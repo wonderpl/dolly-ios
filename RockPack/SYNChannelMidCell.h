@@ -42,7 +42,7 @@ typedef enum {
 @property (strong, nonatomic) IBOutlet UILabel *videoTitleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *followerCountLabel;
 @property (strong, nonatomic) IBOutlet UIView *bottomBarView;
-@property (strong, nonatomic) IBOutlet UIView *boarderView;
+@property (strong, nonatomic) IBOutlet UIView *view;
 @property (nonatomic) ChannelMidCellState state;
 
 @property (strong, nonatomic) IBOutlet UIButton *followButton;

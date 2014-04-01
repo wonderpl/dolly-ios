@@ -46,11 +46,11 @@
     
     if (IS_RETINA)
     {
-        [self.boarderView.layer setBorderWidth:0.5f];
+        [self.view.layer setBorderWidth:0.5f];
     }
     else
     {
-        [self.boarderView.layer setBorderWidth:1.0f];
+        [self.view.layer setBorderWidth:1.0f];
         
     }
     
@@ -58,15 +58,15 @@
     [self.rightSwipe setDirection:UISwipeGestureRecognizerDirectionRight];
     self.rightSwipe.delegate = self;
     
-    [self.containerView addGestureRecognizer:self.rightSwipe];
+    [self.view addGestureRecognizer:self.rightSwipe];
     
     self.leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftSwipe:)];
     [self.leftSwipe setDirection:UISwipeGestureRecognizerDirectionLeft];
     self.leftSwipe.delegate = self;
     
-    [self.containerView addGestureRecognizer:self.leftSwipe];
+    [self.view addGestureRecognizer:self.leftSwipe];
     
-    [self.boarderView.layer setBorderColor:[[UIColor colorWithRed:188.0f/255.0f green:188.0f/255.0f blue:188.0f/255.0f alpha:1.0f]CGColor]];
+    [self.view.layer setBorderColor:[[UIColor colorWithRed:188.0f/255.0f green:188.0f/255.0f blue:188.0f/255.0f alpha:1.0f]CGColor]];
     
     self.state = ChannelMidCellStateDefault;
     
@@ -93,11 +93,11 @@
     if (IS_IPAD){
         if (IS_RETINA)
         {
-            [self.boarderView.layer setBorderWidth:0.5f];
+            [self.view.layer setBorderWidth:0.5f];
         }
         else
         {
-            [self.boarderView.layer setBorderWidth:1.0f];
+            [self.view.layer setBorderWidth:1.0f];
         }
     }
 }
@@ -117,7 +117,7 @@
     self.videoTitleLabel.text = @"";
     self.followerCountLabel.text = @"";
     self.descriptionLabel.text = @"";
-    [self.boarderView.layer setBorderWidth:0.0f];
+    [self.view.layer setBorderWidth:0.0f];
     self.bottomBarView.backgroundColor = [UIColor clearColor];
     self.followButton.hidden = YES;
     self.deletableCell = NO;
@@ -196,17 +196,16 @@
 
 - (IBAction)rightSwipe:(UISwipeGestureRecognizer *)recognizer
 {
+	
+	NSLog(@"rightSwipe");
+	
     if (self.state == ChannelMidCellStateDefault) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:kHideAllDesciptions object:nil];
-        
+		[self.viewControllerDelegate cellStateChanged];
         [self setState:ChannelMidCellStateDescription withAnimation:YES];
-        
+
     }
     else {
-        
         if (self.state == ChannelMidCellStateDescription) {
-            
-            [self setState:ChannelMidCellStateDefault withAnimation:YES];
 
         }
         else if(self.state == ChannelMidCellStateDelete){
@@ -215,29 +214,31 @@
         }
     }
 }
-- (IBAction)deleteChannel:(id)sender {
-    [self.viewControllerDelegate deleteChannelTapped: self];
-}
 
 - (IBAction)leftSwipe:(UISwipeGestureRecognizer *)recognizer
 {
+	NSLog(@"leftSwipe");
+
+	
     if (self.state == ChannelMidCellStateDefault) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:kHideAllDesciptions object:nil];
-        
+		[self.viewControllerDelegate cellStateChanged];
         [self setState:ChannelMidCellStateDelete withAnimation:YES];
 
     }
     else{
         
         if (self.state == ChannelMidCellStateDelete) {
-            [self setState:ChannelMidCellStateDefault withAnimation:YES];
-
         }else if(self.state == ChannelMidCellStateDescription){
             [self setState:ChannelMidCellStateDefault withAnimation:YES];
             
         }}
     
 }
+
+- (IBAction)deleteChannel:(id)sender {
+    [self.viewControllerDelegate deleteChannelTapped: self];
+}
+
 - (IBAction)followChannel:(id)sender
 {
     [self.viewControllerDelegate followButtonTapped: self];
@@ -248,11 +249,11 @@
     
     if (IS_RETINA)
     {
-        [self.boarderView.layer setBorderWidth:0.5f];
+        [self.view.layer setBorderWidth:0.5f];
     }
     else
     {
-        [self.boarderView.layer setBorderWidth:1.0f];
+        [self.view.layer setBorderWidth:1.0f];
     }
 
 }
@@ -260,6 +261,9 @@
 
 -(void)setState:(ChannelMidCellState)state
 {
+	if (state == _state) {
+		return;
+	}
     _state = state;
     switch (_state)
     {
@@ -275,6 +279,7 @@
             
             break;
         case ChannelMidCellStateDelete:{
+			
             //Not all channels can be deleted
             //Only channels you own are deleteable
             if (self.deletableCell) {
@@ -283,18 +288,10 @@
                 
                     CGRect tmpRect = self.containerView.frame;
                     
-                    if (IS_IPHONE)
-                    {
-                        tmpRect.origin.x = -120;
-                    }
-                    else
-                    {
-                        tmpRect.origin.x = -120;
-                    }
+                        tmpRect.origin.x = tmpRect.size.width-120;
                     self.containerView.frame = tmpRect;
                 
             }
-            
         }
             
             break;
@@ -329,21 +326,21 @@
 -(void)setState:(ChannelMidCellState)state withAnimation:(BOOL) animated
 {
     
+	_state = state;
+
     if (!animated) {
-        _state = state;
         return;
     }
-    _state = state;
-    switch (_state)
+	
+	
+    switch (state)
     {
         case ChannelMidCellStateDefault:
         {
             [UIView animateWithDuration:0.5f animations:^{
-                
                 CGRect tmpRect = self.containerView.frame;
                 tmpRect.origin.x = 0;
                 self.containerView.frame = tmpRect;
-                
             }];
             
         }
@@ -356,7 +353,6 @@
             self.deleteButton.hidden = NO;
             self.descriptionLabel.hidden = YES;
                 
-                [self.viewControllerDelegate cellStateChanged];
 
             [UIView animateWithDuration:0.5f animations:^{
                 
@@ -371,7 +367,6 @@
                     tmpRect.origin.x = -120;
                 }
                 self.containerView.frame = tmpRect;
-            } completion:^(BOOL finished) {
             }];
             
             }
@@ -381,11 +376,11 @@
             break;
         case ChannelMidCellStateDescription:
         {
+
             
             self.deleteButton.hidden = YES;
             self.descriptionLabel.hidden = NO;
             
-            [self.viewControllerDelegate cellStateChanged];
 
             [UIView animateWithDuration:0.5f animations:^{
                 CGRect tmpRect = self.containerView.frame;
@@ -407,13 +402,16 @@
         }
             break;
     }
+	
+	_state = state;
+
     
 }
 
 -(void) setCategoryColor: (UIColor*) color
 {
     [self.bottomBarView setBackgroundColor:color];
-    [self.boarderView setBackgroundColor:color];
+    [self.view setBackgroundColor:color];
     [self.descriptionLabel setBackgroundColor:color];
 }
 
@@ -498,27 +496,13 @@
             
             [UIView animateWithDuration:1.0 animations:^{
                 CGRect tmpRect = self.containerView.frame;
-                if (IS_IPHONE)
-                {
-                    tmpRect.origin.x -= 120;
-                }
-                else
-                {
-                    tmpRect.origin.x -= 120;
-                }
+				tmpRect.origin.x -= 120;
                 self.containerView.frame = tmpRect;
 
             } completion:^(BOOL finished) {
                 [UIView animateWithDuration:1.4f animations:^{
                     CGRect tmpRect = self.containerView.frame;
-                    if (IS_IPHONE)
-                    {
-                        tmpRect.origin.x += 120;
-                    }
-                    else
-                    {
-                        tmpRect.origin.x += 120;
-                    }
+					tmpRect.origin.x += 120;
                     self.containerView.frame = tmpRect;
                 } completion:^(BOOL finished) {
                     [self setState:ChannelMidCellStateDefault withAnimation:NO];

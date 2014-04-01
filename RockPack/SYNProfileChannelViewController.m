@@ -31,6 +31,7 @@ static const CGFloat FULLNAMELABELIPADLANDSCAPE = 412.0f;
 @property (nonatomic,strong) IBOutlet UILabel *fakeNavigationBarTitle;
 @property (nonatomic, weak) SYNChannelCreateNewCell *createChannelCell;
 @property (nonatomic) BOOL creatingChannel;
+@property (nonatomic) BOOL showingDescription;
 
 @property (nonatomic, strong) IBOutlet UICollectionViewFlowLayout *defaultLayout;
 @property (nonatomic, strong) UICollectionViewFlowLayout *channelExpandedLayout;
@@ -44,7 +45,6 @@ static const CGFloat FULLNAMELABELIPADLANDSCAPE = 412.0f;
 @property (nonatomic, strong) SYNProfileChannelModel *model;
 
 @property (nonatomic, strong) UITapGestureRecognizer *tapToHideKeyoboard;
-@property (nonatomic, strong) UITapGestureRecognizer *tapToResetCells;
 
 @end
 
@@ -67,11 +67,6 @@ static const CGFloat FULLNAMELABELIPADLANDSCAPE = 412.0f;
     [self.fakeNavigationBarTitle setText: self.channelOwner.displayName];
 
     self.tapToHideKeyoboard = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
-    self.tapToResetCells = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideDescriptionCurrentlyShowing)];
-
-    [self.view addGestureRecognizer:self.tapToResetCells];
-    [self.tapToResetCells setEnabled:NO];
-
 }
 
 -(void) viewDidAppear:(BOOL)animated {
@@ -130,6 +125,10 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     self.isUserProfile = (BOOL)[_channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId];
     self.model = [SYNProfileChannelModel modelWithChannelOwner:_channelOwner];
     self.model.delegate = self;
+}
+
+- (void) setShowingDescription:(BOOL)showingDescription {
+	_showingDescription = showingDescription;
 }
 
 #pragma mark - Scrollview delegates
@@ -236,7 +235,15 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
         [self cancelCreateChannel];
         return;
     }
-
+	
+	
+	if (self.showingDescription) {
+		NSLog(@"didSelectItemAtIndexPath");
+		[self hideDescriptionCurrentlyShowing];
+	}
+	
+	
+	
     SYNChannelMidCell* cell = (SYNChannelMidCell*)[collectionView cellForItemAtIndexPath:indexPath];
     
     SYNChannelMidCell *selectedCell = cell;
@@ -666,7 +673,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 
 - (void) cellStateChanged {
     [self hideDescriptionCurrentlyShowing];
-    [self.tapToResetCells setEnabled:YES];
+	self.showingDescription = YES;
 }
 
 #pragma mark - Alertview delegate
@@ -736,7 +743,6 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 #pragma mark - reset cells
 
 -(void) hideDescriptionCurrentlyShowing {
-    [self.tapToResetCells setEnabled:NO];
     
     for (UICollectionViewCell *cell in [self.cv visibleCells]) {
         if ([cell isKindOfClass:[SYNChannelMidCell class]]) {
@@ -745,6 +751,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
             }
         }
     }
+	self.showingDescription = NO;
 }
 
 #pragma mark - textfield delegates
