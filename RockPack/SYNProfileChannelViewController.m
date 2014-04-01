@@ -406,6 +406,9 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 }
 
 - (void) cancelCreateHelper {
+	
+	self.createChannelCell.descriptionTextView.text = @"";
+
     self.creatingChannel = NO;
     self.cv.scrollEnabled = YES;
     
@@ -457,7 +460,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
                                                      cover: @""
                                                   isPublic: YES
                                          completionHandler: ^(NSDictionary *resourceCreated) {
-											 
+											
 											 NSString *name = [self.createChannelCell.createTextField.text uppercaseString];
 											 [[SYNTrackingManager sharedManager] trackCollectionCreatedWithName:name];
 			
