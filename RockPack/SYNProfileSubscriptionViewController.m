@@ -40,8 +40,7 @@ static const CGFloat OWNUSERHEADERHEIGHT = 494.0f;
 
 @implementation SYNProfileSubscriptionViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];    
     [self.cv registerNib: [SYNChannelMidCell nib]
 forCellWithReuseIdentifier: [SYNChannelMidCell reuseIdentifier]];
@@ -90,45 +89,40 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     
     [self.view addGestureRecognizer:self.tapToResetCells];
     [self.tapToResetCells setEnabled:NO];
-    
 }
 
-- (void) viewWillAppear:(BOOL)animated {
-    
+- (void)viewWillAppear:(BOOL)animated {
     if (IS_IPAD) {
         [self updateLayoutForOrientation: [[SYNDeviceManager sharedInstance] orientation]];
     }
 }
 
 
-- (void) setChannelOwner:(ChannelOwner *)channelOwner {
+- (void)setChannelOwner:(ChannelOwner *)channelOwner {
     _channelOwner = channelOwner;
-    
     self.model = [SYNProfileSubscriptionModel modelWithChannelOwner:channelOwner];
     self.model.delegate = self;
 }
 
 #pragma mark - Scrollview delegates
 
--(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
-{
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     [super scrollViewWillBeginDragging:scrollView];
     [self hideDescriptionCurrentlyShowing];
 }
 
-- (void) scrollViewDidScroll:(UIScrollView *)scrollView {
-    
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     [super scrollViewDidScroll:scrollView];
     [self coverPhotoAnimation];
 	[self moveNameLabelWithOffset:scrollView.contentOffset.y];
 }
 
 
--(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     [self moveNameLabelWithOffset:scrollView.contentOffset.y];
 }
 
-- (void) coverPhotoAnimation {
+- (void)coverPhotoAnimation {
     if (self.cv.contentOffset.y<=0) {
         [self.headerView.coverImage setContentMode:UIViewContentModeScaleAspectFill];
         [self.headerView.coverImageTop setConstant:self.cv.contentOffset.y];
@@ -138,7 +132,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     }
 }
 
-- (void) moveNameLabelWithOffset :(CGFloat) offset {
+- (void)moveNameLabelWithOffset :(CGFloat) offset {
     
     float offSetCheck = IS_IPHONE? FULL_NAME_LABEL_IPHONE: UIDeviceOrientationIsPortrait([[SYNDeviceManager sharedInstance] orientation]) ? FULL_NAME_LABEL_IPAD_PORTRAIT: FULLNAMELABELIPADLANDSCAPE;
     
@@ -152,27 +146,22 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
         CGAffineTransform move = CGAffineTransformMakeTranslation(0,0);
         self.headerView.fullNameLabel.transform = move;
         self.fakeNavigationBar.hidden = YES;
-		
     }
 }
 
 
 #pragma mark - UICollectionView DataSource/Delegate
 
-- (NSInteger) collectionView: (UICollectionView *) view numberOfItemsInSection: (NSInteger) section
-{
+- (NSInteger)collectionView: (UICollectionView *) view numberOfItemsInSection: (NSInteger) section {
     return self.model.itemCount;
 }
 
-- (NSInteger) numberOfSectionsInCollectionView: (UICollectionView *) collectionView
-{
+- (NSInteger) numberOfSectionsInCollectionView: (UICollectionView *) collectionView {
     return 1;
 }
 
-
 - (UICollectionViewCell *) collectionView: (UICollectionView *) collectionView
-                   cellForItemAtIndexPath: (NSIndexPath *) indexPath
-{
+                   cellForItemAtIndexPath: (NSIndexPath *) indexPath {
     
     NSInteger index = indexPath.row;
     
@@ -193,22 +182,18 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     return channelThumbnailCell;
 }
 
-- (void) collectionView: (UICollectionView *) collectionView didSelectItemAtIndexPath: (NSIndexPath *) indexPath
-{
+- (void) collectionView: (UICollectionView *) collectionView didSelectItemAtIndexPath: (NSIndexPath *) indexPath {
     SYNChannelMidCell* cell = (SYNChannelMidCell*)[collectionView cellForItemAtIndexPath:indexPath];
-    
-    
+
     if (cell.state != ChannelMidCellStateDefault) {
         [cell setState: ChannelMidCellStateDefault withAnimation:YES];
         return;
     }
     
-    
     if (indexPath.row < [self.filteredSubscriptions count]) {
         
         Channel *channel = self.filteredSubscriptions[indexPath.row];
         SYNChannelDetailsViewController *channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeDisplay];
-        
         [self.navigationController pushViewController:channelVC animated:YES];
     }
     
@@ -276,7 +261,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 
 #pragma mark - Searchbar delegates
 
--(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     
     [self.cv setContentOffset:CGPointZero animated:YES];
     
@@ -290,7 +275,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     
 }
 
--(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [self.cv reloadData];
     
     if (searchBar.text.length == 0) {
@@ -317,8 +302,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     [self.searchBar becomeFirstResponder];
 }
 
-- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)bar
-{
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)bar {
     
         [UIView animateWithDuration:0.2 animations:^{
             self.cv.contentOffset = CGPointMake(0, SEARCHBAR_Y);
@@ -344,12 +328,12 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 
 #pragma mark - Gesture reconisers
 
--(void)dismissKeyboard {
+- (void)dismissKeyboard {
     [self.searchBar resignFirstResponder];
 }
 
 #pragma mark - SYNChannelMidCellDelegate
-- (void) cellStateChanged {
+- (void)cellStateChanged {
     [self hideDescriptionCurrentlyShowing];
     [self.tapToResetCells setEnabled:YES];
 }
@@ -357,11 +341,8 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 
 #pragma mark - bar buttons
 
--(void) hideDescriptionCurrentlyShowing
-{
-    
+- (void)hideDescriptionCurrentlyShowing{
     [self.tapToResetCells setEnabled:NO];
-    
     for (UICollectionViewCell *cell in [self.cv visibleCells]) {
         if ([cell isKindOfClass:[SYNChannelMidCell class]]) {
             if (((SYNChannelMidCell*)cell).state != ChannelMidCellStateAnimating) {
@@ -373,8 +354,6 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 
 
 #pragma mark - SYNPagingModelDelegate
-
-
 - (void)pagingModelDataUpdated:(SYNPagingModel *)pagingModel {
     [self.cv reloadData];
     [self.headerView.segmentedController setSelectedSegmentIndex:1];
@@ -383,11 +362,9 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 - (void)pagingModelErrorOccurred:(SYNPagingModel *)pagingModel {
 }
 
-
-
 #pragma mark - Orientation change
 
-- (void) willAnimateRotationToInterfaceOrientation: (UIInterfaceOrientation) toInterfaceOrientation
+- (void)willAnimateRotationToInterfaceOrientation: (UIInterfaceOrientation) toInterfaceOrientation
                                           duration: (NSTimeInterval) duration {
 	
     if (IS_IPHONE) {
@@ -398,7 +375,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 }
 
 
-- (void) updateLayoutForOrientation: (UIDeviceOrientation) orientation {
+- (void)updateLayoutForOrientation: (UIDeviceOrientation) orientation {
     
     if (UIDeviceOrientationIsPortrait(orientation)) {
         self.defaultLayout.minimumLineSpacing = 14.0f;
@@ -414,7 +391,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 }
 
 
--(BOOL) isUserProfile {
+- (BOOL)isUserProfile {
 	return [_channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId];
 }
 

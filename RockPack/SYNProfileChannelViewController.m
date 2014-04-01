@@ -69,7 +69,7 @@ static const CGFloat FULLNAMELABELIPADLANDSCAPE = 412.0f;
     self.tapToHideKeyoboard = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
 }
 
--(void) viewDidAppear:(BOOL)animated {
+- (void)viewDidAppear:(BOOL)animated {
     
 	[self viewWillDisappear:YES];
     if (IS_IPAD) {
@@ -82,7 +82,7 @@ static const CGFloat FULLNAMELABELIPADLANDSCAPE = 412.0f;
 
 
 
-- (void) registerNibs {
+- (void)registerNibs {
     
     [self.cv registerNib: [SYNChannelCreateNewCell nib]
 forCellWithReuseIdentifier: [SYNChannelCreateNewCell reuseIdentifier]];
@@ -102,7 +102,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     
 }
 
-- (void) setUpBarButtons {
+- (void)setUpBarButtons {
     self.barBtnCancelCreateChannel = [[UIBarButtonItem alloc]initWithTitle:@"cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelCreateChannel)];
     self.barBtnCancelCreateChannel.tintColor = [UIColor colorWithRed: (100 / 255.0f)
                                                              green: (99 / 255.0f)
@@ -120,30 +120,30 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 
 #pragma mark - setChannelOwner 
 
-- (void) setChannelOwner:(ChannelOwner *)channelOwner {
+- (void)setChannelOwner:(ChannelOwner *)channelOwner {
     _channelOwner = channelOwner;
-    self.isUserProfile = (BOOL)[_channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId];
     self.model = [SYNProfileChannelModel modelWithChannelOwner:_channelOwner];
     self.model.delegate = self;
 }
 
-- (void) setShowingDescription:(BOOL)showingDescription {
+- (void)setShowingDescription:(BOOL)showingDescription {
 	_showingDescription = showingDescription;
 }
 
 #pragma mark - Scrollview delegates
 
--(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     [super scrollViewWillBeginDragging:scrollView];
     [self hideDescriptionCurrentlyShowing];
 }
 
-- (void) scrollViewDidScroll:(UIScrollView *)scrollView {
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     [super scrollViewDidScroll:scrollView];
     [self coverPhotoAnimation];
     [self moveNameLabelWithOffset:scrollView.contentOffset.y];
 }
-- (void) coverPhotoAnimation {
+
+- (void)coverPhotoAnimation {
     if (self.cv.contentOffset.y<=0) {
         [self.headerView.coverImage setContentMode:UIViewContentModeScaleAspectFill];
         [self.headerView.coverImageTop setConstant:self.cv.contentOffset.y];
@@ -153,7 +153,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     }
 }
 
-- (void) moveNameLabelWithOffset :(CGFloat) offset {
+- (void)moveNameLabelWithOffset :(CGFloat) offset {
     
     float offSetCheck = IS_IPHONE? FULL_NAME_LABEL_IPHONE: UIDeviceOrientationIsPortrait([[SYNDeviceManager sharedInstance] orientation]) ? FULL_NAME_LABEL_IPAD_PORTRAIT: FULLNAMELABELIPADLANDSCAPE;
     
@@ -172,7 +172,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 
 #pragma mark - UICollectionView DataSource/Delegate
 
-- (NSInteger) collectionView: (UICollectionView *) view numberOfItemsInSection: (NSInteger) section {
+- (NSInteger)collectionView: (UICollectionView *) view numberOfItemsInSection: (NSInteger) section {
      // to account for the extra 'creation' cell at the start of the collection view
     if (section == 1) {
         return 0;
@@ -180,7 +180,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     return self.model.itemCount + (self.isUserProfile ? 1 : 0);
 }
 
-- (NSInteger) numberOfSectionsInCollectionView: (UICollectionView *) collectionView {
+- (NSInteger)numberOfSectionsInCollectionView: (UICollectionView *) collectionView {
     return 2;
 }
 
@@ -225,7 +225,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     return cell;
 }
 
-- (void) collectionView: (UICollectionView *) collectionView didSelectItemAtIndexPath: (NSIndexPath *) indexPath {
+- (void)collectionView: (UICollectionView *) collectionView didSelectItemAtIndexPath: (NSIndexPath *) indexPath {
     
 	if (self.isUserProfile && indexPath.row == 0) {
         return;
@@ -360,7 +360,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 
 #pragma mark - CreateNewCelllDelegates
 
-- (void) createNewButtonPressed {
+- (void)createNewButtonPressed {
   
     [[SYNTrackingManager sharedManager] trackCreateChannelScreenView];
     
@@ -385,7 +385,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 }
 
 
-- (void) setCreateOffset{
+- (void)setCreateOffset{
 
     if (IS_IPHONE) {
             self.cv.contentOffset = CGPointMake(0, self.headerView.frame.size.height-64);
@@ -411,7 +411,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     }];
 }
 
-- (void) cancelCreateHelper {
+- (void)cancelCreateHelper {
 	
 	self.createChannelCell.descriptionTextView.text = @"";
 
@@ -430,7 +430,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 
 }
 
-- (void) cancelCreateChannel {
+- (void)cancelCreateChannel {
     
     [self cancelCreateHelper];
     
@@ -440,7 +440,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     }];
 }
 
--(void) updateCollectionLayout {
+- (void)updateCollectionLayout {
     
     if (self.cv.collectionViewLayout == self.defaultLayout) {
         [self.cv setCollectionViewLayout:self.channelExpandedLayout];
@@ -449,7 +449,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     }
 }
 
--(void) scrollUpWithTime {
+- (void)scrollUpWithTime {
     if (self.channelOwner.channelsSet.count<=3 && IS_IPHONE) {
         [UIView animateWithDuration:0.4 animations:^{
             [self.cv setContentOffset:CGPointMake(0, 0) animated:YES];
@@ -457,7 +457,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     }
 }
 
--(void) saveCreateChannelTapped {
+- (void)saveCreateChannelTapped {
     
     [appDelegate.oAuthNetworkEngine createChannelForUserId: appDelegate.currentOAuth2Credentials.userId
                                                      title: self.createChannelCell.createTextField.text
@@ -509,7 +509,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 }
 
 
-- (void) showError: (NSString *) errorMessage showErrorTitle: (NSString *) errorTitle {
+- (void)showError: (NSString *) errorMessage showErrorTitle: (NSString *) errorTitle {
     [[[UIAlertView alloc] initWithTitle: errorTitle
                                 message: errorMessage
                                delegate: nil
@@ -517,7 +517,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
                       otherButtonTitles: nil] show];
 }
 
-- (void) createNewCollection {
+- (void)createNewCollection {
     
     NSManagedObjectID *channelOwnerObjectId = self.channelOwner.objectID;
     NSManagedObjectContext *channelOwnerObjectMOC = self.channelOwner.managedObjectContext;
@@ -558,7 +558,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 
 #pragma mark - inboarding animations
 
-- (void) showInboardingAnimationAfterCreate {
+- (void)showInboardingAnimationAfterCreate {
     SYNChannelMidCell *cell;
     
     if (![[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultsCreateChannelFirstTime]) {
@@ -581,7 +581,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     }
 }
 
-- (void) showInboardingAnimationDescription {
+- (void)showInboardingAnimationDescription {
    
     SYNChannelMidCell *cell;
     
@@ -627,14 +627,14 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 
 #pragma mark - setOffset
 
-- (void) setContentOffSet: (CGPoint) offset {
+- (void)setContentOffSet: (CGPoint) offset {
     
     [self.cv setContentOffset:offset];
 }
 
 #pragma mark - Delete channel
 
--(void)deleteChannelTapped: (SYNChannelMidCell*) cell {
+- (void)deleteChannelTapped: (SYNChannelMidCell*) cell {
     
     self.deleteCell = cell;
     NSString *titleString = [NSString stringWithFormat:@"%@ %@?",NSLocalizedString(@"Delete Collection", "Alerview confirm to delete a Channel"), cell.channel.title];
@@ -642,7 +642,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     [[[UIAlertView alloc] initWithTitle:titleString message:@"" delegate:self cancelButtonTitle:NSLocalizedString(@"No", @"No to alert view") otherButtonTitles:NSLocalizedString(@"Yes", @"Yes to alert view") , nil] show];
 }
 
--(void) deleteChannel:(SYNChannelMidCell *)cell {
+- (void)deleteChannel:(SYNChannelMidCell *)cell {
     cell.state = ChannelMidCellStateDefault;
     
     __weak SYNProfileChannelViewController *weakSelf = self;
@@ -670,14 +670,14 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 }
 
 
-- (void) cellStateChanged {
+- (void)cellStateChanged {
     [self hideDescriptionCurrentlyShowing];
 	self.showingDescription = YES;
 }
 
 #pragma mark - Alertview delegate
 
-- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
 	[[SYNTrackingManager sharedManager] trackUserCollectionsFollowFromScreenName:[self trackingScreenName]];
     
     if (buttonIndex == 1) {
@@ -688,7 +688,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 
 #pragma mark - Orientation change
 
-- (void) willAnimateRotationToInterfaceOrientation: (UIInterfaceOrientation) toInterfaceOrientation
+- (void)willAnimateRotationToInterfaceOrientation: (UIInterfaceOrientation) toInterfaceOrientation
                                           duration: (NSTimeInterval) duration {
 	if (IS_IPHONE) {
         return;
@@ -697,7 +697,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     [self updateLayoutForOrientation: toInterfaceOrientation];
 }
 
-- (void) updateLayoutForOrientation: (UIDeviceOrientation) orientation {
+- (void)updateLayoutForOrientation: (UIDeviceOrientation) orientation {
     
     
     if (UIDeviceOrientationIsPortrait(orientation)) {
@@ -741,7 +741,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 
 #pragma mark - reset cells
 
--(void) hideDescriptionCurrentlyShowing {
+- (void)hideDescriptionCurrentlyShowing {
     
     for (UICollectionViewCell *cell in [self.cv visibleCells]) {
         if ([cell isKindOfClass:[SYNChannelMidCell class]]) {
@@ -772,7 +772,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     return YES;
 }
 
--(void)textFieldDidEndEditing:(UITextField *)textField {
+- (void)textFieldDidEndEditing:(UITextField *)textField {
     [textField resignFirstResponder];
     if (textField == self.createChannelCell.createTextField) {
     }
@@ -781,7 +781,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 
 #pragma mark - Text View Delegates
 
--(void)textViewDidEndEditing:(UITextView *)textView {
+- (void)textViewDidEndEditing:(UITextView *)textView {
     if (self.creatingChannel && self.createChannelCell.descriptionTextView == textView && [textView.text isEqualToString:@""]) {
         self.createChannelCell.descriptionPlaceholderLabel.hidden = NO;
     }
@@ -789,7 +789,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     [textView resignFirstResponder];
 }
 
--(void) textViewDidBeginEditing:(UITextView *)textView {
+- (void)textViewDidBeginEditing:(UITextView *)textView {
     [self.view addGestureRecognizer:self.tapToHideKeyoboard];
     if (self.creatingChannel && self.createChannelCell.descriptionTextView == textView ) {
         self.createChannelCell.descriptionPlaceholderLabel.hidden = YES;
@@ -818,16 +818,20 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     return (newLength > 100) ? NO : YES;
 }
 
+- (BOOL)isUserProfile {
+	return [_channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId];
+}
+
 
 #pragma mark - gesture reconiser methods
 
--(void)dismissKeyboard {
+- (void)dismissKeyboard {
     [self.createChannelCell.descriptionTextView resignFirstResponder];
     [self.createChannelCell.createTextField resignFirstResponder];
     [self.view removeGestureRecognizer:self.tapToHideKeyoboard];
 }
 
-- (NSString *)trackingScreenName {
+- (NSString*)trackingScreenName {
 	return @"Profile";
 }
 
