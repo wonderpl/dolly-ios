@@ -69,9 +69,9 @@
 	self.dobErrorLabel.font = [UIFont lightCustomFontOfSize:self.dobErrorLabel.font.pointSize];
 	
 	self.textFields = @[ self.emailTextField, self.firstNameTextField, self.lastNameTextField, self.usernameTextField, self.passwordTextField, self.dayTextField, self.monthTextField, self.yearTextField ];
-	
-	self.addPhotoLabel.font = [UIFont regularCustomFontOfSize:self.addPhotoLabel.font.pointSize];
 	self.addPhotoLabel.text = NSLocalizedString(@"Add your photo", @"Ipad add your photo label");
+
+	self.addPhotoLabel.font = [UIFont lightCustomFontOfSize:self.addPhotoLabel.font.pointSize];
 	
     self.uploadPhotoButton.layer.borderColor = [UIColor colorWithWhite:167.0f/255.0f alpha:1.0f].CGColor;
     self.uploadPhotoButton.layer.borderWidth = 1.0f;

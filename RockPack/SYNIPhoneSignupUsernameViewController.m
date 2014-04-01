@@ -66,7 +66,7 @@ static const NSInteger UsernameMaxLength = 20;
 	self.usernameTextField.font = [UIFont lightCustomFontOfSize:self.usernameTextField.font.pointSize];
 	self.errorLabel.font = [UIFont lightCustomFontOfSize:self.errorLabel.font.pointSize];
 	
-	self.addPhotoLabel.font = [UIFont regularCustomFontOfSize:self.addPhotoLabel.font.pointSize];
+	self.addPhotoLabel.font = [UIFont lightCustomFontOfSize:self.addPhotoLabel.font.pointSize];
 	
 	self.addPhotoLabel.text = NSLocalizedString(@"Add your photo", @"Add your photo in login");
     
