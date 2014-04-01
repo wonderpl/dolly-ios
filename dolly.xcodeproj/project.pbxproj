@@ -1084,6 +1084,7 @@
 		4C03237918AE6F8300E168EF /* SYNFriendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNFriendCell.m; sourceTree = "<group>"; };
 		4C03237B18AE6F9E00E168EF /* SYNFriendCell~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNFriendCell~iphone.xib"; sourceTree = "<group>"; };
 		4C03237D18AE6FBD00E168EF /* SYNFriendCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNFriendCell.xib; sourceTree = "<group>"; };
+		4C0CAF3918EB0ABA004A2911 /* SYNProfileNavigationBarDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYNProfileNavigationBarDelegate.h; sourceTree = "<group>"; };
 		4C102A3A1896D80E00C367E8 /* IconWonderAbout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IconWonderAbout.png; sourceTree = "<group>"; };
 		4C102A3B1896D80E00C367E8 /* IconWonderAbout@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "IconWonderAbout@2x.png"; sourceTree = "<group>"; };
 		4C1DBBEA18E48E5D0047CAFA /* SYNIPadSignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNIPadSignupViewController.h; sourceTree = "<group>"; };
@@ -3061,6 +3062,7 @@
 				4C9B51A118D74A7200A3AB0D /* Profile_IPhone.storyboard */,
 				4C1D30A718D9ECAC00F96F7C /* SYNProfileEditDelegate.h */,
 				4CAC2B0D18E070C2004AB77E /* SYNProfileHeaderDelegate.h */,
+				4C0CAF3918EB0ABA004A2911 /* SYNProfileNavigationBarDelegate.h */,
 			);
 			name = "new profile";
 			sourceTree = "<group>";

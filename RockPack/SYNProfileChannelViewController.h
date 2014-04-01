@@ -8,15 +8,16 @@
 
 #import "SYNProfileViewController.h"
 #import "SYNProfileChannelModel.h"
+#import "SYNProfileNavigationBarDelegate.h"
 
 @interface SYNProfileChannelViewController : SYNAbstractViewController
 
 @property (nonatomic, strong) ChannelOwner* channelOwner;
 @property (nonatomic) BOOL isUserProfile;
-@property (strong, nonatomic) IBOutlet UICollectionView *cv;
+@property (nonatomic, strong) IBOutlet UICollectionView *cv;
 @property (nonatomic, readonly) SYNProfileChannelModel *model;
 @property (nonatomic, strong, readonly) SYNProfileHeader* headerView;
-
+@property (nonatomic, weak) id<SYNProfileNavigationBarDelegate> delegate;
 
 - (void) coverPhotoAnimation;
 

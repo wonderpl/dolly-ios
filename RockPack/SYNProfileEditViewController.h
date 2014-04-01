@@ -12,6 +12,6 @@
 @interface SYNProfileEditViewController : SYNAbstractViewController
 @property (strong, nonatomic) IBOutlet UITextView *descriptionTextView;
 @property (strong, nonatomic) NSString *descriptionString;
-@property (weak, nonatomic) id<SYNProfileEditDelegate> delegate;
+@property (nonatomic, weak) id<SYNProfileEditDelegate> delegate;
 
 @end

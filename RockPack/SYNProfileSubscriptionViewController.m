@@ -138,15 +138,9 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     float offSetCheck = IS_IPHONE? FULL_NAME_LABEL_IPHONE: UIDeviceOrientationIsPortrait([[SYNDeviceManager sharedInstance] orientation]) ? FULL_NAME_LABEL_IPAD_PORTRAIT: FULLNAMELABELIPADLANDSCAPE;
     
     if (offset > offSetCheck) {
-        self.fakeNavigationBar.hidden = NO;
-		
-        CGAffineTransform move = CGAffineTransformMakeTranslation(0,-FULL_NAME_LABEL_IPHONE+offset);
-		
-        self.headerView.fullNameLabel.transform = move;
-    } else {
-        CGAffineTransform move = CGAffineTransformMakeTranslation(0,0);
-        self.headerView.fullNameLabel.transform = move;
-        self.fakeNavigationBar.hidden = YES;
+		[self.delegate hideNavigationBar];
+	} else {
+		[self.delegate showNavigationBar];
     }
 }
 

@@ -21,7 +21,7 @@
 
 static const CGFloat TransitionDuration = 0.5f;
 
-@interface SYNProfileViewController () <UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning>
+@interface SYNProfileViewController () <UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning, SYNProfileNavigationBarDelegate>
 
 @property (nonatomic, strong) SYNProfileSubscriptionViewController *subscriptionCollectionViewController;
 @property (nonatomic, strong) SYNProfileChannelViewController *channelCollectionViewController;
@@ -31,6 +31,9 @@ static const CGFloat TransitionDuration = 0.5f;
 @property (nonatomic, strong) SYNSocialButton *followAllButton;
 @property (nonatomic, assign) BOOL isUserProfile;
 @property (nonatomic, assign) BOOL creatingChannel;
+@property (strong, nonatomic) IBOutlet UINavigationItem *titleView;
+
+@property (nonatomic, strong) IBOutlet UINavigationBar *navigationBar;
 
 @end
 
@@ -109,12 +112,14 @@ static const CGFloat TransitionDuration = 0.5f;
         SYNProfileChannelViewController * channelCollectionViewController =[segue destinationViewController];
         channelCollectionViewController.channelOwner = self.channelOwner;
         channelCollectionViewController.isUserProfile = self.isUserProfile;
-
+		channelCollectionViewController.delegate = self;
+		
         self.channelCollectionViewController = channelCollectionViewController;
     } else if ([segueName isEqualToString: @"subscriptionSegue"]){
         SYNProfileSubscriptionViewController * subscriptionCollectionViewController =[segue destinationViewController];
         subscriptionCollectionViewController.channelOwner = self.channelOwner;
         subscriptionCollectionViewController.isUserProfile = self.isUserProfile;
+		subscriptionCollectionViewController.delegate = self;
         self.subscriptionCollectionViewController = subscriptionCollectionViewController;
     }
 }
@@ -318,7 +323,7 @@ static const CGFloat TransitionDuration = 0.5f;
     }];
 }
 
-- (void)followUserButtonTapped:(SYNSocialButton*)sender {
+- (void) followUserButtonTapped:(SYNSocialButton*)sender {
     
 	[[[UIAlertView alloc]initWithTitle:@"Follow All?" message:nil delegate:self cancelButtonTitle:NSLocalizedString(@"No", @"No to alert view") otherButtonTitles:NSLocalizedString(@"Yes", @"Yes to alert view"), nil] show];
     self.followAllButton = sender;
@@ -368,13 +373,13 @@ static const CGFloat TransitionDuration = 0.5f;
 
 #pragma mark - UIViewControllerTransitioningDelegate
 
-- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
+- (id<UIViewControllerAnimatedTransitioning>) animationControllerForPresentedController:(UIViewController *)presented
                                                                   presentingController:(UIViewController *)presenting
                                                                       sourceController:(UIViewController *)source {
     return self;
 }
 
-- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
+- (id<UIViewControllerAnimatedTransitioning>) animationControllerForDismissedController:(UIViewController *)dismissed {
     return self;
 }
 
@@ -384,7 +389,7 @@ static const CGFloat TransitionDuration = 0.5f;
     return TransitionDuration;
 }
 
-- (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
+- (void) animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
     UIView *container = transitionContext.containerView;
 	
 	SYNProfileViewController *fromVC = (SYNProfileViewController*)[transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
@@ -429,6 +434,15 @@ static const CGFloat TransitionDuration = 0.5f;
 	return @"Profile";
 }
 
+#pragma mark - SYNProfileNavigationBarDelegate
 
+- (void) hideNavigationBar {
+	
+	self.navigationBar.hidden = YES;
+}
+
+- (void) showNavigationBar {
+	self.navigationBar.hidden = NO;
+}
 
 @end

@@ -19,10 +19,11 @@
 #import "UICollectionReusableView+Helpers.h"
 #import "SYNChannelFooterMoreView.h"
 #import "SYNProfileExpandedFlowLayout.h"
+#import "UINavigationBar+Appearance.h"
 
 static const CGFloat PARALLAX_SCROLL_VALUE = 2.0f;
 static const CGFloat ALPHA_IN_EDIT = 0.2f;
-static const CGFloat FULL_NAME_LABEL_IPHONE = 364.0f; // lower is down
+static const CGFloat FULL_NAME_LABEL_IPHONE = 355.0f; // lower is down
 static const CGFloat FULL_NAME_LABEL_IPAD_PORTRAIT = 533.0f;
 static const CGFloat FULLNAMELABELIPADLANDSCAPE = 412.0f;
 
@@ -56,6 +57,9 @@ static const CGFloat FULLNAMELABELIPADLANDSCAPE = 412.0f;
     
     [self registerNibs];
     [self setUpBarButtons];
+	
+	
+	self.automaticallyAdjustsScrollViewInsets = NO;
     
     if (IS_IPHONE) {
         self.channelExpandedLayout = [[SYNIPhoneCreateChannelLayout alloc] init];
@@ -67,6 +71,7 @@ static const CGFloat FULLNAMELABELIPADLANDSCAPE = 412.0f;
     [self.fakeNavigationBarTitle setText: self.channelOwner.displayName];
 
     self.tapToHideKeyoboard = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+	
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -85,7 +90,7 @@ static const CGFloat FULLNAMELABELIPADLANDSCAPE = 412.0f;
 - (void)registerNibs {
     
     [self.cv registerNib: [SYNChannelCreateNewCell nib]
-forCellWithReuseIdentifier: [SYNChannelCreateNewCell reuseIdentifier]];
+	forCellWithReuseIdentifier: [SYNChannelCreateNewCell reuseIdentifier]];
     
     
     [self.cv registerNib: [SYNChannelMidCell nib]
@@ -108,7 +113,6 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
                                                              green: (99 / 255.0f)
                                                               blue: (112 / 255.0f)
                                                              alpha: 1.0f];
-
     
     self.barBtnSaveCreateChannel = [[UIBarButtonItem alloc]initWithTitle:@"save" style:UIBarButtonItemStyleBordered target:self action:@selector(saveCreateChannelTapped)];
     self.barBtnSaveCreateChannel.tintColor = [UIColor colorWithRed: (100 / 255.0f)
@@ -120,7 +124,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 
 #pragma mark - setChannelOwner 
 
-- (void)setChannelOwner:(ChannelOwner *)channelOwner {
+- (void)setChannelOwner:(ChannelOwner*)channelOwner {
     _channelOwner = channelOwner;
     self.model = [SYNProfileChannelModel modelWithChannelOwner:_channelOwner];
     self.model.delegate = self;
@@ -155,18 +159,13 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 
 - (void)moveNameLabelWithOffset :(CGFloat) offset {
     
+	NSLog(@"offset : %f", offset);
     float offSetCheck = IS_IPHONE? FULL_NAME_LABEL_IPHONE: UIDeviceOrientationIsPortrait([[SYNDeviceManager sharedInstance] orientation]) ? FULL_NAME_LABEL_IPAD_PORTRAIT: FULLNAMELABELIPADLANDSCAPE;
     
     if (offset > offSetCheck) {
-        self.fakeNavigationBar.hidden = NO;
-
-        CGAffineTransform move = CGAffineTransformMakeTranslation(0,-FULL_NAME_LABEL_IPHONE+offset);
-
-        self.headerView.fullNameLabel.transform = move;
-    } else {
-        CGAffineTransform move = CGAffineTransformMakeTranslation(0,0);
-        self.headerView.fullNameLabel.transform = move;
-        self.fakeNavigationBar.hidden = YES;
+		[self.delegate showNavigationBar];
+	} else {
+		[self.delegate hideNavigationBar];
     }
 }
 
