@@ -10,7 +10,12 @@
 
 @interface UIFont (SYNFont)
 
-+ (UIFont *) lightCustomFontOfSize: (CGFloat) fontSize;
-+ (UIFont *) regularCustomFontOfSize: (CGFloat) fontSize;
++ (UIFont *)lightCustomFontOfSize:(CGFloat)fontSize;
++ (UIFont *)regularCustomFontOfSize:(CGFloat)fontSize;
++ (UIFont *)semiboldCustomFontOfSize:(CGFloat)fontSize;
++ (UIFont *)boldCustomFontOfSize:(CGFloat)fontSize;
+
++ (UIFont *)regularAlternateFontOfSize:(CGFloat)fontSize;
++ (UIFont *)italicAlternateFontOfSize:(CGFloat)fontSize;
 
 @end

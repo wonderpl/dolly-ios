@@ -14,7 +14,6 @@
 #import "Video.h"
 #import "SYNVideoLoadingView.h"
 #import "SYNVideoPlayer+Protected.h"
-#import "SYNAprilFoolsManager.h"
 
 static CGFloat const VideoViewedThresholdPercentage = 0.1;
 static CGFloat const ControlsFadeTimer = 5.0;
@@ -44,11 +43,6 @@ static CGFloat const ControlsFadeTimer = 5.0;
 #pragma mark - Public class
 
 + (instancetype)playerForVideoInstance:(VideoInstance *)videoInstance {
-	if ([SYNAprilFoolsManager shouldTriggerAprilFools]) {
-		SYNVideoPlayer *player = [[SYNYouTubeWebVideoPlayer alloc] init];
-		player.videoInstance = videoInstance;
-		return player;
-	}
 	Class videoPlayerClass = [self videoPlayerClassesForSource:videoInstance.video.source];
 	SYNVideoPlayer *player = [[videoPlayerClass alloc] init];
 	player.videoInstance = videoInstance;

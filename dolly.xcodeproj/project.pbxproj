@@ -536,7 +536,6 @@
 		BEF5ED9017DE061E006EF5A1 /* ShareAddEntry@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BEF5ED8C17DE061E006EF5A1 /* ShareAddEntry@2x.jpg */; };
 		BEF5ED9117DE061E006EF5A1 /* ShareAddEntrySmall.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BEF5ED8D17DE061E006EF5A1 /* ShareAddEntrySmall.jpg */; };
 		BEF5ED9217DE061E006EF5A1 /* ShareAddEntrySmall@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BEF5ED8E17DE061E006EF5A1 /* ShareAddEntrySmall@2x.jpg */; };
-		BEF9E5B016DCBAC800286113 /* SYNSoundPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF9E5AF16DCBAC800286113 /* SYNSoundPlayer.m */; };
 		BEFAE89C1725485B009B2F66 /* SYNVideoQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFAE89B1725485B009B2F66 /* SYNVideoQueue.m */; };
 		C76BF297AD0F44ABBFCB5A85 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3685246F69AA4C9B93DDEDAC /* libPods.a */; };
 		E90506A618E05FD800E0910E /* UIDevice+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = E90506A518E05FD800E0910E /* UIDevice+Helpers.m */; };
@@ -546,7 +545,6 @@
 		E905A93E189ACA0500FED785 /* PlaceholderNotificationVideo@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = E905A93C189ACA0500FED785 /* PlaceholderNotificationVideo@2x~iphone.png */; };
 		E905A93F189ACA0500FED785 /* PlaceholderNotificationVideo~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = E905A93D189ACA0500FED785 /* PlaceholderNotificationVideo~iphone.png */; };
 		E905A945189BCD1500FED785 /* SYNSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E905A944189BCD1500FED785 /* SYNSignupViewController.m */; };
-		E90D558A18E57D1200647051 /* SYNAprilFoolsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E90D558918E57D1200647051 /* SYNAprilFoolsManager.m */; };
 		E914BED7183CF018001616D3 /* SYNFullScreenVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E914BED6183CF018001616D3 /* SYNFullScreenVideoViewController.m */; };
 		E914BEDA183CF33A001616D3 /* SYNFullScreenVideoAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E914BED9183CF33A001616D3 /* SYNFullScreenVideoAnimator.m */; };
 		E91D364B1843573E007DB495 /* SYNCarouselVideoPlayerViewController_iphone4.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E91D364A1843573E007DB495 /* SYNCarouselVideoPlayerViewController_iphone4.storyboard */; };
@@ -563,6 +561,10 @@
 		E92D335B184E239C0025D1DF /* SYNPagingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E92D335A184E239C0025D1DF /* SYNPagingModel.m */; };
 		E93122FB18916A43008ADBEB /* SYNTimestampView.m in Sources */ = {isa = PBXBuildFile; fileRef = E93122FA18916A43008ADBEB /* SYNTimestampView.m */; };
 		E93122FD18916A52008ADBEB /* SYNTimestampView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E93122FC18916A52008ADBEB /* SYNTimestampView.xib */; };
+		E931C39418E98CD2007CEAAA /* MinionPro-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = E931C39018E98CD2007CEAAA /* MinionPro-Italic.otf */; };
+		E931C39518E98CD2007CEAAA /* MinionPro-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = E931C39118E98CD2007CEAAA /* MinionPro-Regular.otf */; };
+		E931C39618E98CD2007CEAAA /* ProximaNova-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E931C39218E98CD2007CEAAA /* ProximaNova-Bold.otf */; };
+		E931C39718E98CD2007CEAAA /* ProximaNova-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E931C39318E98CD2007CEAAA /* ProximaNova-Semibold.otf */; };
 		E93C7F0918368E2F00FE0B65 /* SYNCarouselVideoPlayerViewController_iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E93C7F0818368E2F00FE0B65 /* SYNCarouselVideoPlayerViewController_iphone.storyboard */; };
 		E93C7F0C18368E3D00FE0B65 /* SYNCarouselVideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E93C7F0B18368E3D00FE0B65 /* SYNCarouselVideoPlayerViewController.m */; };
 		E93E10DE1834E93A00A62F64 /* SYNVideoLoadingIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = E93E10DD1834E93A00A62F64 /* SYNVideoLoadingIndicator.m */; };
@@ -1406,8 +1408,6 @@
 		BEF5ED8C17DE061E006EF5A1 /* ShareAddEntry@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "ShareAddEntry@2x.jpg"; path = "Assets/Images/ShareAddEntry@2x.jpg"; sourceTree = "<group>"; };
 		BEF5ED8D17DE061E006EF5A1 /* ShareAddEntrySmall.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = ShareAddEntrySmall.jpg; path = Assets/Images/ShareAddEntrySmall.jpg; sourceTree = "<group>"; };
 		BEF5ED8E17DE061E006EF5A1 /* ShareAddEntrySmall@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "ShareAddEntrySmall@2x.jpg"; path = "Assets/Images/ShareAddEntrySmall@2x.jpg"; sourceTree = "<group>"; };
-		BEF9E5AE16DCBAC800286113 /* SYNSoundPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNSoundPlayer.h; sourceTree = "<group>"; };
-		BEF9E5AF16DCBAC800286113 /* SYNSoundPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNSoundPlayer.m; sourceTree = "<group>"; };
 		BEFAE89A1725485B009B2F66 /* SYNVideoQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNVideoQueue.h; sourceTree = "<group>"; };
 		BEFAE89B1725485B009B2F66 /* SYNVideoQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNVideoQueue.m; sourceTree = "<group>"; };
 		D9D50C4D95B04D83AF3B374D /* libPods-rockpackTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-rockpackTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1422,8 +1422,6 @@
 		E905A943189BCD1500FED785 /* SYNSignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNSignupViewController.h; sourceTree = "<group>"; };
 		E905A944189BCD1500FED785 /* SYNSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNSignupViewController.m; sourceTree = "<group>"; };
 		E905A946189BE9F200FED785 /* SYNSignupViewController+Protected.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SYNSignupViewController+Protected.h"; sourceTree = "<group>"; };
-		E90D558818E57D1200647051 /* SYNAprilFoolsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAprilFoolsManager.h; sourceTree = "<group>"; };
-		E90D558918E57D1200647051 /* SYNAprilFoolsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAprilFoolsManager.m; sourceTree = "<group>"; };
 		E914BED5183CF018001616D3 /* SYNFullScreenVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNFullScreenVideoViewController.h; sourceTree = "<group>"; };
 		E914BED6183CF018001616D3 /* SYNFullScreenVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNFullScreenVideoViewController.m; sourceTree = "<group>"; };
 		E914BED8183CF33A001616D3 /* SYNFullScreenVideoAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNFullScreenVideoAnimator.h; sourceTree = "<group>"; };
@@ -1454,6 +1452,10 @@
 		E93122F918916A43008ADBEB /* SYNTimestampView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNTimestampView.h; sourceTree = "<group>"; };
 		E93122FA18916A43008ADBEB /* SYNTimestampView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNTimestampView.m; sourceTree = "<group>"; };
 		E93122FC18916A52008ADBEB /* SYNTimestampView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNTimestampView.xib; sourceTree = "<group>"; };
+		E931C39018E98CD2007CEAAA /* MinionPro-Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MinionPro-Italic.otf"; sourceTree = "<group>"; };
+		E931C39118E98CD2007CEAAA /* MinionPro-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MinionPro-Regular.otf"; sourceTree = "<group>"; };
+		E931C39218E98CD2007CEAAA /* ProximaNova-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Bold.otf"; sourceTree = "<group>"; };
+		E931C39318E98CD2007CEAAA /* ProximaNova-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Semibold.otf"; sourceTree = "<group>"; };
 		E93C7F0818368E2F00FE0B65 /* SYNCarouselVideoPlayerViewController_iphone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SYNCarouselVideoPlayerViewController_iphone.storyboard; sourceTree = "<group>"; };
 		E93C7F0A18368E3D00FE0B65 /* SYNCarouselVideoPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNCarouselVideoPlayerViewController.h; sourceTree = "<group>"; };
 		E93C7F0B18368E3D00FE0B65 /* SYNCarouselVideoPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNCarouselVideoPlayerViewController.m; sourceTree = "<group>"; };
@@ -1722,8 +1724,6 @@
 				010DEFDB1629BDC40080F26B /* Supporting Files */,
 				019824E11629CAB600216900 /* View Controllers */,
 				019824E31629CADE00216900 /* Views */,
-				E90D558818E57D1200647051 /* SYNAprilFoolsManager.h */,
-				E90D558918E57D1200647051 /* SYNAprilFoolsManager.m */,
 			);
 			name = rockpack;
 			path = RockPack;
@@ -2103,7 +2103,6 @@
 				011A162016EF5E96008CF25E /* Image Picker */,
 				019E6A5E165FD958002B312A /* OAuth2 */,
 				012502BA16CA8FCE0029C7C8 /* Social Media */,
-				BEF9E5AD16DCBAA300286113 /* Sound */,
 				BEF9E5B416DD23F000286113 /* Video Queue */,
 				E9E1E27918561BFF0051E312 /* Paging Models */,
 				E947097718D75F5A000174A7 /* SYNLocationManager.h */,
@@ -2139,8 +2138,12 @@
 		019824FB1629D19600216900 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				E931C39018E98CD2007CEAAA /* MinionPro-Italic.otf */,
+				E931C39118E98CD2007CEAAA /* MinionPro-Regular.otf */,
 				0127B87C1810479E00DE2FD6 /* ProximaNova-Light.otf */,
 				0127B87D1810479E00DE2FD6 /* ProximaNova-Regular.otf */,
+				E931C39318E98CD2007CEAAA /* ProximaNova-Semibold.otf */,
+				E931C39218E98CD2007CEAAA /* ProximaNova-Bold.otf */,
 			);
 			name = Fonts;
 			sourceTree = "<group>";
@@ -3694,15 +3697,6 @@
 			name = Components;
 			sourceTree = "<group>";
 		};
-		BEF9E5AD16DCBAA300286113 /* Sound */ = {
-			isa = PBXGroup;
-			children = (
-				BEF9E5AE16DCBAC800286113 /* SYNSoundPlayer.h */,
-				BEF9E5AF16DCBAC800286113 /* SYNSoundPlayer.m */,
-			);
-			name = Sound;
-			sourceTree = "<group>";
-		};
 		BEF9E5B416DD23F000286113 /* Video Queue */ = {
 			isa = PBXGroup;
 			children = (
@@ -3906,6 +3900,7 @@
 				01A79B9B16F32C3400B05084 /* ShuttleBarProgressBar@2x.png in Resources */,
 				01A79B9C16F32C3400B05084 /* ButtonShuttleBarPause.png in Resources */,
 				44CAFC661884384900B70139 /* ButtonMoreHints@2x.png in Resources */,
+				E931C39518E98CD2007CEAAA /* MinionPro-Regular.otf in Resources */,
 				01A79B9D16F32C3400B05084 /* ButtonShuttleBarPause@2x.png in Resources */,
 				01A79B9E16F32C3400B05084 /* ButtonShuttleBarPlay.png in Resources */,
 				01A79B9F16F32C3400B05084 /* ButtonShuttleBarPlay@2x.png in Resources */,
@@ -4096,6 +4091,8 @@
 				E9F6255B1885B2A1000EF6A2 /* Login_ipad.storyboard in Resources */,
 				1F4560711844E5EF0098983B /* PlaceholderAvatarFriends.png in Resources */,
 				E91E3B2218C7292400F79020 /* ButtonVideoDeleteDefault@2x.png in Resources */,
+				E931C39718E98CD2007CEAAA /* ProximaNova-Semibold.otf in Resources */,
+				E931C39618E98CD2007CEAAA /* ProximaNova-Bold.otf in Resources */,
 				0EAC5162180D4981005F4D42 /* SYNProfileRootViewController~ipad.xib in Resources */,
 				E93122FD18916A52008ADBEB /* SYNTimestampView.xib in Resources */,
 				1F4E7FC4181ACBAA00F59007 /* TabProfileSelected~iphone.png in Resources */,
@@ -4181,6 +4178,7 @@
 				0E26BB4C182D1209008A57F1 /* SYNChannelDetailsViewController~ipad.xib in Resources */,
 				BE7D037D17A69E4C008053DC /* SYNAggregateVideoCell.xib in Resources */,
 				BE7D038117A69E89008053DC /* SYNAggregateChannelCell.xib in Resources */,
+				E931C39418E98CD2007CEAAA /* MinionPro-Italic.otf in Resources */,
 				BE1B3DD1180E8FFE00DA2BD6 /* SYNMoodRootViewController~iphone.xib in Resources */,
 				BE57C0201843588A00C6444A /* SYNOnBoardingViewController.xib in Resources */,
 				1F4560721844E5EF0098983B /* PlaceholderAvatarFriends@2x.png in Resources */,
@@ -4399,7 +4397,6 @@
 				BE0815CA16D5478B00ADB1DC /* SYNRegistry.m in Sources */,
 				BE0815CD16D5487B00ADB1DC /* SYNSearchRegistry.m in Sources */,
 				0E5B8EA61846007D0012F460 /* SYNProfileFlowLayout.m in Sources */,
-				BEF9E5B016DCBAC800286113 /* SYNSoundPlayer.m in Sources */,
 				E9E1E28018561C780051E312 /* SYNiPhonePopoverAnimator.m in Sources */,
 				015487CF16DCD2A1002A41A2 /* SYNYouTubeVideoPlaybackViewController.m in Sources */,
 				0194FD2316DE6FE90058A7C2 /* SYNVideoThumbnailCell.m in Sources */,
@@ -4412,7 +4409,6 @@
 				0125FB6C182BB41300EC822E /* SYNButton.m in Sources */,
 				0EFE39B0186458DE0006FA78 /* UIImageView+RoundImage.m in Sources */,
 				E93122FB18916A43008ADBEB /* SYNTimestampView.m in Sources */,
-				E90D558A18E57D1200647051 /* SYNAprilFoolsManager.m in Sources */,
 				BEF0AE0716E751280094BFDA /* SYNNetworkOperationJsonObjectParse.m in Sources */,
 				E9FECE691855E73D00BBE7F2 /* SYNCenteredFlowLayout.m in Sources */,
 				011A15F616EE3E9A008CF25E /* SYNCameraPopoverViewController.m in Sources */,
