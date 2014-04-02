@@ -21,13 +21,13 @@
 - (void)awakeFromNib {
 	[super awakeFromNib];
 	
-    self.label.font = [UIFont lightCustomFontOfSize: self.label.font.pointSize];
+    self.label.font = [UIFont semiboldCustomFontOfSize: self.label.font.pointSize];
 }
 
--(void)prepareForReuse
-{
+-(void)prepareForReuse {
     [super prepareForReuse];
     self.backgroundColor = [UIColor clearColor];
+	self.label.textColor = [UIColor blackColor];
 }
 
 

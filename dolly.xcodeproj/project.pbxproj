@@ -318,6 +318,8 @@
 		4C5E862C18B6816400D0E937 /* SYNCollectectionDetailsOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5E862A18B6816400D0E937 /* SYNCollectectionDetailsOverlayViewController.m */; };
 		4C5E862D18B6816400D0E937 /* SYNCollectectionDetailsOverlayViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C5E862B18B6816400D0E937 /* SYNCollectectionDetailsOverlayViewController~iphone.xib */; };
 		4C5E862F18B6819400D0E937 /* SYNCollectectionDetailsOverlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C5E862E18B6819400D0E937 /* SYNCollectectionDetailsOverlayViewController.xib */; };
+		4C6FD75018EC215F0068FF84 /* SYNDiscoverSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6FD74F18EC215F0068FF84 /* SYNDiscoverSectionHeaderView.m */; };
+		4C6FD75218EC217B0068FF84 /* SYNDiscoverSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C6FD75118EC217B0068FF84 /* SYNDiscoverSectionHeaderView.xib */; };
 		4CB63A6E18BD052E00825F7C /* placeholderwhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CB63A6D18BD052E00825F7C /* placeholderwhite.png */; };
 		4CDD76A618CA014A000B2CBD /* SYNFeedOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDD76A318CA014A000B2CBD /* SYNFeedOverlayViewController.m */; };
 		4CDD76A718CA014A000B2CBD /* SYNFeedOverlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CDD76A418CA014A000B2CBD /* SYNFeedOverlayViewController.xib */; };
@@ -1096,6 +1098,9 @@
 		4C5E862A18B6816400D0E937 /* SYNCollectectionDetailsOverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNCollectectionDetailsOverlayViewController.m; sourceTree = "<group>"; };
 		4C5E862B18B6816400D0E937 /* SYNCollectectionDetailsOverlayViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNCollectectionDetailsOverlayViewController~iphone.xib"; sourceTree = "<group>"; };
 		4C5E862E18B6819400D0E937 /* SYNCollectectionDetailsOverlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNCollectectionDetailsOverlayViewController.xib; sourceTree = "<group>"; };
+		4C6FD74E18EC215F0068FF84 /* SYNDiscoverSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNDiscoverSectionHeaderView.h; sourceTree = "<group>"; };
+		4C6FD74F18EC215F0068FF84 /* SYNDiscoverSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNDiscoverSectionHeaderView.m; sourceTree = "<group>"; };
+		4C6FD75118EC217B0068FF84 /* SYNDiscoverSectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNDiscoverSectionHeaderView.xib; sourceTree = "<group>"; };
 		4CB63A6D18BD052E00825F7C /* placeholderwhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholderwhite.png; sourceTree = "<group>"; };
 		4CDD76A218CA014A000B2CBD /* SYNFeedOverlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNFeedOverlayViewController.h; sourceTree = "<group>"; };
 		4CDD76A318CA014A000B2CBD /* SYNFeedOverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNFeedOverlayViewController.m; sourceTree = "<group>"; };
@@ -2829,6 +2834,9 @@
 				4C03237318AE3F4D00E168EF /* SYNDiscoverSectionView.h */,
 				4C03237418AE3F4D00E168EF /* SYNDiscoverSectionView.m */,
 				4C03237618AE3F8700E168EF /* SYNDiscoverSectionView.xib */,
+				4C6FD74E18EC215F0068FF84 /* SYNDiscoverSectionHeaderView.h */,
+				4C6FD74F18EC215F0068FF84 /* SYNDiscoverSectionHeaderView.m */,
+				4C6FD75118EC217B0068FF84 /* SYNDiscoverSectionHeaderView.xib */,
 			);
 			name = UICollectionReusableView;
 			sourceTree = "<group>";
@@ -3995,6 +4003,7 @@
 				1FC24E911851F7690022548B /* IconVideoCommentDefault.png in Resources */,
 				E905A93E189ACA0500FED785 /* PlaceholderNotificationVideo@2x~iphone.png in Resources */,
 				BE2D3EEF183A3C2C003B2C26 /* SYNAboutViewController.xib in Resources */,
+				4C6FD75218EC217B0068FF84 /* SYNDiscoverSectionHeaderView.xib in Resources */,
 				1F4E7FB0181ACBAA00F59007 /* TabActivityHighlighted~iphone.png in Resources */,
 				BED027CB1834D4CC00636659 /* ButtonMoreFeedback@2x.png in Resources */,
 				011C1675173003E800CF50B9 /* OWActivityViewController.strings in Resources */,
@@ -4551,6 +4560,7 @@
 				4C1DBBEC18E48E5D0047CAFA /* SYNIPadSignupViewController.m in Sources */,
 				BE57C01F1843588A00C6444A /* SYNOnBoardingViewController.m in Sources */,
 				BE7D036217A14417008053DC /* _FeedItem.m in Sources */,
+				4C6FD75018EC215F0068FF84 /* SYNDiscoverSectionHeaderView.m in Sources */,
 				019CB6A218117D300079DFCF /* SYNMoodCell.m in Sources */,
 				BE7D036D17A69B67008053DC /* SYNAggregateCell.m in Sources */,
 				BE7D037317A69D87008053DC /* SYNAggregateVideoCell.m in Sources */,

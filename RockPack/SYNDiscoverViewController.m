@@ -27,6 +27,9 @@
 #import "SYNDiscoverOverlayHighlightsViewController.h"
 #import "SYNTrackingManager.h"
 #import "SYNGenreManager.h"
+#import "SYNDiscoverSectionHeaderView.h"
+#import "SYNMoodRootViewController.h"
+
 @import QuartzCore;
 
 #define kAutocompleteTime 0.2
@@ -42,7 +45,7 @@ typedef enum {
 static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewCell";
 
 @interface SYNDiscoverViewController () < UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout,
-                                        UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
+UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 
 
 
@@ -69,6 +72,9 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 
 @property (nonatomic, strong) NSArray *genres;
 
+@property (nonatomic, strong) NSMutableArray *recentlyViewed;
+@property (nonatomic, strong) UIBarButtonItem *moodBarButton;
+@property (nonatomic, strong) SYNMoodRootViewController *moodVC;
 @end
 
 @implementation SYNDiscoverViewController
@@ -87,6 +93,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         self.searchBar.layer.borderWidth = 1.0f;
         self.searchBar.layer.borderColor = [[UIColor dollyMediumGray] CGColor];
     }
+	
     
     self.autocompleteTableView.hidden = YES;
     
@@ -95,10 +102,32 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     [self.categoriesCollectionView registerNib:[SYNDiscoverCategoriesCell nib]
                     forCellWithReuseIdentifier:[SYNDiscoverCategoriesCell reuseIdentifier]];
     
-    [self.categoriesCollectionView registerNib: [UINib nibWithNibName: OnBoardingHeaderIndent bundle: nil]
-          forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
-                 withReuseIdentifier: OnBoardingHeaderIndent];
-
+	//    [self.categoriesCollectionView registerNib: [UINib nibWithNibName: OnBoardingHeaderIndent bundle: nil]
+	//          forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
+	//                 withReuseIdentifier: OnBoardingHeaderIndent];
+	
+	
+	[self.categoriesCollectionView registerNib: [SYNDiscoverSectionHeaderView nib]					forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
+						   withReuseIdentifier: [SYNDiscoverSectionHeaderView reuseIdentifier]];
+	
+	
+	
+	UIImage *moodImage = [[UIImage imageNamed:@"TabMoods.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+	
+	self.moodBarButton = [[UIBarButtonItem alloc]initWithImage:moodImage style:UIBarButtonItemStyleBordered target:self action:@selector(pushMoodViewController)];
+	
+	UIBarButtonItem *negativeSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+	[negativeSpace setWidth:-20];
+	
+	self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:negativeSpace,self.moodBarButton,nil];
+	
+	
+	self.navigationController.navigationBar.tintColor = [UIColor dollyMoodColor];
+	
+	if (IS_IPHONE) {
+		
+	}
+	
     if(IS_IPHONE)
     {
         // to allow for full screen scroll of the categories
@@ -126,13 +155,9 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     }
     
     if (IS_IPAD) {
-        self.navigationController.navigationBarHidden = YES;        
+        self.navigationController.navigationBarHidden = YES;
     }
-
-	[self.categoriesCollectionView registerNib:[SYNDiscoverSectionView nib]
-				   forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
-						  withReuseIdentifier:[SYNDiscoverSectionView reuseIdentifier]];
-
+	
     self.sideContainerView.layer.borderColor = [[UIColor dollyMediumGray] CGColor];
     
     self.sideContainerView.layer.borderWidth = IS_RETINA ? 0.5f : 1.0f;
@@ -143,6 +168,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 											 selector:@selector(reloadCategories)
 												 name:CategoriesReloadedNotification
 											   object:nil];
+	self.recentlyViewed = [[NSMutableArray alloc] init];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -160,6 +186,11 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 	}
 	
 	[self updateContainerWidths];
+	
+	
+	[self.categoriesCollectionView reloadData];
+	[self.categoriesCollectionView selectItemAtIndexPath:self.selectedCellIndex animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+	
     
 }
 
@@ -179,9 +210,6 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 													 name:UIKeyboardWillHideNotification
 												   object:nil];
 	}
-
-	[self.categoriesCollectionView reloadData];
-	[self.categoriesCollectionView selectItemAtIndexPath:self.selectedCellIndex animated:NO scrollPosition:UICollectionViewScrollPositionNone];
 	
 }
 
@@ -209,47 +237,225 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 #pragma mark - Data Retrieval
 
 - (void)selectCategoryForCollection:(UICollectionView *)collectionView atIndexPath:(NSIndexPath *)indexPath {
-	Genre *genre = self.genres[indexPath.section];
-	SubGenre *subGenre = genre.subgenres[indexPath.row];
-    
+	
+	int index = indexPath.section;
+	
+	if (index>0) {
+		index--;
+	}
+	
+	SubGenre *subGenre;
+	
+	if (indexPath.section == 1) {
+		subGenre = self.recentlyViewed[indexPath.row];
+	} else {
+		Genre *genre = self.genres[index];
+		subGenre = genre.subgenres[indexPath.row];
+	}
+	
+	BOOL inRecentlyViewed = [self.recentlyViewed containsObject:subGenre];
+	[self addSubGenreToRecents:subGenre];
+	
+	if (IS_IPAD) {
+		
+		if (self.recentlyViewed.count <3) {
+			
+			if (indexPath.section == 1) {
+				[self.categoriesCollectionView performBatchUpdates:^{
+					
+					[self.categoriesCollectionView moveItemAtIndexPath:indexPath toIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
+				} completion:^(BOOL finished) {
+					
+					[self.categoriesCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+					
+				}];
+
+			} else {
+				
+				if (!inRecentlyViewed) {
+					[self.categoriesCollectionView performBatchUpdates:^{
+						
+						[self.categoriesCollectionView insertItemsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForItem:0 inSection:1]]];
+					} completion:nil];
+
+				} else {
+
+				}
+				
+			}
+		} else {
+			
+			if (indexPath.section == 1) {
+				[self.categoriesCollectionView performBatchUpdates:^{
+					
+					[self.categoriesCollectionView moveItemAtIndexPath:indexPath toIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
+				} completion:^(BOOL finished) {
+					
+					[self.categoriesCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+					
+				}];
+
+			}
+			
+		}
+//		else {
+//
+//			[self.categoriesCollectionView performBatchUpdates:^{
+//				
+//				[self.categoriesCollectionView insertItemsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForItem:0 inSection:1]]];
+//				if (self.recentlyViewed.count > 3) {
+//					[self.recentlyViewed removeLastObject];
+//				}
+//				[self.categoriesCollectionView deleteItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:2 inSection:1]]];
+//
+//			} completion:^(BOOL finished) {
+//				
+//				
+//
+//				
+//			}];
+//
+//			
+//			
+//			
+//			
+//			
+//			
+//		}
+	}
+	
+	
+	if (IS_IPAD) {
+		
+		//		if (indexPath.section == 1) {
+		//
+		//			if (self.recentlyViewed.count <3) {
+		//			} else {
+		//
+		//				[self.categoriesCollectionView performBatchUpdates:^{
+		//
+		//					[self.categoriesCollectionView moveItemAtIndexPath:indexPath toIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
+		//
+		//				} completion:nil];
+		//
+		//
+		//
+		//			}
+		
+	} else {
+		
+		//			[self.categoriesCollectionView performBatchUpdates:^{
+		//				[self.categoriesCollectionView insertItemsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForItem:0 inSection:1]]];
+		//
+		//
+		//			} completion:^(BOOL finished) {
+		
+		
+		//			}];
+		
+		
+	}
+	
+	
+	[self.categoriesCollectionView reloadData];
+	[self.categoriesCollectionView selectItemAtIndexPath:self.selectedCellIndex animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+
+	
     NSString *title = (IS_IPHONE ? subGenre.name : @"");
     
     [self dispatchSearch:subGenre.uniqueId
                withTitle:title
                  forType:kSearchTypeGenre];
+	
+	
+}
+
+
+
+
+
+- (void) addSubGenreToRecents:(SubGenre*) subgenre {
+	
+	if ([self.recentlyViewed containsObject:subgenre]) {
+		[self.recentlyViewed removeObject:subgenre];
+	}
+
+	[self.recentlyViewed insertObject:subgenre atIndex:0];
+	
+	if (self.recentlyViewed.count > 3) {
+		[self.recentlyViewed removeLastObject];
+	}
+	
 }
 
 #pragma mark - CollectionView Delegate/Data Source
 
 - (NSInteger) numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-	return [self.genres count];
+	return [self.genres count]+1;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section {
-	Genre *genre = self.genres[section];
+	
+	if (section == 1) {
+		return self.recentlyViewed.count;
+	}
+	
+	int index = section;
+	
+	if (index>0) {
+		index--;
+	}
+	
+	Genre *genre = self.genres[index];
 	return [genre.subgenres count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-	Genre *genre = self.genres[indexPath.section];
-	SubGenre *subGenre = genre.subgenres[indexPath.row];
 	
-    SYNDiscoverCategoriesCell *categoryCell = [cv dequeueReusableCellWithReuseIdentifier:[SYNDiscoverCategoriesCell reuseIdentifier]
+	SYNDiscoverCategoriesCell *categoryCell = [cv dequeueReusableCellWithReuseIdentifier:[SYNDiscoverCategoriesCell reuseIdentifier]
                                                                             forIndexPath: indexPath];
-    
+	SubGenre *subGenre;
+	
+	
+	
+	int index = indexPath.section;
+	
+	if (index>0) {
+		index--;
+	}
+	
+	
+	if (indexPath.section == 1) {
+		subGenre = [self.recentlyViewed objectAtIndex:indexPath.row];
+	} else {
+		Genre *genre = self.genres[index];
+		subGenre = genre.subgenres[indexPath.row];
+	}
+	
 	UIColor *genreColor = [[SYNGenreManager sharedManager] colorForGenreWithId:subGenre.uniqueId];
     
     if (indexPath.section == 0 && indexPath.row == 0) {
-        categoryCell.selectedColor = [UIColor darkerColorForColor:genreColor];
-        categoryCell.deSelectedColor = genreColor;
-        categoryCell.backgroundColor = genreColor;
+		UIColor *newColor = [UIColor colorWithRed: (96.0f / 255.0f)
+											green: (59.0f / 255.0f)
+											 blue: (85.0f / 255.0f)
+											alpha: 1.0f];
+		
+        categoryCell.selectedColor = newColor;
+        categoryCell.deSelectedColor = newColor;
+        categoryCell.backgroundColor = newColor;
+		categoryCell.label.textColor = [UIColor whiteColor];
+		
     } else {
+		
         categoryCell.selectedColor = genreColor;
         categoryCell.deSelectedColor = [UIColor whiteColor];
+		categoryCell.label.textColor = [UIColor blackColor];
+		
     }
 	
     categoryCell.label.text = subGenre.name;
-            
+	
+	
     return categoryCell;
 }
 
@@ -272,24 +478,27 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+	self.selectedCellIndex = indexPath;
     [self selectCategoryForCollection:collectionView atIndexPath:indexPath];
-    self.selectedCellIndex = indexPath;
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    if (section == 0) {
+	if (section == 1 && self.recentlyViewed.count == 0) {
+		return CGSizeMake(0, 0);
+	} else if (section == 0) {
         return CGSizeMake(0, 0);
     } else {
-        return CGSizeMake(self.categoriesCollectionView.bounds.size.width, 14);
+        return CGSizeMake(self.categoriesCollectionView.bounds.size.width, 43);
     }
 }
+
 
 
 - (CGSize)collectionView:(UICollectionView *)collectionView
 				  layout:(UICollectionViewLayout *)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-	return CGSizeMake(CGRectGetWidth(collectionView.frame), 44);
+	return CGSizeMake(CGRectGetWidth(collectionView.frame), 33);
 }
 
 
@@ -297,16 +506,31 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
             viewForSupplementaryElementOfKind: (NSString *) kind
                                   atIndexPath: (NSIndexPath *) indexPath
 {
-    if (kind == UICollectionElementKindSectionFooter)
+	if (kind == UICollectionElementKindSectionHeader)
     {
-        SYNDiscoverSectionView *supplementaryView = [collectionView dequeueReusableSupplementaryViewOfKind: kind
-                                                               withReuseIdentifier: DiscoverSectionView
-                                                                      forIndexPath: indexPath];
+        SYNDiscoverSectionHeaderView *supplementaryView = [collectionView dequeueReusableSupplementaryViewOfKind: kind
+																							 withReuseIdentifier: [SYNDiscoverSectionHeaderView reuseIdentifier]
+																									forIndexPath: indexPath];
 		
-		Genre *genre = self.genres[indexPath.section];
-		SubGenre *subGenre = genre.subgenres[indexPath.row];
 		
-        supplementaryView.background.backgroundColor = [[SYNGenreManager sharedManager] colorForGenreWithId:subGenre.uniqueId];
+		if (indexPath.section == 0) {
+			
+		}
+		
+		else if (indexPath.section == 1) {
+			supplementaryView.titleLabel.text = @"Recently Viewed";
+			
+		} else {
+			
+			int index = indexPath.section;
+			if (index>0) {
+				index--;
+			}
+			Genre *genre = self.genres[index];
+			
+			supplementaryView.titleLabel.text = genre.name;
+			
+		}
 		
 		return supplementaryView;
     }
@@ -379,7 +603,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     NSIndexPath* indexPath = [self.autocompleteTableView indexPathForCell:cell];
     
     NSDictionary* data = self.autocompleteSuggestionsArray[indexPath.row];
-
+	
     NSDictionary* channelOwnerData = @{@"id":data[@"id"], @"avatar_thumbnail_url":data[@"thumbnail"], @"display_name":data[@"name"]};
     ChannelOwner* coSelected = [ChannelOwner instanceFromDictionary:channelOwnerData
                                           usingManagedObjectContext:appDelegate.searchManagedObjectContext
@@ -528,12 +752,12 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
             NSString* objectType = (NSString*)objectData[0];
             
             NSMutableDictionary* dataDictionary = @{@"type" : objectType , @"term" : term}.mutableCopy;
-                                                    
+			
             
-
+			
             if([objectType isEqualToString:@"user"])
             {
-              
+				
                 NSString* userId = (NSString*)objectData[1];
                 dataDictionary[@"id"] = userId;
                 NSString* name = (NSString*)objectData[2];
@@ -597,17 +821,17 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
     {
         // the hack below is used to trigger the viewDidLoad function which initialises blocks and gets the appDelegate
         UIView* view_hack = self.searchResultsController.view;
-        #pragma unused(view_hack)
+#pragma unused(view_hack)
         
         self.searchResultsController.navigationItem.title = title;
         
         [self.navigationController pushViewController:self.searchResultsController
                                              animated:YES];
-   
+		
         
         
         
-    
+		
     }
     
     if(type == kSearchTypeGenre) {
@@ -622,11 +846,12 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
         [self.categoriesCollectionView deselectItemAtIndexPath:self.selectedCellIndex animated:YES];
         self.selectedCellIndex = nil;
         [self.searchResultsController searchForTerm:searchTerm];
-        
-       
     }
-   
+	
+	
+	
 }
+
 
 
 #pragma mark - Helper Methods
@@ -661,7 +886,7 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 													animated:NO
 											  scrollPosition:UICollectionViewScrollPositionNone];
         
-        [self selectCategoryForCollection:self.categoriesCollectionView atIndexPath:firstIndexPath];
+		//        [self selectCategoryForCollection:self.categoriesCollectionView atIndexPath:firstIndexPath];
     }
 }
 
@@ -692,6 +917,24 @@ static NSString *kAutocompleteCellIdentifier = @"SYNSearchAutocompleteTableViewC
 																   keyboardHeightChange,
 																   tableView.contentInset.right);
 					 } completion:nil];
+}
+
+
+- (void) pushMoodViewController {
+	
+	if (!self.moodVC) {
+		self.moodVC = [[SYNMoodRootViewController alloc]initWithViewId:kMoodViewId];
+	}
+	
+	[self.navigationController pushViewController:self.moodVC animated:YES];
+	
+	//Hides tab bar when displaying thre mood vc
+	if (IS_IPHONE) {
+		[[NSNotificationCenter defaultCenter] postNotificationName: kScrollMovement
+                                                            object: self
+                                                          userInfo: @{kScrollingDirection:@(ScrollingDirectionDown)}];
+	}
+	
 }
 
 @end

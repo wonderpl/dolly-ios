@@ -38,7 +38,7 @@
     
     self.uniqueId = uniqueId;
     
-    self.name = [dictionary upperCaseStringForKey: @"name"
+    self.name = [dictionary objectForKey: @"name"
                                       withDefault: @"-?-"];
     
     NSNumber *priorityString = (NSNumber *) dictionary[@"priority"];
