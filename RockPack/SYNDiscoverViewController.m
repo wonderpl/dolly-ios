@@ -273,27 +273,13 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 			} else {
 				
 				if (!inRecentlyViewed) {
-					
 					[self.categoriesCollectionView performBatchUpdates:^{
 						[self insertSubGenreToRecentLyViewed:subGenre];
-						
 					} completion:^(BOOL finished) {
 						[self.categoriesCollectionView reloadData];
 						[self.categoriesCollectionView selectItemAtIndexPath:self.selectedCellIndex animated:NO scrollPosition:UICollectionViewScrollPositionNone];
-						
 					}];
-					
 				} else {
-					
-					
-					int rowOfSubGenre = -1;//[self.recentlyViewed indexOfObject:subGenre];
-					
-					for (int i = 0; i<self.recentlyViewed.count; i++) {
-						if (subGenre == [self.recentlyViewed objectAtIndex:i]) {
-							rowOfSubGenre = i;
-							break;
-						}
-					}
 					
 					[self.categoriesCollectionView moveItemAtIndexPath:[NSIndexPath indexPathForRow:indexOfRecent inSection:1] toIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
 				}
@@ -319,11 +305,16 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 		
 	}
 	
-	
-	[self.categoriesCollectionView reloadData];
-	[self.categoriesCollectionView selectItemAtIndexPath:self.selectedCellIndex animated:NO scrollPosition:UICollectionViewScrollPositionNone];
-	
-	
+	if (IS_IPHONE) {
+		if (self.recentlyViewed.count > numberOfRecents) {
+			[self.recentlyViewed removeLastObject];
+		}
+	}
+
+	if (IS_IPAD) {
+		[self.categoriesCollectionView reloadData];
+		[self.categoriesCollectionView selectItemAtIndexPath:self.selectedCellIndex animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+	}
 	
 	
     NSString *title = (IS_IPHONE ? subGenre.name : @"");
