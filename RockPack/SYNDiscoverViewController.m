@@ -120,7 +120,7 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 	
 	[negativeSpace setWidth:-20];
 	
-	self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:negativeSpace,self.moodBarButton,nil];
+//	self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:negativeSpace,self.moodBarButton,nil];
 	
 	
 	
