@@ -35,6 +35,7 @@
 #define kAutocompleteTime 0.2
 static NSString* DiscoverSectionView = @"SYNDiscoverSectionView";
 static NSString* OnBoardingHeaderIndent = @"SYNOnBoardingHeader";
+static const int numberOfRecents = 3;
 
 typedef enum {
     kSearchTypeGenre = 0,
@@ -109,8 +110,6 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 	
 	[self.categoriesCollectionView registerNib: [SYNDiscoverSectionHeaderView nib]					forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
 						   withReuseIdentifier: [SYNDiscoverSectionHeaderView reuseIdentifier]];
-	
-	
 	
 	UIImage *moodImage = [[UIImage imageNamed:@"TabMoods.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 	
@@ -254,112 +253,78 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 	}
 	
 	BOOL inRecentlyViewed = [self.recentlyViewed containsObject:subGenre];
+	int indexOfRecent = [self.recentlyViewed indexOfObject:subGenre];
 	[self addSubGenreToRecents:subGenre];
 	
 	if (IS_IPAD) {
 		
-		if (self.recentlyViewed.count <3) {
+		if (self.recentlyViewed.count <=numberOfRecents) {
 			
 			if (indexPath.section == 1) {
 				[self.categoriesCollectionView performBatchUpdates:^{
 					
-					[self.categoriesCollectionView moveItemAtIndexPath:indexPath toIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
+					[self moveSubGenreToTheTop:subGenre fromIndex:indexPath];
 				} completion:^(BOOL finished) {
 					
 					[self.categoriesCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] animated:NO scrollPosition:UICollectionViewScrollPositionNone];
 					
 				}];
-
+				
 			} else {
 				
 				if (!inRecentlyViewed) {
+					
 					[self.categoriesCollectionView performBatchUpdates:^{
+						[self insertSubGenreToRecentLyViewed:subGenre];
 						
-						[self.categoriesCollectionView insertItemsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForItem:0 inSection:1]]];
-					} completion:nil];
-
+					} completion:^(BOOL finished) {
+						[self.categoriesCollectionView reloadData];
+						[self.categoriesCollectionView selectItemAtIndexPath:self.selectedCellIndex animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+						
+					}];
+					
 				} else {
-
+					
+					
+					int rowOfSubGenre = -1;//[self.recentlyViewed indexOfObject:subGenre];
+					
+					for (int i = 0; i<self.recentlyViewed.count; i++) {
+						if (subGenre == [self.recentlyViewed objectAtIndex:i]) {
+							rowOfSubGenre = i;
+							break;
+						}
+					}
+					
+					[self.categoriesCollectionView moveItemAtIndexPath:[NSIndexPath indexPathForRow:indexOfRecent inSection:1] toIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
 				}
-				
 			}
 		} else {
-			
 			if (indexPath.section == 1) {
 				[self.categoriesCollectionView performBatchUpdates:^{
-					
-					[self.categoriesCollectionView moveItemAtIndexPath:indexPath toIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
+					[self moveSubGenreToTheTop:subGenre fromIndex:indexPath];
 				} completion:^(BOOL finished) {
 					
-					[self.categoriesCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+					//select the first cell
 					
 				}];
-
+				
+			} else {
+				
+				[self.categoriesCollectionView performBatchUpdates:^{
+					[self insertSubGenreToRecentLyViewed:subGenre];
+					[self removeLastObjectFromRecentlyViewed];
+				} completion:nil];
 			}
-			
 		}
-//		else {
-//
-//			[self.categoriesCollectionView performBatchUpdates:^{
-//				
-//				[self.categoriesCollectionView insertItemsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForItem:0 inSection:1]]];
-//				if (self.recentlyViewed.count > 3) {
-//					[self.recentlyViewed removeLastObject];
-//				}
-//				[self.categoriesCollectionView deleteItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:2 inSection:1]]];
-//
-//			} completion:^(BOOL finished) {
-//				
-//				
-//
-//				
-//			}];
-//
-//			
-//			
-//			
-//			
-//			
-//			
-//		}
-	}
-	
-	
-	if (IS_IPAD) {
-		
-		//		if (indexPath.section == 1) {
-		//
-		//			if (self.recentlyViewed.count <3) {
-		//			} else {
-		//
-		//				[self.categoriesCollectionView performBatchUpdates:^{
-		//
-		//					[self.categoriesCollectionView moveItemAtIndexPath:indexPath toIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
-		//
-		//				} completion:nil];
-		//
-		//
-		//
-		//			}
-		
-	} else {
-		
-		//			[self.categoriesCollectionView performBatchUpdates:^{
-		//				[self.categoriesCollectionView insertItemsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForItem:0 inSection:1]]];
-		//
-		//
-		//			} completion:^(BOOL finished) {
-		
-		
-		//			}];
-		
 		
 	}
 	
 	
 	[self.categoriesCollectionView reloadData];
 	[self.categoriesCollectionView selectItemAtIndexPath:self.selectedCellIndex animated:NO scrollPosition:UICollectionViewScrollPositionNone];
-
+	
+	
+	
 	
     NSString *title = (IS_IPHONE ? subGenre.name : @"");
     
@@ -371,6 +336,31 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 }
 
 
+- (void) moveSubGenreToTheTop :(SubGenre*) subGenre fromIndex:(NSIndexPath*) indexPath {
+	
+	[self. categoriesCollectionView performBatchUpdates:^{
+		[self.categoriesCollectionView moveItemAtIndexPath:indexPath toIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
+	} completion:^(BOOL finished) {
+//		[self.categoriesCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+	}];
+	
+}
+
+- (void) insertSubGenreToRecentLyViewed:(SubGenre *) subGenre {
+	[self.categoriesCollectionView insertItemsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForItem:0 inSection:1]]];
+}
+
+- (void)removeLastObjectFromRecentlyViewed{
+	
+    [self.categoriesCollectionView performBatchUpdates:^{
+        [self.recentlyViewed removeObjectAtIndex:numberOfRecents];
+        NSIndexPath *indexPath =[NSIndexPath indexPathForRow:numberOfRecents-1 inSection:1];
+        [self.categoriesCollectionView deleteItemsAtIndexPaths:[NSArray arrayWithObject:indexPath]];
+		
+    } completion:^(BOOL finished) {
+		
+    }];
+}
 
 
 
@@ -379,12 +369,8 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 	if ([self.recentlyViewed containsObject:subgenre]) {
 		[self.recentlyViewed removeObject:subgenre];
 	}
-
-	[self.recentlyViewed insertObject:subgenre atIndex:0];
 	
-	if (self.recentlyViewed.count > 3) {
-		[self.recentlyViewed removeLastObject];
-	}
+	[self.recentlyViewed insertObject:subgenre atIndex:0];
 	
 }
 
