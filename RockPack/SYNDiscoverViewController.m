@@ -333,26 +333,26 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 
 - (NSMutableArray*) genreArrayFromDefaults {
 	
-	NSMutableArray *arr = [[NSMutableArray alloc] init];
+	NSMutableArray *mutableArray = [[NSMutableArray alloc] init];
 	
-	arr = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsRecentlyViewed];
+	NSArray *defaultsArray = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsRecentlyViewed];
 	
 	
-	if (!arr) {
+	if (!defaultsArray) {
 		return [NSMutableArray new];
 	}
 	
-	NSLog(@" ARRAY YYY %@", arr);
 	
-	for (int i = 0; i < arr.count; i++) {
-		Genre *subGenre = [[SYNGenreManager sharedManager] genreWithId:[arr objectAtIndex:i]];
-		[arr setObject:subGenre atIndexedSubscript:i];
+	for (int i = 0; i < defaultsArray.count; i++) {
+		Genre *subGenre = [[SYNGenreManager sharedManager] genreWithId:[defaultsArray objectAtIndex:i]];
+		if (subGenre) {
+			[mutableArray addObject:subGenre];
+		}
 	}
-	return arr;
+	return mutableArray;
 }
 
-- (NSArray*) defaultsArrayFromRecents {
-	
+- (NSMutableArray*) defaultsArrayFromRecents {
 	
 	NSMutableArray *arr = [[NSMutableArray alloc] init];
 	for (Genre *genre in self.recentlyViewed) {
