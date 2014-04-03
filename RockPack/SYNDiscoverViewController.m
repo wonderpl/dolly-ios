@@ -117,7 +117,7 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 	self.moodBarButton = [[UIBarButtonItem alloc]initWithImage:moodImage style:UIBarButtonItemStyleBordered target:self action:@selector(pushMoodViewController)];
 	
 	UIBarButtonItem *negativeSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-
+	
 	[negativeSpace setWidth:-20];
 	
 	self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:negativeSpace,self.moodBarButton,nil];
@@ -150,7 +150,7 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
     }
     
     if (IS_IPAD) {
-//        self.navigationController.navigationBarHidden = YES;
+		//        self.navigationController.navigationBarHidden = YES;
     }
 	
     self.sideContainerView.layer.borderColor = [[UIColor dollyMediumGray] CGColor];
@@ -173,7 +173,7 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
     [super viewWillAppear:animated];
 	
     if (IS_IPAD) {
-//        self.navigationController.navigationBarHidden = YES;
+		//        self.navigationController.navigationBarHidden = YES;
     }
 	
 	// This is to handle the case where we're on the profile page and popToRootViewControllerAnimated is called.
@@ -217,7 +217,7 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
     [super viewWillDisappear:animated];
 	
     if (IS_IPAD) {
-//        self.navigationController.navigationBarHidden = NO;
+		//        self.navigationController.navigationBarHidden = NO;
 	}
 	
 	if (IS_IPHONE) {
@@ -261,17 +261,7 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 		
 		if (self.recentlyViewed.count <=numberOfRecents) {
 			
-			if (indexPath.section == 1) {
-				[self.categoriesCollectionView performBatchUpdates:^{
-					
-					[self moveSubGenreToTheTop:subGenre fromIndex:indexPath];
-				} completion:^(BOOL finished) {
-					
-					[self.categoriesCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] animated:NO scrollPosition:UICollectionViewScrollPositionNone];
-					
-				}];
-				
-			} else {
+			if (indexPath.section != 1) {
 				
 				if (!inRecentlyViewed) {
 					[self.categoriesCollectionView performBatchUpdates:^{
@@ -286,17 +276,7 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 				}
 			}
 		} else {
-			if (indexPath.section == 1) {
-				[self.categoriesCollectionView performBatchUpdates:^{
-					[self moveSubGenreToTheTop:subGenre fromIndex:indexPath];
-				} completion:^(BOOL finished) {
-					
-					//select the first cell
-					
-				}];
-				
-			} else {
-				
+			if (indexPath.section != 1) {
 				[self.categoriesCollectionView performBatchUpdates:^{
 					[self insertSubGenreToRecentLyViewed:subGenre];
 					[self removeLastObjectFromRecentlyViewed];
@@ -311,7 +291,7 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 			[self.recentlyViewed removeLastObject];
 		}
 	}
-
+	
 	if (IS_IPAD) {
 		[self.categoriesCollectionView reloadData];
 		[self.categoriesCollectionView selectItemAtIndexPath:self.selectedCellIndex animated:NO scrollPosition:UICollectionViewScrollPositionNone];
@@ -324,9 +304,9 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
                withTitle:title
                  forType:kSearchTypeGenre];
 	
-
+	
 	[[NSUserDefaults standardUserDefaults] setObject:[self defaultsArrayFromRecents] forKey:kUserDefaultsRecentlyViewed];
-
+	
 }
 
 
@@ -391,7 +371,7 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 - (void)addSubGenreToRecents:(Genre*) subgenre {
 	
 	if ([self.recentlyViewed containsObject:subgenre]) {
-		[self.recentlyViewed removeObject:subgenre];
+		return;
 	}
 	
 	[self.recentlyViewed insertObject:subgenre atIndex:0];
