@@ -29,6 +29,7 @@
 #import "SYNGenreManager.h"
 #import "SYNDiscoverSectionHeaderView.h"
 #import "SYNMoodRootViewController.h"
+#import "SYNGenreManager.h"
 
 @import QuartzCore;
 
@@ -116,16 +117,12 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 	self.moodBarButton = [[UIBarButtonItem alloc]initWithImage:moodImage style:UIBarButtonItemStyleBordered target:self action:@selector(pushMoodViewController)];
 	
 	UIBarButtonItem *negativeSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+
 	[negativeSpace setWidth:-20];
 	
 	self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:negativeSpace,self.moodBarButton,nil];
 	
 	
-	self.navigationController.navigationBar.tintColor = [UIColor dollyMoodColor];
-	
-	if (IS_IPHONE) {
-		
-	}
 	
     if(IS_IPHONE)
     {
@@ -143,8 +140,7 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
     self.searchResultsController = [[SYNSearchResultsViewController alloc] initWithViewId:kSearchViewId];
     
     // you want to load the search display controller only for iPad, on iPhone in slides in as a navigation
-    if(IS_IPAD)
-    {
+    if(IS_IPAD) {
         [self addChildViewController: self.searchResultsController];
         [self.containerView addSubview: self.searchResultsController.view];
         
@@ -154,7 +150,7 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
     }
     
     if (IS_IPAD) {
-        self.navigationController.navigationBarHidden = YES;
+//        self.navigationController.navigationBarHidden = YES;
     }
 	
     self.sideContainerView.layer.borderColor = [[UIColor dollyMediumGray] CGColor];
@@ -168,13 +164,16 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 												 name:CategoriesReloadedNotification
 											   object:nil];
 	self.recentlyViewed = [[NSMutableArray alloc] init];
+	
+	
+	
 }
 
-- (void) viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 	
     if (IS_IPAD) {
-        self.navigationController.navigationBarHidden = YES;
+//        self.navigationController.navigationBarHidden = YES;
     }
 	
 	// This is to handle the case where we're on the profile page and popToRootViewControllerAnimated is called.
@@ -190,8 +189,10 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 	[self.categoriesCollectionView reloadData];
 	[self.categoriesCollectionView selectItemAtIndexPath:self.selectedCellIndex animated:NO scrollPosition:UICollectionViewScrollPositionNone];
 	
-    
+	
+	self.recentlyViewed = [self genreArrayFromDefaults];
 }
+
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
@@ -216,7 +217,7 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
     [super viewWillDisappear:animated];
 	
     if (IS_IPAD) {
-        self.navigationController.navigationBarHidden = NO;
+//        self.navigationController.navigationBarHidden = NO;
 	}
 	
 	if (IS_IPHONE) {
@@ -243,7 +244,7 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 		index--;
 	}
 	
-	SubGenre *subGenre;
+	Genre *subGenre;
 	
 	if (indexPath.section == 1) {
 		subGenre = self.recentlyViewed[indexPath.row];
@@ -323,21 +324,53 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
                withTitle:title
                  forType:kSearchTypeGenre];
 	
-	
+
+	[[NSUserDefaults standardUserDefaults] setObject:[self defaultsArrayFromRecents] forKey:kUserDefaultsRecentlyViewed];
+
 }
 
 
-- (void) moveSubGenreToTheTop :(SubGenre*) subGenre fromIndex:(NSIndexPath*) indexPath {
+
+- (NSMutableArray*) genreArrayFromDefaults {
 	
-	[self. categoriesCollectionView performBatchUpdates:^{
+	NSMutableArray *arr = [[NSMutableArray alloc] init];
+	
+	arr = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsRecentlyViewed];
+	
+	
+	if (!arr) {
+		return [NSMutableArray new];
+	}
+	
+	NSLog(@" ARRAY YYY %@", arr);
+	
+	for (int i = 0; i < arr.count; i++) {
+		Genre *subGenre = [[SYNGenreManager sharedManager] genreWithId:[arr objectAtIndex:i]];
+		[arr setObject:subGenre atIndexedSubscript:i];
+	}
+	return arr;
+}
+
+- (NSArray*) defaultsArrayFromRecents {
+	
+	
+	NSMutableArray *arr = [[NSMutableArray alloc] init];
+	for (Genre *genre in self.recentlyViewed) {
+		[arr addObject:genre.uniqueId];
+	}
+	
+	return arr;
+}
+
+- (void)moveSubGenreToTheTop :(Genre*) subGenre fromIndex:(NSIndexPath*) indexPath {
+	
+	[self.categoriesCollectionView performBatchUpdates:^{
 		[self.categoriesCollectionView moveItemAtIndexPath:indexPath toIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
-	} completion:^(BOOL finished) {
-//		[self.categoriesCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] animated:NO scrollPosition:UICollectionViewScrollPositionNone];
-	}];
+	} completion:nil];
 	
 }
 
-- (void) insertSubGenreToRecentLyViewed:(SubGenre *) subGenre {
+- (void)insertSubGenreToRecentLyViewed:(Genre *) subGenre {
 	[self.categoriesCollectionView insertItemsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForItem:0 inSection:1]]];
 }
 
@@ -355,7 +388,7 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 
 
 
-- (void) addSubGenreToRecents:(SubGenre*) subgenre {
+- (void)addSubGenreToRecents:(Genre*) subgenre {
 	
 	if ([self.recentlyViewed containsObject:subgenre]) {
 		[self.recentlyViewed removeObject:subgenre];
@@ -367,7 +400,7 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 
 #pragma mark - CollectionView Delegate/Data Source
 
-- (NSInteger) numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
 	return [self.genres count]+1;
 }
 
@@ -436,7 +469,7 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
     return categoryCell;
 }
 
-- (BOOL) collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
 }
 
@@ -453,7 +486,8 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
     }
 }
 
-- (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
 	self.selectedCellIndex = indexPath;
     [self selectCategoryForCollection:collectionView atIndexPath:indexPath];
@@ -903,7 +937,12 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 		self.moodVC = [[SYNMoodRootViewController alloc]initWithViewId:kMoodViewId];
 	}
 	
-	[self.navigationController pushViewController:self.moodVC animated:YES];
+	if (IS_IPHONE) {
+		
+		[self.navigationController pushViewController:self.moodVC animated:YES];
+	} else {
+		[self.navigationController presentViewController:self.moodVC animated:YES completion:nil];
+	}
 	
 	//Hides tab bar when displaying thre mood vc
 	if (IS_IPHONE) {
