@@ -9,7 +9,6 @@
 #import "AppConstants.h"
 #import "Appirater.h"
 #import "Channel.h"
-#import "ChannelCover.h"
 #import "ChannelOwner.h"
 #import "FeedItem.h"
 #import "SYNAggregateCell.h"

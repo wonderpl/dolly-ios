@@ -8,7 +8,6 @@
 
 #import "SYNAddToChannelViewController.h"
 #import "AppConstants.h"
-#import "ChannelCover.h"
 #import "ExternalAccount.h"
 #import "VideoInstance.h"
 #import "SYNAddToChannelCreateNewCell.h"

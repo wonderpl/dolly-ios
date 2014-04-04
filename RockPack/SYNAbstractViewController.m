@@ -11,7 +11,6 @@
 
 #import "AppConstants.h"
 #import "Channel.h"
-#import "ChannelCover.h"
 #import "ChannelOwner.h"
 #import "NSDictionary+Validation.h"
 #import "SDWebImageManager.h"

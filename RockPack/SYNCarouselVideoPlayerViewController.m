@@ -17,7 +17,6 @@
 #import "UIFont+SYNFont.h"
 #import "SYNAppDelegate.h"
 #import "SYNFacebookManager.h"
-#import "ChannelCover.h"
 #import "UICollectionReusableView+Helpers.h"
 #import "SYNFeedModel.h"
 #import "SYNStaticModel.h"

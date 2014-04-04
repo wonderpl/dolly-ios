@@ -8,7 +8,6 @@
 
 #import "AppConstants.h"
 #import "Channel.h"
-#import "ChannelCover.h"
 #import "SYNAddToChannelCreateNewCell.h"
 #import "SYNChannelMidCell.h"
 #import "SYNChannelSearchCell.h"
