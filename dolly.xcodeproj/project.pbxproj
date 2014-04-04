@@ -300,6 +300,7 @@
 		4C102A3C1896D80E00C367E8 /* IconWonderAbout.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C102A3A1896D80E00C367E8 /* IconWonderAbout.png */; };
 		4C102A3D1896D80E00C367E8 /* IconWonderAbout@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C102A3B1896D80E00C367E8 /* IconWonderAbout@2x.png */; };
 		4C1DBBEC18E48E5D0047CAFA /* SYNIPadSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C1DBBEB18E48E5D0047CAFA /* SYNIPadSignupViewController.m */; };
+		4C5C390718EF09E6007250EE /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5C390618EF09E6007250EE /* UIPlaceHolderTextView.m */; };
 		4C5E85F018B620A200D0E937 /* SYNInBoardingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5E85EE18B620A200D0E937 /* SYNInBoardingViewController.m */; };
 		4C5E85FE18B6306A00D0E937 /* SYNOnBoardingOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5E85FC18B6306A00D0E937 /* SYNOnBoardingOverlayViewController.m */; };
 		4C5E85FF18B6306A00D0E937 /* SYNOnBoardingOverlayViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C5E85FD18B6306A00D0E937 /* SYNOnBoardingOverlayViewController~iphone.xib */; };
@@ -1074,6 +1075,8 @@
 		4C1DBBEA18E48E5D0047CAFA /* SYNIPadSignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNIPadSignupViewController.h; sourceTree = "<group>"; };
 		4C1DBBEB18E48E5D0047CAFA /* SYNIPadSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNIPadSignupViewController.m; sourceTree = "<group>"; };
 		4C30407718BB6972006B5463 /* SYNCommentUpdateDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYNCommentUpdateDelegate.h; sourceTree = "<group>"; };
+		4C5C390518EF09E6007250EE /* UIPlaceHolderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPlaceHolderTextView.h; sourceTree = "<group>"; };
+		4C5C390618EF09E6007250EE /* UIPlaceHolderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPlaceHolderTextView.m; sourceTree = "<group>"; };
 		4C5E85ED18B620A200D0E937 /* SYNInBoardingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNInBoardingViewController.h; sourceTree = "<group>"; };
 		4C5E85EE18B620A200D0E937 /* SYNInBoardingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNInBoardingViewController.m; sourceTree = "<group>"; };
 		4C5E85FB18B6306A00D0E937 /* SYNOnBoardingOverlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNOnBoardingOverlayViewController.h; sourceTree = "<group>"; };
@@ -2098,6 +2101,7 @@
 		019824E41629CAF500216900 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				4C5C390418EF09C3007250EE /* UIPlaceHolderTextView */,
 				E947097A18D76236000174A7 /* Serializers */,
 				0E3AE68D1875DE5D008A8D00 /* Genre Manager */,
 				E9B8A501185B209B00F0D625 /* Animators */,
@@ -2839,6 +2843,15 @@
 				4C6FD75118EC217B0068FF84 /* SYNDiscoverSectionHeaderView.xib */,
 			);
 			name = UICollectionReusableView;
+			sourceTree = "<group>";
+		};
+		4C5C390418EF09C3007250EE /* UIPlaceHolderTextView */ = {
+			isa = PBXGroup;
+			children = (
+				4C5C390518EF09E6007250EE /* UIPlaceHolderTextView.h */,
+				4C5C390618EF09E6007250EE /* UIPlaceHolderTextView.m */,
+			);
+			name = UIPlaceHolderTextView;
 			sourceTree = "<group>";
 		};
 		4C5E85EC18B6203600D0E937 /* In Boarding */ = {
@@ -4533,6 +4546,7 @@
 				BEE01B79185732A0000CF681 /* Mood.m in Sources */,
 				E9CE7A301887161B00023A86 /* SYNiPadIntroToSignupAnimator.m in Sources */,
 				E9F625641885C238000EF6A2 /* SYNGradientMaskView.m in Sources */,
+				4C5C390718EF09E6007250EE /* UIPlaceHolderTextView.m in Sources */,
 				E93E10E31835116D00A62F64 /* SYNVideoPlayer.m in Sources */,
 				E929AD7218D0AF0B001E1792 /* SYNHTTPSessionManager.m in Sources */,
 				38281F1D17439B770024DC18 /* SYNLoginBaseViewController.m in Sources */,
