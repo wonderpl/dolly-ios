@@ -158,7 +158,7 @@
         
     }
     
-    ((UIButton*)[self.masterController.tabs objectAtIndex:2]).selected = YES;
+    ((UIButton*)[self.masterController.tabs objectAtIndex:1]).selected = YES;
 
 }
 

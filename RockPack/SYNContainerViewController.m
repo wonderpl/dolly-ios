@@ -80,15 +80,8 @@
     discoveryViewController.navigationItem.backBarButtonItem = backButton;
     UINavigationController *navSearchViewController = [[UINavigationController alloc] initWithRootViewController:discoveryViewController];
     
-    // == Feed Page == //
-    
-    SYNMoodRootViewController *moodRootViewController = [[SYNMoodRootViewController alloc] initWithViewId: kMoodViewId];
-    moodRootViewController.navigationItem.backBarButtonItem = backButton;
-    UINavigationController *navMoodRootViewController = [[UINavigationController alloc] initWithRootViewController:moodRootViewController];
-    
     // == Hold the vc locally
     self.viewControllers = @[navFeedViewController, navSearchViewController,
-                             navMoodRootViewController,
                              navProfileViewController, navActivityViewController];
     
     
@@ -102,13 +95,7 @@
     
     // == Set the first vc
     self.currentViewController = self.viewControllers[0];
-    
-    
-    
-    
-    
-    
-    
+        
 }
 
 

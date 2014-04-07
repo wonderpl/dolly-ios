@@ -455,7 +455,7 @@
 }
 
 - (UIButton *)activityTab {
-	return self.tabs[4];
+	return self.tabs[3];
 }
 
 
