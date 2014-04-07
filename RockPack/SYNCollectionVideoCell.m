@@ -133,14 +133,11 @@
 {
     [self.overlayView setBackgroundColor:[UIColor clearColor]];
 }
--(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
-//    [self.overlayView setBackgroundColor:[UIColor clearColor]];
-}
 
 -(void)showVideo
 {
     [self.delegate videoButtonPressed:self];
+	[self.overlayView setBackgroundColor:[UIColor clearColor]];
 }
 
 
