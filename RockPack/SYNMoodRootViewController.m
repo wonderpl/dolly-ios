@@ -115,11 +115,21 @@
     self.randomVideoArray = @[];
     self.videosArray = @[];
     self.randomVideoIndex = 0;
+	
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName: kScrollMovement
+														object: self
+													  userInfo: @{kScrollingDirection:@(ScrollingDirectionDown)}];
+
 }
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	
+
 	[[SYNTrackingManager sharedManager] trackMoodMinderScreenView];
 }
 

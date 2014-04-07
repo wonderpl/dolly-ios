@@ -104,25 +104,24 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
     [self.categoriesCollectionView registerNib:[SYNDiscoverCategoriesCell nib]
                     forCellWithReuseIdentifier:[SYNDiscoverCategoriesCell reuseIdentifier]];
     
-	//    [self.categoriesCollectionView registerNib: [UINib nibWithNibName: OnBoardingHeaderIndent bundle: nil]
-	//          forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
-	//                 withReuseIdentifier: OnBoardingHeaderIndent];
-	
 	
 	[self.categoriesCollectionView registerNib: [SYNDiscoverSectionHeaderView nib]					forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
 						   withReuseIdentifier: [SYNDiscoverSectionHeaderView reuseIdentifier]];
 	
-	UIImage *moodImage = [[UIImage imageNamed:@"TabMoods.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+	UIImage *moodImage = [[UIImage imageNamed:@"Moods.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 	
-	self.moodBarButton = [[UIBarButtonItem alloc]initWithImage:moodImage style:UIBarButtonItemStyleBordered target:self action:@selector(pushMoodViewController)];
+	
+	self.moodBarButton = [[UIBarButtonItem alloc]initWithImage:moodImage style:UIBarButtonItemStyleBordered target:self action:@selector(pushMoodViewController:)];
+	
+
 	
 	UIBarButtonItem *negativeSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
 	
-	[negativeSpace setWidth:-20];
-	
-//	self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:negativeSpace,self.moodBarButton,nil];
-	
-	
+	[negativeSpace setWidth:-5];
+
+	if (IS_IPHONE) {
+		self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:negativeSpace,self.moodBarButton,nil];
+	}
 	
     if(IS_IPHONE)
     {
@@ -215,15 +214,18 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-	
-    if (IS_IPAD) {
-		//        self.navigationController.navigationBarHidden = NO;
-	}
-	
 	if (IS_IPHONE) {
 		NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
 		[notificationCenter removeObserver:self name:UIKeyboardWillShowNotification object:self];
 		[notificationCenter removeObserver:self name:UIKeyboardWillHideNotification object:self];
+	}
+}
+
+- (void) viewDidDisappear:(BOOL)animated {
+	
+	[super viewDidDisappear:animated];
+	if (IS_IPAD) {
+		self.navigationController.navigationBarHidden = NO;
 	}
 }
 
@@ -911,9 +913,7 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 					 } completion:nil];
 }
 
-
-- (void) pushMoodViewController {
-	
+- (IBAction)pushMoodViewController:(id)sender {
 	if (!self.moodVC) {
 		self.moodVC = [[SYNMoodRootViewController alloc]initWithViewId:kMoodViewId];
 	}
@@ -924,14 +924,7 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 	} else {
 		[self.navigationController presentViewController:self.moodVC animated:YES completion:nil];
 	}
-	
-	//Hides tab bar when displaying thre mood vc
-	if (IS_IPHONE) {
-		[[NSNotificationCenter defaultCenter] postNotificationName: kScrollMovement
-                                                            object: self
-                                                          userInfo: @{kScrollingDirection:@(ScrollingDirectionDown)}];
-	}
-	
 }
+
 
 @end
