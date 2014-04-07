@@ -1132,38 +1132,16 @@
     
     [self killScroll];
 
-    
-    //  [self.activityIndicator startAnimating];
     [self editMode];
     
     for (SYNCollectionVideoCell* cell in self.videoThumbnailCollectionView.visibleCells)
     {
-        //        NSIndexPath* indexPathForCell = [self.videoThumbnailCollectionView indexPathForCell:cell];
         
         cell.deleteButton.hidden = NO;
         void (^animateEditMode)(void) = ^{
             
             CGRect frame = cell.frame;
             
-            //
-            //            if (IS_IPHONE) {
-            //                frame.origin.y -= (index*kHeightChange);
-            //               // frame.size.height -= kHeightChange;
-            //            }
-            //
-            //            if (IS_IPAD) {
-            //
-            //                if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation])) {
-            //                    frame.origin.y -=((index/2)*kHeightChange);
-            //                 //   frame.size.height -=kHeightChange;
-            //                }
-            //                else
-            //                {
-            //                    frame.origin.y -=((index/3)*kHeightChange);
-            //                   // frame.size.height -=kHeightChange;
-            //
-            //                }
-            //            }
             cell.frame = frame;
             
             cell.likeControl.alpha = 0.0f;
@@ -1243,30 +1221,19 @@
 	
     if (self.mode == kChannelDetailsModeEdit )
     {
-        //        CGPoint tmpPoint = self.videoThumbnailCollectionView.contentOffset;
-        
         if (IS_IPHONE)
         {
             [self.videoThumbnailCollectionView setCollectionViewLayout:self.videoCollectionViewLayoutIPhoneEdit animated:YES];
-            //  [self.videoThumbnailCollectionView setContentOffset:tmpPoint];
-            //[self.videoCollectionViewLayoutIPhoneEdit invalidateLayout];
-            
         }
         if (IS_IPAD)
         {
             [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
             [self.videoThumbnailCollectionView setCollectionViewLayout:self.videoCollectionViewLayoutIPadEdit animated:YES];
-//            [self.videoThumbnailCollectionView setContentOffset:tmpPoint];
-//            [self.videoCollectionViewLayoutIPadEdit invalidateLayout];
         }
     }
     
     if (self.mode == kChannelDetailsModeDisplayUser )
     {
-        
-        //        CGPoint tmpPoint = self.videoThumbnailCollectionView.contentOffset;
-        //        tmpPoint.y+= (self.videoThumbnailCollectionView.visibleCells.count-1)*(kHeightChange);
-        
         if (IS_IPHONE)
         {
             [self.videoThumbnailCollectionView setCollectionViewLayout:self.videoCollectionViewLayoutIPhone animated:YES];
@@ -1274,9 +1241,6 @@
             
             self.videoThumbnailCollectionView.delegate = self;
             self.videoThumbnailCollectionView.dataSource = self;
-            
-            //      [self.videoThumbnailCollectionView setContentOffset:tmpPoint];
-            //            [self.videoCollectionViewLayoutIPhone invalidateLayout];
             
         }
         
@@ -1290,15 +1254,8 @@
             
             self.videoThumbnailCollectionView.delegate = self;
             self.videoThumbnailCollectionView.dataSource = self;
-            //      [self.videoThumbnailCollectionView setContentOffset:tmpPoint];
-            //            [self.videoCollectionViewLayoutIPad invalidateLayout];
-            
-            
         }
     }
-
-    //[self.videoThumbnailCollectionView reloadData];
-    
 }
 
 
@@ -1336,10 +1293,6 @@
                                                    cancelButtonTitle: NSLocalizedString(@"Cancel", nil)
                                                    otherButtonTitles: NSLocalizedString(@"Delete", nil), nil];
     [self.deleteChannelAlertView show];
-    
-    
-    
-    
 }
 
 - (void) deleteVideoInstance
@@ -1350,8 +1303,6 @@
     {
         return;
     }
-    
-    //    self.editedVideos = YES;
     
     UICollectionViewCell *cell = [self.videoThumbnailCollectionView cellForItemAtIndexPath: self.indexPathToDelete];
     
@@ -1509,17 +1460,6 @@
                                             
                                              
                                              NSString *channelId = resourceCreated[@"id"];
-                                             //
-                                             //                                             [self setEditControlsVisibility: NO];
-                                             //                                             self.saveChannelButton.enabled = YES;
-                                             //                                             self.deleteChannelButton.enabled = YES;
-                                             //                                             [self.activityIndicator stopAnimating];
-                                             //                                             self.saveChannelButton.hidden = YES;
-                                             //                                             self.deleteChannelButton.hidden = YES;
-                                             //                                             self.cancelEditButton.hidden = YES;
-                                             //
-                                             
-                                             
                                             
                                              if(self.mode == kChannelDetailsModeEdit)
                                                  [self setVideosForChannelById: channelId //  2nd step of the creation process
@@ -1527,7 +1467,6 @@
                                              
                                              
 											 [self cancelTapped];
-                                             // this block will also call the [self getChanelById:channelId isUpdated:YES] //
                                          }
                                               errorHandler: ^(id error) {
                                                   DebugLog(@"Error @ saveChannelPressed:");
@@ -1560,11 +1499,6 @@
                                                   
                                                   [self	showError: errorMessage showErrorTitle: errorTitle];
 												  
-												  //self.saveChannelButton.hidden = NO;
-                                                  //self.saveChannelButton.enabled = YES;
-                                                  //self.deleteChannelButton.hidden = NO;
-                                                  //self.deleteChannelButton.enabled = YES;
-                                                  //[self.activityIndicator stopAnimating];
                                               }];
 }
 
@@ -1602,11 +1536,6 @@
                                             
                                             if (isUpdated)
                                             {
-                                                //                                                          [self.activityIndicator stopAnimating];
-                                                //                                                          self.cancelEditButton.hidden = NO;
-                                                //                                                          self.cancelEditButton.enabled = YES;
-                                                //                                                          self.createChannelButton.enabled = YES;
-                                                //                                                          self.createChannelButton.hidden = NO;
                                                 
                                                 if (!errorMessage)
                                                 {
@@ -1619,15 +1548,15 @@
                                             }
                                             else                           // isCreated
                                             {
-                                                //                                                          [self.activityIndicator stopAnimating];
                                                 
                                                 if (!errorMessage)
                                                 {
                                                     errorMessage = NSLocalizedString(@"Could not add videos to channel. Please review and try again later.", nil);
                                                 }
                                                 
-                                                // if we have an error at this stage then it means that we started a channel with a single invalid video
+												// if we have an error at this stage then it means that we started a channel with a single invalid video
                                                 // we want to still create that channel, but without that video while waring to the user.
+
                                                 if (self.channel.videoInstances[0])
                                                 {
                                                     [self.channel.videoInstancesSet removeObject: self.channel.videoInstances[0]];
@@ -1645,8 +1574,6 @@
 
 - (void) showError: (NSString *) errorMessage showErrorTitle: (NSString *) errorTitle
 {
-    //    self.createChannelButton.hidden = NO;
-    //    [self.activityIndicator stopAnimating];
     
     [[[UIAlertView alloc] initWithTitle: errorTitle
                                 message: errorMessage
