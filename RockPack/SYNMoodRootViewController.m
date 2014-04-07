@@ -25,8 +25,9 @@
 #import "SYNTrackingManager.h"
 #import "SYNMasterViewController.h"
 
-#define LARGE_AMOUNT_OF_ROWS 10000
-#define WATCH_BUTTON_ANIMATION_TIME 0.4
+static const float largeAmountOfRows = 10000;
+static const float watchButtonAnimationTime = 0.4;
+static const float xAxis = 77;
 
 @interface SYNMoodRootViewController ()
 @property (strong, nonatomic) IBOutlet UIImageView *backgroundImage;
@@ -123,7 +124,8 @@
 	[[NSNotificationCenter defaultCenter] postNotificationName: kScrollMovement
 														object: self
 													  userInfo: @{kScrollingDirection:@(ScrollingDirectionDown)}];
-
+	
+	
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -242,7 +244,7 @@
       numberOfItemsInSection: (NSInteger) section {
     
     if (collectionView == self.moodCollectionView) {
-        return self.moods.count > 0 ? LARGE_AMOUNT_OF_ROWS : 0;
+        return self.moods.count > 0 ? largeAmountOfRows : 0;
         
     }
     return self.randomVideoArray.count;
@@ -396,28 +398,25 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
     if (IS_IPAD) {
         if (UIDeviceOrientationIsLandscape([SYNDeviceManager.sharedInstance orientation])) {
             
-            self.moodCollectionView.frame = CGRectMake(117, 253, 215, self.moodCollectionView.frame.size.height);
-            self.iWantToLabel.frame = CGRectMake(-5, 373, self.iWantToLabel.frame.size.width, self.iWantToLabel.frame.size.height);
-            self.moodBackground.frame = CGRectMake(0, 211, 336, self.moodBackground.frame.size.height);
-            self.videoCollectionView.frame = CGRectMake(413, 136, 436, 459);
-            self.chooseAnotherButton.frame = CGRectMake(94, 662, self.chooseAnotherButton.frame.size.width, self.chooseAnotherButton.frame.size.height);
-            
-            self.moodBackground.frame = CGRectMake(1, 270, 311, self.moodBackground.frame.size.height);
-            
+            self.moodCollectionView.frame = CGRectMake(117+xAxis, 253, 215, self.moodCollectionView.frame.size.height);
+            self.iWantToLabel.frame = CGRectMake(-5+xAxis, 373, self.iWantToLabel.frame.size.width, self.iWantToLabel.frame.size.height);
+            self.videoCollectionView.frame = CGRectMake(413+xAxis, 136, 436, 459);
+            self.chooseAnotherButton.frame = CGRectMake(94+xAxis, 662, self.chooseAnotherButton.frame.size.width, self.chooseAnotherButton.frame.size.height);            
+            self.moodBackground.frame = CGRectMake(1+xAxis, 225, 311, self.moodBackground.frame.size.height);
             self.titleLabel.font = [UIFont systemFontOfSize:23];
-            self.divider.frame = CGRectMake(311, 0, 1, 768);
+            self.divider.frame = CGRectMake(311+xAxis, 0, 1, 768);
             
             
         } else {
             
-            self.videoCollectionView.frame = CGRectMake(245, 248, 436, 459);
-            self.chooseAnotherButton.frame = CGRectMake(64, 800, self.chooseAnotherButton.frame.size.width, self.chooseAnotherButton.frame.size.height);
-            self.moodCollectionView.frame = CGRectMake(120, 372, 131, self.moodCollectionView.frame.size.height);
-            self.iWantToLabel.frame = CGRectMake(-25, 492, self.iWantToLabel.frame.size.width, self.iWantToLabel.frame.size.height);
-            self.moodBackground.frame = CGRectMake(1, 330, 254, self.moodBackground.frame.size.height);
+            self.videoCollectionView.frame = CGRectMake(245+xAxis, 248, 436, 459);
+            self.chooseAnotherButton.frame = CGRectMake(64+xAxis, 800, self.chooseAnotherButton.frame.size.width, self.chooseAnotherButton.frame.size.height);
+            self.moodCollectionView.frame = CGRectMake(120+xAxis, 372, 131, self.moodCollectionView.frame.size.height);
+            self.iWantToLabel.frame = CGRectMake(-25+xAxis, 492, self.iWantToLabel.frame.size.width, self.iWantToLabel.frame.size.height);
+            self.moodBackground.frame = CGRectMake(1+xAxis, 340, 254, self.moodBackground.frame.size.height);
             self.titleLabel.font = [UIFont systemFontOfSize:19];
             
-            self.divider.frame = CGRectMake(255, 64, 1, 960);
+            self.divider.frame = CGRectMake(255+xAxis, 64, 1, 960);
         }
         [self setDividerGradient];
     }
@@ -431,7 +430,7 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
     self.watchButton.alpha = 0.0f;
     self.chooseAnotherButton.alpha = 0.0f;
     
-    [UIView animateWithDuration:WATCH_BUTTON_ANIMATION_TIME animations:^{
+    [UIView animateWithDuration:watchButtonAnimationTime animations:^{
         self.watchButton.alpha = 1.0f;
         self.chooseAnotherButton.alpha = 1.0f;
 
@@ -469,7 +468,7 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
         [self.moodCollectionView reloadData];
         
         // center the moods list to the middle
-        [self.moodCollectionView scrollToItemAtIndexPath: [NSIndexPath indexPathForItem:(LARGE_AMOUNT_OF_ROWS/2) inSection:0] atScrollPosition: UICollectionViewScrollPositionCenteredVertically animated: NO];
+        [self.moodCollectionView scrollToItemAtIndexPath: [NSIndexPath indexPathForItem:(largeAmountOfRows/2) inSection:0] atScrollPosition: UICollectionViewScrollPositionCenteredVertically animated: NO];
     }
 }
 
@@ -511,7 +510,7 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
 #pragma mark - Scrolling animation logic
 - (void)scrollSlowly {
     if (self.moods.count>1) {
-        [self.moodCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:LARGE_AMOUNT_OF_ROWS/4 inSection:0] atScrollPosition:       UICollectionViewScrollPositionCenteredVertically animated:NO];
+        [self.moodCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:largeAmountOfRows/4 inSection:0] atScrollPosition:       UICollectionViewScrollPositionCenteredVertically animated:NO];
     } else  {
         return;
     }
