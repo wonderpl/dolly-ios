@@ -255,9 +255,10 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 	
 	BOOL inRecentlyViewed = [self.recentlyViewed containsObject:subGenre];
 	int indexOfRecent = [self.recentlyViewed indexOfObject:subGenre];
-	[self addSubGenreToRecents:subGenre];
 	
-	if (IS_IPAD) {
+	
+	if (IS_IPAD && index != 0) {
+		[self addSubGenreToRecents:subGenre];
 		
 		if (self.recentlyViewed.count <=numberOfRecents) {
 			

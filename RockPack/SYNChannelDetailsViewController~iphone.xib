@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -12,13 +12,13 @@
                 <outlet property="btnFollowChannel" destination="P7D-vs-dmA" id="xdY-R2-Tym"/>
                 <outlet property="btnShareChannel" destination="ftS-iK-V3y" id="Pze-Em-2DI"/>
                 <outlet property="btnShowFollowers" destination="sVX-iR-Htf" id="cde-4s-nHu"/>
-                <outlet property="btnShowVideos" destination="cJl-eE-YdZ" id="A4S-60-iFH"/>
+                <outlet property="btnShowVideos" destination="mBD-Na-Al8" id="6N8-oe-QpC"/>
                 <outlet property="lblChannelTitle" destination="Vnv-ov-6xo" id="ov8-x6-sed"/>
                 <outlet property="lblDescription" destination="irB-oP-X4O" id="BBs-Oh-cue"/>
                 <outlet property="lblFullName" destination="r8Y-zW-rcS" id="0f2-uW-cCd"/>
                 <outlet property="lblNoVideos" destination="bdE-6E-xRu" id="Tvl-mO-hao"/>
-                <outlet property="txtFieldChannelName" destination="iJk-oO-DwC" id="kJf-Ej-qsU"/>
-                <outlet property="txtViewDescription" destination="QmE-dp-0Kj" id="eea-T0-45v"/>
+                <outlet property="txtViewDescription" destination="QmE-dp-0Kj" id="jdZ-sk-LQs"/>
+                <outlet property="txtViewTitle" destination="nlf-Vt-aRh" id="N5T-nO-n3C"/>
                 <outlet property="videoCollectionViewLayoutIPhone" destination="ybs-C7-TVb" id="OAT-F3-2x4"/>
                 <outlet property="videoThumbnailCollectionView" destination="8Ij-2z-UN8" id="cwi-G1-nSN"/>
                 <outlet property="view" destination="1" id="3"/>
@@ -50,33 +50,33 @@
                     </connections>
                 </collectionView>
                 <view userInteractionEnabled="NO" contentMode="scaleToFill" id="pKN-Gg-iQ2" userLabel="View - No Interaction container">
-                    <rect key="frame" x="1" y="0.0" width="320" height="405"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="405"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Full Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="r8Y-zW-rcS" userLabel="Label - User Name">
-                            <rect key="frame" x="0.0" y="150" width="320" height="27"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <color key="textColor" red="0.47058823704719543" green="0.47058823704719543" blue="0.47058823704719543" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="irB-oP-X4O" userLabel="Label - Description">
-                            <rect key="frame" x="23" y="214" width="274" height="37"/>
+                            <rect key="frame" x="30" y="285" width="260" height="51"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <color key="textColor" red="0.47058823704719543" green="0.47058823704719543" blue="0.47058823704719543" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.46666666670000001" green="0.46666666670000001" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <view contentMode="scaleToFill" id="ANz-Ae-0qP" userLabel="View - Line">
-                    <rect key="frame" x="1" y="404" width="320" height="1"/>
+                    <rect key="frame" x="1" y="470" width="320" height="1"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Full Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="r8Y-zW-rcS" userLabel="Label - User Name">
+                    <rect key="frame" x="12" y="172" width="295" height="27"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                    <color key="textColor" red="0.46666666670000001" green="0.46666666670000001" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <view contentMode="scaleToFill" id="g3c-GE-eJE" userLabel="View - Circle Buttons">
-                    <rect key="frame" x="82" y="314" width="159" height="50"/>
+                    <rect key="frame" x="81" y="395" width="159" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ftS-iK-V3y" customClass="SYNSocialButton">
@@ -123,8 +123,9 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <button clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="jXv-L5-71F" userLabel="Button - Avatar" customClass="SYNAvatarButton">
-                    <rect key="frame" x="132" y="94" width="56" height="56"/>
+                    <rect key="frame" x="132" y="106" width="56" height="56"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <state key="normal">
                         <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -134,7 +135,7 @@
                     </connections>
                 </button>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hRf-ua-zJv">
-                    <rect key="frame" x="24" y="272" width="274" height="30"/>
+                    <rect key="frame" x="24" y="359" width="274" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <state key="normal" title="delete">
@@ -145,30 +146,38 @@
                         <action selector="deleteTapped:" destination="-1" eventType="touchUpInside" id="XNV-fz-h5J"/>
                     </connections>
                 </button>
-                <textView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" text="Description test" textAlignment="center" id="QmE-dp-0Kj" userLabel="Text View - Description">
-                    <rect key="frame" x="24" y="208" width="274" height="47"/>
+                <textView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" text="Description test" textAlignment="center" id="QmE-dp-0Kj" userLabel="Text View - Description" customClass="UIPlaceHolderTextView">
+                    <rect key="frame" x="27" y="287" width="268" height="59"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="calibratedRGB"/>
-                    <color key="textColor" red="0.47058823704719543" green="0.47058823704719543" blue="0.47058823704719543" alpha="1" colorSpace="calibratedRGB"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="textColor" red="0.46666666865348816" green="0.46666666865348816" blue="0.50980395078659058" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     <connections>
-                        <outlet property="delegate" destination="-1" id="lDq-Cz-T4x"/>
+                        <outlet property="delegate" destination="-1" id="xho-e1-OWb"/>
+                    </connections>
+                </textView>
+                <textView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="center" id="nlf-Vt-aRh" userLabel="Text View - Title" customClass="UIPlaceHolderTextView">
+                    <rect key="frame" x="23" y="213" width="274" height="77"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="UVM-n6-xcA"/>
                     </connections>
                 </textView>
                 <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" id="iJk-oO-DwC">
-                    <rect key="frame" x="24" y="153" width="274" height="44"/>
+                    <rect key="frame" x="24" y="207" width="274" height="63"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="calibratedRGB"/>
-                    <color key="textColor" red="0.27450981736183167" green="0.27450981736183167" blue="0.27450981736183167" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" red="0.46666666670000001" green="0.46666666670000001" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                     <textInputTraits key="textInputTraits"/>
-                    <connections>
-                        <outlet property="delegate" destination="-1" id="hiT-WX-Joe"/>
-                    </connections>
                 </textField>
                 <label hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bdE-6E-xRu" userLabel="Label - NoVideos">
-                    <rect key="frame" x="4" y="457" width="313" height="21"/>
+                    <rect key="frame" x="4" y="506" width="313" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -176,7 +185,7 @@
                     <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </label>
                 <view contentMode="scaleToFill" id="fij-tg-loq" userLabel="View - Follow and Video Container">
-                    <rect key="frame" x="0.0" y="258" width="320" height="29"/>
+                    <rect key="frame" x="0.0" y="355" width="320" height="29"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="sVX-iR-Htf" userLabel="Button - Followers button">
@@ -184,22 +193,10 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <state key="normal">
-                                <color key="titleColor" red="0.59607845544815063" green="0.59607845544815063" blue="0.59607845544815063" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleColor" red="0.68627450980392157" green="0.68627450980392157" blue="0.70980392156862748" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <connections>
                                 <action selector="followersLabelPressed:" destination="-1" eventType="touchUpInside" id="dPI-RM-Pbt"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cJl-eE-YdZ" userLabel="Button - Videos">
-                            <rect key="frame" x="177" y="0.0" width="144" height="29"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <state key="normal">
-                                <color key="titleColor" red="0.59607845544815063" green="0.59607845544815063" blue="0.59607845544815063" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="videoCountTapped:" destination="-1" eventType="touchUpInside" id="AAR-Se-bNR"/>
                             </connections>
                         </button>
                         <view contentMode="scaleToFill" id="0Cs-sl-Vwi" userLabel="View - Seperator">
@@ -207,26 +204,25 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.59607845544815063" green="0.59607845544815063" blue="0.59607845544815063" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mBD-Na-Al8" userLabel="Button - Followers button">
+                            <rect key="frame" x="177" y="0.0" width="145" height="29"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <state key="normal">
+                                <color key="titleColor" red="0.68627450980000004" green="0.68627450980000004" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="followersLabelPressed:" destination="-1" eventType="touchUpInside" id="jVb-KZ-Pnr"/>
+                                <action selector="videoCountTapped:" destination="-1" eventType="touchUpInside" id="QBe-r1-yna"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>
-                <view contentMode="scaleToFill" id="kbe-UB-CUh" userLabel="View - Navigation Bar">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Channel Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="20" id="Vnv-ov-6xo" userLabel="Label - Channel Title">
+                    <rect key="frame" x="40" y="216" width="240" height="55"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <subviews>
-                        <view contentMode="scaleToFill" id="upD-8h-1CX" userLabel="View - Navigation Line">
-                            <rect key="frame" x="0.0" y="64" width="320" height="1"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                        </view>
-                    </subviews>
-                    <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
-                </view>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Channel Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="20" id="Vnv-ov-6xo" userLabel="Label - Channel Title">
-                    <rect key="frame" x="25" y="178" width="270" height="29"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                    <color key="textColor" red="0.27450981736183167" green="0.27450981736183167" blue="0.27450981736183167" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
                     <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </label>
             </subviews>

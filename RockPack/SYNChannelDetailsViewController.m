@@ -37,12 +37,11 @@
 #import "SYNCollectectionDetailsOverlayViewController.h"
 #import "SYNTrackingManager.h"
 #import "SYNGenreManager.h"
-
+#import "UIPlaceHolderTextView.h"
 
 #define kHeightChange 70.0f
 #define FULL_NAME_LABEL_IPHONE 147.0f
 #define FULL_NAME_LABEL_IPAD_PORTRAIT 252.0f
-
 #define FULLNAMELABELIPADLANDSCAPE 258.0f
 
 
@@ -61,15 +60,16 @@
 @property (strong, nonatomic) IBOutlet UICollectionView *videoThumbnailCollectionView;
 @property (strong, nonatomic) IBOutlet UIButton *btnShowFollowers;
 @property (strong, nonatomic) IBOutlet UIButton *btnShowVideos;
+@property (strong, nonatomic) IBOutlet UIPlaceHolderTextView *txtViewTitle;
 
 @property (strong, nonatomic) IBOutlet UIView *viewProfileContainer;
 
-@property (strong, nonatomic) IBOutlet LXReorderableCollectionViewFlowLayout *videoCollectionViewLayoutIPhoneEdit;
+@property (strong, nonatomic) LXReorderableCollectionViewFlowLayout *videoCollectionViewLayoutIPhoneEdit;
 @property (strong, nonatomic) IBOutlet UICollectionViewFlowLayout *videoCollectionViewLayoutIPhone;
 
 
 @property (strong, nonatomic) IBOutlet UICollectionViewFlowLayout *videoCollectionViewLayoutIPad;
-@property (strong, nonatomic) IBOutlet LXReorderableCollectionViewFlowLayout *videoCollectionViewLayoutIPadEdit;
+@property (strong, nonatomic) LXReorderableCollectionViewFlowLayout *videoCollectionViewLayoutIPadEdit;
 
 @property (strong, nonatomic) IBOutlet UILabel *lblNoVideos;
 
@@ -77,7 +77,7 @@
 @property (strong, nonatomic) IBOutlet SYNSocialButton *btnEditChannel;
 @property (strong, nonatomic) IBOutlet UIButton *btnDeleteChannel;
 @property (strong, nonatomic) IBOutlet UIView *viewCollectionSeperator;
-@property (strong, nonatomic) IBOutlet UITextView *txtViewDescription;
+@property (strong, nonatomic) IBOutlet UIPlaceHolderTextView *txtViewDescription;
 @property (strong, nonatomic) IBOutlet UITextField *txtFieldChannelName;
 @property (strong, nonatomic) UIBarButtonItem *barBtnCancel;
 @property (strong, nonatomic) UIBarButtonItem *barBtnSave;
@@ -121,33 +121,23 @@
     
 //    [SYNActivityManager.sharedInstance updateActivityForCurrentUser];
     
-    if (IS_IPAD)
-    {
+    if (IS_IPAD) {
         [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
     }
     
-    if (IS_IPHONE)
-    {
+    if (IS_IPHONE) {
         self.videoCollectionViewLayoutIPhone.sectionInset = UIEdgeInsetsMake(2, 2, 2, 2);
     }
-    
-    
-    
-    
-    
-    if (IS_IPHONE)
-    {
+	
+	if (IS_IPHONE) {
         self.videoCollectionViewLayoutIPhoneEdit = [[LXReorderableCollectionViewFlowLayout alloc]init];
         self.videoCollectionViewLayoutIPhoneEdit.itemSize = CGSizeMake(295,268-kHeightChange);
-//        self.videoCollectionViewLayoutIPhoneEdit.sectionInset = UIEdgeInsetsMake(2, 2, 2, 2);
     }
     
-    if (IS_IPAD)
-    {
+    if (IS_IPAD) {
         self.videoCollectionViewLayoutIPadEdit = [[LXReorderableCollectionViewFlowLayout alloc]init];
         self.videoCollectionViewLayoutIPadEdit.itemSize = CGSizeMake(295, 268-kHeightChange);
         self.videoCollectionViewLayoutIPadEdit.sectionInset = UIEdgeInsetsMake(0, 35, 0, 35);
-        //
     }
     self.barBtnCancel = [[UIBarButtonItem alloc]initWithTitle:@"cancel"
                                                         style:UIBarButtonItemStyleBordered
@@ -159,16 +149,14 @@
                                                      target:self
                                                      action:@selector(saveTapped)];
     
-    if (IS_IPHONE)
-    {
-        self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsMake(420, 0, 0, 0);
-        self.offsetValue = 420;
+    if (IS_IPHONE) {
+        self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsMake(470, 0, 0, 0);
+        self.offsetValue = 470;
     }
     
-    if (IS_IPAD)
-    {
-        self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsMake(494, 0, 0, 0);
-        self.offsetValue = 494;
+    if (IS_IPAD) {
+        self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsMake(530, 0, 0, 0);
+        self.offsetValue = 530;
     }
     
     if (self.mode == kChannelDetailsFavourites) {
@@ -189,11 +177,11 @@
 
 }
 
-- (void) viewWillAppear: (BOOL) animated
-{
+- (void)viewWillAppear: (BOOL) animated {
     [super viewWillAppear: animated];
-    
-    
+	[self.txtViewDescription setPlaceHolderLabelFont:[UIFont regularCustomFontOfSize:self.txtViewDescription.font.pointSize]];
+	self.txtViewDescription.placeholder = @"Change collection details";
+	self.txtViewTitle.placeholder = @"Change collection titile";
     self.btnShowVideos.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     
     [self.videoThumbnailCollectionView reloadData];
@@ -230,7 +218,7 @@
     
 }
 
-- (void) viewWillDisappear: (BOOL) animated {
+- (void)viewWillDisappear: (BOOL) animated {
     [super viewWillDisappear: animated];
     if (IS_IPHONE) {
         [self.navigationController.navigationBar setBackgroundTransparent:NO];
@@ -253,46 +241,26 @@
         [self.subscribingIndicator removeFromSuperview];
         self.subscribingIndicator = nil;
     }
-    
-//    // cancel the existing request if there is one
-//    [[NSNotificationCenter defaultCenter] postNotificationName: kChannelUpdateRequest
-//                                                        object: self
-//                                                      userInfo: nil];
-//    
-    //    self.navigationController.navigationBarHidden = YES;
-    
-    //    [self.videoThumbnailCollectionView setContentOffset:CGPointZero];
-    
+	
 }
 
 - (NSString *)trackingScreenName {
 	return @"Collection";
 }
 
--(void) setupFonts
-{
-    
-    if (IS_IPHONE)
-    {
-        [self.lblFullName setFont:[UIFont regularCustomFontOfSize:13]];
-        [self.lblChannelTitle setFont:[UIFont regularCustomFontOfSize:24]];
-        [self.lblDescription setFont:[UIFont lightCustomFontOfSize:13]];
-        [self.txtViewDescription setFont:[UIFont lightCustomFontOfSize:13]];
-        [self.btnShowFollowers.titleLabel setFont:[UIFont regularCustomFontOfSize:14]];
-        [self.btnShowVideos.titleLabel setFont:[UIFont regularCustomFontOfSize:14]];
-        [self.lblNoVideos setFont:[UIFont regularCustomFontOfSize:13]];
-    }
-    else
-    {
-        [self.lblFullName setFont:[UIFont regularCustomFontOfSize:self.lblFullName.font.pointSize]];
-        [self.lblChannelTitle setFont:[UIFont regularCustomFontOfSize:self.lblChannelTitle.font.pointSize]];
-        [self.lblDescription setFont:[UIFont lightCustomFontOfSize:self.lblDescription.font.pointSize]];
-        [self.txtViewDescription setFont:[UIFont lightCustomFontOfSize:self.lblDescription.font.pointSize]];
+- (void)setupFonts {
+	[self.lblFullName setFont:[UIFont boldCustomFontOfSize:self.lblFullName.font.pointSize]];
+	[self.lblChannelTitle setFont:[UIFont boldCustomFontOfSize:self.lblChannelTitle.font.pointSize]];
+	
+	[self.txtViewTitle setFont:[UIFont boldCustomFontOfSize:self.txtViewTitle.font.pointSize]];
 
-        [self.btnShowFollowers.titleLabel setFont:[UIFont regularCustomFontOfSize:self.btnShowFollowers.titleLabel.font.pointSize]];
-        [self.btnShowVideos.titleLabel setFont:[UIFont regularCustomFontOfSize:self.btnShowVideos.titleLabel.font.pointSize]];
-        [self.lblNoVideos setFont:[UIFont regularCustomFontOfSize:self.lblNoVideos.font.pointSize]];
-    }
+	[self.lblDescription setFont:[UIFont regularCustomFontOfSize:self.lblDescription.font.pointSize]];
+	[self.txtViewDescription setFont:[UIFont regularCustomFontOfSize:self.txtViewDescription.font.pointSize]];
+	[self.btnShowFollowers.titleLabel setFont:[UIFont lightCustomFontOfSize:self.btnShowFollowers.titleLabel.font.pointSize]];
+	[self.btnShowVideos.titleLabel setFont:[UIFont lightCustomFontOfSize:self.btnShowVideos.titleLabel.font.pointSize]];
+	
+
+	[self.lblNoVideos setFont:[UIFont regularCustomFontOfSize:self.lblNoVideos.font.pointSize]];
 
     [self.videoThumbnailCollectionView registerNib:[SYNCollectionVideoCell nib]
                         forCellWithReuseIdentifier:[SYNCollectionVideoCell reuseIdentifier]];
@@ -303,99 +271,68 @@
                                withReuseIdentifier:[SYNChannelFooterMoreView reuseIdentifier]];
 
     self.btnShowFollowers.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-    [self.txtFieldChannelName setFont:[UIFont lightCustomFontOfSize:24]];
-
-    
-    if (IS_RETINA) {
-        [[self.txtFieldChannelName layer] setBorderWidth:0.5];
-    }
-    else
-    {
-        [[self.txtFieldChannelName layer] setBorderWidth:1.0];
-    }
-
-    [[self.txtFieldChannelName layer] setBorderColor:[[UIColor colorWithRed:172.0/255.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f] CGColor]];
+    [self.txtFieldChannelName setFont:[UIFont boldCustomFontOfSize:self.txtFieldChannelName.font.pointSize]];
+//
+//    
+//    if (IS_RETINA) {
+//        [[self.txtFieldChannelName layer] setBorderWidth:0.5];
+//    } else {
+//        [[self.txtFieldChannelName layer] setBorderWidth:1.0];
+//    }
+//
+//    [[self.txtFieldChannelName layer] setBorderColor:[[UIColor colorWithRed:172.0/255.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f] CGColor]];
     
     [self.txtViewDescription setTextColor:[UIColor dollyTextMediumGray]];
     
     [[self.txtFieldChannelName layer] setCornerRadius:0];
     
-    [[self.txtViewDescription layer] setBorderColor:[[UIColor colorWithRed:172.0/255.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f] CGColor]];
-    if (IS_RETINA)
-    {
-        [[self.txtViewDescription layer] setBorderWidth:0.5];
-    }
-    else
-    {
-        [[self.txtViewDescription layer] setBorderWidth:1.0];
-    }
-    
-    [[self.txtViewDescription layer] setCornerRadius:0];
+//    [[self.txtViewDescription layer] setBorderColor:[[UIColor colorWithRed:172.0/255.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f] CGColor]];
+//    if (IS_RETINA) {
+//        [[self.txtViewDescription layer] setBorderWidth:0.5];
+//    } else {
+//        [[self.txtViewDescription layer] setBorderWidth:1.0];
+//    }
+//    
+//    [[self.txtViewDescription layer] setCornerRadius:0];
 
+	
     self.lblNoVideos.text = NSLocalizedString(@"channel_screen_no_videos", "No videos in the channel details colleciton");
+	
 }
 
--(void) setUpMode
-{
-    if (self.mode == kChannelDetailsModeDisplayUser)
-    {
+-(void) setUpMode {
+    if (self.mode == kChannelDetailsModeDisplayUser) {
         self.btnEditChannel.hidden = NO;
         self.btnFollowChannel.hidden = YES;
-    }
-    else if (self.mode == kChannelDetailsModeDisplay)
-    {
+    } else if (self.mode == kChannelDetailsModeDisplay) {
         self.btnEditChannel.hidden = YES;
         self.btnFollowChannel.hidden = NO;
-    }
-    else if (self.mode == kChannelDetailsModeEdit)
-    {
+    } else if (self.mode == kChannelDetailsModeEdit) {
         [self editMode];
-        
         self.navigationItem.leftBarButtonItem = nil;
     }
-    else if (self.mode == kChannelDetailsFavourites)
-    {
+    else if (self.mode == kChannelDetailsFavourites) {
         //Favourites channel is differnet
-        if(IS_IPHONE)
-        {
+        if(IS_IPHONE) {
             self.btnEditChannel.hidden = YES;
             self.btnFollowChannel.hidden = YES;
-            //            self.lblDescription.hidden = YES;
-            //
-            //            [self moveView:self.viewCirleButtonContainer withY:20];
-            //            [self moveView:self.viewFollowAndVideoContainer withY:20];
-            //            [self moveView:self.viewCollectionSeperator withY:30];
             [self centreView:self.btnShareChannel];
-            
             CGRect tmpFrame = self.btnShareChannel.frame;
-            tmpFrame.origin.x = 55;// [self.btnShareChannel superview].center.x;
-            self.btnShareChannel.frame = tmpFrame;
+            tmpFrame.origin.x = 55;            self.btnShareChannel.frame = tmpFrame;
             tmpFrame = self.viewCirleButtonContainer.frame;
             tmpFrame.origin.y -= 4;
             self.viewCirleButtonContainer.frame = tmpFrame;
-            //            self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsMake(360, 0, 0, 0);
-        }
-        else
-        {
+        } else {
             self.btnEditChannel.hidden = YES;
             self.btnFollowChannel.hidden = YES;
-            //            self.lblDescription.hidden = YES;
             CGRect tmpFrame = self.btnShareChannel.frame;
             tmpFrame.origin.x = 50;
             self.btnShareChannel.frame = tmpFrame;
-            //            [self moveView:self.viewCirleButtonContainer withY:15];
-            //            [self moveView:self.viewFollowAndVideoContainer withY:10];
-            
-            //            self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsMake(480, 0, 0, 0);
-            
         }
-        
-        
     }
 }
 
--(void) displayChannelDetails
-{
+-(void) displayChannelDetails {
     
     // == Avatar Image == //
 
@@ -416,35 +353,26 @@
     self.txtFieldChannelName.text = self.channel.title;
 
     self.lblFullName.text = self.channel.channelOwner.displayName;
-    self.lblChannelTitle.text = [self.channel.title uppercaseString];
-    
-    self.lblDescription.text = self.channel.channelDescription;
-    
+    self.lblChannelTitle.text = self.channel.title;
+	self.txtViewTitle.text = self.channel.title;
+	
+	self.lblDescription.attributedText = [self attributedDescriptionStringFrom:self.channel.channelDescription];
+	
     self.txtViewDescription.text = self.lblDescription.text;
     
-    // placeholder text for empty string
-    
-    if ([self.lblDescription.text isEqualToString:@""]) {
-        self.txtViewDescription.text = NSLocalizedString(@"description_placeholder", @"placeholder for editing");
-    }
     
     [self updateButtonCounts];
     
     self.dataItemsAvailable = self.channel.totalVideosValueValue;
     [self.btnEditChannel setTitle:NSLocalizedString(@"Edit", @"Edit mode button title, channel details")];
-    
     [self.btnShareChannel setTitle:NSLocalizedString(@"Share", @"Share a channel title, channel details")];
     
 	[self setFollowButton];
-    if ([self.channel.totalVideosValue integerValue] == 0)
-    {
+    if ([self.channel.totalVideosValue integerValue] == 0) {
         self.lblNoVideos.hidden = NO;
-    }
-    else
-    {
+    } else {
         self.lblNoVideos.hidden = YES;
     }
-    
     
     //should not have to do this, check.
     [self.btnDeleteChannel setBackgroundColor:[UIColor whiteColor]];
@@ -478,34 +406,18 @@
 
 -(void) updateButtonCounts {
     
-    
     if (self.channel.subscribersCountValue == 1) {
         [self.btnShowFollowers setTitle:[NSString stringWithFormat: @"%ld %@", (long)self.channel.subscribersCountValue, NSLocalizedString(@"Follower", @"followers count in channeldetail")] forState:UIControlStateNormal ];
-        
-    }
-    else
-    {
+    } else {
         [self.btnShowFollowers setTitle:[NSString stringWithFormat: @"%ld %@", (long)self.channel.subscribersCountValue, NSLocalizedString(@"Followers", @"followers count in channeldetail")] forState:UIControlStateNormal ];
     }
     
-    
     if (self.channel.totalVideosValueValue == 1) {
         [self.btnShowVideos setTitle:[NSString stringWithFormat: @"%@ %@",self.channel.totalVideosValue, NSLocalizedString(@"Video", nil)] forState:UIControlStateNormal ];
-    }
-    else
-    {
+    } else {
         [self.btnShowVideos setTitle:[NSString stringWithFormat: @"%@ %@",self.channel.totalVideosValue, NSLocalizedString(@"Videos", nil)] forState:UIControlStateNormal ];
     }
     
-    
-}
-- (void) addSubscribeActivityIndicator
-{
-    //    self.subscribingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleWhite];
-//    [self.subscribingIndicator setColor:[UIColor dollyActivityIndicator]];
-    //    self.subscribingIndicator.center = self.btnFollowChannel.center;
-    //    [self.subscribingIndicator startAnimating];
-    //    [self.view addSubview: self.subscribingIndicator];
 }
 
 - (IBAction)shareChannelPressed:(id)sender {
@@ -516,29 +428,11 @@
                isOwner:@([self.channel.channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId])
             usingImage:image];
 }
-//- (void) likeControlPressed: (SYNSocialButton *) socialButton
-//{
-//    [super likeControlPressed:socialButton];
-//    
-//}
-//- (void) addControlPressed: (SYNSocialButton *) socialButton
-//{
-//    [super addControlPressed:socialButton];
-//    
-//}
-//
-//- (void) commentControlPressed: (SYNSocialButton*) socialButton
-//{
-//    
-//    [super commentControlPressed: socialButton];
-//}
 
 #pragma mark - ScrollView Delegate
 
-- (void) scrollViewDidScroll: (UIScrollView *) scrollView
-{
+- (void)scrollViewDidScroll: (UIScrollView *) scrollView {
     [super scrollViewDidScroll:scrollView];
-    
     [self moveHeader:scrollView.contentOffset.y];
     
 }
@@ -551,8 +445,7 @@
 }
 
 
--(void) moveHeader:(CGFloat) offset
-{
+- (void)moveHeader:(CGFloat) offset {
     if (IS_IPHONE ) {
         offset +=self.videoThumbnailCollectionView.contentInset.top;
     }
@@ -573,61 +466,46 @@
     self.txtViewDescription.transform = move;
     self.txtFieldChannelName.transform = move;
     self.viewCirleButtonContainer.transform = move;
-    
-    if (IS_IPHONE) {
-        [self moveNameLabelWithOffset: offset];
-    } else {
-        self.lblChannelTitle.transform = move;
-    }
+	self.lblChannelTitle.transform = move;
+	self.txtViewTitle.transform = move;
+    self.lblFullName.transform = move;
 }
 
--(void) moveNameLabelWithOffset :(CGFloat) offset
-{
-    if (IS_IPHONE)
-    {
-        
+-(void) moveNameLabelWithOffset :(CGFloat) offset {
+    if (IS_IPHONE) {
         CGAffineTransform move = CGAffineTransformMakeTranslation(0, -offset);
         self.lblChannelTitle.transform = move;
         
-        if (offset < FULL_NAME_LABEL_IPHONE)
-        {
+        if (offset < FULL_NAME_LABEL_IPHONE) {
             CGAffineTransform move = CGAffineTransformMakeTranslation(0, -offset);
             self.lblChannelTitle.transform = move;
         }
         
-        if (offset > FULL_NAME_LABEL_IPHONE)
-        {
+        if (offset > FULL_NAME_LABEL_IPHONE) {
             CGAffineTransform move = CGAffineTransformMakeTranslation(0,-FULL_NAME_LABEL_IPHONE);
             CGAffineTransform scale =  CGAffineTransformMakeScale(1.0, 1.0);
             self.lblChannelTitle.transform = CGAffineTransformConcat(move, scale);
         }
     }
     
-    if (IS_IPAD)
-    {
+    if (IS_IPAD) {
         if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation]) ) {
-            if (offset<FULL_NAME_LABEL_IPAD_PORTRAIT)
-            {
+            if (offset<FULL_NAME_LABEL_IPAD_PORTRAIT) {
                 CGAffineTransform move = CGAffineTransformMakeTranslation(0,-offset);
                 self.lblChannelTitle.transform = move;
             }
             
-            if (offset > FULL_NAME_LABEL_IPAD_PORTRAIT)
-            {
+            if (offset > FULL_NAME_LABEL_IPAD_PORTRAIT) {
                 CGAffineTransform move = CGAffineTransformMakeTranslation(0,-FULL_NAME_LABEL_IPAD_PORTRAIT);
                 self.lblChannelTitle.transform = move;
             }
-        }
-        else if (UIDeviceOrientationIsLandscape([SYNDeviceManager.sharedInstance orientation]))
-        {
-            if (offset > FULLNAMELABELIPADLANDSCAPE)
-            {
+        } else if (UIDeviceOrientationIsLandscape([SYNDeviceManager.sharedInstance orientation])) {
+            if (offset > FULLNAMELABELIPADLANDSCAPE) {
                 CGAffineTransform move = CGAffineTransformMakeTranslation(0,-FULL_NAME_LABEL_IPAD_PORTRAIT);
                 self.lblChannelTitle.transform = move;
             }
             
-            if (offset<FULLNAMELABELIPADLANDSCAPE)
-            {
+            if (offset<FULLNAMELABELIPADLANDSCAPE) {
                 CGAffineTransform move = CGAffineTransformMakeTranslation(0,-offset);
                 self.lblChannelTitle.transform = move;
             }
@@ -637,8 +515,7 @@
 
 #pragma mark - Tab View Methods
 
-- (void) setChannel: (Channel *) channel
-{
+- (void) setChannel: (Channel *) channel {
 
     self.originalChannel = channel;
     
@@ -1148,8 +1025,11 @@
 {
     self.mode = kChannelDetailsModeDisplayUser;
     
+	
+	self.txtViewTitle.hidden = YES;
+	
+	self.btnAvatar.userInteractionEnabled = YES;
     self.viewProfileContainer.hidden = NO;
-    self.btnAvatar.hidden = NO;
     self.btnShowFollowers.hidden = NO;
     self.btnShowVideos.hidden = NO;
     self.btnFollowChannel.hidden = YES;
@@ -1157,7 +1037,6 @@
     self.btnShareChannel.hidden = NO;
     self.viewCirleButtonContainer.hidden = NO;
     self.viewFollowAndVideoContainer.hidden = NO;
-    self.lblFullName.hidden = NO;
     
     self.lblChannelTitle. hidden = NO;
     //edit mode
@@ -1182,7 +1061,6 @@
     //    self.btnFollowChannel.alpha = 0.0f;
     self.btnEditChannel.alpha = 0.0f;
     self.btnShareChannel.alpha = 0.0f;
-    self.lblFullName.alpha = 0.0f;
     self.lblChannelTitle.alpha = 0.0f;
     
 	[self.navigationItem setLeftBarButtonItem:nil animated:YES];
@@ -1196,7 +1074,6 @@
         //      self.btnFollowChannel.alpha = 1.0f;
         self.btnEditChannel.alpha = 1.0f;
         self.btnShareChannel.alpha = 1.0f;
-        self.lblFullName.alpha = 1.0f;
         self.lblChannelTitle.alpha = 1.0f;
         
     }];
@@ -1212,29 +1089,38 @@
     //profile mode
     
     self.viewProfileContainer.hidden = YES;
-    self.btnAvatar.hidden = YES;
+//    self.btnAvatar.hidden = YES;
+	
+	self.txtViewTitle.hidden = NO;
+
+	self.btnAvatar.userInteractionEnabled = NO;
     self.btnShowFollowers.hidden = YES;
     self.btnShowVideos.hidden = YES;
     self.btnEditChannel.hidden = YES;
     self.btnShareChannel.hidden = YES;
     self.viewCirleButtonContainer.hidden = YES;
     self.viewFollowAndVideoContainer.hidden = YES;
-    self.lblFullName.hidden = YES;
     self.lblChannelTitle. hidden = YES;
     //edit mode
     self.btnDeleteChannel.hidden = NO;
     self.txtFieldChannelName.hidden = NO;
     self.txtViewDescription.hidden = NO;
-    self.btnDeleteChannel.alpha = 0.0f;
+    self.txtViewTitle.hidden = NO;
+	
+	
+	self.btnDeleteChannel.alpha = 0.0f;
     self.txtFieldChannelName.alpha = 0.0f;
     self.txtViewDescription.alpha = 0.0f;
-    
+	self.txtViewTitle.alpha = 0.0f;
+
 	[self.navigationItem setLeftBarButtonItem:self.barBtnCancel animated:YES];
 	[self.navigationItem setRightBarButtonItem:self.barBtnSave animated:YES];
     [UIView animateWithDuration:0.4 animations:^{
         self.btnDeleteChannel.alpha = 1.0f;
         self.txtFieldChannelName.alpha = 1.0f;
         self.txtViewDescription.alpha = 1.0f;
+		self.txtViewTitle.alpha = 1.0f;
+
     }];
     
 }
@@ -1307,64 +1193,31 @@
 }
 
 
--(void) cancelTapped
-{
-    
-    
-    if (self.activityIndicator.isAnimating)
-    {
-        //  [self.activityIndicator stopAnimating];
-    }
+- (void)cancelTapped {
     
     [self profileMode];
     
     [self.txtFieldChannelName resignFirstResponder];
     [self.txtViewDescription resignFirstResponder];
+	[self.txtViewTitle resignFirstResponder];
+	
+	self.txtViewDescription.text = self.channel.channelDescription;
 	
     [self updateCollectionLayout];
-    for (SYNCollectionVideoCell* cell in self.videoThumbnailCollectionView.visibleCells)
-    {
-        
-        //        NSIndexPath* indexPathForCell = [self.videoThumbnailCollectionView indexPathForCell:cell];
+    for (SYNCollectionVideoCell* cell in self.videoThumbnailCollectionView.visibleCells) {
         
         cell.likeControl.hidden = NO;
         cell.shareControl.hidden = NO;
         cell.addControl.hidden = NO;
         cell.commentControl.hidden = NO;
-
         cell.deleteButton.hidden = YES;
         
         void (^animateProfileMode)(void) = ^{
-            
-            //            CGRect frame = cell.frame;
-            //
-            //            if (IS_IPHONE)
-            //            {
-            //                frame.origin.y += (index*kHeightChange);
-            //                frame.size.height += kHeightChange;
-            //            }
-            //
-            //            if (IS_IPAD) {
-            //
-            //                if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation])) {
-            //                    frame.origin.y +=((index/2)*kHeightChange);
-            //                    frame.size.height +=kHeightChange;
-            //                }
-            //                else
-            //                {
-            //                    frame.origin.y +=((index/3)*kHeightChange);
-            //                    frame.size.height +=kHeightChange;
-            //
-            //                }
-            //            }
-            //
-            //            cell.frame = frame;
             
             cell.likeControl.alpha = 1.0f;
             cell.shareControl.alpha = 1.0f;
             cell.addControl.alpha = 1.0f;
             cell.commentControl.alpha = 1.0f;
-
             cell.deleteButton.alpha = 0.0f;
         };
         
@@ -1543,11 +1396,7 @@
 }
 
 
-- (void) deleteChannel
-{
-    // return to previous screen as if the back button tapped
-    
-    
+- (void)deleteChannel {
     __weak SYNChannelDetailsViewController *weakSelf = self;
     [appDelegate.oAuthNetworkEngine deleteChannelForUserId: appDelegate.currentUser.uniqueId
                                                  channelId: self.channel.uniqueId
@@ -1569,13 +1418,11 @@
                                              
                                          }];
     
-    
-    
 }
 
 
 
-- (IBAction) followersLabelPressed: (id) sender {
+- (IBAction)followersLabelPressed: (id) sender {
     if (self.channel.subscribersCountValue == 0) {
         return;
     }
@@ -1637,36 +1484,26 @@
     
 }
 
--(void) saveTapped
-{
+- (void)saveTapped {
     
 	[[SYNTrackingManager sharedManager] trackCollectionSaved];
 	
-    //
-    //    self.saveChannelButton.enabled = NO;
-    //    self.deleteChannelButton.enabled = YES;
-    //        [self.activityIndicator startAnimating];
-    //
-    //    [self hideCategoryChooser];
-    //
-    //    self.channel.channelDescription = self.channel.channelDescription ? self.channel.channelDescription : @"";
-    //
-    //    NSString *category = [self categoryIdStringForServiceCall];
-    //
-    //    NSString *cover = [self coverIdStringForServiceCall];
-    
+	self.lblDescription.attributedText = [self attributedDescriptionStringFrom:self.txtViewDescription.text];
+	self.lblChannelTitle.text = IS_IPHONE ? self.txtViewTitle.text : self.txtFieldChannelName.text;
+
     
     [appDelegate.oAuthNetworkEngine updateChannelForUserId: appDelegate.currentOAuth2Credentials.userId
                                                  channelId: self.channel.uniqueId
-                                                     title: self.txtFieldChannelName.text
-                                               description: [self.txtViewDescription.text isEqualToString:NSLocalizedString(@"description_placeholder", nil)] ? @"" : self.txtViewDescription.text
+                                                     title: IS_IPHONE ? self.txtViewTitle.text : self.txtFieldChannelName.text
+                                               description: self.txtViewDescription.text
                                                   category: @""
                                                      cover: @""
                                                   isPublic: YES
                                          completionHandler: ^(NSDictionary *resourceCreated) {
+
+											 self.lblDescription.attributedText = [self attributedDescriptionStringFrom:self.txtViewDescription.text];
                                              
-                                             self.lblDescription.text = self.txtViewDescription.text;
-                                             
+											 self.lblChannelTitle.text = IS_IPHONE ? self.txtViewTitle.text : self.txtFieldChannelName.text;
 											 [[SYNTrackingManager sharedManager] trackCollectionEdited:[self.txtFieldChannelName.text uppercaseString]];
                                              
                                             
@@ -1722,12 +1559,12 @@
                                                   }
                                                   
                                                   [self	showError: errorMessage showErrorTitle: errorTitle];
-                                                  //
-                                                  //                                                  self.saveChannelButton.hidden = NO;
-                                                  //                                                  self.saveChannelButton.enabled = YES;
-                                                  //                                                  self.deleteChannelButton.hidden = NO;
-                                                  //                                                  self.deleteChannelButton.enabled = YES;
-                                                  //                                                  [self.activityIndicator stopAnimating];
+												  
+												  //self.saveChannelButton.hidden = NO;
+                                                  //self.saveChannelButton.enabled = YES;
+                                                  //self.deleteChannelButton.hidden = NO;
+                                                  //self.deleteChannelButton.enabled = YES;
+                                                  //[self.activityIndicator stopAnimating];
                                               }];
 }
 
@@ -1821,24 +1658,46 @@
 -(void) textViewDidBeginEditing:(UITextView *)textView
 {
     [self.view addGestureRecognizer:self.tapToHideKeyoboard];
-    if (textView == self.txtViewDescription) {
-        
-        if ([textView.text isEqualToString:NSLocalizedString(@"description_placeholder", @"placeholder for editing")]) {
-            textView.text = @"";
-//            textView.textColor = [UIColor dollyTextLightGray];
-        }
-    }
+	
+	
+	if ([textView isEqual:@""]) {
+		textView.textAlignment = NSTextAlignmentLeft;
+	}
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
     if (textView == self.txtViewDescription) {
         
-        if ([textView.text isEqualToString:@""]) {
-            textView.text = NSLocalizedString(@"description_placeholder", @"placeholder for editing");
-//            textView.textColor = [UIColor dollyTextDarkGray];
-        }
     }
+}
+
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range
+ replacementText:(NSString *)text
+{
+    if ([text isEqualToString:@"\n"]) {
+        
+        [textView resignFirstResponder];
+        // Return FALSE so that the final '\n' character doesn't get added
+        return NO;
+    }
+	
+	if (textView.text.length <= 1 && [text isEqual:@""]) {
+		textView.textAlignment = NSTextAlignmentLeft;
+	} else {
+		textView.textAlignment = NSTextAlignmentCenter;
+
+	}
+    NSUInteger newLength = [textView.text length] + [text length] - range.length;
+	
+	if (textView == self.txtViewDescription) {
+		return (newLength > 100) ? NO : YES;
+	} else if (textView == self.txtViewTitle) {
+		return (newLength > 25) ? NO : YES;
+	}
+	
+	return NO;
 }
 
 
@@ -1863,21 +1722,7 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     NSUInteger newLength = [textField.text length] + [string length] - range.length;
-    return (newLength > 20) ? NO : YES;
-}
-
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range
- replacementText:(NSString *)text
-{
-    if ([text isEqualToString:@"\n"]) {
-        
-        [textView resignFirstResponder];
-        // Return FALSE so that the final '\n' character doesn't get added
-        return NO;
-    }
-    
-    NSUInteger newLength = [textView.text length] + [text length] - range.length;
-    return (newLength > 100) ? NO : YES;
+    return (newLength > 25) ? NO : YES;
 }
 
 -(void)dismissKeyboard
@@ -1928,5 +1773,24 @@
 
 }
 
+
+-(NSMutableAttributedString*) attributedDescriptionStringFrom:(NSString *) string {
+	
+	if (!string) {
+		return [[NSMutableAttributedString alloc] initWithString: @""];
+	}
+	NSMutableAttributedString *channelDescription = [[NSMutableAttributedString alloc] initWithString: string];
+	
+	NSInteger strLength = [channelDescription length];
+	NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+	style.lineBreakMode = NSLineBreakByWordWrapping;
+	[style setLineSpacing:7];
+	[style setAlignment:NSTextAlignmentCenter];
+	
+	[channelDescription addAttribute:NSParagraphStyleAttributeName
+							   value:style
+							   range:NSMakeRange(0, strLength)];
+	return channelDescription;
+}
 
 @end
