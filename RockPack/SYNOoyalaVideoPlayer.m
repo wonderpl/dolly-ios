@@ -30,51 +30,43 @@ static NSString * const PlayerDomain = @"www.ooyala.com";
 
 #pragma mark - Init / Dealloc
 
-- (id)initWithFrame:(CGRect)frame {
-	if (self = [super initWithFrame:frame]) {
-		[self.playerContainerView addSubview:self.ooyalaPlayer.view];
-		
-		NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-		[notificationCenter addObserver:self
-							   selector:@selector(ooyalaPlayerStateChanged:)
-								   name:OOOoyalaPlayerStateChangedNotification
-								 object:self.ooyalaPlayer];
-		[notificationCenter addObserver:self
-							   selector:@selector(ooyalaPlayerPlayStarted:)
-								   name:OOOoyalaPlayerPlayStartedNotification
-								 object:self.ooyalaPlayer];
-		[notificationCenter addObserver:self
-							   selector:@selector(ooyalaPlayerPlayCompleted:)
-								   name:OOOoyalaPlayerPlayCompletedNotification
-								 object:self.ooyalaPlayer];
-		[notificationCenter addObserver:self
-							   selector:@selector(ooyalaPlayerErrorOccurred:)
-								   name:OOOoyalaPlayerErrorNotification
-								 object:self.ooyalaPlayer];
-	}
-	return self;
-}
-
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Getters / Setters
 
-- (void)setVideoInstance:(VideoInstance *)videoInstance {
-	[super setVideoInstance:videoInstance];
-	
-    [self.ooyalaPlayer setEmbedCode:videoInstance.video.sourceId];
-}
-
 - (OOOoyalaPlayer *)ooyalaPlayer {
 	if (!_ooyalaPlayer) {
 		OOOoyalaPlayer *ooyalaPlayer = [[OOOoyalaPlayer alloc] initWithPcode:PCode domain:PlayerDomain];
-		ooyalaPlayer.view.frame = self.bounds;
+		
+		NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+		[notificationCenter addObserver:self
+							   selector:@selector(ooyalaPlayerStateChanged:)
+								   name:OOOoyalaPlayerStateChangedNotification
+								 object:ooyalaPlayer];
+		[notificationCenter addObserver:self
+							   selector:@selector(ooyalaPlayerPlayStarted:)
+								   name:OOOoyalaPlayerPlayStartedNotification
+								 object:ooyalaPlayer];
+		[notificationCenter addObserver:self
+							   selector:@selector(ooyalaPlayerPlayCompleted:)
+								   name:OOOoyalaPlayerPlayCompletedNotification
+								 object:ooyalaPlayer];
+		[notificationCenter addObserver:self
+							   selector:@selector(ooyalaPlayerErrorOccurred:)
+								   name:OOOoyalaPlayerErrorNotification
+								 object:ooyalaPlayer];
 		
 		self.ooyalaPlayer = ooyalaPlayer;
 	}
 	return _ooyalaPlayer;
+}
+
+- (void)setVideoInstance:(VideoInstance *)videoInstance {
+	[super setVideoInstance:videoInstance];
+	
+	[self.ooyalaPlayer setEmbedCode:videoInstance.video.sourceId];
 }
 
 #pragma mark - Overridden
@@ -108,6 +100,10 @@ static NSString * const PlayerDomain = @"www.ooyala.com";
 - (float)bufferingProgress {
 	float progress = [self.ooyalaPlayer bufferedTime] / [self.ooyalaPlayer duration];
 	return (isnan(progress) ? 0.0 : progress);
+}
+
+- (UIView *)videoPlayerView {
+	return self.ooyalaPlayer.view;
 }
 
 #pragma mark - Notifications

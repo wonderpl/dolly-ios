@@ -35,6 +35,7 @@ static CGFloat const ControlsFadeTimer = 5.0;
 @property (nonatomic, assign) BOOL controlsVisible;
 
 @property (nonatomic, assign) BOOL videoViewed;
+@property (nonatomic, assign) BOOL hasBeganPlaying;
 
 @end
 
@@ -57,12 +58,7 @@ static CGFloat const ControlsFadeTimer = 5.0;
 		self.backgroundColor = [UIColor blackColor];
 		
 		[self addSubview:self.playerContainerView];
-		[self addSubview:self.controlsFadeTapView];
 		[self addSubview:self.loadingView];
-		[self addSubview:self.scrubberBar];
-        
-		[self addGestureRecognizer:self.maximiseMinimiseGestureRecognizer];
-        [self addGestureRecognizer:self.maximiseMinimisePinchGestureRecognizer];
 	}
 	return self;
 }
@@ -185,6 +181,18 @@ static CGFloat const ControlsFadeTimer = 5.0;
 }
 
 - (void)play {
+	if (!self.hasBeganPlaying) {
+		self.videoPlayerView.frame = self.playerContainerView.bounds;
+		[self.playerContainerView addSubview:self.videoPlayerView];
+		[self.playerContainerView addSubview:self.controlsFadeTapView];
+		[self.playerContainerView addSubview:self.scrubberBar];
+		
+		[self addGestureRecognizer:self.maximiseMinimiseGestureRecognizer];
+		[self addGestureRecognizer:self.maximiseMinimisePinchGestureRecognizer];
+		
+		self.hasBeganPlaying = YES;
+	}
+	
 	self.state = SYNVideoPlayerStatePlaying;
 	
 	[self startUpdatingProgress];

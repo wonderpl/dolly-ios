@@ -35,7 +35,6 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 
 - (id)initWithFrame:(CGRect)frame {
 	if (self = [super initWithFrame:frame]) {
-		[self.playerContainerView addSubview:self.youTubeWebView];
 	}
 	return self;
 }
@@ -195,6 +194,10 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 		
 		self.youTubePlayerState = SYNYouTubeVideoPlayerStateLoaded;
 	}
+}
+
+- (UIView *)videoPlayerView {
+	return self.youTubeWebView;
 }
 
 @end

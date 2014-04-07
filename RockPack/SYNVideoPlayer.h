@@ -43,6 +43,7 @@ typedef NS_ENUM(NSInteger, SYNVideoPlayerState) {
 @property (nonatomic, assign) BOOL maximised;
 
 @property (nonatomic, strong, readonly) UIView *playerContainerView;
+@property (nonatomic, strong, readonly) UIView *videoPlayerView;
 
 + (instancetype)playerForVideoInstance:(VideoInstance *)videoInstance;
 
