@@ -614,6 +614,7 @@
 		E98369D7188937B300363709 /* ButtonLogin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E98369D5188937B300363709 /* ButtonLogin@2x.png */; };
 		E985176218B39D4A00ADBD0F /* SYNTrackingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E985176118B39D4A00ADBD0F /* SYNTrackingManager.m */; };
 		E985176418B4B37100ADBD0F /* NSRegularExpressionUsernameSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = E985176318B4B37100ADBD0F /* NSRegularExpressionUsernameSpec.m */; };
+		E985C8B118EC4B8E00356272 /* SYNVideoThumbnailDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = E985C8B018EC4B8E00356272 /* SYNVideoThumbnailDownloader.m */; };
 		E98F609818B24901008AAAA8 /* SYNWonderMailActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = E98F609718B24901008AAAA8 /* SYNWonderMailActivity.m */; };
 		E98F609B18B25CBD008AAAA8 /* NSRegularExpression+Username.m in Sources */ = {isa = PBXBuildFile; fileRef = E98F609A18B25CBD008AAAA8 /* NSRegularExpression+Username.m */; };
 		E9918C1618967BA500767BBD /* SYNTimestampLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9918C1518967BA500767BBD /* SYNTimestampLabel.m */; };
@@ -1564,6 +1565,8 @@
 		E985176018B39D4A00ADBD0F /* SYNTrackingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNTrackingManager.h; sourceTree = "<group>"; };
 		E985176118B39D4A00ADBD0F /* SYNTrackingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNTrackingManager.m; sourceTree = "<group>"; };
 		E985176318B4B37100ADBD0F /* NSRegularExpressionUsernameSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSRegularExpressionUsernameSpec.m; sourceTree = "<group>"; };
+		E985C8AF18EC4B8E00356272 /* SYNVideoThumbnailDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNVideoThumbnailDownloader.h; sourceTree = "<group>"; };
+		E985C8B018EC4B8E00356272 /* SYNVideoThumbnailDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNVideoThumbnailDownloader.m; sourceTree = "<group>"; };
 		E98F609618B24901008AAAA8 /* SYNWonderMailActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNWonderMailActivity.h; sourceTree = "<group>"; };
 		E98F609718B24901008AAAA8 /* SYNWonderMailActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNWonderMailActivity.m; sourceTree = "<group>"; };
 		E98F609918B25CBD008AAAA8 /* NSRegularExpression+Username.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSRegularExpression+Username.h"; sourceTree = "<group>"; };
@@ -2181,6 +2184,8 @@
 				E947097718D75F5A000174A7 /* SYNLocationManager.h */,
 				E947097818D75F5A000174A7 /* SYNLocationManager.m */,
 				E947097E18D84BBB000174A7 /* SYNNetworkTypes.h */,
+				E985C8AF18EC4B8E00356272 /* SYNVideoThumbnailDownloader.h */,
+				E985C8B018EC4B8E00356272 /* SYNVideoThumbnailDownloader.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -4619,6 +4624,7 @@
 				BE7D34D317159E2C0085AB81 /* SYNNotificationsTableViewCell.m in Sources */,
 				4C5E85FE18B6306A00D0E937 /* SYNOnBoardingOverlayViewController.m in Sources */,
 				BE7D34D617159F3C0085AB81 /* SYNActivityViewController.m in Sources */,
+				E985C8B118EC4B8E00356272 /* SYNVideoThumbnailDownloader.m in Sources */,
 				BE7D35051715CE450085AB81 /* SYNNotification.m in Sources */,
 				BE86BF1A171F07B10006DC8A /* SYNChannelMidCell.m in Sources */,
 				0E19FBC2182273EE0007DF5B /* SYNChannelSearchCell.m in Sources */,
