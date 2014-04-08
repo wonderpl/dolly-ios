@@ -259,8 +259,15 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 	int indexOfRecent = [self.recentlyViewed indexOfObject:subGenre];
 	
 	
-	if (IS_IPAD && index != 0) {
+	BOOL editiorsPicks = index ==0;
+	
+	if (!editiorsPicks) {
+		
 		[self addSubGenreToRecents:subGenre];
+	
+	}
+	
+	if (IS_IPAD && !editiorsPicks) {
 		
 		if (self.recentlyViewed.count <=numberOfRecents) {
 			
