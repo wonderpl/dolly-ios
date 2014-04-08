@@ -172,7 +172,7 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
     [super viewWillAppear:animated];
 	
     if (IS_IPAD) {
-		//        self.navigationController.navigationBarHidden = YES;
+		self.navigationController.navigationBarHidden = YES;
     }
 	
 	// This is to handle the case where we're on the profile page and popToRootViewControllerAnimated is called.
