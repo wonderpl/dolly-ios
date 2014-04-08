@@ -10,7 +10,9 @@
 #import "SYNVideoPlayerViewController.h"
 #import "SYNFullScreenVideoViewController.h"
 #import "SYNVideoPlayer.h"
+#import "SYNVideoPlayerCell.h"
 #import "SYNDeviceManager.h"
+#import <Masonry.h>
 
 static const CGFloat AnimationDuration = 0.3;
 
@@ -54,72 +56,65 @@ static const CGFloat AnimationDuration = 0.3;
 #pragma mark - Private
 
 - (void)animatePresentingTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
-	UINavigationController *navigationController = (UINavigationController *)[transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
-	SYNVideoPlayerViewController *videoViewController = (SYNVideoPlayerViewController *)navigationController.topViewController;
+	SYNVideoPlayerViewController *videoPlayerViewController = (SYNVideoPlayerViewController *)[transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
 	SYNFullScreenVideoViewController *fullScreenViewController = (SYNFullScreenVideoViewController *)[transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
 	UIView *containerView = [transitionContext containerView];
-	SYNVideoPlayer *videoPlayer = videoViewController.currentVideoPlayer;
 	
-	videoPlayer.frame = [navigationController.view convertRect:videoPlayer.frame fromView:videoPlayer.superview];
-	[fullScreenViewController.view addSubview:videoPlayer];
+	UICollectionView *collectionView = videoPlayerViewController.videosCollectionView;
 	
-	fullScreenViewController.backgroundView.alpha = 0.0;
+	[fullScreenViewController.view addSubview:collectionView];
+	[collectionView mas_updateConstraints:^(MASConstraintMaker *make) {
+		make.centerX.equalTo(fullScreenViewController.view.mas_centerX);
+		make.centerY.equalTo(fullScreenViewController.view.mas_centerY);
+		make.width.equalTo(fullScreenViewController.view.mas_width);
+		make.height.equalTo(fullScreenViewController.view.mas_height);
+	}];
+	
+	[collectionView.collectionViewLayout invalidateLayout];
+	[collectionView layoutIfNeeded];
+	collectionView.contentOffset = CGPointMake(videoPlayerViewController.selectedIndex * 568, 0);
+	
 	[containerView addSubview:fullScreenViewController.view];
 	
-	[UIView animateWithDuration:AnimationDuration animations:^{
-		if (IS_IPHONE) {
-			UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
-			CGFloat angle = (orientation == UIDeviceOrientationLandscapeLeft ? M_PI_2 : M_PI_2 * 3);
-			videoPlayer.bounds = CGRectMake(0, 0, CGRectGetHeight(fullScreenViewController.view.bounds), CGRectGetWidth(fullScreenViewController.view.bounds));
-			videoPlayer.transform = CGAffineTransformMakeRotation(angle);
-		} else {
-			CGFloat aspectRatio = CGRectGetWidth(videoPlayer.bounds) / CGRectGetHeight(videoPlayer.bounds);
-			CGFloat toViewWidth = CGRectGetWidth(fullScreenViewController.view.bounds);
-			videoPlayer.bounds = CGRectMake(0, 0, toViewWidth, toViewWidth / aspectRatio);
-		}
-		videoPlayer.center = fullScreenViewController.view.center;
-		
-		fullScreenViewController.backgroundView.alpha = 1.0;
-	} completion:^(BOOL finished) {
-		fullScreenViewController.videoPlayer = videoPlayer;
-		
-		[transitionContext completeTransition:YES];
-	}];
+	fullScreenViewController.view.alpha = 0.0;
+	
+	[UIView animateWithDuration:AnimationDuration
+					 animations:^{
+						 fullScreenViewController.view.alpha = 1.0;
+					 } completion:^(BOOL finished) {
+						 fullScreenViewController.collectionView = collectionView;
+						 
+						 [transitionContext completeTransition:YES];
+					 }];
 }
 
 - (void)animateDismissingTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
 	SYNFullScreenVideoViewController *fullScreenViewController = (SYNFullScreenVideoViewController *)[transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
-	UINavigationController *navigationController = (UINavigationController *)[transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
-	UIViewController *fromViewController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
-	SYNVideoPlayerViewController *videoViewController = (SYNVideoPlayerViewController *)navigationController.topViewController;
+	SYNVideoPlayerViewController *videoPlayerViewController = (SYNVideoPlayerViewController *)[transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
 	UIView *containerView = [transitionContext containerView];
-	SYNVideoPlayer *videoPlayer = fullScreenViewController.videoPlayer;
-	UIView *playerContainerView = videoViewController.videoPlayerContainerView;
 	
-	[containerView insertSubview:navigationController.view belowSubview:fullScreenViewController.view];
+	UICollectionView *collectionView = fullScreenViewController.collectionView;
 	
-	// Make sure we relayout the view controller so that we're animating to the right position
-	[navigationController.view layoutIfNeeded];
+	[containerView insertSubview:videoPlayerViewController.view belowSubview:fullScreenViewController.view];
 	
-	fullScreenViewController.backgroundView.alpha = 1.0;
-	
-	[UIView animateWithDuration:AnimationDuration animations:^{
-		if (IS_IPHONE) {
-			videoPlayer.transform = CGAffineTransformIdentity;
-		}
-		
-		CGRect videoPlayerFrame = [navigationController.view convertRect:playerContainerView.frame fromView:playerContainerView.superview];
-		videoPlayer.frame = videoPlayerFrame;
-		
-		fullScreenViewController.backgroundView.alpha = 0.0;
-	} completion:^(BOOL finished) {
-		videoPlayer.frame = playerContainerView.bounds;
-		[playerContainerView addSubview:videoPlayer];
-		
-		[transitionContext completeTransition:YES];
-		
-		fromViewController.transitioningDelegate = nil;
-	}];
+	[UIView animateWithDuration:AnimationDuration
+					 animations:^{
+						 fullScreenViewController.view.alpha = 0.0;
+					 } completion:^(BOOL finished) {
+						 [videoPlayerViewController.videoPlayerContainerView addSubview:collectionView];
+						 [collectionView mas_updateConstraints:^(MASConstraintMaker *make) {
+							 make.centerX.equalTo(videoPlayerViewController.videoPlayerContainerView.mas_centerX);
+							 make.centerY.equalTo(videoPlayerViewController.videoPlayerContainerView.mas_centerY);
+							 make.width.equalTo(videoPlayerViewController.videoPlayerContainerView.mas_width);
+							 make.height.equalTo(videoPlayerViewController.videoPlayerContainerView.mas_height);
+						 }];
+						 
+						 [collectionView.collectionViewLayout invalidateLayout];
+						 [collectionView layoutIfNeeded];
+						 collectionView.contentOffset = CGPointMake(videoPlayerViewController.selectedIndex * 320, 0);
+						 
+						 [transitionContext completeTransition:YES];
+					 }];
 }
 
 @end

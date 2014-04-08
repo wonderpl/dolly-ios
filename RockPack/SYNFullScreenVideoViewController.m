@@ -36,7 +36,10 @@
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	
-	self.videoOrientation = [[UIDevice currentDevice] orientation];
+	UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
+	if (UIDeviceOrientationIsLandscape(orientation)) {
+		self.videoOrientation = orientation;
+	}
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -62,43 +65,15 @@
 	}
 }
 
+- (NSUInteger)supportedInterfaceOrientations {
+	return UIInterfaceOrientationMaskLandscape;
+}
+
 - (BOOL)prefersStatusBarHidden {
 	return YES;
 }
 
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
-	[super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-	
-	CGFloat aspectRatio = CGRectGetWidth(self.videoPlayer.bounds) / CGRectGetHeight(self.videoPlayer.bounds);
-	CGFloat width = CGRectGetWidth(self.view.bounds);
-	self.videoPlayer.bounds = CGRectMake(0, 0, width, width / aspectRatio);
-	self.videoPlayer.center = CGPointMake(CGRectGetWidth(self.view.bounds) / 2.0, CGRectGetHeight(self.view.bounds) / 2.0);
-}
-
 #pragma mark - Getters / Setters
-
-- (void)setVideoPlayer:(SYNVideoPlayer *)videoPlayer {
-	_videoPlayer = videoPlayer;
-	
-	if (IS_IPHONE) {
-		CGFloat angle = (self.videoOrientation == UIDeviceOrientationLandscapeLeft ? M_PI_2 : M_PI_2 * 3);
-		videoPlayer.bounds = CGRectMake(0, 0, CGRectGetHeight(self.view.bounds), CGRectGetWidth(self.view.bounds));
-		videoPlayer.transform = CGAffineTransformMakeRotation(angle);
-	} else {
-		CGFloat aspectRatio = CGRectGetWidth(videoPlayer.bounds) / CGRectGetHeight(videoPlayer.bounds);
-		CGFloat viewWidth = CGRectGetWidth(self.view.bounds);
-		videoPlayer.bounds = CGRectMake(0, 0, viewWidth, round(viewWidth / aspectRatio));
-	}
-	self.videoPlayer.center = CGPointMake(CGRectGetWidth(self.view.bounds) / 2.0, CGRectGetHeight(self.view.bounds) / 2.0);
-	
-	[self.view addSubview:videoPlayer];
-}
-
-- (void)setVideoOrientation:(UIDeviceOrientation)videoOrientation {
-	if (UIDeviceOrientationIsLandscape(videoOrientation)) {
-		_videoOrientation = videoOrientation;
-	}
-}
 
 - (UIView *)backgroundView {
 	if (!_backgroundView) {
@@ -117,16 +92,8 @@
 	UIDevice *device = [notification object];
 	
 	if (device.orientation == UIDeviceOrientationPortrait) {
-		self.videoPlayer.maximised = NO;
 		[self dismissViewControllerAnimated:YES completion:nil];
 	} else if (UIDeviceOrientationIsLandscape(device.orientation)) {
-		// For the iPhone we only officially supports portrait orientation so we have to manually transform
-		// the video on rotation
-		[UIView animateWithDuration:0.3 animations:^{
-			CGFloat rotationAngle = (device.orientation == UIDeviceOrientationLandscapeLeft ? M_PI_2 : M_PI_2 * 3);
-			self.videoPlayer.transform = CGAffineTransformMakeRotation(rotationAngle);
-		}];
-		
 		self.videoOrientation = device.orientation;
 	}
 }

@@ -131,6 +131,7 @@
     self.shareSocialButton.dataItemLinked = _videoInstance;
     self.commentSocialButton.dataItemLinked = _videoInstance;
     
+	//MOVE
     [self.imageView setImageWithURL:[NSURL URLWithString: _videoInstance.thumbnailURL]
 				   placeholderImage:[UIImage imageNamed: @"PlaceholderChannelSmall.png"]
 							options:SDWebImageRetryFailed];

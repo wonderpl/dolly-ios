@@ -4,6 +4,8 @@
 <dict>
 	<key>APIHostName</key>
 	<string>api.dev.wonderpl.com</string>
+	<key>AppURLScheme</key>
+	<string>wonderpldev</string>
 	<key>BuildTarget</key>
 	<string>Develop</string>
 	<key>CFBundleDevelopmentRegion</key>
@@ -45,8 +47,6 @@
 			</array>
 		</dict>
 	</array>
-	<key>AppURLScheme</key>
-	<string>wonderpldev</string>
 	<key>CFBundleVersion</key>
 	<string>1.0.2</string>
 	<key>FacebookAppID</key>
@@ -77,6 +77,8 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>

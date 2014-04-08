@@ -33,6 +33,7 @@
 #import "UIColor+SYNColor.h"
 #import "SYNTrackingManager.h"
 #import "SYNFeedOverlayViewController.h"
+#import "SYNVideoPlayerViewController.h"
 
 @interface SYNFeedRootViewController () <UIViewControllerTransitioningDelegate, SYNPagingModelDelegate, SYNVideoPlayerAnimatorDelegate>
 
@@ -312,16 +313,14 @@
 	NSIndexPath *indexPath = [NSIndexPath indexPathForItem:subCellIndex inSection:cellIndexPath.row];
 	
 	self.model.mode = SYNFeedModelModeVideo;
-//	UIViewController *viewController = [SYNCarouselVideoPlayerViewController viewControllerWithModel:self.model
-//																					   selectedIndex:[self.model videoIndexForIndexPath:indexPath]
-//																						 presentedBy:NSStringFromClass([self class])];
+	UIViewController *viewController = [SYNVideoPlayerViewController viewControllerWithModel:self.model
+																			   selectedIndex:[self.model videoIndexForIndexPath:indexPath]];
 //	SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
 //	animator.delegate = self;
 //	animator.cellIndexPath = indexPath;
 //	self.videoPlayerAnimator = animator;
 //	viewController.transitioningDelegate = animator;
-//	
-//	[self presentViewController:viewController animated:YES completion:nil];
+	[self presentViewController:viewController animated:YES completion:nil];
 }
 
 - (id<SYNVideoInfoCell>)videoCellForIndexPath:(NSIndexPath *)indexPath {

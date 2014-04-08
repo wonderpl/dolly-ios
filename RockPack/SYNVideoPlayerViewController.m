@@ -29,13 +29,15 @@
 #import "SYNGenreManager.h"
 #import "SYNMasterViewController.h"
 #import <SDWebImageManager.h>
+#import "UIDevice+Helpers.h"
+#import "SYNPagingModel.h"
+#import "SYNVideoPlayerCell.h"
 @import AVFoundation;
 @import MediaPlayer;
 
-@interface SYNVideoPlayerViewController () <UIViewControllerTransitioningDelegate, UIPopoverControllerDelegate, SYNVideoPlayerDelegate>
+@interface SYNVideoPlayerViewController () <UIViewControllerTransitioningDelegate, UIPopoverControllerDelegate, UIScrollViewDelegate, SYNVideoPlayerDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) IBOutlet UILabel *videoTitleLabel;
-@property (nonatomic, strong) IBOutlet UIView *videoPlayerContainerView;
 @property (nonatomic, strong) IBOutlet UIButton *commentButton;
 @property (nonatomic, strong) IBOutlet SYNSocialButton *addButton;
 @property (nonatomic, strong) IBOutlet SYNButton *likeButton;
@@ -47,11 +49,34 @@
 
 @property (nonatomic, assign) NSTimeInterval autoplayStartTime;
 
+@property (nonatomic, assign) NSInteger selectedIndex;
+
 @property (nonatomic, strong) SYNRotatingPopoverController *commentPopoverController;
+
+@property (nonatomic, strong) SYNPagingModel *model;
+
+@property (nonatomic, strong) IBOutlet UIView *videoPlayerContainerView;
+
+@property (nonatomic, strong) IBOutlet UICollectionView *videosCollectionView;
 
 @end
 
+
 @implementation SYNVideoPlayerViewController
+
+#pragma mark - Factory
+
++ (UIViewController *)viewControllerWithModel:(SYNPagingModel *)model selectedIndex:(NSInteger)selectedIndex {
+	NSString *suffix = ([[UIDevice currentDevice] isPhone] ? @"iphone" : @"ipad");
+	NSString *storyboardName = [NSString stringWithFormat:@"%@_%@", NSStringFromClass(self), suffix];
+	UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle:nil];
+	
+	SYNVideoPlayerViewController *viewController = [storyboard instantiateInitialViewController];
+	viewController.model = model;
+	viewController.selectedIndex = selectedIndex;
+	
+	return viewController;
+}
 
 - (void)dealloc {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -64,7 +89,7 @@
 	
 	appDelegate = [[UIApplication sharedApplication] delegate];
 	
-	self.videoTitleLabel.font = [UIFont lightCustomFontOfSize:self.videoTitleLabel.font.pointSize];
+	self.videoTitleLabel.font = [UIFont boldCustomFontOfSize:self.videoTitleLabel.font.pointSize];
 	
 	self.linkButton.backgroundColor = [UIColor colorWithWhite:241/255.0 alpha:1.0];
 	self.linkButton.layer.borderColor = [[UIColor colorWithWhite:212/255.0 alpha:1.0] CGColor];
@@ -88,12 +113,16 @@
 	
 	[self updateVideoInstanceDetails:self.videoInstance];
 	
-	if ([self.navigationController isBeingPresented]) {
-		[self playCurrentVideo];
+	if (self.currentVideoPlayer) {
+		[self.currentVideoPlayer play];
 	}
 	
 	AVAudioSession *audioSession = [AVAudioSession sharedInstance];
 	[audioSession setActive:YES withOptions:0 error:nil];
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+	return UIInterfaceOrientationMaskPortrait;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -101,6 +130,10 @@
 	
 	Genre *genre = [[SYNGenreManager sharedManager] genreWithId:self.videoInstance.channel.categoryId];
 	[[SYNTrackingManager sharedManager] setCategoryDimension:genre.name];
+	
+	if ([self isBeingPresented]) {
+		[self playCurrentVideo];
+	}
 	
 	if (IS_IPHONE) {
 		UIDevice *device = [UIDevice currentDevice];
@@ -166,8 +199,50 @@
     
 	if ([self isViewLoaded]) {
 		[self updateVideoInstanceDetails:videoInstance];
+		
 		[self playCurrentVideo];
 	}
+}
+
+- (void)setSelectedIndex:(NSInteger)selectedIndex {
+	_selectedIndex = selectedIndex;
+		
+	self.videoInstance = [self.model itemAtIndex:selectedIndex];
+}
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+	return 1;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+	return [self.model itemCount];
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+	SYNVideoPlayerCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"VideoPlayerCell"
+																		 forIndexPath:indexPath];
+	
+	if (indexPath.item == self.selectedIndex && self.currentVideoPlayer) {
+		cell.videoPlayer = self.currentVideoPlayer;
+	} else {
+		VideoInstance *videoInstance = [self.model itemAtIndex:indexPath.row];
+		
+		SYNVideoPlayer *videoPlayer = [SYNVideoPlayer playerForVideoInstance:videoInstance];
+		videoPlayer.delegate = self;
+		
+		cell.videoPlayer = videoPlayer;
+	}
+	
+	return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(SYNVideoPlayerCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
+	
+	[cell cellDisplayEnded];
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+	return collectionView.frame.size;
 }
 
 #pragma mark - UIViewControllerTransitioningDelegate
@@ -214,7 +289,7 @@
 }
 
 - (void)videoPlayerFinishedPlaying {
-	
+	[self playNextVideo];
 }
 
 - (void)videoPlayerErrorOccurred:(NSString *)reason {
@@ -231,7 +306,7 @@
 
 #pragma mark - IBActions
 
-- (IBAction)closeButtonPressed:(UIBarButtonItem *)barButton {
+- (IBAction)closeButtonPressed:(UIButton *)barButton {
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -308,35 +383,22 @@
 
 - (void)deviceOrientationChanged:(NSNotification *)notification {
 	UIDevice *device = [notification object];
-	[self handleRotationToOrientation:device.orientation];
+	
+	if (!self.presentedViewController) {
+		[self handleRotationToOrientation:device.orientation];
+	}
 }
 
 #pragma mark - Private
 
 - (void)playCurrentVideo {
-	if (self.currentVideoPlayer) {
-		[self.currentVideoPlayer pause];
-		[self.currentVideoPlayer removeFromSuperview];
-		self.currentVideoPlayer.delegate = nil;
-		self.currentVideoPlayer = nil;
-	}
+	NSIndexPath *indexPath = [NSIndexPath indexPathForItem:self.selectedIndex inSection:0];
+	SYNVideoPlayerCell *cell = (SYNVideoPlayerCell *)[self.videosCollectionView cellForItemAtIndexPath:indexPath];
 	
-	SYNVideoPlayer *videoPlayer = [SYNVideoPlayer playerForVideoInstance:self.videoInstance];
-	videoPlayer.delegate = self;
-	videoPlayer.frame = self.videoPlayerContainerView.bounds;
-	
-	self.currentVideoPlayer = videoPlayer;
-	if ([self.presentedViewController isKindOfClass:[SYNFullScreenVideoViewController class]]) {
-		videoPlayer.maximised = YES;
-		SYNFullScreenVideoViewController *fullScreenViewController = (SYNFullScreenVideoViewController *)self.presentedViewController;
-		fullScreenViewController.videoPlayer = videoPlayer;
-	} else {
-		[self.videoPlayerContainerView addSubview:videoPlayer];
-	}
-	
-	self.autoplayStartTime = [NSDate timeIntervalSinceReferenceDate];
+	SYNVideoPlayer *videoPlayer = cell.videoPlayer;
 	
 	[videoPlayer play];
+	self.currentVideoPlayer = videoPlayer;
 }
 
 - (void)maximiseVideoPlayer {
@@ -393,6 +455,33 @@
 	} else {
 		self.hasTrackedAirPlayUse = NO;
 	}
+}
+
+#pragma mark - UIScrollViewDelegate
+
+// These are implemented and empty to make sure that the AbstractViewController's methods aren't being called
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+	
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+	
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+	if (scrollView == self.videosCollectionView) {
+		self.selectedIndex = (NSInteger)(scrollView.contentOffset.x / scrollView.frame.size.width);
+	}
+}
+
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
+	if (scrollView == self.videosCollectionView) {
+		self.selectedIndex = (NSInteger)(scrollView.contentOffset.x / scrollView.frame.size.width);
+	}
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 	
 }
 
@@ -400,6 +489,17 @@
 	[[SYNTrackingManager sharedManager] trackVideoView:self.videoInstance.video.sourceId
 										   currentTime:self.currentVideoPlayer.currentTime
 											  duration:self.currentVideoPlayer.duration];
+}
+
+- (NSInteger)nextVideoIndex {
+	return ((self.selectedIndex + 1) % [self.model itemCount]);
+}
+
+- (void)playNextVideo {
+	NSIndexPath *indexPath = [NSIndexPath indexPathForItem:[self nextVideoIndex] inSection:0];
+	[self.videosCollectionView scrollToItemAtIndexPath:indexPath
+									  atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
+											  animated:YES];
 }
 
 - (Class)animationClassForViewController:(UIViewController *)viewController {
