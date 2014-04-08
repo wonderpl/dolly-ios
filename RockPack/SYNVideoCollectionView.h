@@ -1,5 +1,5 @@
 //
-//  SYNCarouselVideoScrollView.h
+//  SYNVideoCollectionView.h
 //  dolly
 //
 //  Created by Sherman Lo on 30/01/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SYNCarouselVideoScrollView : UIScrollView
+@interface SYNVideoCollectionView : UICollectionView
 
 @end

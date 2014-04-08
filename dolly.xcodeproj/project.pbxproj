@@ -675,7 +675,7 @@
 		E9F7CC761846273E0026C97D /* NSString+Validation.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F7CC751846273E0026C97D /* NSString+Validation.m */; };
 		E9F7CC791846289B0026C97D /* NSStringValidationSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F7CC771846286C0026C97D /* NSStringValidationSpec.m */; };
 		E9F7CC7C1846562F0026C97D /* SYNVideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F7CC7B1846562F0026C97D /* SYNVideoPlayerViewController.m */; };
-		E9F7D9FC189A99D400BA79D4 /* SYNCarouselVideoScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F7D9FB189A99D400BA79D4 /* SYNCarouselVideoScrollView.m */; };
+		E9F7D9FC189A99D400BA79D4 /* SYNVideoCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F7D9FB189A99D400BA79D4 /* SYNVideoCollectionView.m */; };
 		E9FDCD96188D7C4700C31CC1 /* UILabel+Animation.m in Sources */ = {isa = PBXBuildFile; fileRef = E9FDCD95188D7C4700C31CC1 /* UILabel+Animation.m */; };
 		E9FDCD98188D902A00C31CC1 /* WebView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9FDCD97188D902A00C31CC1 /* WebView.storyboard */; };
 		E9FDCD9E188D92EF00C31CC1 /* BackButton.png in Resources */ = {isa = PBXBuildFile; fileRef = E9FDCD9A188D92EF00C31CC1 /* BackButton.png */; };
@@ -1664,8 +1664,8 @@
 		E9F7CC771846286C0026C97D /* NSStringValidationSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSStringValidationSpec.m; sourceTree = "<group>"; };
 		E9F7CC7A1846562F0026C97D /* SYNVideoPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNVideoPlayerViewController.h; sourceTree = "<group>"; };
 		E9F7CC7B1846562F0026C97D /* SYNVideoPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNVideoPlayerViewController.m; sourceTree = "<group>"; };
-		E9F7D9FA189A99D400BA79D4 /* SYNCarouselVideoScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNCarouselVideoScrollView.h; sourceTree = "<group>"; };
-		E9F7D9FB189A99D400BA79D4 /* SYNCarouselVideoScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNCarouselVideoScrollView.m; sourceTree = "<group>"; };
+		E9F7D9FA189A99D400BA79D4 /* SYNVideoCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNVideoCollectionView.h; sourceTree = "<group>"; };
+		E9F7D9FB189A99D400BA79D4 /* SYNVideoCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNVideoCollectionView.m; sourceTree = "<group>"; };
 		E9FDCD94188D7C4700C31CC1 /* UILabel+Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+Animation.h"; sourceTree = "<group>"; };
 		E9FDCD95188D7C4700C31CC1 /* UILabel+Animation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Animation.m"; sourceTree = "<group>"; };
 		E9FDCD97188D902A00C31CC1 /* WebView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = WebView.storyboard; sourceTree = "<group>"; };
@@ -2583,8 +2583,8 @@
 				E92CBAEC1887E29500A07070 /* SYNVideoPlayerAnimator.h */,
 				E92CBAED1887E29500A07070 /* SYNVideoPlayerAnimator.m */,
 				E98369D81889457500363709 /* SYNVideoInfoCell.h */,
-				E9F7D9FA189A99D400BA79D4 /* SYNCarouselVideoScrollView.h */,
-				E9F7D9FB189A99D400BA79D4 /* SYNCarouselVideoScrollView.m */,
+				E9F7D9FA189A99D400BA79D4 /* SYNVideoCollectionView.h */,
+				E9F7D9FB189A99D400BA79D4 /* SYNVideoCollectionView.m */,
 				E947097118D70F21000174A7 /* SYNYouTubeWebView.h */,
 				E947097218D70F21000174A7 /* SYNYouTubeWebView.m */,
 			);
@@ -4513,7 +4513,7 @@
 				E9F6255618854A3D000EF6A2 /* SYNIPhoneSignupUsernameViewController.m in Sources */,
 				E947097D18D76277000174A7 /* SYNStringResponseSerializer.m in Sources */,
 				01946B921683335400354601 /* _VideoInstance.m in Sources */,
-				E9F7D9FC189A99D400BA79D4 /* SYNCarouselVideoScrollView.m in Sources */,
+				E9F7D9FC189A99D400BA79D4 /* SYNVideoCollectionView.m in Sources */,
 				01946B971683339F00354601 /* ChannelOwner.m in Sources */,
 				01946B981683339F00354601 /* VideoInstance.m in Sources */,
 				BE31EFBA18314CE8006E20E2 /* SYNAddToChannelFlowLayout.m in Sources */,
