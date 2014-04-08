@@ -352,6 +352,8 @@
         
         [appDelegate.masterViewController removeOverlayControllerAnimated:YES];
     }
+	
+	//in IPad this view is displayed in a pop over so we call viewProfileDetails on the top VC
     [appDelegate.masterViewController.showingViewController viewProfileDetails:searchUserCell.channelOwner];
     
 }
