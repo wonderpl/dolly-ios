@@ -272,30 +272,11 @@
 
     self.btnShowFollowers.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     [self.txtFieldChannelName setFont:[UIFont boldCustomFontOfSize:self.txtFieldChannelName.font.pointSize]];
-//
-//    
-//    if (IS_RETINA) {
-//        [[self.txtFieldChannelName layer] setBorderWidth:0.5];
-//    } else {
-//        [[self.txtFieldChannelName layer] setBorderWidth:1.0];
-//    }
-//
-//    [[self.txtFieldChannelName layer] setBorderColor:[[UIColor colorWithRed:172.0/255.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f] CGColor]];
     
     [self.txtViewDescription setTextColor:[UIColor dollyTextMediumGray]];
     
     [[self.txtFieldChannelName layer] setCornerRadius:0];
     
-//    [[self.txtViewDescription layer] setBorderColor:[[UIColor colorWithRed:172.0/255.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f] CGColor]];
-//    if (IS_RETINA) {
-//        [[self.txtViewDescription layer] setBorderWidth:0.5];
-//    } else {
-//        [[self.txtViewDescription layer] setBorderWidth:1.0];
-//    }
-//    
-//    [[self.txtViewDescription layer] setCornerRadius:0];
-
-	
     self.lblNoVideos.text = NSLocalizedString(@"channel_screen_no_videos", "No videos in the channel details colleciton");
 	
 }
@@ -807,17 +788,13 @@
     if (IS_IPAD) {
         if (UIDeviceOrientationIsPortrait(orientation))
         {
-            //            self.videoCollectionLayoutIPad.headerReferenceSize = CGSizeMake(670, 507);
             self.videoCollectionViewLayoutIPadEdit.sectionInset = UIEdgeInsetsMake(0, 35, 0, 35);
             self.videoCollectionViewLayoutIPad.sectionInset = UIEdgeInsetsMake(0, 35, 0, 35);
             
             [self centreAllUi];
-            
-            
         }
         else
         {
-            //            self.videoCollectionLayoutIPad.headerReferenceSize = CGSizeMake(927, 507);
             self.videoCollectionViewLayoutIPadEdit.sectionInset = UIEdgeInsetsMake(0, 10, 0, 10);
             self.videoCollectionViewLayoutIPad.sectionInset = UIEdgeInsetsMake(0, 10, 0, 10);
             
@@ -1117,9 +1094,9 @@
 	[self.navigationItem setRightBarButtonItem:self.barBtnSave animated:YES];
     [UIView animateWithDuration:0.4 animations:^{
         self.btnDeleteChannel.alpha = 1.0f;
-        self.txtFieldChannelName.alpha = 1.0f;
-        self.txtViewDescription.alpha = 1.0f;
-		self.txtViewTitle.alpha = 1.0f;
+        self.txtFieldChannelName.alpha = 0.3f;
+        self.txtViewDescription.alpha = 0.3f;
+		self.txtViewTitle.alpha = 0.3f;
 
     }];
     
@@ -1379,6 +1356,14 @@
     }
     
     SYNSubscribersViewController *subscribersViewController = [[SYNSubscribersViewController alloc] initWithChannel: self.channel];
+	
+	UIBarButtonItem* backButton = [[UIBarButtonItem alloc] initWithTitle:@""
+                                                                   style:UIBarButtonItemStyleBordered
+                                                                  target:nil
+                                                                  action:nil];
+	
+	subscribersViewController.navigationController.navigationItem.backBarButtonItem = backButton;
+
     
     if(IS_IPAD)
     {
@@ -1400,6 +1385,7 @@
     
     else
     {
+		
         [self.navigationController pushViewController:subscribersViewController animated:YES];
     }
     
@@ -1586,19 +1572,12 @@
 {
     [self.view addGestureRecognizer:self.tapToHideKeyoboard];
 	
+	textView.alpha = 1.0f;
 	
 	if ([textView isEqual:@""]) {
 		textView.textAlignment = NSTextAlignmentLeft;
 	}
 }
-
-- (void)textViewDidEndEditing:(UITextView *)textView
-{
-    if (textView == self.txtViewDescription) {
-        
-    }
-}
-
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range
  replacementText:(NSString *)text
@@ -1614,7 +1593,6 @@
 		textView.textAlignment = NSTextAlignmentLeft;
 	} else {
 		textView.textAlignment = NSTextAlignmentCenter;
-
 	}
     NSUInteger newLength = [textView.text length] + [text length] - range.length;
 	
@@ -1631,6 +1609,8 @@
 #pragma mark - Text Field Delegates
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
+	textField.alpha = 1.0f;
+
     [self.view addGestureRecognizer:self.tapToHideKeyoboard];
 }
 
@@ -1654,6 +1634,9 @@
 
 -(void)dismissKeyboard
 {
+	
+	
+	[self.txtViewTitle resignFirstResponder];
     [self.txtFieldChannelName resignFirstResponder];
     [self.txtViewDescription resignFirstResponder];
     

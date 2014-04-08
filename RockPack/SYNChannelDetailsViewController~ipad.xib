@@ -73,7 +73,7 @@
                         <outlet property="delegate" destination="-1" id="cv2-cZ-tto"/>
                     </connections>
                 </textView>
-                <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Change Collection Title" textAlignment="center" minimumFontSize="50" id="lUk-nV-j8P" userLabel="Text field - Channel Title">
+                <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Change Collection Title" textAlignment="center" minimumFontSize="30" id="lUk-nV-j8P" userLabel="Text field - Channel Title">
                     <rect key="frame" x="35" y="270" width="600" height="48"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -189,7 +189,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="NYK-20-9W1" userLabel="Button - Avatar" customClass="SYNAvatarButton">
-                    <rect key="frame" x="287" y="106" width="96" height="96"/>
+                    <rect key="frame" x="287" y="91" width="96" height="96"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <state key="normal">
