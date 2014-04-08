@@ -278,7 +278,7 @@ referenceSizeForFooterInSection:(NSInteger)section {
 	if (channel.subscribedByUserValue) {
         [[SYNActivityManager sharedInstance] unsubscribeToChannel: channel
 												completionHandler:^(NSDictionary *responseDictionary) {
-													barButton.title = @"follow";
+													barButton.title = NSLocalizedString(@"follow", @"Follow button in video overlay");
 													barButton.enabled = YES;
                                                     [[NSNotificationCenter defaultCenter] postNotificationName:kReloadFeed object:self userInfo:nil];
 
@@ -290,7 +290,7 @@ referenceSizeForFooterInSection:(NSInteger)section {
 											  completionHandler: ^(NSDictionary *responseDictionary) {
 												  [[SYNTrackingManager sharedManager] trackCollectionFollowCompleted];
 												  
-												  barButton.title = @"unfollow";
+												  barButton.title = NSLocalizedString(@"unfollow", @"unfollow button in video overlay");
 												  barButton.enabled = YES;
                                                   [[NSNotificationCenter defaultCenter] postNotificationName:kReloadFeed object:self userInfo:nil];
 

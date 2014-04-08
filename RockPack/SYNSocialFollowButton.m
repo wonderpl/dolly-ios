@@ -29,7 +29,7 @@
         [self setTitleColor: [self selectedBorderColor]
                    forState: UIControlStateSelected];
 		
-		self.titleLabel.font = [UIFont lightCustomFontOfSize:12.5f];
+		self.titleLabel.font = [UIFont lightCustomFontOfSize:11.0f];
         
         
     }
