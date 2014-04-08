@@ -55,6 +55,8 @@
 
 @implementation SYNCarouselVideoPlayerViewController
 
+@synthesize selectedIndex = _selectedIndex;
+
 #pragma mark - Public class
 
 + (UIViewController *)viewControllerWithModel:(SYNPagingModel *)model selectedIndex:(NSInteger)selectedIndex presentedBy:(NSString *)presentedBy {
