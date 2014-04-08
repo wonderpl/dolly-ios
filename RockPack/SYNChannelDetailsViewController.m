@@ -31,7 +31,7 @@
 #import "UICollectionReusableView+Helpers.h"
 #import "SYNProfileRootViewController.h"
 #import "SYNChannelVideosModel.h"
-#import "SYNCarouselVideoPlayerViewController.h"
+//#import "SYNCarouselVideoPlayerViewController.h"
 #import "UINavigationBar+Appearance.h"
 #import "LXReorderableCollectionViewFlowLayout.h"
 #import "SYNCollectectionDetailsOverlayViewController.h"
@@ -833,17 +833,17 @@
     SYNCollectionVideoCell *selectedCell = (SYNCollectionVideoCell *) candidateCell;
     NSIndexPath *indexPath = [self.videoThumbnailCollectionView indexPathForItemAtPoint: selectedCell.center];
 	
-	UIViewController *viewController = [SYNCarouselVideoPlayerViewController viewControllerWithModel:self.model
-																					   selectedIndex:indexPath.item
-																						 presentedBy:NSStringFromClass([self class])];
-	SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
-	animator.delegate = self;
-	animator.cellIndexPath = indexPath;
-	
-	self.videoPlayerAnimator = animator;
-	viewController.transitioningDelegate = animator;
-	
-	[self presentViewController:viewController animated:YES completion:nil];
+//	UIViewController *viewController = [SYNCarouselVideoPlayerViewController viewControllerWithModel:self.model
+//																					   selectedIndex:indexPath.item
+//																						 presentedBy:NSStringFromClass([self class])];
+//	SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
+//	animator.delegate = self;
+//	animator.cellIndexPath = indexPath;
+//	
+//	self.videoPlayerAnimator = animator;
+//	viewController.transitioningDelegate = animator;
+//	
+//	[self presentViewController:viewController animated:YES completion:nil];
 	
     selectedCell.overlayView.backgroundColor = [UIColor colorWithRed: (57.0f / 255.0f)
                                                                green: (57.0f / 255.0f)
@@ -1669,14 +1669,14 @@
             
             [self.channel addVideoInstancesObject:vidToPlay];
             
-            viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:[self.channel.videoInstancesSet array]
-																					  selectedIndex:[self.channel.videoInstancesSet array].count-1
-																						presentedBy:NSStringFromClass([self class])];
+//            viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:[self.channel.videoInstancesSet array]
+//																					  selectedIndex:[self.channel.videoInstancesSet array].count-1
+//																						presentedBy:NSStringFromClass([self class])];
         } else {
             //If found put the video, display the player with the correct position
-            viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:[self.channel.videoInstancesSet array]
-																					  selectedIndex:tmpPosition
-																						presentedBy:NSStringFromClass([self class])];
+//            viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:[self.channel.videoInstancesSet array]
+//																					  selectedIndex:tmpPosition
+//																						presentedBy:NSStringFromClass([self class])];
         }
         
 		[self.navigationController presentViewController:viewController animated:YES completion:nil];

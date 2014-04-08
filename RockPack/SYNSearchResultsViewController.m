@@ -22,7 +22,7 @@
 #import "SYNVideoPlayerAnimator.h"
 #import "SYNGenreManager.h"
 #import "UIFont+SYNFont.h"
-#import "SYNCarouselVideoPlayerViewController.h"
+//#import "SYNCarouselVideoPlayerViewController.h"
 #import "SYNDeviceManager.h"
 #import "SYNMasterViewController.h"
 #import "SYNDiscoverOverlayVideoViewController.h"
@@ -542,16 +542,15 @@ typedef void (^SearchResultCompleteBlock)(int);
         
 		UIViewController *viewController;
         
-        if (!self.currentSearchTerm) {
-            viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:self.videosArray
-																					  selectedIndex:indexPath.item
-																						presentedBy:NSStringFromClass([self class])];
-
-        } else {
-            viewController  = [SYNSearchVideoPlayerViewController viewControllerWithVideoInstance:videoInstance];
-
-        }
-		
+//        if (!self.currentSearchTerm) {
+//            viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:self.videosArray
+//																					  selectedIndex:indexPath.item
+//																						presentedBy:NSStringFromClass([self class])];
+//
+//        } else {
+//            viewController  = [SYNSearchVideoPlayerViewController viewControllerWithVideoInstance:videoInstance];
+//
+//        }
         
 		SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
 		animator.delegate = self;

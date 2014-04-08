@@ -16,7 +16,7 @@
 #import "VideoInstance.h"
 #import "UINavigationBar+Appearance.h"
 #import "UIColor+SYNColor.h"
-#import "SYNCarouselVideoPlayerViewController.h"
+//#import "SYNCarouselVideoPlayerViewController.h"
 #import "UICollectionReusableView+Helpers.h"
 #import "SYNVideoPlayerAnimator.h"
 #import "SYNSearchResultsVideoCell.h"
@@ -219,13 +219,13 @@ static const float xAxis = 77;
                                                       if (rand > sortedVideos.count) {
                                                           rand = 0;
                                                       }
-                                                      
-                                                      if (IS_IPHONE) {
-                                                          UIViewController* viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:sortedVideos selectedIndex:rand presentedBy:NSStringFromClass([self class])];
-                                                          
-                                                          [strongSelf presentViewController:viewController animated:YES completion:nil];
-                                                          
-                                                      }
+													  
+//                                                      if (IS_IPHONE) {
+//                                                          UIViewController* viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:sortedVideos selectedIndex:rand presentedBy:NSStringFromClass([self class])];
+//                                                          
+//                                                          [strongSelf presentViewController:viewController animated:YES completion:nil];
+//                                                          
+//                                                      }
                                                   }
                                                   
                                                   strongSelf.watchButton.userInteractionEnabled = YES;
@@ -333,16 +333,15 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
         return;
     }
     
-    UIViewController* viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:self.videosArray selectedIndex:self.randomVideoIndex.intValue presentedBy:NSStringFromClass([self class])];
-    SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
-    animator.delegate = self;
-    animator.cellIndexPath = indexPath;
-    self.videoPlayerAnimator = animator;
-    viewController.transitioningDelegate = animator;
-    [self presentViewController:viewController animated:YES completion:^{
-        self.videoCollectionView.userInteractionEnabled = YES;
-    }];
-
+//    UIViewController* viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:self.videosArray selectedIndex:self.randomVideoIndex.intValue presentedBy:NSStringFromClass([self class])];
+//    SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
+//    animator.delegate = self;
+//    animator.cellIndexPath = indexPath;
+//    self.videoPlayerAnimator = animator;
+//    viewController.transitioningDelegate = animator;
+//    [self presentViewController:viewController animated:YES completion:^{
+//        self.videoCollectionView.userInteractionEnabled = YES;
+//    }];
 }
 
 - (id<SYNVideoInfoCell>)videoCellForIndexPath:(NSIndexPath *)indexPath {

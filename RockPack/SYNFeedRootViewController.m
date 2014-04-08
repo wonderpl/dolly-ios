@@ -98,9 +98,6 @@
 
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetData) name:kReloadFeed object:nil];
-
-    
-    
 }
 
 - (void) viewWillAppear: (BOOL) animated {
@@ -119,8 +116,6 @@
 	[super viewDidAppear:animated];
 	
 	[[SYNTrackingManager sharedManager] trackFeedScreenView];
-    
-
 }
 
 
@@ -317,16 +312,16 @@
 	NSIndexPath *indexPath = [NSIndexPath indexPathForItem:subCellIndex inSection:cellIndexPath.row];
 	
 	self.model.mode = SYNFeedModelModeVideo;
-	UIViewController *viewController = [SYNCarouselVideoPlayerViewController viewControllerWithModel:self.model
-																					   selectedIndex:[self.model videoIndexForIndexPath:indexPath]
-																						 presentedBy:NSStringFromClass([self class])];
-	SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
-	animator.delegate = self;
-	animator.cellIndexPath = indexPath;
-	self.videoPlayerAnimator = animator;
-	viewController.transitioningDelegate = animator;
-	
-	[self presentViewController:viewController animated:YES completion:nil];
+//	UIViewController *viewController = [SYNCarouselVideoPlayerViewController viewControllerWithModel:self.model
+//																					   selectedIndex:[self.model videoIndexForIndexPath:indexPath]
+//																						 presentedBy:NSStringFromClass([self class])];
+//	SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
+//	animator.delegate = self;
+//	animator.cellIndexPath = indexPath;
+//	self.videoPlayerAnimator = animator;
+//	viewController.transitioningDelegate = animator;
+//	
+//	[self presentViewController:viewController animated:YES completion:nil];
 }
 
 - (id<SYNVideoInfoCell>)videoCellForIndexPath:(NSIndexPath *)indexPath {
