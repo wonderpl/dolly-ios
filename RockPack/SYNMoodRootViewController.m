@@ -120,12 +120,11 @@ static const float xAxis = 77;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-	
-	[[NSNotificationCenter defaultCenter] postNotificationName: kScrollMovement
-														object: self
-													  userInfo: @{kScrollingDirection:@(ScrollingDirectionDown)}];
-	
-	
+	appDelegate.masterViewController.tabsView.hidden = YES;
+}
+
+-(void)viewWillDisappear:(BOOL)animated {
+	appDelegate.masterViewController.tabsView.hidden = NO;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -137,7 +136,7 @@ static const float xAxis = 77;
 
 #pragma mark - Getting Mood Objects
 
-- (void) loadMoods {
+- (void)loadMoods {
     
     NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Mood"];
     
