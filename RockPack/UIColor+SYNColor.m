@@ -24,12 +24,8 @@
 
 + (UIColor *) dollyTextMediumGray
 {
-    return [UIColor colorWithRed: 120.0f / 255.0f
-                           green: 120.0f / 255.0f
-                            blue: 120.0f / 255.0f
-                           alpha: 1.0f];
+    return RGB(119, 119, 130);
 }
-
 
 + (UIColor *) dollyTextLightGray
 {
@@ -166,6 +162,7 @@ return [UIColor colorWithRed: 136.0f / 255.0f
 + (UIColor *)facebookColor {
 	return RGB(61, 90, 151);
 }
+
 
 + (UIColor *) dollySearchBarColor
 {

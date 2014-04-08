@@ -13,8 +13,9 @@
 @implementation SYNAppearanceManager
 
 + (void)setupGlobalAppAppearance {
-	[self setupSearchBarAppearance];
 	
+	[[UINavigationBar appearance] setTintColor: [UIColor dollyTextMediumGray]];
+	[self setupSearchBarAppearance];
 	[self setupNavigationBarAppearance];
 }
 
