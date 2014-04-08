@@ -12,7 +12,7 @@
 #import "SYNOAuthNetworkEngine.h"
 #import "FeedItem.h"
 #import "VideoInstance.h"
-#import <TestFlight.h>
+#import "SYNVideoThumbnailDownloader.h"
 
 @interface SYNFeedModel ()
 
@@ -163,6 +163,8 @@
 											   
 											   NSArray *videoInstances = [sself videoInstancesForFeedItems:feedItems];
 											   sself.videoInstances = videoInstances;
+											   
+											   [[SYNVideoThumbnailDownloader sharedDownloader] fetchThumbnailImagesForVideos:[videoInstances valueForKeyPath:@"video"]];
 											   
 											   sself.loadedItems = (sself.mode == SYNFeedModelModeFeed ? feedItems : videoInstances);
 											   sself.totalItemCount = [total integerValue];
