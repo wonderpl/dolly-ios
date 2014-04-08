@@ -11,7 +11,7 @@
 #import "VideoInstance.h"
 #import "Video.h"
 #import "UIImage+Blur.h"
-#import <SDWebImageManager.h>
+#import "SYNVideoThumbnailDownloader.h"
 
 static NSString *const LoadingMessage = @"Your video is loading...";
 
@@ -124,18 +124,10 @@ static const CGFloat TextSideInset = 20.0;
 - (void)setVideoInstance:(VideoInstance *)videoInstance {
 	_videoInstance = videoInstance;
 	
-	[[SDWebImageManager sharedManager] downloadWithURL:[NSURL URLWithString:videoInstance.video.thumbnailURL]
-											   options:0
-											  progress:nil
-											 completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished) {
-												 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-													 UIImage *blurredImage = [UIImage blurredImageFromImage:image];
-													 dispatch_async(dispatch_get_main_queue(), ^{
-														 self.imageLayer.contents = (__bridge id)blurredImage.CGImage;
-														 self.textLayer.contents = (__bridge id)blurredImage.CGImage;
-													 });
-												 });
-											 }];
+	[[SYNVideoThumbnailDownloader sharedDownloader] blurredImageForVideoInstance:videoInstance.video completion:^(UIImage *image) {
+		self.imageLayer.contents = (__bridge id)image.CGImage;
+		self.textLayer.contents = (__bridge id)image.CGImage;
+	}];
 }
 
 #pragma mark - Private
