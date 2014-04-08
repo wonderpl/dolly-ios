@@ -12,6 +12,7 @@ pod 'ISO8601DateFormatter'
 pod 'TestFlightSDK'
 pod 'Facebook-iOS-SDK'
 pod 'GoogleAnalytics-iOS-SDK'
+pod 'Masonry'
 
 target :dollyTests, :exclusive => true do
 	pod 'Kiwi/XCTest'

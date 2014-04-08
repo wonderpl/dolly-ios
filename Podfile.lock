@@ -28,6 +28,7 @@ PODS:
   - Kiwi/XCTest (2.2.4):
     - Kiwi/ARC
     - Kiwi/NonARC
+  - Masonry (0.4.0)
   - MKNetworkKit (0.87):
     - Reachability (~> 3.1.0)
   - Ooyala (1.5.1)
@@ -46,6 +47,7 @@ DEPENDENCIES:
   - GoogleConversionTracking
   - ISO8601DateFormatter
   - Kiwi/XCTest
+  - Masonry
   - MKNetworkKit (from `https://github.com/rockpack/MKNetworkKit.git`, branch `cocoapods`)
   - Ooyala
   - Reachability
@@ -66,6 +68,7 @@ SPEC CHECKSUMS:
   GoogleConversionTracking: cb1368fb8c3229ca374a3554a2a9ce50dfa1fa9d
   ISO8601DateFormatter: 00944e437ea647f4244454ce8809d313861d08de
   Kiwi: d60d7498b640a16f58b01925fc3c8d7c4d809f66
+  Masonry: d673617c9cbc24aaea90fba20b10e47fd9970a39
   MKNetworkKit: e92724a21c0392c2f4181978135f3ae715863f1a
   Ooyala: 5371cc4cb8a8cfa889d17d0353510eebe5360869
   Reachability: be4883bb93f31e38266ae3365e5600a317aae735
@@ -73,4 +76,4 @@ SPEC CHECKSUMS:
   SSKeychain: ffa1a79eb716d9ed1ca184fb0cf218087ca28486
   TestFlightSDK: 71e3e78d3a46144dbad975a4bf80a14dae6a818a
 
-COCOAPODS: 0.29.0
+COCOAPODS: 0.31.1
