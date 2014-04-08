@@ -309,7 +309,7 @@ static CGFloat const ControlsFadeTimer = 5.0;
 }
 
 - (void)startUpdatingProgress {
-	self.progressUpdateTimer = [NSTimer timerWithTimeInterval:0.1
+	self.progressUpdateTimer = [NSTimer timerWithTimeInterval:0.25
 													   target:self
 													 selector:@selector(updateProgress)
 													 userInfo:nil
