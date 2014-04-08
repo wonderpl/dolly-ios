@@ -77,7 +77,7 @@ static const NSInteger UsernameMaxLength = 20;
         self.avatarImageView.hidden = YES;
         self.uploadAvatarButton.hidden = YES;
         
-        [self.topFirstNameLabelConstraint setConstant:101];
+        [self.topFirstNameLabelConstraint setConstant:95];
 		self.addPhotoLabel.hidden = YES;
     }
 }
@@ -162,6 +162,8 @@ static const NSInteger UsernameMaxLength = 20;
 																
 																NSNumber *availabilitynumber = result[@"available"];
 																
+																NSLog(@"resultresult : %@", result);
+																
 																if (availabilitynumber) {
 																	BOOL usernameAvailable = [availabilitynumber boolValue];
 																	
@@ -178,9 +180,9 @@ static const NSInteger UsernameMaxLength = 20;
 																	NSString *errorString = NSLocalizedString(@"unknown_error_message", nil);
 																	
 																	if (formErrors && [formErrors count] > 0) {
-																		errorString = [NSString stringWithFormat: NSLocalizedString(@"%@: %@", nil), NSLocalizedString(@"Username", nil), formErrors[0]];
+																		errorString =  NSLocalizedString(@"username_too_short", nil);
 																	}
-																	
+																																		
 																	self.errorLabel.text = errorString;
 																	
 																	[navigationItem setRightBarButtonItem:self.nextBarButton animated:YES];
@@ -188,6 +190,8 @@ static const NSInteger UsernameMaxLength = 20;
 															} errorHandler: ^(NSError *error) {
 																[navigationItem setLeftBarButtonItem:self.backBarButton animated:YES];
 																[navigationItem setRightBarButtonItem:self.nextBarButton animated:YES];
+																
+																
 																
 																self.errorLabel.text = NSLocalizedString(@"unknown_error_message", nil);
 															}];

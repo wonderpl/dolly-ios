@@ -120,6 +120,7 @@
 "register_screen_form_avatar_upload_title" = "Oops";
 "register_screen_form_avatar_upload_description" = "We're having trouble uploading your photo. Please try again.";
 "register_screen_form_field_username_already_taken" = "This username is already taken.";
+"username_too_short" = "Username must be at least 3 characters long.";
 
 //Facebook
 "facebook_login_error_title" = "Facebook Login";
