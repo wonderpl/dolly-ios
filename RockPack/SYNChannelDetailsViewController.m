@@ -1655,22 +1655,21 @@
         VideoInstance *vidToPlay = [VideoInstance instanceFromDictionary:response usingManagedObjectContext:appDelegate.mainManagedObjectContext];
         
         
-        int64_t tmpPosition = -1;
+        NSInteger tmpPosition = NSNotFound;
         
         // Check if the video instance is in the first set of videos
         for (int i = 0; i<self.model.itemCount; i++) {
             VideoInstance *videoInstance = [self.model itemAtIndex:i];
                 //If the video is found, set the position
                 if ([videoInstance.uniqueId isEqual:vidToPlay.uniqueId]) {
-                tmpPosition = videoInstance.positionValue;
+                tmpPosition = i;
             }
         }
         
         //If the Video was not found, add the video instance to th end.
-        if (tmpPosition == -1) {
+        if (tmpPosition == NSNotFound) {
             
             [self.channel addVideoInstancesObject:vidToPlay];
-            //[vidToPlay setChannel:self.channel];
             
             viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:[self.channel.videoInstancesSet array]
 																					  selectedIndex:[self.channel.videoInstancesSet array].count-1
@@ -1684,7 +1683,10 @@
         
 		[self.navigationController presentViewController:viewController animated:YES completion:nil];
         
-    } errorHandler: nil];
+    } errorHandler:^(id  error) {
+		//TODO: Displaying something when the video is not found
+	
+	}];
 
 }
 
