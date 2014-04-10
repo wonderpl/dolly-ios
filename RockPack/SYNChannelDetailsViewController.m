@@ -836,7 +836,8 @@
     NSIndexPath *indexPath = [self.videoThumbnailCollectionView indexPathForItemAtPoint: selectedCell.center];
 	
 	UIViewController *viewController = [SYNCarouselVideoPlayerViewController viewControllerWithModel:self.model
-																					   selectedIndex:indexPath.item];
+																					   selectedIndex:indexPath.item
+																						 presentedBy:NSStringFromClass([self class])];
 	SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
 	animator.delegate = self;
 	animator.cellIndexPath = indexPath;
@@ -1671,10 +1672,14 @@
             [self.channel addVideoInstancesObject:vidToPlay];
             //[vidToPlay setChannel:self.channel];
             
-            viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:[self.channel.videoInstancesSet array] selectedIndex:[self.channel.videoInstancesSet array].count-1];
+            viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:[self.channel.videoInstancesSet array]
+																					  selectedIndex:[self.channel.videoInstancesSet array].count-1
+																						presentedBy:NSStringFromClass([self class])];
         } else {
             //If found put the video, display the player with the correct position
-            viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:[self.channel.videoInstancesSet array] selectedIndex:tmpPosition];
+            viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:[self.channel.videoInstancesSet array]
+																					  selectedIndex:tmpPosition
+																						presentedBy:NSStringFromClass([self class])];
         }
         
 		[self.navigationController presentViewController:viewController animated:YES completion:nil];

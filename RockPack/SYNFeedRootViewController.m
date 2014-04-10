@@ -319,7 +319,8 @@
 	
 	self.model.mode = SYNFeedModelModeVideo;
 	UIViewController *viewController = [SYNCarouselVideoPlayerViewController viewControllerWithModel:self.model
-																					   selectedIndex:[self.model videoIndexForIndexPath:indexPath]];
+																					   selectedIndex:[self.model videoIndexForIndexPath:indexPath]
+																						 presentedBy:NSStringFromClass([self class])];
 	SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
 	animator.delegate = self;
 	animator.cellIndexPath = indexPath;

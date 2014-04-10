@@ -28,6 +28,7 @@
 #import "SYNTrackingManager.h"
 #import <UIButton+WebCache.h>
 #import "SYNTrackingManager.h"
+#import <TestFlight.h>
 
 @interface SYNCarouselVideoPlayerViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIViewControllerTransitioningDelegate, UIScrollViewDelegate, SYNPagingModelDelegate>
 
@@ -49,13 +50,15 @@
 @property (nonatomic, strong) SYNPagingModel *model;
 @property (nonatomic, strong) IBOutlet UIScrollView *videoScrollView;
 
+@property (nonatomic, copy) NSString *presentedBy;
+
 @end
 
 @implementation SYNCarouselVideoPlayerViewController
 
 #pragma mark - Public class
 
-+ (UIViewController *)viewControllerWithModel:(SYNPagingModel *)model selectedIndex:(NSInteger)selectedIndex {
++ (UIViewController *)viewControllerWithModel:(SYNPagingModel *)model selectedIndex:(NSInteger)selectedIndex presentedBy:(NSString *)presentedBy {
 	NSString *suffix = (IS_IPAD ? @"ipad" : (IS_IPHONE_5 ? @"iphone" : @"iphone4" ));
 	NSString *filename = [NSString stringWithFormat:@"%@_%@", NSStringFromClass(self), suffix];
 	UIStoryboard *storyboard = [UIStoryboard storyboardWithName:filename bundle:nil];
@@ -64,13 +67,14 @@
 	SYNCarouselVideoPlayerViewController *viewController = (SYNCarouselVideoPlayerViewController *)navigationController.topViewController;
 	viewController.model = model;
 	viewController.selectedIndex = selectedIndex;
+	viewController.presentedBy = presentedBy;
 	
 	return navigationController;
 }
 
-+ (UIViewController *)viewControllerWithVideoInstances:(NSArray *)videoInstances selectedIndex:(NSInteger)selectedIndex {
++ (UIViewController *)viewControllerWithVideoInstances:(NSArray *)videoInstances selectedIndex:(NSInteger)selectedIndex presentedBy:(NSString *)presentedBy {
 	SYNPagingModel *model = [[SYNStaticModel alloc] initWithItems:videoInstances];
-	return [self viewControllerWithModel:model selectedIndex:selectedIndex];
+	return [self viewControllerWithModel:model selectedIndex:selectedIndex presentedBy:presentedBy];
 }
 
 #pragma mark - UIViewController
@@ -105,6 +109,8 @@
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	
+	TFLog(@"Appearing when presented from: %@", self.presentedBy);
+	
 	if ([self.navigationController isBeingPresented]) {
 		NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.selectedIndex inSection:0];
 		[self.thumbnailCollectionView selectItemAtIndexPath:indexPath
@@ -117,6 +123,8 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
+	
+	TFLog(@"Disappearing when presented from %@", self.presentedBy);
 	
 	// FIXME: This is a dodgy hack to work around a race condition in SYNFeedModel because it has separate modes
 	// which are switched between. Need to go back and rework how that's done but for now we have this hack to prevent

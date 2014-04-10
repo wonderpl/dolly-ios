@@ -13,7 +13,7 @@
 
 @interface SYNCarouselVideoPlayerViewController : SYNVideoPlayerViewController
 
-+ (UIViewController *)viewControllerWithModel:(SYNPagingModel *)model selectedIndex:(NSInteger)selectedIndex;
-+ (UIViewController *)viewControllerWithVideoInstances:(NSArray *)videos selectedIndex:(NSInteger)selectedIndex;
++ (UIViewController *)viewControllerWithModel:(SYNPagingModel *)model selectedIndex:(NSInteger)selectedIndex presentedBy:(NSString *)presentedBy;
++ (UIViewController *)viewControllerWithVideoInstances:(NSArray *)videos selectedIndex:(NSInteger)selectedIndex presentedBy:(NSString *)presentedBy;
 
 @end
