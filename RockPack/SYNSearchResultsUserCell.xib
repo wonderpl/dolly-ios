@@ -14,29 +14,28 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sTy-g0-GXP" userLabel="Cover photo">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="162"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="185"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.34999999999999998" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fkX-vS-KN8" userLabel="Cover photo layer">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="162"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="185"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.28005708495662784" green="0.27861682212248673" blue="0.30377462635869568" alpha="1" colorSpace="calibratedRGB"/>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MN1-18-LaS" userLabel="follow" customClass="SYNSocialFollowButton">
-                        <rect key="frame" x="253" y="135" width="50" height="50"/>
+                        <rect key="frame" x="225" y="147" width="78" height="28"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="50" id="87R-1f-sG1"/>
-                            <constraint firstAttribute="width" constant="50" id="Exx-mZ-XZn"/>
+                            <constraint firstAttribute="height" constant="28" id="87R-1f-sG1"/>
+                            <constraint firstAttribute="width" constant="78" id="Exx-mZ-XZn"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                         <state key="normal">
-                            <color key="titleColor" red="0.27450980392156865" green="0.27450980392156865" blue="0.27450980392156865" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MMMMMMMMMMMMMMMMMMMMMMMMMMMMMM" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="230" translatesAutoresizingMaskIntoConstraints="NO" id="ufw-e6-HaY" userLabel="Label - Description">
+                    <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MMMMMMMMMMMMMMMMMMMMMMMMMMMMMM" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="230" translatesAutoresizingMaskIntoConstraints="NO" id="ufw-e6-HaY" userLabel="Label - Description">
                         <rect key="frame" x="12" y="114" width="230" height="36"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <constraints>
@@ -48,10 +47,10 @@
                         <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.85999999999999999" colorSpace="calibratedRGB"/>
                         <size key="shadowOffset" width="0.0" height="0.0"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mTu-lk-DTw">
-                        <rect key="frame" x="12" y="12" width="293" height="21"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="293" translatesAutoresizingMaskIntoConstraints="NO" id="mTu-lk-DTw">
+                        <rect key="frame" x="12" y="12" width="293" height="28"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -62,7 +61,7 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="sTy-g0-GXP" secondAttribute="trailing" id="0Mp-Lf-HTO"/>
                 <constraint firstItem="sTy-g0-GXP" firstAttribute="top" secondItem="gc6-j7-DT5" secondAttribute="top" id="1tz-2f-gDH"/>
-                <constraint firstAttribute="bottom" secondItem="fkX-vS-KN8" secondAttribute="bottom" constant="33" id="5rU-g7-4d6"/>
+                <constraint firstAttribute="bottom" secondItem="fkX-vS-KN8" secondAttribute="bottom" constant="10" id="5rU-g7-4d6"/>
                 <constraint firstAttribute="bottom" secondItem="ufw-e6-HaY" secondAttribute="bottom" constant="45" id="7pq-X0-LZI"/>
                 <constraint firstItem="mTu-lk-DTw" firstAttribute="top" secondItem="gc6-j7-DT5" secondAttribute="top" constant="12" id="AFg-84-kX7"/>
                 <constraint firstAttribute="trailing" secondItem="mTu-lk-DTw" secondAttribute="trailing" constant="15" id="BsV-YQ-Ipc"/>
@@ -72,14 +71,13 @@
                 <constraint firstItem="fkX-vS-KN8" firstAttribute="leading" secondItem="gc6-j7-DT5" secondAttribute="leading" id="gVK-dm-yAg"/>
                 <constraint firstItem="mTu-lk-DTw" firstAttribute="leading" secondItem="gc6-j7-DT5" secondAttribute="leading" constant="12" id="gd5-tC-byv"/>
                 <constraint firstAttribute="trailing" secondItem="fkX-vS-KN8" secondAttribute="trailing" id="nrS-fB-Bzi"/>
-                <constraint firstAttribute="bottom" secondItem="sTy-g0-GXP" secondAttribute="bottom" constant="33" id="rDG-Oa-xDw"/>
+                <constraint firstAttribute="bottom" secondItem="sTy-g0-GXP" secondAttribute="bottom" constant="10" id="rDG-Oa-xDw"/>
                 <constraint firstItem="ufw-e6-HaY" firstAttribute="leading" secondItem="gc6-j7-DT5" secondAttribute="leading" constant="12" id="xGA-ZQ-Z01"/>
-                <constraint firstAttribute="bottom" secondItem="MN1-18-LaS" secondAttribute="bottom" constant="10" id="xSd-wJ-1c1"/>
+                <constraint firstAttribute="bottom" secondItem="MN1-18-LaS" secondAttribute="bottom" constant="20" id="xSd-wJ-1c1"/>
             </constraints>
             <size key="customSize" width="353" height="216"/>
             <connections>
                 <outlet property="coverImage" destination="sTy-g0-GXP" id="Yu7-59-j8E"/>
-                <outlet property="descriptionLabel" destination="ufw-e6-HaY" id="Xxu-jx-8pq"/>
                 <outlet property="followButton" destination="MN1-18-LaS" id="Bhy-77-2TY"/>
                 <outlet property="userNameLabel" destination="mTu-lk-DTw" id="MyT-a4-W7m"/>
             </connections>

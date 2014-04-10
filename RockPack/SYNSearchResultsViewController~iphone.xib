@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -9,6 +9,7 @@
                 <outlet property="containerTabs" destination="ETn-jl-6bC" id="d8m-A9-xQK"/>
                 <outlet property="noUsersLabel" destination="9AH-zX-4as" id="fNr-Sf-0mR"/>
                 <outlet property="noVideosLabel" destination="bZV-Ur-AjO" id="0xy-KZ-j95"/>
+                <outlet property="topVideoContraint" destination="azm-s7-Fah" id="ZFz-JY-Ixb"/>
                 <outlet property="usersCollectionView" destination="Xpe-E2-vgS" id="D46-Ve-nma"/>
                 <outlet property="usersTabButton" destination="XNX-MU-8Wx" id="PEh-gR-77S"/>
                 <outlet property="videosCollectionView" destination="FGp-za-xxN" id="Ix6-S0-WBq"/>

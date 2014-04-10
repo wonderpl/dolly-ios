@@ -88,7 +88,6 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     if (IS_IPAD) {
@@ -148,12 +147,7 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
         self.searchResultsController.view.frame = sResRect;
     }
     
-    if (IS_IPAD) {
-		//        self.navigationController.navigationBarHidden = YES;
-    }
-	
     self.sideContainerView.layer.borderColor = [[UIColor dollyMediumGray] CGColor];
-    
     self.sideContainerView.layer.borderWidth = IS_RETINA ? 0.5f : 1.0f;
     
     [self reloadCategories];
@@ -163,9 +157,16 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 												 name:CategoriesReloadedNotification
 											   object:nil];
 	self.recentlyViewed = [[NSMutableArray alloc] init];
+//	UIImage *searchBg =  [[UIImage imageNamed:@"search"]
+//						  resizableImageWithCapInsets:UIEdgeInsetsMake(7, 19, 7, 20)]; //[UIImage imageNamed:@"seachbar_statenormal"];
+//	searchBg = [searchBg stretchableImageWithLeftCapWidth:10 topCapHeight:10]; //experiment with values
+
+//	[self.searchBar setSearchFieldBackgroundImage:[UIImage imageNamed:@"search"]forState:UIControlStateNormal];
+
 	
+//	[self.searchBar setBackgroundImage:[self imageWithColor:[UIColor dollySearchBackground]]];
 	
-	
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -426,32 +427,23 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 	
 	if (indexPath.section == 1) {
 		subGenre = [self.recentlyViewed objectAtIndex:indexPath.row];
+
 	} else {
 		Genre *genre = self.genres[index];
 		subGenre = genre.subgenres[indexPath.row];
 	}
 	
 	UIColor *genreColor = [[SYNGenreManager sharedManager] colorForGenreWithId:subGenre.uniqueId];
-    
-    if (indexPath.section == 0 && indexPath.row == 0) {
-		UIColor *newColor = [UIColor colorWithRed: (96.0f / 255.0f)
-											green: (59.0f / 255.0f)
-											 blue: (85.0f / 255.0f)
-											alpha: 1.0f];
-		
-        categoryCell.selectedColor = newColor;
-        categoryCell.deSelectedColor = newColor;
-        categoryCell.backgroundColor = newColor;
-		categoryCell.label.textColor = [UIColor whiteColor];
-		
-    } else {
-		
-        categoryCell.selectedColor = genreColor;
-        categoryCell.deSelectedColor = [UIColor whiteColor];
-		categoryCell.label.textColor = [UIColor blackColor];
-		
-    }
+	if (indexPath.section == 0 && indexPath.row == 0) {
+		categoryCell.rightImage.hidden = NO;
+	} else {
+		categoryCell.rightImage.hidden = YES;
+
+	}
 	
+	categoryCell.selectedColor = genreColor;
+	categoryCell.deSelectedColor = [UIColor whiteColor];
+		
     categoryCell.label.text = subGenre.name;
 	
 	
@@ -930,6 +922,41 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 	} else {
 		[self.navigationController presentViewController:self.moodVC animated:YES completion:nil];
 	}
+}
+
+
+- (UIImage *)imageWithColor:(UIColor*) color {
+	
+	
+	CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+	
+    CGContextSetFillColorWithColor(context, [[UIColor blueColor] CGColor]);
+    CGContextFillRect(context, rect);
+	
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+	
+    return image;
+
+}
+
+- (UIImage *)searchFieldBackgroundImageForState:(UIControlState)state {
+	
+	
+	CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+	
+    CGContextSetFillColorWithColor(context, [[UIColor blueColor] CGColor]);
+    CGContextFillRect(context, rect);
+	
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+	
+    return image;
+
 }
 
 

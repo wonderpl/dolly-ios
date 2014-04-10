@@ -26,7 +26,6 @@
 @property (nonatomic, strong) IBOutlet SYNSocialButton *followButton;
 @property (nonatomic, strong) IBOutlet SYNAvatarButton *userThumbnailButton;
 @property (strong, nonatomic) IBOutlet UILabel *userNameLabel;
-@property (nonatomic, strong) IBOutlet UIButton* userNameLabelButton;
 @property (strong, nonatomic) UIAlertView *followAllAlertView;
 @property (strong, nonatomic) IBOutlet UIImageView *coverImage;
 @property (strong, nonatomic) UIButton* alertViewButton;
@@ -44,18 +43,15 @@
 		[self addSubview:self.separatorView];
 	}
 	
-	self.userNameLabelButton.titleLabel.font = [UIFont lightCustomFontOfSize:self.userNameLabelButton.titleLabel.font.pointSize];
 	
 	[self.userThumbnailButton addTarget:self action:@selector(profileButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-	[self.userNameLabelButton addTarget:self action:@selector(profileButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
 	[self.followButton addTarget:self action:@selector(followButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
  
     self.followButton.layer.cornerRadius = self.followButton.frame.size.width/2;
     self.followButton.layer.masksToBounds = YES;
     
     
-    [self.userNameLabel setFont:[UIFont regularCustomFontOfSize:20.0f]];
-    [self.descriptionLabel setFont:[UIFont regularCustomFontOfSize:15.0f]];
+    [self.userNameLabel setFont:[UIFont semiboldCustomFontOfSize:self.userNameLabel.font.pointSize]];
 }
 
 #pragma mark - Set Data
@@ -65,7 +61,6 @@
 	
 	if (!_channelOwner) {
 		self.userThumbnailButton.imageView.image = [UIImage imageNamed: @"PlaceholderChannelSmall.png"];
-		self.userNameLabelButton.titleLabel.text = @"";
 		return;
 	}
 	
@@ -104,8 +99,6 @@
                                }
                            }];
 
-    
-    [self setButtonTitleAndResizeText:channelOwner.displayName forLabel:self.userNameLabelButton.titleLabel];
 
     channelOwner.subscribedByUserValue = [[SYNActivityManager sharedInstance] isSubscribedToUserId:channelOwner.uniqueId];
     
@@ -123,30 +116,30 @@
 
 -(void) setButtonTitleAndResizeText:(NSString*) text forLabel:(UILabel*) label
 {
-    
-    UIFont *font = [UIFont lightCustomFontOfSize:label.font.pointSize];
-    
-    //i starts at the ideal font size and shrinks down
-    int i;
-    for(i = label.font.pointSize; i > 10; i=i-1)
-    {
-        // Set the new font size.
-        font = [font fontWithSize:i];
-        CGSize constraintSize = CGSizeMake(self.userNameLabelButton.frame.size.width
-                                           , MAXFLOAT);
-        
-        CGRect textRect = [text boundingRectWithSize:constraintSize
-                                                  options:NSStringDrawingUsesLineFragmentOrigin
-                                               attributes:@{NSFontAttributeName:font}
-                                                  context:nil];
-        
-        CGSize labelSize = textRect.size;
-        //need to set the height of the label
-        if(labelSize.height <= 33.0f)
-            break;
-    }
-    label.font = font;
-    [label setText:text];
+//    
+//    UIFont *font = [UIFont lightCustomFontOfSize:label.font.pointSize];
+//    
+//    //i starts at the ideal font size and shrinks down
+//    int i;
+//    for(i = label.font.pointSize; i > 10; i=i-1)
+//    {
+//        // Set the new font size.
+//        font = [font fontWithSize:i];
+//        CGSize constraintSize = CGSizeMake(self.userNameLabelButton.frame.size.width
+//                                           , MAXFLOAT);
+//        
+//        CGRect textRect = [text boundingRectWithSize:constraintSize
+//                                                  options:NSStringDrawingUsesLineFragmentOrigin
+//                                               attributes:@{NSFontAttributeName:font}
+//                                                  context:nil];
+//        
+//        CGSize labelSize = textRect.size;
+//        //need to set the height of the label
+//        if(labelSize.height <= 33.0f)
+//            break;
+//    }
+//    label.font = font;
+//    [label setText:text];
 
 }
 

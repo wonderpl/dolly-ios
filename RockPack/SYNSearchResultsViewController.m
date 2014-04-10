@@ -52,6 +52,7 @@ typedef void (^SearchResultCompleteBlock)(int);
 @property (nonatomic) NSRange dataRequestRange2;
 @property (nonatomic) NSInteger dataItemsAvailable2;
 
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *topVideoContraint;
 
 @property (nonatomic) SearchResultsShowing searchResultsShowing;
 @property (nonatomic, strong) NSString *currentSearchTerm;
@@ -292,7 +293,11 @@ typedef void (^SearchResultCompleteBlock)(int);
 }
 
 - (void) searchForGenre: (NSString *) genreId
-{
+{	
+	if (IS_IPHONE) {
+		self.containerTabs.hidden = YES;
+		[self.topVideoContraint setConstant:62];
+	}
 	Genre *genre = [[SYNGenreManager sharedManager] genreWithId:genreId];
 	[[SYNTrackingManager sharedManager] setCategoryDimension:genre.name];
 	
@@ -346,6 +351,12 @@ typedef void (^SearchResultCompleteBlock)(int);
 
 - (void) searchForTerm: (NSString *) newSearchTerm
 {
+	
+	if (IS_IPHONE) {
+		self.containerTabs.hidden = NO;
+		[self.topVideoContraint setConstant:111];
+	}
+	
 	[[SYNTrackingManager sharedManager] setCategoryDimension:nil];
 	
 	self.searchType = SYNSearchTypeSearch;
@@ -567,9 +578,9 @@ typedef void (^SearchResultCompleteBlock)(int);
     
         if (IS_IPHONE) {
             if (indexPath.row<2) {
-                return CGSizeMake(320, 195);
+                return CGSizeMake(320, 192);
             } else {
-                return CGSizeMake(320, 113);
+                return CGSizeMake(320, 101);
             }
         }
         

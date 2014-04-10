@@ -14,6 +14,8 @@
 @property (nonatomic, strong) IBOutlet UILabel *label;
 @property (nonatomic, strong) IBOutlet UIView* dimmingView;
 @property (nonatomic, strong) IBOutlet UIView *separator;
+@property (strong, nonatomic) IBOutlet UIImageView *rightImage;
+
 @end
 
 @implementation SYNDiscoverCategoriesCell
@@ -21,13 +23,17 @@
 - (void)awakeFromNib {
 	[super awakeFromNib];
 	
-    self.label.font = [UIFont semiboldCustomFontOfSize: self.label.font.pointSize];
+    self.label.font = [UIFont semiboldCustomFontOfSize: self.label.font.pointSize];\
+	self.rightImage.hidden = YES;
+
 }
 
 -(void)prepareForReuse {
     [super prepareForReuse];
     self.backgroundColor = [UIColor clearColor];
-	self.label.textColor = [UIColor blackColor];
+	self.label.textColor = [UIColor whiteColor];
+	
+	self.rightImage.hidden = YES;
 }
 
 
@@ -38,7 +44,7 @@
 }
 
 - (void)setSelectedColor:(UIColor *)selectedColor {
-    _selectedColor = selectedColor;
+    _selectedColor = [UIColor blackColor];
     
     [self updateBackgroundColor];
 }
@@ -52,9 +58,11 @@
 
 - (void)updateBackgroundColor {
     if (self.selected) {
-        self.backgroundColor =  self.selectedColor;
-    } else {
-        self.backgroundColor = self.deSelectedColor;
+        self.backgroundColor =  [UIColor blackColor];
+		[self.label setTextColor:[UIColor whiteColor]];
+	} else {
+        self.backgroundColor =  [UIColor whiteColor];
+		[self.label setTextColor:[UIColor blackColor]];
     }
 
 }
