@@ -296,6 +296,8 @@
 		4C1DBBEC18E48E5D0047CAFA /* SYNIPadSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C1DBBEB18E48E5D0047CAFA /* SYNIPadSignupViewController.m */; };
 		4C22750D18F6D471009C5242 /* rightarrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C22750B18F6D471009C5242 /* rightarrow.png */; };
 		4C22750E18F6D471009C5242 /* rightarrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C22750C18F6D471009C5242 /* rightarrow@2x.png */; };
+		4C22752018F6E654009C5242 /* searchbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C22751E18F6E654009C5242 /* searchbar.png */; };
+		4C22752118F6E654009C5242 /* searchbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C22751F18F6E654009C5242 /* searchbar@2x.png */; };
 		4C5C390718EF09E6007250EE /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5C390618EF09E6007250EE /* UIPlaceHolderTextView.m */; };
 		4C5E85F018B620A200D0E937 /* SYNInBoardingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5E85EE18B620A200D0E937 /* SYNInBoardingViewController.m */; };
 		4C5E85FE18B6306A00D0E937 /* SYNOnBoardingOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5E85FC18B6306A00D0E937 /* SYNOnBoardingOverlayViewController.m */; };
@@ -1072,6 +1074,8 @@
 		4C1DBBEB18E48E5D0047CAFA /* SYNIPadSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNIPadSignupViewController.m; sourceTree = "<group>"; };
 		4C22750B18F6D471009C5242 /* rightarrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rightarrow.png; sourceTree = "<group>"; };
 		4C22750C18F6D471009C5242 /* rightarrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rightarrow@2x.png"; sourceTree = "<group>"; };
+		4C22751E18F6E654009C5242 /* searchbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchbar.png; sourceTree = "<group>"; };
+		4C22751F18F6E654009C5242 /* searchbar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchbar@2x.png"; sourceTree = "<group>"; };
 		4C30407718BB6972006B5463 /* SYNCommentUpdateDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYNCommentUpdateDelegate.h; sourceTree = "<group>"; };
 		4C5C390518EF09E6007250EE /* UIPlaceHolderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPlaceHolderTextView.h; sourceTree = "<group>"; };
 		4C5C390618EF09E6007250EE /* UIPlaceHolderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPlaceHolderTextView.m; sourceTree = "<group>"; };
@@ -1989,6 +1993,7 @@
 		019824DE1629CA5900216900 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				4C22750F18F6E12F009C5242 /* Search */,
 				4C22750A18F6D464009C5242 /* Discover */,
 				E91E3B1F18C7292400F79020 /* ButtonVideoDeleteDefault.png */,
 				E91E3B2018C7292400F79020 /* ButtonVideoDeleteDefault@2x.png */,
@@ -2857,6 +2862,15 @@
 				4C22750C18F6D471009C5242 /* rightarrow@2x.png */,
 			);
 			name = Discover;
+			sourceTree = "<group>";
+		};
+		4C22750F18F6E12F009C5242 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				4C22751E18F6E654009C5242 /* searchbar.png */,
+				4C22751F18F6E654009C5242 /* searchbar@2x.png */,
+			);
+			name = Search;
 			sourceTree = "<group>";
 		};
 		4C5C390418EF09C3007250EE /* UIPlaceHolderTextView */ = {
@@ -4005,6 +4019,7 @@
 				BE285DA1172584FF00D995AB /* SYNAddToChannelCreateNewCell.xib in Resources */,
 				E9B9213218C78C94003093B8 /* TabActivityNotiHighlighted.png in Resources */,
 				E9AB7E05188EBC2A0041F58A /* SYNAddToChannelCreateNewCell~iphone.xib in Resources */,
+				4C22752018F6E654009C5242 /* searchbar.png in Resources */,
 				1F458B0617E1C4E6003C14AC /* AppIcon76x76.png in Resources */,
 				1F4E7F85181AC7D300F59007 /* TabSearchHighlighted.png in Resources */,
 				BE285DC01726990F00D995AB /* BarNetwork.png in Resources */,
@@ -4207,6 +4222,7 @@
 				BE53DD801832850400D65793 /* SYNAddToChannelCell~iphone.xib in Resources */,
 				1F4E7FC1181ACBAA00F59007 /* TabProfileHighlighted@2x~iphone.png in Resources */,
 				BE7D0302179D5624008053DC /* SYNFriendsViewController.xib in Resources */,
+				4C22752118F6E654009C5242 /* searchbar@2x.png in Resources */,
 				1F4E7F75181AC7D300F59007 /* TabActivityHighlighted.png in Resources */,
 				BEC39C18184DFF7D00DA8089 /* SYNOnBoardingHeader.xib in Resources */,
 				BEB313011815638700FAF98A /* TabSearch@2x.png in Resources */,

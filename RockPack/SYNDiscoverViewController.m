@@ -89,11 +89,19 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
+
+	
+	
+	self.searchBar.layer.borderWidth = IS_RETINA ? 0.5 : 1.0;
+
     if (IS_IPAD) {
-        self.searchBar.layer.borderWidth = 1.0f;
         self.searchBar.layer.borderColor = [[UIColor dollyMediumGray] CGColor];
-    }
+    } else {
+		self.searchBar.layer.borderColor = [[UIColor colorWithRed: 214.0f / 255.0f
+														   green: 214.0f / 255.0f
+															blue: 214.0f / 255.0f
+														   alpha: 1.0f] CGColor];
+	}
 	
     
     self.autocompleteTableView.hidden = YES;
@@ -161,8 +169,9 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 //						  resizableImageWithCapInsets:UIEdgeInsetsMake(7, 19, 7, 20)]; //[UIImage imageNamed:@"seachbar_statenormal"];
 //	searchBg = [searchBg stretchableImageWithLeftCapWidth:10 topCapHeight:10]; //experiment with values
 
-//	[self.searchBar setSearchFieldBackgroundImage:[UIImage imageNamed:@"search"]forState:UIControlStateNormal];
-
+	[self.searchBar setSearchFieldBackgroundImage:[[UIImage imageNamed:@"Searchbar"]resizableImageWithCapInsets:UIEdgeInsetsMake(0, 16, 0, 16)] forState:UIControlStateNormal];
+	
+	
 	
 //	[self.searchBar setBackgroundImage:[self imageWithColor:[UIColor dollySearchBackground]]];
 	
