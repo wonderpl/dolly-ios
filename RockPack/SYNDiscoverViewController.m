@@ -113,12 +113,12 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 	
 	self.moodBarButton = [[UIBarButtonItem alloc]initWithImage:moodImage style:UIBarButtonItemStyleBordered target:self action:@selector(pushMoodViewController:)];
 	
-
+	
 	
 	UIBarButtonItem *negativeSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
 	
 	[negativeSpace setWidth:-5];
-
+	
 	if (IS_IPHONE) {
 		self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:negativeSpace,self.moodBarButton,nil];
 	}
@@ -257,33 +257,32 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 	
 	BOOL inRecentlyViewed = [self.recentlyViewed containsObject:subGenre];
 	int indexOfRecent = [self.recentlyViewed indexOfObject:subGenre];
-	
-	
 	BOOL editiorsPicks = index ==0;
 	
-	if (!editiorsPicks) {
-		
-		[self addSubGenreToRecents:subGenre];
 	
+	//We never add editors picks to recently viewed
+ 	if (!editiorsPicks) {
+		[self addSubGenreToRecents:subGenre];
 	}
 	
 	if (IS_IPAD && !editiorsPicks) {
 		
 		if (self.recentlyViewed.count <=numberOfRecents) {
 			
-			if (indexPath.section != 1) {
-				
-				if (!inRecentlyViewed) {
-					[self.categoriesCollectionView performBatchUpdates:^{
-						[self insertSubGenreToRecentLyViewed:subGenre];
-					} completion:^(BOOL finished) {
-						[self.categoriesCollectionView reloadData];
-						[self.categoriesCollectionView selectItemAtIndexPath:self.selectedCellIndex animated:NO scrollPosition:UICollectionViewScrollPositionNone];
-					}];
-				} else {
-					
+			if (!inRecentlyViewed) {
+				[self.categoriesCollectionView performBatchUpdates:^{
+					[self insertSubGenreToRecentLyViewed:subGenre];
+				} completion:^(BOOL finished) {
+					[self.categoriesCollectionView reloadData];
+					[self.categoriesCollectionView selectItemAtIndexPath:self.selectedCellIndex animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+				}];
+			} else {
+								
+				// Dont move if item is already at the top
+				if (indexOfRecent != 0) {
 					[self.categoriesCollectionView moveItemAtIndexPath:[NSIndexPath indexPathForRow:indexOfRecent inSection:1] toIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
 				}
+				
 			}
 		} else {
 			if (indexPath.section != 1) {
@@ -381,7 +380,7 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 - (void)addSubGenreToRecents:(Genre*) subgenre {
 	
 	if ([self.recentlyViewed containsObject:subgenre]) {
-		return;
+		[self.recentlyViewed removeObject:subgenre];
 	}
 	
 	[self.recentlyViewed insertObject:subgenre atIndex:0];
