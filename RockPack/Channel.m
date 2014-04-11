@@ -58,12 +58,6 @@
                                                       ignoringObjectTypes: kIgnoreChannelObjects | kIgnoreSubscriptionObjects];
     }
     
-    if (!(ignoringObjects & kIgnoreChannelCover))
-    {
-        copyChannel.channelCover = [ChannelCover instanceFromChannelCover: channel.channelCover
-                                                usingManagedObjectContext: managedObjectContext];
-    }
-    
     if (!(ignoringObjects & kIgnoreVideoInstanceObjects))
     {
         for (VideoInstance *videoInstance in channel.videoInstances)
@@ -289,7 +283,7 @@
     
     NSDictionary *channelCoverDictionary = dictionary[@"cover"];
     
-    if (!(ignoringObjects & kIgnoreChannelCover) && [channelCoverDictionary isKindOfClass: [NSDictionary class]])
+    if ([channelCoverDictionary isKindOfClass: [NSDictionary class]])
     {
         self.channelCover = [ChannelCover instanceFromDictionary: channelCoverDictionary
                                        usingManagedObjectContext: self.managedObjectContext];

@@ -151,11 +151,8 @@ static NSDateFormatter *dateFormatter = nil;
                                    ignoringObjectTypes: ignoringObjects | kIgnoreVideoInstanceObjects];
     }
     
-    // kIgnoreStarringObjects
-    
-    
     NSArray* starrersArray = dictionary[@"starring_users"];
-    if (!(ignoringObjects & kIgnoreStarringObjects) && [starrersArray isKindOfClass:[NSArray class]])
+    if ([starrersArray isKindOfClass:[NSArray class]])
     {
         ChannelOwner* starringChannelOwner;
         for (NSDictionary* starringDictionary in starrersArray)
