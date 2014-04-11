@@ -10,4 +10,7 @@
 
 @interface SYNSocialFollowButton : SYNSocialButton
 
+@property (nonatomic, strong) UIColor *selectedColor;
+@property (nonatomic, strong) UIColor *defaultColor;
+
 @end

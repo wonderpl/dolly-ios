@@ -296,7 +296,7 @@ typedef void (^SearchResultCompleteBlock)(int);
 {	
 	if (IS_IPHONE) {
 		self.containerTabs.hidden = YES;
-		[self.topVideoContraint setConstant:62];
+		[self.topVideoContraint setConstant:66];
 	}
 	Genre *genre = [[SYNGenreManager sharedManager] genreWithId:genreId];
 	[[SYNTrackingManager sharedManager] setCategoryDimension:genre.name];

@@ -291,8 +291,8 @@
 
 // == Social Buttons == //
 
-"follow" = "Follow";
-"unfollow" = "Following";
+"follow" = "follow";
+"unfollow" = "following";
 "add" = "add";
 "like" = "love";
 "share" = "share";

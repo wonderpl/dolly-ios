@@ -9,56 +9,55 @@
 #import "SYNSocialFollowButton.h"
 #import "UIColor+SYNColor.h"
 #import "UIFont+SYNFont.h"
+
+@interface SYNSocialFollowButton ()
+
+@end
+
 @implementation SYNSocialFollowButton
 
--(void)awakeFromNib
-{
+-(void)awakeFromNib {
     [super awakeFromNib];
     
-    [self setTitle:NSLocalizedString(@"follow", nil)];
 }
 
--(void)setSelected:(BOOL)selected
-{
+-(void)setSelected:(BOOL)selected {
     [super setSelected:selected];
     
-    if(selected)
-    {
-        self.layer.borderColor = [[self selectedBorderColor] CGColor];
+    if(selected) {
+        self.layer.borderColor = [self.selectedColor CGColor];
         [self setTitle:NSLocalizedString(@"unfollow", nil)];
-        [self setTitleColor: [self selectedBorderColor]
+        [self setTitleColor: self.selectedColor
                    forState: UIControlStateSelected];
-		
-		self.titleLabel.font = [UIFont lightCustomFontOfSize:11.0f];
+		self.titleLabel.font = self.selectedFont;
         
-        
-    }
-    else
-    {
-        self.layer.borderColor = self.defaultColor.CGColor;
-        
+    } else {
+        self.layer.borderColor = [self.defaultColor CGColor];
         [self setTitle:NSLocalizedString(@"follow", nil)];
-        
-        [self setTitleColor: [UIColor dollyButtonDefaultColor]
+        [self setTitleColor: self.defaultColor
                    forState: UIControlStateNormal];
-		self.titleLabel.font = [UIFont lightCustomFontOfSize:13.0f];
-
+		self.titleLabel.font = self.defaultFont;
     }
 }
 
-- (UIColor *) selectedColor
-{
-    return [UIColor colorWithRed:(188.0f/255.0f)
-                           green:(186.0f/255.0f)
-                            blue:(212.0f/255.0f)
-                           alpha:1.0f];
-}
-- (UIColor *) selectedBorderColor
-{
-    return [UIColor colorWithRed:(146.0f/255.0f)
+- (UIColor*)selectedColor {
+	return [UIColor colorWithRed:(146.0f/255.0f)
                            green:(143.0f/255.0f)
                             blue:(183.0f/255.0f)
                            alpha:1.0f];
 }
+
+- (UIColor*)defaultColor {
+	return [UIColor dollyMoodColor];
+}
+
+- (UIFont*)selectedFont {
+	return [UIFont lightCustomFontOfSize:11.0f];
+}
+
+- (UIFont*)defaultFont {
+	return [UIFont lightCustomFontOfSize:13.0f];
+}
+
 
 @end
