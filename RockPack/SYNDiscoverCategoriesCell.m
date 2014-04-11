@@ -23,7 +23,7 @@
 - (void)awakeFromNib {
 	[super awakeFromNib];
 	
-    self.label.font = [UIFont semiboldCustomFontOfSize: self.label.font.pointSize];\
+    self.label.font = [UIFont semiboldCustomFontOfSize: self.label.font.pointSize];
 	self.rightImage.hidden = YES;
 
 }

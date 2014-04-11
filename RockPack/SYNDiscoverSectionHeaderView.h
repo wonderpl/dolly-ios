@@ -11,4 +11,6 @@
 @interface SYNDiscoverSectionHeaderView : UICollectionReusableView
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 
+- (void)setTitleText : (NSString*) title;
+
 @end

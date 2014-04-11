@@ -38,6 +38,8 @@ static NSString* DiscoverSectionView = @"SYNDiscoverSectionView";
 static NSString* OnBoardingHeaderIndent = @"SYNOnBoardingHeader";
 static const int numberOfRecents = 3;
 
+#define kRecentlyViewed @"Recently Viewed"
+
 typedef enum {
     kSearchTypeGenre = 0,
     kSearchTypeTerm
@@ -519,7 +521,7 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 		}
 		
 		else if (indexPath.section == 1) {
-			supplementaryView.titleLabel.text = @"Recently Viewed";
+			[supplementaryView setTitleText: kRecentlyViewed];
 			
 		} else {
 			
@@ -529,7 +531,7 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 			}
 			Genre *genre = self.genres[index];
 			
-			supplementaryView.titleLabel.text = genre.name;
+			[supplementaryView setTitleText: genre.name];
 			
 		}
 		
