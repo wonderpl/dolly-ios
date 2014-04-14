@@ -14,4 +14,6 @@
 
 @property (nonatomic, strong) VideoInstance *videoInstance;
 
++ (instancetype)loadingViewWithFrame:(CGRect)frame;
+
 @end

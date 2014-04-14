@@ -627,6 +627,7 @@
 		E99AA425188035F100330ABB /* LoginLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E99AA423188035F100330ABB /* LoginLogo@2x.png */; };
 		E99B8D3E1892AD9500E08ABD /* ScrubberBarHD.png in Resources */ = {isa = PBXBuildFile; fileRef = E99B8D3C1892AD9500E08ABD /* ScrubberBarHD.png */; };
 		E99B8D3F1892AD9500E08ABD /* ScrubberBarHD@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E99B8D3D1892AD9500E08ABD /* ScrubberBarHD@2x.png */; };
+		E99F587118FC102700BA2CE4 /* SYNVideoLoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E99F587018FC102700BA2CE4 /* SYNVideoLoadingView.xib */; };
 		E9A465FE187FFA76007511B3 /* SYNTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E9A465FD187FFA76007511B3 /* SYNTabBar.m */; };
 		E9A4E5321864623E00972F09 /* UINavigationBar+Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = E9A4E5311864623E00972F09 /* UINavigationBar+Appearance.m */; };
 		E9A6900B18DC9FBF00603D99 /* SYNOnboardingViewControllerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = E9A6900A18DC9FBF00603D99 /* SYNOnboardingViewControllerSpec.m */; };
@@ -1588,6 +1589,7 @@
 		E99AA423188035F100330ABB /* LoginLogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "LoginLogo@2x.png"; path = "Assets/Images/LoginLogo@2x.png"; sourceTree = "<group>"; };
 		E99B8D3C1892AD9500E08ABD /* ScrubberBarHD.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ScrubberBarHD.png; path = Assets/Images/ScrubberBarHD.png; sourceTree = "<group>"; };
 		E99B8D3D1892AD9500E08ABD /* ScrubberBarHD@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ScrubberBarHD@2x.png"; path = "Assets/Images/ScrubberBarHD@2x.png"; sourceTree = "<group>"; };
+		E99F587018FC102700BA2CE4 /* SYNVideoLoadingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNVideoLoadingView.xib; sourceTree = "<group>"; };
 		E9A465FC187FFA76007511B3 /* SYNTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNTabBar.h; sourceTree = "<group>"; };
 		E9A465FD187FFA76007511B3 /* SYNTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNTabBar.m; sourceTree = "<group>"; };
 		E9A4E5301864623E00972F09 /* UINavigationBar+Appearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+Appearance.h"; sourceTree = "<group>"; };
@@ -2161,6 +2163,7 @@
 				E9921A9718353B33001A4F3B /* SYNScrubberBar.xib */,
 				E91F04501844BDB50009D610 /* SYNVideoLoadingView.h */,
 				E91F04511844BDB50009D610 /* SYNVideoLoadingView.m */,
+				E99F587018FC102700BA2CE4 /* SYNVideoLoadingView.xib */,
 				E93122F918916A43008ADBEB /* SYNTimestampView.h */,
 				E93122FA18916A43008ADBEB /* SYNTimestampView.m */,
 				E93122FC18916A52008ADBEB /* SYNTimestampView.xib */,
@@ -4192,6 +4195,7 @@
 				1F65D49017EB3C8C004326A9 /* Images.xcassets in Resources */,
 				1F4E7F7F181AC7D300F59007 /* TabMoodsSelected.png in Resources */,
 				1F4E7FAD181ACBAA00F59007 /* TabActivity@2x~iphone.png in Resources */,
+				E99F587118FC102700BA2CE4 /* SYNVideoLoadingView.xib in Resources */,
 				4CE8AAD118967E4B00D7E373 /* SYNNotificationsMarkAllAsReadCell.xib in Resources */,
 				38A200AA1731607F00FB9F57 /* IconBirthday@2x~iphone.png in Resources */,
 				38A200AB1731607F00FB9F57 /* IconBirthday~iphone.png in Resources */,

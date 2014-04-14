@@ -131,7 +131,7 @@ static CGFloat const ControlsFadeTimer = 5.0;
 
 - (SYNVideoLoadingView *)loadingView {
 	if (!_loadingView) {
-		SYNVideoLoadingView *loadingView = [[SYNVideoLoadingView alloc] initWithFrame:self.bounds];
+		SYNVideoLoadingView *loadingView = [SYNVideoLoadingView loadingViewWithFrame:self.bounds];
 		loadingView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
 		
 		self.loadingView = loadingView;
