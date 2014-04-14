@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -36,10 +36,11 @@
                     </connections>
                 </collectionView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="cx7-DP-WVU" userLabel="Autosuggest Table View">
-                    <rect key="frame" x="0.0" y="115" width="320" height="453"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <inset key="scrollIndicatorInsets" minX="0.0" minY="115" maxX="0.0" maxY="0.0"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="oXw-KP-4iS"/>
                         <outlet property="delegate" destination="-1" id="9Hd-ZH-Z1L"/>
@@ -67,7 +68,7 @@
                 <constraint firstItem="P85-Oa-9xk" firstAttribute="top" secondItem="1" secondAttribute="top" constant="64" id="0CX-BH-qli"/>
                 <constraint firstItem="P85-Oa-9xk" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="0yH-cv-07G"/>
                 <constraint firstAttribute="bottom" secondItem="cx7-DP-WVU" secondAttribute="bottom" id="9hk-lV-EHy"/>
-                <constraint firstItem="cx7-DP-WVU" firstAttribute="top" secondItem="1" secondAttribute="top" constant="115" id="ITG-Zh-gSb"/>
+                <constraint firstItem="cx7-DP-WVU" firstAttribute="top" secondItem="1" secondAttribute="top" id="ITG-Zh-gSb"/>
                 <constraint firstItem="cx7-DP-WVU" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="KFM-DZ-iae"/>
                 <constraint firstAttribute="bottom" secondItem="fhE-V4-G8V" secondAttribute="bottom" id="QLW-ft-tmr"/>
                 <constraint firstItem="fhE-V4-G8V" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="aqM-hG-3aM"/>
