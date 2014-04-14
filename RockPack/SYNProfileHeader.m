@@ -130,7 +130,7 @@
             [self.descriptionTopConstraint setConstant:202];
         }
     } else if (self.isUserProfile && IS_IPHONE) {
-        [self.coverImageBottom setConstant:158];
+//        [self.coverImageBottom setConstant:158];
     }
     
     if (IS_IPAD && self.isUserProfile) {
