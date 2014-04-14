@@ -42,7 +42,7 @@ NSString *const VideoSourceOoyala = @"ooyala";
                                       withDefault: @"Uninitialized Id"];
     
     Video *instance = [Video insertInManagedObjectContext: managedObjectContext];
-    
+	
     // As we have a new object, we need to set all the attributes (from the dictionary passed in)
     // We have already obtained the uniqueId, so pass it in as an optimisation
     [instance setAttributesFromDictionary: dictionary
@@ -101,6 +101,8 @@ NSString *const VideoSourceOoyala = @"ooyala";
                                   withDefault: @0];
     
     self.starredByUserValue = NO;
+	
+	self.videoDescription = [dictionary objectForKey:@"description" withDefault:@""];
     
     self.thumbnailURL = [dictionary objectForKey: @"thumbnail_url"
                                      withDefault: @""];

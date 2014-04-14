@@ -16,6 +16,7 @@ extern const struct VideoAttributes {
 	__unsafe_unretained NSString *starCount;
 	__unsafe_unretained NSString *starredByUser;
 	__unsafe_unretained NSString *thumbnailURL;
+	__unsafe_unretained NSString *videoDescription;
 	__unsafe_unretained NSString *viewCount;
 	__unsafe_unretained NSString *viewedByUser;
 } VideoAttributes;
@@ -28,6 +29,7 @@ extern const struct VideoFetchedProperties {
 } VideoFetchedProperties;
 
 @class VideoInstance;
+
 
 
 
@@ -178,6 +180,16 @@ extern const struct VideoFetchedProperties {
 
 
 
+@property (nonatomic, strong) NSString* videoDescription;
+
+
+
+//- (BOOL)validateVideoDescription:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
 @property (nonatomic, strong) NSNumber* viewCount;
 
 
@@ -299,6 +311,12 @@ extern const struct VideoFetchedProperties {
 
 - (NSString*)primitiveThumbnailURL;
 - (void)setPrimitiveThumbnailURL:(NSString*)value;
+
+
+
+
+- (NSString*)primitiveVideoDescription;
+- (void)setPrimitiveVideoDescription:(NSString*)value;
 
 
 
