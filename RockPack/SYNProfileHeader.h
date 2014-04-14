@@ -25,8 +25,9 @@
 @property (strong, nonatomic) IBOutlet UISegmentedControl *segmentedController;
 
 
--(void) setCoverphotoImage: (NSString*) thumbnailURL;
--(void) setProfileImage : (NSString*) thumbnailURL;
--(void) setDescriptionText : (NSString*) text; 
+- (void)setCoverphotoImage: (NSString*) thumbnailURL;
+- (void)setProfileImage : (NSString*) thumbnailURL;
+- (void)setDescriptionText : (NSString*) text;
+- (void)setSegmentedControllerText;
 
 @end

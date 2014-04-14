@@ -59,7 +59,6 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     
     //    [self setUpSearchBar];
     self.filteredSubscriptions = [self.channelOwner.subscriptions array];
-    [self.cv reloadData];
     
     if (self.isUserProfile && IS_IPHONE) {
         
@@ -76,10 +75,12 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
         self.searchBar.layer.borderWidth = IS_RETINA ? 0.5f: 1.0f;
         self.searchBar.layer.borderColor = [[UIColor dollyMediumGray] CGColor];
         
+		
+		self.defaultLayout.sectionInset = UIEdgeInsetsMake(self.searchBar.frame.size.height, 0, 70, 0);
+		[self.cv setCollectionViewLayout:self.defaultLayout];
         [self.cv addSubview:self.searchBar];
 		
     }
-	
 	
     
     self.fakeNavigationBarTitle.font = [UIFont regularCustomFontOfSize:20];
@@ -116,6 +117,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     [super scrollViewDidScroll:scrollView];
     [self coverPhotoAnimation];
 	[self moveNameLabelWithOffset:scrollView.contentOffset.y];
+
 }
 
 
@@ -216,6 +218,8 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
         self.headerView.channelOwner = self.channelOwner;
         self.headerView.isUserProfile = self.isUserProfile;
         self.headerView.delegate = (SYNProfileViewController*)self.parentViewController;
+
+		supplementaryView = self.headerView;
     }
     
     if (kind == UICollectionElementKindSectionFooter) {
@@ -356,6 +360,10 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 
 #pragma mark - SYNPagingModelDelegate
 - (void)pagingModelDataUpdated:(SYNPagingModel *)pagingModel {
+	
+	self.headerView.channelOwner.subscriptionCountValue = self.model.totalItemCount;
+	[self.headerView setSegmentedControllerText];
+
     [self.cv reloadData];
     [self.headerView.segmentedController setSelectedSegmentIndex:1];
 }

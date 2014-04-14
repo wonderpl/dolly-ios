@@ -48,11 +48,8 @@
     self.userNameLabel.text = [NSString stringWithFormat:@"@%@", channelOwner.username];
     self.fullNameLabel.text = channelOwner.displayName;
     
-    [self.segmentedController setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Collections", nil), channelOwner.totalVideosValueChannelValue] forSegmentAtIndex:0];
-
-    
-    [self.segmentedController setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Following", nil), channelOwner.subscriptionCountValue] forSegmentAtIndex:1];
-
+	[self setSegmentedControllerText];
+	
     [self.segmentedController layoutIfNeeded];
 
     self.aboutMeTextView.text = channelOwner.channelOwnerDescription;
@@ -61,6 +58,18 @@
     [self setFollowersCountLabel];
 }
 
+
+- (void)setSegmentedControllerText {
+	[self.segmentedController setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Collections", nil), self.channelOwner.totalVideosValueChannelValue] forSegmentAtIndex:0];
+	
+    
+    [self.segmentedController setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Following", nil), self.channelOwner.subscriptionCountValue] forSegmentAtIndex:1];
+
+	
+	NSLog(@"chan total%lld", self.channelOwner.totalVideosValueChannelValue);
+	NSLog(@"sub total%lld", self.channelOwner.subscriptionCountValue);
+
+}
 
 -(void) setProfileImage : (NSString*) thumbnailURL
 {

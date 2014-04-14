@@ -658,6 +658,9 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
                                                  
                                              } completion:^(BOOL finished) {
                                                  [cell.channel.managedObjectContext deleteObject:cell.channel];
+												 
+												 weakSelf.headerView.channelOwner.totalVideosValueChannelValue--;
+												 [weakSelf.headerView setSegmentedControllerText];
                                                  
                                              }];
                                          } errorHandler: ^(id error) {
@@ -727,8 +730,12 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 
 
 - (void)pagingModelDataUpdated:(SYNPagingModel *)pagingModel {
-    [self.cv reloadData];
-    [self.headerView.segmentedController setSelectedSegmentIndex:0];
+
+	self.headerView.channelOwner.totalVideosValueChannelValue = self.model.totalItemCount;
+	[self.headerView setSegmentedControllerText];
+
+	[self.cv reloadData];
+	[self.headerView.segmentedController setSelectedSegmentIndex:0];
 
 }
 
