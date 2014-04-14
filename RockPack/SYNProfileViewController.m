@@ -49,7 +49,6 @@ static const CGFloat TransitionDuration = 0.5f;
 	SYNProfileViewController *profileVC = ((SYNProfileViewController*)navigationController.topViewController);
 	profileVC.channelOwner = channelOwner;
 	
-	
 	return navigationController;
 }
 
@@ -71,7 +70,6 @@ static const CGFloat TransitionDuration = 0.5f;
 	[self.subscriptionCollectionViewController coverPhotoAnimation];
     [self.channelCollectionViewController coverPhotoAnimation];
 	
-	
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -84,15 +82,21 @@ static const CGFloat TransitionDuration = 0.5f;
 		[[SYNTrackingManager sharedManager] trackOtherUserProfileScreenView];
 	}
 }
+
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 	[self.navigationController.navigationBar setBackgroundTransparent:YES];
 	
     [self.navigationBar setBarTintColor:[UIColor whiteColor]];
 	self.navigationBar.hidden = YES;
-//	self.navigationItem.title = self.channelOwner.username;
-	
 	[self updateProfileData];
+	
+	self.navigationItem.title = @"";
+}
+
+- (void) viewWillDisappear:(BOOL)animated {
+	self.navigationBar.hidden = NO;
+	[self.navigationController.navigationBar setBackgroundTransparent:NO];
 
 }
 
