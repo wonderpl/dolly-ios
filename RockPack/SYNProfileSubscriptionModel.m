@@ -46,7 +46,6 @@
     MKNKUserSuccessBlock successBlock = ^(NSDictionary *dictionary) {
         __strong typeof(self) sself = wself;
 
-        NSError *error = nil;
         
 		BOOL isInitalPage = (range.location == 0);
 		if (isInitalPage) {
@@ -55,12 +54,10 @@
 			[sself.channelOwner addSubscriptionsFromDictionary: dictionary];
 		}
 		
-        [wself.channelOwner.managedObjectContext save: &error];
-
-        sself.loadedItems = [sself.channelOwner.subscriptionsSet array];
 		sself.totalItemCount = [dictionary[@"channels"][@"total"] intValue];
-        
 
+		NSMutableArray *arr = [NSMutableArray arrayWithArray:[sself.channelOwner.subscriptionsSet array]];
+		sself.loadedItems = arr;
         [sself handleDataUpdatedForRange:range];
     };
     

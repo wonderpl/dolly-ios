@@ -52,9 +52,10 @@
 		} else {
 			[sself.channelOwner addChannelsFromDictionary: dictionary];
 		}
+		
+		sself.totalItemCount = [dictionary[@"channels"][@"total"] intValue];		
 				
 		sself.loadedItems = [sself.channelOwner.channelsSet array];
-		sself.totalItemCount = sself.channelOwner.totalVideosValueChannelValue;
         
         [sself handleDataUpdatedForRange:range];
 
