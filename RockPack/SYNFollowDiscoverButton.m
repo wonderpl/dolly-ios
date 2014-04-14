@@ -16,9 +16,7 @@
 -(void)awakeFromNib
 {
     [super awakeFromNib];
-    
-	self.backgroundColor = [UIColor clearColor];
-	
+	self.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.45];
 }
 
 - (UIColor*) selectedColor {
@@ -27,6 +25,18 @@
 
 - (UIColor*) defaultColor {
 	return [UIColor whiteColor];
+}
+
+- (UIFont*)selectedFont {
+	return [UIFont regularCustomFontOfSize:14.0f];
+}
+
+- (UIFont*)defaultFont {
+	return [UIFont regularCustomFontOfSize:14.0f];
+}
+
+- (UIColor*) borderColor {
+	return [UIColor colorWithWhite:1.0 alpha:0.7];
 }
 
 

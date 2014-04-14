@@ -12,5 +12,6 @@
 
 @property (nonatomic, strong) UIColor *selectedColor;
 @property (nonatomic, strong) UIColor *defaultColor;
+@property (nonatomic, strong) UIColor *borderColor;
 
 @end

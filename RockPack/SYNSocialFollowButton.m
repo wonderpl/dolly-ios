@@ -18,21 +18,21 @@
 
 -(void)awakeFromNib {
     [super awakeFromNib];
-    
+    self.layer.borderWidth = 1.0f;
 }
 
 -(void)setSelected:(BOOL)selected {
     [super setSelected:selected];
     
     if(selected) {
-        self.layer.borderColor = [self.selectedColor CGColor];
+        self.layer.borderColor = [self.borderColor CGColor];
         [self setTitle:NSLocalizedString(@"unfollow", nil)];
         [self setTitleColor: self.selectedColor
                    forState: UIControlStateSelected];
 		self.titleLabel.font = self.selectedFont;
         
     } else {
-        self.layer.borderColor = [self.defaultColor CGColor];
+        self.layer.borderColor = [self.borderColor CGColor];
         [self setTitle:NSLocalizedString(@"follow", nil)];
         [self setTitleColor: self.defaultColor
                    forState: UIControlStateNormal];
@@ -49,6 +49,13 @@
 
 - (UIColor*)defaultColor {
 	return [UIColor dollyMoodColor];
+}
+
+- (UIColor*) borderColor {
+	return [UIColor colorWithRed:(146.0f/255.0f)
+                           green:(143.0f/255.0f)
+                            blue:(183.0f/255.0f)
+                           alpha:1.0f];
 }
 
 - (UIFont*)selectedFont {
