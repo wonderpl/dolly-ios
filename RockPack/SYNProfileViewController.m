@@ -489,9 +489,6 @@ static const CGFloat TransitionDuration = 0.5f;
 
 - (void) updateProfileData {
     
-
-    NSLog(@"isChannelsCollectionViewShowing : %hhd", self.isChannelsCollectionViewShowing);
-	
     if (self.isChannelsCollectionViewShowing) {
 		[appDelegate.oAuthNetworkEngine userDataForUser: ((User *) self.channelOwner)
 										   onCompletion: ^(id dictionary) {

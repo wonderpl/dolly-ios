@@ -455,6 +455,8 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 
 - (void)saveCreateChannelTapped {
     
+	__weak SYNProfileChannelViewController *weakSelf = self;
+	
     [appDelegate.oAuthNetworkEngine createChannelForUserId: appDelegate.currentOAuth2Credentials.userId
                                                      title: self.createChannelCell.createTextField.text
                                                description: self.createChannelCell.descriptionTextView.text
@@ -470,6 +472,9 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
                                              [self cancelCreateChannelWithBlock:^{
                                                  
                                                  [self createNewCollection];
+
+												 weakSelf.headerView.channelOwner.totalVideosValueChannelValue--;
+												 [weakSelf.headerView setSegmentedControllerText];
 
                                              }];
                                              
