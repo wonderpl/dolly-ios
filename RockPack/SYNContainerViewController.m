@@ -58,26 +58,7 @@
     
     // == Profile Page == //
 
-    SYNProfileRootViewController *profileViewController = [[SYNProfileRootViewController alloc] initWithViewId: kProfileViewId];
-    profileViewController.navigationItem.backBarButtonItem = backButton;
-    UINavigationController *navProfileViewController = [[UINavigationController alloc] initWithRootViewController: profileViewController];
-    
-	
-	
-	NSString *storyBoardName = IS_IPHONE ? @"Profile_IPhone" : @"Profile_IPad";
-	
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyBoardName bundle:nil];
-        
-        navProfileViewController = [storyboard instantiateInitialViewController];
-
-        ((SYNProfileViewController*)navProfileViewController.viewControllers.firstObject).channelOwner = self.appDelegate.currentUser;
-
-    if (IS_IPHONE)
-    {
-        profileViewController.hideUserProfile = YES;
-    }
-    
-    profileViewController.channelOwner = self.appDelegate.currentUser;
+    UINavigationController *navProfileViewController = [SYNProfileViewController navigationControllerWithChannelOwner:self.appDelegate.currentUser];
     
     // == Activity Page == //
     
@@ -105,7 +86,6 @@
     
     // == Set the first vc
     self.currentViewController = self.viewControllers[0];
-        
 }
 
 
