@@ -63,11 +63,7 @@
 	[self.segmentedController setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Collections", nil), self.channelOwner.totalVideosValueChannelValue] forSegmentAtIndex:0];
 	
     
-    [self.segmentedController setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Following", nil), self.channelOwner.subscriptionCountValue] forSegmentAtIndex:1];
-
-	
-	NSLog(@"chan total%lld", self.channelOwner.totalVideosValueChannelValue);
-	NSLog(@"sub total%lld", self.channelOwner.subscriptionCountValue);
+    [self.segmentedController setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Following", nil), self.channelOwner.subscriptionCountValue] forSegmentAtIndex:1];	
 
 }
 
