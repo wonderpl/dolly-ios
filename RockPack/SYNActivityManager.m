@@ -207,8 +207,6 @@
                                                      
                                                      [self.userSubscriptons removeObject:channelOwner.uniqueId];
                                                      channelOwner.subscribedByUserValue = NO;
-													 
-													 [self subscribedList];
 
                                                      completionBlock(responseDictionary);
                                                  }
