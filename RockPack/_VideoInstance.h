@@ -8,6 +8,7 @@ extern const struct VideoInstanceAttributes {
 	__unsafe_unretained NSString *commentCount;
 	__unsafe_unretained NSString *dateAdded;
 	__unsafe_unretained NSString *dateOfDayAdded;
+	__unsafe_unretained NSString *label;
 	__unsafe_unretained NSString *position;
 	__unsafe_unretained NSString *title;
 } VideoInstanceAttributes;
@@ -24,6 +25,7 @@ extern const struct VideoInstanceFetchedProperties {
 @class Channel;
 @class ChannelOwner;
 @class Video;
+
 
 
 
@@ -73,6 +75,16 @@ extern const struct VideoInstanceFetchedProperties {
 
 
 //- (BOOL)validateDateOfDayAdded:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
+@property (nonatomic, strong) NSString* label;
+
+
+
+//- (BOOL)validateLabel:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -155,6 +167,12 @@ extern const struct VideoInstanceFetchedProperties {
 
 - (NSDate*)primitiveDateOfDayAdded;
 - (void)setPrimitiveDateOfDayAdded:(NSDate*)value;
+
+
+
+
+- (NSString*)primitiveLabel;
+- (void)setPrimitiveLabel:(NSString*)value;
 
 
 

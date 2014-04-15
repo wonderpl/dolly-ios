@@ -7,6 +7,7 @@ const struct VideoInstanceAttributes VideoInstanceAttributes = {
 	.commentCount = @"commentCount",
 	.dateAdded = @"dateAdded",
 	.dateOfDayAdded = @"dateOfDayAdded",
+	.label = @"label",
 	.position = @"position",
 	.title = @"title",
 };
@@ -97,6 +98,13 @@ const struct VideoInstanceFetchedProperties VideoInstanceFetchedProperties = {
 
 
 @dynamic dateOfDayAdded;
+
+
+
+
+
+
+@dynamic label;
 
 
 

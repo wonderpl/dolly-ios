@@ -107,6 +107,8 @@ static NSDateFormatter *dateFormatter = nil;
     
     self.dateAdded = [dictionary dateFromISO6801StringForKey: @"date_added"
                                                  withDefault: [NSDate date]];
+	
+	self.label = [dictionary objectForKey:@"label" withDefault:@""];
     
     NSString *dateAdded = [dictionary objectForKey: @"source_date_uploaded"];
     
