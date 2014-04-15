@@ -155,14 +155,14 @@
 
 #pragma mark - Getters / Setters
 
-- (void)setSelectedIndex:(NSInteger)selectedIndex {
-	_selectedIndex = selectedIndex;
-	
-	self.videoInstance = [self.model itemAtIndex:selectedIndex];
-	
-	NSIndexPath *selectedIndexPath = [NSIndexPath indexPathForRow:selectedIndex inSection:0];
-	[self.thumbnailCollectionView selectItemAtIndexPath:selectedIndexPath animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
-}
+//- (void)setSelectedIndex:(NSInteger)selectedIndex {
+//	_selectedIndex = selectedIndex;
+//	
+//	self.videoInstance = [self.model itemAtIndex:selectedIndex];
+//	
+//	NSIndexPath *selectedIndexPath = [NSIndexPath indexPathForRow:selectedIndex inSection:0];
+//	[self.thumbnailCollectionView selectItemAtIndexPath:selectedIndexPath animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
+//}
 
 #pragma mark - UICollectionViewDataSource
 
@@ -277,42 +277,42 @@ referenceSizeForFooterInSection:(NSInteger)section {
 
 #pragma mark - IBActions
 
-- (IBAction)followButtonPressed:(UIBarButtonItem *)barButton {
-	barButton.enabled = NO;
-	
-	[[SYNTrackingManager sharedManager] trackCollectionFollowFromScreenName:[self trackingScreenName]];
-	
-	Channel *channel = self.videoInstance.channel;
-	channel.subscribedByUserValue = [[SYNActivityManager sharedInstance] isSubscribedToChannelId:channel.uniqueId];
-	if (channel.subscribedByUserValue) {
-        [[SYNActivityManager sharedInstance] unsubscribeToChannel: channel
-												completionHandler:^(NSDictionary *responseDictionary) {
-													barButton.title = NSLocalizedString(@"follow", @"Follow button in video overlay");
-													barButton.enabled = YES;
-                                                    [[NSNotificationCenter defaultCenter] postNotificationName:kReloadFeed object:self userInfo:nil];
-
-												} errorHandler: ^(NSDictionary *errorDictionary) {
-													barButton.enabled = YES;
-												}];
-	} else {
-        [[SYNActivityManager sharedInstance] subscribeToChannel: channel
-											  completionHandler: ^(NSDictionary *responseDictionary) {
-												  [[SYNTrackingManager sharedManager] trackCollectionFollowCompleted];
-												  
-												  barButton.title = NSLocalizedString(@"unfollow", @"unfollow button in video overlay");
-												  barButton.enabled = YES;
-                                                  [[NSNotificationCenter defaultCenter] postNotificationName:kReloadFeed object:self userInfo:nil];
-
-											  } errorHandler: ^(NSDictionary *errorDictionary) {
-												  barButton.enabled = YES;
-											  }];
-	}
-}
+//- (IBAction)followButtonPressed:(UIBarButtonItem *)barButton {
+//	barButton.enabled = NO;
+//	
+//	[[SYNTrackingManager sharedManager] trackCollectionFollowFromScreenName:[self trackingScreenName]];
+//	
+//	Channel *channel = self.videoInstance.channel;
+//	channel.subscribedByUserValue = [[SYNActivityManager sharedInstance] isSubscribedToChannelId:channel.uniqueId];
+//	if (channel.subscribedByUserValue) {
+//        [[SYNActivityManager sharedInstance] unsubscribeToChannel: channel
+//												completionHandler:^(NSDictionary *responseDictionary) {
+//													barButton.title = NSLocalizedString(@"follow", @"Follow button in video overlay");
+//													barButton.enabled = YES;
+//                                                    [[NSNotificationCenter defaultCenter] postNotificationName:kReloadFeed object:self userInfo:nil];
+//
+//												} errorHandler: ^(NSDictionary *errorDictionary) {
+//													barButton.enabled = YES;
+//												}];
+//	} else {
+//        [[SYNActivityManager sharedInstance] subscribeToChannel: channel
+//											  completionHandler: ^(NSDictionary *responseDictionary) {
+//												  [[SYNTrackingManager sharedManager] trackCollectionFollowCompleted];
+//												  
+//												  barButton.title = NSLocalizedString(@"unfollow", @"unfollow button in video overlay");
+//												  barButton.enabled = YES;
+//                                                  [[NSNotificationCenter defaultCenter] postNotificationName:kReloadFeed object:self userInfo:nil];
+//
+//											  } errorHandler: ^(NSDictionary *errorDictionary) {
+//												  barButton.enabled = YES;
+//											  }];
+//	}
+//}
 
 #pragma mark - Private
 
 - (void)updateVideoInstanceDetails:(VideoInstance *)videoInstance {
-	[super updateVideoInstanceDetails:videoInstance];
+//	[super updateVideoInstanceDetails:videoInstance];
 	
 	if (self.previousVideoPlayer) {
 		[self.previousVideoPlayer removeFromSuperview];

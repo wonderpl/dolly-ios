@@ -36,6 +36,8 @@
 
 + (UIColor *) dollySearchBarColor;
 
++ (UIColor *)dollyButtonGreenColor;
+
 + (UIColor *) facebookColor;
 + (UIColor *) lighterColorForColor:(UIColor *)c;
 + (UIColor *) darkerColorForColor:(UIColor *)c;

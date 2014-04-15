@@ -48,7 +48,7 @@
 	
 	UINavigationController *navigationController = [storyboard instantiateInitialViewController];
 	SYNSearchVideoPlayerViewController *viewController = (SYNSearchVideoPlayerViewController *)navigationController.topViewController;
-	viewController.videoInstance = videoInstance;
+//	viewController.videoInstance = videoInstance;
 	return navigationController;
 }
 
@@ -243,9 +243,9 @@ referenceSizeForFooterInSection:(NSInteger)section {
 
 #pragma mark - SYNChannelMidCellDelegate
 
-- (void)followButtonTapped:(SYNChannelMidCell *)cell {
-	[self followButtonPressed:cell.followButton withChannel:self.videoInstance.channel];
-}
+//- (void)followButtonTapped:(SYNChannelMidCell *)cell {
+//	[self followButtonPressed:cell.followButton withChannel:self.videoInstance.channel];
+//}
 
 - (void)deleteChannelTapped:(SYNChannelMidCell *)cell {
 	// We don't support delete on the cell
@@ -253,25 +253,25 @@ referenceSizeForFooterInSection:(NSInteger)section {
 
 #pragma mark - Getters / Setters
 
-- (SYNPagingModel *)channelsModel {
-	if (!_channelsModel) {
-		SYNPagingModel *model = [SYNSearchVideoChannelsModel modelWithVideoId:self.videoInstance.video.uniqueId];
-		model.delegate = self;
-		
-		_channelsModel = model;
-	}
-	return _channelsModel;
-}
-
-- (SYNPagingModel *)likesModel {
-	if (!_likesModel) {
-		SYNPagingModel *model = [SYNSearchVideoLikesModel modelWithVideoId:self.videoInstance.video.uniqueId];
-		model.delegate = self;
-		
-		_likesModel = model;
-	}
-	return _likesModel;
-}
+//- (SYNPagingModel *)channelsModel {
+//	if (!_channelsModel) {
+//		SYNPagingModel *model = [SYNSearchVideoChannelsModel modelWithVideoId:self.videoInstance.video.uniqueId];
+//		model.delegate = self;
+//		
+//		_channelsModel = model;
+//	}
+//	return _channelsModel;
+//}
+//
+//- (SYNPagingModel *)likesModel {
+//	if (!_likesModel) {
+//		SYNPagingModel *model = [SYNSearchVideoLikesModel modelWithVideoId:self.videoInstance.video.uniqueId];
+//		model.delegate = self;
+//		
+//		_likesModel = model;
+//	}
+//	return _likesModel;
+//}
 
 #pragma mark - IBActions
 

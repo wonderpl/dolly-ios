@@ -16,8 +16,6 @@
 
 + (UIViewController *)viewControllerWithModel:(SYNPagingModel *)model selectedIndex:(NSInteger)selectedIndex;
 
-@property (nonatomic, strong) VideoInstance *videoInstance;
-
 @property (nonatomic, assign, readonly) NSInteger selectedIndex;
 
 @property (nonatomic, strong, readonly) UIView *videoPlayerContainerView;

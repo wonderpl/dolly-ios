@@ -163,6 +163,9 @@ return [UIColor colorWithRed: 136.0f / 255.0f
 	return RGB(61, 90, 151);
 }
 
++ (UIColor *)dollyButtonGreenColor {
+	return RGB(81, 179, 100);
+}
 
 + (UIColor *) dollySearchBarColor
 {

@@ -32,6 +32,7 @@
 #import "UIDevice+Helpers.h"
 #import "SYNPagingModel.h"
 #import "SYNVideoPlayerCell.h"
+#import "SYNVideoInfoViewController.h"
 @import AVFoundation;
 @import MediaPlayer;
 
@@ -58,6 +59,10 @@
 @property (nonatomic, strong) IBOutlet UIView *videoPlayerContainerView;
 
 @property (nonatomic, strong) IBOutlet UICollectionView *videosCollectionView;
+
+@property (nonatomic, strong) SYNVideoInfoViewController *videoInfoViewController;
+
+@property (nonatomic, strong) VideoInstance *videoInstance;
 
 @end
 
@@ -91,26 +96,25 @@
 	
 	self.videoTitleLabel.font = [UIFont boldCustomFontOfSize:self.videoTitleLabel.font.pointSize];
 	
-	self.linkButton.backgroundColor = [UIColor colorWithWhite:241/255.0 alpha:1.0];
-	self.linkButton.layer.borderColor = [[UIColor colorWithWhite:212/255.0 alpha:1.0] CGColor];
-	self.linkButton.layer.borderWidth = 1.0;
-	self.linkButton.layer.cornerRadius = CGRectGetHeight(self.linkButton.frame) / 2.0;
-	
-	self.linkButton.titleLabel.font = [UIFont lightCustomFontOfSize:self.linkButton.titleLabel.font.pointSize];
-    
-    [self.commentButton setTitle:@"0" forState:UIControlStateNormal];
-	
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(activeWirelessRouteChanged:)
 												 name:MPVolumeViewWirelessRouteActiveDidChangeNotification
 											   object:nil];
 }
 
+- (NSUInteger)supportedInterfaceOrientations {
+	return UIInterfaceOrientationMaskPortrait;
+}
+
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	
-	[self.navigationController.navigationBar setBackgroundTransparent:YES];
-	
+	if ([self isBeingPresented]) {
+		NSIndexPath *indexPath = [NSIndexPath indexPathForItem:self.selectedIndex inSection:0];
+		[self.videosCollectionView scrollToItemAtIndexPath:indexPath
+										  atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
+												  animated:NO];
+	}
 	[self updateVideoInstanceDetails:self.videoInstance];
 	
 	if (self.currentVideoPlayer) {
@@ -121,19 +125,15 @@
 	[audioSession setActive:YES withOptions:0 error:nil];
 }
 
-- (NSUInteger)supportedInterfaceOrientations {
-	return UIInterfaceOrientationMaskPortrait;
-}
-
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	
-	Genre *genre = [[SYNGenreManager sharedManager] genreWithId:self.videoInstance.channel.categoryId];
-	[[SYNTrackingManager sharedManager] setCategoryDimension:genre.name];
 	
 	if ([self isBeingPresented]) {
 		[self playCurrentVideo];
 	}
+	
+	Genre *genre = [[SYNGenreManager sharedManager] genreWithId:self.videoInstance.channel.categoryId];
+	[[SYNTrackingManager sharedManager] setCategoryDimension:genre.name];
 	
 	if (IS_IPHONE) {
 		UIDevice *device = [UIDevice currentDevice];
@@ -153,13 +153,9 @@
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
 	
-	if (IS_IPHONE && ![self.navigationController isBeingDismissed]) {
-		[self.navigationController.navigationBar setBackgroundTransparent:NO];
-	}
-	
 	// If viewWillDisappear is being triggered from viewDidAppear then the isBeingDismissed flag is YES for some reason.
 	// This is to check for this case and work around the issue
-	BOOL isActuallyBeingDismissed = (![self.navigationController isBeingPresented] && [self.navigationController isBeingDismissed]);
+	BOOL isActuallyBeingDismissed = (![self isBeingPresented] && [self isBeingDismissed]);
 	if (isActuallyBeingDismissed) {
 		[self trackViewingStatisticsForCurrentVideo];
 		
@@ -184,6 +180,16 @@
 	return UIStatusBarStyleDefault;
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+	if ([segue.identifier isEqualToString:@"VideoInfo"]) {
+		SYNVideoInfoViewController *viewController = segue.destinationViewController;
+		viewController.model = self.model;
+		viewController.selectedIndex = self.selectedIndex;
+		
+		self.videoInfoViewController = viewController;
+	}
+}
+
 #pragma mark - Getters / Setters
 
 - (void)setVideoInstance:(VideoInstance *)videoInstance {
@@ -196,7 +202,7 @@
     }
 
 	_videoInstance = videoInstance;
-    
+	
 	if ([self isViewLoaded]) {
 		[self updateVideoInstanceDetails:videoInstance];
 		
@@ -206,8 +212,9 @@
 
 - (void)setSelectedIndex:(NSInteger)selectedIndex {
 	_selectedIndex = selectedIndex;
-		
+	
 	self.videoInstance = [self.model itemAtIndex:selectedIndex];
+	self.videoInfoViewController.selectedIndex = selectedIndex;
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -396,8 +403,8 @@
 	SYNVideoPlayerCell *cell = (SYNVideoPlayerCell *)[self.videosCollectionView cellForItemAtIndexPath:indexPath];
 	
 	SYNVideoPlayer *videoPlayer = cell.videoPlayer;
-	
 	[videoPlayer play];
+	
 	self.currentVideoPlayer = videoPlayer;
 }
 
@@ -415,18 +422,13 @@
 - (void)updateVideoInstanceDetails:(VideoInstance *)videoInstance {
 	[self.videoTitleLabel setText:videoInstance.title animated:YES];
 	
-	[self.linkButton setTitle:videoInstance.video.linkTitle forState:UIControlStateNormal];
-	[UIView animateWithDuration:0.3 animations:^{
-		self.linkButton.alpha = (videoInstance.video.hasLink ? 1.0 : 0.0);
-	}];
-    
-	self.likeButton.dataItemLinked = videoInstance;
-	self.addButton.dataItemLinked = videoInstance;
-	
-	self.likeButton.selected = videoInstance.starredByUserValue;
-	[self.likeButton setTitle:NSLocalizedString(@"like", nil) andCount:[videoInstance.video.starCount integerValue]];
-    
-    [self.commentButton setTitle:[NSString stringWithFormat:@"%d", videoInstance.commentCountValue] forState:UIControlStateNormal];
+//	self.likeButton.dataItemLinked = videoInstance;
+//	self.addButton.dataItemLinked = videoInstance;
+//	
+//	self.likeButton.selected = videoInstance.starredByUserValue;
+//	[self.likeButton setTitle:NSLocalizedString(@"like", nil) andCount:[videoInstance.video.starCount integerValue]];
+//    
+//    [self.commentButton setTitle:[NSString stringWithFormat:@"%d", videoInstance.commentCountValue] forState:UIControlStateNormal];
 }
 
 - (BOOL)handleRotationToOrientation:(UIDeviceOrientation)orientation {
