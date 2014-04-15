@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -56,14 +56,6 @@
                     <rect key="frame" x="137" y="397" width="398" height="284"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rAj-tb-ncC" userLabel="Button - Upload Avatar" customClass="SYNAvatarButton">
-                            <rect key="frame" x="151" y="67" width="96" height="96"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <connections>
-                                <action selector="avatarButtonTapped:" destination="CwX-kR-DQ1" eventType="touchUpInside" id="7Fn-sG-MEI"/>
-                            </connections>
-                        </button>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="User name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cha-pJ-bzu" userLabel="Label - User name">
                             <rect key="frame" x="91" y="189" width="216" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -118,6 +110,21 @@
                                 <action selector="segmentedControllerTapped:" destination="CwX-kR-DQ1" eventType="valueChanged" id="Zwe-Af-r3m"/>
                             </connections>
                         </segmentedControl>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ote-bm-uEO">
+                            <rect key="frame" x="151" y="67" width="96" height="96"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rAj-tb-ncC" userLabel="Button - Upload Avatar" customClass="SYNAvatarButton">
+                                    <rect key="frame" x="2" y="2" width="92" height="92"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <connections>
+                                        <action selector="avatarButtonTapped:" destination="CwX-kR-DQ1" eventType="touchUpInside" id="7Fn-sG-MEI"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        </view>
                     </subviews>
                     <constraints>
                         <constraint firstAttribute="height" constant="284" id="SgW-WW-Jk1"/>
@@ -145,6 +152,7 @@
             </constraints>
             <connections>
                 <outlet property="aboutMeTextView" destination="ZGW-qb-DqS" id="ENw-9J-aob"/>
+                <outlet property="avatarBorder" destination="Ote-bm-uEO" id="02n-Om-PrS"/>
                 <outlet property="avatarButton" destination="rAj-tb-ncC" id="Y17-6L-ans"/>
                 <outlet property="coverImage" destination="9PC-4a-87q" id="ZcF-Lp-plG"/>
                 <outlet property="coverImageTop" destination="S7f-yg-ibX" id="vhO-AO-upr"/>
