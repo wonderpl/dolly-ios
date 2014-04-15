@@ -36,7 +36,7 @@
 @import AVFoundation;
 @import MediaPlayer;
 
-@interface SYNVideoPlayerViewController () <UIViewControllerTransitioningDelegate, UIPopoverControllerDelegate, UIScrollViewDelegate, SYNVideoPlayerDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@interface SYNVideoPlayerViewController () <UIViewControllerTransitioningDelegate, UIPopoverControllerDelegate, UIScrollViewDelegate, SYNVideoPlayerDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SYNVideoInfoViewControllerDelegate>
 
 @property (nonatomic, strong) IBOutlet UILabel *videoTitleLabel;
 @property (nonatomic, strong) IBOutlet UIButton *commentButton;
@@ -185,6 +185,7 @@
 		SYNVideoInfoViewController *viewController = segue.destinationViewController;
 		viewController.model = self.model;
 		viewController.selectedIndex = self.selectedIndex;
+		viewController.delegate = self;
 		
 		self.videoInfoViewController = viewController;
 	}
@@ -213,7 +214,13 @@
 - (void)setSelectedIndex:(NSInteger)selectedIndex {
 	_selectedIndex = selectedIndex;
 	
+	NSIndexPath *indexPath = [NSIndexPath indexPathForItem:self.selectedIndex inSection:0];
+	[self.videosCollectionView scrollToItemAtIndexPath:indexPath
+									  atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
+											  animated:YES];
+	
 	self.videoInstance = [self.model itemAtIndex:selectedIndex];
+	
 	self.videoInfoViewController.selectedIndex = selectedIndex;
 }
 
@@ -309,6 +316,12 @@
 															   DebugLog(@"Report concern failed");
 															   DebugLog(@"%@", [error debugDescription]);
 														   }];
+}
+
+#pragma mark - SYNVideoInfoViewControllerDelegate
+
+- (void)videoInfoViewController:(SYNVideoInfoViewController *)viewController didSelectVideoAtIndex:(NSInteger)index {
+	self.selectedIndex = index;
 }
 
 #pragma mark - IBActions

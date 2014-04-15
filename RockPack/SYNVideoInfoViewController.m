@@ -56,6 +56,7 @@
 	_selectedIndex = selectedIndex;
 	
 	[self.collectionView reloadData];
+	self.collectionView.contentOffset = CGPointZero;
 }
 
 - (VideoInstance *)currentVideoInstance {
@@ -122,6 +123,12 @@
 }
 
 #pragma mark - UICollectionViewDelegate
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+	if (indexPath.section == [self upcomingVideosSectionIndex]) {
+		[self.delegate videoInfoViewController:self didSelectVideoAtIndex:self.selectedIndex + indexPath.row + 1];
+	}
+}
 
 #pragma mark - UICollectionViewDelegateFlowLayout
 

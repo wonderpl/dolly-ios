@@ -10,6 +10,13 @@
 
 @class VideoInstance;
 @class SYNPagingModel;
+@class SYNVideoInfoViewController;
+
+@protocol SYNVideoInfoViewControllerDelegate <NSObject>
+
+- (void)videoInfoViewController:(SYNVideoInfoViewController *)viewController didSelectVideoAtIndex:(NSInteger)index;
+
+@end
 
 @interface SYNVideoInfoViewController : UIViewController
 
@@ -17,6 +24,6 @@
 
 @property (nonatomic, assign) NSInteger selectedIndex;
 
-@property (nonatomic, strong) NSArray *nextVideos;
+@property (nonatomic, weak) id<SYNVideoInfoViewControllerDelegate> delegate;
 
 @end
