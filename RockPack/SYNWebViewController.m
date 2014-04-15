@@ -49,6 +49,7 @@
 																			action:nil];
 	spacer.width = 30.0;
 	self.navigationItem.rightBarButtonItems = @[ self.closeButton, spacer ];
+	self.webView.scalesPageToFit = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
