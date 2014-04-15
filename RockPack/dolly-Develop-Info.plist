@@ -63,8 +63,9 @@
 	<string>secure.dev.wonderpl.com</string>
 	<key>UIAppFonts</key>
 	<array>
-		<string>MinionPro-Italic.otf</string>
-		<string>MinionPro-Regular.otf</string>
+		<string>FreightTextPro-Book.otf</string>
+		<string>FreightTextPro-BookItalic.otf</string>
+		<string>FreightTextPro-Bold.otf</string>
 		<string>ProximaNova-Light.otf</string>
 		<string>ProximaNova-Regular.otf</string>
 		<string>ProximaNova-Semibold.otf</string>
