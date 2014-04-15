@@ -7,8 +7,6 @@
 //
 
 #import "SYNVideoPlayerAnimator.h"
-#import "SYNAggregateVideoCell.h"
-#import "SYNAggregateVideoItemCell.h"
 #import "SYNVideoPlayerViewController.h"
 #import "SYNVideoPlayer.h"
 #import "UIImage+Blur.h"
