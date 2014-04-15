@@ -17,6 +17,10 @@
 #import "SYNVideoDivider.h"
 #import "Video.h"
 #import "SYNPagingModel.h"
+#import "SYNOneToOneSharingController.h"
+#import "SYNAddToChannelViewController.h"
+#import "SYNTrackingManager.h"
+#import <SDWebImageManager.h>
 
 @interface SYNVideoInfoViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SYNWebViewCellDelegate, SYNVideoActionsDelegate, SYNVideoClickToMoreCellDelegate>
 
@@ -83,7 +87,7 @@
 		SYNVideoActionsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[SYNVideoActionsCell reuseIdentifier]
 																			  forIndexPath:indexPath];
 		
-		
+		cell.delegate = self;
 		
 		
 		return cell;
@@ -139,6 +143,50 @@
 	return CGSizeZero;
 }
 
+#pragma mark - SYNVideoActionsDelegate
+
+- (void)videoActionsFavouritePressed {
+	
+}
+
+- (void)videoActionsAddToChannelPressed {
+	VideoInstance *videoInstance = [self.model itemAtIndex:self.selectedIndex];
+	
+	[[SYNTrackingManager sharedManager] trackVideoAddFromScreenName:[self trackingScreenName]];
+	
+    [appDelegate.oAuthNetworkEngine recordActivityForUserId:appDelegate.currentUser.uniqueId
+                                                     action:@"select"
+                                            videoInstanceId:videoInstance.uniqueId
+                                          completionHandler:nil
+                                               errorHandler:nil];
+	
+	SYNAddToChannelViewController *viewController = [[SYNAddToChannelViewController alloc] initWithViewId:kExistingChannelsViewId];
+	viewController.modalPresentationStyle = UIModalPresentationCustom;
+	viewController.transitioningDelegate = self;
+	viewController.videoInstance = videoInstance;
+	
+	[self presentViewController:viewController animated:YES completion:nil];
+}
+
+- (void)videoActionsSharePressed {
+	VideoInstance *videoInstance = [self.model itemAtIndex:self.selectedIndex];
+	
+	[self requestShareLinkWithObjectType:@"video_instance" objectId:videoInstance.uniqueId];
+	
+    // At this point it is safe to assume that the video thumbnail image is in the cache
+    UIImage *thumbnailImage = [[[SDWebImageManager sharedManager] imageCache] imageFromMemoryCacheForKey:videoInstance.video.thumbnailURL];
+	
+	SYNOneToOneSharingController *viewController = [self createSharingViewControllerForObjectType:@"video_instance"
+																						 objectId:videoInstance.video.thumbnailURL
+																						  isOwner:NO
+																						  isVideo:YES
+																							image:thumbnailImage];
+	viewController.modalPresentationStyle = UIModalPresentationCustom;
+	viewController.transitioningDelegate = self;
+	
+	[self presentViewController:viewController animated:YES completion:nil];
+}
+
 #pragma mark - SYNVideoClickToMoreCellDelegate
 
 - (void)clickToMoreButtonPressed {
@@ -165,6 +213,10 @@
 }
 
 #pragma mark - Private
+
+- (NSString *)trackingScreenName {
+	return @"Video";
+}
 
 - (NSInteger)actionsSectionIndex {
 	return 0;

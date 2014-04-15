@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Wonder PL Ltd. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "SYNAbstractViewController.h"
 
 @class VideoInstance;
 @class SYNPagingModel;
@@ -18,7 +18,7 @@
 
 @end
 
-@interface SYNVideoInfoViewController : UIViewController
+@interface SYNVideoInfoViewController : SYNAbstractViewController
 
 @property (nonatomic, strong) SYNPagingModel *model;
 
