@@ -13,7 +13,6 @@
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WTJ-1k-eNv" userLabel="Image View - Cover image">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="338"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </imageView>
                 <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mr2-HA-7xn" userLabel="View - Background ">
                     <rect key="frame" x="0.0" y="338" width="321" height="152"/>
