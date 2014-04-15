@@ -27,11 +27,15 @@
 }
 
 + (UIFont *)italicAlternateFontOfSize:(CGFloat)fontSize {
-	return [UIFont fontWithName:@"MinionPro-Italic" size:fontSize];
+	return [UIFont fontWithName:@"FreightTextProBook-Italic" size:fontSize];
 }
 
 + (UIFont *)regularAlternateFontOfSize:(CGFloat)fontSize {
-	return [UIFont fontWithName:@"MinionPro-Regular" size:fontSize];
+	return [UIFont fontWithName:@"FreightTextProBook-Regular" size:fontSize];
+}
+
++ (UIFont *)boldAlternateFontOfSize:(CGFloat)fontSize {
+	return [UIFont fontWithName:@"FreightTextProBold-Regular" size:fontSize];
 }
 
 @end
