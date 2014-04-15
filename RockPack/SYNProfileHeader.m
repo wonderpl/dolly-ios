@@ -25,6 +25,7 @@
 @property (nonatomic, strong) IBOutlet UIButton *moreButton;
 @property (nonatomic, strong) IBOutlet SYNSocialFollowButton *followAllButton;
 @property (nonatomic, strong) IBOutlet UILabel *followersCountLabel;
+@property (strong, nonatomic) IBOutlet UIView *avatarBorder;
 
 @end
 
@@ -76,8 +77,6 @@
     
     self.avatarButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentFill;
     self.avatarButton.contentVerticalAlignment = UIControlContentVerticalAlignmentFill;
-    
-    
 }
 
 -(void) setCoverphotoImage: (NSString*) thumbnailURL
@@ -124,6 +123,13 @@
 
 - (void) setUpViews {
     
+	self.avatarBorder.layer.cornerRadius = self.avatarBorder.frame.size.height/2;
+	self.avatarBorder.layer.masksToBounds = NO;
+	self.avatarBorder.layer.shadowColor = [UIColor blackColor].CGColor;
+	self.avatarBorder.layer.shadowOffset = CGSizeMake(0.0f, 1.0f);
+	self.avatarBorder.layer.shadowOpacity = 0.15f;
+
+	
     [self.userNameLabel setFont:[UIFont regularCustomFontOfSize:self.userNameLabel.font.pointSize]];
     self.userNameLabel.textColor = [UIColor colorWithWhite:120/255.0 alpha:1.0];
     self.fullNameLabel.font = [UIFont regularCustomFontOfSize:self.fullNameLabel.font.pointSize];

@@ -64,18 +64,6 @@
                         <action selector="moreButtonTapped:" destination="79y-KX-90i" eventType="touchUpInside" id="rp7-sj-IPt"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wzg-oF-9q5" userLabel="Button - Upload Avatar" customClass="SYNAvatarButton">
-                    <rect key="frame" x="112" y="287" width="96" height="96"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="96" id="VPr-aw-2be"/>
-                        <constraint firstAttribute="height" constant="96" id="ZIg-IX-Mpp"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <connections>
-                        <action selector="avatarButtonTapped:" destination="79y-KX-90i" eventType="touchUpInside" id="jLw-co-8MP"/>
-                    </connections>
-                </button>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SPE-qM-wrN" userLabel="Label - User name">
                     <rect key="frame" x="20" y="415" width="280" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -131,6 +119,25 @@
                         <action selector="segmentedControllerTapped:" destination="79y-KX-90i" eventType="valueChanged" id="OdK-RU-q7Z"/>
                     </connections>
                 </segmentedControl>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zuH-da-sGu">
+                    <rect key="frame" x="112" y="290" width="96" height="96"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wzg-oF-9q5" userLabel="Button - Upload Avatar" customClass="SYNAvatarButton">
+                            <rect key="frame" x="2" y="2" width="92" height="92"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <connections>
+                                <action selector="avatarButtonTapped:" destination="79y-KX-90i" eventType="touchUpInside" id="jLw-co-8MP"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="96" id="07h-4j-zQO"/>
+                        <constraint firstAttribute="width" constant="96" id="qFE-UO-ils"/>
+                    </constraints>
+                </view>
             </subviews>
             <constraints>
                 <constraint firstItem="WTJ-1k-eNv" firstAttribute="top" secondItem="79y-KX-90i" secondAttribute="top" id="1ut-Pa-fNu"/>
@@ -141,21 +148,22 @@
                 <constraint firstAttribute="trailing" secondItem="WTJ-1k-eNv" secondAttribute="trailing" id="Fxt-2t-wma"/>
                 <constraint firstAttribute="trailing" secondItem="qG4-1X-MoW" secondAttribute="trailing" constant="16" id="G0f-TM-VG1"/>
                 <constraint firstAttribute="bottom" secondItem="WTJ-1k-eNv" secondAttribute="bottom" constant="178" id="Gad-sf-cIj"/>
+                <constraint firstItem="0i5-fa-0Qz" firstAttribute="centerY" secondItem="zuH-da-sGu" secondAttribute="centerY" constant="65" id="Io8-40-mcv"/>
                 <constraint firstAttribute="bottom" secondItem="Bql-TC-S7R" secondAttribute="bottom" constant="10" id="NdA-Pt-o7Z"/>
-                <constraint firstItem="0i5-fa-0Qz" firstAttribute="top" secondItem="Wzg-oF-9q5" secondAttribute="top" constant="96" id="NdY-67-ZyD"/>
+                <constraint firstItem="zuH-da-sGu" firstAttribute="top" secondItem="WTJ-1k-eNv" secondAttribute="bottom" constant="-48" id="PsP-Qw-SNJ"/>
                 <constraint firstItem="3x0-8E-Inl" firstAttribute="leading" secondItem="79y-KX-90i" secondAttribute="leading" constant="13" id="V92-e5-0AF"/>
                 <constraint firstItem="0i5-fa-0Qz" firstAttribute="top" secondItem="SPE-qM-wrN" secondAttribute="top" constant="-32" id="Wrx-gT-qJ5"/>
                 <constraint firstItem="SPE-qM-wrN" firstAttribute="leading" secondItem="79y-KX-90i" secondAttribute="leading" constant="20" id="YA6-K1-1Eo"/>
-                <constraint firstItem="Wzg-oF-9q5" firstAttribute="top" secondItem="WTJ-1k-eNv" secondAttribute="bottom" constant="-51" id="jbm-08-tOy"/>
+                <constraint firstItem="WTJ-1k-eNv" firstAttribute="leading" secondItem="zuH-da-sGu" secondAttribute="trailing" constant="-208" id="e4U-05-wW8"/>
                 <constraint firstAttribute="trailing" secondItem="FyE-Km-Hdh" secondAttribute="trailing" id="lLt-oR-dXD"/>
                 <constraint firstItem="WTJ-1k-eNv" firstAttribute="leading" secondItem="79y-KX-90i" secondAttribute="leading" id="o9Y-JO-D5B"/>
-                <constraint firstItem="WTJ-1k-eNv" firstAttribute="leading" secondItem="Wzg-oF-9q5" secondAttribute="trailing" constant="-208" id="pvW-3f-3Iv"/>
                 <constraint firstItem="Bql-TC-S7R" firstAttribute="leading" secondItem="79y-KX-90i" secondAttribute="leading" constant="37" id="qd9-dK-72x"/>
                 <constraint firstAttribute="bottom" secondItem="qG4-1X-MoW" secondAttribute="bottom" constant="153" id="sjV-pB-rGr"/>
                 <constraint firstItem="Pnq-Al-e0n" firstAttribute="leading" secondItem="79y-KX-90i" secondAttribute="leading" constant="10" id="zqn-8h-I5B"/>
             </constraints>
             <connections>
                 <outlet property="aboutMeTextView" destination="Pnq-Al-e0n" id="VW9-ZT-aPf"/>
+                <outlet property="avatarBorder" destination="zuH-da-sGu" id="flh-1o-c2V"/>
                 <outlet property="avatarButton" destination="Wzg-oF-9q5" id="GEt-Xv-mWG"/>
                 <outlet property="coverImage" destination="WTJ-1k-eNv" id="RAx-PU-VBY"/>
                 <outlet property="coverImageBottom" destination="Gad-sf-cIj" id="uYk-KF-VGZ"/>

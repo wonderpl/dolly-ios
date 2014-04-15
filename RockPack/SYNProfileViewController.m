@@ -514,5 +514,6 @@ static const CGFloat TransitionDuration = 0.5f;
         [self.subscriptionCollectionViewController.model loadNextPage];
 
 	}
+	
 }
 @end
