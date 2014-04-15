@@ -105,9 +105,7 @@
         // mode must be set first because setChannel relies on it...
         self.mode = mode;
         self.channel = channel;
-        
-		
-		self.model = [SYNChannelVideosModel modelWithChannel:self.channel];
+		self.model = [SYNChannelVideosModel modelWithChannel:channel];
     }
     
     return self;
