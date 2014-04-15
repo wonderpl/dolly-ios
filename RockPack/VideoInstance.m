@@ -152,6 +152,10 @@ static NSDateFormatter *dateFormatter = nil;
                              usingManagedObjectContext: managedObjectContext
                                    ignoringObjectTypes: ignoringObjects | kIgnoreVideoInstanceObjects];
     }
+	
+	self.originator = [ChannelOwner instanceFromDictionary:dictionary[@"original_channel_owner"]
+								 usingManagedObjectContext:managedObjectContext
+									   ignoringObjectTypes:kIgnoreNothing];
     
     NSArray* starrersArray = dictionary[@"starring_users"];
     if ([starrersArray isKindOfClass:[NSArray class]])
@@ -259,6 +263,10 @@ static NSDateFormatter *dateFormatter = nil;
             break;
         }
     }
+}
+
+- (ChannelOwner *)originator {
+	return (self.primitiveOriginator ?: self.channel.channelOwner);
 }
 
 #pragma mark - Starred By User Props

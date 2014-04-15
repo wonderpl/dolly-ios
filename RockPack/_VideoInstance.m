@@ -14,6 +14,7 @@ const struct VideoInstanceAttributes VideoInstanceAttributes = {
 
 const struct VideoInstanceRelationships VideoInstanceRelationships = {
 	.channel = @"channel",
+	.originator = @"originator",
 	.starrers = @"starrers",
 	.video = @"video",
 };
@@ -145,6 +146,10 @@ const struct VideoInstanceFetchedProperties VideoInstanceFetchedProperties = {
 
 
 @dynamic channel;
+
+	
+
+@dynamic originator;
 
 	
 
