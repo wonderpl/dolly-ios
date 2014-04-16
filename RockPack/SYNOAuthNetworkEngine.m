@@ -483,7 +483,7 @@
     
     parameters[@"start"] = @(0);
     
-//    parameters[@"size"] = @(MAXIMUM_REQUEST_LENGTH);
+    parameters[@"size"] = @(40);
     
     parameters[@"locale"] = self.localeString;
     
@@ -584,55 +584,8 @@
             errorBlock(@{@"saving_error" : @"Main Registry Could Not Save the User"});
             return;
         }
-
-        // Get subscriptions
-        
-        NSString* userId = responseDictionary[@"id"];
-
-        [self channelSubscriptionsForUserId:userId
-                                 credential:credentials
-                                      start:0
-                                       size:50
-                          completionHandler:^(id subscriptionsDictionary) {
-                              NSString* possibleError = subscriptionsDictionary[@"error"];
-                              
-                              if (possibleError)
-                              {
-                                  errorBlock(responseDictionary);
-                                  return;
-                              }
-                              
-                              BOOL userRegistered = [self.registry registerSubscriptionsForCurrentUserFromDictionary:subscriptionsDictionary];
-                              if(!userRegistered)
-                                  return;
-                              
-                              completionBlock(responseDictionary);
-                          }
-                               errorHandler:^(id errorObject) {
-                                   if([errorObject isKindOfClass:[NSDictionary class]])
-                                   {
-                                       errorBlock(errorObject);
-                                   }
-                                   else if([errorObject isKindOfClass:[NSError class]])
-                                   {
-                                       NSError* error = (NSError*) errorObject;
-                                       
-                                       if (error.code >=500 && error.code < 600)
-                                       {
-                                           [self showErrorPopUpForError:error];
-                                       }
-                                       
-                                       DebugLog(@"API Call failed");
-                                       NSDictionary* customErrorDictionary = @{@"network_error" : [NSString stringWithFormat: @"%@, Server responded with %@", error.domain, @(error.code)] , @"nserror" : error };
-                                       errorBlock(customErrorDictionary);
-                                   }
-                                   else
-                                   {
-                                       errorBlock(nil);
-                                   }
-                                   
-                               }];
-    }
+			completionBlock(responseDictionary);
+		}
                                   errorHandler: ^(NSError* error)
      {
          DebugLog(@"API Call failed");
