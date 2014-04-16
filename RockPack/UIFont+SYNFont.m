@@ -34,8 +34,8 @@
 	return [UIFont fontWithName:@"FreightTextProBook-Regular" size:fontSize];
 }
 
-+ (UIFont *)boldAlternateFontOfSize:(CGFloat)fontSize {
-	return [UIFont fontWithName:@"FreightTextProBold-Regular" size:fontSize];
++ (UIFont *)boldItalicAlternateFontOfSize:(CGFloat)fontSize {
+	return [UIFont fontWithName:@"FreightTextProBold-Italic" size:fontSize];
 }
 
 @end

@@ -610,6 +610,7 @@
 		E985176218B39D4A00ADBD0F /* SYNTrackingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E985176118B39D4A00ADBD0F /* SYNTrackingManager.m */; };
 		E985176418B4B37100ADBD0F /* NSRegularExpressionUsernameSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = E985176318B4B37100ADBD0F /* NSRegularExpressionUsernameSpec.m */; };
 		E985C8B118EC4B8E00356272 /* SYNVideoThumbnailDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = E985C8B018EC4B8E00356272 /* SYNVideoThumbnailDownloader.m */; };
+		E985D34D18FECDB800D5A9E1 /* FreightTextPro-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = E985D34C18FECDB800D5A9E1 /* FreightTextPro-BoldItalic.otf */; };
 		E98F609818B24901008AAAA8 /* SYNWonderMailActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = E98F609718B24901008AAAA8 /* SYNWonderMailActivity.m */; };
 		E98F609B18B25CBD008AAAA8 /* NSRegularExpression+Username.m in Sources */ = {isa = PBXBuildFile; fileRef = E98F609A18B25CBD008AAAA8 /* NSRegularExpression+Username.m */; };
 		E9918C1618967BA500767BBD /* SYNTimestampLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9918C1518967BA500767BBD /* SYNTimestampLabel.m */; };
@@ -673,7 +674,6 @@
 		E9EE08DF18F8089F000DC06A /* SYNVideoActionsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9EE08DE18F8089F000DC06A /* SYNVideoActionsCell.m */; };
 		E9EE08E218F80BB2000DC06A /* SYNVideoClickToMoreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9EE08E118F80BB2000DC06A /* SYNVideoClickToMoreCell.m */; };
 		E9EE08E418F80BD8000DC06A /* SYNVideoClickToMoreCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9EE08E318F80BD8000DC06A /* SYNVideoClickToMoreCell.xib */; };
-		E9EF289418FD901E003B2D0F /* FreightTextPro-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E9EF289118FD9017003B2D0F /* FreightTextPro-Bold.otf */; };
 		E9EF289518FD901E003B2D0F /* FreightTextPro-Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = E9EF289218FD9017003B2D0F /* FreightTextPro-Book.otf */; };
 		E9EF289618FD901E003B2D0F /* FreightTextPro-BookItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = E9EF289318FD9017003B2D0F /* FreightTextPro-BookItalic.otf */; };
 		E9F62550188404A8000EF6A2 /* SYNiPhoneLoginAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F6254F188404A8000EF6A2 /* SYNiPhoneLoginAnimator.m */; };
@@ -1579,6 +1579,7 @@
 		E985176318B4B37100ADBD0F /* NSRegularExpressionUsernameSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSRegularExpressionUsernameSpec.m; sourceTree = "<group>"; };
 		E985C8AF18EC4B8E00356272 /* SYNVideoThumbnailDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNVideoThumbnailDownloader.h; sourceTree = "<group>"; };
 		E985C8B018EC4B8E00356272 /* SYNVideoThumbnailDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNVideoThumbnailDownloader.m; sourceTree = "<group>"; };
+		E985D34C18FECDB800D5A9E1 /* FreightTextPro-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FreightTextPro-BoldItalic.otf"; sourceTree = "<group>"; };
 		E98F609618B24901008AAAA8 /* SYNWonderMailActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNWonderMailActivity.h; sourceTree = "<group>"; };
 		E98F609718B24901008AAAA8 /* SYNWonderMailActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNWonderMailActivity.m; sourceTree = "<group>"; };
 		E98F609918B25CBD008AAAA8 /* NSRegularExpression+Username.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSRegularExpression+Username.h"; sourceTree = "<group>"; };
@@ -1671,7 +1672,6 @@
 		E9EE08E018F80BB2000DC06A /* SYNVideoClickToMoreCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNVideoClickToMoreCell.h; sourceTree = "<group>"; };
 		E9EE08E118F80BB2000DC06A /* SYNVideoClickToMoreCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNVideoClickToMoreCell.m; sourceTree = "<group>"; };
 		E9EE08E318F80BD8000DC06A /* SYNVideoClickToMoreCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNVideoClickToMoreCell.xib; sourceTree = "<group>"; };
-		E9EF289118FD9017003B2D0F /* FreightTextPro-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FreightTextPro-Bold.otf"; sourceTree = "<group>"; };
 		E9EF289218FD9017003B2D0F /* FreightTextPro-Book.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FreightTextPro-Book.otf"; sourceTree = "<group>"; };
 		E9EF289318FD9017003B2D0F /* FreightTextPro-BookItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FreightTextPro-BookItalic.otf"; sourceTree = "<group>"; };
 		E9F6254E188404A8000EF6A2 /* SYNiPhoneLoginAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNiPhoneLoginAnimator.h; sourceTree = "<group>"; };
@@ -2256,8 +2256,8 @@
 		019824FB1629D19600216900 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				E9EF289118FD9017003B2D0F /* FreightTextPro-Bold.otf */,
 				E9EF289218FD9017003B2D0F /* FreightTextPro-Book.otf */,
+				E985D34C18FECDB800D5A9E1 /* FreightTextPro-BoldItalic.otf */,
 				E9EF289318FD9017003B2D0F /* FreightTextPro-BookItalic.otf */,
 				E9EE08D918F80379000DC06A /* ProximaNova-Bold.otf */,
 				E9EE08DA18F80379000DC06A /* ProximaNova-Semibold.otf */,
@@ -4158,6 +4158,7 @@
 				4C5E861518B6357300D0E937 /* SYNDiscoverOverlayVideoViewController.xib in Resources */,
 				E91D364B1843573E007DB495 /* SYNCarouselVideoPlayerViewController_iphone4.storyboard in Resources */,
 				BEB3138F181FD98600FAF98A /* SYNAggregateVideoCell~iphone.xib in Resources */,
+				E985D34D18FECDB800D5A9E1 /* FreightTextPro-BoldItalic.otf in Resources */,
 				1FC24E941851F7690022548B /* IconVideoCommentHighlighted@2x.png in Resources */,
 				BEB3138B181FCD9400FAF98A /* SYNFeedRootViewController.xib in Resources */,
 				BED027D91834F4EA00636659 /* SYNAccountSettingsViewController.xib in Resources */,
@@ -4399,7 +4400,6 @@
 				4C22752118F6E654009C5242 /* searchbar@2x.png in Resources */,
 				1F4E7F75181AC7D300F59007 /* TabActivityHighlighted.png in Resources */,
 				BEC39C18184DFF7D00DA8089 /* SYNOnBoardingHeader.xib in Resources */,
-				E9EF289418FD901E003B2D0F /* FreightTextPro-Bold.otf in Resources */,
 				BEB313011815638700FAF98A /* TabSearch@2x.png in Resources */,
 				38A73D8717A0086500AD9E90 /* SYNFriendsViewController~iphone.xib in Resources */,
 				BEB313B518280F1200FAF98A /* divider_feed.png in Resources */,
