@@ -101,7 +101,7 @@ typedef enum : NSInteger {
 
 // Channel manageent
 #define kAPIGetChannelDetails       @"/ws/USERID/channels/CHANNELID/"           /* GET */
-#define kAPIGetUserChannel        @"/ws/USERID/channels/"                       /* GET */
+#define kAPIGetUserChannel        @"/ws/USERID"                       /* GET */
 #define kAPICreateNewChannel        @"/ws/USERID/channels/"                     /* POST */
 #define kAPIUpdateExistingChannel   @"/ws/USERID/channels/CHANNELID/"           /* PUT */
 #define kAPIUpdateChannelPrivacy    @"/ws/USERID/channels/CHANNELID/public/"    /* PUT */
@@ -130,7 +130,7 @@ typedef enum : NSInteger {
 #define kAPIDeleteUserCoverArt      @"/ws/USERID/cover_art/COVERID"             /* DELETE */
 
 // User subscriptions
-#define kAPIGetUserSubscriptions    @"/ws/USERID/subscriptions/"                /* GET */
+#define kAPIGetUserSubscriptions    @"/ws/USERID/subscriptions/users/"			/* GET */
 #define kAPICreateUserSubscription  @"/ws/USERID/subscriptions/"                /* POST */
 #define kAPIDeleteUserSubscription  @"/ws/USERID/subscriptions/SUBSCRIPTION/"   /* DELETE */
 

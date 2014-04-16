@@ -273,7 +273,7 @@
 
 - (void) setSubscriptionsDictionary: (NSDictionary *) subscriptionsDictionary
 {
-    NSDictionary *channeslDictionary = subscriptionsDictionary[@"channels"];
+    NSDictionary *channeslDictionary = subscriptionsDictionary[@"users"];
     
     if (!channeslDictionary)
     {
@@ -292,15 +292,13 @@
     
     NSMutableDictionary *subscriptionInsancesByIdDictionary = [[NSMutableDictionary alloc] initWithCapacity: self.subscriptions.count];
     
-//#warning Data is not initilising properly between the 2 logs ln260 - 289
-
     
-    for (Channel *su in self.subscriptions)
+    for (ChannelOwner *su in self.subscriptions)
     {
         subscriptionInsancesByIdDictionary[su.uniqueId] = su;
     }
     
-    [self.subscriptionsSet removeAllObjects];
+    [self.userSubscriptionsSet removeAllObjects];
     
     for (NSDictionary *subscriptionChannel in itemsArray)
     {
@@ -311,11 +309,11 @@
             continue;
         }
         
-        Channel *channel = subscriptionInsancesByIdDictionary[uniqueId];
+        ChannelOwner *channelOwner = subscriptionInsancesByIdDictionary[uniqueId];
         
-        if (!channel)
+        if (!channelOwner)
         {
-            channel = [Channel instanceFromDictionary: subscriptionChannel
+            channelOwner = [ChannelOwner instanceFromDictionary: subscriptionChannel
                             usingManagedObjectContext: self.managedObjectContext
                                   ignoringObjectTypes: kIgnoreVideoInstanceObjects];
         }
@@ -324,40 +322,20 @@
             [subscriptionInsancesByIdDictionary removeObjectForKey: uniqueId];
         }
         
-        if (!channel)
+        if (!channelOwner)
         {
             continue;
         }
         
-        if (channel.favouritesValue)
-        {
-            
-            SYNAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-            
-            if ([appDelegate.currentUser.uniqueId isEqualToString:channel.channelOwner.uniqueId])
-            {
-                channel.title = [NSString stringWithFormat:@"MY %@", NSLocalizedString(@"FAVORITES", nil)];
-            }
-            else
-            {
-				NSString *displayName = [[channel.channelOwner.displayName apostrophisedString] uppercaseString];
-				channel.title = [NSString stringWithFormat:@"%@ %@", displayName, NSLocalizedString(@"FAVORITES", nil)];
-            }
-        }
-
+        channelOwner.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribedToUserId:channelOwner.uniqueId];
+		
+        [self.userSubscriptionsSet addObject: channelOwner];
         
-        
-        
-        channel.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribedToUserId:self.uniqueId];
-
-        [self addSubscriptionsObject: channel];
-        
-        channel.viewId = self.viewId;
     }
     
     for (id key in subscriptionInsancesByIdDictionary)
     {
-        Channel *su = subscriptionInsancesByIdDictionary[key];
+        ChannelOwner *su = subscriptionInsancesByIdDictionary[key];
         
         if (!su)
         {
