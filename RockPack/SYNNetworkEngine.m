@@ -896,5 +896,33 @@
 }
 
 
+- (void) subscriptionsForUserId: (NSString *) userId
+						inRange: (NSRange) range
+			  completionHandler: (MKNKUserSuccessBlock) completionBlock
+				   errorHandler: (MKNKUserErrorBlock) errorBlock
+{
+    NSDictionary *apiSubstitutionDictionary = @{@"USERID" : userId};
+    
+    NSString *apiString = [kAPIGetUserSubscriptions stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
+	
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    
+    params[@"start"] = @(range.location);
+    params[@"size"] = @(range.length);
+    
+    SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject*)[self operationWithPath: apiString
+                                                                                                       params: params
+                                                                                                   httpMethod: @"GET"
+                                                                                                          ssl: NO];
+    
+    
+    [self addCommonHandlerToNetworkOperation: networkOperation
+                           completionHandler: completionBlock
+                                errorHandler: errorBlock];
+    
+    [self enqueueOperation:networkOperation];
+}
+
+
 
 @end

@@ -129,6 +129,10 @@
 
 // post comments method is in the oAuthNetworkEngine
 
+- (void) subscriptionsForUserId: (NSString *) userId
+						inRange: (NSRange) range
+			  completionHandler: (MKNKUserSuccessBlock) completionBlock
+				   errorHandler: (MKNKUserErrorBlock) errorBlock;
 
 
 
