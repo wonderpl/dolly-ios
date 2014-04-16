@@ -24,7 +24,7 @@
 }
 
 - (UIColor*) defaultColor {
-	return [UIColor dollyTextMediumGray];
+	return [UIColor dollyGreen];
 }
 
 - (UIFont*)selectedFont {
@@ -40,7 +40,7 @@
 }
 
 - (UIColor*) defaultBorderColor {
-	return [UIColor dollyTextMediumGray];
+	return [UIColor dollyGreen];
 }
 
 
