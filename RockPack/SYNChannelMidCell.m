@@ -71,12 +71,11 @@
     self.deletableCell = NO;
     
     if (IS_IPHONE) {
-        [self.descriptionLabel setFont:[UIFont lightCustomFontOfSize:14]];
-        [self.followerCountLabel setFont:[UIFont regularCustomFontOfSize:10]];
-        [self.videoCountLabel setFont:[UIFont regularCustomFontOfSize:10]];
+        [self.descriptionLabel setFont:[UIFont lightCustomFontOfSize:self.descriptionLabel.font.pointSize]];
+        [self.followerCountLabel setFont:[UIFont regularCustomFontOfSize:self.followerCountLabel.font.pointSize]];
     } else {
         [self.descriptionLabel setFont:[UIFont lightCustomFontOfSize:14]];
-        [self.followerCountLabel setFont:[UIFont regularCustomFontOfSize:14]];
+        [self.followerCountLabel setFont:[UIFont regularCustomFontOfSize:self.followerCountLabel.font.pointSize]];
         [self.videoCountLabel setFont:[UIFont regularCustomFontOfSize:14]];
     }
 }
@@ -116,22 +115,28 @@
         return;
     }
     
+	
+	NSString *labelText = @"";
+	
     if (channel.subscribersCountValue == 1) {
-        self.followerCountLabel.text = [NSString stringWithFormat: @"%@ %@", channel.subscribersCount, NSLocalizedString(@"Follower", nil)];
+        labelText = [NSString stringWithFormat: @"%@ %@", channel.subscribersCount, NSLocalizedString(@"Follower", nil)];
 		
     } else {
-        self.followerCountLabel.text = [NSString stringWithFormat: @"%@ %@", channel.subscribersCount, NSLocalizedString(@"Subscribers", nil)];
+        labelText = [NSString stringWithFormat: @"%@ %@", channel.subscribersCount, NSLocalizedString(@"Subscribers", nil)];
     }
     
     if (channel.totalVideosValueValue == 1) {
-        self.videoCountLabel.text = [NSString stringWithFormat:@"%@ %@",channel.totalVideosValue, NSLocalizedString(@"Video", nil)];
+        labelText = [NSString stringWithFormat:@"%@   |   %@ %@", labelText, channel.totalVideosValue, NSLocalizedString(@"Video", nil)];
     } else {
-        self.videoCountLabel.text = [NSString stringWithFormat:@"%@ %@",channel.totalVideosValue, NSLocalizedString(@"Videos", nil)];
+        labelText = [NSString stringWithFormat:@"%@   |   %@ %@", labelText, channel.totalVideosValue, NSLocalizedString(@"Videos", nil)];
 	}
+	
+	
+	self.followerCountLabel.text = labelText;
 	
 	self.descriptionLabel.text = channel.channelDescription;
     self.videoTitleLabel.text =  [channel.title uppercaseString];
-    [self.videoTitleLabel setFont:[UIFont regularCustomFontOfSize:self.videoTitleLabel.font.pointSize]];
+    [self.videoTitleLabel setFont:[UIFont boldCustomFontOfSize:self.videoTitleLabel.font.pointSize]];
     [self.followerCountLabel setFont:[UIFont regularCustomFontOfSize:self.followerCountLabel.font.pointSize]];
     [self.followerCountLabel setFont:[UIFont regularCustomFontOfSize:self.followerCountLabel.font.pointSize]];
     [self setBorder];
