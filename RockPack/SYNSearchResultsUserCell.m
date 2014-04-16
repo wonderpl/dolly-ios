@@ -15,7 +15,7 @@
 #import "SYNAvatarButton.h"
 #import "SYNActivityManager.h"
 #import "UIImageView+WebCache.h"
-#import "SYNFollowDiscoverButton.h"
+#import "SYNFollowUserButton.h"
 
 @interface SYNSearchResultsUserCell ()
 

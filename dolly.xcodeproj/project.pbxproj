@@ -156,7 +156,7 @@
 		0E5B8EA61846007D0012F460 /* SYNProfileFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5B8EA51846007D0012F460 /* SYNProfileFlowLayout.m */; };
 		0EAC5162180D4981005F4D42 /* SYNProfileRootViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EAC5161180D4980005F4D42 /* SYNProfileRootViewController~ipad.xib */; };
 		0EAC51E5180EBE67005F4D42 /* SYNProfileRootViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EAC51E4180EBE67005F4D42 /* SYNProfileRootViewController~iphone.xib */; };
-		0ECBED3A187C66F900F28EB2 /* SYNFollowDiscoverButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECBED39187C66F900F28EB2 /* SYNFollowDiscoverButton.m */; };
+		0ECBED3A187C66F900F28EB2 /* SYNFollowUserButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECBED39187C66F900F28EB2 /* SYNFollowUserButton.m */; };
 		0EE380AB182D4DFC001297C7 /* SYNChannelCreateNewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE380A8182D4DFC001297C7 /* SYNChannelCreateNewCell.m */; };
 		0EE380AC182D4DFC001297C7 /* SYNChannelCreateNewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EE380A9182D4DFC001297C7 /* SYNChannelCreateNewCell.xib */; };
 		0EE380AD182D4DFC001297C7 /* SYNChannelCreateNewCell~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EE380AA182D4DFC001297C7 /* SYNChannelCreateNewCell~iphone.xib */; };
@@ -935,8 +935,8 @@
 		0E5B8EA51846007D0012F460 /* SYNProfileFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNProfileFlowLayout.m; sourceTree = "<group>"; };
 		0EAC5161180D4980005F4D42 /* SYNProfileRootViewController~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNProfileRootViewController~ipad.xib"; sourceTree = "<group>"; };
 		0EAC51E4180EBE67005F4D42 /* SYNProfileRootViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNProfileRootViewController~iphone.xib"; sourceTree = "<group>"; };
-		0ECBED38187C66F900F28EB2 /* SYNFollowDiscoverButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNFollowDiscoverButton.h; sourceTree = "<group>"; };
-		0ECBED39187C66F900F28EB2 /* SYNFollowDiscoverButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNFollowDiscoverButton.m; sourceTree = "<group>"; };
+		0ECBED38187C66F900F28EB2 /* SYNFollowUserButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNFollowUserButton.h; sourceTree = "<group>"; };
+		0ECBED39187C66F900F28EB2 /* SYNFollowUserButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNFollowUserButton.m; sourceTree = "<group>"; };
 		0EE380A7182D4DFC001297C7 /* SYNChannelCreateNewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNChannelCreateNewCell.h; sourceTree = "<group>"; };
 		0EE380A8182D4DFC001297C7 /* SYNChannelCreateNewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNChannelCreateNewCell.m; sourceTree = "<group>"; };
 		0EE380A9182D4DFC001297C7 /* SYNChannelCreateNewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNChannelCreateNewCell.xib; sourceTree = "<group>"; };
@@ -3677,8 +3677,8 @@
 				4C72DD4818FD96E6004AC132 /* SYNFollowChannelButton.h */,
 				4C72DD4918FD96E6004AC132 /* SYNFollowChannelButton.m */,
 				BEE01B59184F5868000CF681 /* SYNSocialFollowButton.m */,
-				0ECBED38187C66F900F28EB2 /* SYNFollowDiscoverButton.h */,
-				0ECBED39187C66F900F28EB2 /* SYNFollowDiscoverButton.m */,
+				0ECBED38187C66F900F28EB2 /* SYNFollowUserButton.h */,
+				0ECBED39187C66F900F28EB2 /* SYNFollowUserButton.m */,
 				BEE01B6B18521418000CF681 /* SYNSocialCommentButton.h */,
 				BEE01B6C18521418000CF681 /* SYNSocialCommentButton.m */,
 			);
@@ -4625,7 +4625,7 @@
 				BEB313561817D8C400FAF98A /* SYNSearchResultsUserCell.m in Sources */,
 				BEFAE89C1725485B009B2F66 /* SYNVideoQueue.m in Sources */,
 				BE285D9B1725726300D995AB /* SYNAddToChannelViewController.m in Sources */,
-				0ECBED3A187C66F900F28EB2 /* SYNFollowDiscoverButton.m in Sources */,
+				0ECBED3A187C66F900F28EB2 /* SYNFollowUserButton.m in Sources */,
 				BE285D9F172584E200D995AB /* SYNAddToChannelCreateNewCell.m in Sources */,
 				BE285DB01725A23300D995AB /* SYNNetworkMessageView.m in Sources */,
 				E9F625611885B8EA000EF6A2 /* SYNExampleUserCell.m in Sources */,

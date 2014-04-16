@@ -6,11 +6,11 @@
 //  Copyright (c) 2014 Rockpack Ltd. All rights reserved.
 //
 
-#import "SYNFollowDiscoverButton.h"
+#import "SYNFollowUserButton.h"
 #import "UIColor+SYNColor.h"
 #import "UIFont+SYNFont.h"
 
-@implementation SYNFollowDiscoverButton
+@implementation SYNFollowUserButton
 
 
 -(void)awakeFromNib

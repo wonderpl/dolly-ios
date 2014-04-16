@@ -13,7 +13,7 @@
 #import "UIFont+SYNFont.h"
 #import "UIColor+SYNColor.h"
 #import "SYNSocialFollowButton.h"
-#import "SYNFollowDiscoverButton.h"
+#import "SYNFollowUserButton.h"
 @interface SYNProfileHeader ()
 
 @property (nonatomic, strong) IBOutlet UIButton *avatarButton;
@@ -24,7 +24,7 @@
 @property (nonatomic, strong) IBOutlet UITextView *aboutMeTextView;
 @property (nonatomic, strong) IBOutlet UIView *segmentedControlsView;
 @property (nonatomic, strong) IBOutlet UIButton *moreButton;
-@property (nonatomic, strong) IBOutlet SYNFollowDiscoverButton *followAllButton;
+@property (nonatomic, strong) IBOutlet SYNFollowUserButton *followAllButton;
 @property (nonatomic, strong) IBOutlet UILabel *followersCountLabel;
 @property (strong, nonatomic) IBOutlet UIView *avatarBorder;
 

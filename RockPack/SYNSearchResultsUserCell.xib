@@ -17,12 +17,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="185"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.34999999999999998" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fkX-vS-KN8" userLabel="Cover photo layer">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.44999999999999996" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fkX-vS-KN8" userLabel="Cover photo layer">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="185"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.28005708495662784" green="0.27861682212248673" blue="0.30377462635869568" alpha="1" colorSpace="calibratedRGB"/>
                     </imageView>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MN1-18-LaS" userLabel="follow" customClass="SYNFollowDiscoverButton">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MN1-18-LaS" userLabel="follow" customClass="SYNFollowUserButton">
                         <rect key="frame" x="225" y="138" width="80" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <constraints>

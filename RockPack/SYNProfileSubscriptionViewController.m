@@ -18,7 +18,7 @@
 #import "SYNDeviceManager.h"
 #import "SYNProfileViewController.h"
 #import "SYNSearchResultsUserCell.h"
-#import "SYNFollowDiscoverButton.h"
+#import "SYNFollowUserButton.h"
 
 
 static const CGFloat PARALLAX_SCROLL_VALUE = 2.0f;

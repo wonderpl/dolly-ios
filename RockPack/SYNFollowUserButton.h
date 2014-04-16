@@ -8,6 +8,6 @@
 
 #import "SYNSocialFollowButton.h"
 
-@interface SYNFollowDiscoverButton : SYNSocialFollowButton
+@interface SYNFollowUserButton : SYNSocialFollowButton
 
 @end
