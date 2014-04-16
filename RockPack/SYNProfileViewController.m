@@ -232,7 +232,7 @@ static const CGFloat TransitionDuration = 0.5f;
     [self.subscriptionCollectionViewController.headerView layoutIfNeeded];
 
     if (IS_IPHONE) {
-		int headerSize = self.isUserProfile ? 494.0f : 516.0f;
+		int headerSize = self.isUserProfile ? 560 : 560;
 		
 		CGRect toFrame = self.view.frame;
 		toFrame.origin.x = 0;
@@ -294,7 +294,7 @@ static const CGFloat TransitionDuration = 0.5f;
 		fromFrame.origin.x = -320;
 		
 		
-		int headerSize = self.isUserProfile ? 494.0f : 516.0f;
+		int headerSize = self.isUserProfile ? 560 : 560;
 		
 		self.subscriptionCollectionViewController.view.frame = CGRectMake(320, 0, 320, headerSize);
 		self.subscriptionCollectionViewController.headerView.frame = CGRectMake(-320, 0, 320, headerSize);

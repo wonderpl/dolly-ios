@@ -56,6 +56,7 @@
 
     self.aboutMeTextView.text = channelOwner.channelOwnerDescription;
     [self.followAllButton setSelected:self.channelOwner.subscribedByUserValue];
+	[self setDescriptionText:channelOwner.channelOwnerDescription];
     [self setUpViews];
     [self setFollowersCountLabel];
 }
@@ -107,16 +108,22 @@
                            }];
 }
 
--(void) setDescriptionText : (NSString*) text {
-    self.aboutMeTextView.text = text;
-    [self setUpDescriptionTextView];
-
-}
-
-- (void) setUpDescriptionTextView {
-    self.aboutMeTextView.font = [UIFont regularCustomFontOfSize:20];
-	self.aboutMeTextView.textAlignment = NSTextAlignmentCenter;
-	self.aboutMeTextView.textColor = [UIColor colorWithWhite:120/255.0 alpha:1.0];
+-(void) setDescriptionText : (NSString*) string {
+	NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+	style.lineSpacing = 6;
+	style.alignment = NSTextAlignmentCenter;
+	
+	
+	NSDictionary *attributes = @{NSParagraphStyleAttributeName : style,
+								 NSFontAttributeName : [UIFont regularCustomFontOfSize : 20],
+								 NSForegroundColorAttributeName : [UIColor dollyTextMediumGray],
+								 };
+	
+	
+	self.aboutMeTextView.attributedText = [[NSAttributedString alloc]
+										   initWithString:string
+										   attributes:attributes];
+	
     [[self.aboutMeTextView layer] setBorderColor:[[UIColor colorWithRed:172.0/255.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f] CGColor]];
 
 }
@@ -135,7 +142,6 @@
     self.userNameLabel.textColor = [UIColor colorWithWhite:120/255.0 alpha:1.0];
     self.fullNameLabel.font = [UIFont boldCustomFontOfSize:self.fullNameLabel.font.pointSize];
 
-    [self setUpDescriptionTextView];
     
     if (!self.isUserProfile) {
         if (IS_IPAD) {
@@ -181,7 +187,7 @@
         self.followAllButton.hidden = YES;
         self.avatarButton.userInteractionEnabled = YES;
         self.moreButton.hidden = NO;
-        self.userNameLabel.hidden = YES;
+//        self.userNameLabel.hidden = YES;
     } else {
         self.followAllButton.hidden = NO;
         self.moreButton.hidden = YES;

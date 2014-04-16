@@ -302,9 +302,9 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     }
     if (IS_IPHONE) {
         if (self.isUserProfile) {
-            return CGSizeMake(320, 494);
+            return CGSizeMake(320, 560);
         } else {
-            return CGSizeMake(320, 516);
+            return CGSizeMake(320, 560);
         }
     } else {
         if (UIDeviceOrientationIsPortrait([[SYNDeviceManager sharedInstance] orientation])) {

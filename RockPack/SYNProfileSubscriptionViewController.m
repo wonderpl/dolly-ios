@@ -17,15 +17,19 @@
 #import "UIFont+SYNFont.h"
 #import "SYNDeviceManager.h"
 #import "SYNProfileViewController.h"
+#import "SYNSearchResultsUserCell.h"
+#import "SYNFollowDiscoverButton.h"
+
 
 static const CGFloat PARALLAX_SCROLL_VALUE = 2.0f;
 static const CGFloat SEARCHBAR_Y = 430.0f;
 static const CGFloat FULL_NAME_LABEL_IPHONE = 364.0f; // lower is down
 static const CGFloat FULL_NAME_LABEL_IPAD_PORTRAIT = 533.0f;
 static const CGFloat FULLNAMELABELIPADLANDSCAPE = 412.0f;
-static const CGFloat OWNUSERHEADERHEIGHT = 494.0f;
+static const CGFloat OWNUSERHEADERHEIGHT = 560;
 
-@interface SYNProfileSubscriptionViewController () <UISearchBarDelegate, SYNPagingModelDelegate, SYNChannelMidCellDelegate>
+@interface SYNProfileSubscriptionViewController () <UISearchBarDelegate, SYNPagingModelDelegate, SYNChannelMidCellDelegate,SYNSearchResultsUserCellDelegate>
+
 @property (strong, nonatomic) IBOutlet UICollectionViewFlowLayout *defaultLayout;
 @property (nonatomic, strong) IBOutlet UIView *fakeNavigationBar;
 @property (nonatomic, strong) IBOutlet UILabel *fakeNavigationBarTitle;
@@ -53,12 +57,16 @@ forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
     [self.cv registerNib: [SYNChannelSearchCell nib]
 forCellWithReuseIdentifier:[SYNChannelSearchCell reuseIdentifier]];
     
+	[self.cv registerNib: [SYNSearchResultsUserCell nib]
+forCellWithReuseIdentifier:[SYNSearchResultsUserCell reuseIdentifier]];
+
+	
     [self.cv registerNib:[SYNChannelFooterMoreView nib]
 forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
      withReuseIdentifier:[SYNChannelFooterMoreView reuseIdentifier]];
     
     //    [self setUpSearchBar];
-    self.filteredSubscriptions = [self.channelOwner.subscriptions array];
+    self.filteredSubscriptions = [self.channelOwner.userSubscriptionsSet array];
     
     if (self.isUserProfile && IS_IPHONE) {
         
@@ -162,21 +170,25 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     
     NSInteger index = indexPath.row;
     
-	SYNChannelMidCell *channelThumbnailCell = [collectionView dequeueReusableCellWithReuseIdentifier: [SYNChannelMidCell reuseIdentifier] forIndexPath: indexPath];
+	SYNSearchResultsUserCell *channelThumbnailCell = [collectionView dequeueReusableCellWithReuseIdentifier: [SYNSearchResultsUserCell reuseIdentifier] forIndexPath: indexPath];
 	
-	Channel *channel;
+	ChannelOwner *channelOwner;
 	
 	if (index < [self.filteredSubscriptions count]) {
-		channel = self.filteredSubscriptions[index];
+		channelOwner = self.filteredSubscriptions[index];
 		//text is set in the channelmidcell setChannel method
-		channelThumbnailCell.channel = channel;
+		channelThumbnailCell.channelOwner = channelOwner;
 	} else {
-		channelThumbnailCell.channel = nil;
+		channelThumbnailCell.channelOwner = nil;
 	}
 	
 	
-		channelThumbnailCell.followButton.hidden = NO;
-	channelThumbnailCell.viewControllerDelegate = self;
+	channelThumbnailCell.followButton.selected = [[SYNActivityManager sharedInstance] isSubscribedToUserId:channelOwner.uniqueId];
+	
+//	NSLog(@"Subed to %@   %hhd", channelOwner.username, );
+		
+//	channelThumbnailCell.followButton.hidden = NO;
+	channelThumbnailCell.delegate = self;
 	
     return channelThumbnailCell;
 }
@@ -184,22 +196,20 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 - (void) collectionView: (UICollectionView *) collectionView didSelectItemAtIndexPath: (NSIndexPath *) indexPath {
 	
 	
-	if (self.showingDescription) {
-		[self hideDescriptionCurrentlyShowing];
-	}
+//	if (self.showingDescription) {
+//		[self hideDescriptionCurrentlyShowing];
+//	}
 
-    SYNChannelMidCell* cell = (SYNChannelMidCell*)[collectionView cellForItemAtIndexPath:indexPath];
-
-    if (cell.state != ChannelMidCellStateDefault) {
-        [cell setState: ChannelMidCellStateDefault withAnimation:YES];
-        return;
-    }
+//    SYNChannelMidCell* cell = (SYNChannelMidCell*)[collectionView cellForItemAtIndexPath:indexPath];
+//
+//    if (cell.state != ChannelMidCellStateDefault) {
+//        [cell setState: ChannelMidCellStateDefault withAnimation:YES];
+//        return;
+//    }
     
     if (indexPath.row < [self.filteredSubscriptions count]) {
-        
-        Channel *channel = self.filteredSubscriptions[indexPath.row];
-        SYNChannelDetailsViewController *channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeDisplay];
-        [self.navigationController pushViewController:channelVC animated:YES];
+        ChannelOwner *channelOwner = (ChannelOwner*)(self.filteredSubscriptions[indexPath.row]);
+        [self viewProfileDetails:channelOwner];
     }
     
     return;
@@ -251,9 +261,9 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     
     if (IS_IPHONE) {
         if (self.isUserProfile) {
-            return CGSizeMake(320, OWNUSERHEADERHEIGHT);
+            return CGSizeMake(320, 560);
         } else {
-            return CGSizeMake(320, 516);
+            return CGSizeMake(320, 560);
         }
     } else {
         if (UIDeviceOrientationIsPortrait([[SYNDeviceManager sharedInstance] orientation])) {
