@@ -501,9 +501,12 @@ static const CGFloat TransitionDuration = 0.5f;
 											   {
 												   [self.channelOwner setAttributesFromDictionary: dictionary
 																			  ignoringObjectTypes: kIgnoreNothing];
+
+												   self.channelCollectionViewController.channelOwner = self.channelOwner;
 												   [self.channelCollectionViewController.cv reloadData];
 
-												   
+											;
+
 											   }
 										   } onError: nil];
 		

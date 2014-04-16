@@ -45,15 +45,19 @@
 
     MKNKUserSuccessBlock successBlock = ^(NSDictionary *dictionary) {
 		__strong typeof(self) sself = wself;
+		sself.totalItemCount = [dictionary[@"channels"][@"total"] intValue];
 		
 		BOOL isInitalPage = (range.location == 0);
 		if (isInitalPage) {
             [sself.channelOwner setSubscriptionsDictionary: dictionary];
 		} else {
-			[sself.channelOwner addChannelsFromDictionary: dictionary];
+			
+			// This is bad, need to fix. getting doubles because of the double server call
+			if (sself.channelOwner.channelsSet.count < sself.totalItemCount) {
+				[sself.channelOwner addChannelsFromDictionary: dictionary];				
+			}
 		}
 		
-		sself.totalItemCount = [dictionary[@"channels"][@"total"] intValue];		
 				
 		sself.loadedItems = [sself.channelOwner.channelsSet array];
         
