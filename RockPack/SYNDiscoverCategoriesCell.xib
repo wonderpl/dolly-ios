@@ -21,12 +21,8 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rightarrow.png" translatesAutoresizingMaskIntoConstraints="NO" id="7ma-il-ldL">
-                        <rect key="frame" x="226" y="0.0" width="30" height="44"/>
+                        <rect key="frame" x="235" y="14" width="9" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="44" id="W10-Aa-L62"/>
-                            <constraint firstAttribute="width" constant="30" id="rQd-oR-e4W"/>
-                        </constraints>
                     </imageView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -34,7 +30,7 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="VDA-cz-Gkg" firstAttribute="top" secondItem="DiE-ts-EYH" secondAttribute="top" id="FOG-nv-hqd"/>
-                <constraint firstAttribute="trailing" secondItem="7ma-il-ldL" secondAttribute="trailing" id="QHe-pw-XaA"/>
+                <constraint firstAttribute="trailing" secondItem="7ma-il-ldL" secondAttribute="trailing" constant="12" id="QHe-pw-XaA"/>
                 <constraint firstAttribute="bottom" secondItem="VDA-cz-Gkg" secondAttribute="bottom" id="RFq-eY-xVk"/>
                 <constraint firstAttribute="centerY" secondItem="7ma-il-ldL" secondAttribute="centerY" id="bq8-Di-eid"/>
                 <constraint firstItem="VDA-cz-Gkg" firstAttribute="leading" secondItem="DiE-ts-EYH" secondAttribute="leading" id="lkf-Ob-NaB"/>
