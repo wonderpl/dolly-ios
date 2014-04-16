@@ -51,21 +51,27 @@
 		if (isInitalPage) {
 			[sself.channelOwner setSubscriptionsDictionary:dictionary];
 		} else {
-			[sself.channelOwner addSubscriptionsFromDictionary: dictionary];
+
+		//TODO:Paging
 		}
 		
-		sself.totalItemCount = [dictionary[@"channels"][@"total"] intValue];
+		sself.totalItemCount = [dictionary[@"users"][@"total"] intValue];
 
-		NSMutableArray *arr = [NSMutableArray arrayWithArray:[sself.channelOwner.subscriptionsSet array]];
+		
+		NSMutableArray *arr = [NSMutableArray arrayWithArray:[sself.channelOwner.userSubscriptionsSet array]];
 		sself.loadedItems = arr;
-        [sself handleDataUpdatedForRange:range];
+
+		[sself handleDataUpdatedForRange:range];
     };
     
     MKNKUserErrorBlock errorBlock = ^(NSDictionary *errorDictionary) {
         DebugLog(@"Update action failed");
     };
 
-	[appDelegate.oAuthNetworkEngine subscriptionsForUserId: wself.channelOwner.uniqueId
+	
+	//Secure request not implemented
+	//sing http for now
+	[appDelegate.networkEngine subscriptionsForUserId: wself.channelOwner.uniqueId
 												   inRange: range
 										 completionHandler: successBlock
 											  errorHandler: errorBlock];
