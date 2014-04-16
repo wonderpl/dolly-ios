@@ -19,6 +19,8 @@
 -(void)awakeFromNib {
     [super awakeFromNib];
     self.layer.borderWidth = 1.0f;
+
+
 }
 
 -(void)setSelected:(BOOL)selected {
@@ -27,16 +29,15 @@
     if(selected) {
         self.layer.borderColor = [self.selectedBorderColor CGColor];
         [self setTitle:NSLocalizedString(@"unfollow", nil)];
-        [self setTitleColor: self.selectedColor
-                   forState: UIControlStateSelected];
 		self.titleLabel.font = self.selectedFont;
-        
+		[self setTitleColor: self.selectedColor
+				   forState: UIControlStateSelected];
     } else {
         self.layer.borderColor = [self.defaultBorderColor CGColor];
         [self setTitle:NSLocalizedString(@"follow", nil)];
-        [self setTitleColor: self.defaultColor
-                   forState: UIControlStateNormal];
 		self.titleLabel.font = self.defaultFont;
+		[self setTitleColor: self.defaultColor
+				   forState: UIControlStateNormal];
     }
 }
 
