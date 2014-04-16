@@ -12,4 +12,6 @@
 
 + (NSString *)timecodeStringFromSeconds:(NSTimeInterval)timeSeconds;
 
++ (NSString *)friendlyLengthFromTimeInterval:(NSTimeInterval)timeInterval;
+
 @end

@@ -24,4 +24,26 @@
 	return [NSString stringWithFormat:@"%ld:%02ld", (long)minutes, (long)seconds];
 }
 
++ (NSString *)friendlyLengthFromTimeInterval:(NSTimeInterval)timeInterval {
+	NSInteger timeInSeconds = timeInterval;
+	
+	NSInteger minutes = MAX(1, round(timeInSeconds / 60.0));
+	NSInteger hours = ((timeInSeconds / 60) / 60);
+	
+	if (hours) {
+		NSInteger roundedMinutes = round((minutes % 60) / 15.0) * 15;
+		if (roundedMinutes == 60) {
+			hours++;
+			roundedMinutes = 0;
+		}
+		if (roundedMinutes) {
+			return [NSString stringWithFormat:@"%d HR %d MIN WATCH", hours, roundedMinutes];
+		} else {
+			return [NSString stringWithFormat:@"%d HR WATCH", hours];
+		}
+	}
+
+	return [NSString stringWithFormat:@"%d MIN WATCH", minutes];
+}
+
 @end
