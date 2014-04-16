@@ -13,6 +13,7 @@
 #import "UIFont+SYNFont.h"
 #import "UIColor+SYNColor.h"
 #import "SYNSocialFollowButton.h"
+#import "SYNFollowDiscoverButton.h"
 @interface SYNProfileHeader ()
 
 @property (nonatomic, strong) IBOutlet UIButton *avatarButton;
@@ -23,7 +24,7 @@
 @property (nonatomic, strong) IBOutlet UITextView *aboutMeTextView;
 @property (nonatomic, strong) IBOutlet UIView *segmentedControlsView;
 @property (nonatomic, strong) IBOutlet UIButton *moreButton;
-@property (nonatomic, strong) IBOutlet SYNSocialFollowButton *followAllButton;
+@property (nonatomic, strong) IBOutlet SYNFollowDiscoverButton *followAllButton;
 @property (nonatomic, strong) IBOutlet UILabel *followersCountLabel;
 @property (strong, nonatomic) IBOutlet UIView *avatarBorder;
 
@@ -113,7 +114,7 @@
 }
 
 - (void) setUpDescriptionTextView {
-    self.aboutMeTextView.font = [UIFont lightCustomFontOfSize:11];
+    self.aboutMeTextView.font = [UIFont regularCustomFontOfSize:20];
 	self.aboutMeTextView.textAlignment = NSTextAlignmentCenter;
 	self.aboutMeTextView.textColor = [UIColor colorWithWhite:120/255.0 alpha:1.0];
     [[self.aboutMeTextView layer] setBorderColor:[[UIColor colorWithRed:172.0/255.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f] CGColor]];
@@ -132,7 +133,7 @@
 	
     [self.userNameLabel setFont:[UIFont regularCustomFontOfSize:self.userNameLabel.font.pointSize]];
     self.userNameLabel.textColor = [UIColor colorWithWhite:120/255.0 alpha:1.0];
-    self.fullNameLabel.font = [UIFont regularCustomFontOfSize:self.fullNameLabel.font.pointSize];
+    self.fullNameLabel.font = [UIFont boldCustomFontOfSize:self.fullNameLabel.font.pointSize];
 
     [self setUpDescriptionTextView];
     
@@ -164,10 +165,14 @@
     }
     else {
         tmpString = [[NSString alloc] initWithFormat:@"%lld %@", self.channelOwner.subscribersCountValue, NSLocalizedString(@"followers", "followers count in profile")];
-    }
+
+    
+		tmpString = [[NSString alloc] initWithFormat:@"%lld %@", self.channelOwner.subscribersCountValue, NSLocalizedString(@"followers", "followers count in profile")];
+
+	}
     
     [self.followersCountLabel setText:tmpString];
-    [self.followersCountLabel setFont:[UIFont  regularCustomFontOfSize:self.followersCountLabel.font.pointSize]];
+    [self.followersCountLabel setFont:[UIFont lightCustomFontOfSize:self.followersCountLabel.font.pointSize]];
 }
 
 -(void) setIsUserProfile:(BOOL)isUserProfile {

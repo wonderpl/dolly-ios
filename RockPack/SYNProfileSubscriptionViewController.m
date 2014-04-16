@@ -174,6 +174,8 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 		channelThumbnailCell.channel = nil;
 	}
 	
+	
+		channelThumbnailCell.followButton.hidden = NO;
 	channelThumbnailCell.viewControllerDelegate = self;
 	
     return channelThumbnailCell;
@@ -403,5 +405,19 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 - (BOOL)isUserProfile {
 	return [_channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId];
 }
+
+- (void)profileButtonTapped:(UIButton *)button {
+	
+	
+	NSLog(@"PROFILE BUTTON TAPPED");
+	
+}
+
+- (void)followControlPressed:(UIButton *)button {
+	
+	NSLog(@"FOLLOW CONTROLL TAPPED");
+	
+}
+
 
 @end

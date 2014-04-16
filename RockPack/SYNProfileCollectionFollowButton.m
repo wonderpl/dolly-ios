@@ -1,16 +1,16 @@
 //
-//  SYNFollowUserButton.m
+//  SYNProfileCollectionFollowButton.m
 //  dolly
 //
-//  Created by Cong on 07/01/2014.
-//  Copyright (c) 2014 Rockpack Ltd. All rights reserved.
+//  Created by Cong Le on 15/04/2014.
+//  Copyright (c) 2014 Wonder PL Ltd. All rights reserved.
 //
 
-#import "SYNFollowDiscoverButton.h"
+#import "SYNProfileCollectionFollowButton.h"
 #import "UIColor+SYNColor.h"
 #import "UIFont+SYNFont.h"
 
-@implementation SYNFollowDiscoverButton
+@implementation SYNProfileCollectionFollowButton
 
 
 -(void)awakeFromNib
@@ -20,11 +20,11 @@
 }
 
 - (UIColor*) selectedColor {
-	return [UIColor whiteColor];
+	return [UIColor dollyGreen];
 }
 
 - (UIColor*) defaultColor {
-	return [UIColor whiteColor];
+	return [UIColor dollyTextMediumGray];
 }
 
 - (UIFont*)selectedFont {
@@ -36,11 +36,12 @@
 }
 
 - (UIColor*) selectedBorderColor {
-	return [UIColor colorWithWhite:1.0 alpha:0.7];
+	return [UIColor dollyGreen];
 }
 
 - (UIColor*) defaultBorderColor {
-	return [UIColor colorWithWhite:1.0 alpha:0.7];
+	return [UIColor dollyTextMediumGray];
 }
+
 
 @end

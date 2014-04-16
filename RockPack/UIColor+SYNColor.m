@@ -194,6 +194,14 @@ return [UIColor colorWithRed: 136.0f / 255.0f
     return nil;
 }
 
++ (UIColor*)dollyGreen {
+	
+	return [UIColor colorWithRed: 81.0f / 255.0f
+                           green: 179.0f / 255.0f
+                            blue: 100.0f / 255.0f
+                           alpha: 1.0f];
+}
+
 + (UIColor *)defaultCategoryColor {
 	return WA(200, 1);
 }

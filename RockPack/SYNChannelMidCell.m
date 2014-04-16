@@ -14,6 +14,8 @@
 #import "ChannelOwner.h"
 #import "SYNAppDelegate.h"
 #import "SYNGenreManager.h"
+#import "SYNActivityManager.h"
+
 
 @import QuartzCore;
 
@@ -89,8 +91,8 @@
     self.followerCountLabel.text = @"";
     self.descriptionLabel.text = @"";
     [self.view.layer setBorderWidth:0.0f];
-    self.bottomBarView.backgroundColor = [UIColor clearColor];
-    self.followButton.hidden = YES;
+//    self.bottomBarView.backgroundColor = [UIColor clearColor];
+//    self.followButton.hidden = NO;
     self.deletableCell = NO;
 }
 
@@ -137,6 +139,8 @@
 	
 	self.separatorView.hidden = NO;
 	
+	self.followButton.selected = [[SYNActivityManager sharedInstance] isSubscribedToChannelId:self.channel.uniqueId];
+	
 }
 
 - (void)setFollowButtonLabel:(NSString*) strFollowLabel {
@@ -144,8 +148,6 @@
 }
 
 - (IBAction)rightSwipe:(UISwipeGestureRecognizer *)recognizer {
-	
-	NSLog(@"rightSwipe");
 	
     if (self.state == ChannelMidCellStateDefault) {
 		[self.viewControllerDelegate cellStateChanged];
@@ -177,7 +179,9 @@
 }
 
 - (IBAction)followChannel:(id)sender {
-    [self.viewControllerDelegate followButtonTapped: self];
+	
+	//TODO:Implement follow button
+	
 }
 
 - (void)setBorder {
@@ -300,7 +304,7 @@
 }
 
 - (void)setCategoryColor: (UIColor*) color {
-    [self.bottomBarView setBackgroundColor:color];
+//    [self.bottomBarView setBackgroundColor:color];
     [self.view setBackgroundColor:color];
     [self.descriptionLabel setBackgroundColor:color];
 }

@@ -298,8 +298,8 @@
 		4C22750E18F6D471009C5242 /* rightarrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C22750C18F6D471009C5242 /* rightarrow@2x.png */; };
 		4C22752018F6E654009C5242 /* searchbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C22751E18F6E654009C5242 /* searchbar.png */; };
 		4C22752118F6E654009C5242 /* searchbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C22751F18F6E654009C5242 /* searchbar@2x.png */; };
-		4C5C390718EF09E6007250EE /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5C390618EF09E6007250EE /* UIPlaceHolderTextView.m */; };
 		4C56F15818CF76E0005E4A7C /* SYNIPhoneCreateChannelLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C56F15718CF76E0005E4A7C /* SYNIPhoneCreateChannelLayout.m */; };
+		4C5C390718EF09E6007250EE /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5C390618EF09E6007250EE /* UIPlaceHolderTextView.m */; };
 		4C5E85F018B620A200D0E937 /* SYNInBoardingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5E85EE18B620A200D0E937 /* SYNInBoardingViewController.m */; };
 		4C5E85FE18B6306A00D0E937 /* SYNOnBoardingOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5E85FC18B6306A00D0E937 /* SYNOnBoardingOverlayViewController.m */; };
 		4C5E85FF18B6306A00D0E937 /* SYNOnBoardingOverlayViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C5E85FD18B6306A00D0E937 /* SYNOnBoardingOverlayViewController~iphone.xib */; };
@@ -318,21 +318,22 @@
 		4C5E862C18B6816400D0E937 /* SYNCollectectionDetailsOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5E862A18B6816400D0E937 /* SYNCollectectionDetailsOverlayViewController.m */; };
 		4C5E862D18B6816400D0E937 /* SYNCollectectionDetailsOverlayViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C5E862B18B6816400D0E937 /* SYNCollectectionDetailsOverlayViewController~iphone.xib */; };
 		4C5E862F18B6819400D0E937 /* SYNCollectectionDetailsOverlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C5E862E18B6819400D0E937 /* SYNCollectectionDetailsOverlayViewController.xib */; };
+		4C63487318E5CBFB00FF7168 /* SYNProfileViewControllerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C63487218E5CBFB00FF7168 /* SYNProfileViewControllerSpec.m */; };
+		4C63487518E5E04600FF7168 /* SYNProfileChannelViewControllerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C63487418E5E04600FF7168 /* SYNProfileChannelViewControllerSpec.m */; };
+		4C63487918E5E65E00FF7168 /* SYNProfileEditViewControllerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C63487818E5E65E00FF7168 /* SYNProfileEditViewControllerSpec.m */; };
 		4C6FD75018EC215F0068FF84 /* SYNDiscoverSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6FD74F18EC215F0068FF84 /* SYNDiscoverSectionHeaderView.m */; };
 		4C6FD75218EC217B0068FF84 /* SYNDiscoverSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C6FD75118EC217B0068FF84 /* SYNDiscoverSectionHeaderView.xib */; };
+		4C72DD4A18FD96E6004AC132 /* SYNProfileCollectionFollowButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C72DD4918FD96E6004AC132 /* SYNProfileCollectionFollowButton.m */; };
+		4C9B519918D71FCB00A3AB0D /* Profile_IPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C9B519818D71FCB00A3AB0D /* Profile_IPad.storyboard */; };
+		4C9B519B18D721D600A3AB0D /* SYNProfileHeader~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C9B519A18D721D600A3AB0D /* SYNProfileHeader~ipad.xib */; };
+		4C9B519E18D72B5100A3AB0D /* SYNIPadCreateChannelLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9B519D18D72B5100A3AB0D /* SYNIPadCreateChannelLayout.m */; };
+		4C9B51A218D74A7200A3AB0D /* Profile_IPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C9B51A118D74A7200A3AB0D /* Profile_IPhone.storyboard */; };
 		4CADB33318F2C34E00409996 /* Moods.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CADB32D18F2C34E00409996 /* Moods.png */; };
 		4CADB33418F2C34E00409996 /* Moods@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CADB32E18F2C34E00409996 /* Moods@2x.png */; };
 		4CADB33518F2C34E00409996 /* MoodsActive.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CADB32F18F2C34E00409996 /* MoodsActive.png */; };
 		4CADB33618F2C34E00409996 /* MoodsActive@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CADB33018F2C34E00409996 /* MoodsActive@2x.png */; };
 		4CADB33718F2C34E00409996 /* MoodsSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CADB33118F2C34E00409996 /* MoodsSelected.png */; };
 		4CADB33818F2C34E00409996 /* MoodsSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CADB33218F2C34E00409996 /* MoodsSelected@2x.png */; };
-		4C63487318E5CBFB00FF7168 /* SYNProfileViewControllerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C63487218E5CBFB00FF7168 /* SYNProfileViewControllerSpec.m */; };
-		4C63487518E5E04600FF7168 /* SYNProfileChannelViewControllerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C63487418E5E04600FF7168 /* SYNProfileChannelViewControllerSpec.m */; };
-		4C63487918E5E65E00FF7168 /* SYNProfileEditViewControllerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C63487818E5E65E00FF7168 /* SYNProfileEditViewControllerSpec.m */; };
-		4C9B519918D71FCB00A3AB0D /* Profile_IPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C9B519818D71FCB00A3AB0D /* Profile_IPad.storyboard */; };
-		4C9B519B18D721D600A3AB0D /* SYNProfileHeader~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C9B519A18D721D600A3AB0D /* SYNProfileHeader~ipad.xib */; };
-		4C9B519E18D72B5100A3AB0D /* SYNIPadCreateChannelLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9B519D18D72B5100A3AB0D /* SYNIPadCreateChannelLayout.m */; };
-		4C9B51A218D74A7200A3AB0D /* Profile_IPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C9B51A118D74A7200A3AB0D /* Profile_IPhone.storyboard */; };
 		4CB63A6E18BD052E00825F7C /* placeholderwhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CB63A6D18BD052E00825F7C /* placeholderwhite.png */; };
 		4CCAD0B218D7520F00EC0F03 /* SYNProfileChannelModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCAD0B118D7520F00EC0F03 /* SYNProfileChannelModel.m */; };
 		4CCAD0B518D7530600EC0F03 /* SYNProfileSubscriptionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCAD0B418D7530600EC0F03 /* SYNProfileSubscriptionModel.m */; };
@@ -1087,6 +1088,7 @@
 		4C0CAF3918EB0ABA004A2911 /* SYNProfileNavigationBarDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYNProfileNavigationBarDelegate.h; sourceTree = "<group>"; };
 		4C102A3A1896D80E00C367E8 /* IconWonderAbout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IconWonderAbout.png; sourceTree = "<group>"; };
 		4C102A3B1896D80E00C367E8 /* IconWonderAbout@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "IconWonderAbout@2x.png"; sourceTree = "<group>"; };
+		4C1D30A718D9ECAC00F96F7C /* SYNProfileEditDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYNProfileEditDelegate.h; sourceTree = "<group>"; };
 		4C1DBBEA18E48E5D0047CAFA /* SYNIPadSignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNIPadSignupViewController.h; sourceTree = "<group>"; };
 		4C1DBBEB18E48E5D0047CAFA /* SYNIPadSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNIPadSignupViewController.m; sourceTree = "<group>"; };
 		4C22750B18F6D471009C5242 /* rightarrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rightarrow.png; sourceTree = "<group>"; };
@@ -1094,12 +1096,10 @@
 		4C22751E18F6E654009C5242 /* searchbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchbar.png; sourceTree = "<group>"; };
 		4C22751F18F6E654009C5242 /* searchbar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchbar@2x.png"; sourceTree = "<group>"; };
 		4C30407718BB6972006B5463 /* SYNCommentUpdateDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYNCommentUpdateDelegate.h; sourceTree = "<group>"; };
-		4C5C390518EF09E6007250EE /* UIPlaceHolderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPlaceHolderTextView.h; sourceTree = "<group>"; };
-		4C5C390618EF09E6007250EE /* UIPlaceHolderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPlaceHolderTextView.m; sourceTree = "<group>"; };
-		4C1D30A718D9ECAC00F96F7C /* SYNProfileEditDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYNProfileEditDelegate.h; sourceTree = "<group>"; };
-		4C30407718BB6972006B5463 /* SYNCommentUpdateDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYNCommentUpdateDelegate.h; sourceTree = "<group>"; };
 		4C56F15618CF76E0005E4A7C /* SYNIPhoneCreateChannelLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNIPhoneCreateChannelLayout.h; sourceTree = "<group>"; };
 		4C56F15718CF76E0005E4A7C /* SYNIPhoneCreateChannelLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNIPhoneCreateChannelLayout.m; sourceTree = "<group>"; };
+		4C5C390518EF09E6007250EE /* UIPlaceHolderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPlaceHolderTextView.h; sourceTree = "<group>"; };
+		4C5C390618EF09E6007250EE /* UIPlaceHolderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPlaceHolderTextView.m; sourceTree = "<group>"; };
 		4C5E85ED18B620A200D0E937 /* SYNInBoardingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNInBoardingViewController.h; sourceTree = "<group>"; };
 		4C5E85EE18B620A200D0E937 /* SYNInBoardingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNInBoardingViewController.m; sourceTree = "<group>"; };
 		4C5E85FB18B6306A00D0E937 /* SYNOnBoardingOverlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNOnBoardingOverlayViewController.h; sourceTree = "<group>"; };
@@ -1124,24 +1124,26 @@
 		4C5E862A18B6816400D0E937 /* SYNCollectectionDetailsOverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNCollectectionDetailsOverlayViewController.m; sourceTree = "<group>"; };
 		4C5E862B18B6816400D0E937 /* SYNCollectectionDetailsOverlayViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNCollectectionDetailsOverlayViewController~iphone.xib"; sourceTree = "<group>"; };
 		4C5E862E18B6819400D0E937 /* SYNCollectectionDetailsOverlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNCollectectionDetailsOverlayViewController.xib; sourceTree = "<group>"; };
-		4C6FD74E18EC215F0068FF84 /* SYNDiscoverSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNDiscoverSectionHeaderView.h; sourceTree = "<group>"; };
-		4C6FD74F18EC215F0068FF84 /* SYNDiscoverSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNDiscoverSectionHeaderView.m; sourceTree = "<group>"; };
-		4C6FD75118EC217B0068FF84 /* SYNDiscoverSectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNDiscoverSectionHeaderView.xib; sourceTree = "<group>"; };
-		4CADB32D18F2C34E00409996 /* Moods.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Moods.png; sourceTree = "<group>"; };
-		4CADB32E18F2C34E00409996 /* Moods@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Moods@2x.png"; sourceTree = "<group>"; };
-		4CADB32F18F2C34E00409996 /* MoodsActive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MoodsActive.png; sourceTree = "<group>"; };
-		4CADB33018F2C34E00409996 /* MoodsActive@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MoodsActive@2x.png"; sourceTree = "<group>"; };
-		4CADB33118F2C34E00409996 /* MoodsSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MoodsSelected.png; sourceTree = "<group>"; };
-		4CADB33218F2C34E00409996 /* MoodsSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MoodsSelected@2x.png"; sourceTree = "<group>"; };
 		4C63487218E5CBFB00FF7168 /* SYNProfileViewControllerSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNProfileViewControllerSpec.m; sourceTree = "<group>"; };
 		4C63487418E5E04600FF7168 /* SYNProfileChannelViewControllerSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNProfileChannelViewControllerSpec.m; sourceTree = "<group>"; };
 		4C63487818E5E65E00FF7168 /* SYNProfileEditViewControllerSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNProfileEditViewControllerSpec.m; sourceTree = "<group>"; };
+		4C6FD74E18EC215F0068FF84 /* SYNDiscoverSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNDiscoverSectionHeaderView.h; sourceTree = "<group>"; };
+		4C6FD74F18EC215F0068FF84 /* SYNDiscoverSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNDiscoverSectionHeaderView.m; sourceTree = "<group>"; };
+		4C6FD75118EC217B0068FF84 /* SYNDiscoverSectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNDiscoverSectionHeaderView.xib; sourceTree = "<group>"; };
+		4C72DD4818FD96E6004AC132 /* SYNProfileCollectionFollowButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNProfileCollectionFollowButton.h; sourceTree = "<group>"; };
+		4C72DD4918FD96E6004AC132 /* SYNProfileCollectionFollowButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNProfileCollectionFollowButton.m; sourceTree = "<group>"; };
 		4C9B519818D71FCB00A3AB0D /* Profile_IPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile_IPad.storyboard; sourceTree = "<group>"; };
 		4C9B519A18D721D600A3AB0D /* SYNProfileHeader~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNProfileHeader~ipad.xib"; sourceTree = "<group>"; };
 		4C9B519C18D72B5100A3AB0D /* SYNIPadCreateChannelLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNIPadCreateChannelLayout.h; sourceTree = "<group>"; };
 		4C9B519D18D72B5100A3AB0D /* SYNIPadCreateChannelLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNIPadCreateChannelLayout.m; sourceTree = "<group>"; };
 		4C9B51A118D74A7200A3AB0D /* Profile_IPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile_IPhone.storyboard; sourceTree = "<group>"; };
 		4CAC2B0D18E070C2004AB77E /* SYNProfileHeaderDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYNProfileHeaderDelegate.h; sourceTree = "<group>"; };
+		4CADB32D18F2C34E00409996 /* Moods.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Moods.png; sourceTree = "<group>"; };
+		4CADB32E18F2C34E00409996 /* Moods@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Moods@2x.png"; sourceTree = "<group>"; };
+		4CADB32F18F2C34E00409996 /* MoodsActive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MoodsActive.png; sourceTree = "<group>"; };
+		4CADB33018F2C34E00409996 /* MoodsActive@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MoodsActive@2x.png"; sourceTree = "<group>"; };
+		4CADB33118F2C34E00409996 /* MoodsSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MoodsSelected.png; sourceTree = "<group>"; };
+		4CADB33218F2C34E00409996 /* MoodsSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MoodsSelected@2x.png"; sourceTree = "<group>"; };
 		4CB63A6D18BD052E00825F7C /* placeholderwhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholderwhite.png; sourceTree = "<group>"; };
 		4CCAD0B018D7520F00EC0F03 /* SYNProfileChannelModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNProfileChannelModel.h; sourceTree = "<group>"; };
 		4CCAD0B118D7520F00EC0F03 /* SYNProfileChannelModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNProfileChannelModel.m; sourceTree = "<group>"; };
@@ -3666,6 +3668,8 @@
 				BEB31372181AC6DB00FAF98A /* SYNSocialAddButton.h */,
 				BEB31373181AC6DB00FAF98A /* SYNSocialAddButton.m */,
 				BEE01B58184F5868000CF681 /* SYNSocialFollowButton.h */,
+				4C72DD4818FD96E6004AC132 /* SYNProfileCollectionFollowButton.h */,
+				4C72DD4918FD96E6004AC132 /* SYNProfileCollectionFollowButton.m */,
 				BEE01B59184F5868000CF681 /* SYNSocialFollowButton.m */,
 				0ECBED38187C66F900F28EB2 /* SYNFollowDiscoverButton.h */,
 				0ECBED39187C66F900F28EB2 /* SYNFollowDiscoverButton.m */,
@@ -4541,6 +4545,7 @@
 				E9E1E28018561C780051E312 /* SYNiPhonePopoverAnimator.m in Sources */,
 				015487CF16DCD2A1002A41A2 /* SYNYouTubeVideoPlaybackViewController.m in Sources */,
 				0194FD2316DE6FE90058A7C2 /* SYNVideoThumbnailCell.m in Sources */,
+				4C72DD4A18FD96E6004AC132 /* SYNProfileCollectionFollowButton.m in Sources */,
 				0173F70816E0C56B005B3ECA /* SYNVideoViewerThumbnailLayout.m in Sources */,
 				BEE01B6D18521418000CF681 /* SYNSocialCommentButton.m in Sources */,
 				BEE01B7618573292000CF681 /* _Mood.m in Sources */,
