@@ -15,7 +15,7 @@
 #import "SYNAvatarButton.h"
 #import "SYNActivityManager.h"
 #import "UIImageView+WebCache.h"
-
+#import "SYNFollowDiscoverButton.h"
 
 @interface SYNSearchResultsUserCell ()
 
@@ -66,12 +66,6 @@
 	
 	self.followButton.dataItemLinked = channelOwner;
     
-    
-    
-//    [self.userNameLabelButton setTitle:channelOwner.displayName forState:UIControlStateNormal];
-//    self.userNameLabelButton.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-//    self.userNameLabelButton.titleLabel.numberOfLines = 2;
-    
     [self.userNameLabel setText: channelOwner.displayName];
     
     [self.descriptionLabel setText:channelOwner.channelOwnerDescription];
@@ -102,7 +96,7 @@
 
     channelOwner.subscribedByUserValue = [[SYNActivityManager sharedInstance] isSubscribedToUserId:channelOwner.uniqueId];
     
-    if (channelOwner.subscribedByUserValue == NO) {
+    if (!channelOwner.subscribedByUserValue) {
         [self.followButton setTitle:NSLocalizedString(@"follow", "follow discover screen") forState:UIControlStateNormal];
     }
     else
