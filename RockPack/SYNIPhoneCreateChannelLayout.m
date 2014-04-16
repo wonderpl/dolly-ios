@@ -18,7 +18,7 @@
     self.sectionInset = UIEdgeInsetsMake(0, 0, 300, 0);
     self.minimumInteritemSpacing = 0.0f;
     self.minimumLineSpacing = 0.0f;
-    self.itemSize = CGSizeMake(320.0f, 71);
+    self.itemSize = CGSizeMake(320.0f, 91);
     self.headerReferenceSize = CGSizeZero;
     
     
