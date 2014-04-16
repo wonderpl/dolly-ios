@@ -299,12 +299,12 @@
         
         if ([appDelegate.currentUser.uniqueId isEqualToString:self.channelOwner.uniqueId])
         {
-            self.title = [NSString stringWithFormat:@"MY %@", NSLocalizedString(@"FAVORITES", nil)];
+            self.title = [NSString stringWithFormat:@"My %@", NSLocalizedString(@"Favorites", nil)];
         }
         else
         {
-			NSString *displayName = [[self.channelOwner.displayName apostrophisedString] uppercaseString];
-			self.title = [NSString stringWithFormat:@"%@ %@", displayName, NSLocalizedString(@"FAVORITES", nil)];
+			NSString *displayName = [self.channelOwner.displayName apostrophisedString];
+			self.title = [NSString stringWithFormat:@"%@ %@", displayName, NSLocalizedString(@"Favorites", nil)];
         }
     }
 }

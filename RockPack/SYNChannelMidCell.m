@@ -90,8 +90,6 @@
     self.followerCountLabel.text = @"";
     self.descriptionLabel.text = @"";
     [self.view.layer setBorderWidth:0.0f];
-//    self.bottomBarView.backgroundColor = [UIColor clearColor];
-//    self.followButton.hidden = NO;
     self.deletableCell = NO;
 }
 
@@ -135,7 +133,7 @@
 	self.followerCountLabel.text = labelText;
 	
 	self.descriptionLabel.text = channel.channelDescription;
-    self.videoTitleLabel.text =  [channel.title uppercaseString];
+    self.videoTitleLabel.text =  channel.title;
     [self.videoTitleLabel setFont:[UIFont boldCustomFontOfSize:self.videoTitleLabel.font.pointSize]];
     [self.followerCountLabel setFont:[UIFont regularCustomFontOfSize:self.followerCountLabel.font.pointSize]];
     [self.followerCountLabel setFont:[UIFont regularCustomFontOfSize:self.followerCountLabel.font.pointSize]];
