@@ -6,11 +6,11 @@
 //  Copyright (c) 2014 Wonder PL Ltd. All rights reserved.
 //
 
-#import "SYNProfileCollectionFollowButton.h"
+#import "SYNFollowChannelButton.h"
 #import "UIColor+SYNColor.h"
 #import "UIFont+SYNFont.h"
 
-@implementation SYNProfileCollectionFollowButton
+@implementation SYNFollowChannelButton
 
 
 -(void)awakeFromNib
@@ -24,7 +24,7 @@
 }
 
 - (UIColor*) defaultColor {
-	return [UIColor dollyGreen];
+	return [UIColor dollyTextMediumGray];
 }
 
 - (UIFont*)selectedFont {
@@ -40,7 +40,7 @@
 }
 
 - (UIColor*) defaultBorderColor {
-	return [UIColor dollyGreen];
+	return [UIColor dollyTextMediumGray];
 }
 
 

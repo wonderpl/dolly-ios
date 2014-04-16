@@ -323,7 +323,7 @@
 		4C63487918E5E65E00FF7168 /* SYNProfileEditViewControllerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C63487818E5E65E00FF7168 /* SYNProfileEditViewControllerSpec.m */; };
 		4C6FD75018EC215F0068FF84 /* SYNDiscoverSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6FD74F18EC215F0068FF84 /* SYNDiscoverSectionHeaderView.m */; };
 		4C6FD75218EC217B0068FF84 /* SYNDiscoverSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C6FD75118EC217B0068FF84 /* SYNDiscoverSectionHeaderView.xib */; };
-		4C72DD4A18FD96E6004AC132 /* SYNProfileCollectionFollowButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C72DD4918FD96E6004AC132 /* SYNProfileCollectionFollowButton.m */; };
+		4C72DD4A18FD96E6004AC132 /* SYNFollowChannelButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C72DD4918FD96E6004AC132 /* SYNFollowChannelButton.m */; };
 		4C72DD4D18FEBD00004AC132 /* downarrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C72DD4B18FEBD00004AC132 /* downarrow.png */; };
 		4C72DD4E18FEBD00004AC132 /* downarrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C72DD4C18FEBD00004AC132 /* downarrow@2x.png */; };
 		4C9B519918D71FCB00A3AB0D /* Profile_IPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C9B519818D71FCB00A3AB0D /* Profile_IPad.storyboard */; };
@@ -1132,8 +1132,8 @@
 		4C6FD74E18EC215F0068FF84 /* SYNDiscoverSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNDiscoverSectionHeaderView.h; sourceTree = "<group>"; };
 		4C6FD74F18EC215F0068FF84 /* SYNDiscoverSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNDiscoverSectionHeaderView.m; sourceTree = "<group>"; };
 		4C6FD75118EC217B0068FF84 /* SYNDiscoverSectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNDiscoverSectionHeaderView.xib; sourceTree = "<group>"; };
-		4C72DD4818FD96E6004AC132 /* SYNProfileCollectionFollowButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNProfileCollectionFollowButton.h; sourceTree = "<group>"; };
-		4C72DD4918FD96E6004AC132 /* SYNProfileCollectionFollowButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNProfileCollectionFollowButton.m; sourceTree = "<group>"; };
+		4C72DD4818FD96E6004AC132 /* SYNFollowChannelButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNFollowChannelButton.h; sourceTree = "<group>"; };
+		4C72DD4918FD96E6004AC132 /* SYNFollowChannelButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNFollowChannelButton.m; sourceTree = "<group>"; };
 		4C72DD4B18FEBD00004AC132 /* downarrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = downarrow.png; sourceTree = "<group>"; };
 		4C72DD4C18FEBD00004AC132 /* downarrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "downarrow@2x.png"; sourceTree = "<group>"; };
 		4C9B519818D71FCB00A3AB0D /* Profile_IPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile_IPad.storyboard; sourceTree = "<group>"; };
@@ -3674,8 +3674,8 @@
 				BEB31372181AC6DB00FAF98A /* SYNSocialAddButton.h */,
 				BEB31373181AC6DB00FAF98A /* SYNSocialAddButton.m */,
 				BEE01B58184F5868000CF681 /* SYNSocialFollowButton.h */,
-				4C72DD4818FD96E6004AC132 /* SYNProfileCollectionFollowButton.h */,
-				4C72DD4918FD96E6004AC132 /* SYNProfileCollectionFollowButton.m */,
+				4C72DD4818FD96E6004AC132 /* SYNFollowChannelButton.h */,
+				4C72DD4918FD96E6004AC132 /* SYNFollowChannelButton.m */,
 				BEE01B59184F5868000CF681 /* SYNSocialFollowButton.m */,
 				0ECBED38187C66F900F28EB2 /* SYNFollowDiscoverButton.h */,
 				0ECBED39187C66F900F28EB2 /* SYNFollowDiscoverButton.m */,
@@ -4553,7 +4553,7 @@
 				E9E1E28018561C780051E312 /* SYNiPhonePopoverAnimator.m in Sources */,
 				015487CF16DCD2A1002A41A2 /* SYNYouTubeVideoPlaybackViewController.m in Sources */,
 				0194FD2316DE6FE90058A7C2 /* SYNVideoThumbnailCell.m in Sources */,
-				4C72DD4A18FD96E6004AC132 /* SYNProfileCollectionFollowButton.m in Sources */,
+				4C72DD4A18FD96E6004AC132 /* SYNFollowChannelButton.m in Sources */,
 				0173F70816E0C56B005B3ECA /* SYNVideoViewerThumbnailLayout.m in Sources */,
 				BEE01B6D18521418000CF681 /* SYNSocialCommentButton.m in Sources */,
 				BEE01B7618573292000CF681 /* _Mood.m in Sources */,

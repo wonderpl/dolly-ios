@@ -7,6 +7,7 @@
 //
 
 #import "Channel.h"
+#import "SYNSocialButton.h"
 @import UIKit;
 
 @class SYNChannelMidCell;
@@ -45,7 +46,7 @@ typedef enum {
 @property (strong, nonatomic) IBOutlet UIView *view;
 @property (nonatomic) ChannelMidCellState state;
 
-@property (strong, nonatomic) IBOutlet UIButton *followButton;
+@property (strong, nonatomic) IBOutlet SYNSocialButton *followButton;
 @property (strong, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (strong, nonatomic) IBOutlet UIView *containerView;
 

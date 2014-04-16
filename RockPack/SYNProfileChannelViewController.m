@@ -674,9 +674,16 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 }
 
 
+
+
 - (void)cellStateChanged {
     [self hideDescriptionCurrentlyShowing];
 	self.showingDescription = YES;
+}
+
+
+- (void) followButtonTapped:(SYNChannelMidCell *)cell {
+	[self followButtonPressed:cell.followButton withChannel:cell.channel];
 }
 
 #pragma mark - Alertview delegate

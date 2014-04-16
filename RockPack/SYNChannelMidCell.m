@@ -183,8 +183,7 @@
 
 - (IBAction)followChannel:(id)sender {
 	
-	//TODO:Implement follow button
-	
+	[self.viewControllerDelegate followButtonTapped:self];
 }
 
 - (void)setBorder {
