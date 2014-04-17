@@ -1503,7 +1503,9 @@
                                                                                                    httpMethod: @"GET"
                                                                                                           ssl: YES];
     
-    
+    //Secure request was getting cached?? lol
+	networkOperation.shouldNotCacheResponse = YES;
+	
     [self addCommonHandlerToNetworkOperation: networkOperation
                            completionHandler: completionBlock
                                 errorHandler: errorBlock];
