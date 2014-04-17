@@ -284,7 +284,10 @@
 "Delete ?" = "Delete ?";
 
 "edit" = "edit";
-//
+
+"Change_cover_photo" = "Change your cover photo";
+"Change_avatar" = "Change your avatar photo";
+
 
 "Channel Unavailable" = "Channel Unavailable";
 "The Channel for which this notification has been issued might have been deleted" = "The Channel for which this notification has been issued might have been deleted";

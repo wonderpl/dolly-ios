@@ -13,6 +13,7 @@
 #import "UIFont+SYNFont.h"
 #import "UINavigationBar+Appearance.h"
 #import "UIColor+SYNColor.h"
+#import "UIFont+SYNFont.h"
 
 
 static const CGFloat OFFSET_DESCRIPTION_EDIT = 130.0f;
@@ -22,6 +23,8 @@ static const CGFloat OFFSET_DESCRIPTION_EDIT = 130.0f;
 @property (nonatomic, strong) SYNImagePickerController* imagePickerControllerAvatar;
 @property (nonatomic, strong) SYNImagePickerController* imagePickerControllerCoverphoto;
 @property (nonatomic, strong) UITapGestureRecognizer *tapToHideKeyoboard;
+@property (strong, nonatomic) IBOutlet UILabel *coverPhotoLabel;
+@property (strong, nonatomic) IBOutlet UILabel *avatarLabel;
 
 @property (strong, nonatomic) IBOutlet UIButton *cancelButton;
 @property (strong, nonatomic) IBOutlet UIButton *saveButton;
@@ -94,8 +97,13 @@ static const CGFloat OFFSET_DESCRIPTION_EDIT = 130.0f;
 	[self.saveButton.titleLabel setAttributedText:saveString];
 	
 	
+	self.coverPhotoLabel.text = NSLocalizedString(@"Change_cover_photo", nil);
 	
-
+	self.avatarLabel.text = NSLocalizedString(@"Change_avatar", nil);
+	
+	
+	[self.coverPhotoLabel setFont:[UIFont regularCustomFontOfSize:self.coverPhotoLabel.font.pointSize]];
+	[self.avatarLabel setFont:[UIFont regularCustomFontOfSize:self.avatarLabel.font.pointSize]];
 
 }
 

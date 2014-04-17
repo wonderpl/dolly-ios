@@ -130,7 +130,7 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OmF-pf-1PU" userLabel="Cancel Button">
-                                <rect key="frame" x="11" y="27" width="46" height="30"/>
+                                <rect key="frame" x="13" y="24" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -140,7 +140,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8HZ-p2-yuD" userLabel="Save Button">
-                                <rect key="frame" x="264" y="27" width="46" height="30"/>
+                                <rect key="frame" x="274" y="24" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -149,21 +149,41 @@
                                     <action selector="saveDescription:" destination="fOd-gt-lke" eventType="touchUpInside" id="V1x-fl-agZ"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v3x-Ob-9pm">
+                                <rect key="frame" x="139" y="192" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.46666666865348816" green="0.46666666865348816" blue="0.50980395078659058" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HTj-Ia-3yx">
+                                <rect key="frame" x="139" y="322" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.46666666865348816" green="0.46666666865348816" blue="0.50980395078659058" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <constraints>
                             <constraint firstItem="orx-PY-CL9" firstAttribute="centerX" secondItem="OXR-E2-PUn" secondAttribute="centerX" id="0QJ-Aw-iFq"/>
                             <constraint firstItem="OXR-E2-PUn" firstAttribute="top" secondItem="orx-PY-CL9" secondAttribute="bottom" constant="33" id="2N7-dB-r9Y"/>
                             <constraint firstItem="orx-PY-CL9" firstAttribute="top" secondItem="F8N-LT-Ekd" secondAttribute="bottom" constant="82" id="LSj-ob-eFj"/>
+                            <constraint firstItem="v3x-Ob-9pm" firstAttribute="centerX" secondItem="orx-PY-CL9" secondAttribute="centerX" id="M3Z-IX-D7y"/>
+                            <constraint firstItem="HTj-Ia-3yx" firstAttribute="top" secondItem="OXR-E2-PUn" secondAttribute="bottom" constant="-5" id="NLb-Zu-RBw"/>
                             <constraint firstItem="orx-PY-CL9" firstAttribute="leading" secondItem="fAf-o9-2xc" secondAttribute="leading" constant="112" id="NeH-EY-Z8f"/>
+                            <constraint firstItem="v3x-Ob-9pm" firstAttribute="top" secondItem="orx-PY-CL9" secondAttribute="bottom" constant="-6" id="XZO-S4-M3e"/>
                             <constraint firstItem="9YD-ci-a6S" firstAttribute="top" secondItem="OXR-E2-PUn" secondAttribute="bottom" constant="54" id="igZ-AM-UZY"/>
                             <constraint firstItem="OXR-E2-PUn" firstAttribute="centerY" secondItem="9YD-ci-a6S" secondAttribute="centerY" constant="-152.5" id="oOu-Ht-L30"/>
                             <constraint firstItem="OXR-E2-PUn" firstAttribute="centerX" secondItem="9YD-ci-a6S" secondAttribute="centerX" id="rbs-Ni-XcQ"/>
+                            <constraint firstItem="HTj-Ia-3yx" firstAttribute="centerX" secondItem="OXR-E2-PUn" secondAttribute="centerX" id="uGb-d6-sPX"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="v8M-xO-epg"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="avatarLabel" destination="HTj-Ia-3yx" id="PKb-UE-W0u"/>
                         <outlet property="cancelButton" destination="OmF-pf-1PU" id="FMQ-SG-5OP"/>
+                        <outlet property="coverPhotoLabel" destination="v3x-Ob-9pm" id="2CL-LL-Oe5"/>
                         <outlet property="descriptionTextView" destination="9YD-ci-a6S" id="oky-m8-o1z"/>
                         <outlet property="saveButton" destination="8HZ-p2-yuD" id="uyQ-Cd-t3b"/>
                         <outlet property="topConstraint" destination="LSj-ob-eFj" id="IdP-Gd-ImT"/>
