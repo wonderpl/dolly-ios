@@ -76,7 +76,6 @@
 @property (nonatomic, strong) NSIndexPath *indexPathToDelete;
 @property (strong, nonatomic) IBOutlet SYNSocialButton *btnEditChannel;
 @property (strong, nonatomic) IBOutlet UIButton *btnDeleteChannel;
-@property (strong, nonatomic) IBOutlet UIView *viewCollectionSeperator;
 @property (strong, nonatomic) IBOutlet UIPlaceHolderTextView *txtViewDescription;
 @property (strong, nonatomic) IBOutlet UITextField *txtFieldChannelName;
 @property (strong, nonatomic) UIBarButtonItem *barBtnCancel;
@@ -251,6 +250,7 @@
 	[self.lblChannelTitle setFont:[UIFont boldCustomFontOfSize:self.lblChannelTitle.font.pointSize]];
 	
 	[self.txtViewTitle setFont:[UIFont boldCustomFontOfSize:self.txtViewTitle.font.pointSize]];
+	
 
 	[self.lblDescription setFont:[UIFont regularCustomFontOfSize:self.lblDescription.font.pointSize]];
 	[self.txtViewDescription setFont:[UIFont regularCustomFontOfSize:self.txtViewDescription.font.pointSize]];
@@ -297,7 +297,8 @@
             self.btnFollowChannel.hidden = YES;
             [self centreView:self.btnShareChannel];
             CGRect tmpFrame = self.btnShareChannel.frame;
-            tmpFrame.origin.x = 55;            self.btnShareChannel.frame = tmpFrame;
+            tmpFrame.origin.x = self.viewCirleButtonContainer.frame.size.width/2-tmpFrame.size.width/2;
+			self.btnShareChannel.frame = tmpFrame;
             tmpFrame = self.viewCirleButtonContainer.frame;
             tmpFrame.origin.y -= 4;
             self.viewCirleButtonContainer.frame = tmpFrame;
@@ -439,7 +440,6 @@
     self.btnAvatar.transform = move;
     self.viewCirleButtonContainer.transform = move;
     self.lblNoVideos.transform = move;
-    self.viewCollectionSeperator.transform = move;
     self.viewFollowAndVideoContainer.transform = move;
     self.btnDeleteChannel.transform = move;
     self.txtViewDescription.transform = move;

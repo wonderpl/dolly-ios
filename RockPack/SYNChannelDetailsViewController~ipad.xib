@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -15,7 +15,6 @@
                 <outlet property="btnShowVideos" destination="LmD-EB-g99" id="ivC-ge-PTW"/>
                 <outlet property="lblChannelTitle" destination="KoP-pw-j1K" id="a53-gC-oX1"/>
                 <outlet property="lblDescription" destination="DEu-Rn-eGJ" id="OEB-Xb-Azp"/>
-                <outlet property="lblFullName" destination="qVh-3B-R6Q" id="Q68-lv-nA1"/>
                 <outlet property="lblNoVideos" destination="XIq-6Z-fJL" id="fyy-uB-uJQ"/>
                 <outlet property="txtFieldChannelName" destination="lUk-nV-j8P" id="V9N-mu-BAd"/>
                 <outlet property="txtViewDescription" destination="LHF-AA-xTN" id="vAV-aB-Aah"/>
@@ -63,7 +62,7 @@
                     </connections>
                 </button>
                 <textView hidden="YES" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" text="Description test" textAlignment="center" id="LHF-AA-xTN" userLabel="Text View - Description" customClass="UIPlaceHolderTextView">
-                    <rect key="frame" x="121" y="328" width="430" height="65"/>
+                    <rect key="frame" x="146" y="331" width="380" height="80"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="textColor" red="0.47058823700000002" green="0.47058823700000002" blue="0.47058823700000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -74,7 +73,7 @@
                     </connections>
                 </textView>
                 <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Change Collection Title" textAlignment="center" minimumFontSize="30" id="lUk-nV-j8P" userLabel="Text field - Channel Title">
-                    <rect key="frame" x="35" y="270" width="600" height="48"/>
+                    <rect key="frame" x="35" y="254" width="600" height="48"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="50"/>
@@ -83,12 +82,18 @@
                         <outlet property="delegate" destination="-1" id="rgY-v2-Kh1"/>
                     </connections>
                 </textField>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Channel Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" id="KoP-pw-j1K" userLabel="Label - Channel Title">
+                    <rect key="frame" x="35" y="235" width="600" height="88"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <view userInteractionEnabled="NO" contentMode="scaleToFill" id="TjS-Dr-jUj" userLabel="View - Profile mode">
-                    <rect key="frame" x="113" y="166" width="445" height="225"/>
+                    <rect key="frame" x="113" y="133" width="445" height="259"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
                     <subviews>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DEu-Rn-eGJ" userLabel="Label - Description">
-                            <rect key="frame" x="7" y="159" width="430" height="65"/>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DEu-Rn-eGJ" userLabel="Label - Description">
+                            <rect key="frame" x="32" y="179" width="380" height="80"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="21"/>
                             <color key="textColor" red="0.47058823704719543" green="0.47058823704719543" blue="0.47058823704719543" alpha="1" colorSpace="calibratedRGB"/>
@@ -97,13 +102,6 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Full Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qVh-3B-R6Q" userLabel="Label - User Name">
-                    <rect key="frame" x="175" y="226" width="320" height="27"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                    <color key="textColor" red="0.47058823700000002" green="0.47058823700000002" blue="0.47058823700000002" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <view contentMode="scaleToFill" id="pHs-SR-PmA" userLabel="View - Container View">
                     <rect key="frame" x="148" y="399" width="375" height="38"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
@@ -189,7 +187,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="NYK-20-9W1" userLabel="Button - Avatar" customClass="SYNAvatarButton">
-                    <rect key="frame" x="287" y="91" width="96" height="96"/>
+                    <rect key="frame" x="297" y="134" width="76" height="76"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <state key="normal">
@@ -199,12 +197,6 @@
                         <action selector="avatarTapped:" destination="-1" eventType="touchUpInside" id="WNr-kQ-Sfq"/>
                     </connections>
                 </button>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Channel Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" id="KoP-pw-j1K" userLabel="Label - Channel Title">
-                    <rect key="frame" x="35" y="251" width="600" height="88"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="50"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" textAlignment="center" selectable="NO" id="kPn-3x-XUE" customClass="UIPlaceHolderTextView">
                     <rect key="frame" x="35" y="266" width="600" height="67"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
