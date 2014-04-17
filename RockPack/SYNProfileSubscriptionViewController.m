@@ -65,12 +65,11 @@ forCellWithReuseIdentifier:[SYNSearchResultsUserCell reuseIdentifier]];
 forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
      withReuseIdentifier:[SYNChannelFooterMoreView reuseIdentifier]];
     
-    //    [self setUpSearchBar];
     self.filteredSubscriptions = [self.channelOwner.userSubscriptionsSet array];
     
     if (self.isUserProfile && IS_IPHONE) {
         
-        self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, OWNUSERHEADERHEIGHT, CGRectGetWidth(self.cv.frame), 44)];
+        self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, OWNUSERHEADERHEIGHT, CGRectGetWidth(self.cv.frame), 37)];
         self.searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
         self.searchBar.delegate = self;
         
@@ -93,6 +92,8 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     
     self.fakeNavigationBarTitle.font = [UIFont regularCustomFontOfSize:20];
     [self.fakeNavigationBarTitle setText: self.channelOwner.displayName];
+	
+//	NSLog(@"VIEW DID LOAD %@", [self.channelOwner.userSubscriptionsSet array]);
     
 }
 
@@ -182,11 +183,9 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 		channelThumbnailCell.channelOwner = nil;
 	}
 	
-	
 	channelThumbnailCell.followButton.selected = [[SYNActivityManager sharedInstance] isSubscribedToUserId:channelOwner.uniqueId];
 	
 //	NSLog(@"Subed to %@   %hhd", channelOwner.username, );
-		
 //	channelThumbnailCell.followButton.hidden = NO;
 	channelThumbnailCell.delegate = self;
 	
@@ -289,6 +288,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     
     [self.searchBar setShowsCancelButton:NO animated:YES];
     [searchBar resignFirstResponder];
+	[self.cv reloadData];
     
 }
 
@@ -314,9 +314,9 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     }
 
 	self.filteredSubscriptions = [self filteredSubscriptionsForSearchTerm:searchBar.text];
-	
     [self.cv reloadData];
-    [self.searchBar becomeFirstResponder];
+	
+	[self.searchBar becomeFirstResponder];
 }
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)bar {
@@ -336,10 +336,11 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 
 - (NSArray *)filteredSubscriptionsForSearchTerm:(NSString *)searchTerm {
 	if ([searchTerm length]) {
-		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"title BEGINSWITH[cd] %@", searchTerm];
-		return [[self.channelOwner.subscriptions array] filteredArrayUsingPredicate:predicate];
+		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"displayName BEGINSWITH[cd] %@", searchTerm];
+		return [[self.channelOwner.userSubscriptionsSet array] filteredArrayUsingPredicate:predicate];
 	}
-	return [self.channelOwner.subscriptions array];
+	
+	return [self.channelOwner.userSubscriptionsSet array];
 }
 
 

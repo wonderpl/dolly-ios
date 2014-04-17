@@ -56,11 +56,11 @@
 		}
 		
 		sself.totalItemCount = [dictionary[@"users"][@"total"] intValue];
+		[sself.channelOwner.managedObjectContext save:nil];
 
 		
 		NSMutableArray *arr = [NSMutableArray arrayWithArray:[sself.channelOwner.userSubscriptionsSet array]];
 		sself.loadedItems = arr;
-
 		[sself handleDataUpdatedForRange:range];
     };
     
