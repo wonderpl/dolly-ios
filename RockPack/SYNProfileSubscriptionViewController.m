@@ -159,7 +159,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 #pragma mark - UICollectionView DataSource/Delegate
 
 - (NSInteger)collectionView: (UICollectionView *) view numberOfItemsInSection: (NSInteger) section {	
-    return self.model.itemCount;
+    return self.filteredSubscriptions.count;
 }
 
 - (NSInteger) numberOfSectionsInCollectionView: (UICollectionView *) collectionView {
@@ -179,8 +179,6 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 		channelOwner = self.filteredSubscriptions[index];
 		//text is set in the channelmidcell setChannel method
 		channelThumbnailCell.channelOwner = channelOwner;
-	} else {
-		channelThumbnailCell.channelOwner = nil;
 	}
 	
 	channelThumbnailCell.followButton.selected = [[SYNActivityManager sharedInstance] isSubscribedToUserId:channelOwner.uniqueId];
@@ -196,8 +194,11 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 	
     if (indexPath.row < [self.filteredSubscriptions count]) {
         ChannelOwner *channelOwner = (ChannelOwner*)(self.filteredSubscriptions[indexPath.row]);
-        [self viewProfileDetails:channelOwner];
-    }
+		[self viewProfileDetails:channelOwner];
+		[self.searchBar resignFirstResponder];
+		self.filteredSubscriptions = [self filteredSubscriptionsForSearchTerm:@""];
+		[self.cv reloadData];
+	}
     
     return;
 }
@@ -270,7 +271,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     [self.cv setContentOffset:CGPointZero animated:YES];
     
         UIEdgeInsets tmp = self.defaultLayout.sectionInset;
-        tmp.bottom += 300;
+        tmp.bottom = 70;
         self.defaultLayout.sectionInset = tmp;
         [self.cv.collectionViewLayout invalidateLayout];
     
@@ -314,7 +315,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
             
         } completion:^(BOOL finished) {
             UIEdgeInsets tmp = self.defaultLayout.sectionInset;
-            tmp.bottom += 300;
+            tmp.bottom = 300;
             self.defaultLayout.sectionInset = tmp;
             [self.cv.collectionViewLayout invalidateLayout];
         }];
