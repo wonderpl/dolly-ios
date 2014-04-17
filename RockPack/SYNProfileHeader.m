@@ -187,7 +187,7 @@
         self.followAllButton.hidden = YES;
         self.avatarButton.userInteractionEnabled = YES;
         self.moreButton.hidden = NO;
-//        self.userNameLabel.hidden = YES;
+        self.userNameLabel.hidden = YES;
     } else {
         self.followAllButton.hidden = NO;
         self.moreButton.hidden = YES;
