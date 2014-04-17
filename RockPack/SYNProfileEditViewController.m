@@ -20,9 +20,11 @@ static const CGFloat OFFSET_DESCRIPTION_EDIT = 130.0f;
 @property (nonatomic, strong) UITapGestureRecognizer *tapGesture;
 @property (nonatomic, strong) SYNImagePickerController* imagePickerControllerAvatar;
 @property (nonatomic, strong) SYNImagePickerController* imagePickerControllerCoverphoto;
-@property (nonatomic, strong) IBOutlet UIBarButtonItem *barBtnCancel;
-@property (nonatomic, strong) IBOutlet UIBarButtonItem *barBtnSave;
 @property (nonatomic, strong) UITapGestureRecognizer *tapToHideKeyoboard;
+
+@property (strong, nonatomic) IBOutlet UIButton *cancelButton;
+@property (strong, nonatomic) IBOutlet UIButton *saveButton;
+
 
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *topConstraint;
 @property (nonatomic, strong) IBOutlet UINavigationBar *navigationBar;
@@ -47,8 +49,6 @@ static const CGFloat OFFSET_DESCRIPTION_EDIT = 130.0f;
         [[self.descriptionTextView layer] setBorderWidth:1.0];
     }
     
-    //wierd :   textview attributes reset when text is set.
-    
     [[self.descriptionTextView layer] setCornerRadius:0];
 	self.descriptionTextView.textAlignment = NSTextAlignmentCenter;
 	self.descriptionTextView.textColor = [UIColor colorWithWhite:120/255.0 alpha:1.0];
@@ -61,6 +61,24 @@ static const CGFloat OFFSET_DESCRIPTION_EDIT = 130.0f;
 
     // == Tap gesture do dismiss the keyboard
     self.tapToHideKeyoboard = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+	
+
+	// Tried to get the data from
+	// [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] titleTextAttributesForState:UIControlStateNormal]
+	//not enough time to make it work
+	//TODO:get size from appereance instead of hard coding
+	NSDictionary *attributes = @{ NSFontAttributeName : [UIFont regularCustomFontOfSize : IS_IPHONE ? 15 : 17],
+								 NSForegroundColorAttributeName : [[UINavigationBar appearance] tintColor],
+								  };
+
+	
+	NSMutableAttributedString* cancelString = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"cancel", @"cancel in edit mode") attributes:attributes];
+	[self.cancelButton.titleLabel setAttributedText:cancelString];
+
+	
+	NSMutableAttributedString* saveString = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"save", @"save in edit mode") attributes:attributes];
+	[self.saveButton.titleLabel setAttributedText:saveString];
+
 
 }
 
@@ -69,7 +87,7 @@ static const CGFloat OFFSET_DESCRIPTION_EDIT = 130.0f;
     
     //we move the view up in 1phone 4
     if (!IS_IPHONE_5 && IS_IPHONE) {
-        [self.topConstraint setConstant:-50];
+        [self.topConstraint setConstant:-70];
     }
     
     [self.navigationBar setTranslucent:YES];
@@ -214,7 +232,7 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock {
         int offset = OFFSET_DESCRIPTION_EDIT;
         
         if (!IS_IPHONE_5 && IS_IPHONE) {
-            offset += 70;
+            offset += 50;
         } else if (IS_IPAD) {
             offset += 20;
         }
@@ -229,7 +247,7 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock {
     [UIView animateWithDuration:1.5 animations:^{
         if (IS_IPHONE ) {
             if (IS_IPHONE_5) {
-                [self.topConstraint setConstant:-70];
+                [self.topConstraint setConstant:-50];
             } else {
                 [self.topConstraint setConstant:-140];
             }
