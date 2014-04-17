@@ -30,6 +30,7 @@
 #import "SYNDiscoverSectionHeaderView.h"
 #import "SYNMoodRootViewController.h"
 #import "SYNGenreManager.h"
+#import "SYNDeviceManager.h"
 
 @import QuartzCore;
 
@@ -439,12 +440,6 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 	}
 	
 	UIColor *genreColor = [[SYNGenreManager sharedManager] colorForGenreWithId:subGenre.uniqueId];
-	if (indexPath.section == 0 && indexPath.row == 0) {
-		categoryCell.rightImage.hidden = NO;
-	} else {
-		categoryCell.rightImage.hidden = YES;
-
-	}
 	
 	categoryCell.selectedColor = genreColor;
 	categoryCell.deSelectedColor = [UIColor whiteColor];
@@ -486,7 +481,7 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 	} else if (section == 0) {
         return CGSizeMake(0, 0);
     } else {
-        return CGSizeMake(self.categoriesCollectionView.bounds.size.width, 43);
+        return CGSizeMake(self.categoriesCollectionView.bounds.size.width, 45);
     }
 }
 
@@ -495,7 +490,7 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 - (CGSize)collectionView:(UICollectionView *)collectionView
 				  layout:(UICollectionViewLayout *)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-	return CGSizeMake(CGRectGetWidth(collectionView.frame), 33);
+	return CGSizeMake(CGRectGetWidth(collectionView.frame), 36);
 }
 
 
@@ -882,8 +877,6 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
         [self.categoriesCollectionView selectItemAtIndexPath:firstIndexPath
 													animated:NO
 											  scrollPosition:UICollectionViewScrollPositionNone];
-        
-		//        [self selectCategoryForCollection:self.categoriesCollectionView atIndexPath:firstIndexPath];
     }
 }
 
