@@ -20,8 +20,13 @@
 }
 
 + (void)setupSearchBarAppearance {
-	[[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setBackgroundColor:[UIColor dollySearchBarColor]];
+	[[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setBackgroundColor:[UIColor whiteColor]];
     [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setFont:[UIFont regularCustomFontOfSize:15]];
+	
+	[[UISearchBar appearance] setSearchFieldBackgroundImage:[[UIImage imageNamed:@"searchbar.png"]resizableImageWithCapInsets:UIEdgeInsetsMake(0, 16, 0, 16)] forState:UIControlStateNormal];
+	
+	[[UISearchBar appearance] setBarTintColor: [UIColor colorWithWhite:247.0f/255.0f alpha:1.0]];
+
 }
 
 + (void)setupNavigationBarAppearance {

@@ -167,15 +167,8 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 												 name:CategoriesReloadedNotification
 											   object:nil];
 	self.recentlyViewed = [[NSMutableArray alloc] init];
-//	UIImage *searchBg =  [[UIImage imageNamed:@"search"]
-//						  resizableImageWithCapInsets:UIEdgeInsetsMake(7, 19, 7, 20)]; //[UIImage imageNamed:@"seachbar_statenormal"];
-//	searchBg = [searchBg stretchableImageWithLeftCapWidth:10 topCapHeight:10]; //experiment with values
 
-	[self.searchBar setSearchFieldBackgroundImage:[[UIImage imageNamed:@"Searchbar"]resizableImageWithCapInsets:UIEdgeInsetsMake(0, 16, 0, 16)] forState:UIControlStateNormal];
 	
-	
-	
-//	[self.searchBar setBackgroundImage:[self imageWithColor:[UIColor dollySearchBackground]]];
 	
 
 }
@@ -202,6 +195,7 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 	
 	
 	self.recentlyViewed = [self genreArrayFromDefaults];
+	
 }
 
 
