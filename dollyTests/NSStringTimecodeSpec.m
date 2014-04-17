@@ -50,6 +50,7 @@ describe(@"The NSString Timecode category", ^{
 		});
 		
 		it(@"should round times greater than an hour to the nearest 15 minutes", ^{
+			[[[NSString friendlyLengthFromTimeInterval:MINS(59) + 45] should] equal:@"1 HR WATCH"];
 			[[[NSString friendlyLengthFromTimeInterval:HOURS(1)] should] equal:@"1 HR WATCH"];
 			[[[NSString friendlyLengthFromTimeInterval:HOURS(1) + MINS(5)] should] equal:@"1 HR WATCH"];
 			[[[NSString friendlyLengthFromTimeInterval:HOURS(1) + MINS(10)] should] equal:@"1 HR 15 MIN WATCH"];

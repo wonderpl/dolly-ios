@@ -27,8 +27,13 @@
 + (NSString *)friendlyLengthFromTimeInterval:(NSTimeInterval)timeInterval {
 	NSInteger timeInSeconds = timeInterval;
 	
-	NSInteger minutes = MAX(1, round(timeInSeconds / 60.0));
 	NSInteger hours = ((timeInSeconds / 60) / 60);
+	NSInteger minutes = MAX(1, round((timeInSeconds - hours * 3600) / 60.0));
+	
+	if (minutes == 60) {
+		hours++;
+		minutes = 0;
+	}
 	
 	if (hours) {
 		NSInteger roundedMinutes = round((minutes % 60) / 15.0) * 15;
