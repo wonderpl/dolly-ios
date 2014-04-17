@@ -20,11 +20,11 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pnq-Al-e0n" userLabel="Text View - Description">
-                    <rect key="frame" x="25" y="380" width="270" height="101"/>
+                    <rect key="frame" x="15" y="380" width="290" height="101"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="tintColor" red="0.50980392159999999" green="0.50980392159999999" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="270" id="Z2I-9Q-0Gj"/>
+                        <constraint firstAttribute="width" constant="290" id="Z2I-9Q-0Gj"/>
                         <constraint firstAttribute="height" constant="101" id="jHH-3i-uTW"/>
                     </constraints>
                     <string key="text">Something about
@@ -161,7 +161,7 @@
                 <constraint firstItem="Bql-TC-S7R" firstAttribute="leading" secondItem="79y-KX-90i" secondAttribute="leading" id="qd9-dK-72x"/>
                 <constraint firstItem="3x0-8E-Inl" firstAttribute="top" secondItem="WTJ-1k-eNv" secondAttribute="bottom" constant="10" id="rnO-bh-WuD"/>
                 <constraint firstAttribute="bottom" secondItem="qG4-1X-MoW" secondAttribute="bottom" constant="287" id="sjV-pB-rGr"/>
-                <constraint firstItem="Pnq-Al-e0n" firstAttribute="leading" secondItem="79y-KX-90i" secondAttribute="leading" constant="25" id="zqn-8h-I5B"/>
+                <constraint firstItem="Pnq-Al-e0n" firstAttribute="leading" secondItem="79y-KX-90i" secondAttribute="leading" constant="15" id="zqn-8h-I5B"/>
             </constraints>
             <connections>
                 <outlet property="aboutMeTextView" destination="Pnq-Al-e0n" id="VW9-ZT-aPf"/>

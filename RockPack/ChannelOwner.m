@@ -446,7 +446,7 @@
 - (void) addSubscriptionsFromDictionary : (NSDictionary *) subscriptionsDictionary
 {
     
-    NSDictionary *itemDict = subscriptionsDictionary[@"channels"];
+    NSDictionary *itemDict = subscriptionsDictionary[@"users"];
     if (!itemDict || ![itemDict isKindOfClass: [NSDictionary class]])
     {
         return;
@@ -455,47 +455,30 @@
     NSArray *items = [itemDict objectForKey:@"items"];
 	NSMutableDictionary *subscriptionInsancesByIdDictionary = [[NSMutableDictionary alloc] initWithCapacity: self.subscriptions.count];
 	
-    for (Channel *su in self.subscriptions)
+    for (ChannelOwner *su in self.subscriptions)
     {
         subscriptionInsancesByIdDictionary[su.uniqueId] = su;
     }
 	
     for (NSDictionary *channelDictionary in items) {
 		
-		Channel *channel = subscriptionInsancesByIdDictionary[channelDictionary[@"id"]];
+		ChannelOwner *channelOwner = subscriptionInsancesByIdDictionary[channelDictionary[@"id"]];
 		
         
-        if (channel) {
-			[self.subscriptionsSet removeObject:channel];
+        if (channelOwner) {
+			[self.subscriptionsSet removeObject:channelOwner];
 		}
 		
 		
-		channel = [Channel instanceFromDictionary: channelDictionary
+		channelOwner = [ChannelOwner instanceFromDictionary: channelDictionary
 						usingManagedObjectContext: self.managedObjectContext
 							  ignoringObjectTypes: kIgnoreVideoInstanceObjects];
 		
 		
-		if (channel.favouritesValue)
-        {
-            
-            SYNAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-            
-            if ([appDelegate.currentUser.uniqueId isEqualToString:channel.channelOwner.uniqueId])
-            {
-                channel.title = [NSString stringWithFormat:@"My %@", NSLocalizedString(@"FAVORITES", nil)];
-            }
-            else
-            {
-				NSString *displayName = [channel.channelOwner.displayName apostrophisedString];
-				channel.title = [NSString stringWithFormat:@"%@ %@", displayName, NSLocalizedString(@"FAVORITES", nil)];
-            }
-        }
+        channelOwner.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribedToUserId:self.uniqueId];
 		
-        channel.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribedToUserId:self.uniqueId];
 		
-        channel.viewId = self.viewId;
-		
-		[self addSubscriptionsObject:channel];
+		[self.userSubscriptionsSet addObject:channelOwner];
 	}
 }
 @end

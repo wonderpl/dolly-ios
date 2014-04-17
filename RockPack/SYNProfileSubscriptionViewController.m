@@ -158,7 +158,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 
 #pragma mark - UICollectionView DataSource/Delegate
 
-- (NSInteger)collectionView: (UICollectionView *) view numberOfItemsInSection: (NSInteger) section {
+- (NSInteger)collectionView: (UICollectionView *) view numberOfItemsInSection: (NSInteger) section {	
     return self.model.itemCount;
 }
 
@@ -194,18 +194,6 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 
 - (void) collectionView: (UICollectionView *) collectionView didSelectItemAtIndexPath: (NSIndexPath *) indexPath {
 	
-	
-//	if (self.showingDescription) {
-//		[self hideDescriptionCurrentlyShowing];
-//	}
-
-//    SYNChannelMidCell* cell = (SYNChannelMidCell*)[collectionView cellForItemAtIndexPath:indexPath];
-//
-//    if (cell.state != ChannelMidCellStateDefault) {
-//        [cell setState: ChannelMidCellStateDefault withAnimation:YES];
-//        return;
-//    }
-    
     if (indexPath.row < [self.filteredSubscriptions count]) {
         ChannelOwner *channelOwner = (ChannelOwner*)(self.filteredSubscriptions[indexPath.row]);
         [self viewProfileDetails:channelOwner];

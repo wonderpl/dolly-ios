@@ -52,12 +52,10 @@
 			[sself.channelOwner setSubscriptionsDictionary:dictionary];
 		} else {
 
-		//TODO:Paging
+			[sself.channelOwner addSubscriptionsFromDictionary: dictionary];
 		}
 		
 		sself.totalItemCount = [dictionary[@"users"][@"total"] intValue];
-		[sself.channelOwner.managedObjectContext save:nil];
-
 		
 		NSMutableArray *arr = [NSMutableArray arrayWithArray:[sself.channelOwner.userSubscriptionsSet array]];
 		sself.loadedItems = arr;
@@ -71,10 +69,19 @@
 	
 	//Secure request not implemented
 	//sing http for now
-	[appDelegate.networkEngine subscriptionsForUserId: wself.channelOwner.uniqueId
-												   inRange: range
-										 completionHandler: successBlock
-											  errorHandler: errorBlock];
+	BOOL isUserProfile = [self.channelOwner.uniqueId isEqualToString:appDelegate.currentUser.uniqueId];
+	
+	if (isUserProfile) {
+		[appDelegate.oAuthNetworkEngine subscriptionsForUserId: wself.channelOwner.uniqueId
+													   inRange: range
+											 completionHandler: successBlock
+												  errorHandler: errorBlock];
+	} else {
+		[appDelegate.networkEngine subscriptionsForUserId: wself.channelOwner.uniqueId
+												  inRange: range
+										completionHandler: successBlock
+											 errorHandler: errorBlock];
+	}
 }
 
 
