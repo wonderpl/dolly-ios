@@ -1,6 +1,5 @@
 #import "AppConstants.h"
 #import "Channel.h"
-#import "ChannelCover.h"
 #import "ChannelOwner.h"
 #import "NSDictionary+Validation.h"
 #import "SYNActivityManager.h"
@@ -279,14 +278,6 @@
         self.channelOwner = [ChannelOwner instanceFromDictionary: ownerDictionary
                                        usingManagedObjectContext: self.managedObjectContext
                                              ignoringObjectTypes: ignoringObjects | kIgnoreChannelObjects];
-    }
-    
-    NSDictionary *channelCoverDictionary = dictionary[@"cover"];
-    
-    if ([channelCoverDictionary isKindOfClass: [NSDictionary class]])
-    {
-        self.channelCover = [ChannelCover instanceFromDictionary: channelCoverDictionary
-                                       usingManagedObjectContext: self.managedObjectContext];
     }
     
 //    self.subscribedByUserValue = YES;

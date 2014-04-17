@@ -9,7 +9,6 @@
 #import "Appirater.h"
 #import "BBCyclingLabel.h"
 #import "Channel.h"
-#import "ChannelCover.h"
 #import "ChannelOwner.h"
 #import "NSObject+Blocks.h"
 #import "SYNAbstractViewController.h"
@@ -298,12 +297,12 @@
                                        placeholderImage:nil];
     }
     
-    else if ([videoInstance.channel.channelOwner.displayName length] > 0)
-    {
-        [self.channelThumbnailImageView setImageWithURL: [NSURL URLWithString: videoInstance.channel.channelCover.imageSmallUrl]
-                                       placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
-                                                options: SDWebImageRetryFailed];
-    }
+//    else if ([videoInstance.channel.channelOwner.displayName length] > 0)
+//    {
+//        [self.channelThumbnailImageView setImageWithURL: [NSURL URLWithString: videoInstance.channel.channelCover.imageSmallUrl]
+//                                       placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
+//                                                options: SDWebImageRetryFailed];
+//    }
     
     [self.videoPlaybackViewController setPlaylist: self.videoInstanceArray
                                     selectedIndex: self.currentSelectedIndex
@@ -548,12 +547,12 @@
                                        placeholderImage: nil];
     }
     
-    else if ([videoInstance.channel.channelOwner.displayName length] > 0)
-    {
-        [self.channelThumbnailImageView setImageWithURL: [NSURL URLWithString: videoInstance.channel.channelCover.imageSmallUrl]
-                                       placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
-                                                options: SDWebImageRetryFailed];
-    }
+//    else if ([videoInstance.channel.channelOwner.displayName length] > 0)
+//    {
+//        [self.channelThumbnailImageView setImageWithURL: [NSURL URLWithString: videoInstance.channel.channelCover.imageSmallUrl]
+//                                       placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
+//                                                options: SDWebImageRetryFailed];
+//    }
 }
 
 

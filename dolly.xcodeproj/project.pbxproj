@@ -468,8 +468,6 @@
 		BEB1576B173BA75100DAFA2F /* _SubGenre.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB15769173BA75100DAFA2F /* _SubGenre.m */; };
 		BEB1577B173C10E900DAFA2F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BEB1577D173C10E900DAFA2F /* Localizable.strings */; };
 		BEB1578B173D016B00DAFA2F /* _CoverArt.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB1578A173D016B00DAFA2F /* _CoverArt.m */; };
-		BEB1578E173D060700DAFA2F /* _ChannelCover.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB1578D173D060700DAFA2F /* _ChannelCover.m */; };
-		BEB15791173D061700DAFA2F /* ChannelCover.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB15790173D061700DAFA2F /* ChannelCover.m */; };
 		BEB312F81815638700FAF98A /* TabActivity.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB312EE1815638700FAF98A /* TabActivity.png */; };
 		BEB312F91815638700FAF98A /* TabActivity@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB312EF1815638700FAF98A /* TabActivity@2x.png */; };
 		BEB312FA1815638700FAF98A /* TabFeed.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB312F01815638700FAF98A /* TabFeed.png */; };
@@ -1382,10 +1380,6 @@
 		BEB1577C173C10E900DAFA2F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BEB15789173D016B00DAFA2F /* _CoverArt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CoverArt.h; sourceTree = "<group>"; };
 		BEB1578A173D016B00DAFA2F /* _CoverArt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CoverArt.m; sourceTree = "<group>"; };
-		BEB1578C173D060700DAFA2F /* _ChannelCover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _ChannelCover.h; sourceTree = "<group>"; };
-		BEB1578D173D060700DAFA2F /* _ChannelCover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _ChannelCover.m; sourceTree = "<group>"; };
-		BEB1578F173D061700DAFA2F /* ChannelCover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelCover.h; sourceTree = "<group>"; };
-		BEB15790173D061700DAFA2F /* ChannelCover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelCover.m; sourceTree = "<group>"; };
 		BEB312EE1815638700FAF98A /* TabActivity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TabActivity.png; path = Assets/Images/TabActivity.png; sourceTree = "<group>"; };
 		BEB312EF1815638700FAF98A /* TabActivity@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "TabActivity@2x.png"; path = "Assets/Images/TabActivity@2x.png"; sourceTree = "<group>"; };
 		BEB312F01815638700FAF98A /* TabFeed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TabFeed.png; path = Assets/Images/TabFeed.png; sourceTree = "<group>"; };
@@ -2509,8 +2503,6 @@
 				BEB15767173BA75100DAFA2F /* _Genre.m */,
 				BEB15789173D016B00DAFA2F /* _CoverArt.h */,
 				BEB1578A173D016B00DAFA2F /* _CoverArt.m */,
-				BEB1578C173D060700DAFA2F /* _ChannelCover.h */,
-				BEB1578D173D060700DAFA2F /* _ChannelCover.m */,
 				BEB15768173BA75100DAFA2F /* _SubGenre.h */,
 				BEB15769173BA75100DAFA2F /* _SubGenre.m */,
 				BE7D030B179D8EFA008053DC /* _Friend.h */,
@@ -2548,8 +2540,6 @@
 				01C6FD13169E11B000E01AA3 /* AbstractCommon.m */,
 				01E427E31664DF21009B941F /* Channel.h */,
 				01E427E41664DF21009B941F /* Channel.m */,
-				BEB1578F173D061700DAFA2F /* ChannelCover.h */,
-				BEB15790173D061700DAFA2F /* ChannelCover.m */,
 				BEE01B7118521DCF000CF681 /* Comment.h */,
 				BEE01B7218521DCF000CF681 /* Comment.m */,
 				01946B931683339F00354601 /* ChannelOwner.h */,
@@ -4794,10 +4784,8 @@
 				E9918C1618967BA500767BBD /* SYNTimestampLabel.m in Sources */,
 				BE1B3DEA181141D600DA2BD6 /* SYNAggregateVideoItemCell.m in Sources */,
 				BEB1578B173D016B00DAFA2F /* _CoverArt.m in Sources */,
-				BEB1578E173D060700DAFA2F /* _ChannelCover.m in Sources */,
 				E9E1E28518561CA30051E312 /* SYNTapDismissView.m in Sources */,
 				E914BED7183CF018001616D3 /* SYNFullScreenVideoViewController.m in Sources */,
-				BEB15791173D061700DAFA2F /* ChannelCover.m in Sources */,
 				BEE01B79185732A0000CF681 /* Mood.m in Sources */,
 				E9CE7A301887161B00023A86 /* SYNiPadIntroToSignupAnimator.m in Sources */,
 				E9F625641885C238000EF6A2 /* SYNGradientMaskView.m in Sources */,
