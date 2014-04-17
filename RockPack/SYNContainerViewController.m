@@ -9,7 +9,6 @@
 #import "SYNContainerViewController.h"
 #import "SYNAppDelegate.h"
 #import "SYNFeedRootViewController.h"
-#import "SYNMoodRootViewController.h"
 #import "SYNActivityViewController.h"
 #import "SYNDiscoverViewController.h"
 #import "SYNProfileRootViewController.h"
