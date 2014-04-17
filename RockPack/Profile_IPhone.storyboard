@@ -115,13 +115,13 @@
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="9YD-ci-a6S" userLabel="Text View - Description">
-                                <rect key="frame" x="10" y="379" width="300" height="81"/>
+                                <rect key="frame" x="20" y="381" width="280" height="101"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" red="0.50980392159999999" green="0.50980392159999999" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="300" id="5rw-e8-AK4"/>
-                                    <constraint firstAttribute="height" constant="81" id="tTg-DL-HrS"/>
+                                    <constraint firstAttribute="width" constant="280" id="5rw-e8-AK4"/>
+                                    <constraint firstAttribute="height" constant="101" id="tTg-DL-HrS"/>
                                 </constraints>
                                 <string key="text">Something about
                                     me...</string>
@@ -155,8 +155,8 @@
                             <constraint firstItem="OXR-E2-PUn" firstAttribute="top" secondItem="orx-PY-CL9" secondAttribute="bottom" constant="33" id="2N7-dB-r9Y"/>
                             <constraint firstItem="orx-PY-CL9" firstAttribute="top" secondItem="F8N-LT-Ekd" secondAttribute="bottom" constant="82" id="LSj-ob-eFj"/>
                             <constraint firstItem="orx-PY-CL9" firstAttribute="leading" secondItem="fAf-o9-2xc" secondAttribute="leading" constant="112" id="NeH-EY-Z8f"/>
-                            <constraint firstItem="9YD-ci-a6S" firstAttribute="top" secondItem="OXR-E2-PUn" secondAttribute="bottom" constant="52" id="igZ-AM-UZY"/>
-                            <constraint firstItem="OXR-E2-PUn" firstAttribute="centerY" secondItem="9YD-ci-a6S" secondAttribute="centerY" constant="-140.5" id="oOu-Ht-L30"/>
+                            <constraint firstItem="9YD-ci-a6S" firstAttribute="top" secondItem="OXR-E2-PUn" secondAttribute="bottom" constant="54" id="igZ-AM-UZY"/>
+                            <constraint firstItem="OXR-E2-PUn" firstAttribute="centerY" secondItem="9YD-ci-a6S" secondAttribute="centerY" constant="-152.5" id="oOu-Ht-L30"/>
                             <constraint firstItem="OXR-E2-PUn" firstAttribute="centerX" secondItem="9YD-ci-a6S" secondAttribute="centerX" id="rbs-Ni-XcQ"/>
                         </constraints>
                     </view>

@@ -12,6 +12,7 @@
 #import "SYNDeviceManager.h"
 #import "UIFont+SYNFont.h"
 #import "UINavigationBar+Appearance.h"
+#import "UIColor+SYNColor.h"
 
 
 static const CGFloat OFFSET_DESCRIPTION_EDIT = 130.0f;
@@ -40,24 +41,37 @@ static const CGFloat OFFSET_DESCRIPTION_EDIT = 130.0f;
     self.tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(goBack)];
     [self.view addGestureRecognizer:self.tapGesture];
     
-    [self.descriptionTextView setText: self.descriptionString];
-
+	NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+	style.lineSpacing = 6;
+	style.alignment = NSTextAlignmentCenter;
+	
+	NSDictionary *descriptionAttributes = @{NSParagraphStyleAttributeName : style,
+											NSFontAttributeName : [UIFont regularCustomFontOfSize : 20],
+											NSForegroundColorAttributeName : [UIColor dollyTextMediumGray],
+											};
+	
+	
+	self.descriptionTextView.attributedText = [[NSAttributedString alloc]
+											   initWithString:self.descriptionString
+											   attributes:descriptionAttributes];
+	
     [[self.descriptionTextView layer] setBorderColor:[[UIColor colorWithRed:172.0/255.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f] CGColor]];
+
     if (IS_RETINA) {
         [[self.descriptionTextView layer] setBorderWidth:0.5];
     } else {
         [[self.descriptionTextView layer] setBorderWidth:1.0];
     }
-    
     [[self.descriptionTextView layer] setCornerRadius:0];
-	self.descriptionTextView.textAlignment = NSTextAlignmentCenter;
-	self.descriptionTextView.textColor = [UIColor colorWithWhite:120/255.0 alpha:1.0];
-    self.descriptionTextView.textContainer.maximumNumberOfLines = 2;
-    [[self.descriptionTextView layer] setBorderColor:[[UIColor colorWithRed:172.0/255.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f] CGColor]];
-    self.descriptionTextView.font = [UIFont lightCustomFontOfSize:11.0];
-
-    [self.navigationBar setBackgroundTransparent:YES];
+	
+	
+	
+	
+	
+//    self.descriptionTextView.textContainer.maximumNumberOfLines = 2;
     self.descriptionTextView.delegate = self;
+
+//    [self.navigationBar setBackgroundTransparent:YES];
 
     // == Tap gesture do dismiss the keyboard
     self.tapToHideKeyoboard = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
@@ -67,20 +81,24 @@ static const CGFloat OFFSET_DESCRIPTION_EDIT = 130.0f;
 	// [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] titleTextAttributesForState:UIControlStateNormal]
 	//not enough time to make it work
 	//TODO:get size from appereance instead of hard coding
-	NSDictionary *attributes = @{ NSFontAttributeName : [UIFont regularCustomFontOfSize : IS_IPHONE ? 15 : 17],
+	NSDictionary *Buttonattributes = @{ NSFontAttributeName : [UIFont regularCustomFontOfSize : IS_IPHONE ? 15 : 17],
 								 NSForegroundColorAttributeName : [[UINavigationBar appearance] tintColor],
 								  };
 
 	
-	NSMutableAttributedString* cancelString = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"cancel", @"cancel in edit mode") attributes:attributes];
+	NSMutableAttributedString* cancelString = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"cancel", @"cancel in edit mode") attributes:Buttonattributes];
 	[self.cancelButton.titleLabel setAttributedText:cancelString];
 
 	
-	NSMutableAttributedString* saveString = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"save", @"save in edit mode") attributes:attributes];
+	NSMutableAttributedString* saveString = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"save", @"save in edit mode") attributes:Buttonattributes];
 	[self.saveButton.titleLabel setAttributedText:saveString];
+	
+	
+	
 
 
 }
+
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -232,10 +250,7 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock {
         int offset = OFFSET_DESCRIPTION_EDIT;
         
 		if (IS_IPHONE ) {
-			
-			if (IS_IPHONE_5) {
-				offset += 50;
-			} else {
+			if (!IS_IPHONE_5) {
 				offset += 92;
 			}
         } else if (IS_IPAD) {
