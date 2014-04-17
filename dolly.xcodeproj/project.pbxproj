@@ -134,7 +134,6 @@
 		01E427E51664DF21009B941F /* Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E427E41664DF21009B941F /* Channel.m */; };
 		01E427F01664EE52009B941F /* _Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E427ED1664EE52009B941F /* _Channel.m */; };
 		01E427F11664EE52009B941F /* _Video.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E427EF1664EE52009B941F /* _Video.m */; };
-		01F1B85D17297471005735AF /* CoverArt.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F1B85C17297471005735AF /* CoverArt.m */; };
 		01F7C9681748ED0B00E36994 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 01F7C9671748ED0B00E36994 /* libsqlite3.dylib */; };
 		01F8E77F16B03A7C000D44B9 /* SYNVideoViewerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F8E77D16B03A7C000D44B9 /* SYNVideoViewerViewController.m */; };
 		01F8E78016B03A7C000D44B9 /* SYNVideoViewerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F8E77E16B03A7C000D44B9 /* SYNVideoViewerViewController.xib */; };
@@ -467,7 +466,6 @@
 		BEB1576A173BA75100DAFA2F /* _Genre.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB15767173BA75100DAFA2F /* _Genre.m */; };
 		BEB1576B173BA75100DAFA2F /* _SubGenre.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB15769173BA75100DAFA2F /* _SubGenre.m */; };
 		BEB1577B173C10E900DAFA2F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BEB1577D173C10E900DAFA2F /* Localizable.strings */; };
-		BEB1578B173D016B00DAFA2F /* _CoverArt.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB1578A173D016B00DAFA2F /* _CoverArt.m */; };
 		BEB312F81815638700FAF98A /* TabActivity.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB312EE1815638700FAF98A /* TabActivity.png */; };
 		BEB312F91815638700FAF98A /* TabActivity@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB312EF1815638700FAF98A /* TabActivity@2x.png */; };
 		BEB312FA1815638700FAF98A /* TabFeed.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB312F01815638700FAF98A /* TabFeed.png */; };
@@ -926,8 +924,6 @@
 		01EA81C316B9483D0069AFF9 /* SYNVideoThumbnailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNVideoThumbnailCell.h; sourceTree = "<group>"; };
 		01EA81C416B9483D0069AFF9 /* SYNVideoThumbnailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNVideoThumbnailCell.m; sourceTree = "<group>"; };
 		01EA81C616B9487A0069AFF9 /* SYNVideoThumbnailCell~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNVideoThumbnailCell~ipad.xib"; sourceTree = "<group>"; };
-		01F1B85B17297471005735AF /* CoverArt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoverArt.h; sourceTree = "<group>"; };
-		01F1B85C17297471005735AF /* CoverArt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoverArt.m; sourceTree = "<group>"; };
 		01F7C9671748ED0B00E36994 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		01F8E77C16B03A7C000D44B9 /* SYNVideoViewerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNVideoViewerViewController.h; sourceTree = "<group>"; };
 		01F8E77D16B03A7C000D44B9 /* SYNVideoViewerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNVideoViewerViewController.m; sourceTree = "<group>"; };
@@ -1378,8 +1374,6 @@
 		BEB15768173BA75100DAFA2F /* _SubGenre.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _SubGenre.h; sourceTree = "<group>"; };
 		BEB15769173BA75100DAFA2F /* _SubGenre.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SubGenre.m; sourceTree = "<group>"; };
 		BEB1577C173C10E900DAFA2F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		BEB15789173D016B00DAFA2F /* _CoverArt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CoverArt.h; sourceTree = "<group>"; };
-		BEB1578A173D016B00DAFA2F /* _CoverArt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CoverArt.m; sourceTree = "<group>"; };
 		BEB312EE1815638700FAF98A /* TabActivity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TabActivity.png; path = Assets/Images/TabActivity.png; sourceTree = "<group>"; };
 		BEB312EF1815638700FAF98A /* TabActivity@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "TabActivity@2x.png"; path = "Assets/Images/TabActivity@2x.png"; sourceTree = "<group>"; };
 		BEB312F01815638700FAF98A /* TabFeed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TabFeed.png; path = Assets/Images/TabFeed.png; sourceTree = "<group>"; };
@@ -2501,8 +2495,6 @@
 				E94BEFA818C9F18F00762651 /* _Recommendation.m */,
 				BEB15766173BA75100DAFA2F /* _Genre.h */,
 				BEB15767173BA75100DAFA2F /* _Genre.m */,
-				BEB15789173D016B00DAFA2F /* _CoverArt.h */,
-				BEB1578A173D016B00DAFA2F /* _CoverArt.m */,
 				BEB15768173BA75100DAFA2F /* _SubGenre.h */,
 				BEB15769173BA75100DAFA2F /* _SubGenre.m */,
 				BE7D030B179D8EFA008053DC /* _Friend.h */,
@@ -2550,8 +2542,6 @@
 				BE7D0309179D8EEC008053DC /* Friend.m */,
 				BEE01B77185732A0000CF681 /* Mood.h */,
 				BEE01B78185732A0000CF681 /* Mood.m */,
-				01F1B85B17297471005735AF /* CoverArt.h */,
-				01F1B85C17297471005735AF /* CoverArt.m */,
 				BEA043E316CAA8E1005406E7 /* Genre.h */,
 				BEA043E416CAA8E1005406E7 /* Genre.m */,
 				BEA043E516CAA8E1005406E7 /* SubGenre.h */,
@@ -4736,7 +4726,6 @@
 				BE285DBC1726828F00D995AB /* SYNChannelManager.m in Sources */,
 				0111CDFC1729314E00612186 /* SYNCoverThumbnailCell.m in Sources */,
 				E9FECE6C1856000800BBE7F2 /* SYNStaticModel.m in Sources */,
-				01F1B85D17297471005735AF /* CoverArt.m in Sources */,
 				BEB313C0182A829400FAF98A /* SYNCollectionVideoCell.m in Sources */,
 				011C1676173003E800CF50B9 /* OWActivity.m in Sources */,
 				011C1677173003E800CF50B9 /* OWActivityDelegateObject.m in Sources */,
@@ -4783,7 +4772,6 @@
 				0E0062E1188EBBCB00429C79 /* SYNOnBoardingSectionHeader.m in Sources */,
 				E9918C1618967BA500767BBD /* SYNTimestampLabel.m in Sources */,
 				BE1B3DEA181141D600DA2BD6 /* SYNAggregateVideoItemCell.m in Sources */,
-				BEB1578B173D016B00DAFA2F /* _CoverArt.m in Sources */,
 				E9E1E28518561CA30051E312 /* SYNTapDismissView.m in Sources */,
 				E914BED7183CF018001616D3 /* SYNFullScreenVideoViewController.m in Sources */,
 				BEE01B79185732A0000CF681 /* Mood.m in Sources */,

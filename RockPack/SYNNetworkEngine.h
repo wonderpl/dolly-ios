@@ -32,17 +32,6 @@
                                    withComplete: (MKNKAutocompleteProcessBlock) completionBlock
                                        andError: (MKNKErrorBlock) errorBlock;
 
-#pragma mark - Cover art
-
-- (void) updateCoverArtWithWithStart: (unsigned int) start
-                                size: (unsigned int) size
-                   completionHandler: (MKNKJSONCompleteBlock) completionBlock
-                        errorHandler: (MKNKUserErrorBlock) errorBlock;
-
-- (void) updateCoverArtOnCompletion: (MKNKJSONCompleteBlock) completionBlock
-                            onError: (MKNKErrorBlock) errorBlock;
-
-
 #pragma mark - Channel owner
 
 - (void) channelOwnerDataForChannelOwner: (ChannelOwner *) channelOwner

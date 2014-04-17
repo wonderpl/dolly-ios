@@ -8,7 +8,6 @@
 
 #import "AppConstants.h"
 #import "Channel.h"
-#import "CoverArt.h"
 #import "FeedItem.h"
 #import "Genre.h"
 #import "NSDictionary+Validation.h"
@@ -273,39 +272,6 @@
     return YES;
 }
 
-
-- (BOOL) registerCoverArtFromDictionary: (NSDictionary*) dictionary
-                          forUserUpload: (BOOL) userUpload
-{
-    // == Check for Validity == //
-    NSDictionary *channelCoverDictionary = dictionary[@"cover_art"];
-    if (!channelCoverDictionary || ![channelCoverDictionary isKindOfClass: [NSDictionary class]])
-        return NO;
-    
-    NSArray *itemArray = channelCoverDictionary[@"items"];
-    
-    if (![itemArray isKindOfClass: [NSArray class]])
-        return NO;
-    
-    for (NSDictionary *individualChannelCoverDictionary in itemArray)
-    {
-        if (![individualChannelCoverDictionary isKindOfClass: [NSDictionary class]])
-            continue;
-        
-        [CoverArt instanceFromDictionary: individualChannelCoverDictionary
-               usingManagedObjectContext: importManagedObjectContext
-                           forUserUpload: userUpload]; 
-    }
-
-    BOOL saveResult = [self saveImportContext];
-    
-    if (!saveResult)
-        return NO;
-    
-    [appDelegate saveContext:NO];
-    
-    return YES;
-}
 
 #pragma mark - Retrieve Functions
 

@@ -20,9 +20,6 @@
 
 - (BOOL) registerSubscriptionsForCurrentUserFromDictionary: (NSDictionary *) dictionary;
 
-- (BOOL) registerCoverArtFromDictionary: (NSDictionary *) dictionary
-                          forUserUpload: (BOOL) userUpload;
-
 -(BOOL)registerExternalAccountWithCurrentUserFromDictionary:(NSDictionary*)dictionary;
 
 -(BOOL)registerMoodsFromDictionary:(NSDictionary*)dictionary
