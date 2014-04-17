@@ -29,6 +29,7 @@
 @property (strong, nonatomic) UIAlertView *followAllAlertView;
 @property (strong, nonatomic) IBOutlet UIImageView *coverImage;
 @property (strong, nonatomic) UIButton* alertViewButton;
+@property (strong, nonatomic) IBOutlet UIView *gradientMask;
 
 @end
 
@@ -52,6 +53,18 @@
     
     
     [self.userNameLabel setFont:[UIFont semiboldCustomFontOfSize:self.userNameLabel.font.pointSize]];
+	
+	CAGradientLayer *mask = [CAGradientLayer layer];
+	mask.colors = @[ (id)[[UIColor clearColor] CGColor],
+					 (id)[[UIColor colorWithWhite:0.0 alpha:0.2] CGColor],
+					 (id)[[UIColor colorWithWhite:0.0 alpha:0.3] CGColor],
+					 (id)[[UIColor colorWithWhite:0.0 alpha:0.45] CGColor] ];
+	mask.locations = @[@0.0, @0.2, @0.8, @1.0 ];
+	
+	mask.frame = self.gradientMask.frame;
+	
+	self.gradientMask.layer.mask = mask;
+
 }
 
 #pragma mark - Set Data
@@ -103,6 +116,8 @@
     {
         [self.followButton setTitle:NSLocalizedString(@"unfollow", "unfollow discover screen") forState:UIControlStateSelected];
     }
+	
+
 }
 
 
@@ -134,6 +149,16 @@
 //    }
 //    label.font = font;
 //    [label setText:text];
+
+	
+	CAGradientLayer *mask = [CAGradientLayer layer];
+	mask.colors = @[ (id)[[UIColor whiteColor] CGColor],
+					 (id)[[UIColor clearColor] CGColor],
+					 (id)[[UIColor clearColor] CGColor],
+					 (id)[[UIColor whiteColor] CGColor] ];
+	mask.locations = @[ @0.0, @0.2, @0.8, @1.0 ];
+	
+	mask.frame = self.layer.bounds;
 
 }
 

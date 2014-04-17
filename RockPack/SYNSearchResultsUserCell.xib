@@ -17,11 +17,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="185"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.44999999999999996" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fkX-vS-KN8" userLabel="Cover photo layer">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZrU-Mh-zWA" userLabel="Gradient Mask">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="185"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" red="0.28005708495662784" green="0.27861682212248673" blue="0.30377462635869568" alpha="1" colorSpace="calibratedRGB"/>
-                    </imageView>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MN1-18-LaS" userLabel="follow" customClass="SYNFollowUserButton">
                         <rect key="frame" x="225" y="138" width="80" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -61,24 +61,25 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="sTy-g0-GXP" secondAttribute="trailing" id="0Mp-Lf-HTO"/>
                 <constraint firstItem="sTy-g0-GXP" firstAttribute="top" secondItem="gc6-j7-DT5" secondAttribute="top" id="1tz-2f-gDH"/>
-                <constraint firstAttribute="bottom" secondItem="fkX-vS-KN8" secondAttribute="bottom" constant="10" id="5rU-g7-4d6"/>
                 <constraint firstAttribute="bottom" secondItem="ufw-e6-HaY" secondAttribute="bottom" constant="45" id="7pq-X0-LZI"/>
                 <constraint firstItem="mTu-lk-DTw" firstAttribute="top" secondItem="gc6-j7-DT5" secondAttribute="top" constant="12" id="AFg-84-kX7"/>
                 <constraint firstAttribute="trailing" secondItem="mTu-lk-DTw" secondAttribute="trailing" constant="15" id="BsV-YQ-Ipc"/>
                 <constraint firstAttribute="trailing" secondItem="MN1-18-LaS" secondAttribute="trailing" constant="15" id="F3M-04-VvQ"/>
                 <constraint firstItem="sTy-g0-GXP" firstAttribute="leading" secondItem="gc6-j7-DT5" secondAttribute="leading" id="HOu-iH-IYN"/>
-                <constraint firstItem="fkX-vS-KN8" firstAttribute="top" secondItem="gc6-j7-DT5" secondAttribute="top" id="dIJ-Ri-yeo"/>
-                <constraint firstItem="fkX-vS-KN8" firstAttribute="leading" secondItem="gc6-j7-DT5" secondAttribute="leading" id="gVK-dm-yAg"/>
+                <constraint firstAttribute="trailing" secondItem="ZrU-Mh-zWA" secondAttribute="trailing" id="XNm-zA-7jz"/>
+                <constraint firstAttribute="bottom" secondItem="ZrU-Mh-zWA" secondAttribute="bottom" constant="10" id="aV0-wd-54R"/>
+                <constraint firstItem="ZrU-Mh-zWA" firstAttribute="leading" secondItem="gc6-j7-DT5" secondAttribute="leading" id="dLS-jN-CQR"/>
                 <constraint firstItem="mTu-lk-DTw" firstAttribute="leading" secondItem="gc6-j7-DT5" secondAttribute="leading" constant="12" id="gd5-tC-byv"/>
-                <constraint firstAttribute="trailing" secondItem="fkX-vS-KN8" secondAttribute="trailing" id="nrS-fB-Bzi"/>
                 <constraint firstAttribute="bottom" secondItem="sTy-g0-GXP" secondAttribute="bottom" constant="10" id="rDG-Oa-xDw"/>
                 <constraint firstItem="ufw-e6-HaY" firstAttribute="leading" secondItem="gc6-j7-DT5" secondAttribute="leading" constant="12" id="xGA-ZQ-Z01"/>
                 <constraint firstAttribute="bottom" secondItem="MN1-18-LaS" secondAttribute="bottom" constant="25" id="xSd-wJ-1c1"/>
+                <constraint firstItem="ZrU-Mh-zWA" firstAttribute="top" secondItem="gc6-j7-DT5" secondAttribute="top" id="xYR-81-lLo"/>
             </constraints>
             <size key="customSize" width="353" height="216"/>
             <connections>
                 <outlet property="coverImage" destination="sTy-g0-GXP" id="Yu7-59-j8E"/>
                 <outlet property="followButton" destination="MN1-18-LaS" id="Bhy-77-2TY"/>
+                <outlet property="gradientMask" destination="ZrU-Mh-zWA" id="F8b-bD-stM"/>
                 <outlet property="userNameLabel" destination="mTu-lk-DTw" id="MyT-a4-W7m"/>
             </connections>
         </collectionViewCell>
