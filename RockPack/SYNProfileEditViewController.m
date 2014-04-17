@@ -87,7 +87,7 @@ static const CGFloat OFFSET_DESCRIPTION_EDIT = 130.0f;
     
     //we move the view up in 1phone 4
     if (!IS_IPHONE_5 && IS_IPHONE) {
-        [self.topConstraint setConstant:-70];
+        [self.topConstraint setConstant:-28];
     }
     
     [self.navigationBar setTranslucent:YES];
@@ -231,8 +231,13 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock {
         
         int offset = OFFSET_DESCRIPTION_EDIT;
         
-        if (!IS_IPHONE_5 && IS_IPHONE) {
-            offset += 50;
+		if (IS_IPHONE ) {
+			
+			if (IS_IPHONE_5) {
+				offset += 50;
+			} else {
+				offset += 92;
+			}
         } else if (IS_IPAD) {
             offset += 20;
         }
