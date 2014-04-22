@@ -112,6 +112,78 @@
 	return channelOwner;
 }
 
++ (NSDictionary *)channelOwnersFromDictionaries:(NSArray *)dictionaries
+						 inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
+	
+	NSArray *channelOwnerIds = [dictionaries valueForKey:@"id"];
+	
+	NSMutableDictionary *existingChannelOwners = [[self existingChannelOwnersWithIds:channelOwnerIds
+															  inManagedObjectContext:managedObjectContext] mutableCopy];
+	
+	NSMutableDictionary *channelOwners = [NSMutableDictionary dictionary];
+	for (NSDictionary *dictionary in dictionaries) {
+		NSString *channelOwnerId = dictionary[@"id"];
+		
+		ChannelOwner *channelOwner = existingChannelOwners[channelOwnerId];
+		if (!channelOwner) {
+			channelOwner = [self insertInManagedObjectContext:managedObjectContext];
+			
+			channelOwner.uniqueId = channelOwnerId;
+			
+			existingChannelOwners[channelOwnerId] = channelOwner;
+		}
+		
+		[channelOwner setAttributesFromDictionary:dictionary];
+		
+		channelOwners[channelOwnerId] = channelOwner;
+	}
+	
+	return channelOwners;
+}
+
+- (void)setAttributesFromDictionary:(NSDictionary *)dictionary {
+	
+    self.uniqueId = [dictionary objectForKey:@"id"
+								 withDefault: @""];
+    
+    self.thumbnailURL = [dictionary objectForKey: @"avatar_thumbnail_url"
+                                     withDefault: @""];
+    
+    self.displayName = [dictionary objectForKey: @"display_name"
+                                    withDefault: @""];
+    
+    self.username = [dictionary objectForKey: @"username"
+                                 withDefault: @""];
+    
+    self.position = [dictionary objectForKey: @"position"
+                                 withDefault: @0];
+    
+    self.subscriptionCount = [dictionary objectForKey:@"subscription_count"
+                                          withDefault:@0];
+    
+    self.subscribersCount =[dictionary objectForKey:@"subscriber_count"
+                                        withDefault:@0];
+    
+    self.coverPhotoURL = [dictionary objectForKey:@"profile_cover_url"
+                                      withDefault:@""];
+    
+    self.channelOwnerDescription = [dictionary objectForKey:@"description"
+                                                withDefault:@""];
+    
+    self.totalVideosValueSubscriptions = [dictionary objectForKey: @"subscription_count" withDefault:0];
+}
+
+
++ (NSDictionary *)existingChannelOwnersWithIds:(NSArray *)videoIds
+						inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
+	
+	NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[self entityName]];
+	[fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"uniqueId IN %@", videoIds]];
+	
+	NSArray *videos = [managedObjectContext executeFetchRequest:fetchRequest error:nil];
+	
+	return [NSDictionary dictionaryWithObjects:videos forKeys:[videos valueForKey:@"uniqueId"]];
+}
 
 - (void) setAttributesFromDictionary: (NSDictionary *) dictionary
                  ignoringObjectTypes: (IgnoringObjects) ignoringObjects

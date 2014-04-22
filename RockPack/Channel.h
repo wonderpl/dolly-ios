@@ -24,6 +24,12 @@
         usingManagedObjectContext: (NSManagedObjectContext *) managedObjectContext
               ignoringObjectTypes: (IgnoringObjects) ignoringObjects;
 
++ (NSDictionary *)existingChannelsWithIds:(NSArray *)videoIds
+				   inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
+
++ (NSDictionary *)channelsFromDictionaries:(NSArray *)dictionaries
+					inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
+
 - (void) addVideoInstanceFromDictionary: (NSDictionary *) videosInstanceDictionary;
 
 - (void) addVideoInstancesFromDictionary: (NSDictionary *) videosInstancesDictionary;

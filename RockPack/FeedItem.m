@@ -7,117 +7,68 @@
 
 @implementation FeedItem
 
-@synthesize placeholder;
-
-
-+ (FeedItem *) instanceFromResource: (AbstractCommon *) object
-{
++ (FeedItem *)instanceFromResource:(AbstractCommon *)object {
     FeedItem *instance = [FeedItem insertInManagedObjectContext: object.managedObjectContext];
     
-    if (!instance)
-    {
-        return nil;
-    }
-    
-    instance.uniqueId = [NSString stringWithString: object.uniqueId];
-    instance.resourceId = [NSString stringWithString: object.uniqueId];
-
-    // pass date according to type
-    instance.itemTypeValue = FeedItemTypeLeaf;
-    
-    if ([object isKindOfClass: [VideoInstance class]])
-    {
-        VideoInstance *videoInstance = (VideoInstance *) object;
-        instance.dateAdded = videoInstance.dateAdded;
-        instance.resourceTypeValue = FeedItemResourceTypeVideo;
-        instance.positionValue = videoInstance.positionValue;
-    }
-    else if ([object isKindOfClass: [Channel class]])
-    {
-        Channel *channel = (Channel *) object;
-        instance.dateAdded = channel.datePublished;
-        instance.resourceTypeValue = FeedItemResourceTypeChannel;
-        instance.positionValue = channel.positionValue;
-    }
-    
-    instance.itemCountValue = 1;
-    instance.viewId = object.viewId;
+	[instance updateWithResource:object];
     
     return instance;
 }
 
-
-+ (FeedItem *) instanceFromDictionary: (NSDictionary *) dictionary
-                               withId: (NSString *) aid
-            usingManagedObjectContext: (NSManagedObjectContext *) managedObjectContext
-{
-    if (!aid || !dictionary || ![dictionary isKindOfClass: [NSDictionary class]])
+- (void)updateWithResource:(AbstractCommon *)resource {
+	self.uniqueId = resource.uniqueId;
+	
+    if ([resource isKindOfClass: [VideoInstance class]])
     {
-        return nil;
+        VideoInstance *videoInstance = (VideoInstance *)resource;
+        self.dateAdded = videoInstance.dateAdded;
+        self.resourceTypeValue = FeedItemResourceTypeVideo;
+        self.positionValue = videoInstance.positionValue;
+    }
+    else if ([resource isKindOfClass: [Channel class]])
+    {
+        Channel *channel = (Channel *)resource;
+        self.dateAdded = channel.datePublished;
+        self.resourceTypeValue = FeedItemResourceTypeChannel;
+        self.positionValue = channel.positionValue;
     }
 	
-    FeedItem *instance = [FeedItem insertInManagedObjectContext: managedObjectContext];
-    
-    instance.uniqueId = aid;
-    
-    [instance setAttributesFromDictionary: dictionary];
-    
-    return instance;
+	self.viewId = resource.viewId;
 }
 
-
-- (void) setAttributesFromDictionary: (NSDictionary *) dictionary
-{
-    // usually empty, title is derived from other data
-    NSString *n_title = dictionary[@"title"];
-    
-    if (n_title && [n_title isKindOfClass: [NSString class]])
-    {
-        self.title = n_title;
-    }
-    
-    self.itemTypeValue = FeedItemTypeAggregate;
-    
-    NSString *n_type = dictionary[@"type"]; // "type": "video" | "channel"
-    
-    if (n_type)
-    {
-        if ([n_type isEqualToString: @"video"])
-        {
-            self.resourceTypeValue = FeedItemResourceTypeVideo;
-        }
-        else if ([n_type isEqualToString: @"channel"])
-        {
-            self.resourceTypeValue = FeedItemResourceTypeChannel;
-        }
-    }
-    
-    NSNumber *n_count = dictionary[@"count"];
-    
-    if (n_count && [n_count isKindOfClass: [NSNumber class]])
-    {
-        self.itemCount = n_count;
-    }
-    
-    self.positionValue = INT_MAX; // heuristic, place it at the end
-    
-    self.dateAdded = [NSDate distantPast];
++ (NSDictionary *)feedItemsWithIds:(NSArray *)feedItemIds inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
+	NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[FeedItem entityName]];
+	[fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"uniqueId IN %@", feedItemIds]];
+	
+	NSArray *feedItems = [managedObjectContext executeFetchRequest:fetchRequest error:nil];
+	
+	return [NSDictionary dictionaryWithObjects:feedItems forKeys:[feedItems valueForKey:@"uniqueId"]];
 }
 
-
-- (void) addFeedItemsObject: (FeedItem *) value_
-{
-    [self.feedItemsSet addObject: value_];
-    self.positionValue = MIN(self.positionValue, value_.positionValue);
-    self.dateAdded = [self.dateAdded laterDate: value_.dateAdded];
++ (NSArray *)orderedFeedItemsWithIds:(NSArray *)feedItemIds inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
+	NSDictionary *feedItemsByIds = [self feedItemsWithIds:feedItemIds inManagedObjectContext:managedObjectContext];
+	
+	NSMutableArray *array = [NSMutableArray array];
+	for (NSString *feedItemId in feedItemIds) {
+		[array addObject:feedItemsByIds[feedItemId]];
+	}
+	return array;
 }
 
++ (void)deleteFeedItemsWithoutIds:(NSArray *)feedItemIds inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
+	NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[FeedItem entityName]];
+	[fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"viewId == %@ AND NOT (uniqueId IN %@)", kFeedViewId, feedItemIds]];
+	
+	NSArray *feedItems = [managedObjectContext executeFetchRequest:fetchRequest error:nil];
+	for (FeedItem *feedItem in feedItems) {
+		[managedObjectContext deleteObject:feedItem];
+	}
+}
 
 - (NSString *) description
 {
-    NSString *typeString = self.itemTypeValue == FeedItemTypeAggregate ? @"AGR" : @"FDI";
     NSString *resourceString = self.resourceTypeValue == FeedItemResourceTypeChannel ? @"Channel" : @"VideoInstance";
-    NSMutableString *responceString = [NSMutableString stringWithFormat: @"[FeedItem %@ (type:'%@', rsc:'%@', count:%i, position:%lld)]", self.uniqueId, typeString, resourceString, self.itemCountValue, self.positionValue];
+    NSMutableString *responceString = [NSMutableString stringWithFormat: @"[FeedItem %@ (rsc:'%@', position:%lld)]", self.uniqueId, resourceString, self.positionValue];
     
     return responceString;
 }

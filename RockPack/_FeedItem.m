@@ -6,17 +6,12 @@
 const struct FeedItemAttributes FeedItemAttributes = {
 	.channelOwnerId = @"channelOwnerId",
 	.dateAdded = @"dateAdded",
-	.itemCount = @"itemCount",
-	.itemType = @"itemType",
 	.position = @"position",
-	.resourceId = @"resourceId",
 	.resourceType = @"resourceType",
 	.title = @"title",
 };
 
 const struct FeedItemRelationships FeedItemRelationships = {
-	.aggregate = @"aggregate",
-	.feedItems = @"feedItems",
 };
 
 const struct FeedItemFetchedProperties FeedItemFetchedProperties = {
@@ -48,16 +43,6 @@ const struct FeedItemFetchedProperties FeedItemFetchedProperties = {
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 	
-	if ([key isEqualToString:@"itemCountValue"]) {
-		NSSet *affectingKey = [NSSet setWithObject:@"itemCount"];
-		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
-		return keyPaths;
-	}
-	if ([key isEqualToString:@"itemTypeValue"]) {
-		NSSet *affectingKey = [NSSet setWithObject:@"itemType"];
-		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
-		return keyPaths;
-	}
 	if ([key isEqualToString:@"positionValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"position"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
@@ -89,58 +74,6 @@ const struct FeedItemFetchedProperties FeedItemFetchedProperties = {
 
 
 
-@dynamic itemCount;
-
-
-
-- (int32_t)itemCountValue {
-	NSNumber *result = [self itemCount];
-	return [result intValue];
-}
-
-- (void)setItemCountValue:(int32_t)value_ {
-	[self setItemCount:[NSNumber numberWithInt:value_]];
-}
-
-- (int32_t)primitiveItemCountValue {
-	NSNumber *result = [self primitiveItemCount];
-	return [result intValue];
-}
-
-- (void)setPrimitiveItemCountValue:(int32_t)value_ {
-	[self setPrimitiveItemCount:[NSNumber numberWithInt:value_]];
-}
-
-
-
-
-
-@dynamic itemType;
-
-
-
-- (int32_t)itemTypeValue {
-	NSNumber *result = [self itemType];
-	return [result intValue];
-}
-
-- (void)setItemTypeValue:(int32_t)value_ {
-	[self setItemType:[NSNumber numberWithInt:value_]];
-}
-
-- (int32_t)primitiveItemTypeValue {
-	NSNumber *result = [self primitiveItemType];
-	return [result intValue];
-}
-
-- (void)setPrimitiveItemTypeValue:(int32_t)value_ {
-	[self setPrimitiveItemType:[NSNumber numberWithInt:value_]];
-}
-
-
-
-
-
 @dynamic position;
 
 
@@ -162,13 +95,6 @@ const struct FeedItemFetchedProperties FeedItemFetchedProperties = {
 - (void)setPrimitivePositionValue:(int64_t)value_ {
 	[self setPrimitivePosition:[NSNumber numberWithLongLong:value_]];
 }
-
-
-
-
-
-@dynamic resourceId;
-
 
 
 
@@ -206,23 +132,6 @@ const struct FeedItemFetchedProperties FeedItemFetchedProperties = {
 
 
 
-
-@dynamic aggregate;
-
-	
-
-@dynamic feedItems;
-
-	
-- (NSMutableSet*)feedItemsSet {
-	[self willAccessValueForKey:@"feedItems"];
-  
-	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"feedItems"];
-  
-	[self didAccessValueForKey:@"feedItems"];
-	return result;
-}
-	
 
 
 

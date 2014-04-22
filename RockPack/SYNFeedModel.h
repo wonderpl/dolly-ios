@@ -11,20 +11,10 @@
 @class Channel;
 @class FeedItem;
 
-typedef NS_ENUM(NSInteger, SYNFeedModelMode) {
-	SYNFeedModelModeFeed,
-	SYNFeedModelModeVideo
-};
-
 @interface SYNFeedModel : SYNPagingModel
 
-@property (nonatomic, assign) SYNFeedModelMode mode;
+- (FeedItem *)feedItemAtindex:(NSInteger)index;
 
-- (Channel *)channelForFeedItem:(FeedItem *)feedItem;
-
-- (NSArray *)videoInstancesForFeedItem:(FeedItem *)feedItem;
-- (NSArray *)channelsForFeedItem:(FeedItem *)feedItem;
-
-- (NSInteger)videoIndexForIndexPath:(NSIndexPath *)indexPath;
+- (id)resourceForFeedItem:(FeedItem *)feedItem;
 
 @end

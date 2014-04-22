@@ -15,4 +15,7 @@ extern NSString *const VideoSourceOoyala;
 + (Video *) instanceFromVideo: (Video *) video
     usingManagedObjectContext: (NSManagedObjectContext *) managedObjectContext;
 
++ (NSDictionary *)videosFromDictionaries:(NSArray *)dictionaries
+				  inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
+
 @end

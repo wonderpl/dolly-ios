@@ -28,102 +28,36 @@
 #pragma mark - Public
 
 - (Channel *)channelForFeedItem:(FeedItem *)feedItem {
-	FeedItem *actualFeedItem = feedItem;
-	if (feedItem.itemTypeValue == FeedItemTypeAggregate) {
-		actualFeedItem = [feedItem.feedItems anyObject];
-	}
-	
-	Channel *channel = nil;
-	if (actualFeedItem.resourceTypeValue == FeedItemResourceTypeVideo) {
-		VideoInstance *videoInstance = self.videoInstancesById[actualFeedItem.resourceId];
-		channel = videoInstance.channel;
-	} else if (actualFeedItem.resourceTypeValue == FeedItemResourceTypeChannel) {
-		channel = self.channelsById[actualFeedItem.resourceId];
-	}
-	return channel;
-}
-
-- (NSArray *)videoInstancesForFeedItem:(FeedItem *)feedItem {
-	NSMutableArray* videoInstances = [NSMutableArray array];
-	
-	if (feedItem.itemTypeValue == FeedItemTypeAggregate) {
-		for (FeedItem* childFeedItem in feedItem.feedItems) {
-			VideoInstance *videoInstance = self.videoInstancesById[childFeedItem.resourceId];
-			if (videoInstance) {
-				[videoInstances addObject:videoInstance];
-			}
-		}
+	if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo) {
+		VideoInstance *videoInstance = self.videoInstancesById[feedItem.uniqueId];
+		return videoInstance.channel;
 	} else {
-        VideoInstance *videoInstance = self.videoInstancesById[feedItem.resourceId];
-        if (videoInstance) {
-            [videoInstances addObject:videoInstance];
-        }
+		return self.channelsById[feedItem.uniqueId];
 	}
-	
-	return videoInstances;
-}
-
-- (NSArray *)channelsForFeedItem:(FeedItem *)feedItem {
-	NSMutableArray* channels = [NSMutableArray array];
-	
-	if (feedItem.itemTypeValue == FeedItemTypeAggregate) {
-		for (FeedItem* childFeedItem in feedItem.feedItems) {
-			Channel *channel = self.channelsById[childFeedItem.resourceId];
-			if (channel) {
-				[channels addObject:channel];
-			}
-		}
-	} else {
-		Channel *channel = self.channelsById[feedItem.resourceId];
-        if (channel) {
-            [channels addObject:channel];
-        }
-	}
-	
-	return channels;
 }
 
 - (NSArray *)videoInstancesForFeedItems:(NSArray *)feedItems {
 	NSMutableArray *videoInstances = [NSMutableArray array];
 	
-	NSArray *sortDescriptors = @[ [NSSortDescriptor sortDescriptorWithKey:@"position" ascending:YES] ];
 	for (FeedItem *feedItem in feedItems) {
 		if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo) {
-			if (feedItem.itemTypeValue == FeedItemTypeAggregate) {
-				for (FeedItem *childFeedItem in [feedItem.feedItems sortedArrayUsingDescriptors:sortDescriptors]) {
-					if (childFeedItem.resourceTypeValue == FeedItemResourceTypeVideo) {
-						[videoInstances addObject:self.videoInstancesById[childFeedItem.resourceId]];
-					}
-				}
-			} else {
-				[videoInstances addObject:self.videoInstancesById[feedItem.resourceId]];
-			}
+			[videoInstances addObject:self.videoInstancesById[feedItem.uniqueId]];
 		}
 	}
 	
 	return videoInstances;
 }
 
-- (NSInteger)videoIndexForIndexPath:(NSIndexPath *)indexPath {
-	__block NSInteger index = 0;
-	[self.feedItems enumerateObjectsUsingBlock:^(FeedItem *feedItem, NSUInteger idx, BOOL *stop) {
-		if (idx >= indexPath.section) {
-			*stop = YES;
-			return;
-		}
-		if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo) {
-			index += feedItem.itemCountValue;
-		}
-	}];
-	return index + indexPath.item;
+- (FeedItem *)feedItemAtindex:(NSInteger)index {
+	return self.feedItems[index];
 }
 
-#pragma mark - Getters / Setters
-
-- (void)setMode:(SYNFeedModelMode)mode {
-	_mode = mode;
-	
-	self.loadedItems = (mode == SYNFeedModelModeFeed ? self.feedItems : self.videoInstances);
+- (id)resourceForFeedItem:(FeedItem *)feedItem {
+	if (feedItem.resourceType == FeedItemResourceTypeVideo) {
+		return self.videoInstancesById[feedItem.uniqueId];
+	} else {
+		return self.channelsById[feedItem.uniqueId];
+	}
 }
 
 #pragma mark - Overridden
@@ -136,83 +70,111 @@
                                                    start:range.location
                                                     size:range.length
                                        completionHandler:^(NSDictionary *responseDictionary) {
-										   BOOL append = (range.location > 0);
 										   
-                                           NSDictionary *contentItems = responseDictionary[@"content"];
+										   NSDictionary *content = responseDictionary[@"content"];
 										   
-										   SYNMainRegistry *mainRegistry = appDelegate.mainRegistry;
+										   NSArray *existingFeedItemIds = ([self.feedItems valueForKey:@"uniqueId"] ?: @[]);
 										   
-                                           [mainRegistry performInBackground: ^BOOL (NSManagedObjectContext *backgroundContext) {
-                                               return [mainRegistry registerDataForSocialFeedFromItemsDictionary:contentItems
-																									 byAppending:append];
-                                           } completionBlock: ^(BOOL registryResultOk) {
-											   __strong typeof(self) sself = wself;
-											   
-											   if (!registryResultOk) {
-												   [self handleError];
-												   return;
-											   }
-											   
-											   NSNumber *total = contentItems[@"total"];
-											   NSArray *feedItems = [sself fetchFeedItems];
-											   
-											   sself.feedItems = feedItems;
-											   
-											   sself.videoInstancesById = [self fetchVideoInstancesByIds];
-											   sself.channelsById = [self fetchChannelsByIds];
-											   
-											   NSArray *videoInstances = [sself videoInstancesForFeedItems:feedItems];
-											   sself.videoInstances = videoInstances;
-											   
-											   [[SYNVideoThumbnailDownloader sharedDownloader] fetchThumbnailImagesForVideos:[videoInstances valueForKeyPath:@"video"]];
-											   
-											   sself.loadedItems = (sself.mode == SYNFeedModelModeFeed ? feedItems : videoInstances);
-											   sself.totalItemCount = [total integerValue];
-
-											   [sself handleDataUpdatedForRange:range];
-										   }];
+										   [self parseFeedResponse:content
+												   existingFeedIds:existingFeedItemIds
+												   completionBlock:^(NSArray *feedItems) {
+													   
+													   __strong typeof(self) sself = wself;
+													   
+													   NSManagedObjectContext *managedObjectContext = appDelegate.mainManagedObjectContext;
+													   
+													   NSNumber *total = content[@"total"];
+													   
+													   sself.feedItems = feedItems;
+													   
+													   NSArray *feedItemIds = [feedItems valueForKey:@"uniqueId"];
+													   
+													   sself.videoInstancesById = [VideoInstance existingVideoInstancesWithIds:feedItemIds
+																										inManagedObjectContext:managedObjectContext];
+													   sself.channelsById = [Channel existingChannelsWithIds:feedItemIds
+																					  inManagedObjectContext:managedObjectContext];
+													   
+													   NSArray *videoInstances = [sself videoInstancesForFeedItems:feedItems];
+													   sself.videoInstances = videoInstances;
+													   
+													   [[SYNVideoThumbnailDownloader sharedDownloader] fetchThumbnailImagesForVideos:[videoInstances valueForKeyPath:@"video"]];
+													   
+													   sself.loadedItems = videoInstances;
+													   sself.totalItemCount = [total integerValue];
+													   
+													   [sself handleDataUpdatedForRange:range];
+												   }];
                                        } errorHandler:^(NSDictionary *errorDictionary) {
 										   [self handleError];
                                        }];
 }
 
-#pragma mark - Private
-
-- (NSArray *)fetchFeedItems {
+- (void)parseFeedResponse:(NSDictionary *)response existingFeedIds:(NSArray *)existingFeedIds completionBlock:(MKNKUserSuccessBlock)completionBlock {
+	
 	SYNAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
 	
-	NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[FeedItem entityName]];
+	NSManagedObjectContext *managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+	[managedObjectContext setPersistentStoreCoordinator:appDelegate.mainManagedObjectContext.persistentStoreCoordinator];
 	
-	// if the aggregate has a parent FeedItem then it should NOT be displayed since it is going to be part of an aggregate...
-	fetchRequest.predicate = [NSPredicate predicateWithFormat:@"viewId == %@ AND aggregate == nil", kFeedViewId];
+	__block NSArray *feedItemIds = nil;
 	
-	fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"dateAdded" ascending:NO],
-									 [NSSortDescriptor sortDescriptorWithKey:@"position" ascending:YES]];
+	[managedObjectContext performBlock:^{
+		
+		NSArray *items = response[@"items"];
+		
+		NSArray *videoInstanceDictionaries = [items filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"video != nil"]];
+		NSDictionary *videoInstances = [VideoInstance videoInstancesFromDictionaries:videoInstanceDictionaries
+															  inManagedObjectContext:managedObjectContext];
+		
+		NSArray *channelDictionaries = [items filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"video = nil"]];
+		NSDictionary *channels = [Channel channelsFromDictionaries:channelDictionaries
+											inManagedObjectContext:managedObjectContext];
+		
+		NSDictionary *existingFeedItems = [FeedItem feedItemsWithIds:existingFeedIds
+											  inManagedObjectContext:managedObjectContext];
+		
+		NSMutableArray *newFeedItemIds = [NSMutableArray array];
+		for (NSDictionary *item in items) {
+			NSString *feedItemId = item[@"id"];
+			
+			// Resource is either a video instance or a channel
+			AbstractCommon *resource = (videoInstances[feedItemId] ?: channels[feedItemId]);
+			
+			FeedItem *feedItem = existingFeedItems[feedItemId];
+			if (feedItem) {
+				[feedItem updateWithResource:resource];
+			} else {
+				feedItem = [FeedItem instanceFromResource:resource];
+			}
+			
+			[newFeedItemIds addObject:feedItemId];
+		}
+		
+		// We want to dedupe the new feed items since MKNetworkKit is stupid and doesn't understand how caching should work
+		NSMutableOrderedSet *uniqueFeedIds = [NSMutableOrderedSet orderedSetWithArray:existingFeedIds];
+		[uniqueFeedIds addObjectsFromArray:newFeedItemIds];
+		
+		feedItemIds = [uniqueFeedIds array];
+		
+		[FeedItem deleteFeedItemsWithoutIds:feedItemIds inManagedObjectContext:managedObjectContext];
+		
+		[managedObjectContext save:nil];
+	}];
 	
-	return [appDelegate.mainManagedObjectContext executeFetchRequest:fetchRequest error:nil];
-}
-
-- (NSDictionary *)fetchChannelsByIds {
-	SYNAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-	
-	NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[Channel entityName]];
-    
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"viewId == %@", kFeedViewId];
-    
-    NSArray *results = [appDelegate.mainManagedObjectContext executeFetchRequest: fetchRequest error:nil];
-	
-	return [NSDictionary dictionaryWithObjects:results forKeys:[results valueForKey:@"uniqueId"]];
-}
-
-- (NSDictionary *)fetchVideoInstancesByIds {
-	SYNAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-	
-	NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[VideoInstance entityName]];
-	fetchRequest.predicate = [NSPredicate predicateWithFormat:@"viewId == %@", kFeedViewId];
-	
-	NSArray *results = [appDelegate.mainManagedObjectContext executeFetchRequest:fetchRequest error:nil];
-	
-	return [NSDictionary dictionaryWithObjects:results forKeys:[results valueForKey:@"uniqueId"]];
+	[[NSNotificationCenter defaultCenter] addObserverForName:NSManagedObjectContextDidSaveNotification
+													  object:managedObjectContext
+													   queue:[NSOperationQueue mainQueue]
+												  usingBlock:^(NSNotification *note) {
+													  
+													  NSArray *feedItems = [FeedItem orderedFeedItemsWithIds:feedItemIds
+																					  inManagedObjectContext:appDelegate.mainManagedObjectContext];
+													  
+													  completionBlock(feedItems);
+													  
+													  [[NSNotificationCenter defaultCenter] removeObserver:self
+																									  name:NSManagedObjectContextDidSaveNotification
+																									object:managedObjectContext];
+												  }];
 }
 
 @end

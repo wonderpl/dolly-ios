@@ -7,14 +7,14 @@
 
 @interface FeedItem : _FeedItem {}
 
-+ (FeedItem *) instanceFromDictionary: (NSDictionary *) dictionary
-                               withId: (NSString*)aid
-            usingManagedObjectContext: (NSManagedObjectContext *) managedObjectContext;
++ (FeedItem *)instanceFromResource:(AbstractCommon *)object;
 
-- (void) setAttributesFromDictionary: (NSDictionary *) dictionary;
+- (void)updateWithResource:(AbstractCommon *)resource;
 
-+ (FeedItem *) instanceFromResource: (AbstractCommon *) object;
++ (NSDictionary *)feedItemsWithIds:(NSArray *)feedItemIds inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 
-@property (nonatomic, weak) NSManagedObject* placeholder;
++ (NSArray *)orderedFeedItemsWithIds:(NSArray *)feedItemIds inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
+
++ (void)deleteFeedItemsWithoutIds:(NSArray *)feedItemIds inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 
 @end

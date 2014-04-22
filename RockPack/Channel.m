@@ -114,6 +114,53 @@
 }
 
 
++ (NSDictionary *)channelsFromDictionaries:(NSArray *)dictionaries
+					inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
+	NSArray *channelIds = [dictionaries valueForKey:@"id"];
+	
+	NSArray *channelOwnersDictionaries = [dictionaries valueForKey:@"owner"];
+	
+	NSDictionary *channelOwners = [ChannelOwner channelOwnersFromDictionaries:channelOwnersDictionaries
+													   inManagedObjectContext:managedObjectContext];
+	
+	NSMutableDictionary *existingChannels = [[self existingChannelsWithIds:channelIds
+													inManagedObjectContext:managedObjectContext] mutableCopy];
+	
+	NSMutableDictionary *channels = [NSMutableDictionary dictionary];
+	for (NSDictionary *dictionary in dictionaries) {
+		NSString *channelId = dictionary[@"id"];
+		NSString *channelOwnerId = dictionary[@"owner"][@"id"];
+		
+		Channel *channel = existingChannels[channelId];
+		if (!channel) {
+			channel = [self insertInManagedObjectContext:managedObjectContext];
+			
+			channel.uniqueId = channelId;
+			
+			existingChannels[channelId] = channel;
+		}
+		
+		[channel setBasicAttributesFromDictionary:dictionary];
+		
+		channel.channelOwner = channelOwners[channelOwnerId];
+		
+		channels[channelId] = channel;
+	}
+
+	return channels;
+}
+
++ (NSDictionary *)existingChannelsWithIds:(NSArray *)videoIds
+				   inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
+	
+	NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[self entityName]];
+	[fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"uniqueId IN %@", videoIds]];
+	
+	NSArray *videos = [managedObjectContext executeFetchRequest:fetchRequest error:nil];
+	
+	return [NSDictionary dictionaryWithObjects:videos forKeys:[videos valueForKey:@"uniqueId"]];
+}
+
 - (void) setAttributesFromDictionary: (NSDictionary *) dictionary
                  ignoringObjectTypes: (IgnoringObjects) ignoringObjects
 {

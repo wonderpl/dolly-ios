@@ -44,6 +44,44 @@ static NSDateFormatter *dateFormatter = nil;
     return instance;
 }
 
++ (NSDictionary *)videoInstancesFromDictionaries:(NSArray *)dictionaries
+						  inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
+	NSArray *videoInstanceIds = [dictionaries valueForKey:@"id"];
+	NSArray *videosDictionaries = [dictionaries valueForKey:@"video"];
+	NSArray *channelsDictionaries = [dictionaries valueForKey:@"channel"];
+	
+	NSMutableDictionary *existingVideoInstances = [[self existingVideoInstancesWithIds:videoInstanceIds
+															   inManagedObjectContext:managedObjectContext] mutableCopy];
+	
+	NSDictionary *videos = [Video videosFromDictionaries:videosDictionaries inManagedObjectContext:managedObjectContext];
+	NSDictionary *channels = [Channel channelsFromDictionaries:channelsDictionaries inManagedObjectContext:managedObjectContext];
+	
+	NSMutableDictionary *videoInstances = [NSMutableDictionary dictionary];
+	for (NSDictionary *dictionary in dictionaries) {
+		NSString *videoInstanceId = dictionary[@"id"];
+		NSString *videoId = dictionary[@"video"][@"id"];
+		NSString *channelId = dictionary[@"channel"][@"id"];
+		
+		VideoInstance *videoInstance = existingVideoInstances[videoInstanceId];
+		if (!videoInstance) {
+			videoInstance = [self insertInManagedObjectContext:managedObjectContext];
+			
+			videoInstance.uniqueId = videoInstanceId;
+			
+			existingVideoInstances[videoInstanceId] = videoInstance;
+		}
+		
+		[videoInstance setAttributesFromDictionary:dictionary];
+		
+		videoInstance.video = videos[videoId];
+		videoInstance.channel = channels[channelId];
+		
+		videoInstances[videoInstanceId] = videoInstance;
+	}
+	
+	return videoInstances;
+}
+
 
 #pragma mark - Object factory
 
@@ -94,16 +132,8 @@ static NSDateFormatter *dateFormatter = nil;
     return instance;
 }
 
-
-- (void) setAttributesFromDictionary: (NSDictionary *) dictionary
-           usingManagedObjectContext: (NSManagedObjectContext *) managedObjectContext
-                 ignoringObjectTypes: (IgnoringObjects) ignoringObjects
-                      existingVideos: (NSArray *) existingVideos
-{
-    
-    
-    self.position = [dictionary objectForKey: @"position"
-                                 withDefault: @0];
+- (void)setAttributesFromDictionary:(NSDictionary *)dictionary {
+    self.position = [dictionary objectForKey: @"position" withDefault: @0];
     
     self.dateAdded = [dictionary dateFromISO6801StringForKey: @"date_added"
                                                  withDefault: [NSDate date]];
@@ -112,19 +142,20 @@ static NSDateFormatter *dateFormatter = nil;
     
     NSString *dateAdded = [dictionary objectForKey: @"source_date_uploaded"];
     
-    
     NSString *dayAdded = [dateAdded substringToIndex: [dateAdded rangeOfString: @"T"].location];
     self.dateOfDayAdded = [[VideoInstance DayOfDateFormatter] dateFromString: dayAdded];
     
-    self.title = [dictionary objectForKey: @"title"
-                              withDefault: @""];
+    self.title = [dictionary objectForKey: @"title" withDefault: @""];
+}
+
+
+- (void) setAttributesFromDictionary: (NSDictionary *) dictionary
+           usingManagedObjectContext: (NSManagedObjectContext *) managedObjectContext
+                 ignoringObjectTypes: (IgnoringObjects) ignoringObjects
+                      existingVideos: (NSArray *) existingVideos
+{
     
-    NSDictionary* commentsDictionary = [dictionary objectForKey:@"comments"];
-        self.commentCount = [commentsDictionary objectForKey: @"total"
-                                                 withDefault: @(0)];
-    
-    
-    NSArray *filteredVideos;
+	NSArray *filteredVideos;
     if(existingVideos)
     {
         NSString *videoId = [dictionary[@"video"] objectForKey: @"id"];
@@ -177,6 +208,17 @@ static NSDateFormatter *dateFormatter = nil;
         
     }
     
+}
+
++ (NSDictionary *)existingVideoInstancesWithIds:(NSArray *)videoIds
+						 inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
+	
+	NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[self entityName]];
+	[fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"uniqueId IN %@", videoIds]];
+	
+	NSArray *videoInstances = [managedObjectContext executeFetchRequest:fetchRequest error:nil];
+	
+	return [NSDictionary dictionaryWithObjects:videoInstances forKeys:[videoInstances valueForKey:@"uniqueId"]];
 }
 
 

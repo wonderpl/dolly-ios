@@ -44,15 +44,6 @@
 
 #define kShareLinkForObjectObtained @"kShareLinkForObjectObtained"
 
-// Feed
-
-typedef enum : NSInteger {
-    
-    FeedItemTypeLeaf = 0,
-    FeedItemTypeAggregate = 1
-    
-} FeedItemType;
-
 typedef enum : NSInteger {
     
     FeedItemResourceTypeVideo = 0,

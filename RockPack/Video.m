@@ -37,32 +37,61 @@ NSString *const VideoSourceOoyala = @"ooyala";
          usingManagedObjectContext: (NSManagedObjectContext *) managedObjectContext
                ignoringObjectTypes: (IgnoringObjects) ignoringObjects
 {
-    // Get the unique id of this object from the dictionary that has been passed in
-    NSString *uniqueId = [dictionary objectForKey: @"id"
-                                      withDefault: @"Uninitialized Id"];
-    
+	NSString *videoId = dictionary[@"id"];
+	
     Video *instance = [Video insertInManagedObjectContext: managedObjectContext];
 	
-    // As we have a new object, we need to set all the attributes (from the dictionary passed in)
-    // We have already obtained the uniqueId, so pass it in as an optimisation
-    [instance setAttributesFromDictionary: dictionary
-                                   withId: uniqueId
-                usingManagedObjectContext: managedObjectContext
-                      ignoringObjectTypes: ignoringObjects];
-    
+    instance.uniqueId = videoId;
+	
+    [instance setAttributesFromDictionary:dictionary];
     
     return instance;
+}
+
++ (NSDictionary *)videosFromDictionaries:(NSArray *)dictionaries
+				   inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
+	
+	NSArray *videoIds = [dictionaries valueForKey:@"id"];
+	
+	NSMutableDictionary *existingVideos = [[self existingVideosWithIds:videoIds
+												inManagedObjectContext:managedObjectContext] mutableCopy];
+	
+	NSMutableDictionary *videos = [NSMutableDictionary dictionary];
+	for (NSDictionary *dictionary in dictionaries) {
+		NSString *videoId = dictionary[@"id"];
+		
+		Video *video = existingVideos[videoId];
+		if (video) {
+			[video setAttributesFromDictionary:dictionary];
+		} else {
+			video = [Video instanceFromDictionary:dictionary
+						usingManagedObjectContext:managedObjectContext
+							  ignoringObjectTypes:kIgnoreNothing];
+			existingVideos[video.uniqueId] = video;
+		}
+		
+		videos[videoId] = video;
+	}
+	
+	return videos;
+}
+
++ (NSDictionary *)existingVideosWithIds:(NSArray *)videoIds
+				 inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
+	
+	NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[self entityName]];
+	[fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"uniqueId IN %@", videoIds]];
+	
+	NSArray *videos = [managedObjectContext executeFetchRequest:fetchRequest error:nil];
+	
+	return [NSDictionary dictionaryWithObjects:videos forKeys:[videos valueForKey:@"uniqueId"]];
 }
 
 - (BOOL)hasLink {
 	return ([self.linkTitle length] && [self.linkURL length]);
 }
 
-- (void) setAttributesFromDictionary: (NSDictionary *) dictionary
-                              withId: (NSString *) uniqueId
-           usingManagedObjectContext: (NSManagedObjectContext *) managedObjectContext
-                 ignoringObjectTypes: (IgnoringObjects) ignoringObjects
-{
+- (void)setAttributesFromDictionary:(NSDictionary *)dictionary {
     // Is we are not actually a dictionary, then bail
     if (![dictionary isKindOfClass: [NSDictionary class]])
     {
@@ -71,7 +100,6 @@ NSString *const VideoSourceOoyala = @"ooyala";
     }
     
     // Simple objects
-    self.uniqueId = uniqueId;
     
     self.categoryId = [dictionary objectForKey: @"category_id"
                                    withDefault: @""];

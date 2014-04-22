@@ -10,5 +10,4 @@
 
 @interface SYNFeedRootViewController : SYNAbstractViewController
 
-
 @end
