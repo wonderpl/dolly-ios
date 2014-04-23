@@ -48,17 +48,24 @@ static NSDateFormatter *dateFormatter = nil;
 	NSArray *videosDictionaries = [dictionaries valueForKey:@"video"];
 	NSArray *channelsDictionaries = [dictionaries valueForKey:@"channel"];
 	
+	NSArray *originatorsDictionaries = [dictionaries valueForKey:@"original_channel_owner"];
+	
+	NSPredicate *notNullPredicate = [NSPredicate predicateWithFormat:@"self != NULL"];
+	originatorsDictionaries = [originatorsDictionaries filteredArrayUsingPredicate:notNullPredicate];
+	
 	NSMutableDictionary *existingVideoInstances = [[self existingVideoInstancesWithIds:videoInstanceIds
 															   inManagedObjectContext:managedObjectContext] mutableCopy];
 	
 	NSDictionary *videos = [Video videosFromDictionaries:videosDictionaries inManagedObjectContext:managedObjectContext];
 	NSDictionary *channels = [Channel channelsFromDictionaries:channelsDictionaries inManagedObjectContext:managedObjectContext];
+	NSDictionary *originators = [ChannelOwner channelOwnersFromDictionaries:originatorsDictionaries inManagedObjectContext:managedObjectContext];
 	
 	NSMutableDictionary *videoInstances = [NSMutableDictionary dictionary];
 	for (NSDictionary *dictionary in dictionaries) {
 		NSString *videoInstanceId = dictionary[@"id"];
 		NSString *videoId = dictionary[@"video"][@"id"];
 		NSString *channelId = dictionary[@"channel"][@"id"];
+		NSString *originatorId = dictionary[@"original_channel_owner"][@"id"];
 		
 		VideoInstance *videoInstance = existingVideoInstances[videoInstanceId];
 		if (!videoInstance) {
@@ -73,6 +80,7 @@ static NSDateFormatter *dateFormatter = nil;
 		
 		videoInstance.video = videos[videoId];
 		videoInstance.channel = channels[channelId];
+		videoInstance.originator = originators[originatorId];
 		
 		videoInstances[videoInstanceId] = videoInstance;
 	}
