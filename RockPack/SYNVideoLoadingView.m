@@ -15,8 +15,6 @@
 
 static NSString *const LoadingMessage = @"YOUR VIDEO IS LOADING";
 
-static const CGFloat TextSideInset = 20.0;
-
 @interface SYNVideoLoadingView ()
 
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView *activityIndicator;
