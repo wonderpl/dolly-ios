@@ -230,15 +230,6 @@
 
 }
 
-- (BOOL) isRecentlyViewed:(NSString*)videoId
-{
-    if(!videoId)
-        return NO;
-    
-    return [self.recentlyViewed containsObject:videoId];
-    
-}
-
 - (BOOL)isSubscribedToChannelId:(NSString*)channelId {
 	return [self.channelSubscriptions containsObject:channelId];
 }

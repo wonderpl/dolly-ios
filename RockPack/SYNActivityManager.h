@@ -17,7 +17,6 @@
 + (instancetype) sharedInstance;
 
 - (BOOL) isRecentlyStarred:(NSString*)videoInstanceId;
-- (BOOL) isRecentlyViewed:(NSString*)videoId;
 - (BOOL) isSubscribedToChannelId:(NSString*)channelId;
 - (BOOL) isSubscribedToUserId:(NSString*)userId;
 
