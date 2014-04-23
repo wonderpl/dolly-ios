@@ -18,9 +18,9 @@
 - (void)videoCellAvatarPressed:(SYNFeedVideoCell *)cell;
 - (void)videoCellThumbnailPressed:(SYNFeedVideoCell *)cell;
 
-- (void)videoCellFavouritePressed:(SYNFeedVideoCell *)cell;
-- (void)videoCellAddToChannelPressed:(SYNFeedVideoCell *)cell;
-- (void)videoCellSharePressed:(SYNFeedVideoCell *)cell;
+- (void)videoCell:(SYNFeedVideoCell *)cell favouritePressed:(UIButton *)button;
+- (void)videoCell:(SYNFeedVideoCell *)cell addToChannelPressed:(UIButton *)button;
+- (void)videoCell:(SYNFeedVideoCell *)cell sharePressed:(UIButton *)button;
 
 @end
 

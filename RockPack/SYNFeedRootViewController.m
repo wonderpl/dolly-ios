@@ -301,11 +301,11 @@
 	[self presentViewController:viewController animated:YES completion:nil];
 }
 
-- (void)videoCellFavouritePressed:(SYNFeedVideoCell *)cell {
+- (void)videoCell:(SYNFeedVideoCell *)cell favouritePressed:(UIButton *)button {
 	
 }
 
-- (void)videoCellAddToChannelPressed:(SYNFeedVideoCell *)cell {
+- (void)videoCell:(SYNFeedVideoCell *)cell addToChannelPressed:(UIButton *)button {
 	VideoInstance *videoInstance = cell.videoInstance;
 	
 	[[SYNTrackingManager sharedManager] trackVideoAddFromScreenName:[self trackingScreenName]];
@@ -324,7 +324,7 @@
 	[self presentViewController:viewController animated:YES completion:nil];
 }
 
-- (void)videoCellSharePressed:(SYNFeedVideoCell *)cell {
+- (void)videoCell:(SYNFeedVideoCell *)cell sharePressed:(UIButton *)button {
 	VideoInstance *videoInstance = cell.videoInstance;
 
 	[self requestShareLinkWithObjectType:@"video_instance" objectId:videoInstance.uniqueId];

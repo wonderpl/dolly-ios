@@ -94,15 +94,15 @@
 }
 
 - (void)videoActionsBar:(SYNVideoActionsBar *)bar favouritesButtonPressed:(UIButton *)button {
-	[self.delegate videoCellFavouritePressed:self];
+	[self.delegate videoCell:self favouritePressed:button];
 }
 
 - (void)videoActionsBar:(SYNVideoActionsBar *)bar addToChannelButtonPressed:(UIButton *)button {
-	[self.delegate videoCellAddToChannelPressed:self];
+	[self.delegate videoCell:self addToChannelPressed:button];
 }
 
 - (void)videoActionsBar:(SYNVideoActionsBar *)bar shareButtonPressed:(UIButton *)button {
-	[self.delegate videoCellSharePressed:self];
+	[self.delegate videoCell:self sharePressed:button];
 }
 
 - (IBAction)avatarThumbnailPressed:(UIButton *)button {
