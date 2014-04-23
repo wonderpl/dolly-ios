@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vaj-tD-bEt">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vaj-tD-bEt">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -55,73 +55,6 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gCx-pA-lrk" userLabel="Buttons">
-                                <rect key="frame" x="38" y="346" width="244" height="49"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fgi-wy-8Fa" customClass="SYNSocialButton">
-                                        <rect key="frame" x="0.0" y="0.0" width="49" height="49"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="49" id="L78-IV-wO5"/>
-                                            <constraint firstAttribute="width" constant="49" id="SnR-6n-UyS"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <state key="normal" title="like">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8bz-te-Q7h" customClass="SYNSocialAddButton">
-                                        <rect key="frame" x="65" y="0.0" width="49" height="49"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="49" id="LeJ-dj-wM2"/>
-                                            <constraint firstAttribute="height" constant="49" id="icI-eK-RYv"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <state key="normal" image="IconVideoAddDefault.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XUA-HZ-bW8" customClass="SYNSocialCommentButton">
-                                        <rect key="frame" x="130" y="0.0" width="49" height="49"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="49" id="Ixc-Qo-h24"/>
-                                            <constraint firstAttribute="height" constant="49" id="a2f-06-Qj7"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <state key="normal">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8sy-ew-bpH" customClass="SYNSocialButton">
-                                        <rect key="frame" x="195" y="0.0" width="49" height="49"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="49" id="SEY-y6-tmd"/>
-                                            <constraint firstAttribute="height" constant="49" id="iNC-4I-NKY"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <state key="normal" title="share">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="8sy-ew-bpH" secondAttribute="trailing" id="0OA-22-yRV"/>
-                                    <constraint firstAttribute="centerY" secondItem="8bz-te-Q7h" secondAttribute="centerY" id="20d-Yw-dxC"/>
-                                    <constraint firstItem="XUA-HZ-bW8" firstAttribute="leading" secondItem="8bz-te-Q7h" secondAttribute="trailing" constant="16" id="8Ku-Ud-o1Y"/>
-                                    <constraint firstAttribute="centerY" secondItem="XUA-HZ-bW8" secondAttribute="centerY" id="F21-5C-9ZR"/>
-                                    <constraint firstItem="8bz-te-Q7h" firstAttribute="top" secondItem="gCx-pA-lrk" secondAttribute="top" id="FX6-Qv-r1o"/>
-                                    <constraint firstAttribute="centerY" secondItem="8sy-ew-bpH" secondAttribute="centerY" id="cJK-uz-wRy"/>
-                                    <constraint firstItem="fgi-wy-8Fa" firstAttribute="leading" secondItem="gCx-pA-lrk" secondAttribute="leading" id="fbJ-Tf-aDb"/>
-                                    <constraint firstItem="8sy-ew-bpH" firstAttribute="leading" secondItem="XUA-HZ-bW8" secondAttribute="trailing" constant="16" id="h7Y-Vh-fq4"/>
-                                    <constraint firstItem="8bz-te-Q7h" firstAttribute="leading" secondItem="fgi-wy-8Fa" secondAttribute="trailing" constant="16" id="iDW-i8-Njf"/>
-                                    <constraint firstAttribute="centerY" secondItem="fgi-wy-8Fa" secondAttribute="centerY" id="saP-55-Zww"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Yv-dB-EFS">
                                 <rect key="frame" x="0.0" y="148" width="320" height="180"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -163,7 +96,7 @@
                                 </constraints>
                             </view>
                             <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IbH-kt-YGA">
-                                <rect key="frame" x="0.0" y="327" width="320" height="241"/>
+                                <rect key="frame" x="0.0" y="328" width="320" height="240"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <connections>
@@ -177,16 +110,14 @@
                             <constraint firstItem="IbH-kt-YGA" firstAttribute="leading" secondItem="jUN-hk-7n4" secondAttribute="leading" id="1wz-CO-jZv"/>
                             <constraint firstItem="5NX-qs-qYn" firstAttribute="leading" secondItem="jUN-hk-7n4" secondAttribute="leading" constant="10" id="2gW-68-tdl"/>
                             <constraint firstItem="XvK-bX-B3j" firstAttribute="top" secondItem="6RR-tE-wLX" secondAttribute="bottom" constant="14" id="6zq-fw-cBA"/>
-                            <constraint firstItem="gCx-pA-lrk" firstAttribute="top" secondItem="3Yv-dB-EFS" secondAttribute="bottom" constant="18" id="9yd-58-ZIG"/>
                             <constraint firstAttribute="trailing" secondItem="XvK-bX-B3j" secondAttribute="trailing" constant="10" id="IW7-w9-QzQ"/>
                             <constraint firstAttribute="centerX" secondItem="3Yv-dB-EFS" secondAttribute="centerX" id="LOV-P6-aBn"/>
                             <constraint firstItem="3Yv-dB-EFS" firstAttribute="top" secondItem="nVh-CQ-apC" secondAttribute="bottom" constant="13" id="WJB-XT-OLz"/>
-                            <constraint firstItem="IbH-kt-YGA" firstAttribute="top" secondItem="3Yv-dB-EFS" secondAttribute="bottom" constant="-1" id="Wle-kp-b31"/>
+                            <constraint firstItem="IbH-kt-YGA" firstAttribute="top" secondItem="3Yv-dB-EFS" secondAttribute="bottom" id="Wle-kp-b31"/>
                             <constraint firstAttribute="centerX" secondItem="nVh-CQ-apC" secondAttribute="centerX" id="ZrG-vM-ka4"/>
-                            <constraint firstAttribute="centerX" secondItem="gCx-pA-lrk" secondAttribute="centerX" id="dTD-yi-xje"/>
                             <constraint firstItem="1nv-tp-TGt" firstAttribute="top" secondItem="6RR-tE-wLX" secondAttribute="bottom" constant="14" id="i0U-gT-oaS"/>
                             <constraint firstAttribute="centerX" secondItem="1nv-tp-TGt" secondAttribute="centerX" id="iES-Og-Jjv"/>
-                            <constraint firstItem="gCx-pA-lrk" firstAttribute="top" secondItem="6RR-tE-wLX" secondAttribute="bottom" constant="326" id="nt0-OR-9YG"/>
+                            <constraint firstItem="3Yv-dB-EFS" firstAttribute="top" secondItem="6RR-tE-wLX" secondAttribute="bottom" constant="128" id="juO-7q-pTI"/>
                             <constraint firstAttribute="trailing" secondItem="IbH-kt-YGA" secondAttribute="trailing" id="t0T-V1-sN1"/>
                             <constraint firstItem="5NX-qs-qYn" firstAttribute="top" secondItem="6RR-tE-wLX" secondAttribute="bottom" constant="14" id="uHl-th-RMd"/>
                         </constraints>
@@ -210,11 +141,11 @@
                         <viewControllerLayoutGuide type="bottom" id="TqB-dW-ZGC"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="6Im-DH-KHj">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="241"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="240"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4oD-Wt-Kqr">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="241"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="240"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="1yy-8A-Pbm">
@@ -242,9 +173,6 @@
             <point key="canvasLocation" x="672" y="33"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="IconVideoAddDefault.png" width="49" height="49"/>
-    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
