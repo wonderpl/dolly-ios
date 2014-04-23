@@ -87,7 +87,7 @@
 	if (indexPath.section == [self actionsSectionIndex]) {
 		SYNVideoActionsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[SYNVideoActionsCell reuseIdentifier]
 																			  forIndexPath:indexPath];
-		
+		cell.actionsBar.favouriteButton.selected = self.currentVideoInstance.starredByUserValue;
 		cell.actionsBar.delegate = self;
 		
 		return cell;
