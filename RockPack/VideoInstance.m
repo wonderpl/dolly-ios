@@ -161,6 +161,7 @@ static NSDateFormatter *dateFormatter = nil;
                  ignoringObjectTypes: (IgnoringObjects) ignoringObjects
                       existingVideos: (NSArray *) existingVideos
 {
+	[self setAttributesFromDictionary:dictionary];
     
 	NSArray *filteredVideos;
     if(existingVideos)
