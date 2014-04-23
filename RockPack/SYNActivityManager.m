@@ -10,8 +10,9 @@
 #import "SYNActivityManager.h"
 #import "Video.h"
 #import "SYNAppDelegate.h"
-@interface SYNActivityManager ()
+#import "VideoInstance.h"
 
+@interface SYNActivityManager ()
 
 @property (nonatomic, strong) NSMutableSet *recentlyStarred;
 @property (nonatomic, strong) NSMutableSet *recentlyViewed;
@@ -66,6 +67,14 @@
         
         if (dictionary[@"recently_starred"]){
             [self.recentlyStarred unionSet:[NSSet setWithArray:dictionary[@"recently_starred"]]];
+			
+			// Need to update existing video instances with the fact they've been starred
+			NSManagedObjectContext *managedObjectContext = self.appDelegate.mainManagedObjectContext;
+			NSDictionary *videoInstances = [VideoInstance existingVideoInstancesWithIds:[self.recentlyStarred allObjects]
+																 inManagedObjectContext:managedObjectContext];
+			[videoInstances enumerateKeysAndObjectsUsingBlock:^(NSString *videoInstanceId, VideoInstance *videoInstance, BOOL *stop) {
+				videoInstance.starredByUserValue = YES;
+			}];
         }
         //cant union as unfollow all users cells wont ever be removed
         if (dictionary[@"subscribed"]){

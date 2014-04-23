@@ -4,23 +4,15 @@
 #import "VideoInstance.h"
 #import "SYNAppDelegate.h"
 #import "ChannelOwner.h"
-
-@interface VideoInstance ()
-
-//@property (nonatomic, strong) NSNumber* starredByUser;
-//@property (nonatomic) BOOL starredByUserValue;
-
-@end
+#import "SYNActivityManager.h"
 
 @implementation VideoInstance
 
+@synthesize starredByUser = _starredByUser;
 @synthesize selectedForVideoQueue;
 
 // Store our date formatter as a static for optimization purposes
 static NSDateFormatter *dateFormatter = nil;
-
-@synthesize starredByUser = _starredByUser;
-@synthesize starredByUserValue;
 
 + (VideoInstance *) instanceFromVideoInstance: (VideoInstance *) existingInstance
                     usingManagedObjectContext: (NSManagedObjectContext *) managedObjectContext
@@ -36,7 +28,6 @@ static NSDateFormatter *dateFormatter = nil;
     instance.commentCount = existingInstance.commentCount;
     instance.commentCountValue = existingInstance.commentCountValue;
     instance.starredByUserValue = existingInstance.starredByUserValue;
-    instance.starredByUser = existingInstance.starredByUser;
     instance.video = [Video	instanceFromVideo: existingInstance.video
                     usingManagedObjectContext: managedObjectContext];
     
@@ -153,6 +144,8 @@ static NSDateFormatter *dateFormatter = nil;
     self.dateOfDayAdded = [[VideoInstance DayOfDateFormatter] dateFromString: dayAdded];
     
     self.title = [dictionary objectForKey: @"title" withDefault: @""];
+	
+	self.starredByUserValue = [[SYNActivityManager sharedInstance] isRecentlyStarred:self.uniqueId];
 }
 
 
@@ -319,31 +312,16 @@ static NSDateFormatter *dateFormatter = nil;
 	return (self.primitiveOriginator ?: self.channel.channelOwner);
 }
 
-#pragma mark - Starred By User Props
--(void)setStarredByUser:(NSNumber *)starredByUser
-{
-    if(starredByUser == nil) // nil is equivalent to NO
-        starredByUser = @NO;
-    
-    if(_starredByUser && [starredByUser isEqualToNumber:_starredByUser])
-        return;
-    
-    SYNAppDelegate* appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
-    if([starredByUser boolValue])
-        [self addStarrersObject:appDelegate.currentUser]; // will copy the user into a new object
-    else
-        [self removeStarrersObject:appDelegate.currentUser]; // will remove the duplicate rather than the real user
-    
-    _starredByUser = starredByUser;
-    
+- (void)awakeFromFetch {
+	[super awakeFromFetch];
+	
+	self.starredByUserValue = [[SYNActivityManager sharedInstance] isRecentlyStarred:self.uniqueId];
 }
+
+#pragma mark - Starred By User Props
 
 - (void)setStarredByUserValue:(BOOL)value {
 	self.starredByUser = @(value);
-}
-
-- (NSNumber*)starredByUser {
-    return _starredByUser;
 }
 
 -(BOOL)starredByUserValue {
