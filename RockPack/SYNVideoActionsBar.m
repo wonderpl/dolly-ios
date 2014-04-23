@@ -8,6 +8,12 @@
 
 #import "SYNVideoActionsBar.h"
 
+@interface SYNVideoActionsBar ()
+
+@property (nonatomic, strong) IBOutlet UIButton *favouriteButton;
+
+@end
+
 @implementation SYNVideoActionsBar
 
 + (instancetype)bar {

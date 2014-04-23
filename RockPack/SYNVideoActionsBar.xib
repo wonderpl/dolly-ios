@@ -65,6 +65,9 @@
                 <constraint firstAttribute="trailing" secondItem="Zsz-gD-1Fi" secondAttribute="trailing" constant="10" id="xGv-rq-Cwi"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="favouriteButton" destination="H5R-DI-TgM" id="hvL-IF-NVf"/>
+            </connections>
         </view>
     </objects>
     <resources>

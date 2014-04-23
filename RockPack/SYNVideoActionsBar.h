@@ -22,6 +22,8 @@
 
 @property (nonatomic, weak) id<SYNVideoActionsBarDelegate> delegate;
 
+@property (nonatomic, strong, readonly) UIButton *favouriteButton;
+
 + (instancetype)bar;
 
 @end
