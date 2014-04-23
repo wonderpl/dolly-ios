@@ -95,9 +95,10 @@ static const CGFloat TransitionDuration = 0.5f;
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
+	[super viewWillDisappear:animated];
+	
 	self.navigationBar.hidden = NO;
 	[self.navigationController.navigationBar setBackgroundTransparent:NO];
-
 }
 
 #pragma mark - segue
