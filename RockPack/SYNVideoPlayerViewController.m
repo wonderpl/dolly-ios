@@ -29,6 +29,7 @@
 #import "SYNGenreManager.h"
 #import "SYNMasterViewController.h"
 #import <SDWebImageManager.h>
+#import <UIButton+WebCache.h>
 #import "UIDevice+Helpers.h"
 #import "SYNPagingModel.h"
 #import "SYNVideoPlayerCell.h"
@@ -37,6 +38,8 @@
 @import MediaPlayer;
 
 @interface SYNVideoPlayerViewController () <UIViewControllerTransitioningDelegate, UIPopoverControllerDelegate, UIScrollViewDelegate, SYNVideoPlayerDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SYNVideoInfoViewControllerDelegate>
+
+@property (nonatomic, strong) IBOutlet UIButton *avatarButton;
 
 @property (nonatomic, strong) IBOutlet UILabel *videoTitleLabel;
 @property (nonatomic, strong) IBOutlet UIButton *commentButton;
@@ -433,6 +436,9 @@
 }
 
 - (void)updateVideoInstanceDetails:(VideoInstance *)videoInstance {
+	NSURL *avatarThumbnailURL = [NSURL URLWithString:videoInstance.originator.thumbnailURL];
+	[self.avatarButton setImageWithURL:avatarThumbnailURL forState:UIControlStateNormal];
+	
 	[self.videoTitleLabel setText:videoInstance.title animated:YES];
 	
 //	self.likeButton.dataItemLinked = videoInstance;

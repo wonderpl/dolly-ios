@@ -123,6 +123,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="avatarButton" destination="1nv-tp-TGt" id="wcc-0Y-xDv"/>
                         <outlet property="videoPlayerContainerView" destination="3Yv-dB-EFS" id="gfu-Oi-KGb"/>
                         <outlet property="videoTitleLabel" destination="nVh-CQ-apC" id="env-DE-dXb"/>
                         <outlet property="videosCollectionView" destination="WS0-IR-w5m" id="6Qf-VK-5G5"/>
@@ -170,7 +171,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V2b-Ox-VQW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="672" y="33"/>
+            <point key="canvasLocation" x="668" y="198"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
