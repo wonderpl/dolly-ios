@@ -8,16 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol SYNVideoActionsDelegate <NSObject>
-
-- (void)videoActionsFavouritePressed;
-- (void)videoActionsAddToChannelPressed;
-- (void)videoActionsSharePressed;
-
-@end
+@class SYNVideoActionsBar;
 
 @interface SYNVideoActionsCell : UICollectionViewCell
 
-@property (nonatomic, weak) id<SYNVideoActionsDelegate> delegate;
+@property (nonatomic, strong, readonly) SYNVideoActionsBar *actionsBar;
 
 @end

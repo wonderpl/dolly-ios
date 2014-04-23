@@ -12,37 +12,8 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                 <autoresizingMask key="autoresizingMask"/>
-                <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GPH-Qp-mIV">
-                        <rect key="frame" x="267" y="10" width="40" height="30"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <state key="normal" title="Share"/>
-                        <connections>
-                            <action selector="shareButtonPressed:" destination="Ipq-p3-lve" eventType="touchUpInside" id="KZA-kh-cyg"/>
-                        </connections>
-                    </button>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fxl-M1-btr">
-                        <rect key="frame" x="210" y="0.0" width="49" height="49"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <state key="normal" image="IconVideoAddDefault.png"/>
-                        <connections>
-                            <action selector="addToChannelButtonPressed:" destination="Ipq-p3-lve" eventType="touchUpInside" id="Vnd-RZ-d19"/>
-                        </connections>
-                    </button>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Cr-Sq-FCQ">
-                        <rect key="frame" x="12" y="10" width="34" height="30"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <state key="normal" title="Love"/>
-                        <connections>
-                            <action selector="favouriteButtonPressed:" destination="Ipq-p3-lve" eventType="touchUpInside" id="9NV-fK-NLR"/>
-                        </connections>
-                    </button>
-                </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
         </collectionViewCell>
     </objects>
-    <resources>
-        <image name="IconVideoAddDefault.png" width="49" height="49"/>
-    </resources>
 </document>

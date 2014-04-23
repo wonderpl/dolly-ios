@@ -20,9 +20,10 @@
 #import "SYNOneToOneSharingController.h"
 #import "SYNAddToChannelViewController.h"
 #import "SYNTrackingManager.h"
+#import "SYNVideoActionsBar.h"
 #import <SDWebImageManager.h>
 
-@interface SYNVideoInfoViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SYNWebViewCellDelegate, SYNVideoActionsDelegate, SYNVideoClickToMoreCellDelegate>
+@interface SYNVideoInfoViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SYNWebViewCellDelegate, SYNVideoActionsBarDelegate, SYNVideoClickToMoreCellDelegate>
 
 @property (nonatomic, strong) IBOutlet UICollectionView *collectionView;
 
@@ -87,8 +88,7 @@
 		SYNVideoActionsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[SYNVideoActionsCell reuseIdentifier]
 																			  forIndexPath:indexPath];
 		
-		cell.delegate = self;
-		
+		cell.actionsBar.delegate = self;
 		
 		return cell;
 	} else if (indexPath.section == [self clickToMoreSectionIndex]) {
@@ -143,13 +143,13 @@
 	return CGSizeZero;
 }
 
-#pragma mark - SYNVideoActionsDelegate
+#pragma mark - SYNVideoActionsBarDelegate
 
-- (void)videoActionsFavouritePressed {
+- (void)videoActionsBar:(SYNVideoActionsBar *)bar favouritesButtonPressed:(UIButton *)button {
 	
 }
 
-- (void)videoActionsAddToChannelPressed {
+- (void)videoActionsBar:(SYNVideoActionsBar *)bar addToChannelButtonPressed:(UIButton *)button {
 	VideoInstance *videoInstance = [self.model itemAtIndex:self.selectedIndex];
 	
 	[[SYNTrackingManager sharedManager] trackVideoAddFromScreenName:[self trackingScreenName]];
@@ -168,7 +168,7 @@
 	[self presentViewController:viewController animated:YES completion:nil];
 }
 
-- (void)videoActionsSharePressed {
+- (void)videoActionsBar:(SYNVideoActionsBar *)bar shareButtonPressed:(UIButton *)button {
 	VideoInstance *videoInstance = [self.model itemAtIndex:self.selectedIndex];
 	
 	[self requestShareLinkWithObjectType:@"video_instance" objectId:videoInstance.uniqueId];

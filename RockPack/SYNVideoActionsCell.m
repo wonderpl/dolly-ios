@@ -7,19 +7,29 @@
 //
 
 #import "SYNVideoActionsCell.h"
+#import "SYNVideoActionsBar.h"
+
+@interface SYNVideoActionsCell ()
+
+@property (nonatomic, strong) SYNVideoActionsBar *actionsBar;
+
+@end
 
 @implementation SYNVideoActionsCell
 
-- (IBAction)shareButtonPressed:(UIButton *)button {
-	[self.delegate videoActionsSharePressed];
+- (void)awakeFromNib {
+	[super awakeFromNib];
+	
+	[self.contentView addSubview:self.actionsBar];
 }
 
-- (IBAction)addToChannelButtonPressed:(UIButton *)button {
-	[self.delegate videoActionsAddToChannelPressed];
-}
-
-- (IBAction)favouriteButtonPressed:(UIButton *)button {
-	[self.delegate videoActionsFavouritePressed];
+- (SYNVideoActionsBar *)actionsBar {
+	if (!_actionsBar) {
+		SYNVideoActionsBar *actionsBar = [SYNVideoActionsBar bar];
+		
+		self.actionsBar = actionsBar;
+	}
+	return _actionsBar;
 }
 
 @end
