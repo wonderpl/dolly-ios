@@ -172,17 +172,9 @@
 	}
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-	UIViewController *viewController = [SYNVideoPlayerViewController viewControllerWithModel:self.model
-																			   selectedIndex:indexPath.row];
-	//	SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
-	//	animator.delegate = self;
-	//	animator.cellIndexPath = indexPath;
-	//	self.videoPlayerAnimator = animator;
-	//	viewController.transitioningDelegate = animator;
-	[self presentViewController:viewController animated:YES completion:nil];
+- (id<SYNVideoInfoCell>)videoCellForIndexPath:(NSIndexPath *)indexPath {
+	return (SYNFeedVideoCell *)[self.feedCollectionView cellForItemAtIndexPath:indexPath];
 }
-
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
 		   viewForSupplementaryElementOfKind:(NSString *)kind
@@ -292,6 +284,21 @@
 	Channel *channel = videoInstance.channel;
 	
 	[self viewProfileDetails:channel.channelOwner];
+}
+
+- (void)videoCellThumbnailPressed:(SYNFeedVideoCell *)cell {
+	NSIndexPath *indexPath = [self.feedCollectionView indexPathForCell:cell];
+	
+	UIViewController *viewController = [SYNVideoPlayerViewController viewControllerWithModel:self.model
+																			   selectedIndex:indexPath.row];
+	
+	SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
+	animator.delegate = self;
+	animator.cellIndexPath = indexPath;
+	self.videoPlayerAnimator = animator;
+	viewController.transitioningDelegate = animator;
+	
+	[self presentViewController:viewController animated:YES completion:nil];
 }
 
 - (void)videoCellFavouritePressed:(SYNFeedVideoCell *)cell {

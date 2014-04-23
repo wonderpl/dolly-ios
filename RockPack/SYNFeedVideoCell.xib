@@ -27,7 +27,7 @@
                             <action selector="avatarThumbnailPressed:" destination="RZU-6J-M1O" eventType="touchUpInside" id="Xo0-Cg-2eE"/>
                         </connections>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PSP-Md-g5O" userLabel="Video Thumbnail">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PSP-Md-g5O" userLabel="Video Thumbnail">
                         <rect key="frame" x="16" y="153" width="288" height="162"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <constraints>
@@ -37,6 +37,9 @@
                         <state key="normal">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
+                        <connections>
+                            <action selector="videoThumbnailPressed:" destination="RZU-6J-M1O" eventType="touchUpInside" id="tQB-Yp-vFc"/>
+                        </connections>
                     </button>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gO8-yU-6pT" userLabel="Curated By">
                         <rect key="frame" x="16" y="73" width="36" height="17"/>
@@ -113,7 +116,7 @@
                 <outlet property="labelLabel" destination="kaB-GM-XxE" id="xnA-8N-uFp"/>
                 <outlet property="titleLabel" destination="gYj-Gp-52k" id="wQt-7n-FZu"/>
                 <outlet property="videoActionsContainer" destination="wYn-bf-10j" id="S1X-yg-8rz"/>
-                <outlet property="videoButton" destination="PSP-Md-g5O" id="DQh-nM-fCF"/>
+                <outlet property="videoThumbnailButton" destination="PSP-Md-g5O" id="EIy-kz-kcQ"/>
             </connections>
         </collectionViewCell>
     </objects>

@@ -27,7 +27,7 @@
 
 @property (nonatomic, strong) IBOutlet UILabel *durationLabel;
 
-@property (nonatomic, strong) IBOutlet UIButton *videoButton;
+@property (nonatomic, strong) IBOutlet UIButton *videoThumbnailButton;
 
 @property (nonatomic, strong) IBOutlet UIView *videoActionsContainer;
 
@@ -48,6 +48,10 @@
 	self.titleLabel.font = [UIFont boldCustomFontOfSize:self.titleLabel.font.pointSize];
 	
 	[self.videoActionsContainer addSubview:self.actionsBar];
+}
+
+- (UIImageView *)imageView {
+	return self.videoThumbnailButton.imageView;
 }
 
 - (void)setVideoInstance:(VideoInstance *)videoInstance {
@@ -76,7 +80,7 @@
 	[self.avatarThumbnailButton setImageWithURL:avatarURL forState:UIControlStateNormal];
 	
 	NSURL *thumbnailURL = [NSURL URLWithString:videoInstance.thumbnailURL];
-	[self.videoButton setImageWithURL:thumbnailURL forState:UIControlStateNormal];
+	[self.videoThumbnailButton setImageWithURL:thumbnailURL forState:UIControlStateNormal];
 }
 
 - (SYNVideoActionsBar *)actionsBar {
@@ -106,7 +110,7 @@
 }
 
 - (IBAction)videoThumbnailPressed:(UIButton *)button {
-	
+	[self.delegate videoCellThumbnailPressed:self];
 }
 
 @end

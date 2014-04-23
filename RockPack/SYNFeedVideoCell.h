@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SYNVideoInfoCell.h"
 
 @class VideoInstance;
 @class SYNVideoActionsBar;
@@ -14,14 +15,16 @@
 
 @protocol SYNFeedVideoCellDelegate <NSObject>
 
+- (void)videoCellAvatarPressed:(SYNFeedVideoCell *)cell;
+- (void)videoCellThumbnailPressed:(SYNFeedVideoCell *)cell;
+
 - (void)videoCellFavouritePressed:(SYNFeedVideoCell *)cell;
 - (void)videoCellAddToChannelPressed:(SYNFeedVideoCell *)cell;
 - (void)videoCellSharePressed:(SYNFeedVideoCell *)cell;
-- (void)videoCellAvatarPressed:(SYNFeedVideoCell *)cell;
 
 @end
 
-@interface SYNFeedVideoCell : UICollectionViewCell
+@interface SYNFeedVideoCell : UICollectionViewCell <SYNVideoInfoCell>
 
 @property (nonatomic, strong) VideoInstance *videoInstance;
 

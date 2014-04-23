@@ -32,22 +32,20 @@ static const CGFloat AnimationDuration = 0.3;
 		UIView *containerView = [transitionContext containerView];
 		
 		UIViewController *fromViewController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
-		UINavigationController *videoPlayerNavController = (UINavigationController *)[transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+		SYNVideoPlayerViewController *videoPlayerViewController = (SYNVideoPlayerViewController *)[transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
 		
 		id<SYNVideoInfoCell> infoCell = (id<SYNVideoInfoCell>)[self.delegate videoCellForIndexPath:self.cellIndexPath];
 		
-		[containerView addSubview:videoPlayerNavController.view];
-		[videoPlayerNavController.view layoutIfNeeded];
+		[containerView addSubview:videoPlayerViewController.view];
+		[videoPlayerViewController.view layoutIfNeeded];
 		
-		videoPlayerNavController.view.alpha = 0.0;
+		videoPlayerViewController.view.alpha = 0.0;
 		
 		UIImage *blurredImage = [UIImage blurredImageFromImage:infoCell.imageView.image];
 		UIImageView *blurredImageView = [[UIImageView alloc] initWithImage:blurredImage];
 		blurredImageView.backgroundColor = [UIColor whiteColor];
 		
 		self.blurredImageView = blurredImageView;
-		
-		SYNVideoPlayerViewController *videoPlayerViewController = (SYNVideoPlayerViewController *)videoPlayerNavController.topViewController;
 		
 		UIView *videoPlayerContainerView = videoPlayerViewController.videoPlayerContainerView;
 		
@@ -77,7 +75,7 @@ static const CGFloat AnimationDuration = 0.3;
 									  [UIView addKeyframeWithRelativeStartTime:0.15
 															  relativeDuration:0.85
 																	animations:^{
-																		videoPlayerNavController.view.alpha = 1.0;
+																		videoPlayerViewController.view.alpha = 1.0;
 																		blurredImageView.frame = videoPlayerFrame;
 																	}];
 									  
@@ -97,10 +95,9 @@ static const CGFloat AnimationDuration = 0.3;
 		UIView *containerView = [transitionContext containerView];
 		
 		UIViewController *toViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
-		UINavigationController *videoPlayerNavController = (UINavigationController *)[transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
-		SYNVideoPlayerViewController *videoPlayerViewController = (SYNVideoPlayerViewController *)videoPlayerNavController.topViewController;
+		SYNVideoPlayerViewController *videoPlayerViewController = (SYNVideoPlayerViewController *)[transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
 		
-		[containerView insertSubview:toViewController.view belowSubview:videoPlayerNavController.view];
+		[containerView insertSubview:toViewController.view belowSubview:videoPlayerViewController.view];
 		[toViewController.view layoutIfNeeded];
 		
 		id<SYNVideoInfoCell> infoCell = (id<SYNVideoInfoCell>)[self.delegate videoCellForIndexPath:self.cellIndexPath];
@@ -113,8 +110,8 @@ static const CGFloat AnimationDuration = 0.3;
 		
 		UIImageView *blurredImageView = self.blurredImageView;
 		blurredImageView.alpha = 0.0;
-		blurredImageView.frame = [videoPlayerNavController.view convertRect:videoPlayerViewController.videoPlayerContainerView.bounds
-																   fromView:videoPlayerViewController.videoPlayerContainerView];
+		blurredImageView.frame = [videoPlayerViewController.view convertRect:videoPlayerViewController.videoPlayerContainerView.bounds
+																	fromView:videoPlayerViewController.videoPlayerContainerView];
 		
 		[containerView addSubview:blurredImageView];
 		
@@ -134,7 +131,7 @@ static const CGFloat AnimationDuration = 0.3;
 									  [UIView addKeyframeWithRelativeStartTime:0.1
 															  relativeDuration:0.9
 																	animations:^{
-																		videoPlayerNavController.view.alpha = 0.0;
+																		videoPlayerViewController.view.alpha = 0.0;
 																		if (!CGRectIsEmpty(cellImageFrame)) {
 																			blurredImageView.frame = cellImageFrame;
 																		}
