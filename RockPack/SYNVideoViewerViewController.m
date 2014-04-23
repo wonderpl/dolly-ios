@@ -577,7 +577,6 @@
     self.channelTitleLabel.text = videoInstance.channel.title;
     self.videoTitleLabel.text = videoInstance.title;
     self.heartButton.selected = videoInstance.starredByUserValue;
-    self.likesCountLabel.text = [videoInstance.video.starCount stringValue];
     
     [self refreshAddbuttonStatus: nil];
 }

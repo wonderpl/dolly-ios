@@ -13,8 +13,6 @@ extern const struct VideoAttributes {
 	__unsafe_unretained NSString *source;
 	__unsafe_unretained NSString *sourceId;
 	__unsafe_unretained NSString *sourceUsername;
-	__unsafe_unretained NSString *starCount;
-	__unsafe_unretained NSString *starredByUser;
 	__unsafe_unretained NSString *thumbnailURL;
 	__unsafe_unretained NSString *videoDescription;
 	__unsafe_unretained NSString *viewCount;
@@ -29,8 +27,6 @@ extern const struct VideoFetchedProperties {
 } VideoFetchedProperties;
 
 @class VideoInstance;
-
-
 
 
 
@@ -137,34 +133,6 @@ extern const struct VideoFetchedProperties {
 
 
 //- (BOOL)validateSourceUsername:(id*)value_ error:(NSError**)error_;
-
-
-
-
-
-@property (nonatomic, strong) NSNumber* starCount;
-
-
-
-@property int64_t starCountValue;
-- (int64_t)starCountValue;
-- (void)setStarCountValue:(int64_t)value_;
-
-//- (BOOL)validateStarCount:(id*)value_ error:(NSError**)error_;
-
-
-
-
-
-@property (nonatomic, strong) NSNumber* starredByUser;
-
-
-
-@property BOOL starredByUserValue;
-- (BOOL)starredByUserValue;
-- (void)setStarredByUserValue:(BOOL)value_;
-
-//- (BOOL)validateStarredByUser:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -287,24 +255,6 @@ extern const struct VideoFetchedProperties {
 
 - (NSString*)primitiveSourceUsername;
 - (void)setPrimitiveSourceUsername:(NSString*)value;
-
-
-
-
-- (NSNumber*)primitiveStarCount;
-- (void)setPrimitiveStarCount:(NSNumber*)value;
-
-- (int64_t)primitiveStarCountValue;
-- (void)setPrimitiveStarCountValue:(int64_t)value_;
-
-
-
-
-- (NSNumber*)primitiveStarredByUser;
-- (void)setPrimitiveStarredByUser:(NSNumber*)value;
-
-- (BOOL)primitiveStarredByUserValue;
-- (void)setPrimitiveStarredByUserValue:(BOOL)value_;
 
 
 

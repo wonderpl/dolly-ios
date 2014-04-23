@@ -85,9 +85,6 @@
     
     self.likeControl.selected = videoInstance.starredByUserValue;
     
-    [self.likeControl setTitle: NSLocalizedString(@"like", @"Label for follow button on SYNAggregateVideoItemCell")
-                      andCount: videoInstance.video.starCountValue];
-    
     [self.commentControl setTitle:[NSString stringWithFormat:@"%d", videoInstance.commentCountValue] forState:UIControlStateNormal];
 
     

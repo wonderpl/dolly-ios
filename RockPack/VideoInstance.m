@@ -5,6 +5,13 @@
 #import "SYNAppDelegate.h"
 #import "ChannelOwner.h"
 
+@interface VideoInstance ()
+
+//@property (nonatomic, strong) NSNumber* starredByUser;
+//@property (nonatomic) BOOL starredByUserValue;
+
+@end
+
 @implementation VideoInstance
 
 @synthesize selectedForVideoQueue;
@@ -326,41 +333,22 @@ static NSDateFormatter *dateFormatter = nil;
     else
         [self removeStarrersObject:appDelegate.currentUser]; // will remove the duplicate rather than the real user
     
-    self.video.starredByUser = starredByUser;
-    
     _starredByUser = starredByUser;
     
 }
--(void)setStarredByUserValue:(BOOL)value
-{
-    // box the value into an NSNumber*
-    self.starredByUser = @(value);
+
+- (void)setStarredByUserValue:(BOOL)value {
+	self.starredByUser = @(value);
 }
--(NSNumber*)starredByUser
-{
-    
-    if(self.video.starredByUserValue == YES || (_starredByUser && ([_starredByUser boolValue] == YES))) // check ivar for "caching"
-        return @YES;
-    
-    SYNAppDelegate* appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
-    NSString* currentUserUniqueId = appDelegate.currentUser.uniqueId;
-    for (ChannelOwner* co in self.starrers)
-    {
-        if([co.uniqueId isEqualToString:currentUserUniqueId])
-        {
-            self.video.starredByUserValue = YES; //preemptively set the flag
-            return @YES;
-        }
-        
-    }
-    
-    
-    return @NO;
+
+- (NSNumber*)starredByUser {
+    return _starredByUser;
 }
--(BOOL)starredByUserValue
-{
+
+-(BOOL)starredByUserValue {
     return [self.starredByUser boolValue];
 }
+
 -(void)setMarkedForDeletionValue:(BOOL)value_
 {
     self.markedForDeletion = [NSNumber numberWithBool:value_];

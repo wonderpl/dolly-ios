@@ -131,8 +131,6 @@
         <attribute name="source" attributeType="String" syncable="YES"/>
         <attribute name="sourceId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sourceUsername" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="starCount" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="starredByUser" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="thumbnailURL" optional="YES" attributeType="String" defaultValueString="http://" syncable="YES"/>
         <attribute name="videoDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="viewCount" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
@@ -164,7 +162,7 @@
         <element name="Recommendation" positionX="0" positionY="0" width="128" height="135"/>
         <element name="SubGenre" positionX="0" positionY="0" width="128" height="75"/>
         <element name="User" positionX="0" positionY="0" width="128" height="240"/>
-        <element name="Video" positionX="0" positionY="0" width="128" height="270"/>
+        <element name="Video" positionX="0" positionY="0" width="128" height="238"/>
         <element name="VideoInstance" positionX="0" positionY="0" width="128" height="193"/>
     </elements>
 </model>

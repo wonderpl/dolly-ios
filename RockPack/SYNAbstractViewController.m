@@ -229,13 +229,11 @@
                                             videoInstanceId: videoInstance.uniqueId
                                           completionHandler: ^(id response) {
                                               BOOL previousStarringState = videoInstance.starredByUserValue;
-                                              NSInteger previousStarCount = videoInstance.video.starCountValue;
                                               
                                               if (didStar)
                                               {
                                                   // Currently highlighted, so increment
                                                   videoInstance.starredByUserValue = YES;
-                                                  videoInstance.video.starCountValue += 1;
                                                   
                                                   socialControl.selected = YES;
                                                   
@@ -245,7 +243,6 @@
                                               {
                                                   // Currently highlighted, so decrement
                                                   videoInstance.starredByUserValue = NO;
-                                                  videoInstance.video.starCountValue -= 1;
                                                   
                                                   socialControl.selected = NO;
                                               }
@@ -255,12 +252,6 @@
                                               if (![videoInstance.managedObjectContext save: &error])
                                               {
                                                   videoInstance.starredByUserValue = previousStarringState;
-                                                  videoInstance.video.starCountValue = previousStarCount;
-                                              }
-                                              else
-                                              {
-                                                  [socialControl setTitle: NSLocalizedString(@"like", nil)
-                                                                 andCount: videoInstance.video.starCountValue];
                                               }
                                               
                                               socialControl.enabled = YES;

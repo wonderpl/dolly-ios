@@ -23,8 +23,6 @@ NSString *const VideoSourceOoyala = @"ooyala";
     instance.source = video.source;
     instance.sourceId = video.sourceId;
     instance.sourceUsername = video.sourceUsername;
-    instance.starCount = video.starCount;
-    instance.starredByUserValue = video.starredByUserValue;
     instance.thumbnailURL = video.thumbnailURL;
 	instance.linkTitle = video.linkTitle;
 	instance.linkURL = video.linkURL;
@@ -125,11 +123,6 @@ NSString *const VideoSourceOoyala = @"ooyala";
     self.sourceUsername = [dictionary objectForKey: @"source_username"
                                        withDefault: @""];
     
-    self.starCount = [dictionary objectForKey: @"star_count"
-                                  withDefault: @0];
-    
-    self.starredByUserValue = NO;
-	
 	self.videoDescription = [dictionary objectForKey:@"description" withDefault:@""];
     
     self.thumbnailURL = [dictionary objectForKey: @"thumbnail_url"
@@ -137,8 +130,6 @@ NSString *const VideoSourceOoyala = @"ooyala";
 	
 	self.linkTitle = [dictionary objectForKey:@"link_title" withDefault:@""];
 	self.linkURL = [dictionary objectForKey:@"link_url" withDefault:@""];
-    
-    self.starredByUserValue = [SYNActivityManager.sharedInstance isRecentlyStarred:self.uniqueId];
 }
 
 @end
