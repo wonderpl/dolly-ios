@@ -109,6 +109,8 @@
                                        }];
 }
 
+#pragma mark - Private
+
 - (void)parseFeedResponse:(NSDictionary *)response existingFeedIds:(NSArray *)existingFeedIds completionBlock:(MKNKUserSuccessBlock)completionBlock {
 	
 	SYNAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
@@ -161,20 +163,22 @@
 		[managedObjectContext save:nil];
 	}];
 	
-	[[NSNotificationCenter defaultCenter] addObserverForName:NSManagedObjectContextDidSaveNotification
-													  object:managedObjectContext
-													   queue:[NSOperationQueue mainQueue]
-												  usingBlock:^(NSNotification *note) {
-													  
-													  NSArray *feedItems = [FeedItem orderedFeedItemsWithIds:feedItemIds
-																					  inManagedObjectContext:appDelegate.mainManagedObjectContext];
-													  
-													  completionBlock(feedItems);
-													  
-													  [[NSNotificationCenter defaultCenter] removeObserver:self
-																									  name:NSManagedObjectContextDidSaveNotification
-																									object:managedObjectContext];
-												  }];
+	__weak NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+	__block id observer = nil;
+	observer = [notificationCenter addObserverForName:NSManagedObjectContextDidSaveNotification
+											   object:managedObjectContext
+												queue:[NSOperationQueue mainQueue]
+										   usingBlock:^(NSNotification *note) {
+											   
+											   NSArray *feedItems = [FeedItem orderedFeedItemsWithIds:feedItemIds
+																			   inManagedObjectContext:appDelegate.mainManagedObjectContext];
+											   
+											   completionBlock(feedItems);
+											   
+											   [notificationCenter removeObserver:observer
+																			 name:NSManagedObjectContextDidSaveNotification
+																		   object:managedObjectContext];
+										   }];
 }
 
 @end
