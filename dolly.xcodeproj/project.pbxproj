@@ -592,7 +592,6 @@
 		E94BEFA918C9F18F00762651 /* _Recommendation.m in Sources */ = {isa = PBXBuildFile; fileRef = E94BEFA818C9F18F00762651 /* _Recommendation.m */; };
 		E94BEFAC18C9F19A00762651 /* Recommendation.m in Sources */ = {isa = PBXBuildFile; fileRef = E94BEFAB18C9F19A00762651 /* Recommendation.m */; };
 		E94BEFAE18CA0E6B00762651 /* NSStringTimecodeSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = E94BEFAD18CA0E6B00762651 /* NSStringTimecodeSpec.m */; };
-		E94E9C7718E44D8700E8CE84 /* NSString+TestHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = E94E9C7618E44D8700E8CE84 /* NSString+TestHelpers.m */; };
 		E9533228185B7CE30031CA2B /* SYNSearchVideoLikesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9533227185B7CE30031CA2B /* SYNSearchVideoLikesModel.m */; };
 		E9577EA118EAF62300E95127 /* SYNVideoPlayerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9577EA018EAF62300E95127 /* SYNVideoPlayerCell.m */; };
 		E960239D18E5E6BA00A96CB4 /* SYNVideoPlayerViewController_iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E960239C18E5E6BA00A96CB4 /* SYNVideoPlayerViewController_iphone.storyboard */; };
@@ -619,6 +618,7 @@
 		E985D36D18FED5A000D5A9E1 /* AddButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E985D36B18FED5A000D5A9E1 /* AddButton@2x.png */; };
 		E985D37118FED76E00D5A9E1 /* ShareButton.png in Resources */ = {isa = PBXBuildFile; fileRef = E985D36F18FED76E00D5A9E1 /* ShareButton.png */; };
 		E985D37218FED76E00D5A9E1 /* AddButton.png in Resources */ = {isa = PBXBuildFile; fileRef = E985D37018FED76E00D5A9E1 /* AddButton.png */; };
+		E98A8519190968C2001ADE09 /* NSString+TestHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = E94E9C7618E44D8700E8CE84 /* NSString+TestHelpers.m */; };
 		E98F609818B24901008AAAA8 /* SYNWonderMailActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = E98F609718B24901008AAAA8 /* SYNWonderMailActivity.m */; };
 		E98F609B18B25CBD008AAAA8 /* NSRegularExpression+Username.m in Sources */ = {isa = PBXBuildFile; fileRef = E98F609A18B25CBD008AAAA8 /* NSRegularExpression+Username.m */; };
 		E9918C1618967BA500767BBD /* SYNTimestampLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9918C1518967BA500767BBD /* SYNTimestampLabel.m */; };
@@ -1596,6 +1596,8 @@
 		E985D36B18FED5A000D5A9E1 /* AddButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AddButton@2x.png"; sourceTree = "<group>"; };
 		E985D36F18FED76E00D5A9E1 /* ShareButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ShareButton.png; sourceTree = "<group>"; };
 		E985D37018FED76E00D5A9E1 /* AddButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AddButton.png; sourceTree = "<group>"; };
+		E98A85151909689B001ADE09 /* NSManagedObjectContext+TestHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObjectContext+TestHelpers.h"; sourceTree = "<group>"; };
+		E98A85161909689B001ADE09 /* NSManagedObjectContext+TestHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObjectContext+TestHelpers.m"; sourceTree = "<group>"; };
 		E98F609618B24901008AAAA8 /* SYNWonderMailActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNWonderMailActivity.h; sourceTree = "<group>"; };
 		E98F609718B24901008AAAA8 /* SYNWonderMailActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNWonderMailActivity.m; sourceTree = "<group>"; };
 		E98F609918B25CBD008AAAA8 /* NSRegularExpression+Username.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSRegularExpression+Username.h"; sourceTree = "<group>"; };
@@ -2078,6 +2080,8 @@
 				BEB3135918182D6100FAF98A /* data */,
 				E94E9C7518E44D8700E8CE84 /* NSString+TestHelpers.h */,
 				E94E9C7618E44D8700E8CE84 /* NSString+TestHelpers.m */,
+				E98A85151909689B001ADE09 /* NSManagedObjectContext+TestHelpers.h */,
+				E98A85161909689B001ADE09 /* NSManagedObjectContext+TestHelpers.m */,
 			);
 			name = Tests;
 			path = dollyTests;
@@ -4811,7 +4815,6 @@
 				E93E10E31835116D00A62F64 /* SYNVideoPlayer.m in Sources */,
 				E929AD7218D0AF0B001E1792 /* SYNHTTPSessionManager.m in Sources */,
 				38281F1D17439B770024DC18 /* SYNLoginBaseViewController.m in Sources */,
-				E94E9C7718E44D8700E8CE84 /* NSString+TestHelpers.m in Sources */,
 				E9EE08CB18F6E139000DC06A /* SYNVideoCell.m in Sources */,
 				3864D2DC1743DB3000A90ED3 /* SYNImagePickerController.m in Sources */,
 				E9765BA7184F9ABA005D02E9 /* SYNFeedModel.m in Sources */,
@@ -4866,6 +4869,8 @@
 				4C63487518E5E04600FF7168 /* SYNProfileChannelViewControllerSpec.m in Sources */,
 				E9A6900B18DC9FBF00603D99 /* SYNOnboardingViewControllerSpec.m in Sources */,
 				4C63487318E5CBFB00FF7168 /* SYNProfileViewControllerSpec.m in Sources */,
+				E98A8519190968C2001ADE09 /* NSString+TestHelpers.m in Sources */,
+				E98A8518190968BA001ADE09 /* NSManagedObjectContext+TestHelpers.m in Sources */,
 				E90506AB18E1925700E0910E /* SYNCommentingViewControllerSpec.m in Sources */,
 				E94BEFAE18CA0E6B00762651 /* NSStringTimecodeSpec.m in Sources */,
 				E9F7CC791846289B0026C97D /* NSStringValidationSpec.m in Sources */,
