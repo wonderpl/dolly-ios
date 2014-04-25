@@ -44,8 +44,8 @@ static const NSInteger InitialWebViewCount = 3;
 + (instancetype)createWebView {
 	CGRect screenBounds = [[UIScreen mainScreen] bounds];
 	
-	CGSize size = CGSizeMake(round(CGRectGetHeight(screenBounds)),
-							 round(CGRectGetHeight(screenBounds) / VideoAspectRatio));
+	CGSize size = CGSizeMake(round(CGRectGetWidth(screenBounds)),
+							 round(CGRectGetWidth(screenBounds) / VideoAspectRatio));
 	
 	CGRect frame = CGRectMake(0, 0, size.width, size.height);
 	
