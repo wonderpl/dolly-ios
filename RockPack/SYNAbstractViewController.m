@@ -728,19 +728,6 @@
 	}
 }
 
-- (void) viewVideoInstance:(Channel*) channel withVideoId:videoId
-{
-    [appDelegate.oAuthNetworkEngine videoForChannelForUserId:appDelegate.currentUser.uniqueId channelId:channel.uniqueId instanceId:videoId completionHandler:^(id response) {
-        
-        VideoInstance *vidToPlay = [VideoInstance instanceFromDictionary:response usingManagedObjectContext:appDelegate.mainManagedObjectContext];
-		
-//		UIViewController *viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:@[vidToPlay] selectedIndex:0 presentedBy:NSStringFromClass([self class])];
-//		[self.navigationController presentViewController:viewController animated:YES completion:nil];
-        
-    } errorHandler: nil];
-    
-}
-
 - (void) viewVideoInstanceInChannel:(Channel*) channel withVideoId:videoId
 {
 //    [self viewChannelDetails:channel withAnimation:NO];
