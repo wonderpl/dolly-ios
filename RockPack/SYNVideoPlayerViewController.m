@@ -106,7 +106,7 @@
 }
 
 - (NSUInteger)supportedInterfaceOrientations {
-	return UIInterfaceOrientationMaskPortrait;
+	return ([[UIDevice currentDevice] isPhone] ? UIInterfaceOrientationMaskPortrait : UIInterfaceOrientationMaskAll);
 }
 
 - (void)viewWillAppear:(BOOL)animated {
