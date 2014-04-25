@@ -271,9 +271,7 @@
 - (void)videoCellAvatarPressed:(SYNFeedVideoCell *)cell {
 	VideoInstance *videoInstance = cell.videoInstance;
 	
-	Channel *channel = videoInstance.channel;
-	
-	[self viewProfileDetails:channel.channelOwner];
+	[self viewProfileDetails:videoInstance.originator];
 }
 
 - (void)videoCellThumbnailPressed:(SYNFeedVideoCell *)cell {
