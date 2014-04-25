@@ -160,6 +160,12 @@ static const CGFloat UpcomingVideosDividerHeight = 70.0;
 	return collectionViewLayout.itemSize;
 }
 
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+	[self.delegate videoInfoViewController:self didScrollToContentOffset:scrollView.contentOffset];
+}
+
 #pragma mark - SYNVideoActionsBarDelegate
 
 - (void)videoActionsBar:(SYNVideoActionsBar *)bar favouritesButtonPressed:(UIButton *)button {

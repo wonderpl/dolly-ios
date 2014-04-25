@@ -323,6 +323,17 @@
 
 #pragma mark - SYNVideoInfoViewControllerDelegate
 
+- (void)videoInfoViewController:(SYNVideoInfoViewController *)viewController didScrollToContentOffset:(CGPoint)contentOffset {
+	if (contentOffset.y > 0) {
+		CGFloat opacity = 1.0 - (0.88 * MIN(1.0, contentOffset.y / 60.0));
+		self.avatarButton.alpha = opacity;
+		self.videoTitleLabel.alpha = opacity;
+	} else {
+		self.avatarButton.alpha = 1.0;
+		self.videoTitleLabel.alpha = 1.0;
+	}
+}
+
 - (void)videoInfoViewController:(SYNVideoInfoViewController *)viewController didSelectVideoAtIndex:(NSInteger)index {
 	self.selectedIndex = index;
 }

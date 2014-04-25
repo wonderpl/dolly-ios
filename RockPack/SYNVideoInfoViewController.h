@@ -14,6 +14,7 @@
 
 @protocol SYNVideoInfoViewControllerDelegate <NSObject>
 
+- (void)videoInfoViewController:(SYNVideoInfoViewController *)viewController didScrollToContentOffset:(CGPoint)contentOffset;
 - (void)videoInfoViewController:(SYNVideoInfoViewController *)viewController didSelectVideoAtIndex:(NSInteger)index;
 
 @end
