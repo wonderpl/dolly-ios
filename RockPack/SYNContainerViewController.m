@@ -51,7 +51,7 @@
 	
     // == Feed Page == //
     
-    SYNFeedRootViewController *feedRootViewController = [[SYNFeedRootViewController alloc] initWithViewId: kFeedViewId];
+    SYNFeedRootViewController *feedRootViewController = [SYNFeedRootViewController viewController];
     feedRootViewController.navigationItem.backBarButtonItem = backButton;
     UINavigationController *navFeedViewController = [[UINavigationController alloc] initWithRootViewController:feedRootViewController];
     

@@ -9,9 +9,19 @@
 #import <UIKit/UIKit.h>
 
 @class Channel;
+@class SYNFeedChannelCell;
+
+@protocol SYNFeedChannelCellDelegate <NSObject>
+
+- (void)channelCellAvatarPressed:(SYNFeedChannelCell *)cell;
+- (void)channelCellTitlePressed:(SYNFeedChannelCell *)cell;
+
+@end
 
 @interface SYNFeedChannelCell : UICollectionViewCell
 
 @property (nonatomic, strong) Channel *channel;
+
+@property (nonatomic, weak) id<SYNFeedChannelCellDelegate> delegate;
 
 @end

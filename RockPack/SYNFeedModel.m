@@ -60,6 +60,17 @@
 	}
 }
 
+- (NSInteger)itemIndexForFeedIndex:(NSInteger)feedIndex {
+	NSIndexSet *channelIndexes = [self.feedItems indexesOfObjectsPassingTest:^BOOL(FeedItem *feedItem, NSUInteger idx, BOOL *stop) {
+		if (idx == feedIndex) {
+			*stop = YES;
+			return NO;
+		}
+		return (feedItem.resourceTypeValue == FeedItemResourceTypeChannel);
+	}];
+	return (feedIndex - [channelIndexes count]);
+}
+
 #pragma mark - Overridden
 
 - (void)loadItemsForRange:(NSRange)range {

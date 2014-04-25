@@ -39,10 +39,8 @@
 	NSURL *avatarURL = [NSURL URLWithString:channel.channelOwner.thumbnailURL];
 	[self.avatarThumbnailButton setImageWithURL:avatarURL forState:UIControlStateNormal];
 	
-	self.channelOwnerLabel.text = @"AAA";
-	
 	NSMutableAttributedString *channeOwnerString = [[NSMutableAttributedString alloc] initWithString:@"New by "];
-	
+
 	NSString *channelOwnerName = channel.channelOwner.displayName;
 	UIFont *boldFont = [UIFont boldItalicAlternateFontOfSize:self.channelOwnerLabel.font.pointSize];
 	NSDictionary *attributes = @{ NSFontAttributeName : boldFont };
@@ -52,6 +50,14 @@
 	self.channelOwnerLabel.attributedText = channeOwnerString;
 	
 	[self.channelTitleButton setTitle:channel.title forState:UIControlStateNormal];
+}
+
+- (IBAction)avatarThumbnailPressed:(UIButton *)button {
+	[self.delegate channelCellAvatarPressed:self];
+}
+
+- (IBAction)channelButtonPressed:(UIButton *)button {
+	[self.delegate channelCellTitlePressed:self];
 }
 
 @end

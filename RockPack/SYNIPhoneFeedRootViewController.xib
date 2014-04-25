@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNFeedRootViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNIPhoneFeedRootViewController">
             <connections>
                 <outlet property="feedCollectionView" destination="sPi-AS-jXJ" id="LbI-6L-Xw4"/>
                 <outlet property="view" destination="1" id="18V-Uw-SwP"/>

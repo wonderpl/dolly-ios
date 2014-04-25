@@ -8,6 +8,7 @@
 
 #import "SYNVideoCell.h"
 #import "VideoInstance.h"
+#import "ChannelOwner.h"
 #import "UIFont+SYNFont.h"
 #import <UIImageView+WebCache.h>
 
@@ -33,8 +34,15 @@
 	
 	[self.thumbnailImageView setImageWithURL:[NSURL URLWithString:videoInstance.thumbnailURL]];
 	
-	self.titleLabel.text = videoInstance.title;
-	self.originatorLabel.text = @"Tom Aikens";
+	NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+	paragraphStyle.lineHeightMultiple = 1.3;
+	NSDictionary *attributes = @{ NSParagraphStyleAttributeName : paragraphStyle };
+	
+	NSAttributedString *attributedString = [[NSAttributedString alloc] initWithString:videoInstance.title
+																		   attributes:attributes];
+	
+	self.titleLabel.attributedText = attributedString;
+	self.originatorLabel.text = videoInstance.originator.displayName;
 }
 
 @end

@@ -8,6 +8,14 @@
 
 #import "SYNAbstractViewController.h"
 
+@class SYNFeedModel;
+
 @interface SYNFeedRootViewController : SYNAbstractViewController
+
+@property (nonatomic, strong, readonly) UICollectionView *feedCollectionView;
+
+@property (nonatomic, strong, readonly) SYNFeedModel *model;
+
++ (instancetype)viewController;
 
 @end

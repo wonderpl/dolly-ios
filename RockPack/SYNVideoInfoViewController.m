@@ -23,6 +23,10 @@
 #import "SYNVideoActionsBar.h"
 #import <SDWebImageManager.h>
 
+static const CGFloat ActionCellHeight = 70.0;
+static const CGFloat ClickToMoreCellHeight = 60.0;
+static const CGFloat UpcomingVideosDividerHeight = 70.0;
+
 @interface SYNVideoInfoViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SYNWebViewCellDelegate, SYNVideoActionsBarDelegate, SYNVideoClickToMoreCellDelegate>
 
 @property (nonatomic, strong) IBOutlet UICollectionView *collectionView;
@@ -138,9 +142,22 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
 	if (section == [self upcomingVideosSectionIndex]) {
-		return CGSizeMake(320, 70);
+		return CGSizeMake(CGRectGetWidth(collectionView.bounds), UpcomingVideosDividerHeight);
 	}
 	return CGSizeZero;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+	if (indexPath.section == [self actionsSectionIndex]) {
+		return CGSizeMake(collectionViewLayout.itemSize.width, ActionCellHeight);
+	}
+	if (indexPath.section == [self clickToMoreSectionIndex]) {
+		return CGSizeMake(collectionViewLayout.itemSize.width, ClickToMoreCellHeight);
+	}
+	if (indexPath.section == [self descriptionSectionIndex]) {
+		return CGSizeMake(collectionViewLayout.itemSize.width, self.descriptionHeight);
+	}
+	return collectionViewLayout.itemSize;
 }
 
 #pragma mark - SYNVideoActionsBarDelegate
@@ -203,13 +220,6 @@
 	self.descriptionHeight = cell.contentHeight;
 	
 	[self.collectionView.collectionViewLayout invalidateLayout];
-}
-
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-	if (indexPath.section == [self descriptionSectionIndex]) {
-		return CGSizeMake(collectionViewLayout.itemSize.width, self.descriptionHeight);
-	}
-	return collectionViewLayout.itemSize;
 }
 
 #pragma mark - Private

@@ -20,12 +20,14 @@
 - (void)awakeFromNib {
 	[super awakeFromNib];
 	
+	self.actionsBar.frame = self.contentView.bounds;
 	[self.contentView addSubview:self.actionsBar];
 }
 
 - (SYNVideoActionsBar *)actionsBar {
 	if (!_actionsBar) {
 		SYNVideoActionsBar *actionsBar = [SYNVideoActionsBar bar];
+		actionsBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 		
 		self.actionsBar = actionsBar;
 	}

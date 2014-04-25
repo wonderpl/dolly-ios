@@ -6,23 +6,19 @@
 //  Copyright (c) 2012 Nick Banks. All rights reserved.
 //
 
+#import "SYNFeedRootViewController.h"
 #import "AppConstants.h"
-#import "Appirater.h"
 #import "Channel.h"
 #import "ChannelOwner.h"
 #import "FeedItem.h"
 #import "SYNAppDelegate.h"
-#import "SYNDeviceManager.h"
-#import "SYNFeedRootViewController.h"
-#import "SYNMasterViewController.h"
-#import "SYNNetworkEngine.h"
 #import "SYNOAuthNetworkEngine.h"
+#import "SYNMasterViewController.h"
 #import <UIButton+WebCache.h>
 #import <UIImageView+WebCache.h>
 #import "Video.h"
 #import "VideoInstance.h"
 #import "UICollectionReusableView+Helpers.h"
-#import "SYNPagingModel.h"
 #import "SYNFeedModel.h"
 #import "SYNAggregateVideoItemCell.h"
 #import "SYNCarouselVideoPlayerViewController.h"
@@ -35,11 +31,17 @@
 #import "SYNAddToChannelViewController.h"
 #import "SYNFeedChannelCell.h"
 #import "SYNOneToOneSharingController.h"
+#import "UIDevice+Helpers.h"
+#import "SYNFeedVideoLargeCell.h"
+#import "SYNFeedVideoSmallCell.h"
+#import "SYNIPhoneFeedRootViewController.h"
+#import "SYNIPadFeedRootViewController.h"
+#import "UINavigationBar+Appearance.h"
 
-@interface SYNFeedRootViewController () <UIViewControllerTransitioningDelegate, SYNPagingModelDelegate, SYNVideoPlayerAnimatorDelegate, SYNFeedVideoCellDelegate>
+@interface SYNFeedRootViewController () <UIViewControllerTransitioningDelegate, SYNPagingModelDelegate, SYNVideoPlayerAnimatorDelegate, SYNFeedVideoCellDelegate, SYNFeedChannelCellDelegate>
 
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
-@property (nonatomic, strong) IBOutlet UICollectionView* feedCollectionView;
+@property (nonatomic, strong) IBOutlet UICollectionView *feedCollectionView;
 
 @property (nonatomic, strong) SYNFeedModel *model;
 @property (nonatomic, strong) SYNVideoPlayerAnimator *videoPlayerAnimator;
@@ -48,6 +50,11 @@
 
 
 @implementation SYNFeedRootViewController
+
++ (instancetype)viewController {
+	Class class = ([[UIDevice currentDevice] isPhone] ? [SYNIPhoneFeedRootViewController class] : [SYNIPadFeedRootViewController class]);
+	return [[class alloc] initWithViewId:kFeedViewId];
+}
 
 #pragma mark - Object lifecycle
 
@@ -72,12 +79,6 @@
 
     [self displayPopupMessage: NSLocalizedString(@"feed_screen_loading_message", nil)
                    withLoader: YES];
-	
-	[self.feedCollectionView registerNib:[SYNFeedVideoCell nib]
-			  forCellWithReuseIdentifier:[SYNFeedVideoCell reuseIdentifier]];
-	
-	[self.feedCollectionView registerNib:[SYNFeedChannelCell nib]
-			  forCellWithReuseIdentifier:[SYNFeedChannelCell reuseIdentifier]];
 	
     [self.feedCollectionView registerNib:[SYNChannelFooterMoreView nib]
               forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
@@ -108,7 +109,7 @@
 		self.model.delegate = self;
 	}
     [self.feedCollectionView reloadData];
-   
+	
     [self showInboarding];
 }
 
@@ -116,6 +117,8 @@
 	[super viewDidAppear:animated];
 	
 	[[SYNTrackingManager sharedManager] trackFeedScreenView];
+	
+	[self.model loadNextPage];
 }
 
 
@@ -152,28 +155,22 @@
 	
 	if (feedItem.resourceTypeValue == FeedItemResourceTypeChannel) {
 		
-		SYNFeedChannelCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[SYNFeedChannelCell reuseIdentifier]
-																			 forIndexPath:indexPath];
+		SYNFeedChannelCell *cell = [self channelCellForIndexPath:indexPath collectionView:collectionView];
 		
-		VideoInstance *videoInstance = [self.model itemAtIndex:indexPath.row];
-		cell.channel = videoInstance.channel;
+		Channel *channel = [self.model resourceForFeedItem:feedItem];
+		cell.channel = channel;
+		cell.delegate = self;
 		
 		return cell;
 	} else {
+		SYNFeedVideoCell *cell = [self videoCellForIndexPath:indexPath collectionView:collectionView];
 		
-		SYNFeedVideoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[SYNFeedVideoCell reuseIdentifier]
-																		   forIndexPath:indexPath];
-		
-		VideoInstance *videoInstance = [self.model itemAtIndex:indexPath.row];
+		VideoInstance *videoInstance = [self.model resourceForFeedItem:feedItem];
 		cell.videoInstance = videoInstance;
 		cell.delegate = self;
 		
 		return cell;
 	}
-}
-
-- (id<SYNVideoInfoCell>)videoCellForIndexPath:(NSIndexPath *)indexPath {
-	return (SYNFeedVideoCell *)[self.feedCollectionView cellForItemAtIndexPath:indexPath];
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
@@ -199,24 +196,21 @@
     return supplementaryView;
 }
 
-#pragma mark - UICollectionViewDelegateFlowLayout
-
-- (CGSize)collectionView:(UICollectionView *)collectionView
-				  layout:(UICollectionViewLayout *)collectionViewLayout
-  sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-	FeedItem *feedItem = [self.model feedItemAtindex:indexPath.item];
-
-	CGFloat collectionViewWidth = CGRectGetWidth(collectionView.bounds);
-    
-    if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo) {
-		return (IS_IPAD ? CGSizeMake(collectionViewWidth, 457.0) : CGSizeMake(collectionViewWidth, 401.0));
-    } else {
-		return (IS_IPAD ? CGSizeMake(collectionViewWidth, 330.0) : CGSizeMake(collectionViewWidth, 267.0));
-    }
+- (SYNFeedChannelCell *)channelCellForIndexPath:(NSIndexPath *)indexPath
+								 collectionView:(UICollectionView *)collectionView {
+	return nil;
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
-	return ([self.model hasMoreItems] ? [self footerSize] : CGSizeZero);
+
+- (SYNFeedVideoCell *)videoCellForIndexPath:(NSIndexPath *)indexPath
+							 collectionView:(UICollectionView *)collectionView {
+	return nil;
+}
+
+#pragma mark - SYNVideoInfoCell
+
+- (id<SYNVideoInfoCell>)videoCellForIndexPath:(NSIndexPath *)indexPath {
+	return (SYNFeedVideoCell *)[self.feedCollectionView cellForItemAtIndexPath:indexPath];
 }
 
 #pragma mark - SYNPagingModelDelegate
@@ -227,7 +221,6 @@
 
 	[self.feedCollectionView reloadData];
     
-
     if (self.isViewLoaded && self.view.window) {
         [self showInboarding];
     
@@ -246,10 +239,6 @@
 }
 
 #pragma mark - Helper Methods to get AggreagateCell's Data
-
-- (FeedItem *)feedItemAtIndexPath:(NSIndexPath *)indexPath {
-	return [self.model itemAtIndex:indexPath.item];
-}
 
 - (NSString *)trackingScreenName {
 	return @"MyWonders";
@@ -278,6 +267,8 @@
     }
 }
 
+#pragma mark - SYNFeedVideoCellDelegate
+
 - (void)videoCellAvatarPressed:(SYNFeedVideoCell *)cell {
 	VideoInstance *videoInstance = cell.videoInstance;
 	
@@ -289,8 +280,10 @@
 - (void)videoCellThumbnailPressed:(SYNFeedVideoCell *)cell {
 	NSIndexPath *indexPath = [self.feedCollectionView indexPathForCell:cell];
 	
+	// We need to convert it to the index in the array of videos since the player doesn't know about channels
+	NSInteger itemIndex = [self.model itemIndexForFeedIndex:indexPath.row];
 	UIViewController *viewController = [SYNVideoPlayerViewController viewControllerWithModel:self.model
-																			   selectedIndex:indexPath.row];
+																			   selectedIndex:itemIndex];
 	
 	SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
 	animator.delegate = self;
@@ -302,7 +295,44 @@
 }
 
 - (void)videoCell:(SYNFeedVideoCell *)cell favouritePressed:(UIButton *)button {
+    VideoInstance *videoInstance = cell.videoInstance;
+    
+	[[SYNTrackingManager sharedManager] trackVideoLikeFromScreenName:[self trackingScreenName]];
 	
+    BOOL didStar = (button.selected == NO);
+    
+    button.enabled = NO;
+	
+	SYNAppDelegate *localAppDelegate = appDelegate;
+    
+    [appDelegate.oAuthNetworkEngine recordActivityForUserId: appDelegate.currentUser.uniqueId
+                                                     action: (didStar ? @"star" : @"unstar")
+                                            videoInstanceId: videoInstance.uniqueId
+                                          completionHandler: ^(id response) {
+                                              BOOL previousStarringState = videoInstance.starredByUserValue;
+                                              
+                                              if (didStar) {
+                                                  // Currently highlighted, so increment
+                                                  videoInstance.starredByUserValue = YES;
+                                                  
+                                                  button.selected = YES;
+                                                  
+                                                  [videoInstance addStarrersObject:localAppDelegate.currentUser];
+                                              } else {
+                                                  // Currently highlighted, so decrement
+                                                  videoInstance.starredByUserValue = NO;
+                                                  
+                                                  button.selected = NO;
+                                              }
+                                              
+                                              if (![videoInstance.managedObjectContext save:nil]) {
+                                                  videoInstance.starredByUserValue = previousStarringState;
+                                              }
+                                              
+                                              button.enabled = YES;
+                                          } errorHandler: ^(id error) {
+                                              button.enabled = YES;
+                                          }];
 }
 
 - (void)videoCell:(SYNFeedVideoCell *)cell addToChannelPressed:(UIButton *)button {
@@ -341,6 +371,16 @@
 	viewController.transitioningDelegate = self;
 	
 	[self presentViewController:viewController animated:YES completion:nil];
+}
+
+#pragma mark - SYNFeedChannelCellDelegate
+
+- (void)channelCellAvatarPressed:(SYNFeedChannelCell *)cell {
+	[self viewProfileDetails:cell.channel.channelOwner];
+}
+
+- (void)channelCellTitlePressed:(SYNFeedChannelCell *)cell {
+	[self viewChannelDetails:cell.channel withAnimation:YES];
 }
 
 @end

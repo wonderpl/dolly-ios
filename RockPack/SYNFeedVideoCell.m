@@ -47,6 +47,7 @@
 	
 	self.titleLabel.font = [UIFont boldCustomFontOfSize:self.titleLabel.font.pointSize];
 	
+	self.actionsBar.frame = self.videoActionsContainer.bounds;
 	[self.videoActionsContainer addSubview:self.actionsBar];
 }
 

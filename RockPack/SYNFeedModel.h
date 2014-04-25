@@ -14,7 +14,8 @@
 @interface SYNFeedModel : SYNPagingModel
 
 - (FeedItem *)feedItemAtindex:(NSInteger)index;
-
 - (id)resourceForFeedItem:(FeedItem *)feedItem;
+
+- (NSInteger)itemIndexForFeedIndex:(NSInteger)feedIndex;
 
 @end
