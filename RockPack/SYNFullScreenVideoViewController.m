@@ -66,7 +66,7 @@
 }
 
 - (NSUInteger)supportedInterfaceOrientations {
-	return UIInterfaceOrientationMaskLandscape;
+	return (IS_IPHONE ? UIInterfaceOrientationMaskLandscape : UIInterfaceOrientationMaskAll);
 }
 
 - (BOOL)prefersStatusBarHidden {
