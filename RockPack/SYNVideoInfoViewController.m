@@ -27,7 +27,7 @@ static const CGFloat ActionCellHeight = 70.0;
 static const CGFloat ClickToMoreCellHeight = 60.0;
 static const CGFloat UpcomingVideosDividerHeight = 70.0;
 
-@interface SYNVideoInfoViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SYNWebViewCellDelegate, SYNVideoActionsBarDelegate, SYNVideoClickToMoreCellDelegate>
+@interface SYNVideoInfoViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIViewControllerTransitioningDelegate, SYNWebViewCellDelegate, SYNVideoActionsBarDelegate, SYNVideoClickToMoreCellDelegate>
 
 @property (nonatomic, strong) IBOutlet UICollectionView *collectionView;
 
