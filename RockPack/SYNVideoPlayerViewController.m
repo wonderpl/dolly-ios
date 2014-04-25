@@ -42,10 +42,6 @@
 @property (nonatomic, strong) IBOutlet UIButton *avatarButton;
 
 @property (nonatomic, strong) IBOutlet UILabel *videoTitleLabel;
-@property (nonatomic, strong) IBOutlet UIButton *commentButton;
-@property (nonatomic, strong) IBOutlet SYNSocialButton *addButton;
-@property (nonatomic, strong) IBOutlet SYNButton *likeButton;
-@property (nonatomic, strong) IBOutlet UIButton *linkButton;
 
 @property (nonatomic, assign) BOOL hasTrackedAirPlayUse;
 
@@ -451,14 +447,6 @@
 	[self.avatarButton setImageWithURL:avatarThumbnailURL forState:UIControlStateNormal];
 	
 	[self.videoTitleLabel setText:videoInstance.title animated:YES];
-	
-//	self.likeButton.dataItemLinked = videoInstance;
-//	self.addButton.dataItemLinked = videoInstance;
-//	
-//	self.likeButton.selected = videoInstance.starredByUserValue;
-//	[self.likeButton setTitle:NSLocalizedString(@"like", nil) andCount:[videoInstance.video.starCount integerValue]];
-//    
-//    [self.commentButton setTitle:[NSString stringWithFormat:@"%d", videoInstance.commentCountValue] forState:UIControlStateNormal];
 }
 
 - (BOOL)handleRotationToOrientation:(UIDeviceOrientation)orientation {
