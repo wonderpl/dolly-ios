@@ -249,11 +249,6 @@
 	return cell;
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(SYNVideoPlayerCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
-	
-	[cell cellDisplayEnded];
-}
-
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
 	return collectionView.frame.size;
 }
@@ -422,6 +417,8 @@
 #pragma mark - Private
 
 - (void)playCurrentVideo {
+	[self.currentVideoPlayer pause];
+	
 	NSIndexPath *indexPath = [NSIndexPath indexPathForItem:self.selectedIndex inSection:0];
 	SYNVideoPlayerCell *cell = (SYNVideoPlayerCell *)[self.videosCollectionView cellForItemAtIndexPath:indexPath];
 	
@@ -433,6 +430,7 @@
 
 - (void)maximiseVideoPlayer {
 	SYNFullScreenVideoViewController *viewController = [[SYNFullScreenVideoViewController alloc] init];
+	viewController.videoPlayerViewController = self;
 	viewController.transitioningDelegate = self;
 	
 	[self presentViewController:viewController animated:YES completion:nil];

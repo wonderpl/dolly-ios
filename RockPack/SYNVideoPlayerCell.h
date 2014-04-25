@@ -15,6 +15,4 @@
 
 @property (nonatomic, strong) SYNVideoPlayer *videoPlayer;
 
-- (void)cellDisplayEnded;
-
 @end

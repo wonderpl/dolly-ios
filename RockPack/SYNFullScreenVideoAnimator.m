@@ -62,17 +62,21 @@ static const CGFloat AnimationDuration = 0.3;
 	
 	UICollectionView *collectionView = videoPlayerViewController.videosCollectionView;
 	
-	[fullScreenViewController.view addSubview:collectionView];
+	[fullScreenViewController.videoContainerView addSubview:collectionView];
 	[collectionView mas_updateConstraints:^(MASConstraintMaker *make) {
-		make.centerX.equalTo(fullScreenViewController.view.mas_centerX);
-		make.centerY.equalTo(fullScreenViewController.view.mas_centerY);
-		make.width.equalTo(fullScreenViewController.view.mas_width);
-		make.height.equalTo(fullScreenViewController.view.mas_height);
+		make.centerX.equalTo(fullScreenViewController.videoContainerView.mas_centerX);
+		make.centerY.equalTo(fullScreenViewController.videoContainerView.mas_centerY);
+		make.width.equalTo(fullScreenViewController.videoContainerView.mas_width);
+		make.height.equalTo(fullScreenViewController.videoContainerView.mas_height);
 	}];
 	
 	[collectionView.collectionViewLayout invalidateLayout];
 	[collectionView layoutIfNeeded];
-	collectionView.contentOffset = CGPointMake(videoPlayerViewController.selectedIndex * 568, 0);
+	if (IS_IPHONE) {
+		collectionView.contentOffset = CGPointMake(videoPlayerViewController.selectedIndex * 568, 0);
+	} else {
+		collectionView.contentOffset = CGPointMake(videoPlayerViewController.selectedIndex * CGRectGetWidth(fullScreenViewController.view.frame), 0);
+	}
 	
 	[containerView addSubview:fullScreenViewController.view];
 	
@@ -111,7 +115,11 @@ static const CGFloat AnimationDuration = 0.3;
 						 
 						 [collectionView.collectionViewLayout invalidateLayout];
 						 [collectionView layoutIfNeeded];
-						 collectionView.contentOffset = CGPointMake(videoPlayerViewController.selectedIndex * 320, 0);
+						 if (IS_IPHONE) {
+							 collectionView.contentOffset = CGPointMake(videoPlayerViewController.selectedIndex * 320, 0);
+						 } else {
+							 collectionView.contentOffset = CGPointMake(videoPlayerViewController.selectedIndex * 768, 0);
+						 }
 						 
 						 [transitionContext completeTransition:YES];
 					 }];

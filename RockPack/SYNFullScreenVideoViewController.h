@@ -8,11 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@class SYNVideoPlayerViewController;
+
 @interface SYNFullScreenVideoViewController : UIViewController
 
 @property (nonatomic, strong, readonly) UIView *backgroundView;
 
+@property (nonatomic, strong, readonly) UIView *videoContainerView;
+
 @property (nonatomic, strong) UICollectionView *collectionView;
+
+@property (nonatomic, weak) SYNVideoPlayerViewController *videoPlayerViewController;
 
 @property (nonatomic, assign, readonly) UIDeviceOrientation videoOrientation;
 

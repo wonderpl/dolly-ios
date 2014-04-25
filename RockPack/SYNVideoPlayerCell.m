@@ -16,14 +16,6 @@
 
 @implementation SYNVideoPlayerCell
 
-- (void)cellDisplayEnded {
-	[self.videoPlayer pause];
-	
-	[self.videoPlayer removeFromSuperview];
-	self.videoPlayer = nil;
-	self.videoPlayer.delegate = nil;
-}
-
 - (void)setVideoPlayer:(SYNVideoPlayer *)videoPlayer {
 	_videoPlayer = videoPlayer;
 	
