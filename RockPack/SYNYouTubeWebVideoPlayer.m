@@ -181,11 +181,6 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 	}
 }
 
-- (void)updatePlayerSize:(CGSize)size {
-	NSString *javascript = [NSString stringWithFormat:@"player.setSize(%f, %f);", size.width, size.height];
-	[self.youTubeWebView stringByEvaluatingJavaScriptFromString:javascript];
-}
-
 - (void)loadPlayer {
 	if (self.youTubePlayerState == SYNYouTubeVideoPlayerStateReady) {
 		NSString *sourceId = self.videoInstance.video.sourceId;
