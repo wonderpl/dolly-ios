@@ -53,7 +53,7 @@
 }
 
 - (id)resourceForFeedItem:(FeedItem *)feedItem {
-	if (feedItem.resourceType == FeedItemResourceTypeVideo) {
+	if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo) {
 		return self.videoInstancesById[feedItem.uniqueId];
 	} else {
 		return self.channelsById[feedItem.uniqueId];
