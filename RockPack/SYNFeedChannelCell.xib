@@ -68,6 +68,9 @@
                         <state key="normal" image="ShareButton.png">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
+                        <connections>
+                            <action selector="shareButtonPressed:" destination="eHf-7g-4L4" eventType="touchUpInside" id="AgX-M4-dCS"/>
+                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cZ1-7Z-VVS" customClass="SYNFollowChannelButton">
                         <rect key="frame" x="93" y="207" width="85" height="30"/>
@@ -80,11 +83,11 @@
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
+                <constraint firstItem="nch-3q-JDg" firstAttribute="top" secondItem="Fgh-bY-3NE" secondAttribute="bottom" constant="29" id="65y-pD-NZT"/>
                 <constraint firstAttribute="bottom" secondItem="qkx-0N-2Vf" secondAttribute="bottom" id="8R5-7s-DMM"/>
                 <constraint firstAttribute="centerX" secondItem="2Rw-WP-yQk" secondAttribute="centerX" id="DMa-AP-cvt"/>
                 <constraint firstItem="Fgh-bY-3NE" firstAttribute="top" secondItem="eHf-7g-4L4" secondAttribute="top" constant="125" id="Gbm-dZ-YaJ"/>
                 <constraint firstItem="2Rw-WP-yQk" firstAttribute="top" secondItem="eHf-7g-4L4" secondAttribute="top" constant="96" id="ZIn-Yf-o4g"/>
-                <constraint firstItem="nch-3q-JDg" firstAttribute="top" secondItem="eHf-7g-4L4" secondAttribute="top" constant="202" id="bDg-G8-oNm"/>
                 <constraint firstItem="6r5-TW-bDU" firstAttribute="top" secondItem="eHf-7g-4L4" secondAttribute="top" constant="21" id="bHg-NR-baV"/>
                 <constraint firstAttribute="trailing" secondItem="nch-3q-JDg" secondAttribute="trailing" constant="70" id="cvb-U7-qNL"/>
                 <constraint firstAttribute="centerX" secondItem="6r5-TW-bDU" secondAttribute="centerX" id="fvf-hC-cHm"/>

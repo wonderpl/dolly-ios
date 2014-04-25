@@ -16,6 +16,9 @@
 - (void)channelCellAvatarPressed:(SYNFeedChannelCell *)cell;
 - (void)channelCellTitlePressed:(SYNFeedChannelCell *)cell;
 
+- (void)channelCell:(SYNFeedChannelCell *)cell followPressed:(UIButton *)button;
+- (void)channelCell:(SYNFeedChannelCell *)cell sharePressed:(UIButton *)button;
+
 @end
 
 @interface SYNFeedChannelCell : UICollectionViewCell

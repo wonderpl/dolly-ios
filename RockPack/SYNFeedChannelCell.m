@@ -60,4 +60,12 @@
 	[self.delegate channelCellTitlePressed:self];
 }
 
+- (IBAction)followButtonPressed:(UIButton *)button {
+	[self.delegate channelCell:self followPressed:button];
+}
+
+- (IBAction)shareButtonPressed:(UIButton *)button {
+	[self.delegate channelCell:self sharePressed:button];
+}
+
 @end

@@ -54,9 +54,7 @@
 
 - (void) shareVideoInstance: (VideoInstance *) videoInstance;
 
-- (void) shareChannel: (Channel *) channel
-              isOwner: (NSNumber *) isOwner
-           usingImage: (UIImage *) image;
+- (void)shareChannel:(Channel *)channel;
 
 - (SYNOneToOneSharingController *)createSharingViewControllerForObjectType:(NSString *)objectType
 																  objectId:(NSString *)objectId

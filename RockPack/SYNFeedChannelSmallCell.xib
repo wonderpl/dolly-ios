@@ -62,6 +62,27 @@
                             <constraint firstAttribute="height" constant="1" id="1QG-qu-MXE"/>
                         </constraints>
                     </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="arF-3m-4tQ">
+                        <rect key="frame" x="213" y="244" width="40" height="40"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="hS6-gt-V6V"/>
+                            <constraint firstAttribute="width" constant="40" id="vJV-2z-eCF"/>
+                        </constraints>
+                        <state key="normal" image="ShareButton.png">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="shareButtonPressed:" destination="IUo-RN-cL2" eventType="touchUpInside" id="VLD-e7-KmX"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PO2-9Y-Blu" customClass="SYNFollowChannelButton">
+                        <rect key="frame" x="106" y="250" width="45" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <state key="normal" title="Follow">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
@@ -77,7 +98,9 @@
                 <constraint firstAttribute="centerX" secondItem="zTb-nb-qDr" secondAttribute="centerX" constant="1.5" id="GPy-h9-UzA"/>
                 <constraint firstItem="kF5-cg-XMG" firstAttribute="leading" secondItem="IUo-RN-cL2" secondAttribute="leading" id="NqP-vD-86f"/>
                 <constraint firstItem="30g-g0-9j5" firstAttribute="top" secondItem="ov9-oB-CVO" secondAttribute="bottom" constant="-4" id="bPY-hB-bpz"/>
+                <constraint firstItem="arF-3m-4tQ" firstAttribute="top" secondItem="30g-g0-9j5" secondAttribute="bottom" constant="19" id="df0-Er-R8E"/>
                 <constraint firstAttribute="bottom" secondItem="kF5-cg-XMG" secondAttribute="bottom" id="dmb-8f-bvW"/>
+                <constraint firstAttribute="centerX" secondItem="arF-3m-4tQ" secondAttribute="centerX" constant="-59" id="nne-QG-Ptt"/>
                 <constraint firstItem="E3C-aj-aTh" firstAttribute="top" secondItem="IUo-RN-cL2" secondAttribute="top" id="qZ1-vq-jqK"/>
                 <constraint firstAttribute="trailing" secondItem="kF5-cg-XMG" secondAttribute="trailing" id="wSm-ok-3RE"/>
             </constraints>
@@ -89,4 +112,7 @@
             </connections>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="ShareButton.png" width="19" height="27"/>
+    </resources>
 </document>
