@@ -10,20 +10,19 @@
 #import "SYNMoodCell.h"
 #import "UIFont+SYNFont.h"
 #import "SYNFadingFlowLayout.h"
-#import "SYNCarouselVideoPlayerViewController.h"
 #import "SYNDeviceManager.h"
 #import "Mood.h"
 #import "VideoInstance.h"
 #import "UINavigationBar+Appearance.h"
 #import "UIColor+SYNColor.h"
-//#import "SYNCarouselVideoPlayerViewController.h"
 #import "UICollectionReusableView+Helpers.h"
 #import "SYNVideoPlayerAnimator.h"
 #import "SYNSearchResultsVideoCell.h"
-#import "SYNSearchVideoPlayerViewController.h"
 #import "SYNMoodOverlayViewController.h"
 #import "SYNTrackingManager.h"
 #import "SYNMasterViewController.h"
+#import "SYNVideoPlayerViewController.h"
+#import "SYNStaticModel.h"
 
 static const float largeAmountOfRows = 10000;
 static const float watchButtonAnimationTime = 0.4;
@@ -220,12 +219,13 @@ static const float xAxis = 77;
                                                           rand = 0;
                                                       }
 													  
-//                                                      if (IS_IPHONE) {
-//                                                          UIViewController* viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:sortedVideos selectedIndex:rand presentedBy:NSStringFromClass([self class])];
-//                                                          
-//                                                          [strongSelf presentViewController:viewController animated:YES completion:nil];
-//                                                          
-//                                                      }
+													  if (IS_IPHONE) {
+														  SYNPagingModel *model = [[SYNStaticModel alloc] initWithItems:sortedVideos];
+														  UIViewController *viewController = [SYNVideoPlayerViewController viewControllerWithModel:model
+																																	 selectedIndex:rand];
+														  viewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+														  [strongSelf presentViewController:viewController animated:YES completion:nil];
+													  }
                                                   }
                                                   
                                                   strongSelf.watchButton.userInteractionEnabled = YES;
@@ -332,16 +332,19 @@ didSelectItemAtIndexPath: (NSIndexPath *)indexPath {
     if (self.videosArray<=0) {
         return;
     }
+	
+	SYNPagingModel *model = [[SYNStaticModel alloc] initWithItems:self.videosArray];
+	UIViewController *viewController = [SYNVideoPlayerViewController viewControllerWithModel:model
+																			   selectedIndex:[self.randomVideoIndex intValue]];
     
-//    UIViewController* viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:self.videosArray selectedIndex:self.randomVideoIndex.intValue presentedBy:NSStringFromClass([self class])];
-//    SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
-//    animator.delegate = self;
-//    animator.cellIndexPath = indexPath;
-//    self.videoPlayerAnimator = animator;
-//    viewController.transitioningDelegate = animator;
-//    [self presentViewController:viewController animated:YES completion:^{
-//        self.videoCollectionView.userInteractionEnabled = YES;
-//    }];
+    SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
+    animator.delegate = self;
+    animator.cellIndexPath = indexPath;
+    self.videoPlayerAnimator = animator;
+    viewController.transitioningDelegate = animator;
+    [self presentViewController:viewController animated:YES completion:^{
+        self.videoCollectionView.userInteractionEnabled = YES;
+    }];
 }
 
 - (id<SYNVideoInfoCell>)videoCellForIndexPath:(NSIndexPath *)indexPath {

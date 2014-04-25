@@ -13,7 +13,6 @@
 #import "SYNSearchResultsViewController.h"
 #import "UIFont+SYNFont.h"
 #import "SYNChannelFooterMoreView.h"
-#import "SYNSearchVideoPlayerViewController.h"
 #import "UIColor+SYNColor.h"
 #import "UICollectionReusableView+Helpers.h"
 #import "ChannelOwner.h"
@@ -27,6 +26,7 @@
 #import "SYNDiscoverOverlayVideoViewController.h"
 #import "SYNDiscoverOverlayHighlightsViewController.h"
 #import "SYNTrackingManager.h"
+#import "SYNVideoPlayerViewController.h"
 #import "SYNStaticModel.h"
 
 typedef NS_ENUM(NSInteger, SYNSearchType) {

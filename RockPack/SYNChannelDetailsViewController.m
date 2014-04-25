@@ -37,6 +37,7 @@
 #import "SYNCollectectionDetailsOverlayViewController.h"
 #import "SYNTrackingManager.h"
 #import "SYNGenreManager.h"
+#import "SYNStaticModel.h"
 #import "UIPlaceHolderTextView.h"
 
 #define kHeightChange 70.0f
@@ -1663,20 +1664,20 @@
                 tmpPosition = i;
             }
         }
+		
+		NSArray *videosArray = [self.channel.videoInstancesSet array];
+		SYNPagingModel *model = [[SYNStaticModel alloc] initWithItems:videosArray];
         
         //If the Video was not found, add the video instance to th end.
         if (tmpPosition == NSNotFound) {
             
             [self.channel addVideoInstancesObject:vidToPlay];
-            
-//            viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:[self.channel.videoInstancesSet array]
-//																					  selectedIndex:[self.channel.videoInstancesSet array].count-1
-//																						presentedBy:NSStringFromClass([self class])];
+			
+			viewController = [SYNVideoPlayerViewController viewControllerWithModel:model
+																	 selectedIndex:[videosArray count] - 1];
         } else {
-            //If found put the video, display the player with the correct position
-//            viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:[self.channel.videoInstancesSet array]
-//																					  selectedIndex:tmpPosition
-//																						presentedBy:NSStringFromClass([self class])];
+			viewController = [SYNVideoPlayerViewController viewControllerWithModel:model
+																	 selectedIndex:tmpPosition];
         }
         
 		[self.navigationController presentViewController:viewController animated:YES completion:nil];

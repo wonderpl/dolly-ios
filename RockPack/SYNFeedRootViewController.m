@@ -21,7 +21,6 @@
 #import "UICollectionReusableView+Helpers.h"
 #import "SYNFeedModel.h"
 #import "SYNAggregateVideoItemCell.h"
-#import "SYNCarouselVideoPlayerViewController.h"
 #import "SYNVideoPlayerAnimator.h"
 #import "UIColor+SYNColor.h"
 #import "SYNTrackingManager.h"

@@ -30,7 +30,6 @@
 #import "SYNRotatingPopoverController.h"
 #import "SYNPopoverAnimator.h"
 #import "SYNCommentUpdateDelegate.h"
-//#import "SYNCarouselVideoPlayerViewController.h"
 #import "SYNCommentUpdateDelegate.h"
 #import "SYNSocialCommentButton.h"
 #import "SYNProfileChannelViewController.h"
