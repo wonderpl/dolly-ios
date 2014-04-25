@@ -22,12 +22,12 @@
 #import "SYNVideoPlayerAnimator.h"
 #import "SYNGenreManager.h"
 #import "UIFont+SYNFont.h"
-//#import "SYNCarouselVideoPlayerViewController.h"
 #import "SYNDeviceManager.h"
 #import "SYNMasterViewController.h"
 #import "SYNDiscoverOverlayVideoViewController.h"
 #import "SYNDiscoverOverlayHighlightsViewController.h"
 #import "SYNTrackingManager.h"
+#import "SYNStaticModel.h"
 
 typedef NS_ENUM(NSInteger, SYNSearchType) {
 	SYNSearchTypeUndefined,
@@ -533,24 +533,9 @@ typedef void (^SearchResultCompleteBlock)(int);
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 	if (collectionView == self.videosCollectionView) {
-        
-        
-        
-		VideoInstance *videoInstance = self.videosArray[indexPath.item];
-        
-        
-        
-		UIViewController *viewController;
-        
-//        if (!self.currentSearchTerm) {
-//            viewController = [SYNCarouselVideoPlayerViewController viewControllerWithVideoInstances:self.videosArray
-//																					  selectedIndex:indexPath.item
-//																						presentedBy:NSStringFromClass([self class])];
-//
-//        } else {
-//            viewController  = [SYNSearchVideoPlayerViewController viewControllerWithVideoInstance:videoInstance];
-//
-//        }
+        SYNStaticModel *model = [[SYNStaticModel alloc] initWithItems:self.videosArray];
+		UIViewController *viewController = [SYNVideoPlayerViewController viewControllerWithModel:model
+																				   selectedIndex:indexPath.item];
         
 		SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
 		animator.delegate = self;

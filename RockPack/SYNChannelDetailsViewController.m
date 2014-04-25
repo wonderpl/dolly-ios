@@ -31,7 +31,7 @@
 #import "UICollectionReusableView+Helpers.h"
 #import "SYNProfileRootViewController.h"
 #import "SYNChannelVideosModel.h"
-//#import "SYNCarouselVideoPlayerViewController.h"
+#import "SYNVideoPlayerViewController.h"
 #import "UINavigationBar+Appearance.h"
 #import "LXReorderableCollectionViewFlowLayout.h"
 #import "SYNCollectectionDetailsOverlayViewController.h"
@@ -833,17 +833,17 @@
     SYNCollectionVideoCell *selectedCell = (SYNCollectionVideoCell *) candidateCell;
     NSIndexPath *indexPath = [self.videoThumbnailCollectionView indexPathForItemAtPoint: selectedCell.center];
 	
-//	UIViewController *viewController = [SYNCarouselVideoPlayerViewController viewControllerWithModel:self.model
-//																					   selectedIndex:indexPath.item
-//																						 presentedBy:NSStringFromClass([self class])];
-//	SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
-//	animator.delegate = self;
-//	animator.cellIndexPath = indexPath;
-//	
-//	self.videoPlayerAnimator = animator;
-//	viewController.transitioningDelegate = animator;
-//	
-//	[self presentViewController:viewController animated:YES completion:nil];
+	UIViewController *viewController = [SYNVideoPlayerViewController viewControllerWithModel:self.model
+																			   selectedIndex:indexPath.item];
+	
+	SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
+	animator.delegate = self;
+	animator.cellIndexPath = indexPath;
+	
+	self.videoPlayerAnimator = animator;
+	viewController.transitioningDelegate = animator;
+	
+	[self presentViewController:viewController animated:YES completion:nil];
 	
     selectedCell.overlayView.backgroundColor = [UIColor colorWithRed: (57.0f / 255.0f)
                                                                green: (57.0f / 255.0f)
