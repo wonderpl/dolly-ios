@@ -110,13 +110,13 @@
                             <constraint firstAttribute="trailing" secondItem="5hW-91-img" secondAttribute="trailing" constant="21" id="6il-5K-z1B"/>
                             <constraint firstItem="NWm-in-24r" firstAttribute="leading" secondItem="eHS-Sg-VLw" secondAttribute="leading" id="95V-rK-1aS"/>
                             <constraint firstItem="NWm-in-24r" firstAttribute="top" secondItem="Mur-BL-wuK" secondAttribute="bottom" constant="12" id="H5y-y1-uI4"/>
+                            <constraint firstItem="NWm-in-24r" firstAttribute="trailing" secondItem="Mur-BL-wuK" secondAttribute="trailing" constant="10" id="HjN-ls-tZt"/>
                             <constraint firstItem="NWm-in-24r" firstAttribute="top" secondItem="tO4-Um-GHR" secondAttribute="bottom" constant="122" id="HsZ-e9-VeE"/>
                             <constraint firstItem="cU6-Nc-Ier" firstAttribute="top" secondItem="tO4-Um-GHR" secondAttribute="bottom" id="K0U-zo-U0X"/>
                             <constraint firstAttribute="centerX" secondItem="NWm-in-24r" secondAttribute="centerX" id="Lpq-9q-fXM"/>
-                            <constraint firstAttribute="trailing" secondItem="Mur-BL-wuK" secondAttribute="trailing" constant="10" id="Xaq-v7-Lb9"/>
                             <constraint firstItem="5hW-91-img" firstAttribute="top" secondItem="tO4-Um-GHR" secondAttribute="bottom" id="cwa-g6-8Zg"/>
                             <constraint firstItem="mxU-fj-5q1" firstAttribute="top" secondItem="eHS-Sg-VLw" secondAttribute="bottom" id="eCL-wD-h7w"/>
-                            <constraint firstItem="Mur-BL-wuK" firstAttribute="leading" secondItem="0R6-e8-kts" secondAttribute="leading" constant="10" id="ftl-Wg-lS9"/>
+                            <constraint firstItem="NWm-in-24r" firstAttribute="leading" secondItem="Mur-BL-wuK" secondAttribute="leading" constant="-10" id="hRU-mr-Nky"/>
                             <constraint firstItem="cU6-Nc-Ier" firstAttribute="leading" secondItem="NCT-Oh-nxY" secondAttribute="leading" constant="20" id="jzp-WR-Vsy"/>
                             <constraint firstItem="eHS-Sg-VLw" firstAttribute="top" secondItem="NWm-in-24r" secondAttribute="bottom" id="yuj-72-VIk"/>
                         </constraints>
