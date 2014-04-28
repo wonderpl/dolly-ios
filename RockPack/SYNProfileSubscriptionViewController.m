@@ -387,10 +387,10 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     
     if (UIDeviceOrientationIsPortrait(orientation)) {
         self.defaultLayout.minimumLineSpacing = 14.0f;
-        self.defaultLayout.sectionInset = UIEdgeInsetsMake(0, 47.0, 70.0, 47.0);
+        self.defaultLayout.sectionInset = UIEdgeInsetsMake(0, 27.0, 70.0, 26.0);
         self.defaultLayout.headerReferenceSize = CGSizeMake(self.view.frame.size.width, 701);
     } else {
-        self.defaultLayout.sectionInset = UIEdgeInsetsMake(0, 21.0, 70.0, 21.0);
+        self.defaultLayout.sectionInset = UIEdgeInsetsMake(0, 0.0, 70.0, 0.0);
         self.defaultLayout.minimumLineSpacing = 14.0f;
         self.defaultLayout.headerReferenceSize = CGSizeMake(self.view.frame.size.width, 574);
     }

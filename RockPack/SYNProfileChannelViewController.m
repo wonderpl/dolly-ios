@@ -713,21 +713,19 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     
     if (UIDeviceOrientationIsPortrait(orientation)) {
         self.defaultLayout.minimumLineSpacing = 14.0f;
-        self.defaultLayout.sectionInset = UIEdgeInsetsMake(0, 47.0, 70.0, 47.0);
+        self.defaultLayout.sectionInset = UIEdgeInsetsMake(0, 27.0, 70.0, 26.0);
         self.defaultLayout.headerReferenceSize = CGSizeMake(self.view.frame.size.width, 701);
-
         
         self.channelExpandedLayout.minimumLineSpacing = 14.0f;
-        self.channelExpandedLayout.sectionInset = UIEdgeInsetsMake(0, 47.0, 500.0, 47.0);
+        self.channelExpandedLayout.sectionInset = UIEdgeInsetsMake(0, 29.0, 500.0, 28.0);
     } else {
         
-        self.defaultLayout.sectionInset = UIEdgeInsetsMake(0, 21.0, 70.0, 21.0);
+        self.defaultLayout.sectionInset = UIEdgeInsetsMake(0, 0.0, 70.0, 0.0);
         self.defaultLayout.minimumLineSpacing = 14.0f;
         self.defaultLayout.headerReferenceSize = CGSizeMake(self.view.frame.size.width, 574);
 
-        
-        self.channelExpandedLayout.sectionInset = UIEdgeInsetsMake(0, 21.0, 500.0, 21.0);
-        self.channelExpandedLayout.minimumLineSpacing = 14.0f;
+		self.channelExpandedLayout.sectionInset = UIEdgeInsetsMake(0, 0.0, 500.0, 0.0);
+		self.channelExpandedLayout.minimumLineSpacing = 14.0f;
 
     }
     

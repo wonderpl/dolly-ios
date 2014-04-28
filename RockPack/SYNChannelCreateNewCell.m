@@ -88,7 +88,7 @@
             if (IS_IPAD) {
                 
                 CGRect tmpFrame = self.boarderView.frame;
-                tmpFrame.size.height = 80;
+                tmpFrame.size.height = self.boarderView.frame.size.height;
                 self.boarderView.frame = tmpFrame;
                 
                 [self setBorder];

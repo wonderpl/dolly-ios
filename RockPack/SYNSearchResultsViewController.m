@@ -583,9 +583,9 @@ typedef void (^SearchResultCompleteBlock)(int);
                 if (indexPath.row == 0) {
                     return CGSizeMake(616, 240);
                 } else if (indexPath.row == 1 || indexPath.row == 2) {
-                    return CGSizeMake(300, 194);
+                    return CGSizeMake(300, 164);
                 } else {
-                    return CGSizeMake(300, 113);
+                    return CGSizeMake(300, 82);
                 }
             }
         }

@@ -15,7 +15,6 @@
 @end
 
 @interface SYNChannelCreateNewCell : UICollectionViewCell
-@property (strong, nonatomic) IBOutlet UIView *bottomBarView;
 @property (strong, nonatomic) IBOutlet UIView *boarderView;
 @property (strong, nonatomic) IBOutlet UITextField *createTextField;
 @property (strong, nonatomic) IBOutlet UITextView *descriptionTextView;
