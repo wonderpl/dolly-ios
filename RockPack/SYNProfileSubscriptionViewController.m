@@ -183,8 +183,6 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 	
 	channelThumbnailCell.followButton.selected = [[SYNActivityManager sharedInstance] isSubscribedToUserId:channelOwner.uniqueId];
 	
-//	NSLog(@"Subed to %@   %hhd", channelOwner.username, );
-//	channelThumbnailCell.followButton.hidden = NO;
 	channelThumbnailCell.delegate = self;
 	
     return channelThumbnailCell;
@@ -197,7 +195,6 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 		[self viewProfileDetails:channelOwner];
 		[self.searchBar resignFirstResponder];
 		self.filteredSubscriptions = [self filteredSubscriptionsForSearchTerm:@""];
-		[self.cv reloadData];
 	}
     
     return;
