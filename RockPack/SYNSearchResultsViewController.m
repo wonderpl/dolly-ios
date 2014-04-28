@@ -576,7 +576,7 @@ typedef void (^SearchResultCompleteBlock)(int);
                 } else if (indexPath.row == 1 || indexPath.row == 2) {
                     return CGSizeMake(375, 165);
                 } else {
-                    return CGSizeMake(375, 82);
+                    return CGSizeMake(375, 102);
                 }
             } else {
                 
@@ -585,7 +585,7 @@ typedef void (^SearchResultCompleteBlock)(int);
                 } else if (indexPath.row == 1 || indexPath.row == 2) {
                     return CGSizeMake(300, 164);
                 } else {
-                    return CGSizeMake(300, 82);
+                    return CGSizeMake(300, 102);
                 }
             }
         }
