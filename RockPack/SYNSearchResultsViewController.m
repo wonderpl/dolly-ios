@@ -572,16 +572,16 @@ typedef void (^SearchResultCompleteBlock)(int);
             
             if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation])) {
                 if (indexPath.row == 0) {
-                    return CGSizeMake(434, 240);
+                    return CGSizeMake(375, 210);
                 } else if (indexPath.row == 1 || indexPath.row == 2) {
-                    return CGSizeMake(434, 194);
+                    return CGSizeMake(375, 165);
                 } else {
-                    return CGSizeMake(434, 113);
+                    return CGSizeMake(375, 82);
                 }
             } else {
                 
                 if (indexPath.row == 0) {
-                    return CGSizeMake(616, 240);
+                    return CGSizeMake(610, 210);
                 } else if (indexPath.row == 1 || indexPath.row == 2) {
                     return CGSizeMake(300, 164);
                 } else {

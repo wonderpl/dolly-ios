@@ -861,6 +861,10 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 		CGFloat width = CGRectGetWidth(self.view.bounds);
 		CGFloat sideWidth = (int)(width / 3.0);
 		
+		
+		if (UIDeviceOrientationIsPortrait([[SYNDeviceManager sharedInstance] orientation])) {
+			sideWidth = 273;
+		}
 		self.sideContainerWidth.constant = sideWidth;
 		
 		[self.categoriesCollectionView.collectionViewLayout invalidateLayout];
