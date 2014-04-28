@@ -16,7 +16,7 @@
 -(void)awakeFromNib
 {
     [super awakeFromNib];
-	self.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.45];
+	self.backgroundColor = [UIColor clearColor];
 }
 
 - (UIColor*) selectedColor {
