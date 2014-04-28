@@ -45,21 +45,21 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Followers" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3c9-8H-dtP">
-                                        <rect key="frame" x="18" y="44" width="62" height="17"/>
+                                        <rect key="frame" x="18" y="58" width="62" height="17"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="0.59607843137254901" green="0.59607843137254901" blue="0.59607843137254901" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GARDENING TIPS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="qfg-Af-VXr" userLabel="Label - Pack name">
-                                        <rect key="frame" x="18" y="18" width="142" height="21"/>
+                                        <rect key="frame" x="18" y="15" width="180" height="27"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <color key="textColor" red="0.0039215686274509803" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kIe-qc-U58" customClass="SYNFollowChannelButton">
-                                        <rect key="frame" x="225" y="44" width="80" height="32"/>
+                                        <rect key="frame" x="225" y="51" width="80" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="32" id="OmD-yX-2De"/>
@@ -76,13 +76,13 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="qfg-Af-VXr" firstAttribute="top" secondItem="IsZ-bf-jJ2" secondAttribute="top" constant="18" id="9yq-Qf-Pfp"/>
-                                    <constraint firstItem="kIe-qc-U58" firstAttribute="top" secondItem="IsZ-bf-jJ2" secondAttribute="top" constant="44" id="GUc-W5-NB8"/>
-                                    <constraint firstItem="3c9-8H-dtP" firstAttribute="top" secondItem="IsZ-bf-jJ2" secondAttribute="top" constant="44" id="Uow-e6-M7d"/>
+                                    <constraint firstItem="qfg-Af-VXr" firstAttribute="top" secondItem="IsZ-bf-jJ2" secondAttribute="top" constant="15" id="9yq-Qf-Pfp"/>
+                                    <constraint firstItem="kIe-qc-U58" firstAttribute="top" secondItem="IsZ-bf-jJ2" secondAttribute="top" constant="51" id="GUc-W5-NB8"/>
+                                    <constraint firstAttribute="bottom" secondItem="3c9-8H-dtP" secondAttribute="bottom" constant="15" id="Iz1-zs-s2N"/>
                                     <constraint firstAttribute="trailing" secondItem="kIe-qc-U58" secondAttribute="trailing" constant="6" id="aEu-Sk-gy4"/>
                                     <constraint firstItem="qfg-Af-VXr" firstAttribute="leading" secondItem="IsZ-bf-jJ2" secondAttribute="leading" constant="18" id="moq-MY-88z"/>
                                     <constraint firstItem="3c9-8H-dtP" firstAttribute="leading" secondItem="IsZ-bf-jJ2" secondAttribute="leading" constant="18" id="r31-5V-L9a"/>
-                                    <constraint firstAttribute="bottom" secondItem="kIe-qc-U58" secondAttribute="bottom" constant="14" id="v4m-Z3-5pU"/>
+                                    <constraint firstAttribute="bottom" secondItem="kIe-qc-U58" secondAttribute="bottom" constant="7" id="v4m-Z3-5pU"/>
                                 </constraints>
                             </view>
                         </subviews>

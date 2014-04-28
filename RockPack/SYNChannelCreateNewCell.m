@@ -26,6 +26,10 @@
     [self.descriptionPlaceholderLabel setFont:[UIFont lightCustomFontOfSize:self.descriptionPlaceholderLabel.font.pointSize]];
     [self.createCellButton setBackgroundColor:[UIColor whiteColor]];
 
+	if (IS_IPAD) {
+		self.createCellButton.titleLabel.textAlignment = NSTextAlignmentCenter;		
+	}
+
 }
 
 - (void) setBorder {

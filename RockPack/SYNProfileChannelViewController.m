@@ -61,8 +61,6 @@ static const CGFloat FULLNAMELABELIPADLANDSCAPE = 412.0f;
 	
 	self.automaticallyAdjustsScrollViewInsets = NO;
     
-	[self updateLayoutForOrientation:[[SYNDeviceManager sharedInstance] orientation]];
-	
     if (IS_IPHONE) {
         self.channelExpandedLayout = [[SYNIPhoneCreateChannelLayout alloc] init];
     } else {
@@ -278,6 +276,20 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 }
 
 
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (IS_IPHONE) {
+        if (self.isUserProfile  && indexPath.row == 0 && !self.creatingChannel) {
+            return CGSizeMake(320, 60);
+        }
+		
+        if (self.isUserProfile  && indexPath.row == 0 && self.creatingChannel) {
+            return CGSizeMake(320, 172);
+        }
+    }
+    
+    return ((UICollectionViewFlowLayout*)self.cv.collectionViewLayout).itemSize;
+}
 
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
@@ -705,7 +717,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 		self.defaultLayout.minimumLineSpacing = 14;
 
 
-		self.channelExpandedLayout.itemSize = self.defaultLayout.itemSize;
+//		self.channelExpandedLayout.itemSize = self.defaultLayout.itemSize;
         self.channelExpandedLayout.sectionInset = UIEdgeInsetsMake(0, 44.0, 500.0, 44.0);
 
     } else {
@@ -713,7 +725,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
         self.defaultLayout.headerReferenceSize = CGSizeMake(self.view.frame.size.width, 574);
 		self.defaultLayout.minimumLineSpacing = 14;
 
-		self.channelExpandedLayout.itemSize = self.defaultLayout.itemSize;
+//		self.channelExpandedLayout.itemSize = self.defaultLayout.itemSize;
 		self.channelExpandedLayout.sectionInset = UIEdgeInsetsMake(0, 21.0, 500.0, 21.0);
     }
     
