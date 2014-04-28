@@ -54,16 +54,6 @@
     
     [self.userNameLabel setFont:[UIFont semiboldCustomFontOfSize:self.userNameLabel.font.pointSize]];
 	
-	CAGradientLayer *mask = [CAGradientLayer layer];
-	mask.colors = @[ (id)[[UIColor clearColor] CGColor],
-					 (id)[[UIColor colorWithWhite:0.0 alpha:0.2] CGColor],
-					 (id)[[UIColor colorWithWhite:0.0 alpha:0.3] CGColor],
-					 (id)[[UIColor colorWithWhite:0.0 alpha:0.45] CGColor] ];
-	mask.locations = @[@0.0, @0.2, @0.8, @1.0 ];
-	
-	mask.frame = self.gradientMask.frame;
-	
-	self.gradientMask.layer.mask = mask;
 
 }
 
@@ -117,9 +107,23 @@
         [self.followButton setTitle:NSLocalizedString(@"unfollow", "unfollow discover screen") forState:UIControlStateSelected];
     }
 	
-
+	[self setUpGradientMask];
+	
 }
 
+
+-(void) setUpGradientMask {
+	CAGradientLayer *mask = [CAGradientLayer layer];
+	mask.colors = @[ (id)[[UIColor clearColor] CGColor],
+					 (id)[[UIColor colorWithWhite:0.0 alpha:0.1] CGColor],
+					 (id)[[UIColor colorWithWhite:0.0 alpha:0.2] CGColor],
+					 (id)[[UIColor colorWithWhite:0.0 alpha:0.3] CGColor],
+					 (id)[[UIColor colorWithWhite:0.0 alpha:0.45] CGColor] ];
+	mask.locations = @[@0.0, @0.2, @0.4, @0.8, @1.0];
+	
+	mask.frame = self.bounds;
+	self.gradientMask.layer.mask = mask;
+}
 
 // Could not set word wrapping for a UILabel with multiple lines and set linebreak as NSLineBreakByTruncatingTail so this method calculates a good font size according to the optimal font size and works it way down
 

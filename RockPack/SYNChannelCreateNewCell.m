@@ -33,8 +33,6 @@
     
     [self.createTextField.layer setBorderColor:[[UIColor colorWithRed:188.0f/255.0f green:188.0f/255.0f blue:188.0f/255.0f alpha:1.0f]CGColor]];
     
-    //    self.descriptionTextView.alpha = 0.0f;
-    
     [self.boarderView.layer setBorderColor:[[UIColor colorWithRed:188.0f/255.0f green:188.0f/255.0f blue:188.0f/255.0f alpha:1.0f]CGColor]];
     
     if (IS_RETINA)
@@ -85,16 +83,14 @@
             self.createTextField.hidden = YES;
             self.createCellButton.hidden = NO;
             self.descriptionPlaceholderLabel.hidden = YES;
-            if (IS_IPAD) {
-                
-                CGRect tmpFrame = self.boarderView.frame;
-                tmpFrame.size.height = self.boarderView.frame.size.height;
-                self.boarderView.frame = tmpFrame;
-                
-                [self setBorder];
-            }
-            
 
+            if (IS_IPAD) {
+                CGRect tmpFrame = self.boarderView.frame;
+                tmpFrame.size.height = 90;
+                self.boarderView.frame = tmpFrame;
+                [self setBorder];
+			}
+            
             break;
             
         case CreateNewChannelCellStateEditing:

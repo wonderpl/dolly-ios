@@ -10,6 +10,7 @@
 #import "SYNSearchResultsCell.h"
 #import "SYNSearchResultsUserCell.h"
 #import "SYNSearchResultsVideoCell.h"
+#import "SYNVideoCell.h"
 #import "SYNSearchResultsViewController.h"
 #import "UIFont+SYNFont.h"
 #import "SYNChannelFooterMoreView.h"
@@ -92,8 +93,12 @@ typedef void (^SearchResultCompleteBlock)(int);
     
     self.view.autoresizesSubviews = YES;
     
-    [self.videosCollectionView registerNib:[SYNSearchResultsVideoCell nib]
+	[self.videosCollectionView registerNib:[SYNSearchResultsVideoCell nib]
                 forCellWithReuseIdentifier:[SYNSearchResultsVideoCell reuseIdentifier]];
+
+	
+    [self.videosCollectionView registerNib:[SYNVideoCell nib]
+                forCellWithReuseIdentifier:[SYNVideoCell reuseIdentifier]];
     
     [self.videosCollectionView registerNib:[SYNChannelFooterMoreView nib]
                 forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
@@ -479,7 +484,7 @@ typedef void (^SearchResultCompleteBlock)(int);
         
          
         videoCell.videoInstance = (VideoInstance*)(self.videosArray[indexPath.item]);
-        videoCell.delegate = self;
+//        videoCell.delegate = self;
         
         
         cell = videoCell;
@@ -588,10 +593,20 @@ typedef void (^SearchResultCompleteBlock)(int);
                     return CGSizeMake(300, 102);
                 }
             }
+			
+			
+			
         }
     } else {
+		
+		if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation])) {
+			return CGSizeMake(380, 104);
+		} else {
+			return CGSizeMake(606, 144);
+		}
+		
         return ((UICollectionViewFlowLayout*)self.videosCollectionView.collectionViewLayout).itemSize;
-    }    
+    }
     return CGSizeZero;
 }
 
@@ -651,6 +666,10 @@ referenceSizeForFooterInSection: (NSInteger) section
                                           duration: (NSTimeInterval) duration
 {
     [self.usersCollectionView.collectionViewLayout invalidateLayout];
+	
+	[self.usersCollectionView reloadData];
+	[self.videosCollectionView reloadData];
+
     
 }
 

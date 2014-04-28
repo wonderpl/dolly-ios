@@ -61,10 +61,12 @@ static const CGFloat FULLNAMELABELIPADLANDSCAPE = 412.0f;
 	
 	self.automaticallyAdjustsScrollViewInsets = NO;
     
+	[self updateLayoutForOrientation:[[SYNDeviceManager sharedInstance] orientation]];
+	
     if (IS_IPHONE) {
         self.channelExpandedLayout = [[SYNIPhoneCreateChannelLayout alloc] init];
     } else {
-        self.channelExpandedLayout = [[SYNIPadCreateChannelLayout alloc] init];
+        self.channelExpandedLayout = [[SYNIPadCreateChannelLayout alloc] initWithLayout:self.defaultLayout];
     }
     
     self.fakeNavigationBarTitle.font = [UIFont regularCustomFontOfSize:self.fakeNavigationBarTitle.font.pointSize];
@@ -712,21 +714,20 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     
     
     if (UIDeviceOrientationIsPortrait(orientation)) {
-        self.defaultLayout.minimumLineSpacing = 14.0f;
-        self.defaultLayout.sectionInset = UIEdgeInsetsMake(0, 27.0, 70.0, 26.0);
+        self.defaultLayout.sectionInset = UIEdgeInsetsMake(0, 44.0, 70.0, 44.0);
         self.defaultLayout.headerReferenceSize = CGSizeMake(self.view.frame.size.width, 701);
-        
-        self.channelExpandedLayout.minimumLineSpacing = 14.0f;
-        self.channelExpandedLayout.sectionInset = UIEdgeInsetsMake(0, 29.0, 500.0, 28.0);
+		
+		self.channelExpandedLayout.itemSize = self.defaultLayout.itemSize;
+        self.channelExpandedLayout.minimumLineSpacing = self.defaultLayout.minimumLineSpacing;
+        self.channelExpandedLayout.sectionInset = UIEdgeInsetsMake(0, 44.0, 500.0, 44.0);
+
     } else {
-        
-        self.defaultLayout.sectionInset = UIEdgeInsetsMake(0, 0.0, 70.0, 0.0);
-        self.defaultLayout.minimumLineSpacing = 14.0f;
+        self.defaultLayout.sectionInset = UIEdgeInsetsMake(0.0, 21.0, 70.0, 21.0);
         self.defaultLayout.headerReferenceSize = CGSizeMake(self.view.frame.size.width, 574);
-
-		self.channelExpandedLayout.sectionInset = UIEdgeInsetsMake(0, 0.0, 500.0, 0.0);
-		self.channelExpandedLayout.minimumLineSpacing = 14.0f;
-
+		
+		self.channelExpandedLayout.itemSize = self.defaultLayout.itemSize;
+		self.channelExpandedLayout.sectionInset = UIEdgeInsetsMake(0, 21.0, 500.0, 21.0);
+		self.channelExpandedLayout.minimumLineSpacing = self.defaultLayout.minimumLineSpacing;
     }
     
     if (self.creatingChannel) {

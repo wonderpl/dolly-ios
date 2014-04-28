@@ -20,6 +20,19 @@
 	return self;
 }
 
+-(id)initWithLayout : (UICollectionViewFlowLayout*) flowLayout {
+	if (self = [super init]) {
+	
+	self.sectionInset = flowLayout.sectionInset;
+	self.minimumInteritemSpacing = flowLayout.minimumInteritemSpacing;
+	self.minimumLineSpacing = flowLayout.minimumLineSpacing;
+	self.itemSize = flowLayout.itemSize;
+	}
+	
+	return self;
+}
+
+
 -(UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewLayoutAttributes *attributes =

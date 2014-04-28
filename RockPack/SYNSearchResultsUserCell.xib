@@ -23,7 +23,7 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MN1-18-LaS" userLabel="follow" customClass="SYNFollowUserButton">
-                        <rect key="frame" x="225" y="138" width="80" height="32"/>
+                        <rect key="frame" x="230" y="146" width="80" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="32" id="87R-1f-sG1"/>
@@ -64,16 +64,18 @@
                 <constraint firstAttribute="bottom" secondItem="ufw-e6-HaY" secondAttribute="bottom" constant="45" id="7pq-X0-LZI"/>
                 <constraint firstItem="mTu-lk-DTw" firstAttribute="top" secondItem="gc6-j7-DT5" secondAttribute="top" constant="12" id="AFg-84-kX7"/>
                 <constraint firstAttribute="trailing" secondItem="mTu-lk-DTw" secondAttribute="trailing" constant="15" id="BsV-YQ-Ipc"/>
-                <constraint firstAttribute="trailing" secondItem="MN1-18-LaS" secondAttribute="trailing" constant="15" id="F3M-04-VvQ"/>
+                <constraint firstAttribute="trailing" secondItem="MN1-18-LaS" secondAttribute="trailing" constant="10" id="F3M-04-VvQ"/>
+                <constraint firstItem="ZrU-Mh-zWA" firstAttribute="leading" secondItem="gc6-j7-DT5" secondAttribute="leading" id="Gpr-EM-ri7"/>
                 <constraint firstItem="sTy-g0-GXP" firstAttribute="leading" secondItem="gc6-j7-DT5" secondAttribute="leading" id="HOu-iH-IYN"/>
-                <constraint firstAttribute="trailing" secondItem="ZrU-Mh-zWA" secondAttribute="trailing" id="XNm-zA-7jz"/>
-                <constraint firstAttribute="bottom" secondItem="ZrU-Mh-zWA" secondAttribute="bottom" constant="10" id="aV0-wd-54R"/>
-                <constraint firstItem="ZrU-Mh-zWA" firstAttribute="leading" secondItem="gc6-j7-DT5" secondAttribute="leading" id="dLS-jN-CQR"/>
+                <constraint firstAttribute="centerX" secondItem="ZrU-Mh-zWA" secondAttribute="centerX" id="LW0-Ih-xyM"/>
+                <constraint firstItem="ZrU-Mh-zWA" firstAttribute="top" secondItem="gc6-j7-DT5" secondAttribute="top" id="Lhk-io-oSG"/>
+                <constraint firstAttribute="trailing" secondItem="ZrU-Mh-zWA" secondAttribute="trailing" id="SAa-KM-KYR"/>
+                <constraint firstAttribute="bottom" secondItem="ZrU-Mh-zWA" secondAttribute="bottom" constant="10" id="dTF-9P-UQ7"/>
                 <constraint firstItem="mTu-lk-DTw" firstAttribute="leading" secondItem="gc6-j7-DT5" secondAttribute="leading" constant="12" id="gd5-tC-byv"/>
                 <constraint firstAttribute="bottom" secondItem="sTy-g0-GXP" secondAttribute="bottom" constant="10" id="rDG-Oa-xDw"/>
+                <constraint firstAttribute="centerY" secondItem="ZrU-Mh-zWA" secondAttribute="centerY" constant="5" id="rs0-Tu-y2v"/>
                 <constraint firstItem="ufw-e6-HaY" firstAttribute="leading" secondItem="gc6-j7-DT5" secondAttribute="leading" constant="12" id="xGA-ZQ-Z01"/>
-                <constraint firstAttribute="bottom" secondItem="MN1-18-LaS" secondAttribute="bottom" constant="25" id="xSd-wJ-1c1"/>
-                <constraint firstItem="ZrU-Mh-zWA" firstAttribute="top" secondItem="gc6-j7-DT5" secondAttribute="top" id="xYR-81-lLo"/>
+                <constraint firstAttribute="bottom" secondItem="MN1-18-LaS" secondAttribute="bottom" constant="17" id="xSd-wJ-1c1"/>
             </constraints>
             <size key="customSize" width="353" height="216"/>
             <connections>

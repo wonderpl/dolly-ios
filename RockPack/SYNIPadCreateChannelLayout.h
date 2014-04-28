@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface SYNIPadCreateChannelLayout : UICollectionViewFlowLayout
+-(id)initWithLayout : (UICollectionViewFlowLayout*) flowLayout;
 
 @end
