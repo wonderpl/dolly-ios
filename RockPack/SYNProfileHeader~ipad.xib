@@ -16,11 +16,11 @@
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </imageView>
                 <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7YV-aZ-EKa" userLabel="Button - follow all" customClass="SYNFollowUserButton">
-                    <rect key="frame" x="598" y="487" width="50" height="50"/>
+                    <rect key="frame" x="571" y="466" width="80" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="50" id="jPX-Xg-iwz"/>
-                        <constraint firstAttribute="width" constant="50" id="tJv-YO-kK7"/>
+                        <constraint firstAttribute="height" constant="32" id="jPX-Xg-iwz"/>
+                        <constraint firstAttribute="width" constant="80" id="tJv-YO-kK7"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                     <state key="normal" title="follow">
@@ -146,9 +146,9 @@
                 <constraint firstItem="9PC-4a-87q" firstAttribute="top" secondItem="CwX-kR-DQ1" secondAttribute="top" id="S7f-yg-ibX"/>
                 <constraint firstItem="88l-sj-JDE" firstAttribute="leading" secondItem="CwX-kR-DQ1" secondAttribute="leading" constant="12" id="Y2g-Ra-s0u"/>
                 <constraint firstAttribute="trailing" secondItem="9PC-4a-87q" secondAttribute="trailing" id="ZrX-cP-cbw"/>
-                <constraint firstAttribute="bottom" secondItem="7YV-aZ-EKa" secondAttribute="bottom" constant="243" id="cDi-J3-zEH"/>
+                <constraint firstAttribute="bottom" secondItem="7YV-aZ-EKa" secondAttribute="bottom" constant="282" id="cDi-J3-zEH"/>
                 <constraint firstAttribute="centerX" secondItem="a3W-xz-Bg8" secondAttribute="centerX" constant="-0.5" id="sUk-CW-fcI"/>
-                <constraint firstAttribute="trailing" secondItem="7YV-aZ-EKa" secondAttribute="trailing" constant="23" id="zRV-rD-Wzq"/>
+                <constraint firstAttribute="trailing" secondItem="7YV-aZ-EKa" secondAttribute="trailing" constant="20" id="zRV-rD-Wzq"/>
             </constraints>
             <connections>
                 <outlet property="aboutMeTextView" destination="ZGW-qb-DqS" id="ENw-9J-aob"/>
