@@ -152,7 +152,7 @@
     }
     
     if (IS_IPAD && self.isUserProfile) {
-        [self.descriptionTopConstraint setConstant:189];
+        [self.descriptionTopConstraint setConstant:223];
     }
 
     NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:

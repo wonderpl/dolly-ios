@@ -188,6 +188,10 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4OF-Bm-CZ9" userLabel="Button - Upload Avatar">
                                 <rect key="frame" x="337" y="466" width="96" height="96"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="96" id="TGi-Q3-aKd"/>
+                                    <constraint firstAttribute="height" constant="96" id="UO4-bt-4Zs"/>
+                                </constraints>
                                 <state key="normal" image="ButtonUpload.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>

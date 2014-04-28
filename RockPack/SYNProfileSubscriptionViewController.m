@@ -252,9 +252,9 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
         }
     } else {
         if (UIDeviceOrientationIsPortrait([[SYNDeviceManager sharedInstance] orientation])) {
-            return CGSizeMake(self.view.frame.size.width, 701);
+            return CGSizeMake(self.view.frame.size.width, 780);
         } else {
-            return CGSizeMake(self.view.frame.size.width, 574);
+            return CGSizeMake(self.view.frame.size.width, 664);
         }
     }
     return CGSizeZero;
