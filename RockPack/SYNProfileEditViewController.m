@@ -65,42 +65,22 @@ static const CGFloat OFFSET_DESCRIPTION_EDIT = 130.0f;
     } else {
         [[self.descriptionTextView layer] setBorderWidth:1.0];
     }
+	
     [[self.descriptionTextView layer] setCornerRadius:0];
-	
-	
-	
-	
-	
-//    self.descriptionTextView.textContainer.maximumNumberOfLines = 2;
     self.descriptionTextView.delegate = self;
-
-//    [self.navigationBar setBackgroundTransparent:YES];
 
     // == Tap gesture do dismiss the keyboard
     self.tapToHideKeyoboard = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+	self.cancelButton.tintColor = [[UINavigationBar appearance] tintColor];
+	self.cancelButton.titleLabel.font = [UIFont regularCustomFontOfSize : IS_IPHONE ? 15 : 17];
+	[self.cancelButton setTitle:NSLocalizedString(@"cancel", @"cancel in edit mode") forState:UIControlStateNormal];
 	
-
-	// Tried to get the data from
-	// [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] titleTextAttributesForState:UIControlStateNormal]
-	//not enough time to make it work
-	//TODO:get size from appereance instead of hard coding
-	NSDictionary *Buttonattributes = @{ NSFontAttributeName : [UIFont regularCustomFontOfSize : IS_IPHONE ? 15 : 17],
-								 NSForegroundColorAttributeName : [[UINavigationBar appearance] tintColor],
-								  };
-
-	
-	NSMutableAttributedString* cancelString = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"cancel", @"cancel in edit mode") attributes:Buttonattributes];
-	[self.cancelButton.titleLabel setAttributedText:cancelString];
-
-	
-	NSMutableAttributedString* saveString = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"save", @"save in edit mode") attributes:Buttonattributes];
-	[self.saveButton.titleLabel setAttributedText:saveString];
-	
+	self.saveButton.tintColor = [[UINavigationBar appearance] tintColor];
+	self.saveButton.titleLabel.font = [UIFont regularCustomFontOfSize : IS_IPHONE ? 15 : 17];
+	[self.saveButton setTitle:NSLocalizedString(@"save", @"save in edit mode") forState:UIControlStateNormal];
 	
 	self.coverPhotoLabel.text = NSLocalizedString(@"Change_cover_photo", nil);
-	
 	self.avatarLabel.text = NSLocalizedString(@"Change_avatar", nil);
-	
 	
 	[self.coverPhotoLabel setFont:[UIFont regularCustomFontOfSize:self.coverPhotoLabel.font.pointSize]];
 	[self.avatarLabel setFont:[UIFont regularCustomFontOfSize:self.avatarLabel.font.pointSize]];
@@ -111,7 +91,7 @@ static const CGFloat OFFSET_DESCRIPTION_EDIT = 130.0f;
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    //we move the view up in 1phone 4
+    //we move the view up in iphone 4
     if (!IS_IPHONE_5 && IS_IPHONE) {
         [self.topConstraint setConstant:-28];
     }
