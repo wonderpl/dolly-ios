@@ -279,20 +279,6 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 
 
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (IS_IPHONE) {
-        if (self.isUserProfile  && indexPath.row == 0 && !self.creatingChannel) {
-            return CGSizeMake(320, 60);
-        }
-    
-        if (self.isUserProfile  && indexPath.row == 0 && self.creatingChannel) {
-            return CGSizeMake(320, 172);
-        }
-    }
-    
-    return ((UICollectionViewFlowLayout*)self.cv.collectionViewLayout).itemSize;
-}
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
     
@@ -716,18 +702,19 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     if (UIDeviceOrientationIsPortrait(orientation)) {
         self.defaultLayout.sectionInset = UIEdgeInsetsMake(0, 44.0, 70.0, 44.0);
         self.defaultLayout.headerReferenceSize = CGSizeMake(self.view.frame.size.width, 701);
-		
+		self.defaultLayout.minimumLineSpacing = 14;
+
+
 		self.channelExpandedLayout.itemSize = self.defaultLayout.itemSize;
-        self.channelExpandedLayout.minimumLineSpacing = self.defaultLayout.minimumLineSpacing;
         self.channelExpandedLayout.sectionInset = UIEdgeInsetsMake(0, 44.0, 500.0, 44.0);
 
     } else {
         self.defaultLayout.sectionInset = UIEdgeInsetsMake(0.0, 21.0, 70.0, 21.0);
         self.defaultLayout.headerReferenceSize = CGSizeMake(self.view.frame.size.width, 574);
-		
+		self.defaultLayout.minimumLineSpacing = 14;
+
 		self.channelExpandedLayout.itemSize = self.defaultLayout.itemSize;
 		self.channelExpandedLayout.sectionInset = UIEdgeInsetsMake(0, 21.0, 500.0, 21.0);
-		self.channelExpandedLayout.minimumLineSpacing = self.defaultLayout.minimumLineSpacing;
     }
     
     if (self.creatingChannel) {

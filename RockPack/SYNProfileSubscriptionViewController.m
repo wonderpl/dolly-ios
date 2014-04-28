@@ -388,9 +388,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     if (UIDeviceOrientationIsPortrait(orientation)) {
         self.defaultLayout.sectionInset = UIEdgeInsetsMake(0, 44.0, 70.0, 44.0);
         self.defaultLayout.headerReferenceSize = CGSizeMake(self.view.frame.size.width, 701);
-        
     } else {
-        
         self.defaultLayout.sectionInset = UIEdgeInsetsMake(0.0, 21.0, 70.0, 21.0);
         self.defaultLayout.headerReferenceSize = CGSizeMake(self.view.frame.size.width, 574);
     }

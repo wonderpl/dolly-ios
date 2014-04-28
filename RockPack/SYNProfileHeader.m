@@ -139,9 +139,10 @@
 
 	
     [self.userNameLabel setFont:[UIFont regularCustomFontOfSize:self.userNameLabel.font.pointSize]];
-    self.userNameLabel.textColor = [UIColor colorWithWhite:120/255.0 alpha:1.0];
+    self.userNameLabel.textColor = [UIColor dollyTextMediumGray];
+	
     self.fullNameLabel.font = [UIFont boldCustomFontOfSize:self.fullNameLabel.font.pointSize];
-
+	self.fullNameLabel.textColor = [UIColor dollyTextMediumGray];
     
     if (!self.isUserProfile) {
         if (IS_IPAD) {
