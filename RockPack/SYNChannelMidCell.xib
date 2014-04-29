@@ -51,8 +51,8 @@
                                         <color key="textColor" red="0.59607843137254901" green="0.59607843137254901" blue="0.59607843137254901" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GARDENING TIPS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="qfg-Af-VXr" userLabel="Label - Pack name">
-                                        <rect key="frame" x="18" y="15" width="180" height="27"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GARDENING TIPS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="qfg-Af-VXr" userLabel="Label - Pack name">
+                                        <rect key="frame" x="18" y="15" width="273" height="27"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <color key="textColor" red="0.0039215686274509803" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -78,6 +78,7 @@
                                     <constraint firstItem="qfg-Af-VXr" firstAttribute="top" secondItem="IsZ-bf-jJ2" secondAttribute="top" constant="15" id="9yq-Qf-Pfp"/>
                                     <constraint firstItem="kIe-qc-U58" firstAttribute="top" secondItem="IsZ-bf-jJ2" secondAttribute="top" constant="51" id="GUc-W5-NB8"/>
                                     <constraint firstAttribute="bottom" secondItem="3c9-8H-dtP" secondAttribute="bottom" constant="15" id="Iz1-zs-s2N"/>
+                                    <constraint firstAttribute="trailing" secondItem="qfg-Af-VXr" secondAttribute="trailing" constant="20" id="XBV-2n-Fq2"/>
                                     <constraint firstAttribute="trailing" secondItem="kIe-qc-U58" secondAttribute="trailing" constant="6" id="aEu-Sk-gy4"/>
                                     <constraint firstItem="qfg-Af-VXr" firstAttribute="leading" secondItem="IsZ-bf-jJ2" secondAttribute="leading" constant="18" id="moq-MY-88z"/>
                                     <constraint firstItem="3c9-8H-dtP" firstAttribute="leading" secondItem="IsZ-bf-jJ2" secondAttribute="leading" constant="18" id="r31-5V-L9a"/>
