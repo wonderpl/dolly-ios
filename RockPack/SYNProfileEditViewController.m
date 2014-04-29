@@ -82,6 +82,7 @@ static const CGFloat OFFSET_DESCRIPTION_EDIT = 130.0f;
 	[self.coverPhotoLabel setFont:[UIFont regularCustomFontOfSize:self.coverPhotoLabel.font.pointSize]];
 	[self.avatarLabel setFont:[UIFont regularCustomFontOfSize:self.avatarLabel.font.pointSize]];
 	
+	[self.navigationBar setBackgroundTransparent:YES];
 
 }
 
