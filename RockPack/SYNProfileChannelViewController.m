@@ -74,12 +74,17 @@ static const CGFloat FULLNAMELABELIPADLANDSCAPE = 412.0f;
 	
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    
-	[self viewWillDisappear:YES];
-    if (IS_IPAD) {
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	if (IS_IPAD) {
         [self updateLayoutForOrientation: [[SYNDeviceManager sharedInstance] orientation]];
     }
+
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    
+	[super viewDidAppear:YES];
 	[UIView animateWithDuration:2.0 animations:^{
 		[self showInboardingAnimationDescription];
 	}];

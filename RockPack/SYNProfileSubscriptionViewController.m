@@ -98,6 +98,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
     if (IS_IPAD) {
         [self updateLayoutForOrientation: [[SYNDeviceManager sharedInstance] orientation]];
     }
