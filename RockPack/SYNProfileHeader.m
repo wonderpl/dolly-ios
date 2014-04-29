@@ -151,17 +151,6 @@
     self.fullNameLabel.font = [UIFont boldCustomFontOfSize:self.fullNameLabel.font.pointSize];
 	self.fullNameLabel.textColor = [UIColor dollyTextMediumGray];
     
-    if (!self.isUserProfile) {
-        if (IS_IPAD) {
-            [self.descriptionTopConstraint setConstant:204];
-        }
-    } else if (self.isUserProfile && IS_IPHONE) {
-//        [self.coverImageBottom setConstant:158];
-    }
-    
-    if (IS_IPAD && self.isUserProfile) {
-        [self.descriptionTopConstraint setConstant:223];
-    }
 
     NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
                                 [UIFont regularCustomFontOfSize:15], NSFontAttributeName,
