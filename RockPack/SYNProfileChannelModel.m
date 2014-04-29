@@ -52,9 +52,10 @@
             [sself.channelOwner setSubscriptionsDictionary: dictionary];
 		} else {
 			
-			// This is bad, need to fix. getting doubles because of the double server call
+//			// This is bad, need to fix. getting doubles because of the double server call
+//			// also assuming that total item count is correct
 			if (sself.channelOwner.channelsSet.count < sself.totalItemCount) {
-				[sself.channelOwner addChannelsFromDictionary: dictionary];				
+				[sself.channelOwner addChannelsFromDictionary: dictionary];
 			}
 		}
 		
