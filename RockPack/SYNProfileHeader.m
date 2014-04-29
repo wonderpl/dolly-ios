@@ -72,9 +72,12 @@
 - (void)setSegmentedControllerText {
 
 	[self.collectionsTab setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Collections", nil), self.channelOwner.totalVideosValueChannelValue] forState:UIControlStateNormal];
-	
+	[self.collectionsTab setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Collections", nil), self.channelOwner.totalVideosValueChannelValue] forState:UIControlStateSelected];
+
 	
     [self.followingsTab setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Following", nil), self.channelOwner.subscriptionCountValue] forState:UIControlStateNormal];
+	
+	[self.followingsTab setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Following", nil), self.channelOwner.subscriptionCountValue] forState:UIControlStateSelected];
 }
 
 -(void) setProfileImage : (NSString*) thumbnailURL
@@ -113,6 +116,7 @@
                                    }];
                                }
                            }];
+	
 }
 
 -(void) setDescriptionText : (NSString*) string {

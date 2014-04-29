@@ -55,6 +55,7 @@
 			[sself.channelOwner addSubscriptionsFromDictionary: dictionary];
 		}
 		
+		sself.channelOwner.subscriptionCountValue = [dictionary[@"users"][@"total"] intValue];
 		sself.totalItemCount = [dictionary[@"users"][@"total"] intValue];
 		
 		NSMutableArray *arr = [NSMutableArray arrayWithArray:[sself.channelOwner.userSubscriptionsSet array]];
@@ -67,8 +68,6 @@
     };
 
 	
-	//Secure request not implemented
-	//sing http for now
 	BOOL isUserProfile = [self.channelOwner.uniqueId isEqualToString:appDelegate.currentUser.uniqueId];
 	
 	if (isUserProfile) {

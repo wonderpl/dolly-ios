@@ -509,6 +509,8 @@ static const CGFloat TransitionDuration = 0.5f;
 - (void) updateProfileData {
     
     if (self.isChannelsCollectionViewShowing) {
+		
+
 		[appDelegate.oAuthNetworkEngine userDataForUser: ((User *) self.channelOwner)
 										   onCompletion: ^(id dictionary) {
 											   
@@ -517,14 +519,24 @@ static const CGFloat TransitionDuration = 0.5f;
 												   [self.channelOwner setAttributesFromDictionary: dictionary
 																			  ignoringObjectTypes: kIgnoreNothing];
 
-												   self.channelCollectionViewController.channelOwner = self.channelOwner;
-												   [self.channelCollectionViewController.cv reloadData];
-
-											;
+												   
+												   [appDelegate.oAuthNetworkEngine subscriptionsForUserId: self.channelOwner.uniqueId
+																								  inRange: NSMakeRange(0, 0)
+																						completionHandler:^(id response) {
+																							
+																							
+																							if ([response isKindOfClass:[NSDictionary class]]) {
+																								self.channelOwner.subscriptionCountValue = [response[@"users"][@"total"] intValue];
+																							}
+																							
+																							[self.channelCollectionViewController.cv reloadData];
+																							
+																						} errorHandler: nil];
 
 											   }
 										   } onError: nil];
 		
+
 
 
 	} else {

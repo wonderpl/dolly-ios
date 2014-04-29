@@ -744,14 +744,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 
 - (void)pagingModelDataUpdated:(SYNPagingModel *)pagingModel {
 
-	self.headerView.channelOwner.totalVideosValueChannelValue = self.model.totalItemCount;
-	[self.headerView setSegmentedControllerText];
-
 	[self.cv reloadData];
-//	[self.headerView.segmentedController setSelectedSegmentIndex:0];
-//	self.headerView.collectionsTab.selected = YES;
-//	self.headerView.followingsTab.selected = NO;
-
 }
 
 - (void)pagingModelErrorOccurred:(SYNPagingModel *)pagingModel {

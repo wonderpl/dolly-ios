@@ -357,13 +357,8 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 
 #pragma mark - SYNPagingModelDelegate
 - (void)pagingModelDataUpdated:(SYNPagingModel *)pagingModel {
-	
-	self.headerView.channelOwner.subscriptionCountValue = self.model.totalItemCount;
-	[self.headerView setSegmentedControllerText];
 
     [self.cv reloadData];
-//	self.headerView.followingsTab.selected = YES;
-//	self.headerView.collectionsTab.selected = NO;
 }
 
 - (void)pagingModelErrorOccurred:(SYNPagingModel *)pagingModel {
