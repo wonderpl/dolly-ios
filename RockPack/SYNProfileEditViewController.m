@@ -25,11 +25,8 @@ static const CGFloat OFFSET_DESCRIPTION_EDIT = 130.0f;
 @property (nonatomic, strong) UITapGestureRecognizer *tapToHideKeyoboard;
 @property (strong, nonatomic) IBOutlet UILabel *coverPhotoLabel;
 @property (strong, nonatomic) IBOutlet UILabel *avatarLabel;
-
 @property (strong, nonatomic) IBOutlet UIButton *cancelButton;
 @property (strong, nonatomic) IBOutlet UIButton *saveButton;
-
-
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *topConstraint;
 @property (nonatomic, strong) IBOutlet UINavigationBar *navigationBar;
 
@@ -84,6 +81,7 @@ static const CGFloat OFFSET_DESCRIPTION_EDIT = 130.0f;
 	
 	[self.coverPhotoLabel setFont:[UIFont regularCustomFontOfSize:self.coverPhotoLabel.font.pointSize]];
 	[self.avatarLabel setFont:[UIFont regularCustomFontOfSize:self.avatarLabel.font.pointSize]];
+	
 
 }
 
@@ -97,6 +95,10 @@ static const CGFloat OFFSET_DESCRIPTION_EDIT = 130.0f;
     }
     
     [self.navigationBar setTranslucent:YES];
+	
+	if (IS_IPAD) {
+		[self updateLayoutForOrientation: [[SYNDeviceManager sharedInstance] orientation]];
+	}
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -233,39 +235,52 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock {
 
 -(void) textViewDidBeginEditing:(UITextView *)textView {
     [self.view addGestureRecognizer:self.tapToHideKeyoboard];
-    [UIView animateWithDuration:0.3f animations:^{
-        
-        int offset = OFFSET_DESCRIPTION_EDIT;
-        
-		if (IS_IPHONE ) {
-			if (!IS_IPHONE_5) {
-				offset += 92;
-			}
-        } else if (IS_IPAD) {
-            offset += 20;
-        }
-        
-        [self moveViewToOffSet: CGPointMake(0, offset)];
+	[UIView animateWithDuration:0.3f animations:^{
+
+		[self calculateAndMoveViews];
     }];
+
 }
 
+-(void) calculateAndMoveViews {
+
+	int offset = OFFSET_DESCRIPTION_EDIT;
+	
+	if (IS_IPHONE ) {
+		if (!IS_IPHONE_5) {
+			offset += 92;
+		}
+	} else if (IS_IPAD) {
+		if (UIDeviceOrientationIsLandscape([[SYNDeviceManager sharedInstance] orientation])) {
+			offset += 60;
+		}
+	}
+	
+	[self moveViewToOffSet: CGPointMake(0, offset)];
+
+}
 
 - (void) moveViewToOffSet : (CGPoint) offset {
     
     [UIView animateWithDuration:1.5 animations:^{
         if (IS_IPHONE ) {
+			//TODO: make these values not hard coded
             if (IS_IPHONE_5) {
                 [self.topConstraint setConstant:-50];
             } else {
                 [self.topConstraint setConstant:-140];
             }
         } else {
-            [self.topConstraint setConstant:offset.y];
-
+			if (UIDeviceOrientationIsPortrait([[SYNDeviceManager sharedInstance] orientation])) {
+				[self.topConstraint setConstant:offset.y - 25];
+			} else {
+				[self.topConstraint setConstant:offset.y - 262];
+			}
         }
-        [self.view layoutIfNeeded];
     }];
-    
+
+	[self.view layoutIfNeeded];
+
     [self.delegate setCollectionViewContentOffset: offset animated:NO];
 }
 
@@ -293,6 +308,35 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock {
 
 - (NSString *)trackingScreenName {
 	return @"Profile";
+}
+
+
+- (void)willAnimateRotationToInterfaceOrientation: (UIInterfaceOrientation) toInterfaceOrientation
+										 duration: (NSTimeInterval) duration {
+	if (IS_IPHONE) {
+        return;
+    }
+	
+    [self updateLayoutForOrientation: toInterfaceOrientation];
+}
+
+- (void)updateLayoutForOrientation: (UIDeviceOrientation) orientation {
+    
+	if (self.isEditingDescription) {
+		[self calculateAndMoveViews];
+		return;
+	}
+    if (UIDeviceOrientationIsPortrait(orientation)) {
+		self.topConstraint.constant = 233;
+    } else {
+		self.topConstraint.constant = 120;
+	}
+    
+}
+
+
+- (BOOL) isEditingDescription {
+	return [self.descriptionTextView isFirstResponder];
 }
 
 

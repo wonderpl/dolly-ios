@@ -88,12 +88,9 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
         [self.cv addSubview:self.searchBar];
 		
     }
-	
     
     self.fakeNavigationBarTitle.font = [UIFont regularCustomFontOfSize:20];
     [self.fakeNavigationBarTitle setText: self.channelOwner.displayName];
-	
-//	NSLog(@"VIEW DID LOAD %@", [self.channelOwner.userSubscriptionsSet array]);
     
 }
 

@@ -172,11 +172,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dbq-5l-DXW" userLabel="Button - Upload Cover Image">
-                                <rect key="frame" x="337" y="254" width="96" height="96"/>
+                                <rect key="frame" x="337" y="253" width="96" height="96"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="96" id="3iu-Wb-63a"/>
-                                    <constraint firstAttribute="height" constant="96" id="lgX-7s-seC"/>
+                                    <constraint firstAttribute="height" constant="96" id="9wR-Uj-LMJ"/>
+                                    <constraint firstAttribute="width" constant="96" id="mSz-rK-ifr"/>
                                 </constraints>
                                 <state key="normal" image="ButtonUpload.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -186,11 +186,11 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4OF-Bm-CZ9" userLabel="Button - Upload Avatar">
-                                <rect key="frame" x="337" y="466" width="96" height="96"/>
+                                <rect key="frame" x="337" y="465" width="96" height="96"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="96" id="TGi-Q3-aKd"/>
-                                    <constraint firstAttribute="height" constant="96" id="UO4-bt-4Zs"/>
+                                    <constraint firstAttribute="height" constant="96" id="eSb-l9-fUz"/>
+                                    <constraint firstAttribute="width" constant="96" id="ebh-lt-cAp"/>
                                 </constraints>
                                 <state key="normal" image="ButtonUpload.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -200,13 +200,13 @@
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="bom-ox-Iif" userLabel="Text View - Description">
-                                <rect key="frame" x="235" y="593" width="300" height="45"/>
+                                <rect key="frame" x="200" y="618" width="370" height="92"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.87843137250000003" green="0.87843137250000003" blue="0.87843137250000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" red="0.50980392159999999" green="0.50980392159999999" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="QOz-o3-9mi"/>
-                                    <constraint firstAttribute="width" constant="300" id="V5X-8M-Hwl"/>
+                                    <constraint firstAttribute="height" constant="92" id="0k3-G6-Ogu"/>
+                                    <constraint firstAttribute="width" constant="370" id="Zyb-BA-waI"/>
                                 </constraints>
                                 <string key="text">Something about
                                     me...</string>
@@ -236,13 +236,13 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="eGz-2o-yJb" secondAttribute="trailing" id="0k0-o7-DbW"/>
                             <constraint firstItem="eGz-2o-yJb" firstAttribute="top" secondItem="qtT-ib-drf" secondAttribute="bottom" id="1fG-3o-maA"/>
-                            <constraint firstItem="bom-ox-Iif" firstAttribute="top" secondItem="4OF-Bm-CZ9" secondAttribute="bottom" constant="31" id="8sf-w0-QpI"/>
-                            <constraint firstItem="bom-ox-Iif" firstAttribute="leading" secondItem="4OF-Bm-CZ9" secondAttribute="trailing" constant="-198" id="Kdd-0h-KvF"/>
+                            <constraint firstItem="4OF-Bm-CZ9" firstAttribute="top" secondItem="Dbq-5l-DXW" secondAttribute="top" constant="212" id="BKj-yK-xwe"/>
+                            <constraint firstItem="4OF-Bm-CZ9" firstAttribute="centerY" secondItem="bom-ox-Iif" secondAttribute="centerY" constant="-151" id="CIp-Ey-eM9"/>
+                            <constraint firstItem="4OF-Bm-CZ9" firstAttribute="centerX" secondItem="bom-ox-Iif" secondAttribute="centerX" id="DDM-WZ-qFe"/>
+                            <constraint firstItem="4OF-Bm-CZ9" firstAttribute="centerX" secondItem="Dbq-5l-DXW" secondAttribute="centerX" id="KDt-JP-W0W"/>
+                            <constraint firstItem="Dbq-5l-DXW" firstAttribute="top" secondItem="qtT-ib-drf" secondAttribute="bottom" constant="233" id="Nab-Ma-3r6"/>
+                            <constraint firstItem="Dbq-5l-DXW" firstAttribute="centerX" secondItem="eGz-2o-yJb" secondAttribute="centerX" constant="1" id="QZH-im-mYs"/>
                             <constraint firstItem="eGz-2o-yJb" firstAttribute="leading" secondItem="9qx-sC-vD1" secondAttribute="leading" constant="97" id="RBh-D0-ZgB"/>
-                            <constraint firstItem="4OF-Bm-CZ9" firstAttribute="top" secondItem="Dbq-5l-DXW" secondAttribute="bottom" constant="116" id="VAY-SR-whF"/>
-                            <constraint firstAttribute="centerY" secondItem="4OF-Bm-CZ9" secondAttribute="centerY" constant="-2" id="ij3-q4-Vcw"/>
-                            <constraint firstItem="Dbq-5l-DXW" firstAttribute="leading" secondItem="4OF-Bm-CZ9" secondAttribute="trailing" constant="-96" id="pCm-bO-sGR"/>
-                            <constraint firstAttribute="centerX" secondItem="4OF-Bm-CZ9" secondAttribute="centerX" constant="-49.5" id="t5x-NP-L5w"/>
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -250,7 +250,7 @@
                     <connections>
                         <outlet property="descriptionTextView" destination="bom-ox-Iif" id="M6W-4v-hOO"/>
                         <outlet property="navigationBar" destination="eGz-2o-yJb" id="Gai-3C-T5u"/>
-                        <outlet property="topConstraint" destination="ij3-q4-Vcw" id="EpO-Zs-GWz"/>
+                        <outlet property="topConstraint" destination="Nab-Ma-3r6" id="Ynz-fK-5sk"/>
                         <outlet property="view" destination="9qx-sC-vD1" id="8Q9-sw-zTk"/>
                     </connections>
                 </viewController>
