@@ -377,6 +377,20 @@ static const CGFloat TransitionDuration = 0.5f;
     self.followAllButton = sender;
 }
 
+#pragma mark - Alertview delegates
+
+- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+	[[SYNTrackingManager sharedManager] trackUserCollectionsFollowFromScreenName:[self trackingScreenName]];
+    
+    if (buttonIndex == 1) {
+        self.channelOwner.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribedToUserId:self.channelOwner.uniqueId];
+        self.followAllButton.dataItemLinked = self.channelOwner;
+        [self followControlPressed:self.followAllButton];
+		
+		[self reloadCollectionViews];
+    }
+}
+
 #pragma mark - SYNProfileEditDelegate
 
 - (void) setCollectionViewContentOffset:(CGPoint)contentOffset animated:(BOOL) animated{
@@ -406,17 +420,6 @@ static const CGFloat TransitionDuration = 0.5f;
     [self.channelCollectionViewController.headerView setDescriptionText:descriptionString];
 }
 
-#pragma mark - Alertview delegates
-
-- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-	[[SYNTrackingManager sharedManager] trackUserCollectionsFollowFromScreenName:[self trackingScreenName]];
-    
-    if (buttonIndex == 1) {
-        self.channelOwner.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribedToUserId:self.channelOwner.uniqueId];
-        self.followAllButton.dataItemLinked = self.channelOwner;
-        [self followControlPressed:self.followAllButton];
-    }
-}
 
 
 #pragma mark - UIViewControllerTransitioningDelegate
