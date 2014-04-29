@@ -15,7 +15,7 @@
 @protocol SYNSearchResultsUserCellDelegate <SYNSocialActionsDelegate>
 
 - (void)profileButtonTapped:(UIButton *)button;
-- (void)followControlPressed:(UIButton *)button;
+- (void)followUserTapped:(UIButton *)button;
 
 @end
 

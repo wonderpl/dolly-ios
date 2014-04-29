@@ -80,7 +80,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZGW-qb-DqS" userLabel="Text View - Description">
-                            <rect key="frame" x="8" y="238" width="382" height="91"/>
+                            <rect key="frame" x="8" y="220" width="382" height="91"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="tintColor" red="0.50980392159999999" green="0.50980392159999999" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
@@ -125,13 +125,42 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         </view>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WvX-Ve-VTK" userLabel="Segmented controller">
+                            <rect key="frame" x="59" y="325" width="280" height="34"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xv1-gJ-wI9" userLabel="Button - Collections tab" customClass="SYNSegmentedButton">
+                                    <rect key="frame" x="0.0" y="0.0" width="140" height="34"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" title="Button">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="segmentedControllerTapped:" destination="CwX-kR-DQ1" eventType="touchUpInside" id="z3d-aH-f3U"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h3U-cl-bJm" userLabel="Button - Followings tab" customClass="SYNSegmentedButton">
+                                    <rect key="frame" x="140" y="0.0" width="140" height="34"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" title="Button">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="segmentedControllerTapped:" destination="CwX-kR-DQ1" eventType="touchUpInside" id="ndh-GX-Ojl"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        </view>
                     </subviews>
                     <constraints>
                         <constraint firstAttribute="height" constant="363" id="SgW-WW-Jk1"/>
                         <constraint firstItem="uRX-vv-NrM" firstAttribute="leading" secondItem="a3W-xz-Bg8" secondAttribute="leading" constant="76" id="ecO-GQ-IRd"/>
                         <constraint firstAttribute="width" constant="398" id="iJK-ei-sNk"/>
                         <constraint firstItem="uRX-vv-NrM" firstAttribute="top" secondItem="a3W-xz-Bg8" secondAttribute="top" constant="329" id="jFH-Sm-F91"/>
-                        <constraint firstItem="ZGW-qb-DqS" firstAttribute="top" secondItem="a3W-xz-Bg8" secondAttribute="top" constant="238" id="kVs-Rh-abK"/>
+                        <constraint firstItem="ZGW-qb-DqS" firstAttribute="top" secondItem="a3W-xz-Bg8" secondAttribute="top" constant="220" id="kVs-Rh-abK"/>
                         <constraint firstAttribute="centerX" secondItem="ZGW-qb-DqS" secondAttribute="centerX" id="oK9-ev-Hnr"/>
                     </constraints>
                 </view>
@@ -154,13 +183,16 @@
                 <outlet property="aboutMeTextView" destination="ZGW-qb-DqS" id="ENw-9J-aob"/>
                 <outlet property="avatarBorder" destination="Ote-bm-uEO" id="02n-Om-PrS"/>
                 <outlet property="avatarButton" destination="rAj-tb-ncC" id="Y17-6L-ans"/>
+                <outlet property="collectionsTab" destination="xv1-gJ-wI9" id="QNg-0z-bpe"/>
                 <outlet property="coverImage" destination="9PC-4a-87q" id="ZcF-Lp-plG"/>
                 <outlet property="coverImageTop" destination="S7f-yg-ibX" id="vhO-AO-upr"/>
                 <outlet property="descriptionTopConstraint" destination="kVs-Rh-abK" id="PVq-v4-qLy"/>
                 <outlet property="followAllButton" destination="7YV-aZ-EKa" id="hni-tV-mSP"/>
                 <outlet property="followersCountLabel" destination="88l-sj-JDE" id="vVn-DE-icw"/>
+                <outlet property="followingsTab" destination="h3U-cl-bJm" id="DVz-km-PU4"/>
                 <outlet property="fullNameLabel" destination="OCZ-qA-mlf" id="aw3-Ey-yNI"/>
                 <outlet property="moreButton" destination="r8W-Sv-btW" id="RUW-VI-5xt"/>
+                <outlet property="segmentedBorder" destination="WvX-Ve-VTK" id="6lF-nM-kum"/>
                 <outlet property="segmentedController" destination="uRX-vv-NrM" id="VaX-Zz-3TO"/>
                 <outlet property="userNameLabel" destination="cha-pJ-bzu" id="w5g-il-Cbx"/>
             </connections>

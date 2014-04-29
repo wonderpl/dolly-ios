@@ -73,6 +73,7 @@
 
 	[self.collectionsTab setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Collections", nil), self.channelOwner.totalVideosValueChannelValue] forState:UIControlStateNormal];
 	
+	
     [self.followingsTab setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Following", nil), self.channelOwner.subscriptionCountValue] forState:UIControlStateNormal];
 }
 
@@ -178,7 +179,8 @@
 															   blue: 219.0f / 255.0f
 															  alpha: 1.0f] CGColor];
 	
-
+	[self.followingsTab.titleLabel setFont:[UIFont lightCustomFontOfSize:self.followingsTab.titleLabel.font.pointSize]];
+	[self.collectionsTab.titleLabel setFont:[UIFont lightCustomFontOfSize:self.collectionsTab.titleLabel.font.pointSize]];
 }
 
 -(void) setFollowersCountLabel {

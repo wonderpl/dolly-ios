@@ -227,7 +227,7 @@
 
     if (alertView == self.followAllAlertView && [buttonTitle isEqualToString:[self yesButtonTitle]])
     {
-        [self.delegate followControlPressed:self.alertViewButton];
+        [self.delegate followUserTapped:self.alertViewButton];
     }
 }
 

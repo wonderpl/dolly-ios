@@ -407,11 +407,9 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 	
 }
 
-- (void)followControlPressed:(UIButton *)button {
+- (void)followUserTapped:(SYNSocialButton *)button {
 	
-	NSLog(@"FOLLOW CONTROLL TAPPED");
-	
+	[self followControlPressed:button];
 }
-
 
 @end
