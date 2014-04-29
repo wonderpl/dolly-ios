@@ -474,10 +474,12 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
                                             
                                              [self cancelCreateChannelWithBlock:^{
                                                  
-                                                 [self createNewCollection];
 
 												 weakSelf.headerView.channelOwner.totalVideosValueChannelValue--;
 												 [weakSelf.headerView setSegmentedControllerText];
+												 
+												 [self createNewCollection];
+
 
                                              }];
                                              
@@ -551,13 +553,21 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
                                                    } completion:^(BOOL finished) {
                                                        
                                                        [self showInboardingAnimationAfterCreate];
-
                                                    }];
                                                }
                                            } else {
                                                DebugLog (@"Channel disappeared from underneath us");
                                            }
                                        } onError: errorBlock];
+	
+	// Hack will remove
+	double delayInSeconds = 0.4;
+	dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+	dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+		[self.cv reloadData];
+	});
+
+
 }
 
 #pragma mark - inboarding animations
