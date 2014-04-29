@@ -509,9 +509,31 @@
     
     NSArray *items = [itemDict objectForKey:@"items"];
     
-    for (NSDictionary *tmpDict in items) {
-                
-        [self addChannelsObject:[Channel instanceFromDictionary:tmpDict usingManagedObjectContext:self.managedObjectContext]];
+	
+	NSMutableDictionary *channelsInsancesByIdDictionary = [[NSMutableDictionary alloc] initWithCapacity: self.subscriptions.count];
+	
+    for (ChannelOwner *chan in self.channels)
+    {
+        channelsInsancesByIdDictionary[chan.uniqueId] = chan;
+    }
+
+	
+    for (NSDictionary *channelsDictionary in items) {
+        
+		Channel *channel = channelsInsancesByIdDictionary[channelsDictionary[@"id"]];
+		
+        
+        if (channel) {
+			[self.subscriptionsSet removeObject:channel];
+		}
+		
+		channel = [Channel instanceFromDictionary: channelsDictionary
+								  usingManagedObjectContext: self.managedObjectContext
+										ignoringObjectTypes: kIgnoreVideoInstanceObjects];
+				
+        channel.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribedToUserId:self.uniqueId];
+				
+        [self.channelsSet addObject:channel];
     }
 }
 
