@@ -396,9 +396,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
                 self.cv.contentOffset =  CGPointMake(0, 429);
             }
         } else {
-            if (self.cv.contentOffset.y < 370 || self.cv.contentOffset.y > 480) {
-                self.cv.contentOffset =  CGPointMake(0, 414);
-            }
+                self.cv.contentOffset =  CGPointMake(0, 444);
         }
     }
 }
