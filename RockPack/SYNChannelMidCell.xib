@@ -69,7 +69,6 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="followChannel:" destination="-1" eventType="touchUpInside" id="Dmi-GS-ux3"/>
                                             <action selector="followChannel:" destination="3" eventType="touchUpInside" id="oZ6-dG-9Ra"/>
                                         </connections>
                                     </button>
