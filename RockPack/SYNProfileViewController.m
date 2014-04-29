@@ -70,6 +70,8 @@ static const CGFloat TransitionDuration = 0.5f;
 	[self.subscriptionCollectionViewController coverPhotoAnimation];
     [self.channelCollectionViewController coverPhotoAnimation];
 	
+
+	
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -92,6 +94,7 @@ static const CGFloat TransitionDuration = 0.5f;
 	[self updateProfileData];
 	
 	self.navigationItem.title = @"";
+
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
@@ -221,7 +224,13 @@ static const CGFloat TransitionDuration = 0.5f;
 
 - (void) collectionsTabTapped {
 
+	
+	if (self.isChannelsCollectionViewShowing) {
+		return;
+	}
 	self.isChannelsCollectionViewShowing = YES;
+    self.channelCollectionViewController.headerView.collectionsTab.selected = YES;
+    self.channelCollectionViewController.headerView.followingsTab.selected = NO;
 
     CGPoint offSet = self.subscriptionCollectionViewController.cv.contentOffset;
     
@@ -240,8 +249,7 @@ static const CGFloat TransitionDuration = 0.5f;
 				
 		CGRect fromFrame = self.view.frame;
 		fromFrame.origin.x = 320;
-		
-		
+
 		self.channelCollectionViewController.view.frame = CGRectMake(-320, 0, 320, headerSize);
 		self.channelCollectionViewController.headerView.frame = CGRectMake(320, 0, 320, headerSize);
 		
@@ -265,12 +273,17 @@ static const CGFloat TransitionDuration = 0.5f;
     [self.channelCollectionViewController.model reset];
     [self.channelCollectionViewController.model loadNextPage];
 
-    [self.channelCollectionViewController.headerView.segmentedController setSelectedSegmentIndex:0];
-
 }
 
 - (void) followingsTabTapped {
     
+	if (!self.isChannelsCollectionViewShowing) {
+		return;
+	}
+	
+	self.subscriptionCollectionViewController.headerView.followingsTab.selected = YES;
+	self.subscriptionCollectionViewController.headerView.collectionsTab.selected = NO;
+
 	self.isChannelsCollectionViewShowing = NO;
 	if ([self.channelOwner.uniqueId isEqualToString:appDelegate.currentUser.uniqueId]) {
 		[[SYNTrackingManager sharedManager] trackOwnProfileFollowingScreenView];
@@ -319,8 +332,6 @@ static const CGFloat TransitionDuration = 0.5f;
 
     [self.subscriptionCollectionViewController.model reset];
     [self.subscriptionCollectionViewController.model loadNextPage];
-
-	[self.subscriptionCollectionViewController.headerView.segmentedController setSelectedSegmentIndex:1];
 
 
 }

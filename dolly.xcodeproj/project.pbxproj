@@ -333,6 +333,7 @@
 		4CADB33718F2C34E00409996 /* MoodsSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CADB33118F2C34E00409996 /* MoodsSelected.png */; };
 		4CADB33818F2C34E00409996 /* MoodsSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CADB33218F2C34E00409996 /* MoodsSelected@2x.png */; };
 		4CB63A6E18BD052E00825F7C /* placeholderwhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CB63A6D18BD052E00825F7C /* placeholderwhite.png */; };
+		4CBDC403190FE820009F56F1 /* SYNSegmentedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CBDC402190FE820009F56F1 /* SYNSegmentedButton.m */; };
 		4CCAD0B218D7520F00EC0F03 /* SYNProfileChannelModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCAD0B118D7520F00EC0F03 /* SYNProfileChannelModel.m */; };
 		4CCAD0B518D7530600EC0F03 /* SYNProfileSubscriptionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCAD0B418D7530600EC0F03 /* SYNProfileSubscriptionModel.m */; };
 		4CDD76A618CA014A000B2CBD /* SYNFeedOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDD76A318CA014A000B2CBD /* SYNFeedOverlayViewController.m */; };
@@ -1185,6 +1186,8 @@
 		4CADB33118F2C34E00409996 /* MoodsSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MoodsSelected.png; sourceTree = "<group>"; };
 		4CADB33218F2C34E00409996 /* MoodsSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MoodsSelected@2x.png"; sourceTree = "<group>"; };
 		4CB63A6D18BD052E00825F7C /* placeholderwhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholderwhite.png; sourceTree = "<group>"; };
+		4CBDC401190FE820009F56F1 /* SYNSegmentedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNSegmentedButton.h; sourceTree = "<group>"; };
+		4CBDC402190FE820009F56F1 /* SYNSegmentedButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNSegmentedButton.m; sourceTree = "<group>"; };
 		4CCAD0B018D7520F00EC0F03 /* SYNProfileChannelModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNProfileChannelModel.h; sourceTree = "<group>"; };
 		4CCAD0B118D7520F00EC0F03 /* SYNProfileChannelModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNProfileChannelModel.m; sourceTree = "<group>"; };
 		4CCAD0B318D7530600EC0F03 /* SYNProfileSubscriptionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNProfileSubscriptionModel.h; sourceTree = "<group>"; };
@@ -3224,6 +3227,8 @@
 				4C1D30A718D9ECAC00F96F7C /* SYNProfileEditDelegate.h */,
 				4CAC2B0D18E070C2004AB77E /* SYNProfileHeaderDelegate.h */,
 				4C0CAF3918EB0ABA004A2911 /* SYNProfileNavigationBarDelegate.h */,
+				4CBDC401190FE820009F56F1 /* SYNSegmentedButton.h */,
+				4CBDC402190FE820009F56F1 /* SYNSegmentedButton.m */,
 			);
 			name = "new profile";
 			sourceTree = "<group>";
@@ -4654,6 +4659,7 @@
 				019825F1162C94A300216900 /* UIColor+SYNColor.m in Sources */,
 				0E2AB166188462DD004557A4 /* SYNWebViewController.m in Sources */,
 				BEB31374181AC6DB00FAF98A /* SYNSocialAddButton.m in Sources */,
+				4CBDC403190FE820009F56F1 /* SYNSegmentedButton.m in Sources */,
 				019825F4162C94B500216900 /* UIFont+SYNFont.m in Sources */,
 				4C5E861018B6353900D0E937 /* SYNDiscoverOverlayVideoViewController.m in Sources */,
 				01363EB5162FDEA600FFAA09 /* NSObject+Blocks.m in Sources */,

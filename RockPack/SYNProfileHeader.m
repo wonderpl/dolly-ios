@@ -14,6 +14,8 @@
 #import "UIColor+SYNColor.h"
 #import "SYNSocialFollowButton.h"
 #import "SYNFollowUserButton.h"
+#import "SYNSegmentedButton.h"
+
 @interface SYNProfileHeader ()
 
 @property (nonatomic, strong) IBOutlet UIButton *avatarButton;
@@ -28,6 +30,9 @@
 @property (nonatomic, strong) IBOutlet UILabel *followersCountLabel;
 @property (strong, nonatomic) IBOutlet UIView *avatarBorder;
 
+@property (strong, nonatomic) IBOutlet UIView *segmentedBorder;
+
+
 @end
 
 
@@ -36,6 +41,8 @@
 -(void) awakeFromNib {
     [super awakeFromNib];
     [self setUpViews];
+	self.collectionsTab.selected = YES;
+
 }
 
 
@@ -63,11 +70,10 @@
 
 
 - (void)setSegmentedControllerText {
-	[self.segmentedController setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Collections", nil), self.channelOwner.totalVideosValueChannelValue] forSegmentAtIndex:0];
-	
-    
-    [self.segmentedController setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Following", nil), self.channelOwner.subscriptionCountValue] forSegmentAtIndex:1];	
 
+	[self.collectionsTab setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Collections", nil), self.channelOwner.totalVideosValueChannelValue] forState:UIControlStateNormal];
+	
+    [self.followingsTab setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Following", nil), self.channelOwner.subscriptionCountValue] forState:UIControlStateNormal];
 }
 
 -(void) setProfileImage : (NSString*) thumbnailURL
@@ -161,8 +167,18 @@
                                 [UIColor dollyTextMediumGray], NSForegroundColorAttributeName, nil];
     [self.segmentedController setTitleTextAttributes:attributes forState:UIControlStateNormal];
     
+
     self.segmentedController.layer.borderColor = [[UIColor grayColor] CGColor];
-    
+
+	
+	self.segmentedBorder.layer.borderWidth = IS_RETINA ? 0.5 : 1.0;
+	
+	self.segmentedBorder.layer.borderColor = [[UIColor colorWithRed: 207.0f / 255.0f
+															  green: 217.0f / 255.0f
+															   blue: 219.0f / 255.0f
+															  alpha: 1.0f] CGColor];
+	
+
 }
 
 -(void) setFollowersCountLabel {
@@ -204,13 +220,25 @@
     _delegate = delegate;
 }
 
+
+
+
 - (IBAction)segmentedControllerTapped:(id)sender {
     
-    if (self.segmentedController.selectedSegmentIndex == 0) {
-        [self.delegate collectionsTabTapped];
-    } else if (self.segmentedController.selectedSegmentIndex == 1) {
+    if (sender == self.collectionsTab) {
+		self.collectionsTab.selected = YES;
+		self.followingsTab.selected = NO;
+
+		[self.delegate collectionsTabTapped];
+		
+    } else if (sender == self.followingsTab) {
+		
+		self.followingsTab.selected = YES;
+		self.collectionsTab.selected = NO;
+
         [self.delegate followingsTabTapped];
-    }
+    
+	}
 }
 
 - (IBAction) avatarButtonTapped:(id)sender {

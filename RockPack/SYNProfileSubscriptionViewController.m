@@ -362,7 +362,8 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 	[self.headerView setSegmentedControllerText];
 
     [self.cv reloadData];
-    [self.headerView.segmentedController setSelectedSegmentIndex:1];
+//	self.headerView.followingsTab.selected = YES;
+//	self.headerView.collectionsTab.selected = NO;
 }
 
 - (void)pagingModelErrorOccurred:(SYNPagingModel *)pagingModel {

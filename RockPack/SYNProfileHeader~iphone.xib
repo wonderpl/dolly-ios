@@ -94,23 +94,6 @@
                     <color key="textColor" red="0.46666666870000001" green="0.46666666870000001" blue="0.50980395079999996" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <segmentedControl opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bordered" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Bql-TC-S7R">
-                    <rect key="frame" x="0.0" y="489" width="320" height="36"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="35" id="5cZ-xf-7Vh"/>
-                        <constraint firstAttribute="width" constant="320" id="sUC-Yz-cCL"/>
-                    </constraints>
-                    <segments>
-                        <segment title="First"/>
-                        <segment title="Second"/>
-                    </segments>
-                    <color key="tintColor" red="0.61960784313725492" green="0.61960784313725492" blue="0.61960784313725492" alpha="1" colorSpace="calibratedRGB"/>
-                    <connections>
-                        <action selector="segmentedControllerTapped:" destination="79y-KX-90i" eventType="valueChanged" id="OdK-RU-q7Z"/>
-                    </connections>
-                </segmentedControl>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zuH-da-sGu">
                     <rect key="frame" x="112" y="230" width="96" height="96"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -137,13 +120,41 @@
                         <constraint firstAttribute="height" constant="35" id="8BQ-uQ-UQd"/>
                     </constraints>
                 </imageView>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yIa-oO-mGN" userLabel="Segmented controller">
+                    <rect key="frame" x="0.0" y="490" width="320" height="34"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZcY-bz-9ib" userLabel="Button - Collections tab" customClass="SYNSegmentedButton">
+                            <rect key="frame" x="0.0" y="0.0" width="161" height="34"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Button">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="segmentedControllerTapped:" destination="79y-KX-90i" eventType="touchUpInside" id="Na1-c5-iwy"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Ua-76-NhD" userLabel="Button - Followings tab" customClass="SYNSegmentedButton">
+                            <rect key="frame" x="159" y="0.0" width="161" height="34"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Button">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="segmentedControllerTapped:" destination="79y-KX-90i" eventType="touchUpInside" id="ln3-Jm-2Ao"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                </view>
             </subviews>
             <constraints>
                 <constraint firstItem="WTJ-1k-eNv" firstAttribute="top" secondItem="79y-KX-90i" secondAttribute="top" id="1ut-Pa-fNu"/>
                 <constraint firstItem="FyE-Km-Hdh" firstAttribute="top" secondItem="WTJ-1k-eNv" secondAttribute="bottom" constant="-1" id="2l2-9Y-uO2"/>
                 <constraint firstAttribute="bottom" secondItem="Pnq-Al-e0n" secondAttribute="bottom" constant="79" id="92R-NS-gxn"/>
                 <constraint firstItem="0i5-fa-0Qz" firstAttribute="leading" secondItem="79y-KX-90i" secondAttribute="leading" constant="10" id="Akg-21-bqY"/>
-                <constraint firstItem="Bql-TC-S7R" firstAttribute="bottom" secondItem="WTJ-1k-eNv" secondAttribute="bottom" constant="242" id="EIl-bG-BFY"/>
                 <constraint firstAttribute="trailing" secondItem="WTJ-1k-eNv" secondAttribute="trailing" id="Fxt-2t-wma"/>
                 <constraint firstAttribute="trailing" secondItem="qG4-1X-MoW" secondAttribute="trailing" constant="10" id="G0f-TM-VG1"/>
                 <constraint firstAttribute="bottom" secondItem="WTJ-1k-eNv" secondAttribute="bottom" constant="278" id="Gad-sf-cIj"/>
@@ -158,7 +169,6 @@
                 <constraint firstAttribute="trailing" secondItem="FyE-Km-Hdh" secondAttribute="trailing" id="lLt-oR-dXD"/>
                 <constraint firstAttribute="trailing" secondItem="oRL-oT-kvC" secondAttribute="trailing" id="lnN-vb-gz0"/>
                 <constraint firstItem="WTJ-1k-eNv" firstAttribute="leading" secondItem="79y-KX-90i" secondAttribute="leading" id="o9Y-JO-D5B"/>
-                <constraint firstItem="Bql-TC-S7R" firstAttribute="leading" secondItem="79y-KX-90i" secondAttribute="leading" id="qd9-dK-72x"/>
                 <constraint firstItem="3x0-8E-Inl" firstAttribute="top" secondItem="WTJ-1k-eNv" secondAttribute="bottom" constant="10" id="rnO-bh-WuD"/>
                 <constraint firstAttribute="bottom" secondItem="qG4-1X-MoW" secondAttribute="bottom" constant="287" id="sjV-pB-rGr"/>
                 <constraint firstItem="Pnq-Al-e0n" firstAttribute="leading" secondItem="79y-KX-90i" secondAttribute="leading" constant="15" id="zqn-8h-I5B"/>
@@ -167,15 +177,17 @@
                 <outlet property="aboutMeTextView" destination="Pnq-Al-e0n" id="VW9-ZT-aPf"/>
                 <outlet property="avatarBorder" destination="zuH-da-sGu" id="flh-1o-c2V"/>
                 <outlet property="avatarButton" destination="Wzg-oF-9q5" id="GEt-Xv-mWG"/>
+                <outlet property="collectionsTab" destination="ZcY-bz-9ib" id="5sF-kc-VAv"/>
                 <outlet property="coverImage" destination="WTJ-1k-eNv" id="RAx-PU-VBY"/>
                 <outlet property="coverImageBottom" destination="Gad-sf-cIj" id="uYk-KF-VGZ"/>
                 <outlet property="coverImageTop" destination="1ut-Pa-fNu" id="Aca-Ot-maw"/>
                 <outlet property="descriptionTopConstraint" destination="92R-NS-gxn" id="MJw-dA-Ec4"/>
                 <outlet property="followAllButton" destination="qG4-1X-MoW" id="iiV-GK-36b"/>
                 <outlet property="followersCountLabel" destination="3x0-8E-Inl" id="2u3-cf-dop"/>
+                <outlet property="followingsTab" destination="0Ua-76-NhD" id="wIC-03-UVv"/>
                 <outlet property="fullNameLabel" destination="0i5-fa-0Qz" id="jxT-KC-7Ks"/>
                 <outlet property="moreButton" destination="FyE-Km-Hdh" id="th8-PU-VDY"/>
-                <outlet property="segmentedController" destination="Bql-TC-S7R" id="CPy-DI-Owb"/>
+                <outlet property="segmentedBorder" destination="yIa-oO-mGN" id="OLu-KY-gQ1"/>
                 <outlet property="userNameLabel" destination="SPE-qM-wrN" id="vbO-Ip-nyo"/>
             </connections>
         </collectionReusableView>

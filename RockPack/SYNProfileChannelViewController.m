@@ -71,7 +71,7 @@ static const CGFloat FULLNAMELABELIPADLANDSCAPE = 412.0f;
     [self.fakeNavigationBarTitle setText: self.channelOwner.displayName];
 
     self.tapToHideKeyoboard = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
-	
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -750,7 +750,9 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 	[self.headerView setSegmentedControllerText];
 
 	[self.cv reloadData];
-	[self.headerView.segmentedController setSelectedSegmentIndex:0];
+//	[self.headerView.segmentedController setSelectedSegmentIndex:0];
+//	self.headerView.collectionsTab.selected = YES;
+//	self.headerView.followingsTab.selected = NO;
 
 }
 
