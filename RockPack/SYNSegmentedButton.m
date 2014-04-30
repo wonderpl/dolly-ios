@@ -17,9 +17,9 @@
     [super setSelected:selected];
     
     if(selected) {
-		self.backgroundColor = [UIColor colorWithRed: 207.0f / 255.0f
-															  green: 217.0f / 255.0f
-															   blue: 219.0f / 255.0f
+		self.backgroundColor = [UIColor colorWithRed: 236.0f / 255.0f
+															  green: 240.0f / 255.0f
+															   blue: 241.0f / 255.0f
 															  alpha: 1.0f];
 	} else {
 		self.backgroundColor = [UIColor whiteColor];
