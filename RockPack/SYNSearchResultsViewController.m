@@ -599,12 +599,6 @@ typedef void (^SearchResultCompleteBlock)(int);
         }
     } else {
 		
-		if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation])) {
-			return CGSizeMake(380, 104);
-		} else {
-			return CGSizeMake(606, 144);
-		}
-		
         return ((UICollectionViewFlowLayout*)self.videosCollectionView.collectionViewLayout).itemSize;
     }
     return CGSizeZero;
