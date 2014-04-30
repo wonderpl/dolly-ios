@@ -69,7 +69,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     
     if (self.isUserProfile && IS_IPHONE) {
         
-        self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, OWNUSERHEADERHEIGHT, CGRectGetWidth(self.cv.frame), 37)];
+        self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, OWNUSERHEADERHEIGHT, CGRectGetWidth(self.cv.frame), 44)];
         self.searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
         self.searchBar.delegate = self;
         
