@@ -97,14 +97,10 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 	
 	self.searchBar.layer.borderWidth = IS_RETINA ? 0.5 : 1.0;
 
-    if (IS_IPAD) {
-        self.searchBar.layer.borderColor = [[UIColor dollyMediumGray] CGColor];
-    } else {
-		self.searchBar.layer.borderColor = [[UIColor colorWithRed: 214.0f / 255.0f
-														   green: 214.0f / 255.0f
-															blue: 214.0f / 255.0f
-														   alpha: 1.0f] CGColor];
-	}
+	self.searchBar.layer.borderColor = [[UIColor colorWithRed: 214.0f / 255.0f
+														green: 214.0f / 255.0f
+														 blue: 214.0f / 255.0f
+														alpha: 1.0f] CGColor];
 	
     
     self.autocompleteTableView.hidden = YES;
@@ -158,7 +154,11 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
         self.searchResultsController.view.frame = sResRect;
     }
     
-    self.sideContainerView.layer.borderColor = [[UIColor dollyMediumGray] CGColor];
+    self.sideContainerView.layer.borderColor = [[UIColor colorWithRed: 214.0f / 255.0f
+															   green: 214.0f / 255.0f
+																blue: 214.0f / 255.0f
+															   alpha: 1.0f] CGColor];
+	
     self.sideContainerView.layer.borderWidth = IS_RETINA ? 0.5f : 1.0f;
     
     [self reloadCategories];
@@ -878,10 +878,14 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 	
 	if ([self.genres count] && IS_IPAD) {
         NSIndexPath *firstIndexPath = [NSIndexPath indexPathForItem:0 inSection:0];
+		[self selectCategoryForCollection:self.categoriesCollectionView atIndexPath:firstIndexPath];
         [self.categoriesCollectionView selectItemAtIndexPath:firstIndexPath
 													animated:NO
 											  scrollPosition:UICollectionViewScrollPositionNone];
+
     }
+	
+
 }
 
 - (void)keyboardChanged:(NSNotification *)notification {

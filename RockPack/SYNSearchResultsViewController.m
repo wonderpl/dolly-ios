@@ -42,7 +42,6 @@ typedef void (^SearchResultCompleteBlock)(int);
 @property (strong, nonatomic) IBOutlet UIView *segmentedContainer;
 
 // UI stuff
-@property (nonatomic, strong) IBOutlet UIView *containerTabs;
 @property (strong, nonatomic) IBOutlet UILabel *noVideosLabel;
 @property (strong, nonatomic) IBOutlet UILabel *noUsersLabel;
 
@@ -112,10 +111,6 @@ typedef void (^SearchResultCompleteBlock)(int);
                forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
                       withReuseIdentifier:[SYNChannelFooterMoreView reuseIdentifier]];
     
-    self.containerTabs.layer.cornerRadius = 4.0f;
-    self.containerTabs.layer.borderColor = [[UIColor colorWithWhite:152/255.0 alpha:1.0] CGColor];
-    self.containerTabs.layer.borderWidth = .5f;
-    self.containerTabs.layer.masksToBounds = YES;
     
     
     
@@ -308,7 +303,7 @@ typedef void (^SearchResultCompleteBlock)(int);
 - (void) searchForGenre: (NSString *) genreId
 {	
 	if (IS_IPHONE) {
-		self.containerTabs.hidden = YES;
+		self.segmentedContainer.hidden = YES;
 		[self.topVideoContraint setConstant:65];
 	}
 	Genre *genre = [[SYNGenreManager sharedManager] genreWithId:genreId];
@@ -366,7 +361,7 @@ typedef void (^SearchResultCompleteBlock)(int);
 {
 	
 	if (IS_IPHONE) {
-		self.containerTabs.hidden = NO;
+		self.segmentedContainer.hidden = NO;
 		[self.topVideoContraint setConstant:111];
 	}
 	
@@ -487,15 +482,14 @@ typedef void (^SearchResultCompleteBlock)(int);
     
     if (collectionView == self.videosCollectionView)
     {
-        SYNSearchResultsVideoCell *videoCell = [collectionView dequeueReusableCellWithReuseIdentifier:[SYNSearchResultsVideoCell reuseIdentifier]
+        SYNVideoCell *videoCell = [collectionView dequeueReusableCellWithReuseIdentifier:[SYNVideoCell reuseIdentifier]
                                                                                          forIndexPath:indexPath];
         
          
         videoCell.videoInstance = (VideoInstance*)(self.videosArray[indexPath.item]);
-//        videoCell.delegate = self;
         
         
-        cell = videoCell;
+        return videoCell;
     }
     else if (collectionView == self.usersCollectionView)
     {
@@ -603,6 +597,24 @@ typedef void (^SearchResultCompleteBlock)(int);
             }
         }
     } else {
+		
+		if (IS_IPHONE) {
+			
+			if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation])) {
+				return CGSizeMake(320, 85);
+			} else {
+				return CGSizeMake(606, 144);
+			}
+			
+		} else {
+			
+			if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation])) {
+				return CGSizeMake(380, 104);
+			} else {
+				return CGSizeMake(706, 164);
+				
+			}
+		}
 		
         return ((UICollectionViewFlowLayout*)self.videosCollectionView.collectionViewLayout).itemSize;
     }
@@ -796,12 +808,6 @@ referenceSizeForFooterInSection: (NSInteger) section
             self.videosTabButton.selected = YES;
             self.usersTabButton.selected = NO;
             
-//            self.videosTabButton.backgroundColor = [UIColor dollyTabColorSelectedBackground];
-//            self.videosTabButton.titleLabel.textColor = [UIColor whiteColor];
-//            
-//            self.usersTabButton.backgroundColor = [UIColor whiteColor];
-//            self.usersTabButton.titleLabel.textColor = [UIColor dollyTabColorSelectedText];
-            
             if (self.videosArray.count == 0) {
                 self.noVideosLabel.hidden = NO;
             } else {
@@ -809,7 +815,6 @@ referenceSizeForFooterInSection: (NSInteger) section
             }
             
             self.noUsersLabel.hidden = YES;
-            
             
             break;
             
@@ -820,12 +825,6 @@ referenceSizeForFooterInSection: (NSInteger) section
             
             self.videosTabButton.selected = NO;
             self.usersTabButton.selected = YES;
-            
-//            self.videosTabButton.backgroundColor = [UIColor whiteColor];
-//            self.videosTabButton.titleLabel.textColor = [UIColor dollyTabColorSelectedText];
-//            
-//            self.usersTabButton.backgroundColor = [UIColor dollyTabColorSelectedBackground];
-//            self.usersTabButton.titleLabel.textColor = [UIColor whiteColor];
             
             if (self.usersArray.count == 0) {
 				BOOL searching = (self.searchType == SYNSearchTypeSearch);
