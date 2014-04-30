@@ -39,6 +39,7 @@ typedef NS_ENUM(NSInteger, SYNSearchType) {
 typedef void (^SearchResultCompleteBlock)(int);
 
 @interface SYNSearchResultsViewController () <UICollectionViewDataSource, UICollectionViewDelegate, SYNVideoPlayerAnimatorDelegate>
+@property (strong, nonatomic) IBOutlet UIView *segmentedContainer;
 
 // UI stuff
 @property (nonatomic, strong) IBOutlet UIView *containerTabs;
@@ -117,8 +118,6 @@ typedef void (^SearchResultCompleteBlock)(int);
     self.containerTabs.layer.masksToBounds = YES;
     
     
-    self.usersTabButton.titleLabel.font = [UIFont regularCustomFontOfSize:self.usersTabButton.titleLabel.font.pointSize];
-    self.videosTabButton.titleLabel.font = [UIFont regularCustomFontOfSize:self.videosTabButton.titleLabel.font.pointSize];
     
     // == Define Completion Blocks for operations == //
     
@@ -199,6 +198,13 @@ typedef void (^SearchResultCompleteBlock)(int);
 	[self.videosTabButton.titleLabel setFont:[UIFont regularCustomFontOfSize:self.videosTabButton.titleLabel.font.pointSize]];
 
 	[self.usersTabButton.titleLabel setFont:[UIFont regularCustomFontOfSize:self.usersTabButton.titleLabel.font.pointSize]];
+		
+	self.segmentedContainer.layer.borderWidth = IS_RETINA ? 0.5 : 1.0;
+	self.segmentedContainer.layer.borderColor = [[UIColor colorWithRed: 207.0f / 255.0f
+															  green: 217.0f / 255.0f
+															   blue: 219.0f / 255.0f
+															  alpha: 1.0f] CGColor];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {

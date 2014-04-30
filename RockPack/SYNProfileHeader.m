@@ -162,8 +162,6 @@
     [self.segmentedController setTitleTextAttributes:attributes forState:UIControlStateNormal];
     
 
-    self.segmentedController.layer.borderColor = [[UIColor grayColor] CGColor];
-
 	
 	self.segmentedBorder.layer.borderWidth = IS_RETINA ? 0.5 : 1.0;
 	

@@ -9,6 +9,7 @@
                 <outlet property="containerTabs" destination="Dp0-fc-7PR" id="wxR-p8-3IS"/>
                 <outlet property="noUsersLabel" destination="6aJ-Lk-c1F" id="lgn-Ck-lkS"/>
                 <outlet property="noVideosLabel" destination="yYG-XK-TiE" id="qpQ-th-IdZ"/>
+                <outlet property="segmentedContainer" destination="eDd-qB-cRc" id="gAH-JG-6LC"/>
                 <outlet property="usersCollectionView" destination="4v1-Ly-eu6" id="QkW-ty-jhC"/>
                 <outlet property="usersTabButton" destination="0mj-ki-94y" id="C8E-lv-rTu"/>
                 <outlet property="videosCollectionView" destination="SgG-lq-X96" id="vcl-iZ-YZh"/>
