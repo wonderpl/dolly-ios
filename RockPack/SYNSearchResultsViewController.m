@@ -196,7 +196,9 @@ typedef void (^SearchResultCompleteBlock)(int);
     self.noUsersLabel.font = [UIFont regularCustomFontOfSize:18.0f];
     self.noVideosLabel.font = [UIFont regularCustomFontOfSize:18.0f];
     
+	[self.videosTabButton.titleLabel setFont:[UIFont regularCustomFontOfSize:self.videosTabButton.titleLabel.font.pointSize]];
 
+	[self.usersTabButton.titleLabel setFont:[UIFont regularCustomFontOfSize:self.usersTabButton.titleLabel.font.pointSize]];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -593,9 +595,6 @@ typedef void (^SearchResultCompleteBlock)(int);
                     return CGSizeMake(300, 102);
                 }
             }
-			
-			
-			
         }
     } else {
 		
@@ -791,11 +790,11 @@ referenceSizeForFooterInSection: (NSInteger) section
             self.videosTabButton.selected = YES;
             self.usersTabButton.selected = NO;
             
-            self.videosTabButton.backgroundColor = [UIColor dollyTabColorSelectedBackground];
-            self.videosTabButton.titleLabel.textColor = [UIColor whiteColor];
-            
-            self.usersTabButton.backgroundColor = [UIColor whiteColor];
-            self.usersTabButton.titleLabel.textColor = [UIColor dollyTabColorSelectedText];
+//            self.videosTabButton.backgroundColor = [UIColor dollyTabColorSelectedBackground];
+//            self.videosTabButton.titleLabel.textColor = [UIColor whiteColor];
+//            
+//            self.usersTabButton.backgroundColor = [UIColor whiteColor];
+//            self.usersTabButton.titleLabel.textColor = [UIColor dollyTabColorSelectedText];
             
             if (self.videosArray.count == 0) {
                 self.noVideosLabel.hidden = NO;
@@ -816,11 +815,11 @@ referenceSizeForFooterInSection: (NSInteger) section
             self.videosTabButton.selected = NO;
             self.usersTabButton.selected = YES;
             
-            self.videosTabButton.backgroundColor = [UIColor whiteColor];
-            self.videosTabButton.titleLabel.textColor = [UIColor dollyTabColorSelectedText];
-            
-            self.usersTabButton.backgroundColor = [UIColor dollyTabColorSelectedBackground];
-            self.usersTabButton.titleLabel.textColor = [UIColor whiteColor];
+//            self.videosTabButton.backgroundColor = [UIColor whiteColor];
+//            self.videosTabButton.titleLabel.textColor = [UIColor dollyTabColorSelectedText];
+//            
+//            self.usersTabButton.backgroundColor = [UIColor dollyTabColorSelectedBackground];
+//            self.usersTabButton.titleLabel.textColor = [UIColor whiteColor];
             
             if (self.usersArray.count == 0) {
 				BOOL searching = (self.searchType == SYNSearchTypeSearch);

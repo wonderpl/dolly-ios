@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNSearchResultsViewController">
@@ -10,9 +10,9 @@
                 <outlet property="noUsersLabel" destination="6aJ-Lk-c1F" id="lgn-Ck-lkS"/>
                 <outlet property="noVideosLabel" destination="yYG-XK-TiE" id="qpQ-th-IdZ"/>
                 <outlet property="usersCollectionView" destination="4v1-Ly-eu6" id="QkW-ty-jhC"/>
-                <outlet property="usersTabButton" destination="g4C-7h-KhZ" id="eni-sr-umt"/>
+                <outlet property="usersTabButton" destination="0mj-ki-94y" id="C8E-lv-rTu"/>
                 <outlet property="videosCollectionView" destination="SgG-lq-X96" id="vcl-iZ-YZh"/>
-                <outlet property="videosTabButton" destination="r10-qI-ad1" id="gld-dn-e91"/>
+                <outlet property="videosTabButton" destination="nM9-IW-erW" id="oDf-89-J1d"/>
                 <outlet property="view" destination="2" id="3"/>
             </connections>
         </placeholder>
@@ -113,6 +113,37 @@
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eDd-qB-cRc" userLabel="Segmented controller">
+                    <rect key="frame" x="0.0" y="7" width="280" height="34"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nM9-IW-erW" userLabel="Button - Collections tab" customClass="SYNSegmentedButton">
+                            <rect key="frame" x="0.0" y="0.0" width="140" height="34"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <state key="normal" title="Videos">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="tabPressed:" destination="-1" eventType="touchUpInside" id="03m-dv-KgF"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0mj-ki-94y" userLabel="Button - Followings tab" customClass="SYNSegmentedButton">
+                            <rect key="frame" x="140" y="0.0" width="140" height="34"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <state key="normal" title="Users">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="tabPressed:" destination="-1" eventType="touchUpInside" id="21g-Yc-PdK"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
