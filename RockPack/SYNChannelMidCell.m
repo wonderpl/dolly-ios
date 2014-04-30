@@ -78,6 +78,11 @@
         [self.followerCountLabel setFont:[UIFont regularCustomFontOfSize:self.followerCountLabel.font.pointSize]];
         [self.videoCountLabel setFont:[UIFont regularCustomFontOfSize:14]];
     }
+	
+	self.descriptionLabel.backgroundColor = [UIColor colorWithRed:242.0f/255.0f green:242.0f/255.0f blue:242.0f/255.0f alpha:1.0f];
+
+	self.view.backgroundColor = [UIColor colorWithRed:242.0f/255.0f green:242.0f/255.0f blue:242.0f/255.0f alpha:1.0f];
+
 }
 
 - (void)setViewControllerDelegate: (id<SYNChannelMidCellDelegate>)  viewControllerDelegate {

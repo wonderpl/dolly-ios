@@ -54,7 +54,6 @@ typedef enum {
 -(void) setFollowButtonLabel:(NSString*) strFollowLabel;
 -(void) setBorder;
 -(void) setState:(ChannelMidCellState)state withAnimation:(BOOL) animated;
--(void) setCategoryColor: (UIColor*) color;
 -(void) descriptionAndDeleteAnimation;
 -(void) descriptionAnimation;
 

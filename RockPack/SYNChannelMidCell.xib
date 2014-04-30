@@ -35,7 +35,7 @@
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="DESCRIPTION" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="250" translatesAutoresizingMaskIntoConstraints="NO" id="96x-Ly-DNm">
                                 <rect key="frame" x="15" y="-1" width="250" height="80"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.80000000000000004" green="0.84313725490196079" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -86,7 +86,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="IsZ-bf-jJ2" firstAttribute="leading" secondItem="YqO-ZS-QBX" secondAttribute="leading" id="Fyu-gb-0VV"/>
                             <constraint firstAttribute="trailing" secondItem="HUn-aA-WSg" secondAttribute="trailing" id="Gyo-L1-j36"/>
@@ -100,7 +100,7 @@
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="YqO-ZS-QBX" firstAttribute="top" secondItem="3" secondAttribute="top" id="3Kn-dg-v2G"/>
                 <constraint firstAttribute="trailing" secondItem="YqO-ZS-QBX" secondAttribute="trailing" id="8ym-Re-8i3"/>
