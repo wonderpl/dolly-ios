@@ -485,10 +485,10 @@ typedef void (^SearchResultCompleteBlock)(int);
         SYNVideoCell *videoCell = [collectionView dequeueReusableCellWithReuseIdentifier:[SYNVideoCell reuseIdentifier]
                                                                                          forIndexPath:indexPath];
         
-         
-        videoCell.videoInstance = (VideoInstance*)(self.videosArray[indexPath.item]);
-        
-        
+		if (IS_IPHONE) {
+			videoCell.videoInstance = (VideoInstance*)(self.videosArray[indexPath.item]);
+		}
+			
         return videoCell;
     }
     else if (collectionView == self.usersCollectionView)
