@@ -11,83 +11,40 @@
 #import "Video.h"
 #import "NSString+Timecode.h"
 #import <UIImageView+WebCache.h>
+#import "SYNVideoActionsBar.h"
+
+@interface SYNCollectionVideoCell () <SYNVideoActionsBarDelegate>
+@property (nonatomic, strong) SYNVideoActionsBar *actionsBar;
+
+
+@end
 
 @implementation SYNCollectionVideoCell 
 
-
-- (void) awakeFromNib
-{
+- (void)awakeFromNib{
     [super awakeFromNib];
-    
-    self.titleLabel.font = [UIFont lightCustomFontOfSize:self.titleLabel.font.pointSize];
-    [self.likeControl setTitle: NSLocalizedString(@"like", @"Label for follow button on SYNAggregateVideoItemCell")
-                      andCount: 0];
-    
-    self.shareControl.title = NSLocalizedString(@"share", @"Label for share button on SYNAggregateVideoItemCell");
-    
-    self.timeStampLabel.font = [UIFont lightCustomFontOfSize:self.timeStampLabel.font.pointSize];
-    
-}
-
-#pragma mark - Social Callbacks
-
-- (IBAction) likeControlPressed: (SYNSocialButton *) socialButton
-{
-    [self.delegate likeControlPressed: socialButton];
-}
-
-- (IBAction) addControlPressed: (SYNSocialButton *) socialButton
-{
-    [self.delegate addControlPressed: socialButton];
-}
-
-- (IBAction) shareControlPressed: (SYNSocialButton *) socialButton
-{
-    [self.delegate shareControlPressed: socialButton];
-}
-
-
-- (IBAction)commentControlPressed:(SYNSocialButton*) socialButton {
-    
-    [self.delegate commentControlPressed: socialButton];
-    
+	self.actionsBar.frame = self.videoActionsContainer.bounds;
+	[self.videoActionsContainer addSubview:self.actionsBar];
+	
+	self.titleLabel.font = [UIFont boldCustomFontOfSize:self.titleLabel.font.pointSize];
+	self.durationLabel.font = [UIFont regularCustomFontOfSize:self.durationLabel.font.pointSize];
 }
 
 #pragma mark - Set Video Instance
 
-- (void) setVideoInstance: (VideoInstance *) videoInstance
-{
+- (void)setVideoInstance: (VideoInstance *) videoInstance{
     _videoInstance = videoInstance;
     
-    self.shareControl.dataItemLinked = _videoInstance;
-    self.addControl.dataItemLinked = _videoInstance;
-    self.likeControl.dataItemLinked = _videoInstance;
-    self.commentControl.dataItemLinked = _videoInstance;
+	
+	self.durationLabel.text = [NSString friendlyLengthFromTimeInterval:videoInstance.video.durationValue];
+
     
     if (!_videoInstance)
         return;
     
-    // == timestamp == //
-    
-    self.timeStampLabel.text = [NSString timecodeStringFromSeconds:videoInstance.video.durationValue];
-	CGFloat rightOffset = (CGRectGetWidth(self.frame) - CGRectGetMaxX(self.timeStampLabel.frame));
-	[self.timeStampLabel sizeToFit];
-	self.timeStampLabel.frame = CGRectMake(CGRectGetWidth(self.frame) - (rightOffset + CGRectGetWidth(self.timeStampLabel.frame)),
-										   CGRectGetMinY(self.timeStampLabel.frame),
-										   CGRectGetWidth(self.timeStampLabel.frame),
-										   CGRectGetHeight(self.timeStampLabel.frame));
-    
     [self.imageView setImageWithURL: [NSURL URLWithString: videoInstance.thumbnailURL]
                    placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
                             options: SDWebImageRetryFailed];
-    
-    
-    
-    self.likeControl.selected = videoInstance.starredByUserValue;
-    
-    [self.commentControl setTitle:[NSString stringWithFormat:@"%d", videoInstance.commentCountValue] forState:UIControlStateNormal];
-
-    
     
     self.titleLabel.text = videoInstance.title;
 }
@@ -95,8 +52,7 @@
 #pragma mark - Set delegate
 
 
--(void)setDelegate:(id<SYNSocialActionsDelegate>)delegate
-{
+- (void)setDelegate:(id<SYNSocialActionsDelegate>)delegate {
     _delegate = delegate;
     
     //set an extra delete delegate
@@ -106,8 +62,7 @@
 
 }
 
--(void) setUpVideoTap
-{
+- (void)setUpVideoTap {
     // Tap for showing video
     self.tap = [[UITapGestureRecognizer alloc] initWithTarget: self
                                                        action: @selector(showVideo)];
@@ -116,8 +71,7 @@
 }
 
 
--(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     UIColor *overLayColor = [UIColor colorWithRed: (57.0f / 255.0f)
                                             green: (57.0f / 255.0f)
                                              blue: (57.0f / 255.0f)
@@ -126,15 +80,36 @@
     [self.overlayView setBackgroundColor:overLayColor];
 }
 
--(void) touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
-{
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.overlayView setBackgroundColor:[UIColor clearColor]];
 }
 
--(void)showVideo
-{
+- (void)showVideo {
     [self.delegate videoButtonPressed:self];
 	[self.overlayView setBackgroundColor:[UIColor clearColor]];
+}
+
+
+- (SYNVideoActionsBar *)actionsBar {
+	if (!_actionsBar) {
+		SYNVideoActionsBar *bar = [SYNVideoActionsBar bar];
+		bar.delegate = self;
+		
+		self.actionsBar = bar;
+	}
+	return _actionsBar;
+}
+
+
+
+- (void)videoActionsBar:(SYNVideoActionsBar *)bar favouritesButtonPressed:(UIButton *)button {
+	
+}
+- (void)videoActionsBar:(SYNVideoActionsBar *)bar addToChannelButtonPressed:(UIButton *)button {
+	
+}
+- (void)videoActionsBar:(SYNVideoActionsBar *)bar shareButtonPressed:(UIButton *)button {
+	
 }
 
 

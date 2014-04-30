@@ -138,7 +138,6 @@
     [self.followerCountLabel setFont:[UIFont regularCustomFontOfSize:self.followerCountLabel.font.pointSize]];
     [self.followerCountLabel setFont:[UIFont regularCustomFontOfSize:self.followerCountLabel.font.pointSize]];
     [self setBorder];
-	[self setCategoryColor:[[SYNGenreManager sharedManager] colorForGenreWithId:channel.categoryId]];
 	
 	self.separatorView.hidden = NO;
 	
@@ -305,11 +304,6 @@
 	_state = state;
 }
 
-- (void)setCategoryColor: (UIColor*) color {
-//    [self.bottomBarView setBackgroundColor:color];
-    [self.view setBackgroundColor:color];
-    [self.descriptionLabel setBackgroundColor:color];
-}
 
 - (void)descriptionAnimation {
     self.state = ChannelMidCellStateAnimating;

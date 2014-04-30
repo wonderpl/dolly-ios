@@ -40,7 +40,7 @@
 #import "SYNStaticModel.h"
 #import "UIPlaceHolderTextView.h"
 
-#define kHeightChange 70.0f
+#define kHeightChange 40.0f
 #define FULL_NAME_LABEL_IPHONE 147.0f
 #define FULL_NAME_LABEL_IPAD_PORTRAIT 252.0f
 #define FULLNAMELABELIPADLANDSCAPE 258.0f
@@ -346,8 +346,7 @@
     
     self.dataItemsAvailable = self.channel.totalVideosValueValue;
     [self.btnEditChannel setTitle:NSLocalizedString(@"Edit", @"Edit mode button title, channel details")];
-    [self.btnShareChannel setTitle:NSLocalizedString(@"Share", @"Share a channel title, channel details")];
-    
+	self.btnShareChannel.layer.borderColor = [[UIColor whiteColor] CGColor];
 	[self setFollowButton];
     if ([self.channel.totalVideosValue integerValue] == 0) {
         self.lblNoVideos.hidden = NO;
@@ -707,20 +706,14 @@
     videoThumbnailCell.titleLabel.text = videoInstance.title;
     
     if (self.mode == kChannelDetailsModeEdit) {
-        videoThumbnailCell.likeControl.hidden = YES;
-        videoThumbnailCell.shareControl.hidden = YES;
-        videoThumbnailCell.addControl.hidden = YES;
-        videoThumbnailCell.commentControl.hidden = YES;
         videoThumbnailCell.deleteButton.hidden = NO;
+		videoThumbnailCell.videoActionsContainer.hidden = YES;
     }
     else
     {
-        videoThumbnailCell.likeControl.hidden = NO;
-        videoThumbnailCell.shareControl.hidden = NO;
-        videoThumbnailCell.addControl.hidden = NO;
-        videoThumbnailCell.commentControl.hidden = NO;
-
         videoThumbnailCell.deleteButton.hidden = YES;
+		videoThumbnailCell.videoActionsContainer.hidden = NO;
+
     }
     
     [videoThumbnailCell setVideoInstance:videoInstance];
@@ -784,16 +777,11 @@
         {
             self.videoCollectionViewLayoutIPadEdit.sectionInset = UIEdgeInsetsMake(0, 35, 0, 35);
             self.videoCollectionViewLayoutIPad.sectionInset = UIEdgeInsetsMake(0, 35, 0, 35);
-            
-            [self centreAllUi];
         }
         else
         {
             self.videoCollectionViewLayoutIPadEdit.sectionInset = UIEdgeInsetsMake(0, 10, 0, 10);
             self.videoCollectionViewLayoutIPad.sectionInset = UIEdgeInsetsMake(0, 10, 0, 10);
-            
-            [self centreAllUi];
-            
         }
     }
 }
@@ -804,15 +792,6 @@
     tmpPoint = viewToCentre.center;
     tmpPoint.x = [super view].center.x;
     viewToCentre.center = tmpPoint;
-}
-
--(void) centreAllUi
-{
-    
-    //   [self centreView:self.btnAvatar];
-    //    [self centreView:self.lblNoVideos];
-    //    [self centreView:self.viewProfileContainer];
-    
 }
 
 - (void) videoButtonPressed: (UIButton *) videoButton
@@ -1116,12 +1095,8 @@
             
             cell.frame = frame;
             
-            cell.likeControl.alpha = 0.0f;
-            cell.shareControl.alpha = 0.0f;
-            cell.addControl.alpha = 0.0f;
-            cell.commentControl.alpha = 0.0f;
             cell.deleteButton.alpha = 1.0f;
-            
+            cell.videoActionsContainer.alpha = 0.0f;
             
         };
         
@@ -1156,19 +1131,13 @@
     [self updateCollectionLayout];
     for (SYNCollectionVideoCell* cell in self.videoThumbnailCollectionView.visibleCells) {
         
-        cell.likeControl.hidden = NO;
-        cell.shareControl.hidden = NO;
-        cell.addControl.hidden = NO;
-        cell.commentControl.hidden = NO;
         cell.deleteButton.hidden = YES;
         
         void (^animateProfileMode)(void) = ^{
             
-            cell.likeControl.alpha = 1.0f;
-            cell.shareControl.alpha = 1.0f;
-            cell.addControl.alpha = 1.0f;
-            cell.commentControl.alpha = 1.0f;
             cell.deleteButton.alpha = 0.0f;
+			cell.videoActionsContainer.alpha = 1.0f;
+
         };
         
         [UIView transitionWithView:cell
