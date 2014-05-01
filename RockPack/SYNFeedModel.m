@@ -120,6 +120,15 @@
                                        }];
 }
 
+- (void)reset {
+	[super reset];
+	
+	self.feedItems = nil;
+	self.videoInstances = nil;
+	self.videoInstancesById = nil;
+	self.channelsById = nil;
+}
+
 #pragma mark - Private
 
 - (void)parseFeedResponse:(NSDictionary *)response existingFeedIds:(NSArray *)existingFeedIds completionBlock:(MKNKUserSuccessBlock)completionBlock {
