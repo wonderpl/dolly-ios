@@ -57,7 +57,7 @@
 
 + (void)deleteFeedItemsWithoutIds:(NSArray *)feedItemIds inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
 	NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[FeedItem entityName]];
-	[fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"viewId == %@ AND NOT (uniqueId IN %@)", kFeedViewId, feedItemIds]];
+	[fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"NOT (uniqueId IN %@)", feedItemIds]];
 	
 	NSArray *feedItems = [managedObjectContext executeFetchRequest:fetchRequest error:nil];
 	for (FeedItem *feedItem in feedItems) {
