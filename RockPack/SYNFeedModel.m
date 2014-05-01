@@ -141,18 +141,18 @@
 	__block NSArray *feedItemIds = nil;
 	
 	[managedObjectContext performBlock:^{
-		
 		NSArray *items = response[@"items"];
 		
 		NSArray *videoInstanceDictionaries = [items filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"video != nil"]];
 		NSDictionary *videoInstances = [VideoInstance videoInstancesFromDictionaries:videoInstanceDictionaries
 															  inManagedObjectContext:managedObjectContext];
 		
-		NSArray *channelDictionaries = [items filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"video = nil"]];
+		NSArray *channelDictionaries = [items filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"video == nil"]];
 		NSDictionary *channels = [Channel channelsFromDictionaries:channelDictionaries
 											inManagedObjectContext:managedObjectContext];
 		
-		NSDictionary *existingFeedItems = [FeedItem feedItemsWithIds:existingFeedIds
+		NSArray *feedItemIds = [items valueForKey:@"id"];
+		NSDictionary *existingFeedItems = [FeedItem feedItemsWithIds:feedItemIds
 											  inManagedObjectContext:managedObjectContext];
 		
 		NSMutableArray *newFeedItemIds = [NSMutableArray array];
