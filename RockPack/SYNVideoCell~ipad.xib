@@ -24,12 +24,18 @@
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="202" translatesAutoresizingMaskIntoConstraints="NO" id="MBO-Tm-H5n">
                         <rect key="frame" x="409" y="13" width="202" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="202" id="fcd-Ib-HNL"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CzY-os-IKU">
                         <rect key="frame" x="409" y="49" width="202" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="202" id="58I-7y-D9r"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <color key="textColor" red="0.46666666670000001" green="0.46666666670000001" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -43,10 +49,8 @@
                 <constraint firstItem="CzY-os-IKU" firstAttribute="top" secondItem="MBO-Tm-H5n" secondAttribute="bottom" constant="14" id="HDp-yd-BdD"/>
                 <constraint firstItem="MBO-Tm-H5n" firstAttribute="top" secondItem="INu-ko-zOO" secondAttribute="top" constant="13" id="aYt-vL-TV6"/>
                 <constraint firstItem="CzY-os-IKU" firstAttribute="leading" secondItem="yoN-ey-KqY" secondAttribute="trailing" constant="20" id="gdl-CT-gMj"/>
-                <constraint firstItem="yoN-ey-KqY" firstAttribute="leading" secondItem="INu-ko-zOO" secondAttribute="leading" constant="157" id="hRM-Xh-aUc"/>
-                <constraint firstAttribute="trailing" secondItem="CzY-os-IKU" secondAttribute="trailing" constant="157" id="vTd-Zy-vGl"/>
+                <constraint firstAttribute="centerX" secondItem="yoN-ey-KqY" secondAttribute="centerX" constant="111" id="i2f-Hr-vRK"/>
                 <constraint firstItem="MBO-Tm-H5n" firstAttribute="leading" secondItem="yoN-ey-KqY" secondAttribute="trailing" constant="20" id="vkO-v3-Vsr"/>
-                <constraint firstAttribute="trailing" secondItem="MBO-Tm-H5n" secondAttribute="trailing" constant="157" id="yer-ix-umF"/>
             </constraints>
             <size key="customSize" width="436" height="194"/>
             <connections>
