@@ -485,9 +485,7 @@ typedef void (^SearchResultCompleteBlock)(int);
         SYNVideoCell *videoCell = [collectionView dequeueReusableCellWithReuseIdentifier:[SYNVideoCell reuseIdentifier]
                                                                                          forIndexPath:indexPath];
         
-		if (IS_IPHONE) {
-			videoCell.videoInstance = (VideoInstance*)(self.videosArray[indexPath.item]);
-		}
+		videoCell.videoInstance = (VideoInstance*)(self.videosArray[indexPath.item]);
 			
         return videoCell;
     }
