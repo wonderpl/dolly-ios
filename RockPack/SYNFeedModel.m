@@ -151,8 +151,7 @@
 		NSDictionary *channels = [Channel channelsFromDictionaries:channelDictionaries
 											inManagedObjectContext:managedObjectContext];
 		
-		NSArray *feedItemIds = [items valueForKey:@"id"];
-		NSDictionary *existingFeedItems = [FeedItem feedItemsWithIds:feedItemIds
+		NSDictionary *existingFeedItems = [FeedItem feedItemsWithIds:[items valueForKey:@"id"]
 											  inManagedObjectContext:managedObjectContext];
 		
 		NSMutableArray *newFeedItemIds = [NSMutableArray array];
