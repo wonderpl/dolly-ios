@@ -15,6 +15,7 @@
 
 - (FeedItem *)feedItemAtindex:(NSInteger)index;
 - (id)resourceForFeedItem:(FeedItem *)feedItem;
+- (NSInteger)feedItemCount;
 
 - (NSInteger)itemIndexForFeedIndex:(NSInteger)feedIndex;
 

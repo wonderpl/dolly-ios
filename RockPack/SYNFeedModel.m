@@ -60,6 +60,10 @@
 	}
 }
 
+- (NSInteger)feedItemCount {
+	return [self.feedItems count];
+}
+
 - (NSInteger)itemIndexForFeedIndex:(NSInteger)feedIndex {
 	NSIndexSet *channelIndexes = [self.feedItems indexesOfObjectsPassingTest:^BOOL(FeedItem *feedItem, NSUInteger idx, BOOL *stop) {
 		if (idx == feedIndex) {
