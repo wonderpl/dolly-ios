@@ -17,7 +17,6 @@
 @interface SYNFeedModel ()
 
 @property (nonatomic, strong) NSArray *feedItems;
-@property (nonatomic, strong) NSArray *videoInstances;
 @property (nonatomic, strong) NSDictionary *videoInstancesById;
 @property (nonatomic, strong) NSDictionary *channelsById;
 
@@ -110,7 +109,6 @@
 																					  inManagedObjectContext:managedObjectContext];
 													   
 													   NSArray *videoInstances = [sself videoInstancesForFeedItems:feedItems];
-													   sself.videoInstances = videoInstances;
 													   
 													   [[SYNVideoThumbnailDownloader sharedDownloader] fetchThumbnailImagesForVideos:[videoInstances valueForKeyPath:@"video"]];
 													   
@@ -128,7 +126,6 @@
 	[super reset];
 	
 	self.feedItems = nil;
-	self.videoInstances = nil;
 	self.videoInstancesById = nil;
 	self.channelsById = nil;
 }
