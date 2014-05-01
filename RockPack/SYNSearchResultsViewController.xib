@@ -58,7 +58,7 @@
                     </constraints>
                 </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="4v1-Ly-eu6" userLabel="Users Collection View">
-                    <rect key="frame" x="20" y="10" width="614" height="686"/>
+                    <rect key="frame" x="14" y="10" width="626" height="686"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="4" minimumInteritemSpacing="0.0" id="hqH-9q-DcO">
@@ -113,9 +113,9 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="4v1-Ly-eu6" secondAttribute="trailing" constant="20" id="B80-xC-Aez"/>
+                <constraint firstAttribute="trailing" secondItem="4v1-Ly-eu6" secondAttribute="trailing" constant="14" id="B80-xC-Aez"/>
                 <constraint firstItem="SgG-lq-X96" firstAttribute="top" secondItem="4v1-Ly-eu6" secondAttribute="top" constant="-4" id="DTi-bd-TKG"/>
-                <constraint firstItem="4v1-Ly-eu6" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="20" id="WN0-mx-oSo"/>
+                <constraint firstItem="4v1-Ly-eu6" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="14" id="WN0-mx-oSo"/>
                 <constraint firstAttribute="centerX" secondItem="yYG-XK-TiE" secondAttribute="centerX" constant="-0.5" id="WTx-uu-f0W"/>
                 <constraint firstItem="6aJ-Lk-c1F" firstAttribute="top" secondItem="2" secondAttribute="top" constant="309" id="YFW-Sc-z8i"/>
                 <constraint firstAttribute="bottom" secondItem="4v1-Ly-eu6" secondAttribute="bottom" constant="-2" id="YO5-Mv-K7A"/>
