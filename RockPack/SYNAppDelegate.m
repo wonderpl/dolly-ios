@@ -69,8 +69,6 @@
 - (BOOL) application: (UIApplication *) application
          didFinishLaunchingWithOptions: (NSDictionary *) launchOptions
 {
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-
 #ifdef ENABLE_USER_RATINGS
     [Appirater setAppId:APP_ID];
     [Appirater setDaysUntilPrompt: 1];
