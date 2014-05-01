@@ -37,7 +37,7 @@ static const NSInteger DefaultBatchSize = 40;
 #pragma mark - Public
 
 - (BOOL)hasMoreItems {
-	return (self.loadedRange.location == NSNotFound || (NSMaxRange(self.loadedRange) < self.totalItemCount));
+	return (self.loadedRange.location == NSNotFound || self.totalItemCount == NSNotFound || (NSMaxRange(self.loadedRange) < self.totalItemCount));
 }
 
 - (NSInteger)itemCount {
