@@ -206,8 +206,6 @@ typedef void (^SearchResultCompleteBlock)(int);
 															   blue: 219.0f / 255.0f
 															  alpha: 1.0f] CGColor];
 	
-//	self.topVideoCollectionConstraint.constant = 0;
-//	self.topUserCollectionConstraint.constant = 0;
 
 }
 
@@ -377,7 +375,7 @@ typedef void (^SearchResultCompleteBlock)(int);
 		self.topVideoContraint.constant = 111;
 
 	} else {
-		self.topVideoContraint.constant = 39;
+		self.topVideoContraint.constant = 49;
 	}
 	
 	self.segmentedContainer.hidden = NO;
@@ -500,7 +498,7 @@ typedef void (^SearchResultCompleteBlock)(int);
     if (collectionView == self.videosCollectionView)
     {
 		
-		BOOL isLargeCell = IS_IPAD && UIDeviceOrientationIsPortrait([[SYNDeviceManager sharedInstance] orientation]);
+		BOOL isLargeCell = IS_IPAD && UIDeviceOrientationIsLandscape([[SYNDeviceManager sharedInstance] orientation]);
 		
 		NSString *reuseIdentifier = (isLargeCell ? [SYNSearchVideoLargeCell reuseIdentifier]
 									 : [SYNSearchVideoSmallCell reuseIdentifier]);
@@ -601,20 +599,20 @@ typedef void (^SearchResultCompleteBlock)(int);
             
             if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation])) {
                 if (indexPath.row == 0) {
-                    return CGSizeMake(375, 210);
+                    return CGSizeMake(360, 210);
                 } else if (indexPath.row == 1 || indexPath.row == 2) {
-                    return CGSizeMake(375, 165);
+                    return CGSizeMake(360, 165);
                 } else {
-                    return CGSizeMake(375, 102);
+                    return CGSizeMake(360, 102);
                 }
             } else {
                 
                 if (indexPath.row == 0) {
-                    return CGSizeMake(592, 210);
+                    return CGSizeMake(582, 210);
                 } else if (indexPath.row == 1 || indexPath.row == 2) {
-                    return CGSizeMake(290, 164);
+                    return CGSizeMake(282, 164);
                 } else {
-                    return CGSizeMake(290, 102);
+                    return CGSizeMake(282, 102);
                 }
             }
         }
@@ -631,10 +629,9 @@ typedef void (^SearchResultCompleteBlock)(int);
 		} else {
 			
 			if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation])) {
-				return CGSizeMake(320, 104);
+				return CGSizeMake(386, 90);
 			} else {
-				return CGSizeMake(706, 164);
-				
+				return CGSizeMake(604, 148);
 			}
 		}
 		
@@ -699,6 +696,17 @@ referenceSizeForFooterInSection: (NSInteger) section
                                           duration: (NSTimeInterval) duration
 {
     [self.usersCollectionView.collectionViewLayout invalidateLayout];
+	[self.videosCollectionView.collectionViewLayout invalidateLayout];
+	
+	
+	
+	if (UIDeviceOrientationIsPortrait([[SYNDeviceManager sharedInstance] orientation])) {
+		
+		
+	} else {
+		
+		
+	}
 	
 	[self.usersCollectionView reloadData];
 	[self.videosCollectionView reloadData];

@@ -7,35 +7,29 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Eqg-Tq-get" customClass="SYNSearchVideoLargeCell">
-            <rect key="frame" x="0.0" y="0.0" width="488" height="156"/>
+            <rect key="frame" x="0.0" y="0.0" width="488" height="142"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="488" height="156"/>
+                <rect key="frame" x="0.0" y="0.0" width="488" height="142"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2WU-40-wB8">
-                        <rect key="frame" x="13" y="13" width="232" height="130"/>
+                        <rect key="frame" x="13" y="0.0" width="232" height="130"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="130" id="WUz-rp-nPo"/>
-                            <constraint firstAttribute="width" constant="232" id="Z6B-Wb-pn7"/>
+                            <constraint firstAttribute="width" constant="232" id="aTh-jV-6qb"/>
+                            <constraint firstAttribute="height" constant="130" id="iYu-us-aDb"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="202" translatesAutoresizingMaskIntoConstraints="NO" id="u6v-Dc-uIc">
-                        <rect key="frame" x="265" y="13" width="202" height="22"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="203" translatesAutoresizingMaskIntoConstraints="NO" id="u6v-Dc-uIc">
+                        <rect key="frame" x="265" y="6" width="203" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="202" id="3Gs-C6-j3M"/>
-                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fcu-nE-2kS">
-                        <rect key="frame" x="265" y="49" width="202" height="20"/>
+                        <rect key="frame" x="265" y="95" width="203" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="202" id="FrW-Ix-ngv"/>
-                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <color key="textColor" red="0.46666666670000001" green="0.46666666670000001" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -44,15 +38,16 @@
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
-                <constraint firstItem="2WU-40-wB8" firstAttribute="top" secondItem="Eqg-Tq-get" secondAttribute="top" constant="13" id="4GA-27-OI6"/>
-                <constraint firstItem="Fcu-nE-2kS" firstAttribute="top" secondItem="u6v-Dc-uIc" secondAttribute="bottom" constant="14" id="4vc-lh-xQh"/>
-                <constraint firstAttribute="centerX" secondItem="2WU-40-wB8" secondAttribute="centerX" constant="115" id="Iqc-5z-FLE"/>
-                <constraint firstItem="Fcu-nE-2kS" firstAttribute="leading" secondItem="2WU-40-wB8" secondAttribute="trailing" constant="20" id="OVA-rs-bv6"/>
-                <constraint firstAttribute="bottom" secondItem="2WU-40-wB8" secondAttribute="bottom" constant="13" id="YW4-lh-a5T"/>
-                <constraint firstItem="u6v-Dc-uIc" firstAttribute="top" secondItem="Eqg-Tq-get" secondAttribute="top" constant="13" id="gmd-wk-WBd"/>
-                <constraint firstItem="u6v-Dc-uIc" firstAttribute="leading" secondItem="2WU-40-wB8" secondAttribute="trailing" constant="20" id="oR5-W6-1D8"/>
+                <constraint firstItem="u6v-Dc-uIc" firstAttribute="top" secondItem="Eqg-Tq-get" secondAttribute="top" constant="6" id="5y2-6u-arB"/>
+                <constraint firstItem="Fcu-nE-2kS" firstAttribute="bottom" secondItem="2WU-40-wB8" secondAttribute="bottom" constant="-15" id="625-Q9-5mj"/>
+                <constraint firstItem="2WU-40-wB8" firstAttribute="top" secondItem="Eqg-Tq-get" secondAttribute="top" id="CsS-xm-zaY"/>
+                <constraint firstItem="u6v-Dc-uIc" firstAttribute="leading" secondItem="2WU-40-wB8" secondAttribute="trailing" constant="20" id="DXp-i9-m0I"/>
+                <constraint firstAttribute="trailing" secondItem="u6v-Dc-uIc" secondAttribute="trailing" constant="20" id="Hnt-T0-x2c"/>
+                <constraint firstAttribute="trailing" secondItem="Fcu-nE-2kS" secondAttribute="trailing" constant="20" id="KAV-t9-dWZ"/>
+                <constraint firstItem="2WU-40-wB8" firstAttribute="leading" secondItem="Eqg-Tq-get" secondAttribute="leading" constant="13" id="qNp-I1-0Ii"/>
+                <constraint firstItem="Fcu-nE-2kS" firstAttribute="leading" secondItem="2WU-40-wB8" secondAttribute="trailing" constant="20" id="xqg-GX-Xzc"/>
             </constraints>
-            <size key="customSize" width="156" height="194"/>
+            <size key="customSize" width="156" height="180"/>
             <connections>
                 <outlet property="originatorLabel" destination="Fcu-nE-2kS" id="g7d-wF-5wS"/>
                 <outlet property="thumbnailImageView" destination="2WU-40-wB8" id="aoW-VG-l0v"/>
