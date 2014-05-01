@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -28,7 +28,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G7o-1C-Vhn">
-                        <rect key="frame" x="155" y="38" width="151" height="15"/>
+                        <rect key="frame" x="155" y="53" width="151" height="15"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.46666666666666667" green="0.46666666666666667" blue="0.50980392156862742" alpha="1" colorSpace="calibratedRGB"/>
@@ -39,7 +39,7 @@
             </view>
             <constraints>
                 <constraint firstItem="Hmt-Kr-EPV" firstAttribute="leading" secondItem="CTh-7c-UI1" secondAttribute="leading" constant="14" id="6UR-AS-Aa0"/>
-                <constraint firstItem="G7o-1C-Vhn" firstAttribute="top" secondItem="MvQ-IY-rFl" secondAttribute="bottom" constant="14" id="Awm-XV-3qJ"/>
+                <constraint firstAttribute="bottom" secondItem="G7o-1C-Vhn" secondAttribute="bottom" constant="17" id="HXF-Cg-YgV"/>
                 <constraint firstAttribute="trailing" secondItem="G7o-1C-Vhn" secondAttribute="trailing" constant="14" id="Is4-uZ-TB6"/>
                 <constraint firstItem="Hmt-Kr-EPV" firstAttribute="top" secondItem="CTh-7c-UI1" secondAttribute="top" constant="7" id="Rm7-Da-edo"/>
                 <constraint firstItem="MvQ-IY-rFl" firstAttribute="top" secondItem="CTh-7c-UI1" secondAttribute="top" constant="7" id="Sgj-fG-82W"/>
