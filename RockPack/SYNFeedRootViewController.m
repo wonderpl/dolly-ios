@@ -63,6 +63,8 @@
 
 - (void) viewDidLoad
 {
+	[FeedItem deleteFeedItemsInManagedObjectContext:appDelegate.mainManagedObjectContext];
+	
     [super viewDidLoad];
 	
 	self.model = [[SYNFeedModel alloc] init];

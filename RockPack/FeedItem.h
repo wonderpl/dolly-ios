@@ -15,6 +15,8 @@
 
 + (NSArray *)orderedFeedItemsWithIds:(NSArray *)feedItemIds inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 
++ (void)deleteFeedItemsInManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
+
 + (void)deleteFeedItemsWithoutIds:(NSArray *)feedItemIds inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 
 @end

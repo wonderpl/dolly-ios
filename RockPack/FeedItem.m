@@ -55,6 +55,15 @@
 	return array;
 }
 
++ (void)deleteFeedItemsInManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
+	NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[FeedItem entityName]];
+	
+	NSArray *feedItems = [managedObjectContext executeFetchRequest:fetchRequest error:nil];
+	for (FeedItem *feedItem in feedItems) {
+		[managedObjectContext deleteObject:feedItem];
+	}
+}
+
 + (void)deleteFeedItemsWithoutIds:(NSArray *)feedItemIds inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
 	NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[FeedItem entityName]];
 	[fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"NOT (uniqueId IN %@)", feedItemIds]];
