@@ -7,6 +7,7 @@
 //
 
 #import "SYNFeedRootViewController.h"
+#import "SYNMasterViewController.h"
 #import "Channel.h"
 #import "ChannelOwner.h"
 #import "FeedItem.h"
