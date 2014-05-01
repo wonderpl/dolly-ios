@@ -39,10 +39,10 @@
                     </connections>
                 </collectionView>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="FGp-za-xxN" userLabel="Videos Collection View">
-                    <rect key="frame" x="0.0" y="105" width="320" height="453"/>
+                    <rect key="frame" x="0.0" y="101" width="320" height="453"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="0.0" id="opl-dc-RQT">
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="opl-dc-RQT">
                         <size key="itemSize" width="320" height="382"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -113,10 +113,10 @@
                 <constraint firstItem="FGp-za-xxN" firstAttribute="leading" secondItem="pzo-pG-kmB" secondAttribute="leading" id="50H-qq-3Dv"/>
                 <constraint firstItem="Xpe-E2-vgS" firstAttribute="leading" secondItem="pzo-pG-kmB" secondAttribute="leading" id="8I3-ip-zdI"/>
                 <constraint firstAttribute="trailing" secondItem="FGp-za-xxN" secondAttribute="trailing" id="PGH-XU-hUW"/>
-                <constraint firstAttribute="bottom" secondItem="FGp-za-xxN" secondAttribute="bottom" constant="10" id="QKq-8L-x8O"/>
+                <constraint firstAttribute="bottom" secondItem="FGp-za-xxN" secondAttribute="bottom" constant="14" id="QKq-8L-x8O"/>
                 <constraint firstAttribute="trailing" secondItem="Xpe-E2-vgS" secondAttribute="trailing" id="SBP-B8-5Or"/>
                 <constraint firstItem="Xpe-E2-vgS" firstAttribute="top" secondItem="pzo-pG-kmB" secondAttribute="top" constant="111" id="azm-s7-Fah"/>
-                <constraint firstItem="FGp-za-xxN" firstAttribute="top" secondItem="pzo-pG-kmB" secondAttribute="top" constant="105" id="b6b-8G-Ugw"/>
+                <constraint firstItem="FGp-za-xxN" firstAttribute="top" secondItem="pzo-pG-kmB" secondAttribute="top" constant="101" id="b6b-8G-Ugw"/>
                 <constraint firstAttribute="centerY" secondItem="9AH-zX-4as" secondAttribute="centerY" id="gGk-k1-wtS"/>
                 <constraint firstAttribute="centerY" secondItem="bZV-Ur-AjO" secondAttribute="centerY" id="noF-1s-tIU"/>
                 <constraint firstAttribute="bottom" secondItem="Xpe-E2-vgS" secondAttribute="bottom" id="qAc-fT-W7b"/>

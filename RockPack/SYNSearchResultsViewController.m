@@ -9,8 +9,6 @@
 #import "SYNNetworkEngine.h"
 #import "SYNSearchResultsCell.h"
 #import "SYNSearchResultsUserCell.h"
-#import "SYNSearchResultsVideoCell.h"
-#import "SYNVideoCell.h"
 #import "SYNSearchResultsViewController.h"
 #import "UIFont+SYNFont.h"
 #import "SYNChannelFooterMoreView.h"
@@ -29,6 +27,10 @@
 #import "SYNTrackingManager.h"
 #import "SYNVideoPlayerViewController.h"
 #import "SYNStaticModel.h"
+#import "SYNSearchVideoCell.h"
+#import "SYNVideoCell.h"
+#import "SYNSearchVideoLargeCell.h"
+#import "SYNSearchVideoSmallCell.h"
 
 typedef NS_ENUM(NSInteger, SYNSearchType) {
 	SYNSearchTypeUndefined,
@@ -92,14 +94,18 @@ typedef void (^SearchResultCompleteBlock)(int);
     
     
     self.view.autoresizesSubviews = YES;
+	
+    [self.videosCollectionView registerNib:[SYNSearchVideoCell nib]
+                forCellWithReuseIdentifier:[SYNSearchVideoCell reuseIdentifier]];
     
-	[self.videosCollectionView registerNib:[SYNSearchResultsVideoCell nib]
-                forCellWithReuseIdentifier:[SYNSearchResultsVideoCell reuseIdentifier]];
+	[self.videosCollectionView registerNib:[SYNSearchVideoLargeCell nib]
+                forCellWithReuseIdentifier:[SYNSearchVideoLargeCell reuseIdentifier]];
 
 	
-    [self.videosCollectionView registerNib:[SYNVideoCell nib]
-                forCellWithReuseIdentifier:[SYNVideoCell reuseIdentifier]];
-    
+	[self.videosCollectionView registerNib:[SYNSearchVideoSmallCell nib]
+                forCellWithReuseIdentifier:[SYNSearchVideoSmallCell reuseIdentifier]];
+
+	
     [self.videosCollectionView registerNib:[SYNChannelFooterMoreView nib]
                 forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
                        withReuseIdentifier:[SYNChannelFooterMoreView reuseIdentifier]];
@@ -482,7 +488,14 @@ typedef void (^SearchResultCompleteBlock)(int);
     
     if (collectionView == self.videosCollectionView)
     {
-        SYNVideoCell *videoCell = [collectionView dequeueReusableCellWithReuseIdentifier:[SYNVideoCell reuseIdentifier]
+		
+		BOOL isLargeCell = IS_IPAD && UIDeviceOrientationIsPortrait([[SYNDeviceManager sharedInstance] orientation]);
+		
+		NSString *reuseIdentifier = (isLargeCell ? [SYNSearchVideoLargeCell reuseIdentifier]
+									 : [SYNSearchVideoSmallCell reuseIdentifier]);
+
+		
+        SYNSearchVideoCell *videoCell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier
                                                                                          forIndexPath:indexPath];
         
 		videoCell.videoInstance = (VideoInstance*)(self.videosArray[indexPath.item]);
@@ -558,7 +571,7 @@ typedef void (^SearchResultCompleteBlock)(int);
 }
 
 - (id<SYNVideoInfoCell>)videoCellForIndexPath:(NSIndexPath *)indexPath {
-	return (SYNSearchResultsVideoCell *)[self.videosCollectionView cellForItemAtIndexPath:indexPath];
+	return (SYNSearchVideoCell *)[self.videosCollectionView cellForItemAtIndexPath:indexPath];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -607,7 +620,7 @@ typedef void (^SearchResultCompleteBlock)(int);
 		} else {
 			
 			if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation])) {
-				return CGSizeMake(380, 104);
+				return CGSizeMake(320, 104);
 			} else {
 				return CGSizeMake(706, 164);
 				

@@ -287,6 +287,11 @@
 		4C03237A18AE6F8300E168EF /* SYNFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C03237918AE6F8300E168EF /* SYNFriendCell.m */; };
 		4C03237C18AE6F9E00E168EF /* SYNFriendCell~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C03237B18AE6F9E00E168EF /* SYNFriendCell~iphone.xib */; };
 		4C03237E18AE6FBD00E168EF /* SYNFriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C03237D18AE6FBD00E168EF /* SYNFriendCell.xib */; };
+		4C0B956819128186008D8036 /* SYNSearchVideoSmallCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C0B956719128186008D8036 /* SYNSearchVideoSmallCell.m */; };
+		4C0B956C19128262008D8036 /* SYNSearchVideoSmallCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C0B956B19128262008D8036 /* SYNSearchVideoSmallCell.xib */; };
+		4C0B956F1912838F008D8036 /* SYNSearchVideoLargeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C0B956E1912838F008D8036 /* SYNSearchVideoLargeCell.m */; };
+		4C0B9571191283D8008D8036 /* SYNSearchVideoLargeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C0B9570191283D8008D8036 /* SYNSearchVideoLargeCell.xib */; };
+		4C0B957419128787008D8036 /* SYNSearchVideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C0B957319128787008D8036 /* SYNSearchVideoCell.m */; };
 		4C102A3C1896D80E00C367E8 /* IconWonderAbout.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C102A3A1896D80E00C367E8 /* IconWonderAbout.png */; };
 		4C102A3D1896D80E00C367E8 /* IconWonderAbout@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C102A3B1896D80E00C367E8 /* IconWonderAbout@2x.png */; };
 		4C1DBBEC18E48E5D0047CAFA /* SYNIPadSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C1DBBEB18E48E5D0047CAFA /* SYNIPadSignupViewController.m */; };
@@ -1124,6 +1129,14 @@
 		4C03237918AE6F8300E168EF /* SYNFriendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNFriendCell.m; sourceTree = "<group>"; };
 		4C03237B18AE6F9E00E168EF /* SYNFriendCell~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNFriendCell~iphone.xib"; sourceTree = "<group>"; };
 		4C03237D18AE6FBD00E168EF /* SYNFriendCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNFriendCell.xib; sourceTree = "<group>"; };
+		4C0B956619128186008D8036 /* SYNSearchVideoSmallCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNSearchVideoSmallCell.h; sourceTree = "<group>"; };
+		4C0B956719128186008D8036 /* SYNSearchVideoSmallCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNSearchVideoSmallCell.m; sourceTree = "<group>"; };
+		4C0B956B19128262008D8036 /* SYNSearchVideoSmallCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNSearchVideoSmallCell.xib; sourceTree = "<group>"; };
+		4C0B956D1912838F008D8036 /* SYNSearchVideoLargeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNSearchVideoLargeCell.h; sourceTree = "<group>"; };
+		4C0B956E1912838F008D8036 /* SYNSearchVideoLargeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNSearchVideoLargeCell.m; sourceTree = "<group>"; };
+		4C0B9570191283D8008D8036 /* SYNSearchVideoLargeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNSearchVideoLargeCell.xib; sourceTree = "<group>"; };
+		4C0B957219128787008D8036 /* SYNSearchVideoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNSearchVideoCell.h; sourceTree = "<group>"; };
+		4C0B957319128787008D8036 /* SYNSearchVideoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNSearchVideoCell.m; sourceTree = "<group>"; };
 		4C0CAF3918EB0ABA004A2911 /* SYNProfileNavigationBarDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYNProfileNavigationBarDelegate.h; sourceTree = "<group>"; };
 		4C102A3A1896D80E00C367E8 /* IconWonderAbout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IconWonderAbout.png; sourceTree = "<group>"; };
 		4C102A3B1896D80E00C367E8 /* IconWonderAbout@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "IconWonderAbout@2x.png"; sourceTree = "<group>"; };
@@ -3764,6 +3777,14 @@
 		BEB313521817D70500FAF98A /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				4C0B957219128787008D8036 /* SYNSearchVideoCell.h */,
+				4C0B957319128787008D8036 /* SYNSearchVideoCell.m */,
+				4C0B956619128186008D8036 /* SYNSearchVideoSmallCell.h */,
+				4C0B956719128186008D8036 /* SYNSearchVideoSmallCell.m */,
+				4C0B956B19128262008D8036 /* SYNSearchVideoSmallCell.xib */,
+				4C0B956D1912838F008D8036 /* SYNSearchVideoLargeCell.h */,
+				4C0B956E1912838F008D8036 /* SYNSearchVideoLargeCell.m */,
+				4C0B9570191283D8008D8036 /* SYNSearchVideoLargeCell.xib */,
 				BEB31380181ECAE900FAF98A /* SYNSearchResultsCell.h */,
 				BEB31381181ECAE900FAF98A /* SYNSearchResultsCell.m */,
 				BEB313481817D46B00FAF98A /* SYNSearchResultsVideoCell.h */,
@@ -4406,6 +4427,7 @@
 				1F4E7FB8181ACBAA00F59007 /* TabFeedSelected~iphone.png in Resources */,
 				4CADB33818F2C34E00409996 /* MoodsSelected@2x.png in Resources */,
 				1F458B2F17E1CE8E003C14AC /* AppIcon-Dev-76x76@2x.png in Resources */,
+				4C0B9571191283D8008D8036 /* SYNSearchVideoLargeCell.xib in Resources */,
 				E99B8D3E1892AD9500E08ABD /* ScrubberBarHD.png in Resources */,
 				E905A93B189ABBCB00FED785 /* SYNNotificationsTableViewCell~ipad.xib in Resources */,
 				E9C1A05B18F8448E00CC3F3E /* SYNVideoActionsCell.xib in Resources */,
@@ -4542,6 +4564,7 @@
 				E91E3B2118C7292400F79020 /* ButtonVideoDeleteDefault.png in Resources */,
 				010AAEA717D9EF48001DD5FA /* ShareTwitterButton@2x.png in Resources */,
 				BEF5ED8F17DE061E006EF5A1 /* ShareAddEntry.jpg in Resources */,
+				4C0B956C19128262008D8036 /* SYNSearchVideoSmallCell.xib in Resources */,
 				BEF5ED9017DE061E006EF5A1 /* ShareAddEntry@2x.jpg in Resources */,
 				BEF5ED9117DE061E006EF5A1 /* ShareAddEntrySmall.jpg in Resources */,
 				BEF5ED9217DE061E006EF5A1 /* ShareAddEntrySmall@2x.jpg in Resources */,
@@ -4653,6 +4676,7 @@
 				010DEFE11629BDC40080F26B /* main.m in Sources */,
 				010DEFE51629BDC40080F26B /* SYNAppDelegate.m in Sources */,
 				E9B068E8185B62F500C98AEB /* SYNSearchVideoPlayerViewController.m in Sources */,
+				4C0B956819128186008D8036 /* SYNSearchVideoSmallCell.m in Sources */,
 				015AC9FD181EB86E0020E685 /* SYNAggregateFlowLayout.m in Sources */,
 				0198250D1629DCF100216900 /* SYNContainerViewController.m in Sources */,
 				E92D3358184CDFEA0025D1DF /* UICollectionReusableView+Helpers.m in Sources */,
@@ -4742,6 +4766,7 @@
 				E9E1E28018561C780051E312 /* SYNiPhonePopoverAnimator.m in Sources */,
 				E9EE08DF18F8089F000DC06A /* SYNVideoActionsCell.m in Sources */,
 				015487CF16DCD2A1002A41A2 /* SYNYouTubeVideoPlaybackViewController.m in Sources */,
+				4C0B956F1912838F008D8036 /* SYNSearchVideoLargeCell.m in Sources */,
 				0194FD2316DE6FE90058A7C2 /* SYNVideoThumbnailCell.m in Sources */,
 				4C72DD4A18FD96E6004AC132 /* SYNFollowChannelButton.m in Sources */,
 				0173F70816E0C56B005B3ECA /* SYNVideoViewerThumbnailLayout.m in Sources */,
@@ -4858,6 +4883,7 @@
 				E91D4105187DAE5D00E712CC /* SYNLoginManager.m in Sources */,
 				E9C2A58D1899231500FC50D3 /* SYNGradientSeparatorView.m in Sources */,
 				011C1682173003E800CF50B9 /* OWSaveToCameraRollActivity.m in Sources */,
+				4C0B957419128787008D8036 /* SYNSearchVideoCell.m in Sources */,
 				011C1683173003E800CF50B9 /* OWSinaWeiboActivity.m in Sources */,
 				E9F7CC7C1846562F0026C97D /* SYNVideoPlayerViewController.m in Sources */,
 				011C1684173003E800CF50B9 /* OWTwitterActivity.m in Sources */,

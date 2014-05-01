@@ -17,15 +17,14 @@
 
 @interface SYNCollectionVideoCell : UICollectionViewCell <SYNVideoInfoCell>
  
-@property (strong, nonatomic) IBOutlet UILabel *durationLabel;
-
-@property (strong, nonatomic) IBOutlet UIButton *deleteButton;
+@property (nonatomic, strong) IBOutlet UILabel *durationLabel;
+@property (nonatomic, strong) IBOutlet UIButton *deleteButton;
 @property (nonatomic, strong) IBOutlet UIImageView* imageView;
 @property (nonatomic, strong) IBOutlet UILabel* titleLabel;
-@property (nonatomic, strong) UITapGestureRecognizer *tap;
-@property (strong, nonatomic) IBOutlet UIView *overlayView;
-@property (strong, nonatomic) IBOutlet UIView *videoActionsContainer;
+@property (nonatomic, strong) IBOutlet UIView *overlayView;
+@property (nonatomic, strong) IBOutlet UIView *videoActionsContainer;
 
+@property (nonatomic, strong) UITapGestureRecognizer *tap;
 
 @property (nonatomic, weak) id<SYNSocialActionsDelegate> delegate;
 @property (nonatomic, weak) VideoInstance* videoInstance;
