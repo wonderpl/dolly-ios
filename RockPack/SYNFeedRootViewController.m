@@ -116,8 +116,6 @@
 	[super viewDidAppear:animated];
 	
 	[[SYNTrackingManager sharedManager] trackFeedScreenView];
-	
-	[self.model loadNextPage];
 }
 
 
