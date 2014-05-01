@@ -7,20 +7,15 @@
 //
 
 #import "SYNFeedRootViewController.h"
-#import "AppConstants.h"
 #import "Channel.h"
 #import "ChannelOwner.h"
 #import "FeedItem.h"
-#import "SYNAppDelegate.h"
-#import "SYNOAuthNetworkEngine.h"
-#import "SYNMasterViewController.h"
 #import <UIButton+WebCache.h>
 #import <UIImageView+WebCache.h>
 #import "Video.h"
 #import "VideoInstance.h"
 #import "UICollectionReusableView+Helpers.h"
 #import "SYNFeedModel.h"
-#import "SYNAggregateVideoItemCell.h"
 #import "SYNVideoPlayerAnimator.h"
 #import "UIColor+SYNColor.h"
 #import "SYNTrackingManager.h"
@@ -31,8 +26,6 @@
 #import "SYNFeedChannelCell.h"
 #import "SYNOneToOneSharingController.h"
 #import "UIDevice+Helpers.h"
-#import "SYNFeedVideoLargeCell.h"
-#import "SYNFeedVideoSmallCell.h"
 #import "SYNIPhoneFeedRootViewController.h"
 #import "SYNIPadFeedRootViewController.h"
 #import "UINavigationBar+Appearance.h"
