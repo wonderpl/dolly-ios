@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SYNVideoInfoCell.h"
 
 @class VideoInstance;
 
-@interface SYNSearchVideoCell : UICollectionViewCell
+@interface SYNSearchVideoCell : UICollectionViewCell <SYNVideoInfoCell>
 
 
 @property (nonatomic, strong) VideoInstance *videoInstance;

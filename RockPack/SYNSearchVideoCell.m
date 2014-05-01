@@ -11,9 +11,8 @@
 #import "ChannelOwner.h"
 #import "UIFont+SYNFont.h"
 #import <UIImageView+WebCache.h>
-#import "SYNVideoInfoCell.h"
 
-@interface SYNSearchVideoCell () <SYNVideoInfoCell>
+@interface SYNSearchVideoCell ()
 
 @property (nonatomic, strong) IBOutlet UIImageView *thumbnailImageView;
 @property (nonatomic, strong) IBOutlet UILabel *titleLabel;

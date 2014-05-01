@@ -205,6 +205,9 @@ typedef void (^SearchResultCompleteBlock)(int);
 															  green: 217.0f / 255.0f
 															   blue: 219.0f / 255.0f
 															  alpha: 1.0f] CGColor];
+	
+//	self.topVideoCollectionConstraint.constant = 0;
+//	self.topUserCollectionConstraint.constant = 0;
 
 }
 
@@ -309,9 +312,13 @@ typedef void (^SearchResultCompleteBlock)(int);
 - (void) searchForGenre: (NSString *) genreId
 {	
 	if (IS_IPHONE) {
-		self.segmentedContainer.hidden = YES;
-		[self.topVideoContraint setConstant:65];
+		self.topVideoContraint.constant = 0;
+	} else {
+		self.topVideoContraint.constant = 0;
 	}
+	
+	self.segmentedContainer.hidden = YES;
+
 	Genre *genre = [[SYNGenreManager sharedManager] genreWithId:genreId];
 	[[SYNTrackingManager sharedManager] setCategoryDimension:genre.name];
 	
@@ -367,10 +374,14 @@ typedef void (^SearchResultCompleteBlock)(int);
 {
 	
 	if (IS_IPHONE) {
-		self.segmentedContainer.hidden = NO;
-		[self.topVideoContraint setConstant:111];
+		self.topVideoContraint.constant = 111;
+
+	} else {
+		self.topVideoContraint.constant = 39;
 	}
 	
+	self.segmentedContainer.hidden = NO;
+
 	[[SYNTrackingManager sharedManager] setCategoryDimension:nil];
 	
 	self.searchType = SYNSearchTypeSearch;
@@ -599,11 +610,11 @@ typedef void (^SearchResultCompleteBlock)(int);
             } else {
                 
                 if (indexPath.row == 0) {
-                    return CGSizeMake(610, 210);
+                    return CGSizeMake(592, 210);
                 } else if (indexPath.row == 1 || indexPath.row == 2) {
-                    return CGSizeMake(300, 164);
+                    return CGSizeMake(290, 164);
                 } else {
-                    return CGSizeMake(300, 102);
+                    return CGSizeMake(290, 102);
                 }
             }
         }
