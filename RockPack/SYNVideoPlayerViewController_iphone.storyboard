@@ -147,7 +147,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="240"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4oD-Wt-Kqr">
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4oD-Wt-Kqr">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="240"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -165,6 +165,12 @@
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="4oD-Wt-Kqr" secondAttribute="trailing" id="9E7-4s-lzy"/>
+                            <constraint firstItem="TqB-dW-ZGC" firstAttribute="top" secondItem="4oD-Wt-Kqr" secondAttribute="bottom" id="I3m-z0-n7Q"/>
+                            <constraint firstItem="4oD-Wt-Kqr" firstAttribute="leading" secondItem="6Im-DH-KHj" secondAttribute="leading" id="VaJ-zU-4C6"/>
+                            <constraint firstItem="4oD-Wt-Kqr" firstAttribute="top" secondItem="u4d-x3-aE5" secondAttribute="bottom" id="xcD-I6-stX"/>
+                        </constraints>
                     </view>
                     <toolbarItems/>
                     <connections>
