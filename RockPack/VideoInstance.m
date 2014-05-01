@@ -30,7 +30,11 @@ static NSDateFormatter *dateFormatter = nil;
     instance.starredByUserValue = existingInstance.starredByUserValue;
     instance.video = [Video	instanceFromVideo: existingInstance.video
                     usingManagedObjectContext: managedObjectContext];
-    
+	instance.originator = [ChannelOwner instanceFromChannelOwner:existingInstance.originator
+													   andViewId:existingInstance.viewId
+									   usingManagedObjectContext:managedObjectContext
+											 ignoringObjectTypes:kIgnoreNothing];
+	
     if (!(ignoringObjects & kIgnoreChannelObjects))
     {
         instance.channel = [Channel	instanceFromChannel: existingInstance.channel
@@ -80,7 +84,7 @@ static NSDateFormatter *dateFormatter = nil;
 		
 		videoInstance.video = videos[videoId];
 		videoInstance.channel = channels[channelId];
-		videoInstance.originator = originators[originatorId];
+		videoInstance.originator = originators[originatorId] ?: videoInstance.channel.channelOwner;
 		
 		videoInstances[videoInstanceId] = videoInstance;
 	}
@@ -196,6 +200,9 @@ static NSDateFormatter *dateFormatter = nil;
 	self.originator = [ChannelOwner instanceFromDictionary:dictionary[@"original_channel_owner"]
 								 usingManagedObjectContext:managedObjectContext
 									   ignoringObjectTypes:kIgnoreNothing];
+	if (!self.originator) {
+		self.originator = self.channel.channelOwner;
+	}
     
     NSArray* starrersArray = dictionary[@"starring_users"];
     if ([starrersArray isKindOfClass:[NSArray class]])
@@ -314,10 +321,6 @@ static NSDateFormatter *dateFormatter = nil;
             break;
         }
     }
-}
-
-- (ChannelOwner *)originator {
-	return (self.primitiveOriginator ?: self.channel.channelOwner);
 }
 
 - (void)awakeFromFetch {
