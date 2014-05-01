@@ -88,11 +88,17 @@
 	[[SYNTrackingManager sharedManager] trackStartScreenView];
 }
 
+#pragma mark - UINavigationControllerDelegate
+
 - (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController
 								  animationControllerForOperation:(UINavigationControllerOperation)operation
 											   fromViewController:(UIViewController *)fromVC
 												 toViewController:(UIViewController *)toVC {
 	return [SYNiPhoneLoginAnimator animatorForPresentation:(operation == UINavigationControllerOperationPush)];
+}
+
+- (NSUInteger)navigationControllerSupportedInterfaceOrientations:(UINavigationController *)navigationController {
+	return UIInterfaceOrientationMaskPortrait;
 }
 
 #pragma mark - button IBActions
