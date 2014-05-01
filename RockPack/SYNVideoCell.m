@@ -27,6 +27,10 @@
 	
 	self.titleLabel.font = [UIFont regularCustomFontOfSize:self.titleLabel.font.pointSize];
 	self.originatorLabel.font = [UIFont regularCustomFontOfSize:self.originatorLabel.font.pointSize];
+	
+	self.thumbnailImageView.layer.borderColor = [[UIColor colorWithWhite:0 alpha:0.05] CGColor];
+	self.thumbnailImageView.layer.borderWidth = 1.0;
+	
 }
 
 - (void)setVideoInstance:(VideoInstance *)videoInstance {

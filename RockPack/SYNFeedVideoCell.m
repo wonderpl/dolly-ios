@@ -49,6 +49,10 @@
 	
 	self.actionsBar.frame = self.videoActionsContainer.bounds;
 	[self.videoActionsContainer addSubview:self.actionsBar];
+	
+	self.videoThumbnailButton.layer.borderColor = [[UIColor colorWithWhite:0 alpha:0.05] CGColor];
+	self.videoThumbnailButton.layer.borderWidth = 1.0;
+
 }
 
 - (UIImageView *)imageView {
