@@ -28,7 +28,7 @@
 #define kChannelOwner               @"ChannelOwner"
 
 // viewId
-#define kFeedViewId                 @"MY WONDERS"
+#define kFeedViewId                 @"MY FEED"
 #define kChannelsViewId             @"PACKS"
 #define kCommentsViewId             @"COMMENTS"
 #define kProfileViewId              @"ME"
