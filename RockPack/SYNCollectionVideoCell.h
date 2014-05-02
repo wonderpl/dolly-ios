@@ -21,7 +21,6 @@
 @property (nonatomic, strong) IBOutlet UIButton *deleteButton;
 @property (nonatomic, strong) IBOutlet UIImageView* imageView;
 @property (nonatomic, strong) IBOutlet UILabel* titleLabel;
-@property (nonatomic, strong) IBOutlet UIView *overlayView;
 @property (nonatomic, strong) IBOutlet UIView *videoActionsContainer;
 
 @property (nonatomic, strong) UITapGestureRecognizer *tap;

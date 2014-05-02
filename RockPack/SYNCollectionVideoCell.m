@@ -70,25 +70,9 @@
 
 }
 
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    UIColor *overLayColor = [UIColor colorWithRed: (57.0f / 255.0f)
-                                            green: (57.0f / 255.0f)
-                                             blue: (57.0f / 255.0f)
-                                            alpha: 0.5f];
-    
-    [self.overlayView setBackgroundColor:overLayColor];
-}
-
-- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
-    [self.overlayView setBackgroundColor:[UIColor clearColor]];
-}
-
 - (void)showVideo {
     [self.delegate videoButtonPressed:self];
-	[self.overlayView setBackgroundColor:[UIColor clearColor]];
 }
-
 
 - (SYNVideoActionsBar *)actionsBar {
 	if (!_actionsBar) {

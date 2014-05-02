@@ -820,10 +820,6 @@
 	
 	[self presentViewController:viewController animated:YES completion:nil];
 	
-    selectedCell.overlayView.backgroundColor = [UIColor colorWithRed: (57.0f / 255.0f)
-                                                               green: (57.0f / 255.0f)
-                                                                blue: (57.0f / 255.0f)
-                                                               alpha: 0.5f];
 	
 	
 }
