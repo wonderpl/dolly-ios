@@ -722,10 +722,10 @@
 											   button.enabled = YES;
 											   
 											   [[NSNotificationCenter defaultCenter] postNotificationName:kReloadFeed object:self userInfo:nil];
+											   callbackBlock();
+
 											   
-											   if (callbackBlock) {
-												   callbackBlock();
-											   }
+											   
 											   
 										   } errorHandler: ^(id error) {
 											   button.enabled = YES;
@@ -744,6 +744,7 @@
 												 [[NSNotificationCenter defaultCenter] postNotificationName:kReloadFeed object:self userInfo:nil];
 												 
 												 callbackBlock();
+
 												 
 											 } errorHandler:^(id error) {
 												 button.enabled = YES;
@@ -770,10 +771,6 @@
 												  } errorHandler: ^(NSDictionary *errorDictionary) {
 													  button.enabled = YES;
 												  }];
-
-
-        
-		
 	} else {
         [[SYNActivityManager sharedInstance] subscribeToChannel: channel
 											  completionHandler: ^(NSDictionary *responseDictionary) {

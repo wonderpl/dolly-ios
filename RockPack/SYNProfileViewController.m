@@ -487,8 +487,9 @@ static const CGFloat TransitionDuration = 0.5f;
 
 - (void) reloadCollectionViews {
     [self.channelCollectionViewController.cv.collectionViewLayout invalidateLayout];
-    [self.channelCollectionViewController.cv reloadData];
     [self.subscriptionCollectionViewController.cv.collectionViewLayout invalidateLayout];
+	
+	[self.channelCollectionViewController.cv reloadData];
     [self.subscriptionCollectionViewController.cv reloadData];
 
 }

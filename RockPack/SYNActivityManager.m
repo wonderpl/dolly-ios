@@ -173,12 +173,16 @@
      
         if (completionBlock)
         {
+			//TODO: remove when the server response changes
             [self addUserSubscriptonsObject:channelOwner];
 
             for (Channel *tmpChannel in channelOwner.channels) {
                 [self addChannelSubscriptionsObject:tmpChannel];
             }
-            
+			
+			if (responseDictionary && [responseDictionary isKindOfClass:[NSDictionary class]]) {
+				[self registerActivityFromDictionary:responseDictionary];
+			}
             completionBlock(responseDictionary);
         }
         
@@ -204,6 +208,8 @@
 
                                                  if (completionBlock)
                                                  {
+													 //TODO: remove when the server response changes
+
                                                      for (Channel *tmpChannel in channelOwner.channels) {
                                                          [self.channelSubscriptions removeObject:tmpChannel.uniqueId];
                                                          tmpChannel.subscribedByUserValue = NO;
@@ -212,6 +218,10 @@
                                                      [self.userSubscriptons removeObject:channelOwner.uniqueId];
                                                      channelOwner.subscribedByUserValue = NO;
 
+													 
+													 if (responseDictionary && [responseDictionary isKindOfClass:[NSDictionary class]]) {
+														 [self registerActivityFromDictionary:responseDictionary];
+													 }
                                                      completionBlock(responseDictionary);
                                                  }
                                                  
