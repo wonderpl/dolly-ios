@@ -169,7 +169,7 @@ static const CGFloat UpcomingVideosDividerHeight = 70.0;
 #pragma mark - SYNVideoActionsBarDelegate
 
 - (void)videoActionsBar:(SYNVideoActionsBar *)bar favouritesButtonPressed:(UIButton *)button {
-	
+	[self favouriteButtonPressed:button videoInstance:self.currentVideoInstance];
 }
 
 - (void)videoActionsBar:(SYNVideoActionsBar *)bar addToChannelButtonPressed:(UIButton *)button {
