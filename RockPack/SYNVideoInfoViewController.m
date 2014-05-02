@@ -216,7 +216,7 @@ static const CGFloat UpcomingVideosDividerHeight = 70.0;
 	Video *video = self.currentVideoInstance.video;
 	NSURL *linkURL = [NSURL URLWithString:video.linkURL];
 	
-	UIViewController *viewController = [SYNWebViewController webViewControllerForURL:linkURL];
+	UIViewController *viewController = [SYNWebViewController webViewControllerForURL:linkURL withTrackingName:@"Click to more"];
 	[self presentViewController:viewController animated:YES completion:nil];
 }
 
