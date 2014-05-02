@@ -1,5 +1,5 @@
 //
-//  SYNNotificationsViewController.m
+//  SYNActivityViewController.m
 //  rockpack
 //
 //  Created by Michael Michailidis on 10/04/2013.
@@ -72,6 +72,7 @@
 	[super viewDidAppear:animated];
 	
 	[self loadNotifications];
+	[self markAllAsRead];
 	
 	[[SYNTrackingManager sharedManager] trackActivityScreenView];
 }
@@ -176,7 +177,7 @@
 - (NSInteger)tableView: (UITableView *) tableView numberOfRowsInSection: (NSInteger) section
 {
     
-    return  _notifications.count + (NSUInteger)(self.hasUnreadNotifications); // if zero then return zero, else add one
+    return  _notifications.count;
 }
 
 
@@ -184,22 +185,12 @@
           cellForRowAtIndexPath: (NSIndexPath *) indexPath
 {
     
-    if(indexPath.row == 0 && self.hasUnreadNotifications) // it is the special 'read all' cell
-    {
-        SYNNotificationsMarkAllAsReadCell *notificationMarkAllAsReadCell = [tableView dequeueReusableCellWithIdentifier: kNotificationsSpecialCellIdent
-                                                                                          forIndexPath: indexPath];
-        
-        [notificationMarkAllAsReadCell.readButton addTarget:self action:@selector(markAllAsRead) forControlEvents:UIControlEventTouchUpInside];
-        return notificationMarkAllAsReadCell;
-        
-        
-    }
     
     // else, it is a normal cell
     SYNNotificationsTableViewCell *notificationCell = [tableView dequeueReusableCellWithIdentifier: kNotificationsCellIdent
                                                                                       forIndexPath: indexPath];
     
-    SYNNotification *notification = (SYNNotification *) _notifications[indexPath.row - (NSInteger)(self.hasUnreadNotifications)];
+    SYNNotification *notification = (SYNNotification *) _notifications[indexPath.row];
 	
     notificationCell.notification = notification;
     notificationCell.delegate = self;
@@ -216,23 +207,6 @@
 
 
 
-- (void) tableView: (UITableView *) tableView
-         didSelectRowAtIndexPath: (NSIndexPath *) indexPath
-{
-    
-    SYNNotification* notification;
-    
-    if(indexPath.row == 0 && self.hasUnreadNotifications) {
-		[[SYNTrackingManager sharedManager] trackMarkAllNotificationAsRead];
-		
-        notification = nil;
-    } else {
-        notification = _notifications[indexPath.row - (NSInteger)(self.hasUnreadNotifications)];
-	}
-    
-    [self markAsReadForNotification: notification];
-}
-
 
 #pragma mark - Button Delegates
 
@@ -247,7 +221,7 @@
     if (indexPathForCellPressed.row > self.notifications.count)
         return;
     
-    SYNNotification *notification = self.notifications[indexPathForCellPressed.row  - (NSInteger)(self.hasUnreadNotifications)];
+    SYNNotification *notification = self.notifications[indexPathForCellPressed.row];
     
     
     [self viewProfileDetails: notification.channelOwner];
@@ -258,7 +232,6 @@
 // this is the secondary button to the right
 - (void) itemImageTableCellPressed: (UIButton *) button
 {
-    
     
     SYNNotificationsTableViewCell *cellPressed = [self getCellFromButton:button];
     
@@ -282,18 +255,6 @@
             Channel* channel = [Channel instanceFromDictionary: @{@"id" : notification.channelId, @"resource_url" : notification.channelResourceUrl}
                                      usingManagedObjectContext: [appDelegate mainManagedObjectContext]];
             
-//            if (!channel)
-//            {
-//                // the channel is no longer in the DB, might have been deleted after the notification has been issued
-//                
-//                [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Channel Unavailable", nil)
-//                                            message:NSLocalizedString(@"The Channel for which this notification has been issued might have been deleted", nil)
-//                                           delegate:nil
-//                                  cancelButtonTitle:@"OK"
-//                                  otherButtonTitles:nil] show];
-//                return;
-//            }
-//            
             [self viewVideoInstanceInChannel:channel withVideoId:notification.videoId];
             
             break;
@@ -332,18 +293,6 @@
             Channel* channel = [Channel instanceFromDictionary: @{@"id" : notification.channelId, @"resource_url" : notification.channelResourceUrl}
                                      usingManagedObjectContext: [appDelegate mainManagedObjectContext]];
             
-//            
-//            if (!channel)
-//            {
-//                [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Video Unavailable", nil)
-//                                            message:NSLocalizedString(@"The Video for which this notification has been issued might have been deleted", nil)
-//                                           delegate:nil
-//                                  cancelButtonTitle:@"OK"
-//                                  otherButtonTitles:nil] show];
-//
-//                return;
-//            }
-            
             [self viewVideoInstanceInChannel:channel withVideoId:notification.videoId];
             break;
         }
@@ -366,7 +315,6 @@
         notification = nil;
     
     [self markAsReadForNotification: notification];
-
 
 }
 
@@ -409,15 +357,10 @@
                                                            
                                                        }
                                                        
-                                                       
-        
                                                        [self.tableView reloadData];
-        
         
                                                    } errorHandler:^(id error) {
                                                        
-                                                       
-        
                                                    }];
     
 }
@@ -428,14 +371,11 @@
 -(SYNNotificationsTableViewCell*)getCellFromButton:(UIButton*)button
 {
     
-    
     UIView* cell = button;
     while (![cell isKindOfClass:[SYNNotificationsTableViewCell class]])
     {
         cell = cell.superview;
     }
-    
-    
     return (SYNNotificationsTableViewCell*)cell;
 }
 
