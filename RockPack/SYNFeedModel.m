@@ -79,6 +79,8 @@
 - (void)loadItemsForRange:(NSRange)range {
 	SYNAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
 	
+	NSArray *existingFeedItemIds = ([self.feedItems valueForKey:@"uniqueId"] ?: @[]);
+	
     __weak typeof(self) wself = self;
     [appDelegate.oAuthNetworkEngine feedUpdatesForUserId:appDelegate.currentOAuth2Credentials.userId
                                                    start:range.location
@@ -86,8 +88,6 @@
                                        completionHandler:^(NSDictionary *responseDictionary) {
 										   
 										   NSDictionary *content = responseDictionary[@"content"];
-										   
-										   NSArray *existingFeedItemIds = ([self.feedItems valueForKey:@"uniqueId"] ?: @[]);
 										   
 										   [self parseFeedResponse:content
 												   existingFeedIds:existingFeedItemIds
