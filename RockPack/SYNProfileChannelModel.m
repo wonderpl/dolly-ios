@@ -74,18 +74,18 @@
 	
 	
 	
-//	if ([self.channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId]) {
+	if ([self.channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId]) {
 		[appDelegate.oAuthNetworkEngine channelsForUserId: self.channelOwner.uniqueId
 												  inRange: range
 										completionHandler: successBlock
 											 errorHandler: errorBlock];
-//	} else {
-//		[appDelegate.networkEngine channelsForUserId: self.channelOwner.uniqueId
-//												  inRange: range
-//										completionHandler: successBlock
-//											 errorHandler: errorBlock];
-//
-//	}
+	} else {
+		[appDelegate.networkEngine channelsForUserId: self.channelOwner.uniqueId
+												  inRange: range
+										completionHandler: successBlock
+											 errorHandler: errorBlock];
+
+	}
 }
 
 
