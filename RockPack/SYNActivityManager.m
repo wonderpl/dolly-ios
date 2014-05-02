@@ -63,10 +63,10 @@
 {
     if (dictionary)
     {
-        //Union in the case that the activity manager or the activity service is out of sync
         
+		// == Recently Starred are all videos that a user has liked/stared/favorited
         if (dictionary[@"recently_starred"]){
-            [self.recentlyStarred unionSet:[NSSet setWithArray:dictionary[@"recently_starred"]]];
+            self.recentlyStarred = [NSMutableSet setWithArray:dictionary[@"recently_starred"]];
 			
 			// Need to update existing video instances with the fact they've been starred
 			NSManagedObjectContext *managedObjectContext = self.appDelegate.mainManagedObjectContext;
@@ -76,18 +76,13 @@
 				videoInstance.starredByUserValue = YES;
 			}];
         }
-        //cant union as unfollow all users cells wont ever be removed
+
         if (dictionary[@"subscribed"]){
-            [self.channelSubscriptions unionSet:[NSMutableSet setWithArray: dictionary[@"subscribed"]]];
-            
-//            [self.channelSubscriptions setSet:[NSSet setWithArray: dictionary[@"subscribed"]]];
+			self.channelSubscriptions = [NSMutableSet setWithArray:dictionary[@"subscribed"]];
         }
         
         if (dictionary[@"user_subscribed"]){
-            [self.userSubscriptons unionSet:[NSMutableSet setWithArray:dictionary[@"user_subscribed"]]];
-            
-//            [self.userSubscriptons setSet:[NSSet setWithArray:dictionary[@"user_subscribed"]]];
-            
+			self.userSubscriptons = [NSMutableSet setWithArray:dictionary[@"user_subscribed"]];
         }
     }
     else
