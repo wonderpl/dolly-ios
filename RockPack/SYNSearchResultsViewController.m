@@ -311,7 +311,8 @@ typedef void (^SearchResultCompleteBlock)(int);
 - (void) searchForGenre: (NSString *) genreId
 {	
 	if (IS_IPHONE) {
-		self.topVideoContraint.constant = 0;
+		self.topVideoContraint.constant = 64;
+
 	} else {
 		self.topVideoContraint.constant = 0;
 		self.topUserContraint.constant = 19;
