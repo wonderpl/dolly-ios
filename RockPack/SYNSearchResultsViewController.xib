@@ -9,6 +9,7 @@
                 <outlet property="noUsersLabel" destination="6aJ-Lk-c1F" id="lgn-Ck-lkS"/>
                 <outlet property="noVideosLabel" destination="yYG-XK-TiE" id="qpQ-th-IdZ"/>
                 <outlet property="segmentedContainer" destination="eDd-qB-cRc" id="gAH-JG-6LC"/>
+                <outlet property="topUserContraint" destination="9YX-zW-raS" id="kDb-IP-Olk"/>
                 <outlet property="topVideoContraint" destination="bY1-yc-Qjo" id="14D-VF-Vi7"/>
                 <outlet property="usersCollectionView" destination="4v1-Ly-eu6" id="zcL-HE-jXW"/>
                 <outlet property="usersTabButton" destination="0mj-ki-94y" id="C8E-lv-rTu"/>
@@ -58,7 +59,7 @@
                     </constraints>
                 </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="4v1-Ly-eu6" userLabel="Users Collection View">
-                    <rect key="frame" x="18" y="10" width="618" height="686"/>
+                    <rect key="frame" x="18" y="18" width="618" height="686"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="4" minimumInteritemSpacing="0.0" id="hqH-9q-DcO">
@@ -113,12 +114,12 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstItem="4v1-Ly-eu6" firstAttribute="top" secondItem="2" secondAttribute="top" constant="18" id="9YX-zW-raS"/>
                 <constraint firstAttribute="trailing" secondItem="4v1-Ly-eu6" secondAttribute="trailing" constant="18" id="B80-xC-Aez"/>
-                <constraint firstItem="SgG-lq-X96" firstAttribute="top" secondItem="4v1-Ly-eu6" secondAttribute="top" constant="-4" id="DTi-bd-TKG"/>
                 <constraint firstItem="4v1-Ly-eu6" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="18" id="WN0-mx-oSo"/>
                 <constraint firstAttribute="centerX" secondItem="yYG-XK-TiE" secondAttribute="centerX" constant="-0.5" id="WTx-uu-f0W"/>
                 <constraint firstItem="6aJ-Lk-c1F" firstAttribute="top" secondItem="2" secondAttribute="top" constant="309" id="YFW-Sc-z8i"/>
-                <constraint firstAttribute="bottom" secondItem="4v1-Ly-eu6" secondAttribute="bottom" constant="-2" id="YO5-Mv-K7A"/>
+                <constraint firstAttribute="bottom" secondItem="4v1-Ly-eu6" secondAttribute="bottom" constant="-10" id="YO5-Mv-K7A"/>
                 <constraint firstItem="SgG-lq-X96" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="2" id="a4g-1T-O5O"/>
                 <constraint firstItem="SgG-lq-X96" firstAttribute="top" secondItem="2" secondAttribute="top" constant="6" id="bY1-yc-Qjo"/>
                 <constraint firstAttribute="trailing" secondItem="SgG-lq-X96" secondAttribute="trailing" constant="2" id="eyO-uD-brE"/>

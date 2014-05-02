@@ -56,6 +56,7 @@ typedef void (^SearchResultCompleteBlock)(int);
 @property (nonatomic) NSInteger dataItemsAvailable2;
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *topVideoContraint;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *topUserContraint;
 
 @property (nonatomic) SearchResultsShowing searchResultsShowing;
 @property (nonatomic, strong) NSString *currentSearchTerm;
@@ -313,6 +314,7 @@ typedef void (^SearchResultCompleteBlock)(int);
 		self.topVideoContraint.constant = 0;
 	} else {
 		self.topVideoContraint.constant = 0;
+		self.topUserContraint.constant = 19;
 	}
 	
 	self.segmentedContainer.hidden = YES;
@@ -376,6 +378,7 @@ typedef void (^SearchResultCompleteBlock)(int);
 
 	} else {
 		self.topVideoContraint.constant = 49;
+		self.topUserContraint.constant = 53;
 	}
 	
 	self.segmentedContainer.hidden = NO;
