@@ -16,13 +16,8 @@
 -(void)awakeFromNib
 {
     [super awakeFromNib];
-	self.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.45];
+	self.backgroundColor = [UIColor clearColor];
 	
-	self.layer.masksToBounds = NO;
-	self.layer.shadowColor = [UIColor blackColor].CGColor;
-	self.layer.shadowOpacity = 0.4;
-	self.layer.shadowOffset = CGSizeMake(0.0f, 2.0f);
-
 }
 
 - (UIColor*) selectedColor {
