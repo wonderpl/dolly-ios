@@ -307,8 +307,11 @@
             self.btnEditChannel.hidden = YES;
             self.btnFollowChannel.hidden = YES;
             CGRect tmpFrame = self.btnShareChannel.frame;
-            tmpFrame.origin.x = 50;
-            self.btnShareChannel.frame = tmpFrame;
+            tmpFrame.origin.x = self.viewCirleButtonContainer.frame.size.width/2-tmpFrame.size.width/2;
+			self.btnShareChannel.frame = tmpFrame;
+            tmpFrame = self.viewCirleButtonContainer.frame;
+            tmpFrame.origin.y -= 4;
+            self.viewCirleButtonContainer.frame = tmpFrame;
         }
     }
 }
