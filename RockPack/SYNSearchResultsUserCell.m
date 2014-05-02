@@ -28,7 +28,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (strong, nonatomic) UIAlertView *followAllAlertView;
 @property (strong, nonatomic) IBOutlet UIImageView *coverImage;
-@property (strong, nonatomic) UIButton* alertViewButton;
+@property (strong, nonatomic) SYNSocialButton* alertViewButton;
 @property (strong, nonatomic) IBOutlet UIView *gradientMask;
 
 @end
@@ -227,7 +227,7 @@
 
     if (alertView == self.followAllAlertView && [buttonTitle isEqualToString:[self yesButtonTitle]])
     {
-        [self.delegate followControlPressed:self.alertViewButton];
+        [self.delegate followControlPressed:self.alertViewButton completion:nil];
     }
 }
 

@@ -396,9 +396,10 @@ static const CGFloat TransitionDuration = 0.5f;
     if (buttonIndex == 1) {
         self.channelOwner.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribedToUserId:self.channelOwner.uniqueId];
         self.followAllButton.dataItemLinked = self.channelOwner;
-        [self followControlPressed:self.followAllButton];
 		
-		[self reloadCollectionViews];
+		[self followControlPressed:self.followAllButton completion:^{
+			[self reloadCollectionViews];
+		}];
     }
 }
 
@@ -486,8 +487,10 @@ static const CGFloat TransitionDuration = 0.5f;
 
 - (void) reloadCollectionViews {
     [self.channelCollectionViewController.cv.collectionViewLayout invalidateLayout];
-    
     [self.channelCollectionViewController.cv reloadData];
+    [self.subscriptionCollectionViewController.cv.collectionViewLayout invalidateLayout];
+    [self.subscriptionCollectionViewController.cv reloadData];
+
 }
 
 - (NSString *)trackingScreenName {

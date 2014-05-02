@@ -2014,7 +2014,7 @@
     {
         self.channelOwner.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribedToUserId:self.channelOwner.uniqueId];
         self.followAllButton.dataItemLinked = self.channelOwner;
-        [self followControlPressed:self.followAllButton];
+        [self followControlPressed:self.followAllButton completion:nil];
     }
     
     if (alertView == self.deleteChannelAlertView && [buttonTitle isEqualToString:[self yesButtonTitle]])

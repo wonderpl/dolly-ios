@@ -559,15 +559,6 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
                                                DebugLog (@"Channel disappeared from underneath us");
                                            }
                                        } onError: errorBlock];
-	
-	// Hack will remove
-	double delayInSeconds = 0.4;
-	dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-	dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-		[self.cv reloadData];
-	});
-
-
 }
 
 #pragma mark - inboarding animations
@@ -728,17 +719,12 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
         self.defaultLayout.sectionInset = UIEdgeInsetsMake(0, 44.0, 70.0, 44.0);
         self.defaultLayout.headerReferenceSize = CGSizeMake(self.view.frame.size.width, 701);
 		self.defaultLayout.minimumLineSpacing = 14;
-
-
-//		self.channelExpandedLayout.itemSize = self.defaultLayout.itemSize;
         self.channelExpandedLayout.sectionInset = UIEdgeInsetsMake(0, 44.0, 500.0, 44.0);
 
     } else {
         self.defaultLayout.sectionInset = UIEdgeInsetsMake(0.0, 21.0, 70.0, 21.0);
         self.defaultLayout.headerReferenceSize = CGSizeMake(self.view.frame.size.width, 574);
 		self.defaultLayout.minimumLineSpacing = 14;
-
-//		self.channelExpandedLayout.itemSize = self.defaultLayout.itemSize;
 		self.channelExpandedLayout.sectionInset = UIEdgeInsetsMake(0, 21.0, 500.0, 21.0);
     }
     
@@ -795,8 +781,6 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     [textField resignFirstResponder];
-    if (textField == self.createChannelCell.createTextField) {
-    }
 }
 
 

@@ -12,7 +12,7 @@
 
 @protocol SYNSocialActionsDelegate <NSObject>
 
-- (void) followControlPressed: (SYNSocialButton *) socialButton;
+- (void) followControlPressed:(SYNSocialButton *)socialControl completion :(void (^)(void))callbackBlock;
 - (void) shareControlPressed: (SYNSocialButton *) socialButton;
 - (void) likeControlPressed: (SYNSocialButton *) socialButton;
 - (void) addControlPressed: (SYNSocialButton *) socialButton;

@@ -404,7 +404,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 
 - (void)followUserTapped:(SYNSocialButton *)button {
 	
-	[self followControlPressed:button];
+	[self followControlPressed:button completion:nil];
 }
 
 @end

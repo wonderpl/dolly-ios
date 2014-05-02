@@ -285,7 +285,7 @@
 		self.followedCount++;
 	}
 	
-	[super followControlPressed:socialButton];
+	[self followControlPressed:socialButton completion:nil];
 }
 
 - (void)continueButtonPressed:(UIButton *)button {

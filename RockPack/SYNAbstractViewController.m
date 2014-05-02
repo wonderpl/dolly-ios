@@ -513,62 +513,6 @@
 
 
 
-- (void) followControlPressed: (SYNSocialButton *) socialControl {
- 
-    if ([socialControl.dataItemLinked isKindOfClass: [Channel class]]) {
-        // Get the channel associated with the control pressed
-        Channel *channel = socialControl.dataItemLinked;
-        if (channel) {
-			[self followButtonPressed:socialControl withChannel:channel];
-		}
-    } else {
-        ChannelOwner *channelOwner = (ChannelOwner*)socialControl.dataItemLinked;
-        
-        if(!channelOwner)
-            return;
-		
-		[[SYNTrackingManager sharedManager] trackUserCollectionsFollowFromScreenName:[self trackingScreenName]];
-        
-        if(channelOwner.subscribedByUserValue == NO)
-        {
-            
-            socialControl.enabled = NO;
-
-            [[SYNActivityManager sharedInstance] subscribeToUser:channelOwner
-                                               completionHandler: ^(id responce) {
-                                                    
-                                                    socialControl.selected = YES;
-                                                    socialControl.enabled = YES;
-                                                   
-                                                   [[NSNotificationCenter defaultCenter] postNotificationName:kReloadFeed object:self userInfo:nil];
-                                                   
-                                                } errorHandler: ^(id error) {
-                                                    
-                                                    socialControl.enabled = YES;
-                                                    
-                                                }];
-        }
-        else
-        {
-            
-            socialControl.enabled = NO;
-
-            [[SYNActivityManager sharedInstance] unsubscribeToUser:channelOwner
-                                                  completionHandler:^(id responce) {
-                                                      
-                                                      socialControl.selected = NO;
-                                                      socialControl.enabled = YES;
-                                                      [[NSNotificationCenter defaultCenter] postNotificationName:kReloadFeed object:self userInfo:nil];
-
-                                                  } errorHandler:^(id error) {
-                                                      
-                                                      socialControl.enabled = YES;
-                                                      
-                                                  }];
-        }
-    }
-}
-
 - (UIStatusBarStyle) preferredStatusBarStyle
 {
     return UIStatusBarStyleLightContent;
@@ -752,6 +696,58 @@
 	}
 	return nil;
 }
+
+- (void)followControlPressed:(UIButton *)socialControl withChannelOwner:(ChannelOwner *)channelOwner completion :(void (^)(void))callbackBlock {
+	
+	if(!channelOwner)
+		return;
+	
+	BOOL isCurrentUser = (BOOL)[channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId];
+	
+	if (isCurrentUser) {
+		return;
+	}
+	
+	[[SYNTrackingManager sharedManager] trackUserCollectionsFollowFromScreenName:[self trackingScreenName]];
+	
+	if(channelOwner.subscribedByUserValue == NO)
+	{
+		socialControl.enabled = NO;
+		
+		[[SYNActivityManager sharedInstance] subscribeToUser:channelOwner
+										   completionHandler: ^(id responce) {
+											   
+											   socialControl.selected = YES;
+											   socialControl.enabled = YES;
+											   
+											   [[NSNotificationCenter defaultCenter] postNotificationName:kReloadFeed object:self userInfo:nil];
+											   
+											   callbackBlock();
+											   
+										   } errorHandler: ^(id error) {
+											   socialControl.enabled = YES;
+										   }];
+	}
+	else
+	{
+		
+		socialControl.enabled = NO;
+		
+		[[SYNActivityManager sharedInstance] unsubscribeToUser:channelOwner
+											 completionHandler:^(id responce) {
+												 
+												 socialControl.selected = NO;
+												 socialControl.enabled = YES;
+												 [[NSNotificationCenter defaultCenter] postNotificationName:kReloadFeed object:self userInfo:nil];
+												 
+												 callbackBlock();
+												 
+											 } errorHandler:^(id error) {
+												 socialControl.enabled = YES;
+											 }];
+	}
+}
+
 
 - (void)followButtonPressed:(UIButton *)button withChannel:(Channel *)channel {
 	button.enabled = NO;
