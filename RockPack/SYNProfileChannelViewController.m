@@ -768,6 +768,12 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     return YES;
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+	
+	NSUInteger newLength = [textField.text length] + [string length] - range.length;
+    return (newLength > 25) ? NO : YES;
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [self.view removeGestureRecognizer:self.tapToHideKeyoboard];
     if (textField == self.createChannelCell.createTextField) {
