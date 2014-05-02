@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -40,16 +40,21 @@
                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
-                    <view contentMode="scaleToFill" id="xUG-Xx-LHN" userLabel="Follow" customClass="SYNSocialFollowButton">
-                        <rect key="frame" x="250" y="14" width="50" height="50"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </view>
                     <view contentMode="scaleToFill" id="1Ka-kP-S0e" userLabel="Top Border">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.67450980390000004" green="0.67450980390000004" blue="0.67450980390000004" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="eIs-wc-12W" userLabel="Follow Button" customClass="SYNFollowChannelButton">
+                        <rect key="frame" x="237" y="21" width="80" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <state key="normal">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="followButtonTapped:" destination="mFM-Us-01N" eventType="touchUpInside" id="a8o-3V-TOY"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
@@ -57,7 +62,7 @@
             <connections>
                 <outlet property="avatarButton" destination="Rhf-2u-7gT" id="fIP-rF-piu"/>
                 <outlet property="descriptionLabel" destination="x0p-6l-BAu" id="iLO-qh-7vx"/>
-                <outlet property="followButton" destination="xUG-Xx-LHN" id="rkR-gU-s7i"/>
+                <outlet property="followButton" destination="eIs-wc-12W" id="Wiw-5v-6jz"/>
                 <outlet property="nameLabel" destination="ct3-5L-Zdd" id="G3i-Uz-NlJ"/>
             </connections>
         </collectionViewCell>

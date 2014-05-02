@@ -10,6 +10,7 @@
 #import "SYNSocialActionsDelegate.h"
 #import "SYNAvatarButton.h"
 #import "SYNSocialButton.h"
+#import "SYNFollowChannelButton.h"
 
 @class Recommendation;
 @interface SYNOnBoardingCell : UICollectionViewCell
@@ -26,7 +27,7 @@
 
 @property (nonatomic, strong) IBOutlet UIView* bottomBorderView;
 
-@property (nonatomic, strong) IBOutlet SYNSocialButton* followButton;
+@property (strong, nonatomic) IBOutlet SYNFollowChannelButton *followButton;
 
 
 @property (nonatomic, weak) id<SYNSocialActionsDelegate> delegate;

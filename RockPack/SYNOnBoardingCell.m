@@ -64,9 +64,7 @@
         return;
     
     _recommendation = recommendation;
-    
-    self.followButton.dataItemLinked = recommendation.channelOwner;
-    
+	
     self.nameLabel.text = recommendation.displayName;
     
     recommendation.descriptionText = recommendation.descriptionText;
@@ -102,13 +100,12 @@
     
     _delegate = delegate;
     
-    if(_delegate)
-    {
-        [self.followButton addTarget: _delegate
-                              action: @selector(followControlPressed:)
-                    forControlEvents: UIControlEventTouchUpInside];
-        
-    }
+
+}
+- (IBAction)followButtonTapped:(id)sender {
+	
+	[self.delegate followControlPressed:self.followButton withChannelOwner:self.recommendation.channelOwner completion:nil];
+
 }
 
 @end

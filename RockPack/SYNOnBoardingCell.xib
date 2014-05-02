@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -51,23 +51,21 @@
                         <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BJC-PG-x7n" userLabel="Follow" customClass="SYNSocialFollowButton">
-                        <rect key="frame" x="103" y="190" width="50" height="50"/>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rcF-io-PRY" customClass="SYNFollowChannelButton">
+                        <rect key="frame" x="88" y="191" width="80" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="50" id="09v-4k-54O"/>
-                            <constraint firstAttribute="height" constant="50" id="HkU-LF-s63"/>
-                        </constraints>
-                    </view>
+                        <state key="normal">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="followButtonTapped:" destination="3I8-lG-xrI" eventType="touchUpInside" id="me2-nA-dHR"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
-                <constraint firstItem="BJC-PG-x7n" firstAttribute="top" secondItem="3I8-lG-xrI" secondAttribute="top" constant="190" id="FWW-Yk-WkT"/>
-                <constraint firstAttribute="trailing" secondItem="BJC-PG-x7n" secondAttribute="trailing" constant="103" id="JKn-op-7RN"/>
                 <constraint firstItem="JdY-a8-daP" firstAttribute="top" secondItem="3I8-lG-xrI" secondAttribute="top" constant="32" id="Xaa-hw-Ae6"/>
-                <constraint firstItem="BJC-PG-x7n" firstAttribute="leading" secondItem="3I8-lG-xrI" secondAttribute="leading" constant="103" id="Y5I-TV-JY6"/>
                 <constraint firstAttribute="trailing" secondItem="JdY-a8-daP" secondAttribute="trailing" constant="104" id="gQA-ia-AeW"/>
                 <constraint firstItem="JdY-a8-daP" firstAttribute="leading" secondItem="3I8-lG-xrI" secondAttribute="leading" constant="104" id="zTp-dI-SHk"/>
             </constraints>
@@ -75,7 +73,7 @@
             <connections>
                 <outlet property="avatarButton" destination="JdY-a8-daP" id="MMn-kS-5X7"/>
                 <outlet property="descriptionLabel" destination="Qdh-Yr-ubO" id="wv6-EA-a0f"/>
-                <outlet property="followButton" destination="BJC-PG-x7n" id="JXg-4C-F0W"/>
+                <outlet property="followButton" destination="rcF-io-PRY" id="5Bg-X3-0jo"/>
                 <outlet property="nameLabel" destination="HQx-0D-x5c" id="vMn-hT-SUu"/>
                 <outlet property="subGenreLabel" destination="2Se-8q-waL" id="KLv-o2-d6U"/>
             </connections>

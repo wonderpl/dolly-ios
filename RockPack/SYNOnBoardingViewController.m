@@ -204,6 +204,8 @@
 	if (isEditorsPicks) {
 		cell.followButton.selected = YES;
 		cell.followButton.userInteractionEnabled = NO;
+	} else {
+		cell.followButton.selected = NO;
 	}
 	
 	if ([[UIDevice currentDevice] isPad]) {
@@ -285,7 +287,7 @@
 		self.followedCount++;
 	}
 	
-	[self followControlPressed:socialButton completion:nil];
+//	[self followControlPressed:socialButton completion:nil];
 }
 
 - (void)continueButtonPressed:(UIButton *)button {
