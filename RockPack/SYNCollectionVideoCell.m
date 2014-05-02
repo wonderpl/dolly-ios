@@ -28,6 +28,10 @@
 	
 	self.titleLabel.font = [UIFont boldCustomFontOfSize:self.titleLabel.font.pointSize];
 	self.durationLabel.font = [UIFont regularCustomFontOfSize:self.durationLabel.font.pointSize];
+	
+	self.imageView.layer.borderColor = [[UIColor colorWithWhite:0 alpha:0.05] CGColor];
+	self.imageView.layer.borderWidth = 1.0;
+
 }
 
 #pragma mark - Set Video Instance
