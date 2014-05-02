@@ -547,8 +547,6 @@ typedef void (^SearchResultCompleteBlock)(int);
         {
             [userCell.followButton setTitle:(NSLocalizedString(@"follow", "follow a user, search view controller"))];
             userCell.followButton.selected = NO;
-
-            
         }
         // ================= //
         

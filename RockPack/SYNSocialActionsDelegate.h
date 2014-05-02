@@ -10,9 +10,11 @@
 
 @import Foundation;
 
+@class ChannelOwner;
+
 @protocol SYNSocialActionsDelegate <NSObject>
 
-- (void) followControlPressed:(SYNSocialButton *)socialControl completion :(void (^)(void))callbackBlock;
+- (void)followControlPressed:(UIButton *)button withChannelOwner:(ChannelOwner *)channelOwner completion :(void (^)(void))callbackBlock;
 - (void) shareControlPressed: (SYNSocialButton *) socialButton;
 - (void) likeControlPressed: (SYNSocialButton *) socialButton;
 - (void) addControlPressed: (SYNSocialButton *) socialButton;

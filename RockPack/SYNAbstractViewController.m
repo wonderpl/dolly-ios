@@ -697,7 +697,8 @@
 	return nil;
 }
 
-- (void)followControlPressed:(UIButton *)socialControl withChannelOwner:(ChannelOwner *)channelOwner completion :(void (^)(void))callbackBlock {
+
+- (void)followControlPressed:(UIButton *)button withChannelOwner:(ChannelOwner *)channelOwner completion :(void (^)(void))callbackBlock {
 	
 	if(!channelOwner)
 		return;
@@ -712,38 +713,40 @@
 	
 	if(channelOwner.subscribedByUserValue == NO)
 	{
-		socialControl.enabled = NO;
+		button.enabled = NO;
 		
 		[[SYNActivityManager sharedInstance] subscribeToUser:channelOwner
 										   completionHandler: ^(id responce) {
 											   
-											   socialControl.selected = YES;
-											   socialControl.enabled = YES;
+											   button.selected = YES;
+											   button.enabled = YES;
 											   
 											   [[NSNotificationCenter defaultCenter] postNotificationName:kReloadFeed object:self userInfo:nil];
 											   
-											   callbackBlock();
+											   if (callbackBlock) {
+												   callbackBlock();
+											   }
 											   
 										   } errorHandler: ^(id error) {
-											   socialControl.enabled = YES;
+											   button.enabled = YES;
 										   }];
 	}
 	else
 	{
 		
-		socialControl.enabled = NO;
+		button.enabled = NO;
 		
 		[[SYNActivityManager sharedInstance] unsubscribeToUser:channelOwner
 											 completionHandler:^(id responce) {
 												 
-												 socialControl.selected = NO;
-												 socialControl.enabled = YES;
+												 button.selected = NO;
+												 button.enabled = YES;
 												 [[NSNotificationCenter defaultCenter] postNotificationName:kReloadFeed object:self userInfo:nil];
 												 
 												 callbackBlock();
 												 
 											 } errorHandler:^(id error) {
-												 socialControl.enabled = YES;
+												 button.enabled = YES;
 											 }];
 	}
 }

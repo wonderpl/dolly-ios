@@ -404,7 +404,9 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 
 - (void)followUserTapped:(SYNSocialButton *)button {
 	
-	[self followControlPressed:button completion:nil];
+	[self followControlPressed:button withChannelOwner:button.dataItemLinked completion:^{
+		[self.cv reloadData];
+	}];
 }
 
 @end

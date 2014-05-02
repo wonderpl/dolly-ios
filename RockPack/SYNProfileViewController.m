@@ -395,11 +395,11 @@ static const CGFloat TransitionDuration = 0.5f;
     
     if (buttonIndex == 1) {
         self.channelOwner.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribedToUserId:self.channelOwner.uniqueId];
-        self.followAllButton.dataItemLinked = self.channelOwner;
 		
-		[self followControlPressed:self.followAllButton completion:^{
+		[self followControlPressed:self.followAllButton withChannelOwner:self.channelOwner completion:^{
 			[self reloadCollectionViews];
 		}];
+		
     }
 }
 

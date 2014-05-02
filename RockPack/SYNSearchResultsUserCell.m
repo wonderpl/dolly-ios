@@ -28,7 +28,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (strong, nonatomic) UIAlertView *followAllAlertView;
 @property (strong, nonatomic) IBOutlet UIImageView *coverImage;
-@property (strong, nonatomic) SYNSocialButton* alertViewButton;
+@property (strong, nonatomic) UIButton* alertViewButton;
 @property (strong, nonatomic) IBOutlet UIView *gradientMask;
 
 @end
@@ -66,9 +66,7 @@
 		self.userThumbnailButton.imageView.image = [UIImage imageNamed: @"PlaceholderChannelSmall.png"];
 		return;
 	}
-	
-	self.followButton.dataItemLinked = channelOwner;
-    
+
     [self.userNameLabel setText: channelOwner.displayName];
     
     [self.descriptionLabel setText:channelOwner.channelOwnerDescription];
@@ -227,7 +225,9 @@
 
     if (alertView == self.followAllAlertView && [buttonTitle isEqualToString:[self yesButtonTitle]])
     {
-        [self.delegate followControlPressed:self.alertViewButton completion:nil];
+        [self.delegate followControlPressed:self.alertViewButton withChannelOwner:self.channelOwner completion:^{
+			
+		}];
     }
 }
 
