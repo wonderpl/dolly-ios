@@ -75,7 +75,8 @@
 
 - (NSString *)trackingScreenName;
 
-// Purchase
+- (void)favouriteButtonPressed:(UIButton *)button videoInstance:(VideoInstance *)videoInstance;
+
 - (void) applicationWillEnterForeground: (UIApplication *) application;
 
 - (CGSize) footerSize;

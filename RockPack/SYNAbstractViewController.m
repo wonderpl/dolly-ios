@@ -204,63 +204,57 @@
 
 #pragma mark - Social Actions Delegate
 
-- (void) likeControlPressed: (SYNSocialButton *) socialControl
-{
-    if (![socialControl.dataItemLinked isKindOfClass: [VideoInstance class]])
-    {
-        return; // only relates to video instances
-    }
-    
-    // Get the videoinstance associated with the control pressed
-    VideoInstance *videoInstance = socialControl.dataItemLinked;
-    
+- (void) likeControlPressed:(SYNSocialButton *)socialControl {
+	if (![socialControl.dataItemLinked isKindOfClass: [VideoInstance class]]) {
+		return; // only relates to video instances
+	}
+	
+	// Get the videoinstance associated with the control pressed
+	VideoInstance *videoInstance = socialControl.dataItemLinked;
+	
+	[self favouriteButtonPressed:socialControl videoInstance:videoInstance];
+}
+
+- (void)favouriteButtonPressed:(UIButton *)button videoInstance:(VideoInstance *)videoInstance {
 	[[SYNTrackingManager sharedManager] trackVideoLikeFromScreenName:[self trackingScreenName]];
 	
-    BOOL didStar = (socialControl.selected == NO);
+    BOOL didStar = (button.selected == NO);
     
-    socialControl.enabled = NO;
+    button.enabled = NO;
 	
-	SYNAppDelegate *localAppDelegate = appDelegate;
+	ChannelOwner *currentUser = appDelegate.currentUser;
     
-    // Send
     [appDelegate.oAuthNetworkEngine recordActivityForUserId: appDelegate.currentUser.uniqueId
                                                      action: (didStar ? @"star" : @"unstar")
                                             videoInstanceId: videoInstance.uniqueId
                                           completionHandler: ^(id response) {
                                               BOOL previousStarringState = videoInstance.starredByUserValue;
                                               
-                                              if (didStar)
-                                              {
+                                              if (didStar) {
                                                   // Currently highlighted, so increment
                                                   videoInstance.starredByUserValue = YES;
                                                   
-                                                  socialControl.selected = YES;
+                                                  button.selected = YES;
                                                   
-                                                  [videoInstance addStarrersObject:localAppDelegate.currentUser];
-                                              }
-                                              else
-                                              {
+                                                  [videoInstance addStarrersObject:currentUser];
+                                              } else {
                                                   // Currently highlighted, so decrement
                                                   videoInstance.starredByUserValue = NO;
                                                   
-                                                  socialControl.selected = NO;
+                                                  button.selected = NO;
                                               }
                                               
-                                              NSError *error;
-                                              
-                                              if (![videoInstance.managedObjectContext save: &error])
-                                              {
+                                              if (![videoInstance.managedObjectContext save:nil]) {
                                                   videoInstance.starredByUserValue = previousStarringState;
                                               }
                                               
-                                              socialControl.enabled = YES;
+                                              button.enabled = YES;
                                           } errorHandler: ^(id error) {
                                               DebugLog(@"Could not star video");
-                                              // Re-enable button anyway
-                                              socialControl.enabled = YES;
+											  
+                                              button.enabled = YES;
                                           }];
 }
-
 
 - (void) addControlPressed: (SYNSocialButton *) socialControl
 {
