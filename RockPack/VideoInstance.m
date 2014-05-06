@@ -240,10 +240,18 @@ static NSDateFormatter *dateFormatter = nil;
 + (NSArray *)orderedVideoInstancesWithIds:(NSArray *)videoInstanceIds
 				   inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
 	
-	NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[self entityName]];
-	[fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"uniqueId IN %@", videoInstanceIds]];
+	NSDictionary *videoInstancesById = [self existingVideoInstancesWithIds:videoInstanceIds
+													inManagedObjectContext:managedObjectContext];
 	
-	return [managedObjectContext executeFetchRequest:fetchRequest error:nil];
+	NSMutableArray *videoInstances = [NSMutableArray array];
+	for (NSString *videoInstanceId in videoInstanceIds) {
+		VideoInstance *videoInstance = videoInstancesById[videoInstanceId];
+		if (videoInstance) {
+			[videoInstances addObject:videoInstance];
+		}
+	}
+	
+	return videoInstances;
 }
 
 #pragma mark - Object reference counting
