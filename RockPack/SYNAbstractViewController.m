@@ -671,10 +671,10 @@
 	
 	[[SYNTrackingManager sharedManager] trackUserCollectionsFollowFromScreenName:[self trackingScreenName]];
 	
-	if(channelOwner.subscribedByUserValue == NO)
-	{
-		button.enabled = NO;
-		
+	button.enabled = NO;
+	[button invalidateIntrinsicContentSize];
+	
+	if (channelOwner.subscribedByUserValue == NO) {
 		[[SYNActivityManager sharedInstance] subscribeToUser:channelOwner
 										   completionHandler: ^(id responce) {
 											   
@@ -683,19 +683,14 @@
 											   
 											   [[NSNotificationCenter defaultCenter] postNotificationName:kReloadFeed object:self userInfo:nil];
 											   callbackBlock();
-
 											   
-											   
-											   
+											   [button invalidateIntrinsicContentSize];
 										   } errorHandler: ^(id error) {
 											   button.enabled = YES;
+											   
+											   [button invalidateIntrinsicContentSize];
 										   }];
-	}
-	else
-	{
-		
-		button.enabled = NO;
-		
+	} else {
 		[[SYNActivityManager sharedInstance] unsubscribeToUser:channelOwner
 											 completionHandler:^(id responce) {
 												 
@@ -704,10 +699,12 @@
 												 [[NSNotificationCenter defaultCenter] postNotificationName:kReloadFeed object:self userInfo:nil];
 												 
 												 callbackBlock();
-
 												 
+												 [button invalidateIntrinsicContentSize];
 											 } errorHandler:^(id error) {
 												 button.enabled = YES;
+												 
+												 [button invalidateIntrinsicContentSize];
 											 }];
 	}
 }
