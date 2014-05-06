@@ -4001,6 +4001,9 @@
 					010DEFCF1629BDC40080F26B = {
 						DevelopmentTeam = 55U2NK549A;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.Keychain = {
 								enabled = 0;
 							};
