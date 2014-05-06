@@ -63,17 +63,17 @@
 
 - (void) viewDidLoad
 {
-	[FeedItem deleteFeedItemsInManagedObjectContext:appDelegate.mainManagedObjectContext];
-	
     [super viewDidLoad];
 	
-	self.model = [[SYNFeedModel alloc] init];
+	self.model = [SYNFeedModel sharedModel];
 	self.model.delegate = self;
 	
     self.feedCollectionView.contentInset = UIEdgeInsetsMake(64.0, 0.0, 0.0, 0.0);
-
-    [self displayPopupMessage: NSLocalizedString(@"feed_screen_loading_message", nil)
-                   withLoader: YES];
+	
+	if (![self.model itemCount]) {
+		[self displayPopupMessage: NSLocalizedString(@"feed_screen_loading_message", nil)
+					   withLoader: YES];
+	}
 	
     [self.feedCollectionView registerNib:[SYNChannelFooterMoreView nib]
               forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
@@ -112,6 +112,8 @@
 	[super viewDidAppear:animated];
 	
 	[[SYNTrackingManager sharedManager] trackFeedScreenView];
+	
+	[self resetData];
 }
 
 
@@ -238,8 +240,7 @@
 }
 
 - (void)resetData {
-	[self.model reset];
-	[self.model loadNextPage];
+	[self.model reloadInitialPage];
 }
 
 - (void) applicationWillEnterForeground: (UIApplication *) application {

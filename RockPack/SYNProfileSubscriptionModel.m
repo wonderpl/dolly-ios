@@ -38,12 +38,12 @@
 }
 
 
-- (void)loadItemsForRange:(NSRange)range {
+- (void)loadItemsForRange:(NSRange)range successBlock:(SYNPagingModelResultsBlock)successBlock errorBlock:(SYNPagingModelErrorBlock)errorBlock {
 	SYNAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     
     __weak typeof(self) wself = self;
 
-    MKNKUserSuccessBlock successBlock = ^(NSDictionary *dictionary) {
+    MKNKUserSuccessBlock internalSuccessBlock = ^(NSDictionary *dictionary) {
         __strong typeof(self) sself = wself;
 
         
@@ -56,14 +56,12 @@
 		}
 		
 		sself.channelOwner.subscriptionCountValue = [dictionary[@"users"][@"total"] intValue];
-		sself.totalItemCount = [dictionary[@"users"][@"total"] intValue];
 		
-		NSMutableArray *arr = [NSMutableArray arrayWithArray:[sself.channelOwner.userSubscriptionsSet array]];
-		sself.loadedItems = arr;
-		[sself handleDataUpdatedForRange:range];
+		successBlock([sself.channelOwner.userSubscriptionsSet array], [dictionary[@"users"][@"total"] integerValue]);
     };
     
-    MKNKUserErrorBlock errorBlock = ^(NSDictionary *errorDictionary) {
+    MKNKUserErrorBlock internalErrorBlock = ^(NSDictionary *errorDictionary) {
+		errorBlock();
         DebugLog(@"Update action failed");
     };
 
@@ -73,13 +71,13 @@
 	if (isUserProfile) {
 		[appDelegate.oAuthNetworkEngine subscriptionsForUserId: wself.channelOwner.uniqueId
 													   inRange: range
-											 completionHandler: successBlock
-												  errorHandler: errorBlock];
+											 completionHandler: internalSuccessBlock
+												  errorHandler: internalErrorBlock];
 	} else {
 		[appDelegate.networkEngine subscriptionsForUserId: wself.channelOwner.uniqueId
 												  inRange: range
-										completionHandler: successBlock
-											 errorHandler: errorBlock];
+										completionHandler: internalSuccessBlock
+											 errorHandler: internalErrorBlock];
 	}
 }
 

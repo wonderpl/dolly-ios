@@ -24,28 +24,41 @@
 
 @implementation SYNFeedModel
 
+#pragma mark - Factory
+
++ (instancetype)sharedModel {
+	static SYNFeedModel *model;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		SYNAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+		
+		NSManagedObjectContext *managedObjectContext = appDelegate.mainManagedObjectContext;
+		
+		NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[FeedItem entityName]];
+		NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"position" ascending:YES];
+		[fetchRequest setSortDescriptors:@[ sortDescriptor ]];
+		
+		NSArray *feedItems = [managedObjectContext executeFetchRequest:fetchRequest error:nil];
+		NSArray *feedItemIds = [feedItems valueForKey:@"uniqueId"];
+		
+		NSDictionary *videoInstancesById = [VideoInstance existingVideoInstancesWithIds:feedItemIds
+																 inManagedObjectContext:managedObjectContext];
+		NSDictionary *channelsById = [Channel existingChannelsWithIds:feedItemIds
+											   inManagedObjectContext:managedObjectContext];
+		
+		NSArray *videoInstances = [VideoInstance orderedVideoInstancesWithIds:feedItemIds
+													   inManagedObjectContext:managedObjectContext];
+		
+		model = [[self alloc] initWithItems:videoInstances totalItemCount:NSNotFound];
+		model.videoInstancesById = videoInstancesById;
+		model.channelsById = channelsById;
+		model.feedItems = feedItems;
+	});
+	
+	return model;
+}
+
 #pragma mark - Public
-
-- (Channel *)channelForFeedItem:(FeedItem *)feedItem {
-	if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo) {
-		VideoInstance *videoInstance = self.videoInstancesById[feedItem.uniqueId];
-		return videoInstance.channel;
-	} else {
-		return self.channelsById[feedItem.uniqueId];
-	}
-}
-
-- (NSArray *)videoInstancesForFeedItems:(NSArray *)feedItems {
-	NSMutableArray *videoInstances = [NSMutableArray array];
-	
-	for (FeedItem *feedItem in feedItems) {
-		if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo) {
-			[videoInstances addObject:self.videoInstancesById[feedItem.uniqueId]];
-		}
-	}
-	
-	return videoInstances;
-}
 
 - (FeedItem *)feedItemAtindex:(NSInteger)index {
 	return self.feedItems[index];
@@ -76,18 +89,22 @@
 
 #pragma mark - Overridden
 
-- (void)loadItemsForRange:(NSRange)range {
+- (void)loadItemsForRange:(NSRange)range
+			 successBlock:(SYNPagingModelResultsBlock)successBlock
+			   errorBlock:(SYNPagingModelErrorBlock)errorBlock {
 	SYNAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
 	
-	NSArray *existingFeedItemIds = ([self.feedItems valueForKey:@"uniqueId"] ?: @[]);
+	BOOL isFirstPage = (range.location == 0);
 	
-    __weak typeof(self) wself = self;
-    [appDelegate.oAuthNetworkEngine feedUpdatesForUserId:appDelegate.currentOAuth2Credentials.userId
-                                                   start:range.location
-                                                    size:range.length
-                                       completionHandler:^(NSDictionary *responseDictionary) {
+	__weak typeof(self) wself = self;
+	[appDelegate.oAuthNetworkEngine feedUpdatesForUserId:appDelegate.currentOAuth2Credentials.userId
+												   start:range.location
+													size:range.length
+									   completionHandler:^(NSDictionary *responseDictionary) {
 										   
 										   NSDictionary *content = responseDictionary[@"content"];
+										   
+										   NSArray *existingFeedItemIds = (isFirstPage ? @[] : [self.feedItems valueForKey:@"uniqueId"]);
 										   
 										   [self parseFeedResponse:content
 												   existingFeedIds:existingFeedItemIds
@@ -108,18 +125,16 @@
 													   sself.channelsById = [Channel existingChannelsWithIds:feedItemIds
 																					  inManagedObjectContext:managedObjectContext];
 													   
-													   NSArray *videoInstances = [sself videoInstancesForFeedItems:feedItems];
+													   NSArray *videoInstances = [VideoInstance orderedVideoInstancesWithIds:feedItemIds
+																									  inManagedObjectContext:managedObjectContext];
 													   
 													   [[SYNVideoThumbnailDownloader sharedDownloader] fetchThumbnailImagesForVideos:[videoInstances valueForKeyPath:@"video"]];
 													   
-													   sself.loadedItems = videoInstances;
-													   sself.totalItemCount = [total integerValue];
-													   
-													   [sself handleDataUpdatedForRange:range];
+													   successBlock(videoInstances, [total integerValue]);
 												   }];
-                                       } errorHandler:^(NSDictionary *errorDictionary) {
-										   [self handleError];
-                                       }];
+									   } errorHandler:^(NSDictionary *errorDictionary) {
+										   errorBlock();
+									   }];
 }
 
 #pragma mark - Private

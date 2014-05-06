@@ -109,8 +109,7 @@ static NSString *const PlaceholderText = @"Say something nice";
                                    placeholderImage: [UIImage imageNamed: @"PlaceholderAvatarFriends"]
                                             options: SDWebImageRetryFailed];
     
-	[self.model reset];
-	[self.model loadNextPage];
+	[self.model reloadInitialPage];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardNotified:)

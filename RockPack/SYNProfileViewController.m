@@ -270,9 +270,7 @@ static const CGFloat TransitionDuration = 0.5f;
 
 	}
 	
-    [self.channelCollectionViewController.model reset];
-    [self.channelCollectionViewController.model loadNextPage];
-
+	[self.channelCollectionViewController.model reloadInitialPage];
 }
 
 - (void) followingsTabTapped {
@@ -329,11 +327,8 @@ static const CGFloat TransitionDuration = 0.5f;
 		self.followingContainer.hidden = NO;
 		self.channelContainer.hidden = YES;
 	}
-
-    [self.subscriptionCollectionViewController.model reset];
-    [self.subscriptionCollectionViewController.model loadNextPage];
-
-
+	
+	[self.subscriptionCollectionViewController.model reloadInitialPage];
 }
 
 - (void)editButtonTapped {
@@ -539,14 +534,8 @@ static const CGFloat TransitionDuration = 0.5f;
 
 											   }
 										   } onError: nil];
-		
-
-
-
 	} else {
-		[self.subscriptionCollectionViewController.model reset];
-        [self.subscriptionCollectionViewController.model loadNextPage];
-
+		[self.subscriptionCollectionViewController.model reloadInitialPage];
 	}
 	
 }

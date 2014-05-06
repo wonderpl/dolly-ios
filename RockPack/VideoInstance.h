@@ -26,10 +26,13 @@
 + (VideoInstance *) instanceFromDictionary: (NSDictionary *) dictionary
                  usingManagedObjectContext: (NSManagedObjectContext *) managedObjectContext;
 
-+ (NSDictionary *)existingVideoInstancesWithIds:(NSArray *)videoIds
++ (NSDictionary *)existingVideoInstancesWithIds:(NSArray *)videoInstanceIds
 						 inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 
 + (NSDictionary *)videoInstancesFromDictionaries:(NSArray *)dictionaries
 						  inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
+
++ (NSArray *)orderedVideoInstancesWithIds:(NSArray *)videoInstanceIds
+				   inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 
 @end

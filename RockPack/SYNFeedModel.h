@@ -13,6 +13,8 @@
 
 @interface SYNFeedModel : SYNPagingModel
 
++ (instancetype)sharedModel;
+
 - (FeedItem *)feedItemAtindex:(NSInteger)index;
 - (id)resourceForFeedItem:(FeedItem *)feedItem;
 - (NSInteger)feedItemCount;

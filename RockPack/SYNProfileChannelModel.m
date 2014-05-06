@@ -37,54 +37,44 @@
 }
 
 
-- (void)loadItemsForRange:(NSRange)range {
+- (void)loadItemsForRange:(NSRange)range successBlock:(SYNPagingModelResultsBlock)successBlock errorBlock:(SYNPagingModelErrorBlock)errorBlock {
 	SYNAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-
-    
+	
     __weak typeof(self) wself = self;
 
-    MKNKUserSuccessBlock successBlock = ^(NSDictionary *dictionary) {
+    MKNKUserSuccessBlock internalSuccessBlock = ^(NSDictionary *dictionary) {
 		__strong typeof(self) sself = wself;
-		sself.totalItemCount = [dictionary[@"channels"][@"total"] intValue];
 		
 		BOOL isInitalPage = (range.location == 0);
 		if (isInitalPage) {
             [sself.channelOwner setSubscriptionsDictionary: dictionary];
 		} else {
 			
-//			// This is bad, need to fix. getting doubles because of the double server call
-//			// also assuming that total item count is correct
+			// This is bad, need to fix. getting doubles because of the double server call
+			// also assuming that total item count is correct
 			if (sself.channelOwner.channelsSet.count < sself.totalItemCount) {
 				[sself.channelOwner addChannelsFromDictionary: dictionary];
 			}
 		}
 		
-				
-		sself.loadedItems = [sself.channelOwner.channelsSet array];
-        
-        [sself handleDataUpdatedForRange:range];
-
+		successBlock([sself.channelOwner.channelsSet array], [dictionary[@"channels"][@"total"] integerValue]);
     };
     
     // define error block //
-    MKNKUserErrorBlock errorBlock = ^(NSDictionary *errorDictionary) {
-        DebugLog(@"Update action failed");
+    MKNKUserErrorBlock internalErrorBlock = ^(NSDictionary *errorDictionary) {
+		errorBlock();
     };
     
-	
-	
-	
 	if ([self.channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId]) {
 		[appDelegate.oAuthNetworkEngine channelsForUserId: self.channelOwner.uniqueId
 												  inRange: range
-										completionHandler: successBlock
-											 errorHandler: errorBlock];
+										completionHandler: internalSuccessBlock
+											 errorHandler: internalErrorBlock];
 	} else {
 		[appDelegate.networkEngine channelsForUserId: self.channelOwner.uniqueId
 												  inRange: range
-										completionHandler: successBlock
-											 errorHandler: errorBlock];
-
+										completionHandler: internalSuccessBlock
+											 errorHandler: internalErrorBlock];
 	}
 }
 

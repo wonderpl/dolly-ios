@@ -17,6 +17,8 @@
 
 @end
 
+typedef void (^SYNPagingModelCompletionBlock)(BOOL success);
+
 @interface SYNPagingModel : NSObject
 
 @property (nonatomic, assign, readonly) NSRange loadedRange;
@@ -30,8 +32,10 @@
 
 - (id)itemAtIndex:(NSInteger)index;
 
-- (void)loadNextPage;
+- (void)reloadInitialPage;
+- (void)reloadInitialPageWithCompletionHandler:(SYNPagingModelCompletionBlock)completion;
 
-- (void)reset;
+- (void)loadNextPage;
+- (void)loadNextPageWithCompletionHandler:(SYNPagingModelCompletionBlock)completion;
 
 @end
