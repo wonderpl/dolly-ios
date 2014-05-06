@@ -87,6 +87,8 @@ static const NSInteger DefaultBatchSize = 40;
 	NSRange range = NSMakeRange(nextPageLocation, self.batchSize);
 	
 	[self loadItemsForRange:range successBlock:^(NSArray *results, NSInteger totalItemCount) {
+		BOOL hasChanged = ![results isEqualToArray:self.loadedItems];
+		
 		self.loadedItems = results;
 		self.loadedRange = range;
 		self.totalItemCount = totalItemCount;
@@ -94,11 +96,11 @@ static const NSInteger DefaultBatchSize = 40;
 		self.loading = NO;
 		
 		for (SYNPagingModelCompletionBlock completion in self.completionBlocks) {
-			completion(YES);
+			completion(YES, hasChanged);
 		}
 		self.completionBlocks = [NSMutableArray array];
 		if (completion) {
-			completion(YES);
+			completion(YES, hasChanged);
 		}
 		
 		[self.delegate pagingModelDataUpdated:self];
@@ -106,11 +108,11 @@ static const NSInteger DefaultBatchSize = 40;
 		self.loading = NO;
 		
 		for (SYNPagingModelCompletionBlock completion in self.completionBlocks) {
-			completion(NO);
+			completion(NO, NO);
 		}
 		self.completionBlocks = [NSMutableArray array];
 		if (completion) {
-			completion(NO);
+			completion(NO, NO);
 		}
 		
 		[self.delegate pagingModelErrorOccurred:self];

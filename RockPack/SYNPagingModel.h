@@ -17,7 +17,7 @@
 
 @end
 
-typedef void (^SYNPagingModelCompletionBlock)(BOOL success);
+typedef void (^SYNPagingModelCompletionBlock)(BOOL success, BOOL hasChanged);
 
 @interface SYNPagingModel : NSObject
 
