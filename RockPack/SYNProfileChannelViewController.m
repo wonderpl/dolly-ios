@@ -459,7 +459,6 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 - (void)saveCreateChannelTapped {
     
 	__weak SYNProfileChannelViewController *weakSelf = self;
-	
     [appDelegate.oAuthNetworkEngine createChannelForUserId: appDelegate.currentOAuth2Credentials.userId
                                                      title: self.createChannelCell.createTextField.text
                                                description: self.createChannelCell.descriptionTextView.text
@@ -552,6 +551,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
                                                        [weakSelf.cv insertItemsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForItem:2 inSection:0]]];
                                                    } completion:^(BOOL finished) {
                                                        
+                                                       
                                                        [self showInboardingAnimationAfterCreate];
                                                    }];
                                                }
@@ -559,6 +559,14 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
                                                DebugLog (@"Channel disappeared from underneath us");
                                            }
                                        } onError: errorBlock];
+    
+    //TODO: fix this, animation not showing properly, after model changes. refactor into the profile model.
+    double delayInSeconds = 0.6;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self.cv reloadData];
+    });
+    
 }
 
 #pragma mark - inboarding animations
