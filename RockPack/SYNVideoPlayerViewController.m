@@ -21,7 +21,6 @@
 #import "SYNPopoverAnimator.h"
 #import "SYNActivityManager.h"
 #import "SYNAddToChannelViewController.h"
-#import "SYNRotatingPopoverController.h"
 #import "UINavigationBar+Appearance.h"
 #import "UILabel+Animation.h"
 #import "SYNWebViewController.h"
@@ -49,8 +48,6 @@
 @property (nonatomic, assign) NSTimeInterval autoplayStartTime;
 
 @property (nonatomic, assign) NSInteger selectedIndex;
-
-@property (nonatomic, strong) SYNRotatingPopoverController *commentPopoverController;
 
 @property (nonatomic, strong) SYNPagingModel *model;
 

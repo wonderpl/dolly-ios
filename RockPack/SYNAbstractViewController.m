@@ -27,7 +27,6 @@
 #import "VideoInstance.h"
 #import "SYNTrackingManager.h"
 #import "SYNActivityManager.h"
-#import "SYNRotatingPopoverController.h"
 #import "SYNPopoverAnimator.h"
 #import "SYNSocialCommentButton.h"
 #import "SYNProfileChannelViewController.h"
@@ -48,7 +47,6 @@
 @property (nonatomic, strong) SYNPopupMessageView* popupMessageView;
 @property (nonatomic, assign) ScrollingDirection scrollDirection;
 @property (nonatomic, assign) BOOL scrollerIsNearTop;
-@property (nonatomic, strong) SYNRotatingPopoverController *commentingPopoverController;
 
 @end
 
