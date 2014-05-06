@@ -90,22 +90,6 @@
                         <constraint firstAttribute="trailing" secondItem="voe-PP-I8e" secondAttribute="trailing" constant="1" id="ve5-s9-sIR"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6hE-AF-swA">
-                    <rect key="frame" x="713" y="21" width="31" height="36"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="31" id="JW3-D7-Efl"/>
-                        <constraint firstAttribute="height" constant="36" id="WKi-CU-oxh"/>
-                    </constraints>
-                    <state key="normal" image="Moods.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="selected" image="MoodsSelected.png"/>
-                    <state key="highlighted" image="MoodsActive.png"/>
-                    <connections>
-                        <action selector="pushMoodViewController:" destination="-1" eventType="touchUpInside" id="7O5-3a-PNp"/>
-                    </connections>
-                </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b26-Sj-2qa">
                     <rect key="frame" x="0.0" y="64" width="768" height="1"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -125,9 +109,7 @@
                 <constraint firstAttribute="bottom" secondItem="r19-QH-EUb" secondAttribute="bottom" constant="-32" id="Pln-oS-f24"/>
                 <constraint firstAttribute="trailing" secondItem="fzQ-bP-TKm" secondAttribute="trailing" id="ayI-J4-P47"/>
                 <constraint firstItem="r19-QH-EUb" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="-1" id="gQh-UL-TxC"/>
-                <constraint firstItem="6hE-AF-swA" firstAttribute="top" secondItem="1" secondAttribute="top" constant="21" id="pIM-O7-RXp"/>
                 <constraint firstItem="fzQ-bP-TKm" firstAttribute="top" secondItem="1" secondAttribute="top" constant="64" id="pae-Q9-HuS"/>
-                <constraint firstAttribute="trailing" secondItem="6hE-AF-swA" secondAttribute="trailing" constant="24" id="sh7-eD-8Hd"/>
                 <constraint firstAttribute="bottom" secondItem="fzQ-bP-TKm" secondAttribute="bottom" constant="-32" id="vdA-jA-i5y"/>
                 <constraint firstItem="b26-Sj-2qa" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="ych-cL-eNY"/>
             </constraints>
@@ -141,9 +123,4 @@
             </connections>
         </searchDisplayController>
     </objects>
-    <resources>
-        <image name="Moods.png" width="26" height="26"/>
-        <image name="MoodsActive.png" width="26" height="26"/>
-        <image name="MoodsSelected.png" width="26" height="26"/>
-    </resources>
 </document>

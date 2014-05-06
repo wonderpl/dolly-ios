@@ -28,7 +28,6 @@
 #import "SYNTrackingManager.h"
 #import "SYNGenreManager.h"
 #import "SYNDiscoverSectionHeaderView.h"
-#import "SYNMoodRootViewController.h"
 #import "SYNGenreManager.h"
 #import "SYNDeviceManager.h"
 
@@ -79,7 +78,6 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 
 @property (nonatomic, strong) NSMutableArray *recentlyViewed;
 @property (nonatomic, strong) UIBarButtonItem *moodBarButton;
-@property (nonatomic, strong) SYNMoodRootViewController *moodVC;
 @end
 
 @implementation SYNDiscoverViewController
@@ -114,21 +112,7 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 	[self.categoriesCollectionView registerNib: [SYNDiscoverSectionHeaderView nib]					forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
 						   withReuseIdentifier: [SYNDiscoverSectionHeaderView reuseIdentifier]];
 	
-	UIImage *moodImage = [[UIImage imageNamed:@"Moods.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-	
-	
-	self.moodBarButton = [[UIBarButtonItem alloc]initWithImage:moodImage style:UIBarButtonItemStyleBordered target:self action:@selector(pushMoodViewController:)];
-	
-	
-	
-	UIBarButtonItem *negativeSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-	
-	[negativeSpace setWidth:-5];
-	
-	if (IS_IPHONE) {
-		self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:negativeSpace,self.moodBarButton,nil];
-	}
-	
+		
     if(IS_IPHONE)
     {
         // to allow for full screen scroll of the categories
@@ -915,19 +899,6 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 																   keyboardHeightChange,
 																   tableView.contentInset.right);
 					 } completion:nil];
-}
-
-- (IBAction)pushMoodViewController:(id)sender {
-	if (!self.moodVC) {
-		self.moodVC = [[SYNMoodRootViewController alloc]initWithViewId:kMoodViewId];
-	}
-	
-	if (IS_IPHONE) {
-		
-		[self.navigationController pushViewController:self.moodVC animated:YES];
-	} else {
-		[self.navigationController presentViewController:self.moodVC animated:YES completion:nil];
-	}
 }
 
 
