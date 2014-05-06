@@ -74,7 +74,9 @@ static const NSInteger DefaultBatchSize = 40;
 
 - (void)loadNextPageWithCompletionHandler:(SYNPagingModelCompletionBlock)completion {
 	if (self.loading) {
-		[self.completionBlocks addObject:[completion copy]];
+		if (completion) {
+			[self.completionBlocks addObject:[completion copy]];
+		}
 		
 		return;
 	}
