@@ -21,7 +21,6 @@
 #import "SYNPopoverAnimator.h"
 #import "SYNActivityManager.h"
 #import "SYNAddToChannelViewController.h"
-#import "SYNCommentingViewController.h"
 #import "SYNRotatingPopoverController.h"
 #import "UINavigationBar+Appearance.h"
 #import "UILabel+Animation.h"
@@ -455,8 +454,7 @@
 	NSDictionary *mapping = @{
 							  NSStringFromClass([SYNFullScreenVideoViewController class]) : [SYNFullScreenVideoAnimator class],
 							  NSStringFromClass([SYNOneToOneSharingController class])     : [SYNPopoverAnimator class],
-							  NSStringFromClass([SYNAddToChannelViewController class])    : [SYNPopoverAnimator class],
-							  NSStringFromClass([SYNCommentingViewController class])      : [SYNPopoverAnimator class]
+							  NSStringFromClass([SYNAddToChannelViewController class])    : [SYNPopoverAnimator class]
 							  };
 	return mapping[NSStringFromClass([viewController class])];
 }

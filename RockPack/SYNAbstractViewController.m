@@ -29,8 +29,6 @@
 #import "SYNActivityManager.h"
 #import "SYNRotatingPopoverController.h"
 #import "SYNPopoverAnimator.h"
-#import "SYNCommentUpdateDelegate.h"
-#import "SYNCommentUpdateDelegate.h"
 #import "SYNSocialCommentButton.h"
 #import "SYNProfileChannelViewController.h"
 
@@ -39,7 +37,7 @@
 #define kScrollContentOff 40.0f
 #define kScrollSpeedBoundary 0.0f
 
-@interface SYNAbstractViewController () <UIViewControllerTransitioningDelegate, SYNCommentUpdateDelegate>
+@interface SYNAbstractViewController () <UIViewControllerTransitioningDelegate>
 
 @property (strong, nonatomic) NSMutableDictionary *mutableShareDictionary;
 @property (nonatomic, assign) NSInteger lastContentOffset;
@@ -280,44 +278,8 @@
 
 
 - (void) commentControlPressed:(SYNSocialButton *)socialButton {
-	if (!socialButton.dataItemLinked) {
-		return;
-	}
-	
-	[[SYNTrackingManager sharedManager] trackVideoCommentFromScreenName:[self trackingScreenName]];
-	
-	SYNCommentingViewController* commentController = [[SYNCommentingViewController alloc] initWithVideoInstance:socialButton.dataItemLinked withButton:(SYNSocialCommentButton*)socialButton];
 
-	if (IS_IPAD) {
-        
-        
-		SYNRotatingPopoverController *popoverController = [[SYNRotatingPopoverController alloc] initWithContentViewController:commentController];
-		
-        popoverController.socialButton = socialButton;
-        popoverController.commentDelegate = self;
-		[popoverController presentPopoverFromButton:socialButton
-										   inView:self.view
-						 permittedArrowDirections:UIPopoverArrowDirectionRight
-										 animated:YES];
-		
-		self.commentingPopoverController = popoverController;
-
-	} else {
-		commentController.transitioningDelegate = self;
-		commentController.modalPresentationStyle = UIModalPresentationCustom;
-		[self presentViewController:commentController animated:YES completion:nil];
-	}
 }
-
--(void)commentUpdated{
-    int tmpNumber = ((VideoInstance*)self.commentingPopoverController.socialButton.dataItemLinked).commentCountValue;
-    
-    if (tmpNumber) {
-        
-        [((SYNSocialCommentButton*)self.commentingPopoverController.socialButton) setCount:tmpNumber];
-    }
-}
-
 
 - (void) shareControlPressed: (SYNSocialButton *) socialControl
 {
