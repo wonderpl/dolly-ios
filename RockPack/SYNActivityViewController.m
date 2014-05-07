@@ -42,17 +42,10 @@
         self.notifications = @[];
 		[self loadNotifications];
 		
-		[self addObserver:self
-			   forKeyPath:NSStringFromSelector(@selector(hasUnreadNotifications))
-				  options:0
-				  context:NULL];
 	}
     return self;
 }
 
-- (void)dealloc {
-	[self removeObserver:self forKeyPath:NSStringFromSelector(@selector(hasUnreadNotifications))];
-}
 
 - (void) viewDidLoad {
     [super viewDidLoad];
@@ -383,18 +376,5 @@
 	[self loadNotifications];
 }
 
-#pragma mark - KVO
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-	if ([keyPath isEqualToString:NSStringFromSelector(@selector(hasUnreadNotifications))]) {
-		UIButton *activityTab = appDelegate.masterViewController.activityTab;
-		if (self.hasUnreadNotifications) {
-            //TODO: Badge number selected states
-		} else {
-			[activityTab setImage:[UIImage imageNamed:@"TabActivity"] forState:UIControlStateNormal];
-			[activityTab setImage:[UIImage imageNamed:@"TabActivitySelected"] forState:UIControlStateSelected];
-		}
-	}
-}
 
 @end
