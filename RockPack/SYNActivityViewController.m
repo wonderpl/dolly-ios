@@ -389,12 +389,9 @@
 	if ([keyPath isEqualToString:NSStringFromSelector(@selector(hasUnreadNotifications))]) {
 		UIButton *activityTab = appDelegate.masterViewController.activityTab;
 		if (self.hasUnreadNotifications) {
-			[activityTab setImage:[UIImage imageNamed:@"TabActivityNoti"] forState:UIControlStateNormal];
-			[activityTab setImage:[UIImage imageNamed:@"TabActivityNotiHighlighted"] forState:UIControlStateHighlighted];
-			[activityTab setImage:[UIImage imageNamed:@"TabActivityNotiSelected"] forState:UIControlStateSelected];
+            //TODO: Badge number selected states
 		} else {
 			[activityTab setImage:[UIImage imageNamed:@"TabActivity"] forState:UIControlStateNormal];
-			[activityTab setImage:[UIImage imageNamed:@"TabActivityHighlighted"] forState:UIControlStateHighlighted];
 			[activityTab setImage:[UIImage imageNamed:@"TabActivitySelected"] forState:UIControlStateSelected];
 		}
 	}

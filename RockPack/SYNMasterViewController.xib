@@ -49,7 +49,6 @@
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <state key="selected" image="TabSearchSelected.png"/>
-                                    <state key="highlighted" image="TabSearchHighlighted.png"/>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="kbV-FI-bsq" userLabel="Tab 3 - Feed">
                                     <rect key="frame" x="0.0" y="97" width="97" height="97"/>
@@ -58,7 +57,6 @@
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <state key="selected" image="TabFeedSelected.png"/>
-                                    <state key="highlighted" image="TabFeedHighlighted.png"/>
                                 </button>
                                 <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="enX-Jp-bsM" userLabel="Tab 4 - Profile">
                                     <rect key="frame" x="0.0" y="194" width="97" height="97"/>
@@ -67,7 +65,6 @@
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <state key="selected" image="TabProfileSelected.png"/>
-                                    <state key="highlighted" image="TabProfileHighlighted.png"/>
                                 </button>
                                 <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="YsR-vi-fVg" userLabel="Tab 5 - Activity">
                                     <rect key="frame" x="0.0" y="291" width="97" height="97"/>
@@ -76,7 +73,6 @@
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <state key="selected" image="TabActivitySelected.png"/>
-                                    <state key="highlighted" image="TabActivityHighlighted.png"/>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -92,16 +88,12 @@
     </objects>
     <resources>
         <image name="TabActivity.png" width="97" height="97"/>
-        <image name="TabActivityHighlighted.png" width="97" height="97"/>
         <image name="TabActivitySelected.png" width="97" height="97"/>
         <image name="TabFeed.png" width="97" height="97"/>
-        <image name="TabFeedHighlighted.png" width="97" height="97"/>
         <image name="TabFeedSelected.png" width="97" height="97"/>
         <image name="TabProfile.png" width="97" height="97"/>
-        <image name="TabProfileHighlighted.png" width="97" height="97"/>
         <image name="TabProfileSelected.png" width="97" height="97"/>
         <image name="TabSearch.png" width="97" height="97"/>
-        <image name="TabSearchHighlighted.png" width="97" height="97"/>
         <image name="TabSearchSelected.png" width="97" height="97"/>
     </resources>
 </document>
