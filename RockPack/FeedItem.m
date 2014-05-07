@@ -48,11 +48,11 @@
 + (NSArray *)orderedFeedItemsWithIds:(NSArray *)feedItemIds inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
 	NSDictionary *feedItemsByIds = [self feedItemsWithIds:feedItemIds inManagedObjectContext:managedObjectContext];
 	
-	NSMutableArray *array = [NSMutableArray array];
+	NSMutableArray *feedItems = [NSMutableArray array];
 	for (NSString *feedItemId in feedItemIds) {
-		[array addObject:feedItemsByIds[feedItemId]];
+		[feedItems addObject:feedItemsByIds[feedItemId]];
 	}
-	return array;
+	return feedItems;
 }
 
 + (void)deleteFeedItemsInManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {

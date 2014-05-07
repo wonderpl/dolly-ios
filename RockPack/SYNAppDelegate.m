@@ -34,6 +34,7 @@
 #import "SYNGenreManager.h"
 #import "SYNLocationManager.h"
 #import "SYNAppearanceManager.h"
+#import "SYNFeedModel.h"
 @import AVFoundation;
 
 @interface SYNAppDelegate () {
@@ -328,7 +329,8 @@
 {
     // As we are logging out, we need to unregister the current user (the new user will be re-registered on login below)
     [[UIApplication sharedApplication] unregisterForRemoteNotifications];
-     
+	[[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalNever];
+    
     self.masterViewController = nil;
     
     [self.currentOAuth2Credentials removeFromKeychain];
@@ -352,6 +354,8 @@
 
 
 - (void)loginCompleted:(NSNotification *)notification {
+	[[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
+    
 	[[SYNTrackingManager sharedManager] setAgeDimensionFromBirthDate:self.currentUser.dateOfBirth];
 	[[SYNTrackingManager sharedManager] setGenderDimension:self.currentUser.genderValue];
 	[SYNActivityManager.sharedInstance updateActivityForCurrentUserWithReset:YES];
@@ -1366,6 +1370,32 @@
     }
     
     return success;
+}
+
+- (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+	if (!self.currentOAuth2Credentials.userId) {
+		completionHandler(UIBackgroundFetchResultNoData);
+		return;
+	}
+	
+	[[SYNFeedModel sharedModel] reloadInitialPageWithCompletionHandler:^(BOOL success, BOOL hasChanged) {
+		UIBackgroundFetchResult result;
+		if (success) {
+			if (hasChanged) {
+				result = UIBackgroundFetchResultNewData;
+			} else {
+				result = UIBackgroundFetchResultNoData;
+			}
+		} else {
+			result = UIBackgroundFetchResultFailed;
+		}
+		
+		if (hasChanged) {
+			[self.navigationManager switchToFeed];
+		}
+		
+		completionHandler(result);
+	}];
 }
 
 

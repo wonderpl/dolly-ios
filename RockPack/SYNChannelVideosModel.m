@@ -52,11 +52,11 @@
 
 #pragma mark - Overridden
 
-- (void)loadItemsForRange:(NSRange)range {
+- (void)loadItemsForRange:(NSRange)range successBlock:(SYNPagingModelResultsBlock)successBlock errorBlock:(SYNPagingModelErrorBlock)errorBlock {
 	SYNAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
 
 	__weak typeof(self) wself = self;
-	MKNKUserSuccessBlock successBlock = ^(NSDictionary *response) {
+	MKNKUserSuccessBlock internalSuccessBlock = ^(NSDictionary *response) {
 		__strong typeof(self) sself = wself;
 		
 		wself.isSavingNextPage = YES;
@@ -64,15 +64,11 @@
 		[sself.channel addVideoInstancesFromDictionary:response];
 		[sself.channel.managedObjectContext save:nil];
 		
-		sself.loadedItems = [sself.channel.videoInstancesSet array];
-		sself.totalItemCount = sself.channel.totalVideosValueValue;
-		
-		[sself handleDataUpdatedForRange:range];
+		successBlock([sself.channel.videoInstancesSet array], sself.channel.totalVideosValueValue);
 	};
 
-	// define success block //
-	MKNKUserErrorBlock errorBlock = ^(NSDictionary *response) {
-		[self handleError];
+	MKNKUserErrorBlock internalErrorBlock = ^(NSDictionary *response) {
+		errorBlock();
 	};
 
 	// We want to load the current user's channel securely since it isn't cached and we always want to
@@ -81,14 +77,14 @@
 		[appDelegate.oAuthNetworkEngine videosForChannelForUserId:appDelegate.currentUser.uniqueId
 														channelId:self.channel.uniqueId
 														  inRange:range
-												completionHandler:successBlock
-													 errorHandler:errorBlock];
+												completionHandler:internalSuccessBlock
+													 errorHandler:internalErrorBlock];
 	} else {
 		[appDelegate.networkEngine videosForChannelForUserId:self.channel.channelOwner.uniqueId
 												   channelId:self.channel.uniqueId
 													 inRange:range
-										   completionHandler:successBlock
-												errorHandler:errorBlock];
+										   completionHandler:internalSuccessBlock
+												errorHandler:internalErrorBlock];
 	}
 }
 

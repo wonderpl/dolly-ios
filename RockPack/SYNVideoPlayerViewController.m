@@ -21,8 +21,6 @@
 #import "SYNPopoverAnimator.h"
 #import "SYNActivityManager.h"
 #import "SYNAddToChannelViewController.h"
-#import "SYNCommentingViewController.h"
-#import "SYNRotatingPopoverController.h"
 #import "UINavigationBar+Appearance.h"
 #import "UILabel+Animation.h"
 #import "SYNWebViewController.h"
@@ -50,8 +48,6 @@
 @property (nonatomic, assign) NSTimeInterval autoplayStartTime;
 
 @property (nonatomic, assign) NSInteger selectedIndex;
-
-@property (nonatomic, strong) SYNRotatingPopoverController *commentPopoverController;
 
 @property (nonatomic, strong) SYNPagingModel *model;
 
@@ -455,8 +451,7 @@
 	NSDictionary *mapping = @{
 							  NSStringFromClass([SYNFullScreenVideoViewController class]) : [SYNFullScreenVideoAnimator class],
 							  NSStringFromClass([SYNOneToOneSharingController class])     : [SYNPopoverAnimator class],
-							  NSStringFromClass([SYNAddToChannelViewController class])    : [SYNPopoverAnimator class],
-							  NSStringFromClass([SYNCommentingViewController class])      : [SYNPopoverAnimator class]
+							  NSStringFromClass([SYNAddToChannelViewController class])    : [SYNPopoverAnimator class]
 							  };
 	return mapping[NSStringFromClass([viewController class])];
 }

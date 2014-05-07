@@ -13,7 +13,11 @@ static const NSInteger DefaultBatchSize = 40;
 
 @interface SYNPagingModel ()
 
+@property (nonatomic, strong) NSArray *loadedItems;
+@property (nonatomic, assign) NSInteger totalItemCount;
 @property (nonatomic, assign) NSRange loadedRange;
+
+@property (nonatomic, strong) NSMutableArray *completionBlocks;
 
 @end
 
@@ -30,6 +34,8 @@ static const NSInteger DefaultBatchSize = 40;
 		self.loadedItems = items;
 		self.loadedRange = (items ? NSMakeRange(0, [items count]) : NSMakeRange(NSNotFound, 0));
 		self.totalItemCount = totalItemCount;
+		
+		self.completionBlocks = [NSMutableArray array];
 	}
 	return self;
 }
@@ -52,44 +58,79 @@ static const NSInteger DefaultBatchSize = 40;
 	return DefaultBatchSize;
 }
 
-- (void)reset {
-	[self resetWithItems:nil totalItemCount:0];
+- (void)reloadInitialPage {
+	[self reloadInitialPageWithCompletionHandler:nil];
 }
 
-- (void)resetWithItems:(NSArray *)items totalItemCount:(NSInteger)totalItemCount {
-	self.loadedItems = items;
-	self.loadedRange = (items ? NSMakeRange(0, [items count]) : NSMakeRange(NSNotFound, 0));
-	self.totalItemCount = totalItemCount;
+- (void)reloadInitialPageWithCompletionHandler:(SYNPagingModelCompletionBlock)completion {
+	self.loadedRange = NSMakeRange(NSNotFound, 0);
+	
+	[self loadNextPageWithCompletionHandler:completion];
 }
 
 - (void)loadNextPage {
+	[self loadNextPageWithCompletionHandler:nil];
+}
+
+- (void)loadNextPageWithCompletionHandler:(SYNPagingModelCompletionBlock)completion {
 	if (self.loading) {
+		if (completion) {
+			[self.completionBlocks addObject:[completion copy]];
+		}
+		
 		return;
 	}
 	
 	self.loading = YES;
 	
 	NSUInteger nextPageLocation = (self.loadedRange.location == NSNotFound ? 0 : NSMaxRange(self.loadedRange));
-	[self loadItemsForRange:NSMakeRange(nextPageLocation, self.batchSize)];
+	NSRange range = NSMakeRange(nextPageLocation, self.batchSize);
+	
+	[self loadItemsForRange:range successBlock:^(NSArray *results, NSInteger totalItemCount) {
+		BOOL hasChanged = ![results isEqualToArray:self.loadedItems];
+		
+		self.loadedItems = results;
+		self.loadedRange = range;
+		self.totalItemCount = totalItemCount;
+		
+		self.loading = NO;
+		
+		for (SYNPagingModelCompletionBlock completion in self.completionBlocks) {
+			completion(YES, hasChanged);
+		}
+		self.completionBlocks = [NSMutableArray array];
+		if (completion) {
+			completion(YES, hasChanged);
+		}
+		
+		[self.delegate pagingModelDataUpdated:self];
+	} errorBlock:^{
+		self.loading = NO;
+		
+		for (SYNPagingModelCompletionBlock completion in self.completionBlocks) {
+			completion(NO, NO);
+		}
+		self.completionBlocks = [NSMutableArray array];
+		if (completion) {
+			completion(NO, NO);
+		}
+		
+		[self.delegate pagingModelErrorOccurred:self];
+	}];
 }
 
 #pragma mark - Protected
 
-- (void)handleDataUpdatedForRange:(NSRange)range {
-	self.loading = NO;
-	self.loadedRange = range;
+- (void)loadItemsForRange:(NSRange)range
+			 successBlock:(SYNPagingModelResultsBlock)successBlock
+			   errorBlock:(SYNPagingModelErrorBlock)errorBlock {
 	
-	[self.delegate pagingModelDataUpdated:self];
 }
 
-- (void)handleError {
-	self.loading = NO;
-	
-	[self.delegate pagingModelErrorOccurred:self];
-}
-
-- (void)loadItemsForRange:(NSRange)range {
-	
+- (void)resetWithItems:(NSArray *)items totalItemCount:(NSInteger)totalItemCount {
+	self.loadedItems = items;
+	self.loadedRange = (items ? NSMakeRange(0, [items count]) : NSMakeRange(NSNotFound, 0));
+	self.totalItemCount = totalItemCount;
 }
 
 @end

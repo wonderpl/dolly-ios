@@ -529,11 +529,6 @@
 		BED4311716F0EBBB0051465B /* SYNLoginErrorArrow.m in Sources */ = {isa = PBXBuildFile; fileRef = BED4311616F0EBBB0051465B /* SYNLoginErrorArrow.m */; };
 		BEE01B5A184F5868000CF681 /* SYNSocialFollowButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE01B59184F5868000CF681 /* SYNSocialFollowButton.m */; };
 		BEE01B5C184F638C000CF681 /* SYNOnBoardingHeader~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEE01B5B184F638C000CF681 /* SYNOnBoardingHeader~iphone.xib */; };
-		BEE01B611851E16C000CF681 /* SYNCommentingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE01B5F1851E16C000CF681 /* SYNCommentingViewController.m */; };
-		BEE01B621851E16C000CF681 /* SYNCommentingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEE01B601851E16C000CF681 /* SYNCommentingViewController.xib */; };
-		BEE01B641851E187000CF681 /* SYNCommentingViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEE01B631851E187000CF681 /* SYNCommentingViewController~iphone.xib */; };
-		BEE01B681851E7B1000CF681 /* SYNCommentingCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE01B671851E7B1000CF681 /* SYNCommentingCollectionViewCell.m */; };
-		BEE01B6A18520FA6000CF681 /* SYNCommentingCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEE01B6918520FA6000CF681 /* SYNCommentingCollectionViewCell.xib */; };
 		BEE01B6D18521418000CF681 /* SYNSocialCommentButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE01B6C18521418000CF681 /* SYNSocialCommentButton.m */; };
 		BEE01B7018521DB8000CF681 /* _Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE01B6F18521DB8000CF681 /* _Comment.m */; };
 		BEE01B7318521DCF000CF681 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE01B7218521DCF000CF681 /* Comment.m */; };
@@ -551,7 +546,6 @@
 		BEFAE89C1725485B009B2F66 /* SYNVideoQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFAE89B1725485B009B2F66 /* SYNVideoQueue.m */; };
 		C76BF297AD0F44ABBFCB5A85 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3685246F69AA4C9B93DDEDAC /* libPods.a */; };
 		E90506A618E05FD800E0910E /* UIDevice+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = E90506A518E05FD800E0910E /* UIDevice+Helpers.m */; };
-		E90506AB18E1925700E0910E /* SYNCommentingViewControllerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = E90506AA18E1925700E0910E /* SYNCommentingViewControllerSpec.m */; };
 		E9058169183CC87C00257E7F /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E9058168183CC87C00257E7F /* libicucore.dylib */; };
 		E905A93B189ABBCB00FED785 /* SYNNotificationsTableViewCell~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E905A93A189ABBCB00FED785 /* SYNNotificationsTableViewCell~ipad.xib */; };
 		E905A93E189ACA0500FED785 /* PlaceholderNotificationVideo@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = E905A93C189ACA0500FED785 /* PlaceholderNotificationVideo@2x~iphone.png */; };
@@ -564,7 +558,6 @@
 		E91E3B2218C7292400F79020 /* ButtonVideoDeleteDefault@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E91E3B2018C7292400F79020 /* ButtonVideoDeleteDefault@2x.png */; };
 		E91F04521844BDB50009D610 /* SYNVideoLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = E91F04511844BDB50009D610 /* SYNVideoLoadingView.m */; };
 		E92835DF18D9B78F00F7DA27 /* SYNAppearanceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E92835DE18D9B78F00F7DA27 /* SYNAppearanceManager.m */; };
-		E92837AC189C022E005D5108 /* SYNCommentsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E92837AB189C022E005D5108 /* SYNCommentsModel.m */; };
 		E92837B2189C0BE9005D5108 /* SYNFacebookButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E92837B1189C0BE9005D5108 /* SYNFacebookButton.m */; };
 		E929AD7218D0AF0B001E1792 /* SYNHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E929AD7118D0AF0B001E1792 /* SYNHTTPSessionManager.m */; };
 		E92B7BC9190A77BC0099AA44 /* SYNVideoCell~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E92B7BC8190A77BC0099AA44 /* SYNVideoCell~ipad.xib */; };
@@ -1125,7 +1118,6 @@
 		4C1DBBEB18E48E5D0047CAFA /* SYNIPadSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNIPadSignupViewController.m; sourceTree = "<group>"; };
 		4C22750B18F6D471009C5242 /* rightarrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rightarrow.png; sourceTree = "<group>"; };
 		4C22750C18F6D471009C5242 /* rightarrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rightarrow@2x.png"; sourceTree = "<group>"; };
-		4C30407718BB6972006B5463 /* SYNCommentUpdateDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYNCommentUpdateDelegate.h; sourceTree = "<group>"; };
 		4C56F15618CF76E0005E4A7C /* SYNIPhoneCreateChannelLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNIPhoneCreateChannelLayout.h; sourceTree = "<group>"; };
 		4C56F15718CF76E0005E4A7C /* SYNIPhoneCreateChannelLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNIPhoneCreateChannelLayout.m; sourceTree = "<group>"; };
 		4C5C390518EF09E6007250EE /* UIPlaceHolderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPlaceHolderTextView.h; sourceTree = "<group>"; };
@@ -1452,13 +1444,6 @@
 		BEE01B58184F5868000CF681 /* SYNSocialFollowButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNSocialFollowButton.h; sourceTree = "<group>"; };
 		BEE01B59184F5868000CF681 /* SYNSocialFollowButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNSocialFollowButton.m; sourceTree = "<group>"; };
 		BEE01B5B184F638C000CF681 /* SYNOnBoardingHeader~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNOnBoardingHeader~iphone.xib"; sourceTree = "<group>"; };
-		BEE01B5E1851E16C000CF681 /* SYNCommentingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNCommentingViewController.h; sourceTree = "<group>"; };
-		BEE01B5F1851E16C000CF681 /* SYNCommentingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNCommentingViewController.m; sourceTree = "<group>"; };
-		BEE01B601851E16C000CF681 /* SYNCommentingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNCommentingViewController.xib; sourceTree = "<group>"; };
-		BEE01B631851E187000CF681 /* SYNCommentingViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNCommentingViewController~iphone.xib"; sourceTree = "<group>"; };
-		BEE01B661851E7B1000CF681 /* SYNCommentingCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNCommentingCollectionViewCell.h; sourceTree = "<group>"; };
-		BEE01B671851E7B1000CF681 /* SYNCommentingCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNCommentingCollectionViewCell.m; sourceTree = "<group>"; };
-		BEE01B6918520FA6000CF681 /* SYNCommentingCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNCommentingCollectionViewCell.xib; sourceTree = "<group>"; };
 		BEE01B6B18521418000CF681 /* SYNSocialCommentButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNSocialCommentButton.h; sourceTree = "<group>"; };
 		BEE01B6C18521418000CF681 /* SYNSocialCommentButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNSocialCommentButton.m; sourceTree = "<group>"; };
 		BEE01B6E18521DB8000CF681 /* _Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Comment.h; sourceTree = "<group>"; };
@@ -1488,7 +1473,6 @@
 		D9D50C4D95B04D83AF3B374D /* libPods-rockpackTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-rockpackTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E90506A418E05FD800E0910E /* UIDevice+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Helpers.h"; sourceTree = "<group>"; };
 		E90506A518E05FD800E0910E /* UIDevice+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Helpers.m"; sourceTree = "<group>"; };
-		E90506AA18E1925700E0910E /* SYNCommentingViewControllerSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNCommentingViewControllerSpec.m; sourceTree = "<group>"; };
 		E9058166183CC77F00257E7F /* libPods-Ooyala.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-Ooyala.a"; path = "Pods/build/Debug-iphoneos/libPods-Ooyala.a"; sourceTree = "<group>"; };
 		E9058168183CC87C00257E7F /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		E905A93A189ABBCB00FED785 /* SYNNotificationsTableViewCell~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNNotificationsTableViewCell~ipad.xib"; sourceTree = "<group>"; };
@@ -1510,8 +1494,6 @@
 		E91F04531844C4410009D610 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		E92835DD18D9B78F00F7DA27 /* SYNAppearanceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAppearanceManager.h; sourceTree = "<group>"; };
 		E92835DE18D9B78F00F7DA27 /* SYNAppearanceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAppearanceManager.m; sourceTree = "<group>"; };
-		E92837AA189C022E005D5108 /* SYNCommentsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNCommentsModel.h; sourceTree = "<group>"; };
-		E92837AB189C022E005D5108 /* SYNCommentsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNCommentsModel.m; sourceTree = "<group>"; };
 		E92837B0189C0BE9005D5108 /* SYNFacebookButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNFacebookButton.h; sourceTree = "<group>"; };
 		E92837B1189C0BE9005D5108 /* SYNFacebookButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNFacebookButton.m; sourceTree = "<group>"; };
 		E929AD7018D0AF0B001E1792 /* SYNHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNHTTPSessionManager.h; sourceTree = "<group>"; };
@@ -2075,7 +2057,6 @@
 				E985176318B4B37100ADBD0F /* NSRegularExpressionUsernameSpec.m */,
 				E94BEFAD18CA0E6B00762651 /* NSStringTimecodeSpec.m */,
 				E9A6900A18DC9FBF00603D99 /* SYNOnboardingViewControllerSpec.m */,
-				E90506AA18E1925700E0910E /* SYNCommentingViewControllerSpec.m */,
 				4C63487218E5CBFB00FF7168 /* SYNProfileViewControllerSpec.m */,
 				4C63487418E5E04600FF7168 /* SYNProfileChannelViewControllerSpec.m */,
 				4C63487818E5E65E00FF7168 /* SYNProfileEditViewControllerSpec.m */,
@@ -3883,28 +3864,10 @@
 		BEE01B5D1851E121000CF681 /* Commenting */ = {
 			isa = PBXGroup;
 			children = (
-				BEE01B5E1851E16C000CF681 /* SYNCommentingViewController.h */,
-				BEE01B5F1851E16C000CF681 /* SYNCommentingViewController.m */,
-				BEE01B601851E16C000CF681 /* SYNCommentingViewController.xib */,
-				BEE01B631851E187000CF681 /* SYNCommentingViewController~iphone.xib */,
-				BEE01B651851E757000CF681 /* Cells */,
 				E9D71AD5187DCD8A00C3FAB8 /* SYNRotatingPopoverController.h */,
 				E9D71AD6187DCD8A00C3FAB8 /* SYNRotatingPopoverController.m */,
-				E92837AA189C022E005D5108 /* SYNCommentsModel.h */,
-				E92837AB189C022E005D5108 /* SYNCommentsModel.m */,
-				4C30407718BB6972006B5463 /* SYNCommentUpdateDelegate.h */,
 			);
 			name = Commenting;
-			sourceTree = "<group>";
-		};
-		BEE01B651851E757000CF681 /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				BEE01B661851E7B1000CF681 /* SYNCommentingCollectionViewCell.h */,
-				BEE01B671851E7B1000CF681 /* SYNCommentingCollectionViewCell.m */,
-				BEE01B6918520FA6000CF681 /* SYNCommentingCollectionViewCell.xib */,
-			);
-			name = Cells;
 			sourceTree = "<group>";
 		};
 		BEF9E5A516DBCDEF00286113 /* Components */ = {
@@ -4038,6 +4001,9 @@
 					010DEFCF1629BDC40080F26B = {
 						DevelopmentTeam = 55U2NK549A;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.Keychain = {
 								enabled = 0;
 							};
@@ -4109,7 +4075,6 @@
 				1F4E7F7A181AC7D300F59007 /* TabFeedHighlighted@2x.png in Resources */,
 				E99B8D3F1892AD9500E08ABD /* ScrubberBarHD@2x.png in Resources */,
 				E9B9214018C78CA2003093B8 /* TabActivityNotiSelected@2x~iphone.png in Resources */,
-				BEE01B6A18520FA6000CF681 /* SYNCommentingCollectionViewCell.xib in Resources */,
 				01A79B9116F32C3400B05084 /* ShuttleBarRemainingBar.png in Resources */,
 				01A79B9216F32C3400B05084 /* ShuttleBarRemainingBar@2x.png in Resources */,
 				01A79B9416F32C3400B05084 /* ShuttleBarSliderThumb.png in Resources */,
@@ -4243,8 +4208,6 @@
 				E9B9213518C78C94003093B8 /* TabActivityNotiSelected@2x.png in Resources */,
 				E972DFB1187C6FD900CB9C78 /* Login_iphone.storyboard in Resources */,
 				1F4E7F87181AC7D300F59007 /* TabSearchSelected.png in Resources */,
-				BEE01B641851E187000CF681 /* SYNCommentingViewController~iphone.xib in Resources */,
-				BEE01B621851E16C000CF681 /* SYNCommentingViewController.xib in Resources */,
 				0EF0786B181EAE9100667417 /* ButtonMore@2x~iphone.png in Resources */,
 				BED027D51834D4CC00636659 /* ButtonMoreSettings@2x.png in Resources */,
 				1F458B2E17E1CE8E003C14AC /* AppIcon-Dev-76x76.png in Resources */,
@@ -4589,7 +4552,6 @@
 				4C9B519E18D72B5100A3AB0D /* SYNIPadCreateChannelLayout.m in Sources */,
 				01E427F01664EE52009B941F /* _Channel.m in Sources */,
 				E905A945189BCD1500FED785 /* SYNSignupViewController.m in Sources */,
-				E92837AC189C022E005D5108 /* SYNCommentsModel.m in Sources */,
 				E98F609818B24901008AAAA8 /* SYNWonderMailActivity.m in Sources */,
 				E9F6255318845EF9000EF6A2 /* SYNiPhonePasswordForgotViewController.m in Sources */,
 				BEE01B5A184F5868000CF681 /* SYNSocialFollowButton.m in Sources */,
@@ -4602,7 +4564,6 @@
 				BEE01B7318521DCF000CF681 /* Comment.m in Sources */,
 				0199F13B16721A4500E479C6 /* SYNFeedRootViewController.m in Sources */,
 				01946B911683335400354601 /* _ChannelOwner.m in Sources */,
-				BEE01B681851E7B1000CF681 /* SYNCommentingCollectionViewCell.m in Sources */,
 				E9CDFFB819090EC900A95B90 /* SYNIPadFeedRootViewController.m in Sources */,
 				4CDD76A618CA014A000B2CBD /* SYNFeedOverlayViewController.m in Sources */,
 				E9F6255618854A3D000EF6A2 /* SYNIPhoneSignupUsernameViewController.m in Sources */,
@@ -4751,7 +4712,6 @@
 				E9B8A504185B20D300F0D625 /* SYNChannelVideosModel.m in Sources */,
 				BE1B3DD0180E8FFE00DA2BD6 /* SYNMoodRootViewController.m in Sources */,
 				4CF39EF118CDD5FA0077CDF0 /* SYNProfileChannelViewController.m in Sources */,
-				BEE01B611851E16C000CF681 /* SYNCommentingViewController.m in Sources */,
 				011C1678173003E800CF50B9 /* OWActivityView.m in Sources */,
 				011C167A173003E800CF50B9 /* OWActivityViewController.m in Sources */,
 				011C167B173003E800CF50B9 /* OWCopyActivity.m in Sources */,
@@ -4852,7 +4812,6 @@
 				4C63487318E5CBFB00FF7168 /* SYNProfileViewControllerSpec.m in Sources */,
 				E98A8519190968C2001ADE09 /* NSString+TestHelpers.m in Sources */,
 				E98A8518190968BA001ADE09 /* NSManagedObjectContext+TestHelpers.m in Sources */,
-				E90506AB18E1925700E0910E /* SYNCommentingViewControllerSpec.m in Sources */,
 				E94BEFAE18CA0E6B00762651 /* NSStringTimecodeSpec.m in Sources */,
 				E9F7CC791846289B0026C97D /* NSStringValidationSpec.m in Sources */,
 			);

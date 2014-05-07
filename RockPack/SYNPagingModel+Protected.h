@@ -8,18 +8,18 @@
 
 #import "SYNPagingModel.h"
 
+typedef void (^SYNPagingModelResultsBlock)(NSArray *results, NSInteger totalItemCount);
+typedef void (^SYNPagingModelErrorBlock)();
+
 @interface SYNPagingModel ()
 
 @property (nonatomic, assign) BOOL loading;
-@property (nonatomic, strong) NSArray *loadedItems;
-@property (nonatomic, assign) NSInteger totalItemCount;
 
 - (instancetype)initWithItems:(NSArray *)items totalItemCount:(NSInteger)totalItemCount;
 
-- (void)handleDataUpdatedForRange:(NSRange)range;
-- (void)handleError;
-
-- (void)loadItemsForRange:(NSRange)range;
+- (void)loadItemsForRange:(NSRange)range
+			 successBlock:(SYNPagingModelResultsBlock)successBlock
+			   errorBlock:(SYNPagingModelErrorBlock)errorBlock;
 
 - (void)resetWithItems:(NSArray *)items totalItemCount:(NSInteger)totalItemCount;
 

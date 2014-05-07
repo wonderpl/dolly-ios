@@ -19,6 +19,8 @@
 -(void)navigateToPage:(NSInteger)index;
 -(void)navigateToPageByName:(NSString*)pageName;
 
+- (void)switchToFeed;
+
 +(id)manager;
 
 @end

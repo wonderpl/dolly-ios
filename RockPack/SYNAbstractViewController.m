@@ -27,10 +27,7 @@
 #import "VideoInstance.h"
 #import "SYNTrackingManager.h"
 #import "SYNActivityManager.h"
-#import "SYNRotatingPopoverController.h"
 #import "SYNPopoverAnimator.h"
-#import "SYNCommentUpdateDelegate.h"
-#import "SYNCommentUpdateDelegate.h"
 #import "SYNSocialCommentButton.h"
 #import "SYNProfileChannelViewController.h"
 
@@ -39,7 +36,7 @@
 #define kScrollContentOff 40.0f
 #define kScrollSpeedBoundary 0.0f
 
-@interface SYNAbstractViewController () <UIViewControllerTransitioningDelegate, SYNCommentUpdateDelegate>
+@interface SYNAbstractViewController () <UIViewControllerTransitioningDelegate>
 
 @property (strong, nonatomic) NSMutableDictionary *mutableShareDictionary;
 @property (nonatomic, assign) NSInteger lastContentOffset;
@@ -50,7 +47,6 @@
 @property (nonatomic, strong) SYNPopupMessageView* popupMessageView;
 @property (nonatomic, assign) ScrollingDirection scrollDirection;
 @property (nonatomic, assign) BOOL scrollerIsNearTop;
-@property (nonatomic, strong) SYNRotatingPopoverController *commentingPopoverController;
 
 @end
 
@@ -280,44 +276,8 @@
 
 
 - (void) commentControlPressed:(SYNSocialButton *)socialButton {
-	if (!socialButton.dataItemLinked) {
-		return;
-	}
-	
-	[[SYNTrackingManager sharedManager] trackVideoCommentFromScreenName:[self trackingScreenName]];
-	
-	SYNCommentingViewController* commentController = [[SYNCommentingViewController alloc] initWithVideoInstance:socialButton.dataItemLinked withButton:(SYNSocialCommentButton*)socialButton];
 
-	if (IS_IPAD) {
-        
-        
-		SYNRotatingPopoverController *popoverController = [[SYNRotatingPopoverController alloc] initWithContentViewController:commentController];
-		
-        popoverController.socialButton = socialButton;
-        popoverController.commentDelegate = self;
-		[popoverController presentPopoverFromButton:socialButton
-										   inView:self.view
-						 permittedArrowDirections:UIPopoverArrowDirectionRight
-										 animated:YES];
-		
-		self.commentingPopoverController = popoverController;
-
-	} else {
-		commentController.transitioningDelegate = self;
-		commentController.modalPresentationStyle = UIModalPresentationCustom;
-		[self presentViewController:commentController animated:YES completion:nil];
-	}
 }
-
--(void)commentUpdated{
-    int tmpNumber = ((VideoInstance*)self.commentingPopoverController.socialButton.dataItemLinked).commentCountValue;
-    
-    if (tmpNumber) {
-        
-        [((SYNSocialCommentButton*)self.commentingPopoverController.socialButton) setCount:tmpNumber];
-    }
-}
-
 
 - (void) shareControlPressed: (SYNSocialButton *) socialControl
 {
@@ -711,10 +671,10 @@
 	
 	[[SYNTrackingManager sharedManager] trackUserCollectionsFollowFromScreenName:[self trackingScreenName]];
 	
-	if(channelOwner.subscribedByUserValue == NO)
-	{
-		button.enabled = NO;
-		
+	button.enabled = NO;
+	[button invalidateIntrinsicContentSize];
+	
+	if (channelOwner.subscribedByUserValue == NO) {
 		[[SYNActivityManager sharedInstance] subscribeToUser:channelOwner
 										   completionHandler: ^(id responce) {
 											   
@@ -729,15 +689,13 @@
 											   
 											   
 											   
+											   [button invalidateIntrinsicContentSize];
 										   } errorHandler: ^(id error) {
 											   button.enabled = YES;
+											   
+											   [button invalidateIntrinsicContentSize];
 										   }];
-	}
-	else
-	{
-		
-		button.enabled = NO;
-		
+	} else {
 		[[SYNActivityManager sharedInstance] unsubscribeToUser:channelOwner
 											 completionHandler:^(id responce) {
 												 
@@ -751,8 +709,11 @@
 													 callbackBlock();
                                                  }
 												 
+												 [button invalidateIntrinsicContentSize];
 											 } errorHandler:^(id error) {
 												 button.enabled = YES;
+												 
+												 [button invalidateIntrinsicContentSize];
 											 }];
 	}
 }

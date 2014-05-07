@@ -146,6 +146,16 @@
 }
 
 
+- (void)switchToFeed {
+	// FIXME: For some stupid reason the indexes in the view controllers array and the tab bar are different
+	[self navigateToPage:0];
+	
+	for (UIButton *button in self.masterController.tabs) {
+		button.selected = NO;
+	}
+    ((UIButton*)[self.masterController.tabs objectAtIndex:1]).selected = YES;
+}
+
 - (void) setMasterController: (SYNMasterViewController *) masterController
 {
     _masterController = masterController;

@@ -227,17 +227,33 @@ static NSDateFormatter *dateFormatter = nil;
     
 }
 
-+ (NSDictionary *)existingVideoInstancesWithIds:(NSArray *)videoIds
++ (NSDictionary *)existingVideoInstancesWithIds:(NSArray *)videoInstanceIds
 						 inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
 	
 	NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[self entityName]];
-	[fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"uniqueId IN %@", videoIds]];
+	[fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"uniqueId IN %@", videoInstanceIds]];
 	
 	NSArray *videoInstances = [managedObjectContext executeFetchRequest:fetchRequest error:nil];
 	
 	return [NSDictionary dictionaryWithObjects:videoInstances forKeys:[videoInstances valueForKey:@"uniqueId"]];
 }
 
++ (NSArray *)orderedVideoInstancesWithIds:(NSArray *)videoInstanceIds
+				   inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
+	
+	NSDictionary *videoInstancesById = [self existingVideoInstancesWithIds:videoInstanceIds
+													inManagedObjectContext:managedObjectContext];
+	
+	NSMutableArray *videoInstances = [NSMutableArray array];
+	for (NSString *videoInstanceId in videoInstanceIds) {
+		VideoInstance *videoInstance = videoInstancesById[videoInstanceId];
+		if (videoInstance) {
+			[videoInstances addObject:videoInstance];
+		}
+	}
+	
+	return videoInstances;
+}
 
 #pragma mark - Object reference counting
 

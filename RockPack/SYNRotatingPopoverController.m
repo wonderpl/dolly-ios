@@ -51,9 +51,7 @@
 }
 
 
-- (void) popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
-{
-    [self.commentDelegate commentUpdated];
+- (void) popoverControllerDidDismissPopover:(UIPopoverController *)popoverController {
 }
 
 @end

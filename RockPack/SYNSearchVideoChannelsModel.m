@@ -36,15 +36,13 @@
 
 #pragma mark - Overridden
 
-- (void)loadItemsForRange:(NSRange)range {
+- (void)loadItemsForRange:(NSRange)range successBlock:(SYNPagingModelResultsBlock)successBlock errorBlock:(SYNPagingModelErrorBlock)errorBlock {
 	SYNAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
 	
-	__weak typeof(self) wself = self;
 	[appDelegate.networkEngine channelsForVideoId:self.videoId
 										  inRange:range
 								completionHandler:^(NSDictionary *response) {
-									__strong typeof(self) sself = wself;
-								 
+									
 									NSMutableArray *channels = [NSMutableArray array];
 									for (NSDictionary *dictionary in response[@"channels"][@"items"]) {
 										Channel *channel = [Channel instanceFromDictionary:dictionary
@@ -52,14 +50,9 @@
 										[channels addObject:channel];
 									}
 									
-									sself.loadedItems = channels;
-									sself.totalItemCount = [response[@"channels"][@"total"] integerValue];
-									
-									[sself handleDataUpdatedForRange:range];
+									successBlock(channels, [response[@"channels"][@"total"] integerValue]);
 								} errorHandler:^(NSError *error) {
-									__strong typeof(self) sself = wself;
-
-									[sself handleError];
+									errorBlock();
 								}];
 }
 
