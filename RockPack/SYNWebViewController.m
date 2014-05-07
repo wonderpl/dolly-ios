@@ -9,7 +9,7 @@
 #import "SYNWebViewController.h"
 #import "SYNTrackingManager.h"
 
-@interface SYNWebViewController () <UIWebViewDelegate>
+@interface SYNWebViewController () <UIWebViewDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *closeButton;
 
@@ -37,6 +37,8 @@
 	webViewController.URL = URL;
 	webViewController.trackingName = trackingName;
 	
+	navController.delegate = webViewController;
+	
 	return navController;
 }
 
@@ -63,6 +65,10 @@
 	if (self.trackingName) {
 		[[SYNTrackingManager sharedManager] trackScreenViewWithName:self.trackingName];
 	}
+}
+
+- (NSUInteger)navigationControllerSupportedInterfaceOrientations:(UINavigationController *)navigationController {
+	return (IS_IPAD ? UIInterfaceOrientationMaskAll : UIInterfaceOrientationMaskPortrait);
 }
 
 #pragma mark - UIWebViewDelegate
