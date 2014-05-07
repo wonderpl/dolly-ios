@@ -30,11 +30,12 @@ static NSDateFormatter *dateFormatter = nil;
     instance.starredByUserValue = existingInstance.starredByUserValue;
     instance.video = [Video	instanceFromVideo: existingInstance.video
                     usingManagedObjectContext: managedObjectContext];
-	instance.originator = [ChannelOwner instanceFromChannelOwner:existingInstance.originator
-													   andViewId:existingInstance.viewId
-									   usingManagedObjectContext:managedObjectContext
-											 ignoringObjectTypes:kIgnoreNothing];
-	
+    instance.originator = [ChannelOwner instanceFromChannelOwner:existingInstance.originator
+                                                       andViewId:existingInstance.viewId
+                                       usingManagedObjectContext:managedObjectContext
+                                             ignoringObjectTypes:kIgnoreChannelObjects];
+    
+
     if (!(ignoringObjects & kIgnoreChannelObjects))
     {
         instance.channel = [Channel	instanceFromChannel: existingInstance.channel
