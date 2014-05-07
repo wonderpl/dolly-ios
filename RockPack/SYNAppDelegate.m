@@ -1390,6 +1390,10 @@
 			result = UIBackgroundFetchResultFailed;
 		}
 		
+		if (hasChanged) {
+			[self.navigationManager switchToFeed];
+		}
+		
 		completionHandler(result);
 	}];
 }
