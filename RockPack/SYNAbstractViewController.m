@@ -722,8 +722,10 @@
 											   button.enabled = YES;
 											   
 											   [[NSNotificationCenter defaultCenter] postNotificationName:kReloadFeed object:self userInfo:nil];
-											   callbackBlock();
-
+                                               
+                                               if (callbackBlock != nil) {
+                                                   callbackBlock();
+                                               }
 											   
 											   
 											   
@@ -742,9 +744,12 @@
 												 button.selected = NO;
 												 button.enabled = YES;
 												 [[NSNotificationCenter defaultCenter] postNotificationName:kReloadFeed object:self userInfo:nil];
-												 
-												 callbackBlock();
 
+
+                                                 
+                                                 if (callbackBlock != nil) {
+													 callbackBlock();
+                                                 }
 												 
 											 } errorHandler:^(id error) {
 												 button.enabled = YES;

@@ -88,16 +88,6 @@
 
 - (void) setDelegate:(id<SYNSocialActionsDelegate>)delegate
 {
-    // avatar button is not set to receive press events yet...
-    
-    if(_delegate)
-    {
-        [self.followButton removeTarget: _delegate
-                                 action: @selector(followControlPressed:)
-                       forControlEvents: UIControlEventTouchUpInside];
-        
-    }
-    
     _delegate = delegate;
     
 
