@@ -243,7 +243,7 @@
 	[self.model reloadInitialPageWithCompletionHandler:^(BOOL success, BOOL hasChanged) {
 		if (hasChanged) {
 			self.feedCollectionView.contentOffset = CGPointMake(0, -self.feedCollectionView.contentInset.top);
-			[appDelegate.navigationManager navigateToPage:0];
+			[appDelegate.navigationManager switchToFeed];
 		}
 	}];
 }
