@@ -1619,14 +1619,14 @@
         
         NSInteger tmpPosition = NSNotFound;
         
-        // Check if the video instance is in the first set of videos
-        for (int i = 0; i<self.model.itemCount; i++) {
-            VideoInstance *videoInstance = [self.model itemAtIndex:i];
-                //If the video is found, set the position
-                if ([videoInstance.uniqueId isEqual:vidToPlay.uniqueId]) {
-                tmpPosition = i;
-            }
-        }
+		// Check if the video instance is in the first set of videos
+		for (int i = 0; i<self.model.itemCount; i++) {
+			VideoInstance *videoInstance = [self.model itemAtIndex:i];
+			//If the video is found, set the position
+			if ([videoInstance.uniqueId isEqual:vidToPlay.uniqueId]) {
+				tmpPosition = i;
+			}
+		}
 		
 		NSArray *videosArray = [self.channel.videoInstancesSet array];
 		SYNPagingModel *model = [[SYNStaticModel alloc] initWithItems:videosArray];
