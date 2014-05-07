@@ -12,7 +12,6 @@
 #import "SYNSocialAddButton.h"
 #import "VideoInstance.h"
 #import "SYNSocialActionsDelegate.h"
-#import "SYNSocialCommentButton.h"
 #import "SYNVideoInfoCell.h"
 
 @interface SYNCollectionVideoCell : UICollectionViewCell <SYNVideoInfoCell>

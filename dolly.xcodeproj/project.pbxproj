@@ -200,10 +200,6 @@
 		1F51A6BA1742A959009907CA /* PlaceholderChannelSmall@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F51A6AE1742A959009907CA /* PlaceholderChannelSmall@2x~iphone.png */; };
 		1F51A6BB1742A959009907CA /* PlaceholderChannelSmall~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F51A6AF1742A959009907CA /* PlaceholderChannelSmall~iphone.png */; };
 		1F65D49017EB3C8C004326A9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F65D48F17EB3C8B004326A9 /* Images.xcassets */; };
-		1FC24E911851F7690022548B /* IconVideoCommentDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FC24E8D1851F7690022548B /* IconVideoCommentDefault.png */; };
-		1FC24E921851F7690022548B /* IconVideoCommentDefault@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FC24E8E1851F7690022548B /* IconVideoCommentDefault@2x.png */; };
-		1FC24E931851F7690022548B /* IconVideoCommentHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FC24E8F1851F7690022548B /* IconVideoCommentHighlighted.png */; };
-		1FC24E941851F7690022548B /* IconVideoCommentHighlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FC24E901851F7690022548B /* IconVideoCommentHighlighted@2x.png */; };
 		38281F1D17439B770024DC18 /* SYNLoginBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38281F1C17439B770024DC18 /* SYNLoginBaseViewController.m */; };
 		3862E8A4172979120066E8E7 /* SYNVideoThumbnailCell~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3862E8A2172979120066E8E7 /* SYNVideoThumbnailCell~iphone.xib */; };
 		3862E8B7172979410066E8E7 /* SYNChannelMidCell~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3862E8AF172979410066E8E7 /* SYNChannelMidCell~iphone.xib */; };
@@ -489,7 +485,6 @@
 		BED4311716F0EBBB0051465B /* SYNLoginErrorArrow.m in Sources */ = {isa = PBXBuildFile; fileRef = BED4311616F0EBBB0051465B /* SYNLoginErrorArrow.m */; };
 		BEE01B5A184F5868000CF681 /* SYNSocialFollowButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE01B59184F5868000CF681 /* SYNSocialFollowButton.m */; };
 		BEE01B5C184F638C000CF681 /* SYNOnBoardingHeader~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEE01B5B184F638C000CF681 /* SYNOnBoardingHeader~iphone.xib */; };
-		BEE01B6D18521418000CF681 /* SYNSocialCommentButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE01B6C18521418000CF681 /* SYNSocialCommentButton.m */; };
 		BEE01B7018521DB8000CF681 /* _Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE01B6F18521DB8000CF681 /* _Comment.m */; };
 		BEE01B7318521DCF000CF681 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE01B7218521DCF000CF681 /* Comment.m */; };
 		BEE01B7618573292000CF681 /* _Mood.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE01B7518573292000CF681 /* _Mood.m */; };
@@ -963,10 +958,6 @@
 		1F51A6AE1742A959009907CA /* PlaceholderChannelSmall@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PlaceholderChannelSmall@2x~iphone.png"; path = "placeholders/PlaceholderChannelSmall@2x~iphone.png"; sourceTree = "<group>"; };
 		1F51A6AF1742A959009907CA /* PlaceholderChannelSmall~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PlaceholderChannelSmall~iphone.png"; path = "placeholders/PlaceholderChannelSmall~iphone.png"; sourceTree = "<group>"; };
 		1F65D48F17EB3C8B004326A9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = rockpack/Images.xcassets; sourceTree = SOURCE_ROOT; };
-		1FC24E8D1851F7690022548B /* IconVideoCommentDefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = IconVideoCommentDefault.png; path = Assets/Images/IconVideoCommentDefault.png; sourceTree = "<group>"; };
-		1FC24E8E1851F7690022548B /* IconVideoCommentDefault@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "IconVideoCommentDefault@2x.png"; path = "Assets/Images/IconVideoCommentDefault@2x.png"; sourceTree = "<group>"; };
-		1FC24E8F1851F7690022548B /* IconVideoCommentHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = IconVideoCommentHighlighted.png; path = Assets/Images/IconVideoCommentHighlighted.png; sourceTree = "<group>"; };
-		1FC24E901851F7690022548B /* IconVideoCommentHighlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "IconVideoCommentHighlighted@2x.png"; path = "Assets/Images/IconVideoCommentHighlighted@2x.png"; sourceTree = "<group>"; };
 		276F95C3CF7F47FE9BF50F40 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		3685246F69AA4C9B93DDEDAC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		38281F1B17439B770024DC18 /* SYNLoginBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNLoginBaseViewController.h; sourceTree = "<group>"; };
@@ -1360,8 +1351,6 @@
 		BEE01B58184F5868000CF681 /* SYNSocialFollowButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNSocialFollowButton.h; sourceTree = "<group>"; };
 		BEE01B59184F5868000CF681 /* SYNSocialFollowButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNSocialFollowButton.m; sourceTree = "<group>"; };
 		BEE01B5B184F638C000CF681 /* SYNOnBoardingHeader~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNOnBoardingHeader~iphone.xib"; sourceTree = "<group>"; };
-		BEE01B6B18521418000CF681 /* SYNSocialCommentButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNSocialCommentButton.h; sourceTree = "<group>"; };
-		BEE01B6C18521418000CF681 /* SYNSocialCommentButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNSocialCommentButton.m; sourceTree = "<group>"; };
 		BEE01B6E18521DB8000CF681 /* _Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Comment.h; sourceTree = "<group>"; };
 		BEE01B6F18521DB8000CF681 /* _Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Comment.m; sourceTree = "<group>"; };
 		BEE01B7118521DCF000CF681 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
@@ -1887,10 +1876,6 @@
 				BEB31362181AB81600FAF98A /* IconVideoAddDefault@2x.png */,
 				BEB31363181AB81600FAF98A /* IconVideoAddHighlighted.png */,
 				BEB31364181AB81600FAF98A /* IconVideoAddHighlighted@2x.png */,
-				1FC24E8D1851F7690022548B /* IconVideoCommentDefault.png */,
-				1FC24E8E1851F7690022548B /* IconVideoCommentDefault@2x.png */,
-				1FC24E8F1851F7690022548B /* IconVideoCommentHighlighted.png */,
-				1FC24E901851F7690022548B /* IconVideoCommentHighlighted@2x.png */,
 			);
 			name = Buttons;
 			sourceTree = "<group>";
@@ -3629,8 +3614,6 @@
 				BEE01B59184F5868000CF681 /* SYNSocialFollowButton.m */,
 				0ECBED38187C66F900F28EB2 /* SYNFollowUserButton.h */,
 				0ECBED39187C66F900F28EB2 /* SYNFollowUserButton.m */,
-				BEE01B6B18521418000CF681 /* SYNSocialCommentButton.h */,
-				BEE01B6C18521418000CF681 /* SYNSocialCommentButton.m */,
 			);
 			name = Subclasses;
 			sourceTree = "<group>";
@@ -3990,7 +3973,6 @@
 				4C9B519918D71FCB00A3AB0D /* Profile_IPad.storyboard in Resources */,
 				4C5E861518B6357300D0E937 /* SYNDiscoverOverlayVideoViewController.xib in Resources */,
 				E985D34D18FECDB800D5A9E1 /* FreightTextPro-BoldItalic.otf in Resources */,
-				1FC24E941851F7690022548B /* IconVideoCommentHighlighted@2x.png in Resources */,
 				BEB3138B181FCD9400FAF98A /* SYNIPadFeedRootViewController.xib in Resources */,
 				993B1B47191AA4B5008532D4 /* TabFeedSelected~ipad.png in Resources */,
 				BED027D91834F4EA00636659 /* SYNAccountSettingsViewController.xib in Resources */,
@@ -4042,7 +4024,6 @@
 				BEB313B0182800F000FAF98A /* NotificationsForUser.json in Resources */,
 				E905A93F189ACA0500FED785 /* PlaceholderNotificationVideo~iphone.png in Resources */,
 				BED027C91834D4CC00636659 /* ButtonMoreBlog@2x.png in Resources */,
-				1FC24E911851F7690022548B /* IconVideoCommentDefault.png in Resources */,
 				E905A93E189ACA0500FED785 /* PlaceholderNotificationVideo@2x~iphone.png in Resources */,
 				E9EE08CD18F6E377000DC06A /* SYNVideoCell.xib in Resources */,
 				BE2D3EEF183A3C2C003B2C26 /* SYNAboutViewController.xib in Resources */,
@@ -4053,7 +4034,6 @@
 				011C1679173003E800CF50B9 /* OWActivityViewController.bundle in Resources */,
 				E985D36A18FED44600D5A9E1 /* FavouriteButton.png in Resources */,
 				993B1B4E191AA4D3008532D4 /* TabProfileSelected~ipad.png in Resources */,
-				1FC24E921851F7690022548B /* IconVideoCommentDefault@2x.png in Resources */,
 				E9B9213318C78C94003093B8 /* TabActivityNotiHighlighted@2x.png in Resources */,
 				E9EE08DB18F80379000DC06A /* ProximaNova-Bold.otf in Resources */,
 				BEA216AF17E8A529007C6DF7 /* SYNOneToOneSharingFriendCell.xib in Resources */,
@@ -4185,7 +4165,6 @@
 				E98A852319096B63001ADE09 /* SYNFeedChannelSmallCell.xib in Resources */,
 				E9EF289518FD901E003B2D0F /* FreightTextPro-Book.otf in Resources */,
 				BED027C61834D4CC00636659 /* ButtonMoreAbout.png in Resources */,
-				1FC24E931851F7690022548B /* IconVideoCommentHighlighted.png in Resources */,
 				1F458B2217E1CE8E003C14AC /* AppIcon-Dev-29x29.png in Resources */,
 				0EF0786C181EAE9100667417 /* ButtonMore~iphone.png in Resources */,
 				BEB31365181AB81600FAF98A /* IconVideoAddDefault.png in Resources */,
@@ -4446,7 +4425,6 @@
 				0194FD2316DE6FE90058A7C2 /* SYNVideoThumbnailCell.m in Sources */,
 				4C72DD4A18FD96E6004AC132 /* SYNFollowChannelButton.m in Sources */,
 				0173F70816E0C56B005B3ECA /* SYNVideoViewerThumbnailLayout.m in Sources */,
-				BEE01B6D18521418000CF681 /* SYNSocialCommentButton.m in Sources */,
 				BEE01B7618573292000CF681 /* _Mood.m in Sources */,
 				4C5E861B18B6580300D0E937 /* SYNDiscoverOverlayHighlightsViewController.m in Sources */,
 				0125FB72182D324700EC822E /* SYNAbstractVideoPlaybackViewController.m in Sources */,

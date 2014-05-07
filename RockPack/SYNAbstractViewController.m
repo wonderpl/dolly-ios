@@ -21,14 +21,12 @@
 #import "SYNOneToOneSharingController.h"
 #import "SYNProfileRootViewController.h"
 #import "SYNSocialButton.h"
-#import "SYNCommentingViewController.h"
 #import "UIFont+SYNFont.h"
 #import "Video.h"
 #import "VideoInstance.h"
 #import "SYNTrackingManager.h"
 #import "SYNActivityManager.h"
 #import "SYNPopoverAnimator.h"
-#import "SYNSocialCommentButton.h"
 #import "SYNProfileChannelViewController.h"
 
 @import QuartzCore;
