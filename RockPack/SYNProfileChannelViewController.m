@@ -216,10 +216,11 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
         channelThumbnailCell.followButton.hidden = self.isUserProfile;
         channelThumbnailCell.channel = channel;
         
-        // Disallow deletion of favourites cell
-        BOOL isFavouritesCell = (self.isUserProfile && channel.favouritesValue);
-        channelThumbnailCell.deletableCell = !isFavouritesCell;
-
+        // Disallow deletion of favourites cell or other peoples channels
+        BOOL deletableChannelCheck = (!self.isUserProfile || channel.favouritesValue);
+        channelThumbnailCell.deletableCell = !deletableChannelCheck;
+		
+        
         channelThumbnailCell.viewControllerDelegate = self;
         cell = channelThumbnailCell;
     }
