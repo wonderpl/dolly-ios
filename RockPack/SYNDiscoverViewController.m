@@ -100,6 +100,9 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 														 blue: 214.0f / 255.0f
 														alpha: 1.0f] CGColor];
 	
+	if (IS_IPHONE) {
+		self.autocompleteTableView.contentInset = UIEdgeInsetsMake(108.0, 0, 0, 0);
+	}
     
     self.autocompleteTableView.hidden = YES;
     
