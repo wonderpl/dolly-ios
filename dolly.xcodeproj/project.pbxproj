@@ -29,8 +29,6 @@
 		010DEFE11629BDC40080F26B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 010DEFE01629BDC40080F26B /* main.m */; };
 		010DEFE51629BDC40080F26B /* SYNAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 010DEFE41629BDC40080F26B /* SYNAppDelegate.m */; };
 		0110AE6117DF383C00DC7724 /* SYNProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0110AE5F17DF383C00DC7724 /* SYNProgressView.m */; };
-		0111CDFC1729314E00612186 /* SYNCoverThumbnailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0111CDFB1729314E00612186 /* SYNCoverThumbnailCell.m */; };
-		0111CDFE1729317100612186 /* SYNCoverThumbnailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0111CDFD1729317100612186 /* SYNCoverThumbnailCell.xib */; };
 		011A15F616EE3E9A008CF25E /* SYNCameraPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 011A15F416EE3E9A008CF25E /* SYNCameraPopoverViewController.m */; };
 		011A15F916EE3F05008CF25E /* SYNCameraPopoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 011A15F816EE3F05008CF25E /* SYNCameraPopoverViewController.xib */; };
 		011A160E16EE53A0008CF25E /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 011A160D16EE53A0008CF25E /* UIImage+Resize.m */; };
@@ -686,9 +684,6 @@
 		010DEFE41629BDC40080F26B /* SYNAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SYNAppDelegate.m; sourceTree = "<group>"; };
 		0110AE5F17DF383C00DC7724 /* SYNProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNProgressView.m; sourceTree = "<group>"; };
 		0110AE6017DF383C00DC7724 /* SYNProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNProgressView.h; sourceTree = "<group>"; };
-		0111CDFA1729314E00612186 /* SYNCoverThumbnailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNCoverThumbnailCell.h; sourceTree = "<group>"; };
-		0111CDFB1729314E00612186 /* SYNCoverThumbnailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNCoverThumbnailCell.m; sourceTree = "<group>"; };
-		0111CDFD1729317100612186 /* SYNCoverThumbnailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNCoverThumbnailCell.xib; sourceTree = "<group>"; };
 		011A15F316EE3E9A008CF25E /* SYNCameraPopoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNCameraPopoverViewController.h; sourceTree = "<group>"; };
 		011A15F416EE3E9A008CF25E /* SYNCameraPopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNCameraPopoverViewController.m; sourceTree = "<group>"; };
 		011A15F816EE3F05008CF25E /* SYNCameraPopoverViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNCameraPopoverViewController.xib; sourceTree = "<group>"; };
@@ -1755,16 +1750,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		0111CDF91729312000612186 /* Cover cells */ = {
-			isa = PBXGroup;
-			children = (
-				0111CDFA1729314E00612186 /* SYNCoverThumbnailCell.h */,
-				0111CDFB1729314E00612186 /* SYNCoverThumbnailCell.m */,
-				0111CDFD1729317100612186 /* SYNCoverThumbnailCell.xib */,
-			);
-			name = "Cover cells";
-			sourceTree = "<group>";
-		};
 		011A162016EF5E96008CF25E /* Image Picker */ = {
 			isa = PBXGroup;
 			children = (
@@ -1859,7 +1844,6 @@
 				BE7D036A17A69A99008053DC /* Aggregate Cells */,
 				01B7CD9E166E163D001F4AF0 /* Channel cells */,
 				0199F12D166F95C000E479C6 /* Collections */,
-				0111CDF91729312000612186 /* Cover cells */,
 				012632C7162DF4C40009FF9C /* Layout Engine Support */,
 				01B7CD9D166E1616001F4AF0 /* Video cells */,
 			);
@@ -4006,7 +3990,6 @@
 				BE285DC51726996700D995AB /* IconNetwork@2x.png in Resources */,
 				1F458B2317E1CE8E003C14AC /* AppIcon-Dev-29x29@2x.png in Resources */,
 				E98369D7188937B300363709 /* ButtonLogin@2x.png in Resources */,
-				0111CDFE1729317100612186 /* SYNCoverThumbnailCell.xib in Resources */,
 				E9B9213418C78C94003093B8 /* TabActivityNotiSelected.png in Resources */,
 				3862E8A4172979120066E8E7 /* SYNVideoThumbnailCell~iphone.xib in Resources */,
 				E99AA424188035F100330ABB /* LoginLogo.png in Resources */,
@@ -4503,7 +4486,6 @@
 				E9F625611885B8EA000EF6A2 /* SYNExampleUserCell.m in Sources */,
 				E9EE08E218F80BB2000DC06A /* SYNVideoClickToMoreCell.m in Sources */,
 				BE285DBC1726828F00D995AB /* SYNChannelManager.m in Sources */,
-				0111CDFC1729314E00612186 /* SYNCoverThumbnailCell.m in Sources */,
 				E979F3141908281900FC6743 /* SYNIPadFeedLayout.m in Sources */,
 				E9FECE6C1856000800BBE7F2 /* SYNStaticModel.m in Sources */,
 				BEB313C0182A829400FAF98A /* SYNCollectionVideoCell.m in Sources */,
