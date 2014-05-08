@@ -11,6 +11,7 @@
 #import "SYNNetworkMessageView.h"
 #import "SYNAbstractViewController.h"
 #import "SYNPopoverable.h"
+#import "SYNActivityTabButton.h"
 
 @import UIKit;
 
@@ -33,7 +34,7 @@ typedef void (^VideoOverlayDismissBlock)(void);
 
 @property (nonatomic, readonly) NSArray* tabs;
 
-@property (nonatomic, strong, readonly) UIButton *activityTab;
+@property (nonatomic, strong, readonly) SYNActivityTabButton *activityTab;
 
 @property (nonatomic, readonly) SYNAbstractViewController* showingViewController;
 

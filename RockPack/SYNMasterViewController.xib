@@ -66,13 +66,20 @@
                                     </state>
                                     <state key="selected" image="TabProfileSelected.png"/>
                                 </button>
-                                <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="YsR-vi-fVg" userLabel="Tab 5 - Activity">
+                                <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="YsR-vi-fVg" userLabel="Tab 5 - Activity" customClass="SYNActivityTabButton">
                                     <rect key="frame" x="0.0" y="291" width="97" height="97"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <state key="normal" image="TabActivity.png">
+                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <state key="normal" backgroundImage="TabActivity.png">
+                                        <color key="titleColor" red="0.71764705882352942" green="0.73725490196078436" blue="0.74117647058823533" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
-                                    <state key="selected" image="TabActivitySelected.png"/>
+                                    <state key="selected" backgroundImage="TabActivitySelected.png">
+                                        <color key="titleColor" red="0.71764705880000002" green="0.73725490199999999" blue="0.74117647060000003" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <state key="highlighted">
+                                        <color key="titleColor" red="0.71764705880000002" green="0.73725490199999999" blue="0.74117647060000003" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -87,13 +94,13 @@
         </view>
     </objects>
     <resources>
-        <image name="TabActivity.png" width="97" height="97"/>
-        <image name="TabActivitySelected.png" width="97" height="97"/>
-        <image name="TabFeed.png" width="97" height="97"/>
-        <image name="TabFeedSelected.png" width="97" height="97"/>
-        <image name="TabProfile.png" width="97" height="97"/>
-        <image name="TabProfileSelected.png" width="97" height="97"/>
-        <image name="TabSearch.png" width="97" height="97"/>
-        <image name="TabSearchSelected.png" width="97" height="97"/>
+        <image name="TabActivity.png" width="194" height="194"/>
+        <image name="TabActivitySelected.png" width="194" height="194"/>
+        <image name="TabFeed.png" width="194" height="194"/>
+        <image name="TabFeedSelected.png" width="194" height="194"/>
+        <image name="TabProfile.png" width="194" height="194"/>
+        <image name="TabProfileSelected.png" width="194" height="194"/>
+        <image name="TabSearch.png" width="194" height="194"/>
+        <image name="TabSearchSelected.png" width="194" height="194"/>
     </resources>
 </document>

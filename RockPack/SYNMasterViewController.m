@@ -454,7 +454,7 @@
     return self.tabsView.subviews;
 }
 
-- (UIButton *)activityTab {
+- (SYNActivityTabButton *)activityTab {
 	return self.tabs[3];
 }
 

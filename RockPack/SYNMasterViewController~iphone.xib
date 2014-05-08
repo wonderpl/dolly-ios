@@ -52,13 +52,15 @@
                             <state key="normal" image="TabProfile.png"/>
                             <state key="selected" image="TabProfileSelected.png"/>
                         </button>
-                        <button opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2cq-OW-20C" userLabel="Tab - Activity (Notifications)">
+                        <button opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2cq-OW-20C" userLabel="Tab - Activity (Notifications)" customClass="SYNActivityTabButton">
                             <rect key="frame" x="240" y="0.0" width="80" height="49"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="tintColor" red="0.61176470588235299" green="0.69803921568627447" blue="0.59215686274509804" alpha="1" colorSpace="calibratedRGB"/>
-                            <state key="normal" image="TabActivity.png"/>
-                            <state key="selected" image="TabActivitySelected.png"/>
+                            <state key="normal" backgroundImage="TabActivity.png">
+                                <color key="titleColor" red="0.71764705880000002" green="0.73725490199999999" blue="0.74117647060000003" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <state key="selected" backgroundImage="TabActivitySelected.png"/>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="0.94000000000000006" colorSpace="calibratedWhite"/>

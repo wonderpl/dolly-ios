@@ -14,6 +14,7 @@
 #import "Video.h"
 #import "SYNTrackingManager.h"
 #import "SYNNotificationsMarkAllAsReadCell.h"
+#import "SYNActivityTabButton.h"
 
 #define kNotificationsCellIdent @"kNotificationsCellIdent"
 #define kNotificationsSpecialCellIdent @"SYNNotificationsMarkAllAsReadCell"
@@ -23,6 +24,7 @@
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, assign) BOOL hasUnreadNotifications;
 
+@property (nonatomic, assign) int notificationCounter;
 @property (nonatomic, strong) NSArray *notifications;
 
 @end
@@ -39,13 +41,22 @@
     {
         appDelegate = (SYNAppDelegate *) [[UIApplication sharedApplication] delegate];
         self.hasUnreadNotifications = NO;
+        self.notificationCounter = 0;
         self.notifications = @[];
 		[self loadNotifications];
 		
+	[self addObserver:self
+			   forKeyPath:NSStringFromSelector(@selector(notificationCounter))
+				  options:0
+				  context:NULL];
+
 	}
     return self;
 }
 
+- (void)dealloc {
+	[self removeObserver:self forKeyPath:NSStringFromSelector(@selector(notificationCounter))];
+}
 
 - (void) viewDidLoad {
     [super viewDidLoad];
@@ -137,6 +148,8 @@
     NSMutableArray* inNotificationsutArray = @[].mutableCopy;
     
     
+    self.notificationCounter = 0;
+    
     self.hasUnreadNotifications = NO;
     for (NSDictionary* itemData in itemsArray)
     {
@@ -147,9 +160,9 @@
         if (!notification || notification.objectType == kNotificationObjectTypeUnknown)
             continue;
         
-        if(!notification.read) // one is enought to display the read all button
-            self.hasUnreadNotifications = YES;
-        
+        if(!notification.read) { // one is enought to display the read all button
+            self.notificationCounter ++;
+        }
         
         [inNotificationsutArray addObject:notification];
         
@@ -374,6 +387,16 @@
 
 - (void)applicationWillEnterForeground:(NSNotification *)notification {
 	[self loadNotifications];
+}
+#pragma mark - KVO
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+	if ([keyPath isEqualToString:NSStringFromSelector(@selector(notificationCounter))]) {
+		SYNActivityTabButton *activityTab = appDelegate.masterViewController.activityTab;
+		if (self.notificationCounter > 0) {
+            activityTab.badageNumber = self.notificationCounter;
+		}
+	}
 }
 
 
