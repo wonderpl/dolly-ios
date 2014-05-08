@@ -169,6 +169,11 @@
 	
 	AVAudioSession *audioSession = [AVAudioSession sharedInstance];
 	[audioSession setActive:NO withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation error:nil];
+	
+	// If we're showing another view controller which isn't the full screen one then we want to pause the video
+	if (![self.presentedViewController isKindOfClass:[SYNFullScreenVideoViewController class]]) {
+		[self.currentVideoPlayer pause];
+	}
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
