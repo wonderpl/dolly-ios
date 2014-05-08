@@ -63,7 +63,7 @@
                             <state key="selected" backgroundImage="TabActivitySelected.png"/>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="0.94000000000000006" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="49" id="2hy-U1-VFv"/>
                     </constraints>
