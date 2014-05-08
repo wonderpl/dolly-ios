@@ -316,6 +316,7 @@
 		993B1B5D191AA526008532D4 /* TabActivity~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 993B1B59191AA526008532D4 /* TabActivity~ipad.png */; };
 		993B1B5E191AA526008532D4 /* TabActivitySelected@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 993B1B5A191AA526008532D4 /* TabActivitySelected@2x~ipad.png */; };
 		993B1B5F191AA526008532D4 /* TabActivitySelected~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 993B1B5B191AA526008532D4 /* TabActivitySelected~ipad.png */; };
+		99F300C6191BAF57002C1D25 /* UIViewController+PresentNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F300C5191BAF57002C1D25 /* UIViewController+PresentNotification.m */; };
 		BE03A69316F7459D00245314 /* SYNAccountSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE03A69216F7459D00245314 /* SYNAccountSettingsViewController.m */; };
 		BE03A6D616F784B000245314 /* SYNAccountSettingsGender.m in Sources */ = {isa = PBXBuildFile; fileRef = BE03A6D516F784B000245314 /* SYNAccountSettingsGender.m */; };
 		BE03A6D916F787CB00245314 /* SYNAccountSettingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE03A6D816F787CA00245314 /* SYNAccountSettingTableViewCell.m */; };
@@ -1096,6 +1097,8 @@
 		993B1B59191AA526008532D4 /* TabActivity~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabActivity~ipad.png"; sourceTree = "<group>"; };
 		993B1B5A191AA526008532D4 /* TabActivitySelected@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabActivitySelected@2x~ipad.png"; sourceTree = "<group>"; };
 		993B1B5B191AA526008532D4 /* TabActivitySelected~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabActivitySelected~ipad.png"; sourceTree = "<group>"; };
+		99F300C4191BAF57002C1D25 /* UIViewController+PresentNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+PresentNotification.h"; sourceTree = "<group>"; };
+		99F300C5191BAF57002C1D25 /* UIViewController+PresentNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+PresentNotification.m"; sourceTree = "<group>"; };
 		B1174E5E25AB4317A22BA4F9 /* libPods-dollyTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-dollyTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE03A69116F7459D00245314 /* SYNAccountSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAccountSettingsViewController.h; sourceTree = "<group>"; };
 		BE03A69216F7459D00245314 /* SYNAccountSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAccountSettingsViewController.m; sourceTree = "<group>"; };
@@ -2193,6 +2196,8 @@
 		019825EE162C948000216900 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				99F300C4191BAF57002C1D25 /* UIViewController+PresentNotification.h */,
+				99F300C5191BAF57002C1D25 /* UIViewController+PresentNotification.m */,
 				E9A4E5301864623E00972F09 /* UINavigationBar+Appearance.h */,
 				E9A4E5311864623E00972F09 /* UINavigationBar+Appearance.m */,
 				01C6FD0D169DDEDB00E01AA3 /* NSDictionary+Validation.h */,
@@ -4280,6 +4285,7 @@
 				010DEFE11629BDC40080F26B /* main.m in Sources */,
 				010DEFE51629BDC40080F26B /* SYNAppDelegate.m in Sources */,
 				4C0B956819128186008D8036 /* SYNSearchVideoSmallCell.m in Sources */,
+				99F300C6191BAF57002C1D25 /* UIViewController+PresentNotification.m in Sources */,
 				015AC9FD181EB86E0020E685 /* SYNAggregateFlowLayout.m in Sources */,
 				0198250D1629DCF100216900 /* SYNContainerViewController.m in Sources */,
 				E92D3358184CDFEA0025D1DF /* UICollectionReusableView+Helpers.m in Sources */,

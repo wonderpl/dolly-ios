@@ -26,6 +26,7 @@
 #import "UICollectionReusableView+Helpers.h"
 #import "SYNNetworkMessageView.h"
 #import "SYNActivityManager.h"
+#import "UIViewController+PresentNotification.h"
 
 @interface SYNOnBoardingViewController () <UIBarPositioningDelegate, UICollectionViewDataSource, UICollectionViewDelegate, SYNOnboardingFooterDelegate>
 
@@ -348,76 +349,13 @@
 - (void)followControlPressed:(UIButton *)button withChannelOwner:(ChannelOwner *)channelOwner completion :(void (^)(void))callbackBlock {
 
     [super followControlPressed:button withChannelOwner:channelOwner completion:^{
-        
-        if (callbackBlock != nil) {
-            callbackBlock();
-        }
+            if ([[SYNActivityManager sharedInstance] isSubscribedToUserId:channelOwner.uniqueId]) {
+                [self presentNotificationWithMessage:[NSString stringWithFormat:@"You have successfully subscribed to %@", channelOwner.displayName] andType:NotificationMessageTypeSuccess];
+            } else {
+                [self presentNotificationWithMessage:[NSString stringWithFormat:@"You have successfully unsubscribed to %@", channelOwner.displayName] andType:NotificationMessageTypeSuccess];
+            }
     }];
     
-}
-
-#pragma mark - Message Popups (form Bottom)
-
-- (void) presentNotificationWithMessage : (NSString*) message andType:(NotificationMessageType)type
-{
-    
-    if(self.networkMessageView)
-        return;
-    
-    self.networkMessageView = [[SYNNetworkMessageView alloc] initWithMessageType:type];
-    
-    
-    [self.networkMessageView setText: message];
-	
-	UIViewController *topViewController = self;
-	while (topViewController.presentedViewController && topViewController.presentedViewController.modalPresentationStyle == UIModalPresentationFullScreen) {
-		topViewController = topViewController.presentedViewController;
-	}
-	
-	[topViewController.view addSubview: self.networkMessageView];
-    CGRect newFrame = self.networkMessageView.frame;
-    newFrame.origin.y = [SYNDeviceManager.sharedInstance currentScreenHeight] - newFrame.size.height;
-    
-    if (IS_IPHONE) {
-        newFrame.origin.y-=newFrame.size.height-2;
-    }
-    
-    [UIView animateWithDuration: 0.3f
-                          delay: 0.0f
-                        options: UIViewAnimationOptionCurveEaseOut
-                     animations: ^{
-                         self.networkMessageView.frame = newFrame;
-                     }
-                     completion: ^(BOOL finished) {
-                         
-                         if (type == NotificationMessageTypeSuccess)
-                         {
-                             [self performSelector:@selector(hideNetworkErrorMessageView) withObject:nil afterDelay:2.0f];
-                         }
-				}];
-}
-
--(void)hideNetworkErrorMessageView
-{
-    if(!self.networkMessageView)
-        return;
-    
-    [UIView animateWithDuration: 0.3f
-                          delay: 0.0f
-                        options: UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState
-                     animations: ^{
-                         
-                         CGRect messgaeViewFrame = self.networkMessageView.frame;
-                         messgaeViewFrame.origin.y = [SYNDeviceManager.sharedInstance currentScreenHeight]; // push to the bottom
-                         self.networkMessageView.frame = messgaeViewFrame;
-                         
-                     }
-                     completion: ^(BOOL finished) {
-                         
-                         [self.networkMessageView removeFromSuperview];
-                         self.networkMessageView = nil;
-                         
-                     }];
 }
 
 

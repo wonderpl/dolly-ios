@@ -677,7 +677,7 @@
 											   [[NSNotificationCenter defaultCenter] postNotificationName:kReloadFeed object:self userInfo:nil];
 											   [button invalidateIntrinsicContentSize];
 
-                                               if (callbackBlock != nil) {
+                                               if (callbackBlock) {
                                                    callbackBlock();
                                                }
 
@@ -700,9 +700,6 @@
 												 [button invalidateIntrinsicContentSize];
                                                  
                                                  
-                                                 if (callbackBlock != nil) {
-                                                     callbackBlock();
-                                                 }
 
 											 } errorHandler:^(id error) {
 												 button.enabled = YES;
