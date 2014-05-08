@@ -272,11 +272,6 @@
                                                       userInfo: @{@"VideoInstance": videoInstance}];
 }
 
-
-- (void) commentControlPressed:(SYNSocialButton *)socialButton {
-
-}
-
 - (void) shareControlPressed: (SYNSocialButton *) socialControl
 {
     

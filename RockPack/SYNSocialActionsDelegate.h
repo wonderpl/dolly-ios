@@ -18,7 +18,6 @@
 - (void) shareControlPressed: (SYNSocialButton *) socialButton;
 - (void) likeControlPressed: (SYNSocialButton *) socialButton;
 - (void) addControlPressed: (SYNSocialButton *) socialButton;
-- (void) commentControlPressed: (SYNSocialButton *) socialButton;
 
 //need to change
 @optional
