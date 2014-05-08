@@ -506,6 +506,8 @@
 		E905A945189BCD1500FED785 /* SYNSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E905A944189BCD1500FED785 /* SYNSignupViewController.m */; };
 		E914BED7183CF018001616D3 /* SYNFullScreenVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E914BED6183CF018001616D3 /* SYNFullScreenVideoViewController.m */; };
 		E914BEDA183CF33A001616D3 /* SYNFullScreenVideoAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E914BED9183CF33A001616D3 /* SYNFullScreenVideoAnimator.m */; };
+		E915A1AC191A6A6F001DC76A /* _VideoAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = E915A1AB191A6A6F001DC76A /* _VideoAnnotation.m */; };
+		E915A1AF191A6ACC001DC76A /* VideoAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = E915A1AE191A6ACC001DC76A /* VideoAnnotation.m */; };
 		E91D4105187DAE5D00E712CC /* SYNLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E91D4104187DAE5D00E712CC /* SYNLoginManager.m */; };
 		E91E3B2118C7292400F79020 /* ButtonVideoDeleteDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = E91E3B1F18C7292400F79020 /* ButtonVideoDeleteDefault.png */; };
 		E91E3B2218C7292400F79020 /* ButtonVideoDeleteDefault@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E91E3B2018C7292400F79020 /* ButtonVideoDeleteDefault@2x.png */; };
@@ -1384,6 +1386,10 @@
 		E914BED6183CF018001616D3 /* SYNFullScreenVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNFullScreenVideoViewController.m; sourceTree = "<group>"; };
 		E914BED8183CF33A001616D3 /* SYNFullScreenVideoAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNFullScreenVideoAnimator.h; sourceTree = "<group>"; };
 		E914BED9183CF33A001616D3 /* SYNFullScreenVideoAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNFullScreenVideoAnimator.m; sourceTree = "<group>"; };
+		E915A1AA191A6A6F001DC76A /* _VideoAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _VideoAnnotation.h; sourceTree = "<group>"; };
+		E915A1AB191A6A6F001DC76A /* _VideoAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _VideoAnnotation.m; sourceTree = "<group>"; };
+		E915A1AD191A6ACC001DC76A /* VideoAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoAnnotation.h; sourceTree = "<group>"; };
+		E915A1AE191A6ACC001DC76A /* VideoAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoAnnotation.m; sourceTree = "<group>"; };
 		E91D4103187DAE5D00E712CC /* SYNLoginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNLoginManager.h; sourceTree = "<group>"; };
 		E91D4104187DAE5D00E712CC /* SYNLoginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNLoginManager.m; sourceTree = "<group>"; };
 		E91E3B1F18C7292400F79020 /* ButtonVideoDeleteDefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonVideoDeleteDefault.png; path = Assets/Images/iPhone/channelDetail/ButtonVideoDeleteDefault.png; sourceTree = "<group>"; };
@@ -2399,6 +2405,8 @@
 		01E427F21664F32D009B941F /* Auto generated files */ = {
 			isa = PBXGroup;
 			children = (
+				E915A1AA191A6A6F001DC76A /* _VideoAnnotation.h */,
+				E915A1AB191A6A6F001DC76A /* _VideoAnnotation.m */,
 				E94BEFA718C9F18F00762651 /* _Recommendation.h */,
 				E94BEFA818C9F18F00762651 /* _Recommendation.m */,
 				BEB15766173BA75100DAFA2F /* _Genre.h */,
@@ -2434,6 +2442,8 @@
 		01E427F31664F346009B941F /* Editable files */ = {
 			isa = PBXGroup;
 			children = (
+				E915A1AD191A6ACC001DC76A /* VideoAnnotation.h */,
+				E915A1AE191A6ACC001DC76A /* VideoAnnotation.m */,
 				E94BEFAA18C9F19A00762651 /* Recommendation.h */,
 				E94BEFAB18C9F19A00762651 /* Recommendation.m */,
 				01C6FD12169E11B000E01AA3 /* AbstractCommon.h */,
@@ -4330,6 +4340,7 @@
 				01E427D31664C726009B941F /* Rockpack.xcdatamodeld in Sources */,
 				01E427D91664CDA5009B941F /* SYNAbstractViewController.m in Sources */,
 				BE1B3DD6180EA2EF00DA2BD6 /* SYNDiscoverCategoriesCell.m in Sources */,
+				E915A1AC191A6A6F001DC76A /* _VideoAnnotation.m in Sources */,
 				01E427E21664DF21009B941F /* Video.m in Sources */,
 				4CCAD0B518D7530600EC0F03 /* SYNProfileSubscriptionModel.m in Sources */,
 				01E427E51664DF21009B941F /* Channel.m in Sources */,
@@ -4383,6 +4394,7 @@
 				E9A4E5321864623E00972F09 /* UINavigationBar+Appearance.m in Sources */,
 				012502BD16CA8FE30029C7C8 /* SYNFacebookManager.m in Sources */,
 				0E3AE6901875DE8C008A8D00 /* SYNGenreManager.m in Sources */,
+				E915A1AF191A6ACC001DC76A /* VideoAnnotation.m in Sources */,
 				E9921A9418351D66001A4F3B /* SYNScrubberBar.m in Sources */,
 				E9F7CC761846273E0026C97D /* NSString+Validation.m in Sources */,
 				E9F6256D1886883A000EF6A2 /* SYNiPadLoginViewController.m in Sources */,

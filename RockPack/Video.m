@@ -1,6 +1,7 @@
 #import "NSDictionary+Validation.h"
 #import "SYNActivityManager.h"
 #import "Video.h"
+#import "VideoAnnotation.h"
 @import Foundation;
 
 NSString *const VideoSourceYouTube = @"youtube";
@@ -130,6 +131,13 @@ NSString *const VideoSourceOoyala = @"ooyala";
 	
 	self.linkTitle = [dictionary objectForKey:@"link_title" withDefault:@""];
 	self.linkURL = [dictionary objectForKey:@"link_url" withDefault:@""];
+	
+	for (VideoAnnotation *annotation in [self.videoAnnotations copy]) {
+		[self.managedObjectContext deleteObject:annotation];
+	}
+	NSArray *annotations = [VideoAnnotation videoAnnotationsFromDictionaries:dictionary[@"annotations"]
+													  inManagedObjectContext:self.managedObjectContext];
+	self.videoAnnotations = [NSSet setWithArray:annotations];
 }
 
 @end

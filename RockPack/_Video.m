@@ -19,6 +19,7 @@ const struct VideoAttributes VideoAttributes = {
 };
 
 const struct VideoRelationships VideoRelationships = {
+	.videoAnnotations = @"videoAnnotations",
 	.videoInstances = @"videoInstances",
 };
 
@@ -213,6 +214,19 @@ const struct VideoFetchedProperties VideoFetchedProperties = {
 
 
 
+
+@dynamic videoAnnotations;
+
+	
+- (NSMutableSet*)videoAnnotationsSet {
+	[self willAccessValueForKey:@"videoAnnotations"];
+  
+	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"videoAnnotations"];
+  
+	[self didAccessValueForKey:@"videoAnnotations"];
+	return result;
+}
+	
 
 @dynamic videoInstances;
 
