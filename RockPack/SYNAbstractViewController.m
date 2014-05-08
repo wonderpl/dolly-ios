@@ -633,8 +633,8 @@
     } completion:^(BOOL finished) {
         channelVC.autoplayId = videoId;
     }];
-    
 
+    
 
 }
 
@@ -675,17 +675,15 @@
 											   button.enabled = YES;
 											   
 											   [[NSNotificationCenter defaultCenter] postNotificationName:kReloadFeed object:self userInfo:nil];
-                                               
+											   [button invalidateIntrinsicContentSize];
+
                                                if (callbackBlock != nil) {
                                                    callbackBlock();
                                                }
-											   
-											   
-											   
-											   [button invalidateIntrinsicContentSize];
+
 										   } errorHandler: ^(id error) {
 											   button.enabled = YES;
-											   
+
 											   [button invalidateIntrinsicContentSize];
 										   }];
 	} else {
@@ -698,14 +696,16 @@
 
 
                                                  
-                                                 if (callbackBlock != nil) {
-													 callbackBlock();
-                                                 }
-												 
+
 												 [button invalidateIntrinsicContentSize];
+                                                 
+                                                 
+                                                 if (callbackBlock != nil) {
+                                                     callbackBlock();
+                                                 }
+
 											 } errorHandler:^(id error) {
 												 button.enabled = YES;
-												 
 												 [button invalidateIntrinsicContentSize];
 											 }];
 	}

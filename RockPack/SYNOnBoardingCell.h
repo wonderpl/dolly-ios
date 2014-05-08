@@ -24,12 +24,9 @@
 @property (nonatomic, strong) IBOutlet UILabel* nameLabel;
 @property (nonatomic, strong) IBOutlet UILabel* descriptionLabel;
 @property (nonatomic, strong) IBOutlet UILabel* subGenreLabel;
+@property (nonatomic, strong) IBOutlet SYNFollowChannelButton *followButton;
 
-@property (nonatomic, strong) IBOutlet UIView* bottomBorderView;
-
-@property (strong, nonatomic) IBOutlet SYNFollowChannelButton *followButton;
-
-
+@property (nonatomic, weak) ChannelOwner* channelOwner;
 @property (nonatomic, weak) id<SYNSocialActionsDelegate> delegate;
 @property (nonatomic, weak) Recommendation* recommendation;
 

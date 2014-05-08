@@ -12,6 +12,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "SYNGenreManager.h"
 #import "Recommendation.h"
+#import "ChannelOwner.h"
 
 @implementation SYNOnBoardingCell
 
@@ -27,14 +28,6 @@
     // store the values as read from the XIB file
     nameLabelOrigin = self.nameLabel.frame.origin;
     subGenreLabelOrigin = self.subGenreLabel.frame.origin;
-    
-    // only iPhone cells have the separator at the bottom
-    if(IS_IPHONE)
-    {
-        CGRect bottomBorderFrame = self.bottomBorderView.frame;
-        bottomBorderFrame.size.height = IS_RETINA ? 0.5f : 1.0f;
-        self.bottomBorderView.frame = bottomBorderFrame;
-    }
     
     
 }
@@ -84,6 +77,8 @@
                               forState: UIControlStateNormal
                       placeholderImage: [UIImage imageNamed: @"PlaceholderAvatarFriends"]
                                options: SDWebImageRetryFailed];
+    
+    self.channelOwner = recommendation.channelOwner;
 }
 
 - (void) setDelegate:(id<SYNSocialActionsDelegate>)delegate
@@ -94,7 +89,7 @@
 }
 - (IBAction)followButtonTapped:(id)sender {
 	
-	[self.delegate followControlPressed:self.followButton withChannelOwner:self.recommendation.channelOwner completion:nil];
+	[self.delegate followControlPressed:self.followButton withChannelOwner:self.channelOwner completion:nil];
 
 }
 
