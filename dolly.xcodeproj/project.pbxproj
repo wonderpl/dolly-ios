@@ -121,7 +121,6 @@
 		01C6FD14169E11B000E01AA3 /* _AbstractCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C6FD11169E11B000E01AA3 /* _AbstractCommon.m */; };
 		01C6FD15169E11B000E01AA3 /* AbstractCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C6FD13169E11B000E01AA3 /* AbstractCommon.m */; };
 		01C74BAD169F239800B1CA02 /* SYNNetworkEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C74BAC169F239800B1CA02 /* SYNNetworkEngine.m */; };
-		01D0998B17452A4000351C82 /* BBCyclingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D0998A17452A4000351C82 /* BBCyclingLabel.m */; };
 		01E427D31664C726009B941F /* Rockpack.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 01E427D11664C726009B941F /* Rockpack.xcdatamodeld */; };
 		01E427D91664CDA5009B941F /* SYNAbstractViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E427D81664CDA5009B941F /* SYNAbstractViewController.m */; };
 		01E427E21664DF21009B941F /* Video.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E427E11664DF21009B941F /* Video.m */; };
@@ -842,8 +841,6 @@
 		01C6FD13169E11B000E01AA3 /* AbstractCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractCommon.m; sourceTree = "<group>"; };
 		01C74BAB169F239800B1CA02 /* SYNNetworkEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNNetworkEngine.h; sourceTree = "<group>"; };
 		01C74BAC169F239800B1CA02 /* SYNNetworkEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNNetworkEngine.m; sourceTree = "<group>"; };
-		01D0998917452A4000351C82 /* BBCyclingLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBCyclingLabel.h; sourceTree = "<group>"; };
-		01D0998A17452A4000351C82 /* BBCyclingLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBCyclingLabel.m; sourceTree = "<group>"; };
 		01E427BB1664C5F1009B941F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		01E427D21664C726009B941F /* Rockpack.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Rockpack.xcdatamodel; sourceTree = "<group>"; };
 		01E427D71664CDA5009B941F /* SYNAbstractViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAbstractViewController.h; sourceTree = "<group>"; };
@@ -2239,7 +2236,6 @@
 			children = (
 				0165542818363AC4009B161C /* Text Fields */,
 				BEB3136A181ABD0D00FAF98A /* Cell Buttons */,
-				BEB31369181ABCFD00FAF98A /* BBCyclingLabel */,
 			);
 			name = Controls;
 			sourceTree = "<group>";
@@ -3539,15 +3535,6 @@
 			name = data;
 			sourceTree = "<group>";
 		};
-		BEB31369181ABCFD00FAF98A /* BBCyclingLabel */ = {
-			isa = PBXGroup;
-			children = (
-				01D0998917452A4000351C82 /* BBCyclingLabel.h */,
-				01D0998A17452A4000351C82 /* BBCyclingLabel.m */,
-			);
-			name = BBCyclingLabel;
-			sourceTree = "<group>";
-		};
 		BEB3136A181ABD0D00FAF98A /* Cell Buttons */ = {
 			isa = PBXGroup;
 			children = (
@@ -4520,7 +4507,6 @@
 				E9EE08CB18F6E139000DC06A /* SYNVideoCell.m in Sources */,
 				3864D2DC1743DB3000A90ED3 /* SYNImagePickerController.m in Sources */,
 				E9765BA7184F9ABA005D02E9 /* SYNFeedModel.m in Sources */,
-				01D0998B17452A4000351C82 /* BBCyclingLabel.m in Sources */,
 				E96A4C6A18439CD100ED5782 /* CIFilter+Monochrome.m in Sources */,
 				BE2D3EEE183A3C2C003B2C26 /* SYNAboutViewController.m in Sources */,
 				BE5D29EB17577E2800C00486 /* SYNPopupMessageView.m in Sources */,
