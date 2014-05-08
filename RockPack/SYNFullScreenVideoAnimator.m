@@ -72,11 +72,6 @@ static const CGFloat AnimationDuration = 0.3;
 	
 	[collectionView.collectionViewLayout invalidateLayout];
 	[collectionView layoutIfNeeded];
-	if (IS_IPHONE) {
-		collectionView.contentOffset = CGPointMake(videoPlayerViewController.selectedIndex * 568, 0);
-	} else {
-		collectionView.contentOffset = CGPointMake(videoPlayerViewController.selectedIndex * CGRectGetWidth(fullScreenViewController.view.frame), 0);
-	}
 	
 	[containerView addSubview:fullScreenViewController.view];
 	
@@ -87,6 +82,12 @@ static const CGFloat AnimationDuration = 0.3;
 						 fullScreenViewController.view.alpha = 1.0;
 					 } completion:^(BOOL finished) {
 						 fullScreenViewController.collectionView = collectionView;
+						 
+						 if (IS_IPHONE) {
+							 collectionView.contentOffset = CGPointMake(videoPlayerViewController.selectedIndex * 568, 0);
+						 } else {
+							 collectionView.contentOffset = CGPointMake(videoPlayerViewController.selectedIndex * CGRectGetWidth(fullScreenViewController.view.frame), 0);
+						 }
 						 
 						 [transitionContext completeTransition:YES];
 					 }];
