@@ -350,9 +350,15 @@
 
     [super followControlPressed:button withChannelOwner:channelOwner completion:^{
             if ([[SYNActivityManager sharedInstance] isSubscribedToUserId:channelOwner.uniqueId]) {
-                [self presentNotificationWithMessage:[NSString stringWithFormat:@"You have successfully subscribed to %@", channelOwner.displayName] andType:NotificationMessageTypeSuccess];
+                
+                NSString *text = IS_IPAD ? [NSString stringWithFormat:@"You have successfully subscribed to %@", channelOwner.displayName] : [NSString stringWithFormat:@"Subscribed to %@", channelOwner.displayName];
+                
+                [self presentNotificationWithMessage: text andType:NotificationMessageTypeSuccess];
             } else {
-                [self presentNotificationWithMessage:[NSString stringWithFormat:@"You have successfully unsubscribed to %@", channelOwner.displayName] andType:NotificationMessageTypeSuccess];
+                
+                NSString *text = IS_IPAD ? [NSString stringWithFormat:@"You have successfully subscribed to %@", channelOwner.displayName] : [NSString stringWithFormat:@"Unsubscribed to %@", channelOwner.displayName];
+
+                [self presentNotificationWithMessage: text andType:NotificationMessageTypeSuccess];
             }
     }];
     
