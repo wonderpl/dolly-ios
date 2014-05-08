@@ -21,9 +21,6 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		010AAE9F17D9EF48001DD5FA /* ShareFacebookButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 010AAE9317D9EF48001DD5FA /* ShareFacebookButton@2x.png */; };
-		010AAEA317D9EF48001DD5FA /* ShareMailButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 010AAE9717D9EF48001DD5FA /* ShareMailButton@2x.png */; };
-		010AAEA717D9EF48001DD5FA /* ShareTwitterButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 010AAE9B17D9EF48001DD5FA /* ShareTwitterButton@2x.png */; };
 		010DEFD91629BDC40080F26B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 010DEFD81629BDC40080F26B /* CoreGraphics.framework */; };
 		010DEFDF1629BDC40080F26B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 010DEFDD1629BDC40080F26B /* InfoPlist.strings */; };
 		010DEFE11629BDC40080F26B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 010DEFE01629BDC40080F26B /* main.m */; };
@@ -317,6 +314,17 @@
 		993B1B5E191AA526008532D4 /* TabActivitySelected@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 993B1B5A191AA526008532D4 /* TabActivitySelected@2x~ipad.png */; };
 		993B1B5F191AA526008532D4 /* TabActivitySelected~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 993B1B5B191AA526008532D4 /* TabActivitySelected~ipad.png */; };
 		99F300C6191BAF57002C1D25 /* UIViewController+PresentNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F300C5191BAF57002C1D25 /* UIViewController+PresentNotification.m */; };
+		99F300CA191BCBFF002C1D25 /* SYNActivityTabButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 99F300C9191BCBFF002C1D25 /* SYNActivityTabButton.m */; };
+		99F300D1191BD7AF002C1D25 /* ShareFacebookButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 99F300CB191BD7AF002C1D25 /* ShareFacebookButton.png */; };
+		99F300D2191BD7AF002C1D25 /* ShareFacebookButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 99F300CC191BD7AF002C1D25 /* ShareFacebookButton@2x.png */; };
+		99F300D3191BD7AF002C1D25 /* ShareMailButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 99F300CD191BD7AF002C1D25 /* ShareMailButton.png */; };
+		99F300D4191BD7AF002C1D25 /* ShareMailButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 99F300CE191BD7AF002C1D25 /* ShareMailButton@2x.png */; };
+		99F300D5191BD7AF002C1D25 /* ShareTwitterButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 99F300CF191BD7AF002C1D25 /* ShareTwitterButton.png */; };
+		99F300D6191BD7AF002C1D25 /* ShareTwitterButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 99F300D0191BD7AF002C1D25 /* ShareTwitterButton@2x.png */; };
+		99F300D9191BD80F002C1D25 /* share-message-background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 99F300D7191BD80F002C1D25 /* share-message-background@2x.png */; };
+		99F300DA191BD80F002C1D25 /* share-message-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 99F300D8191BD80F002C1D25 /* share-message-background.png */; };
+		99F300DD191BEBBE002C1D25 /* share-message-background@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 99F300DB191BEBBE002C1D25 /* share-message-background@2x~ipad.png */; };
+		99F300DE191BEBBE002C1D25 /* share-message-background~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 99F300DC191BEBBE002C1D25 /* share-message-background~ipad.png */; };
 		BE03A69316F7459D00245314 /* SYNAccountSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE03A69216F7459D00245314 /* SYNAccountSettingsViewController.m */; };
 		BE03A6D616F784B000245314 /* SYNAccountSettingsGender.m in Sources */ = {isa = PBXBuildFile; fileRef = BE03A6D516F784B000245314 /* SYNAccountSettingsGender.m */; };
 		BE03A6D916F787CB00245314 /* SYNAccountSettingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE03A6D816F787CA00245314 /* SYNAccountSettingTableViewCell.m */; };
@@ -376,9 +384,6 @@
 		BE31EFB2182D4B13006E20E2 /* SYNAddToChannelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE31EFB1182D4B13006E20E2 /* SYNAddToChannelCell.xib */; };
 		BE31EFB5183139F2006E20E2 /* SYNAddToChannelExpandedFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = BE31EFB4183139F2006E20E2 /* SYNAddToChannelExpandedFlowLayout.m */; };
 		BE31EFBA18314CE8006E20E2 /* SYNAddToChannelFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = BE31EFB918314CE8006E20E2 /* SYNAddToChannelFlowLayout.m */; };
-		BE35617B184786E40030CBA6 /* ShareFacebookButton.png in Resources */ = {isa = PBXBuildFile; fileRef = BE356177184786E40030CBA6 /* ShareFacebookButton.png */; };
-		BE35617C184786E40030CBA6 /* ShareMailButton.png in Resources */ = {isa = PBXBuildFile; fileRef = BE356178184786E40030CBA6 /* ShareMailButton.png */; };
-		BE35617D184786E40030CBA6 /* ShareTwitterButton.png in Resources */ = {isa = PBXBuildFile; fileRef = BE356179184786E40030CBA6 /* ShareTwitterButton.png */; };
 		BE3574E917CE07B00083CBB1 /* SYNOneToOneSharingController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3574E717CE07B00083CBB1 /* SYNOneToOneSharingController.m */; };
 		BE3574EA17CE07B00083CBB1 /* SYNOneToOneSharingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE3574E817CE07B00083CBB1 /* SYNOneToOneSharingController.xib */; };
 		BE53DD801832850400D65793 /* SYNAddToChannelCell~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE53DD7F1832850400D65793 /* SYNAddToChannelCell~iphone.xib */; };
@@ -665,9 +670,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		010AAE9317D9EF48001DD5FA /* ShareFacebookButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ShareFacebookButton@2x.png"; path = "Assets/Images/ShareFacebookButton@2x.png"; sourceTree = "<group>"; };
-		010AAE9717D9EF48001DD5FA /* ShareMailButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ShareMailButton@2x.png"; path = "Assets/Images/ShareMailButton@2x.png"; sourceTree = "<group>"; };
-		010AAE9B17D9EF48001DD5FA /* ShareTwitterButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ShareTwitterButton@2x.png"; path = "Assets/Images/ShareTwitterButton@2x.png"; sourceTree = "<group>"; };
 		010DEFD01629BDC40080F26B /* dolly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dolly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		010DEFD41629BDC40080F26B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		010DEFD61629BDC40080F26B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -1099,6 +1101,18 @@
 		993B1B5B191AA526008532D4 /* TabActivitySelected~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabActivitySelected~ipad.png"; sourceTree = "<group>"; };
 		99F300C4191BAF57002C1D25 /* UIViewController+PresentNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+PresentNotification.h"; sourceTree = "<group>"; };
 		99F300C5191BAF57002C1D25 /* UIViewController+PresentNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+PresentNotification.m"; sourceTree = "<group>"; };
+		99F300C8191BCBFF002C1D25 /* SYNActivityTabButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNActivityTabButton.h; sourceTree = "<group>"; };
+		99F300C9191BCBFF002C1D25 /* SYNActivityTabButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNActivityTabButton.m; sourceTree = "<group>"; };
+		99F300CB191BD7AF002C1D25 /* ShareFacebookButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ShareFacebookButton.png; sourceTree = "<group>"; };
+		99F300CC191BD7AF002C1D25 /* ShareFacebookButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ShareFacebookButton@2x.png"; sourceTree = "<group>"; };
+		99F300CD191BD7AF002C1D25 /* ShareMailButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ShareMailButton.png; sourceTree = "<group>"; };
+		99F300CE191BD7AF002C1D25 /* ShareMailButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ShareMailButton@2x.png"; sourceTree = "<group>"; };
+		99F300CF191BD7AF002C1D25 /* ShareTwitterButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ShareTwitterButton.png; sourceTree = "<group>"; };
+		99F300D0191BD7AF002C1D25 /* ShareTwitterButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ShareTwitterButton@2x.png"; sourceTree = "<group>"; };
+		99F300D7191BD80F002C1D25 /* share-message-background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share-message-background@2x.png"; sourceTree = "<group>"; };
+		99F300D8191BD80F002C1D25 /* share-message-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share-message-background.png"; sourceTree = "<group>"; };
+		99F300DB191BEBBE002C1D25 /* share-message-background@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share-message-background@2x~ipad.png"; sourceTree = "<group>"; };
+		99F300DC191BEBBE002C1D25 /* share-message-background~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share-message-background~ipad.png"; sourceTree = "<group>"; };
 		B1174E5E25AB4317A22BA4F9 /* libPods-dollyTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-dollyTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE03A69116F7459D00245314 /* SYNAccountSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAccountSettingsViewController.h; sourceTree = "<group>"; };
 		BE03A69216F7459D00245314 /* SYNAccountSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAccountSettingsViewController.m; sourceTree = "<group>"; };
@@ -1183,9 +1197,6 @@
 		BE31EFB4183139F2006E20E2 /* SYNAddToChannelExpandedFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAddToChannelExpandedFlowLayout.m; sourceTree = "<group>"; };
 		BE31EFB818314CE8006E20E2 /* SYNAddToChannelFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAddToChannelFlowLayout.h; sourceTree = "<group>"; };
 		BE31EFB918314CE8006E20E2 /* SYNAddToChannelFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAddToChannelFlowLayout.m; sourceTree = "<group>"; };
-		BE356177184786E40030CBA6 /* ShareFacebookButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ShareFacebookButton.png; path = Assets/Images/ShareFacebookButton.png; sourceTree = "<group>"; };
-		BE356178184786E40030CBA6 /* ShareMailButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ShareMailButton.png; path = Assets/Images/ShareMailButton.png; sourceTree = "<group>"; };
-		BE356179184786E40030CBA6 /* ShareTwitterButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ShareTwitterButton.png; path = Assets/Images/ShareTwitterButton.png; sourceTree = "<group>"; };
 		BE3574E617CE07B00083CBB1 /* SYNOneToOneSharingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNOneToOneSharingController.h; sourceTree = "<group>"; };
 		BE3574E717CE07B00083CBB1 /* SYNOneToOneSharingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNOneToOneSharingController.m; sourceTree = "<group>"; };
 		BE3574E817CE07B00083CBB1 /* SYNOneToOneSharingController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNOneToOneSharingController.xib; sourceTree = "<group>"; };
@@ -2239,6 +2250,7 @@
 		0199F127166F94C400E479C6 /* Controls */ = {
 			isa = PBXGroup;
 			children = (
+				99F300C7191BCBE2002C1D25 /* ActivityTabButton */,
 				0165542818363AC4009B161C /* Text Fields */,
 				BEB3136A181ABD0D00FAF98A /* Cell Buttons */,
 			);
@@ -2760,12 +2772,12 @@
 		1FD2856417BBA1640094F488 /* Share Panel */ = {
 			isa = PBXGroup;
 			children = (
-				BE356177184786E40030CBA6 /* ShareFacebookButton.png */,
-				BE356178184786E40030CBA6 /* ShareMailButton.png */,
-				BE356179184786E40030CBA6 /* ShareTwitterButton.png */,
-				010AAE9317D9EF48001DD5FA /* ShareFacebookButton@2x.png */,
-				010AAE9717D9EF48001DD5FA /* ShareMailButton@2x.png */,
-				010AAE9B17D9EF48001DD5FA /* ShareTwitterButton@2x.png */,
+				99F300CB191BD7AF002C1D25 /* ShareFacebookButton.png */,
+				99F300CC191BD7AF002C1D25 /* ShareFacebookButton@2x.png */,
+				99F300CD191BD7AF002C1D25 /* ShareMailButton.png */,
+				99F300CE191BD7AF002C1D25 /* ShareMailButton@2x.png */,
+				99F300CF191BD7AF002C1D25 /* ShareTwitterButton.png */,
+				99F300D0191BD7AF002C1D25 /* ShareTwitterButton@2x.png */,
 			);
 			name = "Share Panel";
 			sourceTree = "<group>";
@@ -2990,6 +3002,15 @@
 				4CBDC402190FE820009F56F1 /* SYNSegmentedButton.m */,
 			);
 			name = "new profile";
+			sourceTree = "<group>";
+		};
+		99F300C7191BCBE2002C1D25 /* ActivityTabButton */ = {
+			isa = PBXGroup;
+			children = (
+				99F300C8191BCBFF002C1D25 /* SYNActivityTabButton.h */,
+				99F300C9191BCBFF002C1D25 /* SYNActivityTabButton.m */,
+			);
+			name = ActivityTabButton;
 			sourceTree = "<group>";
 		};
 		BE03A69016F7457900245314 /* Account Settings */ = {
@@ -3407,6 +3428,10 @@
 		BE8F938F17B3CF9700E7035F /* Sharing */ = {
 			isa = PBXGroup;
 			children = (
+				99F300DB191BEBBE002C1D25 /* share-message-background@2x~ipad.png */,
+				99F300DC191BEBBE002C1D25 /* share-message-background~ipad.png */,
+				99F300D7191BD80F002C1D25 /* share-message-background@2x.png */,
+				99F300D8191BD80F002C1D25 /* share-message-background.png */,
 				BEF5ED8B17DE061E006EF5A1 /* ShareAddEntry.jpg */,
 				BEF5ED8C17DE061E006EF5A1 /* ShareAddEntry@2x.jpg */,
 				BEF5ED8D17DE061E006EF5A1 /* ShareAddEntrySmall.jpg */,
@@ -3873,10 +3898,12 @@
 				E99B8D3F1892AD9500E08ABD /* ScrubberBarHD@2x.png in Resources */,
 				E9B9214018C78CA2003093B8 /* TabActivityNotiSelected@2x~iphone.png in Resources */,
 				01A79B9116F32C3400B05084 /* ShuttleBarRemainingBar.png in Resources */,
+				99F300DE191BEBBE002C1D25 /* share-message-background~ipad.png in Resources */,
 				01A79B9216F32C3400B05084 /* ShuttleBarRemainingBar@2x.png in Resources */,
 				01A79B9416F32C3400B05084 /* ShuttleBarSliderThumb.png in Resources */,
 				993B1B4F191AA4D3008532D4 /* TabProfileSelected~ipad@2x.png in Resources */,
 				01A79B9516F32C3400B05084 /* ShuttleBarSliderThumb@2x.png in Resources */,
+				99F300DD191BEBBE002C1D25 /* share-message-background@2x~ipad.png in Resources */,
 				01A79B9616F32C3400B05084 /* ShuttleBarBufferBar.png in Resources */,
 				E9EE08D718F80326000DC06A /* ProximaNova-Light.otf in Resources */,
 				01A79B9716F32C3400B05084 /* ShuttleBarBufferBar@2x.png in Resources */,
@@ -3902,6 +3929,7 @@
 				BE21EE9816FA28680067223B /* IconEmail@2x.png in Resources */,
 				BE21EE9916FA28680067223B /* IconFullname.png in Resources */,
 				BE21EE9A16FA28680067223B /* IconFullname@2x.png in Resources */,
+				99F300D1191BD7AF002C1D25 /* ShareFacebookButton.png in Resources */,
 				BE21EE9B16FA28680067223B /* IconGender.png in Resources */,
 				BE21EE9C16FA28680067223B /* IconGender@2x.png in Resources */,
 				E9EE08D818F80326000DC06A /* ProximaNova-Regular.otf in Resources */,
@@ -3913,14 +3941,12 @@
 				E9FDCDA1188D92EF00C31CC1 /* ForwardButton@2x.png in Resources */,
 				BED027CE1834D4CC00636659 /* ButtonMoreHelp.png in Resources */,
 				BE57C02A1843608500C6444A /* SYNOnBoardingCell~iphone.xib in Resources */,
-				BE35617C184786E40030CBA6 /* ShareMailButton.png in Resources */,
 				BEB31366181AB81600FAF98A /* IconVideoAddDefault@2x.png in Resources */,
 				1F458B0217E1C4E6003C14AC /* AppIcon40x40.png in Resources */,
 				1F458B0317E1C4E6003C14AC /* AppIcon40x40@2x.png in Resources */,
 				BE7D342E170DD8C90085AB81 /* SYNChannelFooterMoreView.xib in Resources */,
 				1F458B2B17E1CE8E003C14AC /* AppIcon-Dev-60x60@2x.png in Resources */,
 				4C9B51A218D74A7200A3AB0D /* Profile_IPhone.storyboard in Resources */,
-				BE35617B184786E40030CBA6 /* ShareFacebookButton.png in Resources */,
 				0EE380AC182D4DFC001297C7 /* SYNChannelCreateNewCell.xib in Resources */,
 				4C9B519918D71FCB00A3AB0D /* Profile_IPad.storyboard in Resources */,
 				4C5E861518B6357300D0E937 /* SYNDiscoverOverlayVideoViewController.xib in Resources */,
@@ -3984,9 +4010,11 @@
 				011C1679173003E800CF50B9 /* OWActivityViewController.bundle in Resources */,
 				E985D36A18FED44600D5A9E1 /* FavouriteButton.png in Resources */,
 				993B1B4E191AA4D3008532D4 /* TabProfileSelected~ipad.png in Resources */,
+				99F300D4191BD7AF002C1D25 /* ShareMailButton@2x.png in Resources */,
 				E9B9213318C78C94003093B8 /* TabActivityNotiHighlighted@2x.png in Resources */,
 				E9EE08DB18F80379000DC06A /* ProximaNova-Bold.otf in Resources */,
 				BEA216AF17E8A529007C6DF7 /* SYNOneToOneSharingFriendCell.xib in Resources */,
+				99F300D2191BD7AF002C1D25 /* ShareFacebookButton@2x.png in Resources */,
 				E9B9213518C78C94003093B8 /* TabActivityNotiSelected@2x.png in Resources */,
 				E972DFB1187C6FD900CB9C78 /* Login_iphone.storyboard in Resources */,
 				0EF0786B181EAE9100667417 /* ButtonMore@2x~iphone.png in Resources */,
@@ -3997,6 +4025,7 @@
 				BED027CC1834D4CC00636659 /* ButtonMoreFriends.png in Resources */,
 				4C102A3D1896D80E00C367E8 /* IconWonderAbout@2x.png in Resources */,
 				BE57C02C184361D300C6444A /* SYNOnBoardingCell.xib in Resources */,
+				99F300D6191BD7AF002C1D25 /* ShareTwitterButton@2x.png in Resources */,
 				E99AA425188035F100330ABB /* LoginLogo@2x.png in Resources */,
 				BEB3139518216F5A00FAF98A /* SYNSearchResultsViewController~iphone.xib in Resources */,
 				44D66FE018B67832009BC910 /* ButtonMoreEdit@2x.png in Resources */,
@@ -4083,6 +4112,7 @@
 				E9921A9818353B33001A4F3B /* SYNScrubberBar.xib in Resources */,
 				1F51A6971742A93B009907CA /* PlaceholderAvatarProfile@2x.png in Resources */,
 				1F51A69C1742A93B009907CA /* PlaceholderChannelSmall.png in Resources */,
+				99F300DA191BD80F002C1D25 /* share-message-background.png in Resources */,
 				993B1B5C191AA526008532D4 /* TabActivity@2x~ipad.png in Resources */,
 				1F51A69D1742A93B009907CA /* PlaceholderChannelSmall@2x.png in Resources */,
 				1F51A69E1742A93B009907CA /* PlaceholderNotificationAvatar.png in Resources */,
@@ -4110,6 +4140,7 @@
 				1F22C199174524350065D4BF /* BarSucess@2x.png in Resources */,
 				1F22C19D17452DB90065D4BF /* BarNetworkLogin.png in Resources */,
 				1F22C19E17452DB90065D4BF /* BarNetworkLogin@2x.png in Resources */,
+				99F300D9191BD80F002C1D25 /* share-message-background@2x.png in Resources */,
 				4C5E862618B65AAE00D0E937 /* In_AddButton.png in Resources */,
 				44D66FDF18B67832009BC910 /* ButtonMoreEdit.png in Resources */,
 				E98A852319096B63001ADE09 /* SYNFeedChannelSmallCell.xib in Resources */,
@@ -4130,12 +4161,13 @@
 				E9FDCDA0188D92EF00C31CC1 /* ForwardButton.png in Resources */,
 				E985D36D18FED5A000D5A9E1 /* AddButton@2x.png in Resources */,
 				BEB313C2182A82B700FAF98A /* SYNCollectionVideoCell.xib in Resources */,
+				99F300D5191BD7AF002C1D25 /* ShareTwitterButton.png in Resources */,
 				993B1ADA191A962F008532D4 /* TabActivity@2x~iphone.png in Resources */,
 				BED027C71834D4CC00636659 /* ButtonMoreAbout@2x.png in Resources */,
 				E9D8E5A418995F1800EB1CD5 /* SYNNotificationsTableViewCell~iphone.xib in Resources */,
 				BEB3135B18182D6A00FAF98A /* SearchVideosResultsForMichael.json in Resources */,
-				BE35617D184786E40030CBA6 /* ShareTwitterButton.png in Resources */,
 				BE7D02EC178B13C3008053DC /* SYNUserThumbnailCell.xib in Resources */,
+				99F300D3191BD7AF002C1D25 /* ShareMailButton.png in Resources */,
 				993B1B5D191AA526008532D4 /* TabActivity~ipad.png in Resources */,
 				BE7D02F0178C0FEC008053DC /* SYNUserThumbnailCell~iphone.xib in Resources */,
 				BE53DD801832850400D65793 /* SYNAddToChannelCell~iphone.xib in Resources */,
@@ -4165,12 +4197,9 @@
 				BE06EEED17D759290028F2E3 /* RecentContactPlaceholder@2x.png in Resources */,
 				BE06EEF017D759390028F2E3 /* ABContactPlaceholder.png in Resources */,
 				BE06EEF117D759390028F2E3 /* ABContactPlaceholder@2x.png in Resources */,
-				010AAE9F17D9EF48001DD5FA /* ShareFacebookButton@2x.png in Resources */,
-				010AAEA317D9EF48001DD5FA /* ShareMailButton@2x.png in Resources */,
 				BED027CD1834D4CC00636659 /* ButtonMoreFriends@2x.png in Resources */,
 				E91E3B2118C7292400F79020 /* ButtonVideoDeleteDefault.png in Resources */,
 				993B1B44191AA4B5008532D4 /* TabFeed@2x~ipad.png in Resources */,
-				010AAEA717D9EF48001DD5FA /* ShareTwitterButton@2x.png in Resources */,
 				BEF5ED8F17DE061E006EF5A1 /* ShareAddEntry.jpg in Resources */,
 				993B1ACB191A95FC008532D4 /* TabProfile~iphone.png in Resources */,
 				4C0B956C19128262008D8036 /* SYNSearchVideoSmallCell.xib in Resources */,
@@ -4448,6 +4477,7 @@
 				BE7D35051715CE450085AB81 /* SYNNotification.m in Sources */,
 				BE86BF1A171F07B10006DC8A /* SYNChannelMidCell.m in Sources */,
 				0E19FBC2182273EE0007DF5B /* SYNChannelSearchCell.m in Sources */,
+				99F300CA191BCBFF002C1D25 /* SYNActivityTabButton.m in Sources */,
 				BEB313561817D8C400FAF98A /* SYNSearchResultsUserCell.m in Sources */,
 				BEFAE89C1725485B009B2F66 /* SYNVideoQueue.m in Sources */,
 				BE285D9B1725726300D995AB /* SYNAddToChannelViewController.m in Sources */,

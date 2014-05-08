@@ -49,7 +49,6 @@ UISearchBarDelegate>
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView *loader;
 @property (nonatomic, strong) IBOutlet UICollectionView *recentFriendsCollectionView;
 
-@property (nonatomic, strong) IBOutlet UILabel *titleLabel;
 @property (nonatomic, strong) IBOutlet UITableView *searchResultsTableView;
 
 @property (nonatomic, strong) IBOutlet UIView *activitiesContainerView;
@@ -64,6 +63,7 @@ UISearchBarDelegate>
 
 @property (strong, nonatomic) NSMutableDictionary *mutableShareDictionary;
 @property (strong, nonatomic) OWActivityViewController *activityViewController;
+@property (strong, nonatomic) IBOutlet UIView *textContainerView;
 
 @end
 
@@ -113,11 +113,13 @@ UISearchBarDelegate>
     
     self.currentSearchTerm = @"";
     
-    self.titleLabel.font = [UIFont regularCustomFontOfSize: self.titleLabel.font.pointSize];
-    
     [self.recentFriendsCollectionView registerNib:[SYNOneToOneSharingFriendCell nib]
                        forCellWithReuseIdentifier:[SYNOneToOneSharingFriendCell reuseIdentifier]];
     
+    self.searchBar.backgroundColor = [UIColor colorWithRed: 246.0f / 255.0f
+                                                     green: 246.0f / 255.0f
+                                                      blue: 246.0f / 255.0f
+                                                     alpha: 1.0f];
     
     if (IS_IPHONE)
     {
@@ -131,6 +133,10 @@ UISearchBarDelegate>
         UIEdgeInsets ei = self.searchResultsTableView.contentInset;
         ei.bottom = 58.0f;
         self.searchResultsTableView.contentInset = ei;
+        
+        CGRect frame = self.textContainerView.frame;
+        frame.origin.x -= 49;
+        self.textContainerView.frame = frame;
     }
     
     // Basic recognition
