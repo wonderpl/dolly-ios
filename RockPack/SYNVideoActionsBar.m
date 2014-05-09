@@ -7,6 +7,7 @@
 //
 
 #import "SYNVideoActionsBar.h"
+#import "UIFont+SYNFont.h"
 
 @interface SYNVideoActionsBar ()
 
@@ -16,6 +17,12 @@
 @end
 
 @implementation SYNVideoActionsBar
+
+- (void)awakeFromNib {
+	[super awakeFromNib];
+	
+	self.shopButton.titleLabel.font = [UIFont regularCustomFontOfSize:self.shopButton.titleLabel.font.pointSize];
+}
 
 + (instancetype)bar {
 	UINib *nib = [UINib nibWithNibName:NSStringFromClass(self) bundle:nil];

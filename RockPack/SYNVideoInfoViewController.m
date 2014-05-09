@@ -76,9 +76,10 @@ static const CGFloat UpcomingVideosDividerHeight = 70.0;
 	
 	[self.annotations addObject:annotation];
 	
+	UIButton *button = self.videoActionsBar.shopButton;
+	[button setTitle:[NSString stringWithFormat:@"%@", @([self.annotations count])] forState:UIControlStateNormal];
+
 	if (isFirstAnnotation) {
-		UIButton *button = self.videoActionsBar.shopButton;
-		
 		button.hidden = NO;
 		button.transform = CGAffineTransformMakeScale(0.0, 0.0);
 		

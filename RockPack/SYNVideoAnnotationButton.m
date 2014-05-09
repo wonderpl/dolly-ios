@@ -12,7 +12,8 @@
 
 - (id)initWithFrame:(CGRect)frame {
 	if (self = [super initWithFrame:frame]) {
-		self.backgroundColor = [UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:0.4];
+		self.imageView.contentMode = UIViewContentModeScaleAspectFit;
+		[self setImage:[UIImage imageNamed:@"ShopMotionActionButton"] forState:UIControlStateNormal];
 	}
 	return self;
 }
