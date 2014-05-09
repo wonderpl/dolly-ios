@@ -51,6 +51,7 @@
 				  context:NULL];
 
 	}
+    
     return self;
 }
 
@@ -160,7 +161,7 @@
         if (!notification || notification.objectType == kNotificationObjectTypeUnknown)
             continue;
         
-        if(!notification.read) { // one is enought to display the read all button
+        if(!notification.read) {
             self.notificationCounter ++;
         }
         
