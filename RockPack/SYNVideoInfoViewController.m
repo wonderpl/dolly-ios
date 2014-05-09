@@ -104,7 +104,13 @@ static const CGFloat UpcomingVideosDividerHeight = 70.0;
 #pragma mark - Getters / Setters
 
 - (void)setSelectedIndex:(NSInteger)selectedIndex {
+	BOOL selectedIndexChanged = (_selectedIndex != selectedIndex);
+	
 	_selectedIndex = selectedIndex;
+	
+	if (selectedIndexChanged) {
+		self.annotations = [NSMutableArray array];
+	}
 	
 	[self.collectionView reloadData];
 	self.collectionView.contentOffset = CGPointZero;
