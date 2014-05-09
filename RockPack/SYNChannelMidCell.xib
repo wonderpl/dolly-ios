@@ -45,7 +45,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Followers" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3c9-8H-dtP">
-                                        <rect key="frame" x="18" y="58" width="62" height="17"/>
+                                        <rect key="frame" x="18" y="58" width="202" height="17"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="0.59607843137254901" green="0.59607843137254901" blue="0.59607843137254901" alpha="1" colorSpace="calibratedRGB"/>
@@ -58,7 +58,7 @@
                                         <color key="textColor" red="0.0039215686274509803" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kIe-qc-U58" customClass="SYNFollowChannelButton">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kIe-qc-U58" userLabel="Follow Button" customClass="SYNFollowChannelButton">
                                         <rect key="frame" x="225" y="51" width="80" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <constraints>
@@ -78,6 +78,7 @@
                                     <constraint firstItem="qfg-Af-VXr" firstAttribute="top" secondItem="IsZ-bf-jJ2" secondAttribute="top" constant="15" id="9yq-Qf-Pfp"/>
                                     <constraint firstItem="kIe-qc-U58" firstAttribute="top" secondItem="IsZ-bf-jJ2" secondAttribute="top" constant="51" id="GUc-W5-NB8"/>
                                     <constraint firstAttribute="bottom" secondItem="3c9-8H-dtP" secondAttribute="bottom" constant="15" id="Iz1-zs-s2N"/>
+                                    <constraint firstItem="kIe-qc-U58" firstAttribute="leading" secondItem="3c9-8H-dtP" secondAttribute="trailing" constant="5" id="UI4-Rg-uop"/>
                                     <constraint firstAttribute="trailing" secondItem="qfg-Af-VXr" secondAttribute="trailing" constant="20" id="XBV-2n-Fq2"/>
                                     <constraint firstAttribute="trailing" secondItem="kIe-qc-U58" secondAttribute="trailing" constant="6" id="aEu-Sk-gy4"/>
                                     <constraint firstItem="qfg-Af-VXr" firstAttribute="leading" secondItem="IsZ-bf-jJ2" secondAttribute="leading" constant="18" id="moq-MY-88z"/>
