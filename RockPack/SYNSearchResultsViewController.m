@@ -620,7 +620,7 @@ typedef void (^SearchResultCompleteBlock)(int);
     } else {
 		
 		if (IS_IPHONE) {
-				return CGSizeMake(320, 85);			
+				return CGSizeMake(320, 85);
 		} else {
 			
 			if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation])) {
