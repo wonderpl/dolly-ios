@@ -149,10 +149,14 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     [super scrollViewDidScroll:scrollView];
     [self coverPhotoAnimation];
-    [self moveNameLabelWithOffset:scrollView.contentOffset.y];
 }
 
 - (void)coverPhotoAnimation {
+    
+    if (self.cv.contentOffset.y >= 750) {
+        return;
+    }
+    
     if (self.cv.contentOffset.y<=0) {
         [self.headerView.coverImage setContentMode:UIViewContentModeScaleAspectFill];
         [self.headerView.coverImageTop setConstant:self.cv.contentOffset.y];

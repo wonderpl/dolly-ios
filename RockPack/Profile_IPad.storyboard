@@ -109,11 +109,11 @@
                                     <outlet property="delegate" destination="tc3-ZG-m6W" id="phX-pF-N1T"/>
                                 </connections>
                             </collectionView>
-                            <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kai-wX-XH8" userLabel="fake navigation bar">
+                            <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kai-wX-XH8" userLabel="fake navigation bar">
                                 <rect key="frame" x="0.0" y="0.0" width="671" height="64"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OTJ-fy-bTV" userLabel="title">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OTJ-fy-bTV" userLabel="title">
                                         <rect key="frame" x="0.0" y="14" width="671" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -122,21 +122,11 @@
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="OTJ-fy-bTV" firstAttribute="leading" secondItem="kai-wX-XH8" secondAttribute="leading" id="pCv-c8-aew"/>
-                                    <constraint firstAttribute="trailing" secondItem="OTJ-fy-bTV" secondAttribute="trailing" id="rvA-2h-yMZ"/>
-                                    <constraint firstItem="OTJ-fy-bTV" firstAttribute="top" secondItem="kai-wX-XH8" secondAttribute="top" constant="14" id="ul3-3t-Vrz"/>
-                                    <constraint firstAttribute="bottom" secondItem="OTJ-fy-bTV" secondAttribute="bottom" id="x9t-IC-KPa"/>
-                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerY" secondItem="5mf-ZY-cuR" secondAttribute="centerY" id="4b9-Gb-soy"/>
-                            <constraint firstAttribute="trailing" secondItem="kai-wX-XH8" secondAttribute="trailing" id="ISP-1z-KS0"/>
-                            <constraint firstItem="Nih-bz-jFs" firstAttribute="top" secondItem="kai-wX-XH8" secondAttribute="bottom" constant="960" id="PuT-zh-X7p"/>
-                            <constraint firstItem="kai-wX-XH8" firstAttribute="leading" secondItem="WI4-AV-lHd" secondAttribute="leading" id="ajs-zc-YVp"/>
-                            <constraint firstItem="kai-wX-XH8" firstAttribute="top" secondItem="5mf-ZY-cuR" secondAttribute="top" id="dCE-Zb-Tjz"/>
                             <constraint firstAttribute="width" secondItem="5mf-ZY-cuR" secondAttribute="width" id="sSu-rr-zcI"/>
                             <constraint firstAttribute="centerX" secondItem="5mf-ZY-cuR" secondAttribute="centerX" id="xED-PB-97x"/>
                             <constraint firstAttribute="height" secondItem="5mf-ZY-cuR" secondAttribute="height" id="xpX-A3-dle"/>
@@ -291,7 +281,7 @@
                                     <outlet property="delegate" destination="YBF-QV-ylu" id="o4A-nT-LJY"/>
                                 </connections>
                             </collectionView>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x14-kE-VRt" userLabel="fake navigation bar">
+                            <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x14-kE-VRt" userLabel="fake navigation bar">
                                 <rect key="frame" x="0.0" y="0.0" width="671" height="64"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
@@ -304,21 +294,14 @@
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="CoX-gE-pvV"/>
-                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerY" secondItem="Bn4-nv-AbE" secondAttribute="centerY" id="0U1-2g-Saj"/>
-                            <constraint firstAttribute="trailing" secondItem="x14-kE-VRt" secondAttribute="trailing" id="2HL-v3-MdA"/>
                             <constraint firstAttribute="width" secondItem="Bn4-nv-AbE" secondAttribute="width" id="6hl-wb-HYc"/>
                             <constraint firstAttribute="height" secondItem="Bn4-nv-AbE" secondAttribute="height" id="7DH-kh-cer"/>
-                            <constraint firstItem="x14-kE-VRt" firstAttribute="top" secondItem="Bn4-nv-AbE" secondAttribute="top" id="WMK-Nu-8E4"/>
                             <constraint firstAttribute="centerX" secondItem="Bn4-nv-AbE" secondAttribute="centerX" id="Zph-Hw-kRc"/>
-                            <constraint firstItem="Bn4-nv-AbE" firstAttribute="top" secondItem="OGi-q6-ASC" secondAttribute="bottom" id="daW-ej-pVc"/>
-                            <constraint firstItem="x14-kE-VRt" firstAttribute="leading" secondItem="0zr-8O-Gd0" secondAttribute="leading" id="ekX-nt-vBV"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
