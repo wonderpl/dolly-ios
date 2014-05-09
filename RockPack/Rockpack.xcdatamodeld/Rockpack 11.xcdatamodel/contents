@@ -92,9 +92,6 @@
         <attribute name="priority" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="subgenres" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="SubGenre" inverseName="genre" inverseEntity="SubGenre" syncable="YES"/>
     </entity>
-    <entity name="Mood" representedClassName="Mood" parentEntity="AbstractCommon" syncable="YES">
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-    </entity>
     <entity name="Recommendation" representedClassName="Recommendation" parentEntity="AbstractCommon" syncable="YES">
         <attribute name="avatarUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="categoryId" optional="YES" attributeType="String" syncable="YES"/>
@@ -169,7 +166,6 @@
         <element name="FeedItem" positionX="0" positionY="0" width="128" height="118"/>
         <element name="Friend" positionX="0" positionY="0" width="128" height="150"/>
         <element name="Genre" positionX="0" positionY="0" width="128" height="105"/>
-        <element name="Mood" positionX="0" positionY="0" width="128" height="60"/>
         <element name="Recommendation" positionX="0" positionY="0" width="128" height="135"/>
         <element name="SubGenre" positionX="0" positionY="0" width="128" height="75"/>
         <element name="User" positionX="0" positionY="0" width="128" height="240"/>

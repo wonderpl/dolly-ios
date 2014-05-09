@@ -484,8 +484,6 @@
 		BEE01B5C184F638C000CF681 /* SYNOnBoardingHeader~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEE01B5B184F638C000CF681 /* SYNOnBoardingHeader~iphone.xib */; };
 		BEE01B7018521DB8000CF681 /* _Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE01B6F18521DB8000CF681 /* _Comment.m */; };
 		BEE01B7318521DCF000CF681 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE01B7218521DCF000CF681 /* Comment.m */; };
-		BEE01B7618573292000CF681 /* _Mood.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE01B7518573292000CF681 /* _Mood.m */; };
-		BEE01B79185732A0000CF681 /* Mood.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE01B78185732A0000CF681 /* Mood.m */; };
 		BEE4A6C2170B5640008F9D05 /* SYNAccountSettingsEmail.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE4A6C1170B563E008F9D05 /* SYNAccountSettingsEmail.m */; };
 		BEE4A6C5170B56B5008F9D05 /* SYNAccountSettingsUsername.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE4A6C4170B56B4008F9D05 /* SYNAccountSettingsUsername.m */; };
 		BEF0AE0716E751280094BFDA /* SYNNetworkOperationJsonObjectParse.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF0AE0616E751280094BFDA /* SYNNetworkOperationJsonObjectParse.m */; };
@@ -1346,10 +1344,6 @@
 		BEE01B6F18521DB8000CF681 /* _Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Comment.m; sourceTree = "<group>"; };
 		BEE01B7118521DCF000CF681 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
 		BEE01B7218521DCF000CF681 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
-		BEE01B7418573292000CF681 /* _Mood.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Mood.h; sourceTree = "<group>"; };
-		BEE01B7518573292000CF681 /* _Mood.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Mood.m; sourceTree = "<group>"; };
-		BEE01B77185732A0000CF681 /* Mood.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mood.h; sourceTree = "<group>"; };
-		BEE01B78185732A0000CF681 /* Mood.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mood.m; sourceTree = "<group>"; };
 		BEE4A6BD170B0FD6008F9D05 /* dolly-Release-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "dolly-Release-Info.plist"; path = "RockPack/dolly-Release-Info.plist"; sourceTree = "<group>"; };
 		BEE4A6BF170B273F008F9D05 /* SYNAccountSettingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAccountSettingTableViewCell.h; sourceTree = "<group>"; };
 		BEE4A6C0170B563D008F9D05 /* SYNAccountSettingsEmail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAccountSettingsEmail.h; sourceTree = "<group>"; };
@@ -2426,8 +2420,6 @@
 				01946B8E1683335400354601 /* _ChannelOwner.m */,
 				BEE01B6E18521DB8000CF681 /* _Comment.h */,
 				BEE01B6F18521DB8000CF681 /* _Comment.m */,
-				BEE01B7418573292000CF681 /* _Mood.h */,
-				BEE01B7518573292000CF681 /* _Mood.m */,
 				01E427EE1664EE52009B941F /* _Video.h */,
 				01E427EF1664EE52009B941F /* _Video.m */,
 				01946B8F1683335400354601 /* _VideoInstance.h */,
@@ -2457,8 +2449,6 @@
 				BE8F938C17B1268500E7035F /* ExternalAccount.m */,
 				BE7D0308179D8EEC008053DC /* Friend.h */,
 				BE7D0309179D8EEC008053DC /* Friend.m */,
-				BEE01B77185732A0000CF681 /* Mood.h */,
-				BEE01B78185732A0000CF681 /* Mood.m */,
 				BEA043E316CAA8E1005406E7 /* Genre.h */,
 				BEA043E416CAA8E1005406E7 /* Genre.m */,
 				BEA043E516CAA8E1005406E7 /* SubGenre.h */,
@@ -4409,7 +4399,6 @@
 				0194FD2316DE6FE90058A7C2 /* SYNVideoThumbnailCell.m in Sources */,
 				4C72DD4A18FD96E6004AC132 /* SYNFollowChannelButton.m in Sources */,
 				0173F70816E0C56B005B3ECA /* SYNVideoViewerThumbnailLayout.m in Sources */,
-				BEE01B7618573292000CF681 /* _Mood.m in Sources */,
 				4C5E861B18B6580300D0E937 /* SYNDiscoverOverlayHighlightsViewController.m in Sources */,
 				E98A851C19096B30001ADE09 /* SYNFeedChannelLargeCell.m in Sources */,
 				0173F70B16E0C5DF005B3ECA /* SYNVideoViewerThumbnailLayoutAttributes.m in Sources */,
@@ -4539,7 +4528,6 @@
 				0E0062E1188EBBCB00429C79 /* SYNOnBoardingSectionHeader.m in Sources */,
 				E9E1E28518561CA30051E312 /* SYNTapDismissView.m in Sources */,
 				E914BED7183CF018001616D3 /* SYNFullScreenVideoViewController.m in Sources */,
-				BEE01B79185732A0000CF681 /* Mood.m in Sources */,
 				E9CE7A301887161B00023A86 /* SYNiPadIntroToSignupAnimator.m in Sources */,
 				E9F625641885C238000EF6A2 /* SYNGradientMaskView.m in Sources */,
 				4C5C390718EF09E6007250EE /* UIPlaceHolderTextView.m in Sources */,
