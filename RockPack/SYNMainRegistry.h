@@ -22,9 +22,6 @@
 
 -(BOOL)registerExternalAccountWithCurrentUserFromDictionary:(NSDictionary*)dictionary;
 
--(BOOL)registerMoodsFromDictionary:(NSDictionary*)dictionary
-                 withExistingMoods:(NSArray*)moods;
-
 - (BOOL) registerCommentsFromDictionary: (NSDictionary*) dictionary
                            withExisting: (NSArray*)existingComments
                      forVideoInstanceId: (NSString*)vid;

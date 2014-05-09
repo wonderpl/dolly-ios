@@ -40,7 +40,6 @@
 #define kSubscribersListViewId      @"SUBSCRIBERS"
 #define kFriendsViewId              @"My Friends"
 #define kActivityViewId             @"ACTIVITY"
-#define kMoodViewId                 @"MOOD-MINDER"
 
 #define kShareLinkForObjectObtained @"kShareLinkForObjectObtained"
 
@@ -159,10 +158,6 @@ typedef enum : NSInteger {
 #define kAPIReportSession           @"/ws/session/"                             /* GET */
 
 
-// Moods
-#define kGetMoods                   @"/ws/moods/"                               /* GET */
-
-
 // HTML player source
 #define kHTMLVideoPlayerSource      @"/ws/videos/players/"                      /* GET */
 
@@ -277,7 +272,6 @@ static NSString* kPopularGenreUniqueId = @"1979";
 // UserDefaults
 #define kUserDefaultsNotFirstInstall @"UD_Not_First_Install"
 #define kUserDefaultsCommentingLastInteracted @"CMT_Interaction_Date"
-#define kUserDefaultsMoodFirstTime @"UD_Mood_First_Time"
 #define kUserDefaultsDiscoverVideoFirstTime @"UD_Discover_Video_First_Time"
 #define kUserDefaultsDiscoverUserFirstTime @"UD_Discover_User_First_Time"
 #define kUserDefaultsYourProfileFirstTime @"UD_Your_Profile_First_Time"

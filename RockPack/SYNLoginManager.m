@@ -207,7 +207,6 @@
         // == inboarding description
         [[NSUserDefaults standardUserDefaults] setInteger:0 forKey: kUserDefaultsOtherPersonsProfile];
         
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey: kUserDefaultsMoodFirstTime];
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey: kUserDefaultsCreateChannelFirstTime];
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey: kUserDefaultsYourProfileFirstTime];
         [[NSUserDefaults standardUserDefaults] setBool: NO forKey: kUserDefaultsFeedFirstTime];
@@ -223,7 +222,6 @@
         // == inboarding description
         [[NSUserDefaults standardUserDefaults] setInteger:2 forKey: kUserDefaultsOtherPersonsProfile];
         
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey: kUserDefaultsMoodFirstTime];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey: kUserDefaultsCreateChannelFirstTime];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey: kUserDefaultsYourProfileFirstTime];
         [[NSUserDefaults standardUserDefaults] setBool: YES forKey: kUserDefaultsFeedFirstTime];

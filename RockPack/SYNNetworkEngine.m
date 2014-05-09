@@ -755,24 +755,6 @@
     [self enqueueOperation: networkOperation];
 }
 
-
-- (void) getMoodsWithCompletionHandler: (MKNKUserSuccessBlock) completionBlock
-                          errorHandler: (MKNKUserErrorBlock) errorBlock
-{
-    SYNNetworkOperationJsonObject *networkOperation =
-    (SYNNetworkOperationJsonObject *) [self operationWithPath: kGetMoods
-                                                       params: [self getLocaleParam]
-                                                   httpMethod: @"GET"];
-    
-    
-    
-    [networkOperation addJSONCompletionHandler: completionBlock
-                                  errorHandler: errorBlock];
-    
-    [self enqueueOperation: networkOperation];
-}
-
-
 - (void) getCommentsForUsedId:(NSString*)userId
                     channelId:(NSString*)channelId
                    andVideoId:(NSString*)videoId

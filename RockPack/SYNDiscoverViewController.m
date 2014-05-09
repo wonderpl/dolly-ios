@@ -77,7 +77,7 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 @property (nonatomic, strong) NSArray *genres;
 
 @property (nonatomic, strong) NSMutableArray *recentlyViewed;
-@property (nonatomic, strong) UIBarButtonItem *moodBarButton;
+
 @end
 
 @implementation SYNDiscoverViewController
