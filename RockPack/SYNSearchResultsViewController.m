@@ -507,7 +507,6 @@ typedef void (^SearchResultCompleteBlock)(int);
 		NSString *reuseIdentifier = (isLargeCell ? [SYNSearchVideoLargeCell reuseIdentifier]
 									 : [SYNSearchVideoSmallCell reuseIdentifier]);
 
-		
         SYNSearchVideoCell *videoCell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier
                                                                                          forIndexPath:indexPath];
         
@@ -621,13 +620,7 @@ typedef void (^SearchResultCompleteBlock)(int);
     } else {
 		
 		if (IS_IPHONE) {
-			
-			if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation])) {
-				return CGSizeMake(320, 85);
-			} else {
-				return CGSizeMake(606, 144);
-			}
-			
+				return CGSizeMake(320, 85);			
 		} else {
 			
 			if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation])) {
