@@ -62,6 +62,12 @@
 		wself.isSavingNextPage = YES;
         
 		[sself.channel addVideoInstancesFromDictionary:response];
+		for (VideoInstance *videoInstance in sself.channel.videoInstances) {
+			if (!videoInstance.originator) {
+				videoInstance.originator = sself.channel.channelOwner;
+			}
+		}
+		
 		[sself.channel.managedObjectContext save:nil];
 		
 		successBlock([sself.channel.videoInstancesSet array], sself.channel.totalVideosValueValue);
