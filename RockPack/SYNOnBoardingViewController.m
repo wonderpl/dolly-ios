@@ -356,7 +356,7 @@
                 [self presentNotificationWithMessage: text andType:NotificationMessageTypeSuccess];
             } else {
                 
-                NSString *text = IS_IPAD ? [NSString stringWithFormat:@"You have successfully subscribed to %@", channelOwner.displayName] : [NSString stringWithFormat:@"Unsubscribed to %@", channelOwner.displayName];
+                NSString *text = IS_IPAD ? [NSString stringWithFormat:@"You have successfully unsubscribed to %@", channelOwner.displayName] : [NSString stringWithFormat:@"Unsubscribed to %@", channelOwner.displayName];
 
                 [self presentNotificationWithMessage: text andType:NotificationMessageTypeSuccess];
             }
