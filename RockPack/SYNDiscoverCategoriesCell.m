@@ -14,7 +14,7 @@
 @property (nonatomic, strong) IBOutlet UILabel *label;
 @property (nonatomic, strong) IBOutlet UIView* dimmingView;
 @property (nonatomic, strong) IBOutlet UIView *separator;
-@property (strong, nonatomic) IBOutlet UIImageView *rightImage;
+@property (strong, nonatomic) IBOutlet UIImageView *arrowImage;
 
 @end
 
@@ -24,47 +24,26 @@
 	[super awakeFromNib];
 	
     self.label.font = [UIFont semiboldCustomFontOfSize: self.label.font.pointSize];
-	self.rightImage.hidden = YES;
 
 }
 
 -(void)prepareForReuse {
     [super prepareForReuse];
     self.backgroundColor = [UIColor clearColor];
-	self.label.textColor = [UIColor whiteColor];
+	self.label.textColor = [UIColor blackColor];
 	
-	self.rightImage.hidden = YES;
+	self.arrowImage.hidden = YES;
 }
 
 
 - (void)setSelected:(BOOL)selected {
     [super setSelected:selected];
-    
-    [self updateBackgroundColor];
-}
-
-- (void)setSelectedColor:(UIColor *)selectedColor {
-    _selectedColor = [UIColor blackColor];
-    
-    [self updateBackgroundColor];
-}
-
-- (void)setDeSelectedColor:(UIColor *)deSelectedColor {
-    _deSelectedColor = deSelectedColor;
-    
-    [self updateBackgroundColor];
-}
-
-
-- (void)updateBackgroundColor {
-    if (self.selected) {
-        self.backgroundColor =  [UIColor blackColor];
-		[self.label setTextColor:[UIColor whiteColor]];
-	} else {
-        self.backgroundColor =  [UIColor whiteColor];
-		[self.label setTextColor:[UIColor blackColor]];
+	if (selected) {
+        self.arrowImage.hidden = NO;
+    } else {
+        self.arrowImage.hidden = YES;
     }
-
 }
+
 
 @end

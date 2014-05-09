@@ -20,9 +20,13 @@
                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="rightarrow.png" translatesAutoresizingMaskIntoConstraints="NO" id="7ma-il-ldL">
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rightarrow.png" translatesAutoresizingMaskIntoConstraints="NO" id="7ma-il-ldL">
                         <rect key="frame" x="235" y="14" width="9" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="17" id="n06-tM-big"/>
+                            <constraint firstAttribute="width" constant="9" id="qIM-XS-Fhw"/>
+                        </constraints>
                     </imageView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -38,8 +42,8 @@
             </constraints>
             <size key="customSize" width="332" height="67"/>
             <connections>
+                <outlet property="arrowImage" destination="7ma-il-ldL" id="ygV-Cp-g3l"/>
                 <outlet property="label" destination="VDA-cz-Gkg" id="Unb-AB-PbO"/>
-                <outlet property="rightImage" destination="7ma-il-ldL" id="eOS-a7-6g2"/>
             </connections>
         </collectionViewCell>
     </objects>

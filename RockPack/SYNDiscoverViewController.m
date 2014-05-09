@@ -157,6 +157,7 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 	self.recentlyViewed = [[NSMutableArray alloc] init];
 
 	
+    
 	
 
 }
@@ -179,8 +180,10 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 	
 	
 	[self.categoriesCollectionView reloadData];
+    
+	//Automatically select editors picks on load.
+    self.selectedCellIndex = [NSIndexPath indexPathForItem:0 inSection:0];
 	[self.categoriesCollectionView selectItemAtIndexPath:self.selectedCellIndex animated:NO scrollPosition:UICollectionViewScrollPositionNone];
-	
 	
 	self.recentlyViewed = [self genreArrayFromDefaults];
 	
@@ -320,11 +323,9 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 	
 	NSArray *defaultsArray = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsRecentlyViewed];
 	
-	
 	if (!defaultsArray) {
 		return [NSMutableArray new];
 	}
-	
 	
 	for (int i = 0; i < defaultsArray.count; i++) {
 		Genre *subGenre = [[SYNGenreManager sharedManager] genreWithId:[defaultsArray objectAtIndex:i]];
@@ -426,11 +427,6 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 		subGenre = genre.subgenres[indexPath.row];
 	}
 	
-	UIColor *genreColor = [[SYNGenreManager sharedManager] colorForGenreWithId:subGenre.uniqueId];
-	
-	categoryCell.selectedColor = genreColor;
-	categoryCell.deSelectedColor = [UIColor whiteColor];
-		
     categoryCell.label.text = subGenre.name;
 	
 	
@@ -806,11 +802,6 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
         
         [self.navigationController pushViewController:self.searchResultsController
                                              animated:YES];
-		
-        
-        
-        
-		
     }
     
     if(type == kSearchTypeGenre) {
@@ -826,9 +817,6 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
         self.selectedCellIndex = nil;
         [self.searchResultsController searchForTerm:searchTerm];
     }
-	
-	
-	
 }
 
 

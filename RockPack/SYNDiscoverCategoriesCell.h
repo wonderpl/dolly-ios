@@ -13,6 +13,6 @@
 @property (nonatomic, strong, readonly) UILabel *label;
 @property (nonatomic, strong) UIColor *selectedColor;
 @property (nonatomic, strong) UIColor *deSelectedColor;
-@property (nonatomic, strong, readonly)  UIImageView *rightImage;
+@property (nonatomic, strong, readonly)  UIImageView *arrowImage;
 
 @end
