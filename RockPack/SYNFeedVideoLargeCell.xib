@@ -63,13 +63,6 @@
                             <action selector="avatarThumbnailPressed:" destination="b82-Mn-j5C" eventType="touchUpInside" id="Sht-64-2BX"/>
                         </connections>
                     </button>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EeA-3P-fNY">
-                        <rect key="frame" x="82" y="161" width="42" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OHt-JI-i3d">
                         <rect key="frame" x="91" y="526" width="489" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -93,26 +86,46 @@
                             <constraint firstAttribute="height" constant="1" id="VOT-Xg-gqE"/>
                         </constraints>
                     </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ujv-HH-Fku">
+                        <rect key="frame" x="82" y="152" width="52" height="40"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="jqc-qL-VEM"/>
+                        </constraints>
+                        <state key="normal">
+                            <attributedString key="attributedTitle">
+                                <fragment content="Button">
+                                    <attributes>
+                                        <color key="NSColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                    </attributes>
+                                </fragment>
+                            </attributedString>
+                        </state>
+                        <connections>
+                            <action selector="addedByPressed:" destination="b82-Mn-j5C" eventType="touchUpInside" id="sea-yW-xSF"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="M8y-SK-o2j" secondAttribute="trailing" id="1LX-nt-EDl"/>
-                <constraint firstItem="EeA-3P-fNY" firstAttribute="leading" secondItem="dVi-I7-bEK" secondAttribute="leading" constant="-9" id="2Od-DQ-99y"/>
                 <constraint firstAttribute="bottom" secondItem="5ha-9n-PNZ" secondAttribute="bottom" id="8W3-pp-QFj"/>
                 <constraint firstItem="dVi-I7-bEK" firstAttribute="trailing" secondItem="OHt-JI-i3d" secondAttribute="trailing" id="GZB-at-otY"/>
                 <constraint firstAttribute="bottom" secondItem="M8y-SK-o2j" secondAttribute="bottom" id="Gi9-Gc-u27"/>
                 <constraint firstItem="5ha-9n-PNZ" firstAttribute="top" secondItem="b82-Mn-j5C" secondAttribute="top" id="HiQ-0Y-Tza"/>
                 <constraint firstItem="dVi-I7-bEK" firstAttribute="leading" secondItem="OHt-JI-i3d" secondAttribute="leading" id="Mz9-K7-ZGg"/>
-                <constraint firstItem="dVi-I7-bEK" firstAttribute="top" secondItem="EeA-3P-fNY" secondAttribute="bottom" constant="53" id="PM8-4d-SIR"/>
                 <constraint firstAttribute="centerX" secondItem="dVi-I7-bEK" secondAttribute="centerX" id="WR0-Fv-8Vc"/>
                 <constraint firstItem="eA5-pA-pfI" firstAttribute="leading" secondItem="dVi-I7-bEK" secondAttribute="leading" constant="-9" id="bGI-nL-k3s"/>
+                <constraint firstItem="dVi-I7-bEK" firstAttribute="leading" secondItem="Ujv-HH-Fku" secondAttribute="leading" constant="9" id="dV0-Z5-Yqp"/>
                 <constraint firstItem="dVi-I7-bEK" firstAttribute="top" secondItem="ypB-ke-5qG" secondAttribute="bottom" constant="105" id="fox-99-aLo"/>
                 <constraint firstItem="M8y-SK-o2j" firstAttribute="leading" secondItem="b82-Mn-j5C" secondAttribute="leading" id="hJG-gf-M3m"/>
                 <constraint firstItem="OHt-JI-i3d" firstAttribute="top" secondItem="dVi-I7-bEK" secondAttribute="bottom" constant="16" id="hO5-KS-oiK"/>
                 <constraint firstItem="dVi-I7-bEK" firstAttribute="top" secondItem="2uC-p9-xU8" secondAttribute="bottom" constant="53" id="j1d-QO-Oay"/>
                 <constraint firstItem="dVi-I7-bEK" firstAttribute="top" secondItem="eA5-pA-pfI" secondAttribute="bottom" constant="53" id="klL-PL-qcU"/>
                 <constraint firstItem="dVi-I7-bEK" firstAttribute="top" secondItem="iNz-XJ-FqX" secondAttribute="bottom" constant="11" id="mkx-pL-8uD"/>
+                <constraint firstItem="dVi-I7-bEK" firstAttribute="top" secondItem="Ujv-HH-Fku" secondAttribute="bottom" constant="43" id="qBa-Rx-JNJ"/>
                 <constraint firstAttribute="centerX" secondItem="ypB-ke-5qG" secondAttribute="centerX" constant="1.5" id="qJg-CO-Kur"/>
                 <constraint firstItem="dVi-I7-bEK" firstAttribute="trailing" secondItem="iNz-XJ-FqX" secondAttribute="trailing" id="rWT-HL-Di1"/>
                 <constraint firstItem="dVi-I7-bEK" firstAttribute="leading" secondItem="iNz-XJ-FqX" secondAttribute="leading" id="sKd-9p-K5q"/>
@@ -123,7 +136,7 @@
             <size key="customSize" width="484" height="422"/>
             <connections>
                 <outlet property="avatarThumbnailButton" destination="ypB-ke-5qG" id="z0k-ug-QOM"/>
-                <outlet property="curatedByLabel" destination="EeA-3P-fNY" id="Uvh-qK-dtO"/>
+                <outlet property="curatedByButton" destination="Ujv-HH-Fku" id="dMd-r3-sb4"/>
                 <outlet property="durationLabel" destination="2uC-p9-xU8" id="ZmF-9S-xm4"/>
                 <outlet property="labelLabel" destination="eA5-pA-pfI" id="Lc1-8T-vpO"/>
                 <outlet property="titleLabel" destination="iNz-XJ-FqX" id="gk1-Ef-cml"/>

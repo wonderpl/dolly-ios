@@ -21,6 +21,7 @@
 - (void)videoCell:(SYNFeedVideoCell *)cell favouritePressed:(UIButton *)button;
 - (void)videoCell:(SYNFeedVideoCell *)cell addToChannelPressed:(UIButton *)button;
 - (void)videoCell:(SYNFeedVideoCell *)cell sharePressed:(UIButton *)button;
+- (void)videoCell:(SYNFeedVideoCell *)cell addedByPressed:(UIButton *)button;
 
 @end
 

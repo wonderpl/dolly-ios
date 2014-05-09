@@ -42,13 +42,26 @@
                             <action selector="videoThumbnailPressed:" destination="RZU-6J-M1O" eventType="touchUpInside" id="tQB-Yp-vFc"/>
                         </connections>
                     </button>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gO8-yU-6pT" userLabel="Curated By">
-                        <rect key="frame" x="16" y="73" width="36" height="17"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DMH-Zk-ftY">
+                        <rect key="frame" x="16" y="63" width="43" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" red="0.46666666666666667" green="0.46666666666666667" blue="0.50980392156862742" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="oRV-56-3Vw"/>
+                        </constraints>
+                        <state key="normal">
+                            <attributedString key="attributedTitle">
+                                <fragment content="Button">
+                                    <attributes>
+                                        <color key="NSColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                    </attributes>
+                                </fragment>
+                            </attributedString>
+                        </state>
+                        <connections>
+                            <action selector="addedByPressed:" destination="RZU-6J-M1O" eventType="touchUpInside" id="4e9-Lg-wkz"/>
+                        </connections>
+                    </button>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kaB-GM-XxE" userLabel="Label">
                         <rect key="frame" x="16" y="73" width="36" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -90,29 +103,29 @@
             </view>
             <constraints>
                 <constraint firstItem="wYn-bf-10j" firstAttribute="leading" secondItem="RZU-6J-M1O" secondAttribute="leading" constant="10" id="35J-Yp-S0k"/>
-                <constraint firstItem="gO8-yU-6pT" firstAttribute="leading" secondItem="PSP-Md-g5O" secondAttribute="leading" id="3Ue-H1-VC2"/>
                 <constraint firstItem="PSP-Md-g5O" firstAttribute="leading" secondItem="g1e-Lh-lg1" secondAttribute="leading" id="3bb-ZM-veo"/>
                 <constraint firstItem="PSP-Md-g5O" firstAttribute="top" secondItem="71k-CY-H0Y" secondAttribute="bottom" constant="94" id="5tg-vn-QFU"/>
                 <constraint firstItem="PSP-Md-g5O" firstAttribute="top" secondItem="gYj-Gp-52k" secondAttribute="bottom" constant="15" id="Car-Mn-uYv"/>
                 <constraint firstItem="PSP-Md-g5O" firstAttribute="trailing" secondItem="g1e-Lh-lg1" secondAttribute="trailing" id="IIf-pj-rTw"/>
-                <constraint firstItem="PSP-Md-g5O" firstAttribute="top" secondItem="gO8-yU-6pT" secondAttribute="bottom" constant="63" id="JNc-ux-qjr"/>
                 <constraint firstItem="PSP-Md-g5O" firstAttribute="leading" secondItem="kaB-GM-XxE" secondAttribute="leading" id="Siq-YX-Ssv"/>
                 <constraint firstItem="PSP-Md-g5O" firstAttribute="trailing" secondItem="gYj-Gp-52k" secondAttribute="trailing" id="SpD-c2-cMK"/>
                 <constraint firstItem="8LT-cL-UD0" firstAttribute="trailing" secondItem="PSP-Md-g5O" secondAttribute="trailing" id="VMC-dL-xCV"/>
                 <constraint firstItem="PSP-Md-g5O" firstAttribute="top" secondItem="kaB-GM-XxE" secondAttribute="bottom" constant="63" id="YnH-ra-I1W"/>
                 <constraint firstItem="71k-CY-H0Y" firstAttribute="top" secondItem="RZU-6J-M1O" secondAttribute="top" constant="16" id="Z5Z-N5-LUp"/>
                 <constraint firstAttribute="trailing" secondItem="wYn-bf-10j" secondAttribute="trailing" constant="10" id="dEZ-hK-5aF"/>
+                <constraint firstItem="DMH-Zk-ftY" firstAttribute="leading" secondItem="PSP-Md-g5O" secondAttribute="leading" id="hFf-6c-Fu3"/>
                 <constraint firstItem="wYn-bf-10j" firstAttribute="top" secondItem="PSP-Md-g5O" secondAttribute="bottom" constant="25" id="haQ-UC-Faw"/>
                 <constraint firstAttribute="centerX" secondItem="PSP-Md-g5O" secondAttribute="centerX" id="j7i-h4-yVW"/>
                 <constraint firstItem="PSP-Md-g5O" firstAttribute="top" secondItem="8LT-cL-UD0" secondAttribute="bottom" constant="63" id="lVI-eN-w2w"/>
                 <constraint firstAttribute="centerX" secondItem="71k-CY-H0Y" secondAttribute="centerX" id="m0F-wt-vTR"/>
                 <constraint firstItem="PSP-Md-g5O" firstAttribute="leading" secondItem="gYj-Gp-52k" secondAttribute="leading" id="nFb-Gz-TBY"/>
+                <constraint firstItem="PSP-Md-g5O" firstAttribute="top" secondItem="DMH-Zk-ftY" secondAttribute="bottom" constant="50" id="q8J-rw-MnH"/>
                 <constraint firstAttribute="bottom" secondItem="g1e-Lh-lg1" secondAttribute="bottom" id="ynB-g6-9BT"/>
             </constraints>
             <size key="customSize" width="320" height="428"/>
             <connections>
                 <outlet property="avatarThumbnailButton" destination="71k-CY-H0Y" id="Lao-D1-36e"/>
-                <outlet property="curatedByLabel" destination="gO8-yU-6pT" id="IZ2-zl-FJu"/>
+                <outlet property="curatedByButton" destination="DMH-Zk-ftY" id="GdM-z1-Yus"/>
                 <outlet property="durationLabel" destination="8LT-cL-UD0" id="1YV-ZK-3pM"/>
                 <outlet property="labelLabel" destination="kaB-GM-XxE" id="xnA-8N-uFp"/>
                 <outlet property="titleLabel" destination="gYj-Gp-52k" id="wQt-7n-FZu"/>

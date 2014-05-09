@@ -18,18 +18,18 @@
 
 @interface SYNFeedVideoCell () <SYNVideoActionsBarDelegate>
 
-@property (nonatomic, strong) IBOutlet UIButton *avatarThumbnailButton;
+@property (nonatomic, weak) IBOutlet UIButton *avatarThumbnailButton;
 
-@property (nonatomic, strong) IBOutlet UILabel *titleLabel;
+@property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 
-@property (nonatomic, strong) IBOutlet UILabel *labelLabel;
-@property (nonatomic, strong) IBOutlet UILabel *curatedByLabel;
+@property (nonatomic, weak) IBOutlet UILabel *labelLabel;
+@property (nonatomic, weak) IBOutlet UIButton *curatedByButton;
 
-@property (nonatomic, strong) IBOutlet UILabel *durationLabel;
+@property (nonatomic, weak) IBOutlet UILabel *durationLabel;
 
-@property (nonatomic, strong) IBOutlet UIButton *videoThumbnailButton;
+@property (nonatomic, weak) IBOutlet UIButton *videoThumbnailButton;
 
-@property (nonatomic, strong) IBOutlet UIView *videoActionsContainer;
+@property (nonatomic, weak) IBOutlet UIView *videoActionsContainer;
 
 @property (nonatomic, strong) SYNVideoActionsBar *actionsBar;
 
@@ -41,7 +41,7 @@
 	[super awakeFromNib];
 	
 	self.labelLabel.font = [UIFont italicAlternateFontOfSize:self.labelLabel.font.pointSize];
-	self.curatedByLabel.font = [UIFont italicAlternateFontOfSize:self.curatedByLabel.font.pointSize];
+	self.curatedByButton.titleLabel.font = [UIFont italicAlternateFontOfSize:self.curatedByButton.titleLabel.font.pointSize];
 	
 	self.durationLabel.font = [UIFont regularCustomFontOfSize:self.durationLabel.font.pointSize];
 	
@@ -65,9 +65,11 @@
 	BOOL hasLabel = ([videoInstance.label length]);
 	if (hasLabel) {
 		self.labelLabel.text = videoInstance.label;
-		self.curatedByLabel.text = nil;
+		
+		[self.curatedByButton setAttributedTitle:nil forState:UIControlStateNormal];
 	} else {
 		self.labelLabel.text = nil;
+		
 		NSMutableAttributedString *curatedByString = [[NSMutableAttributedString alloc] initWithString:@"Added by "];
 		
 		NSString *channelOwnerName = videoInstance.channel.channelOwner.displayName;
@@ -75,7 +77,7 @@
 		
 		[curatedByString appendAttributedString:[[NSAttributedString alloc] initWithString:channelOwnerName attributes:attributes ]];
 		
-		self.curatedByLabel.attributedText = curatedByString;
+		[self.curatedByButton setAttributedTitle:curatedByString forState:UIControlStateNormal];
 	}
 	self.durationLabel.text = [NSString friendlyLengthFromTimeInterval:videoInstance.video.durationValue];
 	
@@ -118,6 +120,10 @@
 
 - (IBAction)videoThumbnailPressed:(UIButton *)button {
 	[self.delegate videoCellThumbnailPressed:self];
+}
+
+- (IBAction)addedByPressed:(UIButton *)button {
+	[self.delegate videoCell:self addedByPressed:button];
 }
 
 @end

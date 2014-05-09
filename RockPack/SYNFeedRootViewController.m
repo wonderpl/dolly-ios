@@ -355,6 +355,12 @@
 	[self shareVideoInstance:cell.videoInstance];
 }
 
+- (void)videoCell:(SYNFeedVideoCell *)cell addedByPressed:(UIButton *)button {
+	VideoInstance *videoInstance = cell.videoInstance;
+	
+	[self viewProfileDetails:videoInstance.channel.channelOwner];
+}
+
 #pragma mark - SYNFeedChannelCellDelegate
 
 - (void)channelCellAvatarPressed:(SYNFeedChannelCell *)cell {

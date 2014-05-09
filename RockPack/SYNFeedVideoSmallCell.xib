@@ -70,12 +70,6 @@
                         <color key="textColor" red="0.31764705879999999" green="0.70196078429999997" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vmh-dN-K0G">
-                        <rect key="frame" x="30" y="64" width="36" height="17"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tFo-l9-hj8">
                         <rect key="frame" x="347" y="0.0" width="1" height="355"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -92,11 +86,30 @@
                             <constraint firstAttribute="height" constant="1" id="o7d-D2-BtO"/>
                         </constraints>
                     </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UUO-NB-yyZ">
+                        <rect key="frame" x="30" y="53" width="43" height="40"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="tki-kd-EQp"/>
+                        </constraints>
+                        <state key="normal">
+                            <attributedString key="attributedTitle">
+                                <fragment content="Button">
+                                    <attributes>
+                                        <color key="NSColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                    </attributes>
+                                </fragment>
+                            </attributedString>
+                        </state>
+                        <connections>
+                            <action selector="addedByPressed:" destination="2mS-Ax-B1Y" eventType="touchUpInside" id="qlD-jb-Dox"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
-                <constraint firstItem="sIJ-IE-bg0" firstAttribute="leading" secondItem="Vmh-dN-K0G" secondAttribute="leading" id="31u-Dm-sWc"/>
                 <constraint firstItem="zvy-4h-KHH" firstAttribute="leading" secondItem="sIJ-IE-bg0" secondAttribute="leading" id="3ap-CN-48f"/>
                 <constraint firstItem="zvy-4h-KHH" firstAttribute="trailing" secondItem="sIJ-IE-bg0" secondAttribute="trailing" id="4h1-F2-VPz"/>
                 <constraint firstItem="Vtv-eD-ehB" firstAttribute="top" secondItem="sIJ-IE-bg0" secondAttribute="bottom" constant="8" id="85q-76-BKT"/>
@@ -106,6 +119,7 @@
                 <constraint firstAttribute="bottom" secondItem="tFo-l9-hj8" secondAttribute="bottom" id="J1i-kY-POb"/>
                 <constraint firstItem="Vtv-eD-ehB" firstAttribute="leading" secondItem="sIJ-IE-bg0" secondAttribute="leading" id="NRN-No-EBD"/>
                 <constraint firstAttribute="bottom" secondItem="D2D-rP-13B" secondAttribute="bottom" id="RDy-kF-P3J"/>
+                <constraint firstItem="UUO-NB-yyZ" firstAttribute="leading" secondItem="sIJ-IE-bg0" secondAttribute="leading" id="UCG-ja-8oz"/>
                 <constraint firstItem="sIJ-IE-bg0" firstAttribute="top" secondItem="zvy-4h-KHH" secondAttribute="bottom" constant="10" id="VAo-qX-UGh"/>
                 <constraint firstItem="Vtv-eD-ehB" firstAttribute="trailing" secondItem="sIJ-IE-bg0" secondAttribute="trailing" id="YNt-4Q-s1V"/>
                 <constraint firstItem="tFo-l9-hj8" firstAttribute="top" secondItem="2mS-Ax-B1Y" secondAttribute="top" id="dIb-Yk-bUc"/>
@@ -113,15 +127,15 @@
                 <constraint firstAttribute="centerX" secondItem="qeS-jH-hfS" secondAttribute="centerX" constant="-0.5" id="i4Q-iY-UMV"/>
                 <constraint firstAttribute="centerY" secondItem="sIJ-IE-bg0" secondAttribute="centerY" constant="-40" id="ihe-2C-z8R"/>
                 <constraint firstAttribute="trailing" secondItem="D2D-rP-13B" secondAttribute="trailing" id="lqc-oe-O9P"/>
+                <constraint firstItem="sIJ-IE-bg0" firstAttribute="top" secondItem="UUO-NB-yyZ" secondAttribute="bottom" constant="44" id="mD5-Mc-Opd"/>
                 <constraint firstAttribute="centerX" secondItem="sIJ-IE-bg0" secondAttribute="centerX" id="mO5-Az-Nvq"/>
                 <constraint firstItem="sIJ-IE-bg0" firstAttribute="leading" secondItem="0BL-Ew-6lA" secondAttribute="leading" id="mny-zH-Hr8"/>
                 <constraint firstAttribute="trailing" secondItem="tFo-l9-hj8" secondAttribute="trailing" id="xdy-h1-0PM"/>
                 <constraint firstItem="sIJ-IE-bg0" firstAttribute="top" secondItem="qeS-jH-hfS" secondAttribute="bottom" constant="82" id="xtj-TU-oiR"/>
-                <constraint firstItem="sIJ-IE-bg0" firstAttribute="top" secondItem="Vmh-dN-K0G" secondAttribute="bottom" constant="56" id="zOi-Fx-MeF"/>
             </constraints>
             <connections>
                 <outlet property="avatarThumbnailButton" destination="qeS-jH-hfS" id="xke-V3-5Sb"/>
-                <outlet property="curatedByLabel" destination="Vmh-dN-K0G" id="97U-uU-rSC"/>
+                <outlet property="curatedByButton" destination="UUO-NB-yyZ" id="WSs-0P-yCl"/>
                 <outlet property="durationLabel" destination="8Bo-0A-6gV" id="Hyb-Ux-ML4"/>
                 <outlet property="labelLabel" destination="0BL-Ew-6lA" id="Stq-lw-xTh"/>
                 <outlet property="titleLabel" destination="zvy-4h-KHH" id="hiW-NY-dfq"/>
