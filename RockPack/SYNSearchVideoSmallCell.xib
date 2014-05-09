@@ -22,13 +22,13 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="151" translatesAutoresizingMaskIntoConstraints="NO" id="jtX-zg-2r8">
-                        <rect key="frame" x="155" y="14" width="151" height="17"/>
+                        <rect key="frame" x="155" y="4" width="151" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XLe-Ld-Xub">
-                        <rect key="frame" x="155" y="44" width="151" height="15"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XLe-Ld-Xub">
+                        <rect key="frame" x="155" y="51" width="151" height="15"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.46666666670000001" green="0.46666666670000001" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -44,8 +44,9 @@
                 <constraint firstAttribute="trailing" secondItem="jtX-zg-2r8" secondAttribute="trailing" constant="14" id="HGK-4n-ldw"/>
                 <constraint firstItem="OJ6-QO-St0" firstAttribute="leading" secondItem="b42-TJ-T8U" secondAttribute="leading" constant="13" id="Hhk-63-9Uf"/>
                 <constraint firstAttribute="trailing" secondItem="XLe-Ld-Xub" secondAttribute="trailing" constant="14" id="MiY-hW-Oee"/>
-                <constraint firstItem="jtX-zg-2r8" firstAttribute="top" secondItem="b42-TJ-T8U" secondAttribute="top" constant="14" id="N7W-Dd-nmd"/>
-                <constraint firstAttribute="bottom" secondItem="XLe-Ld-Xub" secondAttribute="bottom" constant="13" id="mhU-Lo-DLG"/>
+                <constraint firstItem="XLe-Ld-Xub" firstAttribute="top" relation="lessThanOrEqual" secondItem="OJ6-QO-St0" secondAttribute="bottom" constant="-10" id="Zh7-gk-nfx"/>
+                <constraint firstItem="jtX-zg-2r8" firstAttribute="top" secondItem="b42-TJ-T8U" secondAttribute="top" constant="4" id="bwa-68-FxH"/>
+                <constraint firstItem="XLe-Ld-Xub" firstAttribute="top" relation="lessThanOrEqual" secondItem="jtX-zg-2r8" secondAttribute="bottom" constant="30" id="wSo-At-72J"/>
             </constraints>
             <size key="customSize" width="320" height="246"/>
             <connections>
