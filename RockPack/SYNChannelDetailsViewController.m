@@ -1353,36 +1353,6 @@
     }
     
 }
-- (IBAction)videoCountTapped:(id)sender {
-    
-    
-    if (IS_IPHONE)
-    {
-        if (self.channel.videoInstances.count < 3) {
-            return;
-        }
-
-        [self.videoThumbnailCollectionView setContentOffset: CGPointMake(0, -80.0) animated:YES];
-    }
-    else
-    {
-        if (self.channel.videoInstances.count < 8) {
-            return;
-        }
-
-        if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation]))
-        {
-            [self.videoThumbnailCollectionView setContentOffset: CGPointMake(0, -88.0) animated:YES];
-        }
-        else
-        {
-            [self.videoThumbnailCollectionView setContentOffset: CGPointMake(0, -79.0) animated:YES];
-
-        }
-    }
-    
-    
-}
 
 - (void)saveTapped {
     
