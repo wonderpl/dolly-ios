@@ -73,7 +73,7 @@
     UIButton *button = [UIButton buttonWithType: UIButtonTypeCustom];
     
     
-    button.frame = CGRectMake(x, y , 50.0f, 50.0f);
+    button.frame = CGRectMake(x, y , 61.0f, 61.0f);
     button.tag = index;
     
     [button	addTarget: self

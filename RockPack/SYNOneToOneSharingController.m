@@ -50,6 +50,7 @@ UISearchBarDelegate>
 @property (nonatomic, strong) IBOutlet UICollectionView *recentFriendsCollectionView;
 
 @property (nonatomic, strong) IBOutlet UITableView *searchResultsTableView;
+@property (strong, nonatomic) IBOutlet UILabel *quickShareLabel;
 
 @property (nonatomic, strong) IBOutlet UIView *activitiesContainerView;
 @property (nonatomic, strong) NSArray *recentFriends;
@@ -58,6 +59,7 @@ UISearchBarDelegate>
 @property (nonatomic, strong) NSString *currentSearchTerm;
 @property (nonatomic, strong) SYNNetworkOperationJsonObject* lastNetworkOperation;
 
+@property (strong, nonatomic) IBOutlet UILabel *messageLabel;
 
 @property (nonatomic, strong) IBOutlet UISearchBar* searchBar;
 
@@ -120,6 +122,11 @@ UISearchBarDelegate>
                                                      green: 246.0f / 255.0f
                                                       blue: 246.0f / 255.0f
                                                      alpha: 1.0f];
+    
+    
+    
+    [self.quickShareLabel setFont:[UIFont boldCustomFontOfSize:self.quickShareLabel.font.pointSize]];
+    [self.messageLabel setFont:[UIFont lightCustomFontOfSize:self.messageLabel.font.pointSize]];
     
     if (IS_IPHONE)
     {
@@ -935,7 +942,7 @@ didSelectRowAtIndexPath: (NSIndexPath *) indexPath
     
     CGRect sResTblFrame = self.searchResultsTableView.frame;
     
-    sResTblFrame.origin.y = 86.0f;
+    sResTblFrame.origin.y = 44.0f;
     sResTblFrame.size.height = self.view.frame.size.height - sResTblFrame.origin.y;
     
     self.searchResultsTableView.frame = sResTblFrame;

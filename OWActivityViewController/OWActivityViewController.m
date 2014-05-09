@@ -45,11 +45,11 @@
     {
         self.presentingController = viewController;
         
-        self.view.frame = CGRectMake(0, 0, 250.0f, 56.0f);
+        self.view.frame = CGRectMake(0, 0, 255.0f, 66.0f);
         
         _activities = activities;
         
-        _activityView = [[OWActivityView alloc] initWithFrame: CGRectMake(0, 0, 250.0f, 50.0f)
+        _activityView = [[OWActivityView alloc] initWithFrame: CGRectMake(0, 0, 255.0f, 61.0f)
                                                    activities: activities];
         
         

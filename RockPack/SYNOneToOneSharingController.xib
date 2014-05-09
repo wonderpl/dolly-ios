@@ -9,6 +9,8 @@
             <connections>
                 <outlet property="activitiesContainerView" destination="44" id="45"/>
                 <outlet property="loader" destination="36" id="37"/>
+                <outlet property="messageLabel" destination="Ajd-ZB-mr8" id="Hvf-nE-wUU"/>
+                <outlet property="quickShareLabel" destination="IKN-Y6-Fgt" id="vR4-P0-mfS"/>
                 <outlet property="recentFriendsCollectionView" destination="10" id="43"/>
                 <outlet property="searchBar" destination="4pr-S1-LJt" id="B38-5w-a7Y"/>
                 <outlet property="searchResultsTableView" destination="39" id="40"/>
@@ -38,9 +40,8 @@
                     </connections>
                 </collectionView>
                 <view contentMode="scaleToFill" id="44" userLabel="Activities Container">
-                    <rect key="frame" x="85" y="247" width="251" height="56"/>
+                    <rect key="frame" x="78.5" y="247" width="261" height="66"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                 </view>
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" style="gray" id="36" userLabel="Loader">
                     <rect key="frame" x="199" y="188" width="20" height="20"/>
@@ -68,16 +69,16 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quick Share" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IKN-Y6-Fgt">
-                                    <rect key="frame" x="152" y="6" width="116" height="21"/>
+                                    <rect key="frame" x="152" y="10" width="116" height="21"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your friends will recieve this message  in the Wonder PL app and in an email" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ajd-ZB-mr8">
-                                    <rect key="frame" x="20" y="18" width="380" height="64"/>
+                                    <rect key="frame" x="20" y="22" width="380" height="64"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -89,7 +90,7 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
         </view>
         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="39" userLabel="Search Results Table View">
-            <rect key="frame" x="0.0" y="0.0" width="419" height="184"/>
+            <rect key="frame" x="0.0" y="0.0" width="421" height="184"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <connections>
