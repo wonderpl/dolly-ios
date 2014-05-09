@@ -38,4 +38,6 @@ typedef void (^SYNPagingModelCompletionBlock)(BOOL success, BOOL hasChanged);
 - (void)loadNextPage;
 - (void)loadNextPageWithCompletionHandler:(SYNPagingModelCompletionBlock)completion;
 
+- (void)reset;
+
 @end

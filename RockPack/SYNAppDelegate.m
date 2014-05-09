@@ -330,6 +330,8 @@
     // As we are logging out, we need to unregister the current user (the new user will be re-registered on login below)
     [[UIApplication sharedApplication] unregisterForRemoteNotifications];
 	[[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalNever];
+	
+	[[SYNFeedModel sharedModel] reset];
     
     self.masterViewController = nil;
     

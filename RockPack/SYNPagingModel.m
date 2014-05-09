@@ -119,6 +119,10 @@ static const NSInteger DefaultBatchSize = 40;
 	}];
 }
 
+- (void)reset {
+	[self resetWithItems:nil totalItemCount:NSNotFound];
+}
+
 #pragma mark - Protected
 
 - (void)loadItemsForRange:(NSRange)range

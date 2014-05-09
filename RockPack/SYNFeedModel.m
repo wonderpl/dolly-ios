@@ -87,6 +87,14 @@
 	return (feedIndex - [channelIndexes count]);
 }
 
+- (void)reset {
+	[super reset];
+	
+	self.feedItems = nil;
+	self.videoInstancesById = nil;
+	self.channelsById = nil;
+}
+
 #pragma mark - Overridden
 
 - (void)loadItemsForRange:(NSRange)range
