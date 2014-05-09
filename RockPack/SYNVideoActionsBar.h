@@ -16,13 +16,17 @@
 - (void)videoActionsBar:(SYNVideoActionsBar *)bar addToChannelButtonPressed:(UIButton *)button;
 - (void)videoActionsBar:(SYNVideoActionsBar *)bar shareButtonPressed:(UIButton *)button;
 
+@optional
+- (void)videoActionsBar:(SYNVideoActionsBar *)bar annotationButtonPressed:(UIButton *)button;
+
 @end
 
 @interface SYNVideoActionsBar : UIView
 
 @property (nonatomic, weak) id<SYNVideoActionsBarDelegate> delegate;
 
-@property (nonatomic, strong, readonly) UIButton *favouriteButton;
+@property (nonatomic, weak, readonly) UIButton *shopButton;
+@property (nonatomic, weak, readonly) UIButton *favouriteButton;
 
 + (instancetype)bar;
 

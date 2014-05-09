@@ -16,6 +16,7 @@
 #import "SYNWebViewController.h"
 #import "SYNVideoDivider.h"
 #import "Video.h"
+#import "VideoAnnotation.h"
 #import "SYNPagingModel.h"
 #import "SYNOneToOneSharingController.h"
 #import "SYNAddToChannelViewController.h"
@@ -35,13 +36,20 @@ static const CGFloat UpcomingVideosDividerHeight = 70.0;
 
 @property (nonatomic, strong, readonly) VideoInstance *currentVideoInstance;
 
+@property (nonatomic, strong) NSMutableArray *annotations;
+
+@property (nonatomic, weak) SYNVideoActionsBar *videoActionsBar;
+
 @end
 
 @implementation SYNVideoInfoViewController
 
+#pragma mark - UIViewController
+
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
+	self.annotations = [NSMutableArray array];
 	self.descriptionHeight = 50;
 	
 	[self.collectionView registerNib:[SYNVideoDivider nib]
@@ -60,6 +68,40 @@ static const CGFloat UpcomingVideosDividerHeight = 70.0;
 	[self.collectionView registerNib:[SYNVideoCell nib]
 		  forCellWithReuseIdentifier:[SYNVideoCell reuseIdentifier]];
 }
+
+#pragma mark - Public
+
+- (void)addVideoAnnotation:(VideoAnnotation *)annotation {
+	BOOL isFirstAnnotation = ([self.annotations count] == 0);
+	
+	[self.annotations addObject:annotation];
+	
+	if (isFirstAnnotation) {
+		UIButton *button = self.videoActionsBar.shopButton;
+		
+		button.hidden = NO;
+		button.transform = CGAffineTransformMakeScale(0.0, 0.0);
+		
+		[UIView animateKeyframesWithDuration:0.3
+									   delay:0
+									 options:0
+								  animations:^{
+									  
+									  [UIView addKeyframeWithRelativeStartTime:0.0 relativeDuration:0.8 animations:^{
+										  button.transform = CGAffineTransformMakeScale(1.5, 1.5);
+									  }];
+									  
+									  [UIView addKeyframeWithRelativeStartTime:0.8 relativeDuration:1.0 animations:^{
+										  button.transform = CGAffineTransformMakeScale(1.0, 1.0);
+									  }];
+									  
+								  } completion:^(BOOL finished) {
+									  
+								  }];
+	}
+}
+
+#pragma mark - Getters / Setters
 
 - (void)setSelectedIndex:(NSInteger)selectedIndex {
 	_selectedIndex = selectedIndex;
@@ -93,6 +135,9 @@ static const CGFloat UpcomingVideosDividerHeight = 70.0;
 																			  forIndexPath:indexPath];
 		cell.actionsBar.favouriteButton.selected = self.currentVideoInstance.starredByUserValue;
 		cell.actionsBar.delegate = self;
+		cell.actionsBar.shopButton.hidden = ([self.annotations count] == 0);
+		
+		self.videoActionsBar = cell.actionsBar;
 		
 		return cell;
 	} else if (indexPath.section == [self clickToMoreSectionIndex]) {
@@ -170,6 +215,14 @@ static const CGFloat UpcomingVideosDividerHeight = 70.0;
 
 - (void)videoActionsBar:(SYNVideoActionsBar *)bar favouritesButtonPressed:(UIButton *)button {
 	[self favouriteButtonPressed:button videoInstance:self.currentVideoInstance];
+}
+
+- (void)videoActionsBar:(SYNVideoActionsBar *)bar annotationButtonPressed:(UIButton *)button {
+	VideoAnnotation *annotation = [self.annotations firstObject];
+	NSURL *url = [NSURL URLWithString:annotation.url];
+	
+	UIViewController *viewController = [SYNWebViewController webViewControllerForURL:url];
+	[self presentViewController:viewController animated:YES completion:nil];
 }
 
 - (void)videoActionsBar:(SYNVideoActionsBar *)bar addToChannelButtonPressed:(UIButton *)button {

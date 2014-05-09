@@ -18,4 +18,6 @@ extern NSString *const VideoSourceOoyala;
 + (NSDictionary *)videosFromDictionaries:(NSArray *)dictionaries
 				  inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 
+- (NSSet *)annotationsAtTime:(NSTimeInterval)time;
+
 @end

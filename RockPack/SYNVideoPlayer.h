@@ -16,6 +16,7 @@ typedef NS_ENUM(NSInteger, SYNVideoPlayerState) {
 };
 
 @class VideoInstance;
+@class VideoAnnotation;
 
 @protocol SYNVideoPlayerDelegate <NSObject>
 
@@ -28,6 +29,8 @@ typedef NS_ENUM(NSInteger, SYNVideoPlayerState) {
 - (void)videoPlayerFinishedPlaying;
 
 - (void)videoPlayerErrorOccurred:(NSString *)reason;
+
+- (void)videoPlayerAnnotationSelected:(VideoAnnotation *)annotation;
 
 @end
 

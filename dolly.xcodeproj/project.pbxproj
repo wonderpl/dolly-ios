@@ -507,6 +507,7 @@
 		E914BEDA183CF33A001616D3 /* SYNFullScreenVideoAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E914BED9183CF33A001616D3 /* SYNFullScreenVideoAnimator.m */; };
 		E915A1AC191A6A6F001DC76A /* _VideoAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = E915A1AB191A6A6F001DC76A /* _VideoAnnotation.m */; };
 		E915A1AF191A6ACC001DC76A /* VideoAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = E915A1AE191A6ACC001DC76A /* VideoAnnotation.m */; };
+		E915A1B2191A9A30001DC76A /* SYNVideoAnnotationButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E915A1B1191A9A30001DC76A /* SYNVideoAnnotationButton.m */; };
 		E91D4105187DAE5D00E712CC /* SYNLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E91D4104187DAE5D00E712CC /* SYNLoginManager.m */; };
 		E91E3B2118C7292400F79020 /* ButtonVideoDeleteDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = E91E3B1F18C7292400F79020 /* ButtonVideoDeleteDefault.png */; };
 		E91E3B2218C7292400F79020 /* ButtonVideoDeleteDefault@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E91E3B2018C7292400F79020 /* ButtonVideoDeleteDefault@2x.png */; };
@@ -1384,6 +1385,8 @@
 		E915A1AB191A6A6F001DC76A /* _VideoAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _VideoAnnotation.m; sourceTree = "<group>"; };
 		E915A1AD191A6ACC001DC76A /* VideoAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoAnnotation.h; sourceTree = "<group>"; };
 		E915A1AE191A6ACC001DC76A /* VideoAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoAnnotation.m; sourceTree = "<group>"; };
+		E915A1B0191A9A30001DC76A /* SYNVideoAnnotationButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNVideoAnnotationButton.h; sourceTree = "<group>"; };
+		E915A1B1191A9A30001DC76A /* SYNVideoAnnotationButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNVideoAnnotationButton.m; sourceTree = "<group>"; };
 		E91D4103187DAE5D00E712CC /* SYNLoginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNLoginManager.h; sourceTree = "<group>"; };
 		E91D4104187DAE5D00E712CC /* SYNLoginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNLoginManager.m; sourceTree = "<group>"; };
 		E91E3B1F18C7292400F79020 /* ButtonVideoDeleteDefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonVideoDeleteDefault.png; path = Assets/Images/iPhone/channelDetail/ButtonVideoDeleteDefault.png; sourceTree = "<group>"; };
@@ -2551,6 +2554,8 @@
 				E99F586918FBFCF700BA2CE4 /* SYNVideoDivider.h */,
 				E99F586A18FBFCF700BA2CE4 /* SYNVideoDivider.m */,
 				E9C1A05818F8415300CC3F3E /* SYNVideoDivider.xib */,
+				E915A1B0191A9A30001DC76A /* SYNVideoAnnotationButton.h */,
+				E915A1B1191A9A30001DC76A /* SYNVideoAnnotationButton.m */,
 			);
 			name = "Video Player";
 			sourceTree = "<group>";
@@ -4439,6 +4444,7 @@
 				BED4311716F0EBBB0051465B /* SYNLoginErrorArrow.m in Sources */,
 				01A79BA216F32C6900B05084 /* NSString+Timecode.m in Sources */,
 				01A79BA516F34BBF00B05084 /* NSString+Utils.m in Sources */,
+				E915A1B2191A9A30001DC76A /* SYNVideoAnnotationButton.m in Sources */,
 				BE03A69316F7459D00245314 /* SYNAccountSettingsViewController.m in Sources */,
 				BE03A6D616F784B000245314 /* SYNAccountSettingsGender.m in Sources */,
 				BE03A6D916F787CB00245314 /* SYNAccountSettingTableViewCell.m in Sources */,

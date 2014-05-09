@@ -54,9 +54,25 @@
                         <action selector="shareButtonPressed:" destination="RuC-0K-OOM" eventType="touchUpInside" id="dOp-Ab-f0a"/>
                     </connections>
                 </button>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pXu-bh-Z99">
+                    <rect key="frame" x="180" y="0.0" width="40" height="40"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="FAT-NS-4vK"/>
+                        <constraint firstAttribute="height" constant="40" id="YeT-WF-KV5"/>
+                    </constraints>
+                    <state key="normal" title="💰">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="annotationButtonPressed:" destination="RuC-0K-OOM" eventType="touchUpInside" id="wkc-n0-jzO"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstItem="H5R-DI-TgM" firstAttribute="leading" secondItem="RuC-0K-OOM" secondAttribute="leading" id="9rb-kp-IZc"/>
+                <constraint firstAttribute="centerY" secondItem="pXu-bh-Z99" secondAttribute="centerY" id="K1L-o6-O1o"/>
+                <constraint firstItem="gvq-tZ-yxZ" firstAttribute="leading" secondItem="pXu-bh-Z99" secondAttribute="trailing" id="RWm-Ye-tqe"/>
                 <constraint firstItem="Zsz-gD-1Fi" firstAttribute="leading" secondItem="gvq-tZ-yxZ" secondAttribute="trailing" id="V0D-gJ-pPP"/>
                 <constraint firstAttribute="centerY" secondItem="gvq-tZ-yxZ" secondAttribute="centerY" id="dDz-FF-wOa"/>
                 <constraint firstAttribute="centerY" secondItem="Zsz-gD-1Fi" secondAttribute="centerY" id="iD5-Fd-Myo"/>
@@ -66,6 +82,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="favouriteButton" destination="H5R-DI-TgM" id="hvL-IF-NVf"/>
+                <outlet property="shopButton" destination="pXu-bh-Z99" id="L4a-LT-LHZ"/>
             </connections>
         </view>
     </objects>

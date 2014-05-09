@@ -10,7 +10,8 @@
 
 @interface SYNVideoActionsBar ()
 
-@property (nonatomic, strong) IBOutlet UIButton *favouriteButton;
+@property (nonatomic, weak) IBOutlet UIButton *shopButton;
+@property (nonatomic, weak) IBOutlet UIButton *favouriteButton;
 
 @end
 
@@ -23,6 +24,10 @@
 
 - (IBAction)favouriteButtonPressed:(UIButton *)button {
 	[self.delegate videoActionsBar:self favouritesButtonPressed:button];
+}
+
+- (IBAction)annotationButtonPressed:(UIButton *)button {
+	[self.delegate videoActionsBar:self annotationButtonPressed:button];
 }
 
 - (IBAction)addToChannelButtonPressed:(UIButton *)button {

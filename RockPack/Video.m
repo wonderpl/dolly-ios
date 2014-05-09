@@ -135,9 +135,15 @@ NSString *const VideoSourceOoyala = @"ooyala";
 	for (VideoAnnotation *annotation in [self.videoAnnotations copy]) {
 		[self.managedObjectContext deleteObject:annotation];
 	}
+	
 	NSArray *annotations = [VideoAnnotation videoAnnotationsFromDictionaries:dictionary[@"annotations"]
 													  inManagedObjectContext:self.managedObjectContext];
 	self.videoAnnotations = [NSSet setWithArray:annotations];
+}
+
+- (NSSet *)annotationsAtTime:(NSTimeInterval)time {
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(startTimestamp <= %f) AND (endTimestamp >= %f)", time, time];
+	return [self.videoAnnotations filteredSetUsingPredicate:predicate];
 }
 
 @end

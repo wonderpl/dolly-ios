@@ -12,6 +12,8 @@
 #import "SYNScrubberBar.h"
 #import "VideoInstance.h"
 #import "Video.h"
+#import "VideoAnnotation.h"
+#import "SYNVideoAnnotationButton.h"
 #import "SYNVideoLoadingView.h"
 #import "SYNVideoPlayer+Protected.h"
 
@@ -36,6 +38,8 @@ static CGFloat const ControlsFadeTimer = 5.0;
 
 @property (nonatomic, assign) BOOL videoViewed;
 @property (nonatomic, assign) BOOL hasBeganPlaying;
+
+@property (nonatomic, copy) NSArray *annotationButtons;
 
 @end
 
@@ -71,6 +75,14 @@ static CGFloat const ControlsFadeTimer = 5.0;
 	if (!newSuperview) {
 		[self stopControlsTimer];
 		[self stopUpdatingProgress];
+	}
+}
+
+- (void)layoutSubviews {
+	[super layoutSubviews];
+	
+	for (SYNVideoAnnotationButton *button in self.annotationButtons) {
+		button.frame = [button.videoAnnotation frameForAnnotationInRect:self.bounds];
 	}
 }
 
@@ -335,6 +347,8 @@ static CGFloat const ControlsFadeTimer = 5.0;
 	self.scrubberBar.duration = self.duration;
 	self.scrubberBar.currentTime = self.currentTime;
 	self.scrubberBar.bufferingProgress = self.bufferingProgress;
+	
+	[self updateAnnotationButtonsForTime:self.currentTime];
 }
 
 - (void)maximiseMinimisePinchGestureRecognizerTapped:(UIPinchGestureRecognizer *)gestureRecognizer {
@@ -364,6 +378,42 @@ static CGFloat const ControlsFadeTimer = 5.0;
 - (void)handleVideoPlayerMinimise {
 	self.maximised = NO;
 	[self.delegate videoPlayerMinimise];
+}
+
+- (void)annotationButtonPressed:(SYNVideoAnnotationButton *)button {
+	[self.delegate videoPlayerAnnotationSelected:button.videoAnnotation];
+}
+
+- (void)updateAnnotationButtonsForTime:(NSTimeInterval)time {
+	NSSet *currentAnnotations = [self.videoInstance.video annotationsAtTime:time];
+	
+	NSMutableArray *annotationButtons = [NSMutableArray arrayWithArray:self.annotationButtons];
+	NSMutableSet *existingAnnotations = [NSMutableSet set];
+	
+	// Remove existing buttons which no longer have an annotation
+	for (SYNVideoAnnotationButton *annotationButton in [annotationButtons copy]) {
+		if ([currentAnnotations containsObject:annotationButton.videoAnnotation]) {
+			[existingAnnotations addObject:annotationButton.videoAnnotation];
+		} else {
+			[annotationButton removeFromSuperview];
+			[annotationButtons removeObject:annotationButton];
+		}
+	}
+	
+	// Now create new buttons for new annotations
+	for (VideoAnnotation *annotation in currentAnnotations) {
+		if (![existingAnnotations containsObject:annotation]) {
+			CGRect frame = [annotation frameForAnnotationInRect:self.bounds];
+			SYNVideoAnnotationButton *button = [[SYNVideoAnnotationButton alloc] initWithFrame:frame];
+			button.videoAnnotation = annotation;
+			[button addTarget:self action:@selector(annotationButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+			
+			[annotationButtons addObject:button];
+			[self.playerContainerView addSubview:button];
+		}
+	}
+	
+	self.annotationButtons = annotationButtons;
 }
 
 @end

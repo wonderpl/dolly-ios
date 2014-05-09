@@ -31,15 +31,16 @@
 #import "UIDevice+Helpers.h"
 #import "SYNPagingModel.h"
 #import "SYNVideoPlayerCell.h"
+#import "VideoAnnotation.h"
 #import "SYNVideoInfoViewController.h"
 @import AVFoundation;
 @import MediaPlayer;
 
 @interface SYNVideoPlayerViewController () <UIViewControllerTransitioningDelegate, UIPopoverControllerDelegate, UIScrollViewDelegate, SYNVideoPlayerDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SYNVideoInfoViewControllerDelegate>
 
-@property (nonatomic, strong) IBOutlet UIButton *avatarButton;
+@property (nonatomic, weak) IBOutlet UIButton *avatarButton;
 
-@property (nonatomic, strong) IBOutlet UILabel *videoTitleLabel;
+@property (nonatomic, weak) IBOutlet UILabel *videoTitleLabel;
 
 @property (nonatomic, assign) BOOL hasTrackedAirPlayUse;
 
@@ -51,9 +52,9 @@
 
 @property (nonatomic, strong) SYNPagingModel *model;
 
-@property (nonatomic, strong) IBOutlet UIView *videoPlayerContainerView;
+@property (nonatomic, weak) IBOutlet UIView *videoPlayerContainerView;
 
-@property (nonatomic, strong) IBOutlet UICollectionView *videosCollectionView;
+@property (nonatomic, weak) IBOutlet UICollectionView *videosCollectionView;
 
 @property (nonatomic, strong) SYNVideoInfoViewController *videoInfoViewController;
 
@@ -311,6 +312,10 @@
 															   DebugLog(@"Report concern failed");
 															   DebugLog(@"%@", [error debugDescription]);
 														   }];
+}
+
+- (void)videoPlayerAnnotationSelected:(VideoAnnotation *)annotation {
+	[self.videoInfoViewController addVideoAnnotation:annotation];
 }
 
 #pragma mark - SYNVideoInfoViewControllerDelegate

@@ -9,6 +9,7 @@
 #import "SYNAbstractViewController.h"
 
 @class VideoInstance;
+@class VideoAnnotation;
 @class SYNPagingModel;
 @class SYNVideoInfoViewController;
 
@@ -26,5 +27,7 @@
 @property (nonatomic, assign) NSInteger selectedIndex;
 
 @property (nonatomic, weak) id<SYNVideoInfoViewControllerDelegate> delegate;
+
+- (void)addVideoAnnotation:(VideoAnnotation *)annotation;
 
 @end
