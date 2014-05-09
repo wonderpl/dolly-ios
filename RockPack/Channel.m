@@ -409,23 +409,6 @@
 
 #pragma mark - Adding Video Instances
 
-- (void) addVideoInstanceFromDictionary: (NSDictionary *) videosInstanceDictionary
-{
-    // Wrap the dictionary to resemble the full dictionary
-    
-    NSMutableDictionary *d = videosInstanceDictionary.mutableCopy;
-    
-    d[@"position"] = @99999;
-    
-    NSArray *videoArray = @[d.copy];
-    
-    NSDictionary *items = @{@"items" : videoArray};
-    
-    NSDictionary *videosInstancesDictionary = @{@"videos" : items};
-                            
-    [self addVideoInstancesFromDictionary: videosInstancesDictionary];
-}
-
 - (void) addVideoInstancesFromDictionary: (NSDictionary *) videosInstancesDictionary
 {
     

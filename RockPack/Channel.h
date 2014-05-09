@@ -30,8 +30,6 @@
 + (NSDictionary *)channelsFromDictionaries:(NSArray *)dictionaries
 					inManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 
-- (void) addVideoInstanceFromDictionary: (NSDictionary *) videosInstanceDictionary;
-
 - (void) addVideoInstancesFromDictionary: (NSDictionary *) videosInstancesDictionary;
 
 
