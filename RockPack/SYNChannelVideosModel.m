@@ -68,7 +68,6 @@
 			}
 		}
 		
-		[sself.channel.managedObjectContext save:nil];
 		
 		successBlock([sself.channel.videoInstancesSet array], sself.channel.totalVideosValueValue);
 	};

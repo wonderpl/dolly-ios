@@ -48,9 +48,10 @@
     
     [self.imageView setImageWithURL: [NSURL URLWithString: videoInstance.thumbnailURL]
                    placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
-                            options: SDWebImageRetryFailed];
+                            options: SDImageCacheTypeNone];
     
     self.titleLabel.text = videoInstance.title;
+    
 }
 
 #pragma mark - Set delegate

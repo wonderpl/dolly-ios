@@ -117,8 +117,6 @@
 {
     [super viewDidLoad];
     
-//    [SYNActivityManager.sharedInstance updateActivityForCurrentUser];
-    
     if (IS_IPAD) {
         [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
     }
@@ -157,17 +155,8 @@
         self.offsetValue = 530;
     }
     
-    if (self.mode == kChannelDetailsFavourites) {
-        // self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsMake(490, 0, 0, 0);
-    }
     
-    //not used yet
-    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle: UIActivityIndicatorViewStyleGray];
-    [self.activityIndicator setColor:[UIColor dollyActivityIndicator]];
-    self.activityIndicator.frame = CGRectMake(0, 0, 100, 100);
-    self.activityIndicator.center = self.videoThumbnailCollectionView.center;
     
-    [self.view addSubview:self.activityIndicator];
     self.tapToHideKeyoboard = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     [self displayChannelDetails];
     
@@ -195,8 +184,6 @@
 	self.model.delegate = self;
     [self.navigationController.navigationBar setBackgroundTransparent:YES];
 
-    
-
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -213,7 +200,6 @@
 		[[SYNTrackingManager sharedManager] setChannelRelationDimension:subscriptionStatus];
 		[[SYNTrackingManager sharedManager] trackOtherUserCollectionScreenView];
 	}
-    
 }
 
 - (void)viewWillDisappear: (BOOL) animated {
@@ -233,7 +219,6 @@
                                                         name: kUserDataChanged
                                                       object: nil];
     }
-    
     
     if (self.subscribingIndicator) {
         [self.subscribingIndicator removeFromSuperview];
@@ -688,7 +673,7 @@
 #pragma mark - Collection Delegate/Data Source Methods
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-	return [self.model itemCount];
+	return [self.channel.videoInstancesSet count];
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -702,12 +687,6 @@
     
 	VideoInstance *videoInstance = [self.model itemAtIndex:indexPath.item];
     
-    [videoThumbnailCell.imageView setImageWithURL:[NSURL URLWithString:videoInstance.video.thumbnailURL]
-                                 placeholderImage:[UIImage imageNamed:@"PlaceholderVideoWide.png"]
-                                          options:SDWebImageRetryFailed];
-    
-    videoThumbnailCell.titleLabel.text = videoInstance.title;
-    
     if (self.mode == kChannelDetailsModeEdit) {
         videoThumbnailCell.deleteButton.hidden = NO;
 		videoThumbnailCell.videoActionsContainer.hidden = YES;
@@ -716,7 +695,6 @@
     {
         videoThumbnailCell.deleteButton.hidden = YES;
 		videoThumbnailCell.videoActionsContainer.hidden = NO;
-
     }
     
     [videoThumbnailCell setVideoInstance:videoInstance];
@@ -849,6 +827,9 @@
     [self.channel.videoInstances enumerateObjectsUsingBlock: ^(id obj, NSUInteger index, BOOL *stop) {
         [(VideoInstance *) obj setPositionValue : index];
     }];
+    
+    self.model = [SYNChannelVideosModel modelWithChannel:self.channel];
+    [self.videoThumbnailCollectionView reloadData];
 }
 
 
@@ -1251,14 +1232,12 @@
                          cell.alpha = 0.0;
                      }
                      completion: ^(BOOL finished) {
-						 
                          [self.channel.videoInstancesSet removeObject: videoInstanceToDelete];
-                         
                          [videoInstanceToDelete.managedObjectContext deleteObject: videoInstanceToDelete];
 						 
 						 self.channel.totalVideosValueValue--;
-						 
-                         [appDelegate saveContext: YES];
+                         self.model = [SYNChannelVideosModel modelWithChannel:self.channel];
+                        [self.videoThumbnailCollectionView reloadData];
                      }];
 }
 
