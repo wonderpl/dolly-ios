@@ -69,13 +69,6 @@ typedef NS_ENUM(NSInteger, kNotificationObjectType);
 
 - (void)trackCollectionEdited:(NSString *)name;
 
-- (void)trackIPhoneScrolledToMood:(NSString *)name;
-- (void)trackIPadScrolledToMood:(NSString *)name;
-- (void)trackMoodChooseAnother:(NSString *)name;
-- (void)trackIPhoneMoodWatchSelected:(NSString *)name;
-- (void)trackMoodSelected:(NSString *)name;
-- (void)trackIPadMoodVideoSelected:(NSString *)name;
-
 - (void)trackVideoLoadTime:(NSTimeInterval)loadTime;
 
 - (void)trackVideoView:(NSString *)videoId currentTime:(CGFloat)currentTime duration:(CGFloat)duration;
@@ -92,7 +85,6 @@ typedef NS_ENUM(NSInteger, kNotificationObjectType);
 
 - (void)trackOnboardingScreenView;
 
-- (void)trackMoodMinderScreenView;
 - (void)trackDiscoverScreenView;
 - (void)trackFeedScreenView;
 - (void)trackOwnProfileScreenView;

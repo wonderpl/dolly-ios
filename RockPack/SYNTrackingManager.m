@@ -157,14 +157,6 @@ static const NSInteger TrackingDimensionConnection = 6;
 	[self trackEventWithCategory:GoalCategory action:@"collectionUpdated" label:label value:nil];
 }
 
-- (void)trackIPhoneScrolledToMood:(NSString *)name {
-	[self trackEventWithCategory:UIActionCategory action:@"moodSelectediPhone" label:name value:nil];
-}
-
-- (void)trackIPadScrolledToMood:(NSString *)name {
-	[self trackEventWithCategory:UIActionCategory action:@"moodSelectediPad" label:name value:nil];
-}
-
 - (void)trackCollectionSaved {
 	[self trackEventWithCategory:UIActionCategory action:@"collectionSaveButtonClick"];
 }
@@ -231,22 +223,6 @@ static const NSInteger TrackingDimensionConnection = 6;
 	[self trackEventWithCategory:GoalCategory action:@"userFollowCollection"];
 }
 
-- (void)trackMoodChooseAnother:(NSString *)name {
-	[self trackEventWithCategory:UIActionCategory action:@"moodVideoChooseAnotherClick" label:name value:nil];
-}
-
-- (void)trackIPhoneMoodWatchSelected:(NSString *)name {
-	[self trackEventWithCategory:UIActionCategory action:@"moodVideoWatchClickiPhone" label:name value:nil];
-}
-
-- (void)trackMoodSelected:(NSString *)name {
-	[self trackEventWithCategory:UIActionCategory action:@"moodVideoMoodClick" label:name value:nil];
-}
-
-- (void)trackIPadMoodVideoSelected:(NSString *)name {
-	[self trackEventWithCategory:UIActionCategory action:@"moodVideoWatchClickiPad" label:name value:nil];
-}
-
 - (void)trackAccountPropertyChanged:(NSString *)property {
 	[self trackEventWithCategory:UIActionCategory action:@"accountPropertyChanged" label:property value:nil];
 }
@@ -286,10 +262,6 @@ static const NSInteger TrackingDimensionConnection = 6;
 
 - (void)trackOnboardingScreenView {
 	[self trackScreenViewWithName:@"Onboarding"];
-}
-
-- (void)trackMoodMinderScreenView {
-	[self trackScreenViewWithName:@"Mood-Minder"];
 }
 
 - (void)trackFeedScreenView {
