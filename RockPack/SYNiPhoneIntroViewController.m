@@ -20,23 +20,37 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import <Reachability.h>
 
+#define DEGREES_RADIANS(angle) ((angle) / 180.0 * M_PI)
+
+static const CGFloat TransitionPause = 3.5f;
+
+
 @interface SYNiPhoneIntroViewController () <UINavigationControllerDelegate, UIViewControllerTransitioningDelegate>
 
 @property (nonatomic, strong) SYNAppDelegate *appDelegate;
 
 @property (nonatomic, strong) IBOutlet UILabel *subtitleLabel;
-
 @property (nonatomic, strong) IBOutlet UIView *containerView;
-
 @property (nonatomic, strong) IBOutlet UIButton *facebookButton;
 @property (nonatomic, strong) IBOutlet UIButton *loginButton;
-@property (strong, nonatomic) IBOutlet UIView *userContainerView;
 @property (nonatomic, strong) IBOutlet UIButton *signupButton;
-@property (strong, nonatomic) IBOutlet UIImageView *logoImageView;
+@property (nonatomic, strong) IBOutlet UIImageView *logoImageView;
+@property (strong, nonatomic) IBOutlet UIView *orView;
+@property (strong, nonatomic) IBOutlet UILabel *alreadyHaveAccountLabel;
 
-@property (strong, nonatomic) IBOutlet UILabel *sloganView;
+@property (strong, nonatomic) IBOutlet UIImageView *backgroundHome;
+@property (strong, nonatomic) IBOutlet UIImageView *backgroundMountain;
+@property (strong, nonatomic) IBOutlet UIImageView *backgroundFood;
+@property (strong, nonatomic) IBOutlet UIImageView *backgroundChurch;
+@property (strong, nonatomic) IBOutlet UIImageView *backgroundBeach;
+@property (strong, nonatomic) IBOutlet UILabel *orText;
+@property (strong, nonatomic) IBOutlet UILabel *haveAnAccountLabel;
 
-
+@property (strong, nonatomic) IBOutlet UILabel *messageView;
+@property (strong, nonatomic) IBOutlet UILabel *messageView2;
+@property (strong, nonatomic) IBOutlet UILabel *messageView3;
+@property (strong, nonatomic) IBOutlet UILabel *messageView4;
+@property (strong, nonatomic) IBOutlet UILabel *messageView5;
 
 @end
 
@@ -49,38 +63,251 @@
 	
 	self.appDelegate = [[UIApplication sharedApplication] delegate];
 	
-	self.subtitleLabel.font = [UIFont lightCustomFontOfSize:15.0];
-	
-	self.loginButton.titleLabel.font = [UIFont lightCustomFontOfSize:20.0];
-	self.signupButton.titleLabel.font = [UIFont lightCustomFontOfSize:20.0];
-	
-    CGRect tmpFrame = self.logoImageView.frame;
-    CGRect finalFrame = self.logoImageView.frame;
-    tmpFrame = CGRectMake(self.view.center.x-(self.logoImageView.frame.size.width/2), self.view.center.y-(self.logoImageView.frame.size.height/2), tmpFrame.size.width, tmpFrame.size.height);
-    self.logoImageView.frame = tmpFrame;
-    self.logoImageView.alpha = 0.0f;
     
-    [UIView animateWithDuration:1.0f animations:^{
-        self.logoImageView.alpha = 1.0f;
-    }];
+    NSMutableArray* animationBlocks = [NSMutableArray new];
+    
+    typedef void(^animationBlock)(BOOL);
+    
+    // getNextAnimation
+    // removes the first block in the queue and returns it
     
     
-    [UIView animateWithDuration:1.2f delay:1.1f options:UIViewAnimationCurveEaseInOut animations:^{
-        self.logoImageView.frame = finalFrame;
-        
-    } completion:^(BOOL finished) {
-        self.containerView.hidden = NO;
-        self.containerView.alpha = 0.0f;
-        self.userContainerView.hidden = NO;
+    [self.subtitleLabel setFont:[UIFont semiboldCustomFontOfSize:28]];
+    [self.messageView setFont:[UIFont regularCustomFontOfSize:24]];
+    [self.messageView2 setFont:[UIFont regularCustomFontOfSize:24]];
+    [self.messageView3 setFont:[UIFont regularCustomFontOfSize:24]];
+    [self.messageView4 setFont:[UIFont regularCustomFontOfSize:24]];
+    [self.messageView5 setFont:[UIFont regularCustomFontOfSize:24]];
 
-        [UIView animateWithDuration:1.0 animations:^{
+    
+    self.signupButton.layer.borderColor = [[UIColor whiteColor] CGColor];
+    self.signupButton.layer.borderWidth = IS_RETINA ? 0.5 : 1.0;
+    self.signupButton.titleLabel.font = [UIFont regularCustomFontOfSize:14.0];
+    self.signupButton.titleLabel.textColor = [UIColor whiteColor];
+    self.signupButton.layer.cornerRadius = self.signupButton.frame.size.height * 0.5;
+    
+    [self.orText setFont:[UIFont regularCustomFontOfSize:16]];
+    
+    [self.haveAnAccountLabel setFont:[UIFont regularCustomFontOfSize:14]];
+    self.facebookButton.titleLabel.font = [UIFont regularCustomFontOfSize:self.facebookButton.titleLabel.font.pointSize];
+    
+    self.loginButton.titleLabel.font = [UIFont regularCustomFontOfSize:self.loginButton.titleLabel.font.pointSize];
+
+    
+    [self.facebookButton setTitle:@"Login with Facebook" forState:UIControlStateNormal];
+    [self.loginButton setTitle:@"Login" forState:UIControlStateNormal];
+    
+    double delayInSeconds = 1.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+
+        animationBlock (^getNextAnimation)() = ^{
+            animationBlock block = (animationBlock)[animationBlocks firstObject];
+            if (block){
+                [animationBlocks removeObjectAtIndex:0];
+                return block;
+            }else{
+                return ^(BOOL finished){};
+            }
+        };
+        
+        //add a block to our queue
+        [animationBlocks addObject:^(BOOL finished){;
+            self.logoImageView.alpha = 0.5;
+            [UIView animateWithDuration:1.0 animations:^{
+                
+                CGRect frame = self.logoImageView.frame;
+                frame.origin.y += 30;
+            	
+                self.logoImageView.alpha = 1.0;
+
+                self.logoImageView.frame = frame;
+                NSLog(@"1st Animation");
+            } completion: getNextAnimation()];
+        }];
+        
+        //add a block to our queue
+        [animationBlocks addObject:^(BOOL finished){;
+            self.subtitleLabel.alpha = 0.5;
             
-            self.containerView.alpha = 1.0f;
+            
+            [UIView animateWithDuration:1.0 animations:^{
+                CGRect frame = self.subtitleLabel.frame;
+                frame.origin.y += 30;
+                self.subtitleLabel.frame = frame;
+				self.subtitleLabel.alpha = 1.0;
+                NSLog(@"2nd Animation");
+            } completion: getNextAnimation()];
+        }];
+        
+        [animationBlocks addObject:^(BOOL finished){;
+            [UIView animateWithDuration:1.0 animations:^{
+                CGRect frame = self.messageView.frame;
+                frame.origin.y += 30;
+                self.messageView.frame = frame;
+                self.messageView.alpha = 1.0;
+                NSLog(@"3rd");
+            } completion: getNextAnimation()];
+        }];
+        
+        [animationBlocks addObject:^(BOOL finished){;
+            
+            CGRect frame = self.facebookButton.frame;
+            frame.origin.y += 30;
+            self.facebookButton.frame = frame;
+
+            [UIView animateWithDuration:0.3 animations:^{
+                CGRect frame = self.facebookButton.frame;
+                frame.origin.y -= 30;
+                self.facebookButton.frame = frame;
+                self.facebookButton.alpha = 1.0;
+                self.orView.alpha = 1.0;
+                NSLog(@"4th Animation");
+            } completion: getNextAnimation()];
+        }];
+
+        
+        [animationBlocks addObject:^(BOOL finished){;
+            CGRect frame = self.loginButton.frame;
+            frame.origin.y -= 30;
+            self.loginButton.frame = frame;
+
+            [UIView animateWithDuration:0.3 animations:^{
+                CGRect frame = self.loginButton.frame;
+                frame.origin.y += 30;
+                self.loginButton.frame = frame;
+                self.loginButton.alpha = 1.0;
+                NSLog(@"5th Animation");
+            } completion: getNextAnimation()];
+        }];
+        
+        [animationBlocks addObject:^(BOOL finished){;
+            CGRect frame = self.signupButton.frame;
+            frame.origin.y -= 30;
+            self.signupButton.frame = frame;
+
+            [UIView animateWithDuration:0.3 animations:^{
+                CGRect frame = self.signupButton.frame;
+                frame.origin.y += 30;
+                self.signupButton.frame = frame;
+                self.signupButton.alpha = 1.0;
+                self.alreadyHaveAccountLabel.alpha = 1.0;
+                NSLog(@"5th Animation");
+            } completion: getNextAnimation()];
+        }];
+
+
+        [animationBlocks addObject:^(BOOL finished){;
+            [UIView animateWithDuration:1.5 delay:TransitionPause options:UIViewAnimationCurveEaseInOut animations:^{
+                CGRect frame = self.backgroundFood.frame;
+                
+                frame.size = CGSizeMake(frame.size.width*2, frame.size.height*2);
+                frame.origin = CGPointMake(-frame.size.width/3, -frame.size.height/3);
+                
+                self.backgroundFood.frame = frame;
+                self.backgroundFood.alpha = 0.0;
+                
+                
+                frame = self.messageView.frame;
+                
+                
+                self.messageView.alpha = 0.0;
+                
+                
+                frame = self.messageView2.frame;
+                
+                frame.origin.y += 60;
+                
+                self.messageView2.frame = frame;
+				self.messageView2.alpha = 1.0;
+
+            } completion:getNextAnimation()];
+        }];
+        
+        [animationBlocks addObject:^(BOOL finished){;
+            
+            [UIView animateWithDuration:TransitionPause animations:^{
+            } completion: getNextAnimation()];
+        }];
+        
+
+        [animationBlocks addObject:^(BOOL finished){;
+            
+            CGRect frame = self.backgroundChurch.frame;
+            frame.origin.x -= self.backgroundChurch.frame.size.width/2;
+            frame.origin.y -= self.backgroundChurch.frame.size.height/2;
+            
+            self.backgroundChurch.frame = frame;
+                        
+            self.logoImageView.translatesAutoresizingMaskIntoConstraints = YES;
+            self.subtitleLabel.translatesAutoresizingMaskIntoConstraints = YES;
+            self.backgroundChurch.translatesAutoresizingMaskIntoConstraints = YES;
+            self.messageView2.translatesAutoresizingMaskIntoConstraints = YES;
+
+            self.backgroundChurch.layer.anchorPoint = CGPointMake(0, 0);
+
+            
+            [UIView animateWithDuration:1.0 delay:TransitionPause options:UIViewAnimationCurveEaseInOut animations:^{
+                self.backgroundChurch.transform = CGAffineTransformMakeRotation(DEGREES_RADIANS(45));
+                self.backgroundChurch.alpha = 0.0;
+                self.messageView2.alpha = 0.0;
+                self.messageView3.alpha = 1.0;
+                
+            } completion:getNextAnimation()];
             
         }];
-    }];
+        
+
+        [animationBlocks addObject:^(BOOL finished){;
+            [UIView animateWithDuration:0.4 animations:^{
+                self.messageView3.alpha = 1.0;
+            } completion: getNextAnimation()];
+        }];
+
+        [animationBlocks addObject:^(BOOL finished){;
+            
+            
+            [UIView animateWithDuration:1.5 delay:TransitionPause options:UIViewAnimationCurveEaseInOut animations:^{
+                CGRect frame = self.messageView3.frame;
+                
+                frame.origin.x -= 30;
+                self.messageView3.frame = frame;
+                self.messageView3.alpha = 0.0;
+                frame = self.backgroundBeach.frame;
+                frame.origin.x -= 30;
+                self.backgroundBeach.frame = frame;
+                self.backgroundBeach.alpha = 0.0;
+                self.messageView4.alpha = 1.0;
+
+            } completion:getNextAnimation()];
+            
+        }];
+
+        
+        [animationBlocks addObject:^(BOOL finished){;
+            self.backgroundMountain.translatesAutoresizingMaskIntoConstraints = YES;
+
+            [UIView animateWithDuration:1.5 delay:TransitionPause options:UIViewAnimationCurveEaseInOut animations:^{
+                self.backgroundMountain.layer.transform = CATransform3DMakeRotation(M_PI/2, 0.0, 1.0, 0.0);
+                self.backgroundMountain.alpha = 0.0;
+                self.messageView4.alpha = 0.0;
+                self.messageView5.alpha = 1.0;
+                
+            } completion:getNextAnimation()];
+            
+        }];
+        
+        getNextAnimation()(YES);
+
     
+    
+    });
+
+    
+
+
 }
+
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -145,5 +372,6 @@
 					  cancelButtonTitle:nil
 					  otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
 }
+
 
 @end
