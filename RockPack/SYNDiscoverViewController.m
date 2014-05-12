@@ -289,12 +289,9 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 		
 	}
 	
-	if (IS_IPHONE) {
-		if (self.recentlyViewed.count > numberOfRecents) {
-			[self.recentlyViewed removeLastObject];
-		}
-	}
-	
+    if (self.recentlyViewed.count > numberOfRecents) {
+        [self.recentlyViewed removeLastObject];
+    }
 	if (IS_IPAD) {
 		[self.categoriesCollectionView reloadData];
 		[self.categoriesCollectionView selectItemAtIndexPath:self.selectedCellIndex animated:NO scrollPosition:UICollectionViewScrollPositionNone];
@@ -309,17 +306,14 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 	
 	
 	[[NSUserDefaults standardUserDefaults] setObject:[self defaultsArrayFromRecents] forKey:kUserDefaultsRecentlyViewed];
-	
 }
-
-
 
 - (NSMutableArray*) genreArrayFromDefaults {
 	
 	NSMutableArray *mutableArray = [[NSMutableArray alloc] init];
 	
 	NSArray *defaultsArray = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsRecentlyViewed];
-	
+    
 	if (!defaultsArray) {
 		return [NSMutableArray new];
 	}
@@ -337,9 +331,9 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 	
 	NSMutableArray *arr = [[NSMutableArray alloc] init];
 	for (Genre *genre in self.recentlyViewed) {
-		[arr addObject:genre.uniqueId];
+        [arr addObject:genre.uniqueId];
 	}
-	
+
 	return arr;
 }
 
@@ -844,20 +838,10 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 }
 
 - (void)reloadCategories {
+    
 	self.genres = [[SYNGenreManager sharedManager] genres];
-	
     [self.categoriesCollectionView reloadData];
 	
-	if ([self.genres count] && IS_IPAD) {
-        NSIndexPath *firstIndexPath = [NSIndexPath indexPathForItem:0 inSection:0];
-		[self selectCategoryForCollection:self.categoriesCollectionView atIndexPath:firstIndexPath];
-        [self.categoriesCollectionView selectItemAtIndexPath:firstIndexPath
-													animated:NO
-											  scrollPosition:UICollectionViewScrollPositionNone];
-
-    }
-	
-
 }
 
 - (void)keyboardChanged:(NSNotification *)notification {
