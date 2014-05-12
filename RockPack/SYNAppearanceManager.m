@@ -30,9 +30,11 @@
 
 + (void)setupNavigationBarAppearance {
 	UIImage *backButtonImage = [[UIImage imageNamed:@"BackButtonApp.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    
 	[[UINavigationBar appearance] setBackIndicatorImage:backButtonImage];
 	[[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:backButtonImage];
-	
+    [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
+    
 	if (IS_IPAD) {
 		[self setupIPadNavigationBarAppearance];
 	} else {
