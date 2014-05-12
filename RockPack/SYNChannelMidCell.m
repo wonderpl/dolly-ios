@@ -46,8 +46,8 @@
     
     self.followButton.titleLabel.font = [UIFont lightCustomFontOfSize:self.followButton.titleLabel.font.pointSize];
     
-	IS_RETINA ? [self.view.layer setBorderWidth:0.5f] : [self.view.layer setBorderWidth:1.0f];
-	
+	[self.view.layer setBorderWidth:IS_RETINA ? 0.5 : 1.0];
+    
     self.rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(rightSwipe:)];
     [self.rightSwipe setDirection:UISwipeGestureRecognizerDirectionRight];
     self.rightSwipe.delegate = self;
