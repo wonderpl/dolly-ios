@@ -18,6 +18,8 @@
 
 @property (nonatomic, strong) IBOutlet UIWebView *webView;
 
+@property (nonatomic, strong) IBOutlet UIView *loadingView;
+
 @property (nonatomic, strong) NSURL *URL;
 
 @property (nonatomic, copy) NSString *trackingName;
@@ -88,6 +90,10 @@
 	
 	self.backButton.enabled = [webView canGoBack];
 	self.forwardButton.enabled = [webView canGoForward];
+	
+	[UIView animateWithDuration:0.3 animations:^{
+		self.loadingView.alpha = 0.0;
+	}];
 }
 
 #pragma mark - IBActions

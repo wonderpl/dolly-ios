@@ -44,13 +44,42 @@
                                     <outlet property="delegate" destination="O4s-kn-sYz" id="WOI-eN-1fo"/>
                                 </connections>
                             </webView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dSy-md-8Ml">
+                                <rect key="frame" x="102" y="270" width="117" height="28"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6h9-gx-k0J">
+                                        <rect key="frame" x="10" y="5" width="69" height="18"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                        <size key="shadowOffset" width="1" height="1"/>
+                                    </label>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="kQj-Hn-w86">
+                                        <rect key="frame" x="87" y="4" width="20" height="20"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.82352941176470584" green="0.82352941176470584" blue="0.82352941176470584" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="6h9-gx-k0J" firstAttribute="leading" secondItem="dSy-md-8Ml" secondAttribute="leading" constant="10" id="F3m-8D-Hpe"/>
+                                    <constraint firstAttribute="centerY" secondItem="kQj-Hn-w86" secondAttribute="centerY" id="Hzb-ji-yXD"/>
+                                    <constraint firstAttribute="bottom" secondItem="6h9-gx-k0J" secondAttribute="bottom" constant="5" id="JA6-DD-nVN"/>
+                                    <constraint firstItem="kQj-Hn-w86" firstAttribute="leading" secondItem="6h9-gx-k0J" secondAttribute="trailing" constant="8" id="X4B-Sy-v7C"/>
+                                    <constraint firstItem="6h9-gx-k0J" firstAttribute="top" secondItem="dSy-md-8Ml" secondAttribute="top" constant="5" id="aKa-fz-ljM"/>
+                                    <constraint firstAttribute="trailing" secondItem="kQj-Hn-w86" secondAttribute="trailing" constant="10" id="elP-Fk-BV7"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="UDU-zb-h4X" firstAttribute="leading" secondItem="BpX-yv-Agx" secondAttribute="leading" id="4u5-dX-mWr"/>
                             <constraint firstAttribute="trailing" secondItem="UDU-zb-h4X" secondAttribute="trailing" id="9TG-HB-qWo"/>
+                            <constraint firstAttribute="centerX" secondItem="dSy-md-8Ml" secondAttribute="centerX" id="G1P-PK-I8c"/>
                             <constraint firstItem="UDU-zb-h4X" firstAttribute="top" secondItem="BpX-yv-Agx" secondAttribute="top" id="KfM-I1-jgG"/>
                             <constraint firstAttribute="bottom" secondItem="UDU-zb-h4X" secondAttribute="bottom" id="TbI-qk-7oZ"/>
+                            <constraint firstAttribute="centerY" secondItem="dSy-md-8Ml" secondAttribute="centerY" id="UDt-Lq-mHh"/>
                         </constraints>
                     </view>
                     <toolbarItems>
@@ -77,6 +106,7 @@
                         <outlet property="backButton" destination="r3S-iW-Faw" id="eHm-1n-M9A"/>
                         <outlet property="closeButton" destination="cJt-qu-Ann" id="BRJ-Wx-uwQ"/>
                         <outlet property="forwardButton" destination="oPf-lA-e5W" id="WK5-gh-aFL"/>
+                        <outlet property="loadingView" destination="dSy-md-8Ml" id="sBa-WY-ldh"/>
                         <outlet property="webView" destination="UDU-zb-h4X" id="G1I-jm-EaE"/>
                     </connections>
                 </viewController>
