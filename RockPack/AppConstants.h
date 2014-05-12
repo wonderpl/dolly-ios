@@ -182,8 +182,6 @@ typedef enum : NSInteger {
 
 #define kAPIFriends                 @"/ws/USERID/friends/"  /* GET */
 
-#define kExampleUsers				@"/ws/example_users/"	/* GET */
-
 // Push notification
 #define kAccountSettingsLogout      @"kAccountSettingsLogout"
 #define kUserDataChanged            @"kUserDataChanged"

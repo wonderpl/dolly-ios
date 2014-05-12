@@ -656,8 +656,6 @@
 		E9F6255618854A3D000EF6A2 /* SYNIPhoneSignupUsernameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F6255518854A3D000EF6A2 /* SYNIPhoneSignupUsernameViewController.m */; };
 		E9F6255918854A48000EF6A2 /* SYNIPhoneSignupDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F6255818854A48000EF6A2 /* SYNIPhoneSignupDetailsViewController.m */; };
 		E9F6255B1885B2A1000EF6A2 /* Login_ipad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9F6255A1885B2A1000EF6A2 /* Login_ipad.storyboard */; };
-		E9F6255E1885B53B000EF6A2 /* SYNExampleUsersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F6255D1885B53B000EF6A2 /* SYNExampleUsersViewController.m */; };
-		E9F625611885B8EA000EF6A2 /* SYNExampleUserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F625601885B8EA000EF6A2 /* SYNExampleUserCell.m */; };
 		E9F625641885C238000EF6A2 /* SYNGradientMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F625631885C238000EF6A2 /* SYNGradientMaskView.m */; };
 		E9F6256A18868784000EF6A2 /* SYNiPadIntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F6256918868784000EF6A2 /* SYNiPadIntroViewController.m */; };
 		E9F6256D1886883A000EF6A2 /* SYNiPadLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9F6256C1886883A000EF6A2 /* SYNiPadLoginViewController.m */; };
@@ -1623,10 +1621,6 @@
 		E9F6255718854A48000EF6A2 /* SYNIPhoneSignupDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNIPhoneSignupDetailsViewController.h; sourceTree = "<group>"; };
 		E9F6255818854A48000EF6A2 /* SYNIPhoneSignupDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNIPhoneSignupDetailsViewController.m; sourceTree = "<group>"; };
 		E9F6255A1885B2A1000EF6A2 /* Login_ipad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login_ipad.storyboard; sourceTree = "<group>"; };
-		E9F6255C1885B53B000EF6A2 /* SYNExampleUsersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNExampleUsersViewController.h; sourceTree = "<group>"; };
-		E9F6255D1885B53B000EF6A2 /* SYNExampleUsersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNExampleUsersViewController.m; sourceTree = "<group>"; };
-		E9F6255F1885B8EA000EF6A2 /* SYNExampleUserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNExampleUserCell.h; sourceTree = "<group>"; };
-		E9F625601885B8EA000EF6A2 /* SYNExampleUserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNExampleUserCell.m; sourceTree = "<group>"; };
 		E9F625621885C238000EF6A2 /* SYNGradientMaskView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNGradientMaskView.h; sourceTree = "<group>"; };
 		E9F625631885C238000EF6A2 /* SYNGradientMaskView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNGradientMaskView.m; sourceTree = "<group>"; };
 		E9F6256818868784000EF6A2 /* SYNiPadIntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNiPadIntroViewController.h; sourceTree = "<group>"; };
@@ -3218,10 +3212,6 @@
 				E9F6255818854A48000EF6A2 /* SYNIPhoneSignupDetailsViewController.m */,
 				E9F6255A1885B2A1000EF6A2 /* Login_ipad.storyboard */,
 				E972DFB0187C6FD900CB9C78 /* Login_iphone.storyboard */,
-				E9F6255C1885B53B000EF6A2 /* SYNExampleUsersViewController.h */,
-				E9F6255D1885B53B000EF6A2 /* SYNExampleUsersViewController.m */,
-				E9F6255F1885B8EA000EF6A2 /* SYNExampleUserCell.h */,
-				E9F625601885B8EA000EF6A2 /* SYNExampleUserCell.m */,
 				E9F625621885C238000EF6A2 /* SYNGradientMaskView.h */,
 				E9F625631885C238000EF6A2 /* SYNGradientMaskView.m */,
 				E9F6256818868784000EF6A2 /* SYNiPadIntroViewController.h */,
@@ -4525,7 +4515,6 @@
 				BE03A69316F7459D00245314 /* SYNAccountSettingsViewController.m in Sources */,
 				BE03A6D616F784B000245314 /* SYNAccountSettingsGender.m in Sources */,
 				BE03A6D916F787CB00245314 /* SYNAccountSettingTableViewCell.m in Sources */,
-				E9F6255E1885B53B000EF6A2 /* SYNExampleUsersViewController.m in Sources */,
 				014D514F16F738C500B82B00 /* SYNAbstractNetworkEngine.m in Sources */,
 				E9F6256A18868784000EF6A2 /* SYNiPadIntroViewController.m in Sources */,
 				E9CDFFBB19090EDC00A95B90 /* SYNIPhoneFeedRootViewController.m in Sources */,
@@ -4567,7 +4556,6 @@
 				0ECBED3A187C66F900F28EB2 /* SYNFollowUserButton.m in Sources */,
 				BE285D9F172584E200D995AB /* SYNAddToChannelCreateNewCell.m in Sources */,
 				BE285DB01725A23300D995AB /* SYNNetworkMessageView.m in Sources */,
-				E9F625611885B8EA000EF6A2 /* SYNExampleUserCell.m in Sources */,
 				E9EE08E218F80BB2000DC06A /* SYNVideoClickToMoreCell.m in Sources */,
 				BE285DBC1726828F00D995AB /* SYNChannelManager.m in Sources */,
 				E979F3141908281900FC6743 /* SYNIPadFeedLayout.m in Sources */,
