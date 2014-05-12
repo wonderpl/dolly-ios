@@ -303,11 +303,23 @@ static const CGFloat TransitionPause = 3.5f;
     
     });
 
-    
-
-
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+
+    self.messageView.hidden = YES;
+    self.messageView2.hidden = YES;
+    self.messageView3.hidden = YES;
+    self.messageView4.hidden = YES;
+	self.messageView5.hidden = NO;
+    self.messageView5.alpha = 1.0;
+    
+    self.backgroundFood.hidden = YES;
+    self.backgroundBeach.hidden = YES;
+    self.backgroundMountain.hidden = YES;
+    self.backgroundChurch.hidden = YES;
+    
+}
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
