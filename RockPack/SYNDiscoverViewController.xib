@@ -60,7 +60,7 @@
                                 <outlet property="delegate" destination="-1" id="Fna-7B-iUZ"/>
                             </connections>
                         </tableView>
-                        <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="whA-6D-loW">
+                        <searchBar contentMode="redraw" placeholder="Search by video title or for users" translatesAutoresizingMaskIntoConstraints="NO" id="whA-6D-loW">
                             <rect key="frame" x="-2" y="0.0" width="225" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <constraints>
