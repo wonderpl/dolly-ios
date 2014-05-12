@@ -178,17 +178,14 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 	
 	[self updateContainerWidths];
 	
+	self.recentlyViewed = [self genreArrayFromDefaults];
 	
 	[self.categoriesCollectionView reloadData];
-    
+	
 	//Automatically select editors picks on load.
     self.selectedCellIndex = [NSIndexPath indexPathForItem:0 inSection:0];
 	[self.categoriesCollectionView selectItemAtIndexPath:self.selectedCellIndex animated:NO scrollPosition:UICollectionViewScrollPositionNone];
-	
-	self.recentlyViewed = [self genreArrayFromDefaults];
-	
 }
-
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
