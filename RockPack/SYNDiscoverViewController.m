@@ -156,7 +156,8 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 											   object:nil];
 	self.recentlyViewed = [[NSMutableArray alloc] init];
 
-	
+    self.selectedCellIndex = [NSIndexPath indexPathForItem:0 inSection:0];
+
     
 	
 
@@ -183,7 +184,6 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 	[self.categoriesCollectionView reloadData];
 	
 	//Automatically select editors picks on load.
-    self.selectedCellIndex = [NSIndexPath indexPathForItem:0 inSection:0];
 	[self.categoriesCollectionView selectItemAtIndexPath:self.selectedCellIndex animated:NO scrollPosition:UICollectionViewScrollPositionNone];
 }
 
