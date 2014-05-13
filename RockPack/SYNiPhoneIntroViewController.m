@@ -51,6 +51,8 @@ static const CGFloat TransitionPause = 3.5f;
 @property (strong, nonatomic) IBOutlet UILabel *messageView3;
 @property (strong, nonatomic) IBOutlet UILabel *messageView4;
 @property (strong, nonatomic) IBOutlet UILabel *messageView5;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *buttonContainerViewTopConstraint;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *messageContainerViewTopConstraint;
 
 @end
 
@@ -72,6 +74,11 @@ static const CGFloat TransitionPause = 3.5f;
     // removes the first block in the queue and returns it
     
     
+    if (!IS_IPHONE_5 && IS_IPHONE) {
+        [self.buttonContainerViewTopConstraint setConstant:186];
+        [self.messageContainerViewTopConstraint setConstant:-64];
+    }
+    
     [self.subtitleLabel setFont:[UIFont semiboldCustomFontOfSize:28]];
     [self.messageView setFont:[UIFont regularCustomFontOfSize:24]];
     [self.messageView2 setFont:[UIFont regularCustomFontOfSize:24]];
@@ -80,11 +87,12 @@ static const CGFloat TransitionPause = 3.5f;
     [self.messageView5 setFont:[UIFont regularCustomFontOfSize:24]];
 
     
-    self.signupButton.layer.borderColor = [[UIColor whiteColor] CGColor];
-    self.signupButton.layer.borderWidth = IS_RETINA ? 0.5 : 1.0;
-    self.signupButton.titleLabel.font = [UIFont regularCustomFontOfSize:14.0];
+    [self.signupButton setTitle:@"Sign up" forState:UIControlStateNormal];
+    
+    self.signupButton.titleLabel.font = [UIFont regularCustomFontOfSize:self.signupButton.titleLabel.font.pointSize];
     self.signupButton.titleLabel.textColor = [UIColor whiteColor];
     self.signupButton.layer.cornerRadius = self.signupButton.frame.size.height * 0.5;
+    [self.signupButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
     
     [self.orText setFont:[UIFont regularCustomFontOfSize:16]];
     
@@ -120,25 +128,11 @@ static const CGFloat TransitionPause = 3.5f;
                 frame.origin.y += 30;
             	
                 self.logoImageView.alpha = 1.0;
-
                 self.logoImageView.frame = frame;
                 NSLog(@"1st Animation");
             } completion: getNextAnimation()];
         }];
         
-        //add a block to our queue
-        [animationBlocks addObject:^(BOOL finished){;
-            self.subtitleLabel.alpha = 0.5;
-            
-            
-            [UIView animateWithDuration:1.0 animations:^{
-                CGRect frame = self.subtitleLabel.frame;
-                frame.origin.y += 30;
-                self.subtitleLabel.frame = frame;
-				self.subtitleLabel.alpha = 1.0;
-                NSLog(@"2nd Animation");
-            } completion: getNextAnimation()];
-        }];
         
         [animationBlocks addObject:^(BOOL finished){;
             [UIView animateWithDuration:1.0 animations:^{
@@ -206,19 +200,15 @@ static const CGFloat TransitionPause = 3.5f;
                 
                 self.backgroundFood.frame = frame;
                 self.backgroundFood.alpha = 0.0;
+
                 
+                CGAffineTransform scaleAndMove = CGAffineTransformConcat(CGAffineTransformMakeTranslation(-90, 0), CGAffineTransformMakeScale(1.5, 1.5));
                 
-                frame = self.messageView.frame;
-                
-                
+                self.messageView.transform = scaleAndMove;
+                self.messageView.frame = frame;
                 self.messageView.alpha = 0.0;
                 
-                
-                frame = self.messageView2.frame;
-                
-                frame.origin.y += 60;
-                
-                self.messageView2.frame = frame;
+                self.messageView2.transform = CGAffineTransformMakeTranslation(0, 120);
 				self.messageView2.alpha = 1.0;
 
             } completion:getNextAnimation()];
@@ -245,11 +235,11 @@ static const CGFloat TransitionPause = 3.5f;
             self.messageView2.translatesAutoresizingMaskIntoConstraints = YES;
 
             self.backgroundChurch.layer.anchorPoint = CGPointMake(0, 0);
-
             
             [UIView animateWithDuration:1.0 delay:TransitionPause options:UIViewAnimationCurveEaseInOut animations:^{
                 self.backgroundChurch.transform = CGAffineTransformMakeRotation(DEGREES_RADIANS(45));
                 self.backgroundChurch.alpha = 0.0;
+                
                 self.messageView2.alpha = 0.0;
                 self.messageView3.alpha = 1.0;
                 

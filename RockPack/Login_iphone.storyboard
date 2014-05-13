@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="h6T-H1-ExR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="h6T-H1-ExR">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -57,54 +57,60 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="w-logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="dHb-gc-rUo" userLabel="Logo">
-                                <rect key="frame" x="118" y="18" width="84" height="48"/>
+                            <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="wonder-logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="dHb-gc-rUo" userLabel="Logo">
+                                <rect key="frame" x="117.5" y="18" width="85" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="RAISING THE BAR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Mn-sf-8SW">
-                                <rect key="frame" x="10" y="99" width="300" height="42"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SWz-5O-OKk" userLabel="Message container">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="302"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Welcome to your  personalized video  magazine." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="260" translatesAutoresizingMaskIntoConstraints="NO" id="wrO-ZI-aYX" userLabel="Message Label 1">
-                                <rect key="frame" x="30" y="141" width="260" height="105"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Watch, collect &amp; share the highest quality videos you care about." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="Fdo-Bt-clT" userLabel="Message Label 2">
-                                <rect key="frame" x="20" y="119" width="280" height="120"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Across topics from food, the mind, wellness, to culture, family and  entertainment" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="260" translatesAutoresizingMaskIntoConstraints="NO" id="0YZ-dA-Wog" userLabel="Message Label 3">
-                                <rect key="frame" x="30" y="185" width="260" height="101"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="With the world's best creators, we bring you the videos you want to watch" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="260" translatesAutoresizingMaskIntoConstraints="NO" id="ZIA-gD-3Ba" userLabel="Message Label 4">
-                                <rect key="frame" x="30" y="186" width="260" height="101"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Fill your life with Wonder." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="220" translatesAutoresizingMaskIntoConstraints="NO" id="nau-3q-OCY" userLabel="Message Label 5">
-                                <rect key="frame" x="50" y="189" width="220" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LER-5Z-EXM">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Welcome to Wonder." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="260" translatesAutoresizingMaskIntoConstraints="NO" id="wrO-ZI-aYX" userLabel="Message Label 1">
+                                        <rect key="frame" x="30" y="114" width="260" height="69"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Watch, collect, and share the highest quality video." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="Fdo-Bt-clT" userLabel="Message Label 2">
+                                        <rect key="frame" x="20" y="95" width="280" height="70"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Across food, the mind, technology, wellness, culture, fashion, family, and entertainment." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="260" translatesAutoresizingMaskIntoConstraints="NO" id="0YZ-dA-Wog" userLabel="Message Label 3">
+                                        <rect key="frame" x="30" y="162" width="260" height="103"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="With the world's best creators, we bring you the videos you want to watch." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="282" translatesAutoresizingMaskIntoConstraints="NO" id="ZIA-gD-3Ba" userLabel="Message Label 4">
+                                        <rect key="frame" x="19" y="162" width="282" height="103"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Fill your life with Wonder." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="220" translatesAutoresizingMaskIntoConstraints="NO" id="nau-3q-OCY" userLabel="Message Label 5">
+                                        <rect key="frame" x="50" y="168" width="220" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="302" id="8nW-8e-o41"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LER-5Z-EXM">
+                                <rect key="frame" x="0.0" y="294" width="320" height="274"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pbj-Ru-j0Q" userLabel="Facebook Button" customClass="SYNFacebookButton">
-                                        <rect key="frame" x="19" y="321" width="284" height="49"/>
+                                        <rect key="frame" x="19" y="27" width="284" height="49"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <state key="normal" title="Login with Facebook" backgroundImage="facebook-login-button.png">
@@ -119,7 +125,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m39-9A-UIQ" userLabel="Button Login">
-                                        <rect key="frame" x="18" y="410" width="284" height="49"/>
+                                        <rect key="frame" x="18" y="116" width="284" height="49"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <accessibility key="accessibilityConfiguration" label="Login Navigation"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -135,11 +141,11 @@
                                             <segue destination="gfp-5v-9XD" kind="push" identifier="Login" id="2gW-96-ptz"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H6u-lu-1jq" userLabel="Button Signup">
-                                        <rect key="frame" x="114" y="511" width="93" height="36"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H6u-lu-1jq" userLabel="Button Signup">
+                                        <rect key="frame" x="93.5" y="207" width="134" height="61"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <state key="normal" title="Sign Up">
+                                        <state key="normal" backgroundImage="sign-up-button.png">
                                             <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </state>
                                         <state key="highlighted">
@@ -151,29 +157,28 @@
                                         </connections>
                                     </button>
                                     <view alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wd1-cl-xBG">
-                                        <rect key="frame" x="46" y="381" width="228" height="22"/>
+                                        <rect key="frame" x="0.0" y="-294" width="291" height="403"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OOf-Xx-Tb7">
-                                                <rect key="frame" x="20" y="10" width="78" height="1"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            </view>
-                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ytm-W7-oOX">
-                                                <rect key="frame" x="130" y="10" width="78" height="1"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            </view>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="or" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JEF-6W-0IF">
-                                                <rect key="frame" x="106" y="0.0" width="16" height="22"/>
+                                                <rect key="frame" x="152" y="381" width="16" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="left-separator.png" translatesAutoresizingMaskIntoConstraints="NO" id="okZ-Nd-CwN">
+                                                <rect key="frame" x="67" y="391" width="70" height="1"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="right-separator.png" translatesAutoresizingMaskIntoConstraints="NO" id="Oxk-sb-VYu">
+                                                <rect key="frame" x="183" y="391" width="70" height="1"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
                                         </subviews>
                                     </view>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Would you like to create an account" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="faK-MG-3vf">
-                                        <rect key="frame" x="34" y="484" width="253" height="21"/>
+                                        <rect key="frame" x="34" y="187" width="253" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -183,6 +188,15 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="SWz-5O-OKk" firstAttribute="leading" secondItem="fmO-uU-osN" secondAttribute="leading" id="2w1-zt-Yct"/>
+                            <constraint firstItem="lD7-s6-QGu" firstAttribute="top" secondItem="LER-5Z-EXM" secondAttribute="bottom" id="6oe-fr-PS1"/>
+                            <constraint firstAttribute="trailing" secondItem="LER-5Z-EXM" secondAttribute="trailing" id="DuV-bj-q5p"/>
+                            <constraint firstItem="SWz-5O-OKk" firstAttribute="top" secondItem="eEg-Be-pl3" secondAttribute="bottom" constant="-20" id="Ok9-W6-a2A"/>
+                            <constraint firstAttribute="trailing" secondItem="SWz-5O-OKk" secondAttribute="trailing" id="caV-gA-1ig"/>
+                            <constraint firstItem="LER-5Z-EXM" firstAttribute="leading" secondItem="fmO-uU-osN" secondAttribute="leading" id="g66-dv-GLm"/>
+                            <constraint firstItem="LER-5Z-EXM" firstAttribute="top" secondItem="eEg-Be-pl3" secondAttribute="bottom" constant="274" id="z5F-LN-xUL"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="EBD-X8-VZV"/>
                     <connections>
@@ -192,11 +206,13 @@
                         <outlet property="backgroundFood" destination="lWj-r5-SBz" id="Kie-nt-Mkg"/>
                         <outlet property="backgroundHome" destination="giy-AA-jvr" id="VGa-P9-5bq"/>
                         <outlet property="backgroundMountain" destination="XXu-tc-dRt" id="QNj-EN-bDS"/>
+                        <outlet property="buttonContainerViewTopConstraint" destination="z5F-LN-xUL" id="89M-KP-wfk"/>
                         <outlet property="containerView" destination="LER-5Z-EXM" id="rFR-0k-A22"/>
                         <outlet property="facebookButton" destination="pbj-Ru-j0Q" id="hM0-jU-0Of"/>
                         <outlet property="haveAnAccountLabel" destination="faK-MG-3vf" id="dKC-qz-6M3"/>
                         <outlet property="loginButton" destination="m39-9A-UIQ" id="ViL-sr-bFS"/>
                         <outlet property="logoImageView" destination="dHb-gc-rUo" id="kqE-Au-ddm"/>
+                        <outlet property="messageContainerViewTopConstraint" destination="Ok9-W6-a2A" id="1Xp-4R-ZBH"/>
                         <outlet property="messageView" destination="wrO-ZI-aYX" id="1pt-hV-ekl"/>
                         <outlet property="messageView2" destination="Fdo-Bt-clT" id="BqJ-2i-Dk4"/>
                         <outlet property="messageView3" destination="0YZ-dA-Wog" id="gj6-i4-Y2v"/>
@@ -205,12 +221,11 @@
                         <outlet property="orText" destination="JEF-6W-0IF" id="bL7-Ss-fCr"/>
                         <outlet property="orView" destination="wd1-cl-xBG" id="VCU-GP-s7W"/>
                         <outlet property="signupButton" destination="H6u-lu-1jq" id="Ihy-6i-i1A"/>
-                        <outlet property="subtitleLabel" destination="8Mn-sf-8SW" id="OC5-Bj-Y8z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hXm-bs-rTw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="344" y="-139"/>
+            <point key="canvasLocation" x="344" y="-129"/>
         </scene>
         <!--Phone Signup Username View Controller-->
         <scene sceneID="QSU-en-BdW">
@@ -919,13 +934,16 @@
     <resources>
         <image name="ButtonUpload.png" width="96" height="96"/>
         <image name="facebook-login-button.png" width="286" height="50"/>
-        <image name="intro-beach.png" width="640" height="1136"/>
-        <image name="intro-church.png" width="640" height="1136"/>
-        <image name="intro-food.png" width="640" height="1136"/>
-        <image name="intro-home.png" width="640" height="1136"/>
-        <image name="intro-mountains-sea.png" width="640" height="1136"/>
+        <image name="intro-beach.png" width="320" height="568"/>
+        <image name="intro-church.png" width="320" height="568"/>
+        <image name="intro-food.png" width="320" height="568"/>
+        <image name="intro-home.png" width="320" height="568"/>
+        <image name="intro-mountains-sea.png" width="320" height="568"/>
+        <image name="left-separator.png" width="70" height="1"/>
         <image name="login-button.png" width="286" height="50"/>
-        <image name="w-logo.png" width="84" height="48"/>
+        <image name="right-separator.png" width="70" height="1"/>
+        <image name="sign-up-button.png" width="134" height="61"/>
+        <image name="wonder-logo.png" width="85" height="49"/>
     </resources>
     <color key="tintColor" red="0.65490196079999996" green="0.65490196079999996" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

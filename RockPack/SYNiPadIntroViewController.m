@@ -18,6 +18,11 @@
 #import "SYNTrackingManager.h"
 #import "SYNDeviceManager.h"
 
+#define DEGREES_RADIANS(angle) ((angle) / 180.0 * M_PI)
+
+static const CGFloat TransitionPause = 3.5f;
+
+
 @interface SYNiPadIntroViewController () <UINavigationControllerDelegate>
 
 @property (nonatomic, strong) IBOutlet UIButton *facebookButton;
@@ -28,6 +33,12 @@
 @property (strong, nonatomic) IBOutlet UIImageView *logoImageView;
 @property (strong, nonatomic) IBOutlet UIView *buttonContainerView;
 @property (strong, nonatomic) IBOutlet UIView *userContainerView;
+@property (strong, nonatomic) IBOutlet UIImageView *backgroundFood;
+@property (strong, nonatomic) IBOutlet UIImageView *backgroundChurch;
+@property (strong, nonatomic) IBOutlet UIImageView *backgroundBeach;
+@property (strong, nonatomic) IBOutlet UIImageView *backgroundMountain;
+@property (strong, nonatomic) IBOutlet UIImageView *backgroundHome;
+@property (strong, nonatomic) IBOutlet UILabel *messageView;
 
 @end
 
@@ -48,39 +59,105 @@
         
         tmpFrame = CGRectMake(self.view.frame.size.height/2-(self.logoImageView.frame.size.width/2), self.view.frame.size.height/2-(self.logoImageView.frame.size.height)*2, tmpFrame.size.width, tmpFrame.size.height);
     }
-    CGRect finalFrame = self.logoImageView.frame;
-    self.logoImageView.frame = tmpFrame;
-    self.logoImageView.alpha = 0.0f;
 
     
-    [UIView animateWithDuration:1.0f animations:^{
-        self.logoImageView.alpha = 1.0f;
-    }];
+    NSMutableArray* animationBlocks = [NSMutableArray new];
     
+    typedef void(^animationBlock)(BOOL);
     
-    [UIView animateWithDuration:1.2f delay:1.1f options:UIViewAnimationCurveEaseInOut animations:^{
-        self.logoImageView.frame = finalFrame;
-        
-    } completion:^(BOOL finished) {
-        self.buttonContainerView.hidden = NO;
-        self.buttonContainerView.alpha = 0.0f;
-        
-        [UIView animateWithDuration:1.0 animations:^{
-            
-            self.buttonContainerView.alpha = 1.0f;
-            
-        } completion:^(BOOL finished) {
-            self.userContainerView.hidden = NO;
-            self.userContainerView.alpha = 0.0f;
-            [UIView animateWithDuration:0.2 animations:^{
-             
-                self.userContainerView.alpha = 1.0f;
-            }];
-            
-        }];
-        
-    }];
+    animationBlock (^getNextAnimation)() = ^{
+        animationBlock block = (animationBlock)[animationBlocks firstObject];
+        if (block){
+            [animationBlocks removeObjectAtIndex:0];
+            return block;
+        }else{
+            return ^(BOOL finished){};
+        }
+    };
 
+    //add a block to our queue
+    [animationBlocks addObject:^(BOOL finished){;
+        [UIView animateWithDuration:1.5 delay:0.5 options:UIViewAnimationCurveEaseInOut animations:^{
+            CGRect frame = self.backgroundFood.frame;
+            
+            frame.size = CGSizeMake(frame.size.width*2, frame.size.height*2);
+            frame.origin = CGPointMake(-frame.size.width/3, -frame.size.height/3);
+            
+            self.backgroundFood.frame = frame;
+            self.backgroundFood.alpha = 0.0;
+            
+            frame = self.messageView.frame;
+            self.messageView.alpha = 0.0;
+//
+//            
+//            frame = self.messageView2.frame;
+//            
+//            frame.origin.y += 60;
+//            
+//            self.messageView2.frame = frame;
+//            self.messageView2.alpha = 1.0;
+            
+        } completion:getNextAnimation()];
+   
+    
+    }];
+    
+//    [animationBlocks addObject:^(BOOL finished){;
+//        
+//        CGRect frame = self.backgroundChurch.frame;
+//        frame.origin.x -= self.backgroundChurch.frame.size.width/2;
+//        frame.origin.y -= self.backgroundChurch.frame.size.height/2;
+//        
+//        self.backgroundChurch.frame = frame;
+//        
+////        self.logoImageView.translatesAutoresizingMaskIntoConstraints = YES;
+////        self.subtitleLabel.translatesAutoresizingMaskIntoConstraints = YES;
+//        self.backgroundChurch.translatesAutoresizingMaskIntoConstraints = YES;
+////        self.messageView2.translatesAutoresizingMaskIntoConstraints = YES;
+//
+//        [UIView animateWithDuration:1.5 delay:0.5 options:UIViewAnimationCurveEaseInOut animations:^{
+//
+//            self.backgroundChurch.layer.anchorPoint = CGPointMake(0, 0);
+//            [UIView animateWithDuration:1.0 delay:0.0 options:UIViewAnimationCurveEaseInOut animations:^{
+//                self.backgroundChurch.transform = CGAffineTransformMakeRotation(DEGREES_RADIANS(45));
+//                self.backgroundChurch.alpha = 0.0;
+////                self.messageView2.alpha = 0.0;
+////                self.messageView3.alpha = 1.0;
+//                
+//            } completion:getNextAnimation()];
+//            
+//            
+//        } completion:getNextAnimation()];
+//        
+//        
+//    }];
+//
+//    
+//    [animationBlocks addObject:^(BOOL finished){;
+//        
+//        [UIView animateWithDuration:1.0 delay:0.5 options:UIViewAnimationCurveEaseInOut animations:^{
+//            CGRect frame = self.backgroundBeach.frame;
+//            frame.origin.x -= frame.size.width;
+//            self.backgroundBeach.frame = frame;
+//            self.backgroundBeach.alpha = 0.0;
+//            
+//        } completion:getNextAnimation()];
+//        
+//    }];
+//    
+//    [animationBlocks addObject:^(BOOL finished){;
+//        self.backgroundMountain.translatesAutoresizingMaskIntoConstraints = YES;
+//        
+//        [UIView animateWithDuration:1.5 delay:0.5 options:UIViewAnimationCurveEaseInOut animations:^{
+//            self.backgroundMountain.layer.transform = CATransform3DMakeRotation(M_PI/2, 0.0, 1.0, 0.0);
+//            self.backgroundMountain.alpha = 0.0;
+//            
+//        } completion:getNextAnimation()];
+//        
+//    }];
+
+    getNextAnimation()(YES);
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
