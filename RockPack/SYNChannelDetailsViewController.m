@@ -673,7 +673,7 @@
 #pragma mark - Collection Delegate/Data Source Methods
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-	return [self.channel.videoInstancesSet count];
+	return [self.model itemCount];
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
