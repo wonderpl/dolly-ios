@@ -59,7 +59,7 @@
 	MKNKUserSuccessBlock internalSuccessBlock = ^(NSDictionary *response) {
 		__strong typeof(self) sself = wself;
 		
-		wself.isSavingNextPage = YES;
+		sself.isSavingNextPage = YES;
         
 		[sself.channel addVideoInstancesFromDictionary:response];
 		for (VideoInstance *videoInstance in sself.channel.videoInstances) {
