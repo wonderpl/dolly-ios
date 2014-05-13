@@ -120,8 +120,6 @@
 	[self.feedCollectionView setContentOffset:CGPointZero animated:YES];
 }
 
-#pragma mark - Container Scroll Delegates
-
 - (void) willRotateToInterfaceOrientation: (UIInterfaceOrientation) toInterfaceOrientation
                                  duration: (NSTimeInterval) duration
 {
