@@ -31,7 +31,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="intro-home.png" translatesAutoresizingMaskIntoConstraints="NO" id="giy-AA-jvr" userLabel="Background House">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="intro-home.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="giy-AA-jvr" userLabel="Background House">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -39,21 +39,21 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="intro-mountains-sea.png" translatesAutoresizingMaskIntoConstraints="NO" id="XXu-tc-dRt" userLabel="Background Mountains">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="intro-mountains-sea.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="XXu-tc-dRt" userLabel="Background Mountains">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                 </subviews>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="intro-beach.png" translatesAutoresizingMaskIntoConstraints="NO" id="Jtl-qN-Qh5" userLabel="Background Beach">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="intro-beach.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Jtl-qN-Qh5" userLabel="Background Beach">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="intro-church.png" translatesAutoresizingMaskIntoConstraints="NO" id="YcJ-Ue-azk" userLabel="Background Church">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="intro-church.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="YcJ-Ue-azk" userLabel="Background Church">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="intro-food.png" translatesAutoresizingMaskIntoConstraints="NO" id="lWj-r5-SBz" userLabel="Background Food">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="intro-food.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="lWj-r5-SBz" userLabel="Background Food">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -141,7 +141,7 @@
                                             <segue destination="gfp-5v-9XD" kind="push" identifier="Login" id="2gW-96-ptz"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H6u-lu-1jq" userLabel="Button Signup">
+                                    <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H6u-lu-1jq" userLabel="Button Signup">
                                         <rect key="frame" x="93.5" y="207" width="134" height="61"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -934,11 +934,11 @@
     <resources>
         <image name="ButtonUpload.png" width="96" height="96"/>
         <image name="facebook-login-button.png" width="286" height="50"/>
-        <image name="intro-beach.png" width="320" height="568"/>
-        <image name="intro-church.png" width="320" height="568"/>
-        <image name="intro-food.png" width="320" height="568"/>
-        <image name="intro-home.png" width="320" height="568"/>
-        <image name="intro-mountains-sea.png" width="320" height="568"/>
+        <image name="intro-beach.jpg" width="640" height="1136"/>
+        <image name="intro-church.jpg" width="640" height="1136"/>
+        <image name="intro-food.jpg" width="640" height="1136"/>
+        <image name="intro-home.jpg" width="640" height="1136"/>
+        <image name="intro-mountains-sea.jpg" width="640" height="1136"/>
         <image name="left-separator.png" width="70" height="1"/>
         <image name="login-button.png" width="286" height="50"/>
         <image name="right-separator.png" width="70" height="1"/>

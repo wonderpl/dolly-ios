@@ -119,7 +119,6 @@ static const CGFloat TransitionPause = 3.5f;
             }
         };
         
-        //add a block to our queue
         [animationBlocks addObject:^(BOOL finished){;
             self.logoImageView.alpha = 0.5;
             [UIView animateWithDuration:1.0 animations:^{
@@ -129,18 +128,21 @@ static const CGFloat TransitionPause = 3.5f;
             	
                 self.logoImageView.alpha = 1.0;
                 self.logoImageView.frame = frame;
-                NSLog(@"1st Animation");
             } completion: getNextAnimation()];
         }];
         
         
         [animationBlocks addObject:^(BOOL finished){;
+            CGRect frame = self.messageView.frame;
+            frame.origin.y -= 30;
+            self.messageView.frame = frame;
+            self.messageView.alpha = 1.0;
+
             [UIView animateWithDuration:1.0 animations:^{
                 CGRect frame = self.messageView.frame;
                 frame.origin.y += 30;
                 self.messageView.frame = frame;
                 self.messageView.alpha = 1.0;
-                NSLog(@"3rd");
             } completion: getNextAnimation()];
         }];
         
@@ -156,7 +158,6 @@ static const CGFloat TransitionPause = 3.5f;
                 self.facebookButton.frame = frame;
                 self.facebookButton.alpha = 1.0;
                 self.orView.alpha = 1.0;
-                NSLog(@"4th Animation");
             } completion: getNextAnimation()];
         }];
 
@@ -171,7 +172,6 @@ static const CGFloat TransitionPause = 3.5f;
                 frame.origin.y += 30;
                 self.loginButton.frame = frame;
                 self.loginButton.alpha = 1.0;
-                NSLog(@"5th Animation");
             } completion: getNextAnimation()];
         }];
         
@@ -186,7 +186,6 @@ static const CGFloat TransitionPause = 3.5f;
                 self.signupButton.frame = frame;
                 self.signupButton.alpha = 1.0;
                 self.alreadyHaveAccountLabel.alpha = 1.0;
-                NSLog(@"5th Animation");
             } completion: getNextAnimation()];
         }];
 
@@ -201,11 +200,6 @@ static const CGFloat TransitionPause = 3.5f;
                 self.backgroundFood.frame = frame;
                 self.backgroundFood.alpha = 0.0;
 
-                
-                CGAffineTransform scaleAndMove = CGAffineTransformConcat(CGAffineTransformMakeTranslation(-90, 0), CGAffineTransformMakeScale(1.5, 1.5));
-                
-                self.messageView.transform = scaleAndMove;
-                self.messageView.frame = frame;
                 self.messageView.alpha = 0.0;
                 
                 self.messageView2.transform = CGAffineTransformMakeTranslation(0, 120);
@@ -275,9 +269,18 @@ static const CGFloat TransitionPause = 3.5f;
 
         
         [animationBlocks addObject:^(BOOL finished){;
-            self.backgroundMountain.translatesAutoresizingMaskIntoConstraints = YES;
 
-            [UIView animateWithDuration:1.5 delay:TransitionPause options:UIViewAnimationCurveEaseInOut animations:^{
+            self.backgroundMountain.translatesAutoresizingMaskIntoConstraints = YES;
+            self.backgroundMountain.layer.anchorPoint = CGPointMake(1.0, 0.0);
+            
+            CGRect frame = self.backgroundMountain.frame;
+            frame.origin.x += self.backgroundMountain.frame.size.width/2;
+            frame.origin.y -= self.backgroundMountain.frame.size.height/2;
+            
+            self.backgroundMountain.frame = frame;
+            
+            [UIView animateWithDuration:1.5 delay:3.5 options:UIViewAnimationCurveEaseInOut animations:^{
+                
                 self.backgroundMountain.layer.transform = CATransform3DMakeRotation(M_PI/2, 0.0, 1.0, 0.0);
                 self.backgroundMountain.alpha = 0.0;
                 self.messageView4.alpha = 0.0;

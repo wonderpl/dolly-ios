@@ -281,10 +281,6 @@
 		4CF39EF418CDF4420077CDF0 /* SYNProfileSubscriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF39EF318CDF4420077CDF0 /* SYNProfileSubscriptionViewController.m */; };
 		4CF454E119113BCE0078473B /* searchbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CF454DF19113BCE0078473B /* searchbar.png */; };
 		4CF454E219113BCE0078473B /* searchbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CF454E019113BCE0078473B /* searchbar@2x.png */; };
-		9937C9F3192228F6002D3C23 /* intro-beach~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 9937C9EF192228F6002D3C23 /* intro-beach~iphone.png */; };
-		9937C9F4192228F6002D3C23 /* intro-church~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 9937C9F0192228F6002D3C23 /* intro-church~iphone.png */; };
-		9937C9F5192228F6002D3C23 /* intro-food~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 9937C9F1192228F6002D3C23 /* intro-food~iphone.png */; };
-		9937C9F6192228F6002D3C23 /* intro-mountains-sea~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 9937C9F2192228F6002D3C23 /* intro-mountains-sea~iphone.png */; };
 		9937C9FB19222CBC002D3C23 /* wonder-logo@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9937C9F719222CBC002D3C23 /* wonder-logo@2x~ipad.png */; };
 		9937C9FC19222CBC002D3C23 /* wonder-logo@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 9937C9F819222CBC002D3C23 /* wonder-logo@2x~iphone.png */; };
 		9937C9FD19222CBC002D3C23 /* wonder-logo~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9937C9F919222CBC002D3C23 /* wonder-logo~ipad.png */; };
@@ -293,14 +289,23 @@
 		9937CA0219222CD6002D3C23 /* left-separator@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9937CA0019222CD6002D3C23 /* left-separator@2x.png */; };
 		9937CA0519222CE5002D3C23 /* right-separator.png in Resources */ = {isa = PBXBuildFile; fileRef = 9937CA0319222CE5002D3C23 /* right-separator.png */; };
 		9937CA0619222CE5002D3C23 /* right-separator@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9937CA0419222CE5002D3C23 /* right-separator@2x.png */; };
-		9937CA0A19222DBA002D3C23 /* intro-home~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 9937CA0819222DBA002D3C23 /* intro-home~iphone.png */; };
-		9937CA1019222E8A002D3C23 /* intro-beach~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9937CA0B19222E8A002D3C23 /* intro-beach~ipad.png */; };
-		9937CA1119222E8A002D3C23 /* intro-church~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9937CA0C19222E8A002D3C23 /* intro-church~ipad.png */; };
-		9937CA1219222E8A002D3C23 /* intro-food~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9937CA0D19222E8A002D3C23 /* intro-food~ipad.png */; };
-		9937CA1319222E8A002D3C23 /* intro-home~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9937CA0E19222E8A002D3C23 /* intro-home~ipad.png */; };
-		9937CA1419222E8A002D3C23 /* intro-mountains-sea~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 9937CA0F19222E8A002D3C23 /* intro-mountains-sea~ipad.png */; };
 		9937CA17192250B7002D3C23 /* sign-up-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 9937CA15192250B7002D3C23 /* sign-up-button.png */; };
 		9937CA18192250B7002D3C23 /* sign-up-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9937CA16192250B7002D3C23 /* sign-up-button@2x.png */; };
+		9937CA2819228EFC002D3C23 /* intro-beach@2x~ipad.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9937CA1919228EFC002D3C23 /* intro-beach@2x~ipad.jpg */; };
+		9937CA2919228EFC002D3C23 /* intro-beach~ipad.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9937CA1A19228EFC002D3C23 /* intro-beach~ipad.jpg */; };
+		9937CA2A19228EFC002D3C23 /* intro-beach~iphone.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9937CA1B19228EFC002D3C23 /* intro-beach~iphone.jpg */; };
+		9937CA2B19228EFC002D3C23 /* intro-church@2x~ipad.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9937CA1C19228EFC002D3C23 /* intro-church@2x~ipad.jpg */; };
+		9937CA2C19228EFC002D3C23 /* intro-church~ipad.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9937CA1D19228EFC002D3C23 /* intro-church~ipad.jpg */; };
+		9937CA2D19228EFC002D3C23 /* intro-church~iphone.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9937CA1E19228EFC002D3C23 /* intro-church~iphone.jpg */; };
+		9937CA2E19228EFC002D3C23 /* intro-food@2x~ipad.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9937CA1F19228EFC002D3C23 /* intro-food@2x~ipad.jpg */; };
+		9937CA2F19228EFC002D3C23 /* intro-food~ipad.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9937CA2019228EFC002D3C23 /* intro-food~ipad.jpg */; };
+		9937CA3019228EFC002D3C23 /* intro-food~iphone.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9937CA2119228EFC002D3C23 /* intro-food~iphone.jpg */; };
+		9937CA3119228EFC002D3C23 /* intro-home@2x~ipad.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9937CA2219228EFC002D3C23 /* intro-home@2x~ipad.jpg */; };
+		9937CA3219228EFC002D3C23 /* intro-home~ipad.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9937CA2319228EFC002D3C23 /* intro-home~ipad.jpg */; };
+		9937CA3319228EFC002D3C23 /* intro-home~iphone.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9937CA2419228EFC002D3C23 /* intro-home~iphone.jpg */; };
+		9937CA3419228EFC002D3C23 /* intro-mountains-sea@2x~ipad.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9937CA2519228EFC002D3C23 /* intro-mountains-sea@2x~ipad.jpg */; };
+		9937CA3519228EFC002D3C23 /* intro-mountains-sea~ipad.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9937CA2619228EFC002D3C23 /* intro-mountains-sea~ipad.jpg */; };
+		9937CA3619228EFC002D3C23 /* intro-mountains-sea~iphone.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9937CA2719228EFC002D3C23 /* intro-mountains-sea~iphone.jpg */; };
 		993B1AC3191A95CF008532D4 /* TabFeed~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 993B1ABF191A95CF008532D4 /* TabFeed~iphone.png */; };
 		993B1AC4191A95CF008532D4 /* TabFeedSelected@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 993B1AC0191A95CF008532D4 /* TabFeedSelected@2x~iphone.png */; };
 		993B1AC5191A95CF008532D4 /* TabFeedSelected~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 993B1AC1191A95CF008532D4 /* TabFeedSelected~iphone.png */; };
@@ -1090,10 +1095,6 @@
 		4CF39EF318CDF4420077CDF0 /* SYNProfileSubscriptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNProfileSubscriptionViewController.m; sourceTree = "<group>"; };
 		4CF454DF19113BCE0078473B /* searchbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchbar.png; sourceTree = "<group>"; };
 		4CF454E019113BCE0078473B /* searchbar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchbar@2x.png"; sourceTree = "<group>"; };
-		9937C9EF192228F6002D3C23 /* intro-beach~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "intro-beach~iphone.png"; sourceTree = "<group>"; };
-		9937C9F0192228F6002D3C23 /* intro-church~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "intro-church~iphone.png"; sourceTree = "<group>"; };
-		9937C9F1192228F6002D3C23 /* intro-food~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "intro-food~iphone.png"; sourceTree = "<group>"; };
-		9937C9F2192228F6002D3C23 /* intro-mountains-sea~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "intro-mountains-sea~iphone.png"; sourceTree = "<group>"; };
 		9937C9F719222CBC002D3C23 /* wonder-logo@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wonder-logo@2x~ipad.png"; sourceTree = "<group>"; };
 		9937C9F819222CBC002D3C23 /* wonder-logo@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wonder-logo@2x~iphone.png"; sourceTree = "<group>"; };
 		9937C9F919222CBC002D3C23 /* wonder-logo~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wonder-logo~ipad.png"; sourceTree = "<group>"; };
@@ -1102,14 +1103,23 @@
 		9937CA0019222CD6002D3C23 /* left-separator@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left-separator@2x.png"; sourceTree = "<group>"; };
 		9937CA0319222CE5002D3C23 /* right-separator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "right-separator.png"; sourceTree = "<group>"; };
 		9937CA0419222CE5002D3C23 /* right-separator@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "right-separator@2x.png"; sourceTree = "<group>"; };
-		9937CA0819222DBA002D3C23 /* intro-home~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "intro-home~iphone.png"; sourceTree = "<group>"; };
-		9937CA0B19222E8A002D3C23 /* intro-beach~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "intro-beach~ipad.png"; sourceTree = "<group>"; };
-		9937CA0C19222E8A002D3C23 /* intro-church~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "intro-church~ipad.png"; sourceTree = "<group>"; };
-		9937CA0D19222E8A002D3C23 /* intro-food~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "intro-food~ipad.png"; sourceTree = "<group>"; };
-		9937CA0E19222E8A002D3C23 /* intro-home~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "intro-home~ipad.png"; sourceTree = "<group>"; };
-		9937CA0F19222E8A002D3C23 /* intro-mountains-sea~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "intro-mountains-sea~ipad.png"; sourceTree = "<group>"; };
 		9937CA15192250B7002D3C23 /* sign-up-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sign-up-button.png"; sourceTree = "<group>"; };
 		9937CA16192250B7002D3C23 /* sign-up-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sign-up-button@2x.png"; sourceTree = "<group>"; };
+		9937CA1919228EFC002D3C23 /* intro-beach@2x~ipad.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "intro-beach@2x~ipad.jpg"; sourceTree = "<group>"; };
+		9937CA1A19228EFC002D3C23 /* intro-beach~ipad.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "intro-beach~ipad.jpg"; sourceTree = "<group>"; };
+		9937CA1B19228EFC002D3C23 /* intro-beach~iphone.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "intro-beach~iphone.jpg"; sourceTree = "<group>"; };
+		9937CA1C19228EFC002D3C23 /* intro-church@2x~ipad.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "intro-church@2x~ipad.jpg"; sourceTree = "<group>"; };
+		9937CA1D19228EFC002D3C23 /* intro-church~ipad.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "intro-church~ipad.jpg"; sourceTree = "<group>"; };
+		9937CA1E19228EFC002D3C23 /* intro-church~iphone.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "intro-church~iphone.jpg"; sourceTree = "<group>"; };
+		9937CA1F19228EFC002D3C23 /* intro-food@2x~ipad.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "intro-food@2x~ipad.jpg"; sourceTree = "<group>"; };
+		9937CA2019228EFC002D3C23 /* intro-food~ipad.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "intro-food~ipad.jpg"; sourceTree = "<group>"; };
+		9937CA2119228EFC002D3C23 /* intro-food~iphone.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "intro-food~iphone.jpg"; sourceTree = "<group>"; };
+		9937CA2219228EFC002D3C23 /* intro-home@2x~ipad.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "intro-home@2x~ipad.jpg"; sourceTree = "<group>"; };
+		9937CA2319228EFC002D3C23 /* intro-home~ipad.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "intro-home~ipad.jpg"; sourceTree = "<group>"; };
+		9937CA2419228EFC002D3C23 /* intro-home~iphone.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "intro-home~iphone.jpg"; sourceTree = "<group>"; };
+		9937CA2519228EFC002D3C23 /* intro-mountains-sea@2x~ipad.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "intro-mountains-sea@2x~ipad.jpg"; sourceTree = "<group>"; };
+		9937CA2619228EFC002D3C23 /* intro-mountains-sea~ipad.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "intro-mountains-sea~ipad.jpg"; sourceTree = "<group>"; };
+		9937CA2719228EFC002D3C23 /* intro-mountains-sea~iphone.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "intro-mountains-sea~iphone.jpg"; sourceTree = "<group>"; };
 		993B1ABF191A95CF008532D4 /* TabFeed~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabFeed~iphone.png"; sourceTree = "<group>"; };
 		993B1AC0191A95CF008532D4 /* TabFeedSelected@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabFeedSelected@2x~iphone.png"; sourceTree = "<group>"; };
 		993B1AC1191A95CF008532D4 /* TabFeedSelected~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabFeedSelected~iphone.png"; sourceTree = "<group>"; };
@@ -3052,16 +3062,21 @@
 		99BEAEBA191D1F5400A27FC7 /* Backgrounds */ = {
 			isa = PBXGroup;
 			children = (
-				9937CA0B19222E8A002D3C23 /* intro-beach~ipad.png */,
-				9937CA0C19222E8A002D3C23 /* intro-church~ipad.png */,
-				9937CA0D19222E8A002D3C23 /* intro-food~ipad.png */,
-				9937CA0E19222E8A002D3C23 /* intro-home~ipad.png */,
-				9937CA0F19222E8A002D3C23 /* intro-mountains-sea~ipad.png */,
-				9937CA0819222DBA002D3C23 /* intro-home~iphone.png */,
-				9937C9EF192228F6002D3C23 /* intro-beach~iphone.png */,
-				9937C9F0192228F6002D3C23 /* intro-church~iphone.png */,
-				9937C9F1192228F6002D3C23 /* intro-food~iphone.png */,
-				9937C9F2192228F6002D3C23 /* intro-mountains-sea~iphone.png */,
+				9937CA1919228EFC002D3C23 /* intro-beach@2x~ipad.jpg */,
+				9937CA1A19228EFC002D3C23 /* intro-beach~ipad.jpg */,
+				9937CA1B19228EFC002D3C23 /* intro-beach~iphone.jpg */,
+				9937CA1C19228EFC002D3C23 /* intro-church@2x~ipad.jpg */,
+				9937CA1D19228EFC002D3C23 /* intro-church~ipad.jpg */,
+				9937CA1E19228EFC002D3C23 /* intro-church~iphone.jpg */,
+				9937CA1F19228EFC002D3C23 /* intro-food@2x~ipad.jpg */,
+				9937CA2019228EFC002D3C23 /* intro-food~ipad.jpg */,
+				9937CA2119228EFC002D3C23 /* intro-food~iphone.jpg */,
+				9937CA2219228EFC002D3C23 /* intro-home@2x~ipad.jpg */,
+				9937CA2319228EFC002D3C23 /* intro-home~ipad.jpg */,
+				9937CA2419228EFC002D3C23 /* intro-home~iphone.jpg */,
+				9937CA2519228EFC002D3C23 /* intro-mountains-sea@2x~ipad.jpg */,
+				9937CA2619228EFC002D3C23 /* intro-mountains-sea~ipad.jpg */,
+				9937CA2719228EFC002D3C23 /* intro-mountains-sea~iphone.jpg */,
 			);
 			name = Backgrounds;
 			sourceTree = "<group>";
@@ -3964,6 +3979,7 @@
 				9937CA0219222CD6002D3C23 /* left-separator@2x.png in Resources */,
 				BE270BD016EF386300CDDA6D /* DividerLogin.png in Resources */,
 				E9B9213F18C78CA2003093B8 /* TabActivityNotiHighlighted~iphone.png in Resources */,
+				9937CA3519228EFC002D3C23 /* intro-mountains-sea~ipad.jpg in Resources */,
 				BE270BD116EF386300CDDA6D /* DividerLogin@2x.png in Resources */,
 				4C5E862718B65AAE00D0E937 /* In_AddButton@2x.png in Resources */,
 				0E19FBBF1822738A0007DF5B /* SYNChannelSearchCell.xib in Resources */,
@@ -3974,11 +3990,11 @@
 				99F300DE191BEBBE002C1D25 /* share-message-background~ipad.png in Resources */,
 				01A79B9216F32C3400B05084 /* ShuttleBarRemainingBar@2x.png in Resources */,
 				01A79B9416F32C3400B05084 /* ShuttleBarSliderThumb.png in Resources */,
-				9937CA1019222E8A002D3C23 /* intro-beach~ipad.png in Resources */,
 				993B1B4F191AA4D3008532D4 /* TabProfileSelected~ipad@2x.png in Resources */,
 				01A79B9516F32C3400B05084 /* ShuttleBarSliderThumb@2x.png in Resources */,
 				99F300DD191BEBBE002C1D25 /* share-message-background@2x~ipad.png in Resources */,
 				01A79B9616F32C3400B05084 /* ShuttleBarBufferBar.png in Resources */,
+				9937CA2919228EFC002D3C23 /* intro-beach~ipad.jpg in Resources */,
 				E9EE08D718F80326000DC06A /* ProximaNova-Light.otf in Resources */,
 				01A79B9716F32C3400B05084 /* ShuttleBarBufferBar@2x.png in Resources */,
 				9937CA0119222CD6002D3C23 /* left-separator.png in Resources */,
@@ -3989,7 +4005,6 @@
 				01A79B9A16F32C3400B05084 /* ShuttleBarProgressBar.png in Resources */,
 				01A79B9B16F32C3400B05084 /* ShuttleBarProgressBar@2x.png in Resources */,
 				01A79B9C16F32C3400B05084 /* ButtonShuttleBarPause.png in Resources */,
-				9937C9F6192228F6002D3C23 /* intro-mountains-sea~iphone.png in Resources */,
 				44CAFC661884384900B70139 /* ButtonMoreHints@2x.png in Resources */,
 				01A79B9D16F32C3400B05084 /* ButtonShuttleBarPause@2x.png in Resources */,
 				993B1B4D191AA4D3008532D4 /* TabProfile~ipad@2x.png in Resources */,
@@ -4033,6 +4048,7 @@
 				BED027D91834F4EA00636659 /* SYNAccountSettingsViewController.xib in Resources */,
 				1F458B0717E1C4E6003C14AC /* AppIcon76x76@2x.png in Resources */,
 				99BEAEC2191D1F6500A27FC7 /* facebook-login-button@2x.png in Resources */,
+				9937CA2C19228EFC002D3C23 /* intro-church~ipad.jpg in Resources */,
 				BEC39C0E184CA4F700DA8089 /* SYNFeedbackViewController.xib in Resources */,
 				E9FDCD9E188D92EF00C31CC1 /* BackButton.png in Resources */,
 				E979F31119081C5500FC6743 /* SYNFeedVideoSmallCell.xib in Resources */,
@@ -4072,6 +4088,7 @@
 				E99AA424188035F100330ABB /* LoginLogo.png in Resources */,
 				993B1B57191AA4E6008532D4 /* TabSearchSelected~ipad@2x.png in Resources */,
 				993B1ADF191A9676008532D4 /* TabFeed@2x~iphone.png in Resources */,
+				9937CA3019228EFC002D3C23 /* intro-food~iphone.jpg in Resources */,
 				9937C9FB19222CBC002D3C23 /* wonder-logo@2x~ipad.png in Resources */,
 				BEB31397182170E500FAF98A /* SYNSearchResultsUserCell.xib in Resources */,
 				3862E8B7172979410066E8E7 /* SYNChannelMidCell~iphone.xib in Resources */,
@@ -4091,7 +4108,6 @@
 				993B1B4E191AA4D3008532D4 /* TabProfileSelected~ipad.png in Resources */,
 				99F300D4191BD7AF002C1D25 /* ShareMailButton@2x.png in Resources */,
 				E9B9213318C78C94003093B8 /* TabActivityNotiHighlighted@2x.png in Resources */,
-				9937C9F3192228F6002D3C23 /* intro-beach~iphone.png in Resources */,
 				E9EE08DB18F80379000DC06A /* ProximaNova-Bold.otf in Resources */,
 				BEA216AF17E8A529007C6DF7 /* SYNOneToOneSharingFriendCell.xib in Resources */,
 				99F300D2191BD7AF002C1D25 /* ShareFacebookButton@2x.png in Resources */,
@@ -4138,6 +4154,7 @@
 				BED027C81834D4CC00636659 /* ButtonMoreBlog.png in Resources */,
 				BE1B3DCB180D806A00DA2BD6 /* SYNActivityViewController~iphone.xib in Resources */,
 				BED027D11834D4CC00636659 /* ButtonMoreLogout@2x.png in Resources */,
+				9937CA3619228EFC002D3C23 /* intro-mountains-sea~iphone.jpg in Resources */,
 				E9AD5B69187D6B9600298D95 /* ButtonFacebook@2x.png in Resources */,
 				BED027B41833F68100636659 /* SYNOptionsOverlayViewController~iphone.xib in Resources */,
 				4C5E861118B6353900D0E937 /* SYNDiscoverOverlayVideoViewController~iphone.xib in Resources */,
@@ -4159,7 +4176,6 @@
 				BED027D31834D4CC00636659 /* ButtonMoreRate@2x.png in Resources */,
 				993B1AC5191A95CF008532D4 /* TabFeedSelected~iphone.png in Resources */,
 				993B1ADC191A962F008532D4 /* TabActivitySelected@2x~iphone.png in Resources */,
-				9937CA0A19222DBA002D3C23 /* intro-home~iphone.png in Resources */,
 				4C03237E18AE6FBD00E168EF /* SYNFriendCell.xib in Resources */,
 				4C03237C18AE6F9E00E168EF /* SYNFriendCell~iphone.xib in Resources */,
 				0EF07868181EAE8300667417 /* ButtonMore@2x.png in Resources */,
@@ -4170,6 +4186,7 @@
 				4C0B9571191283D8008D8036 /* SYNSearchVideoLargeCell.xib in Resources */,
 				E99B8D3E1892AD9500E08ABD /* ScrubberBarHD.png in Resources */,
 				E905A93B189ABBCB00FED785 /* SYNNotificationsTableViewCell~ipad.xib in Resources */,
+				9937CA3419228EFC002D3C23 /* intro-mountains-sea@2x~ipad.jpg in Resources */,
 				E9C1A05B18F8448E00CC3F3E /* SYNVideoActionsCell.xib in Resources */,
 				BE851B48183BE6BC00B8E8C6 /* ButtonUpload.png in Resources */,
 				0E0062E5188EBCCC00429C79 /* SYNOnBoardingSectionHeader.xib in Resources */,
@@ -4186,18 +4203,17 @@
 				E985D37118FED76E00D5A9E1 /* ShareButton.png in Resources */,
 				4CF454E119113BCE0078473B /* searchbar.png in Resources */,
 				993B1AC3191A95CF008532D4 /* TabFeed~iphone.png in Resources */,
-				9937CA1419222E8A002D3C23 /* intro-mountains-sea~ipad.png in Resources */,
 				1F1B4BD7174280F0009DEB0C /* PlaceholderVideoWide@2x.png in Resources */,
 				1F1B4BDA1742852A009DEB0C /* PlaceholderVideoWide@2x~iphone.png in Resources */,
 				1F1B4BDB1742852A009DEB0C /* PlaceholderVideoWide~iphone.png in Resources */,
 				4C5E862F18B6819400D0E937 /* SYNCollectectionDetailsOverlayViewController.xib in Resources */,
 				BE1B3DD8180EA31800DA2BD6 /* SYNDiscoverCategoriesCell.xib in Resources */,
 				1F51A6921742A93B009907CA /* PlaceholderAvatarChannel.png in Resources */,
+				9937CA2E19228EFC002D3C23 /* intro-food@2x~ipad.jpg in Resources */,
 				1F51A6931742A93B009907CA /* PlaceholderAvatarChannel@2x.png in Resources */,
 				1F51A6961742A93B009907CA /* PlaceholderAvatarProfile.png in Resources */,
 				E9921A9818353B33001A4F3B /* SYNScrubberBar.xib in Resources */,
 				1F51A6971742A93B009907CA /* PlaceholderAvatarProfile@2x.png in Resources */,
-				9937CA1319222E8A002D3C23 /* intro-home~ipad.png in Resources */,
 				1F51A69C1742A93B009907CA /* PlaceholderChannelSmall.png in Resources */,
 				99F300DA191BD80F002C1D25 /* share-message-background.png in Resources */,
 				993B1B5C191AA526008532D4 /* TabActivity@2x~ipad.png in Resources */,
@@ -4214,7 +4230,6 @@
 				1F51A6B51742A959009907CA /* PlaceholderAvatarProfile~iphone.png in Resources */,
 				99BEAEC1191D1F6500A27FC7 /* facebook-login-button.png in Resources */,
 				4CE8AE5818A901560031CE1C /* BackButtonApp@2x.png in Resources */,
-				9937CA1119222E8A002D3C23 /* intro-church~ipad.png in Resources */,
 				E9ACC397191D1F4900ACC929 /* ShopMotionButton.png in Resources */,
 				E9C1A05918F8415300CC3F3E /* SYNVideoDivider.xib in Resources */,
 				E9EF289018FD5E9F003B2D0F /* SYNFeedVideoCell.xib in Resources */,
@@ -4222,25 +4237,27 @@
 				1F51A6BB1742A959009907CA /* PlaceholderChannelSmall~iphone.png in Resources */,
 				BEE01B5C184F638C000CF681 /* SYNOnBoardingHeader~iphone.xib in Resources */,
 				E9EE08E418F80BD8000DC06A /* SYNVideoClickToMoreCell.xib in Resources */,
-				9937CA1219222E8A002D3C23 /* intro-food~ipad.png in Resources */,
 				9937CA17192250B7002D3C23 /* sign-up-button.png in Resources */,
 				4425147718B3A52F00E5764A /* PlaceholderNotificationVideo@2x.png in Resources */,
 				1F458B0517E1C4E6003C14AC /* AppIcon60x60@2x.png in Resources */,
 				993B1AD4191A9614008532D4 /* TabSearchSelected@2x~iphone.png in Resources */,
 				4C5E861E18B6582E00D0E937 /* SYNDiscoverOverlayHighlightsViewController.xib in Resources */,
 				1F22C198174524350065D4BF /* BarSucess.png in Resources */,
+				9937CA2F19228EFC002D3C23 /* intro-food~ipad.jpg in Resources */,
 				1F22C199174524350065D4BF /* BarSucess@2x.png in Resources */,
 				1F22C19D17452DB90065D4BF /* BarNetworkLogin.png in Resources */,
 				E9ACC395191D1F4900ACC929 /* ShopMotionActionButton.png in Resources */,
 				1F22C19E17452DB90065D4BF /* BarNetworkLogin@2x.png in Resources */,
 				99F300D9191BD80F002C1D25 /* share-message-background@2x.png in Resources */,
+				9937CA2819228EFC002D3C23 /* intro-beach@2x~ipad.jpg in Resources */,
 				4C5E862618B65AAE00D0E937 /* In_AddButton.png in Resources */,
 				44D66FDF18B67832009BC910 /* ButtonMoreEdit.png in Resources */,
+				9937CA2B19228EFC002D3C23 /* intro-church@2x~ipad.jpg in Resources */,
 				E98A852319096B63001ADE09 /* SYNFeedChannelSmallCell.xib in Resources */,
+				9937CA3219228EFC002D3C23 /* intro-home~ipad.jpg in Resources */,
 				E9EF289518FD901E003B2D0F /* FreightTextPro-Book.otf in Resources */,
 				BED027C61834D4CC00636659 /* ButtonMoreAbout.png in Resources */,
 				1F458B2217E1CE8E003C14AC /* AppIcon-Dev-29x29.png in Resources */,
-				9937C9F5192228F6002D3C23 /* intro-food~iphone.png in Resources */,
 				0EF0786C181EAE9100667417 /* ButtonMore~iphone.png in Resources */,
 				BEB31365181AB81600FAF98A /* IconVideoAddDefault.png in Resources */,
 				44CAFC651884384900B70139 /* ButtonMoreHints.png in Resources */,
@@ -4251,6 +4268,7 @@
 				E985D36918FED44600D5A9E1 /* FavouriteButton@2x.png in Resources */,
 				E9AD5B68187D6B9600298D95 /* ButtonFacebook.png in Resources */,
 				BE1B3DC6180D50C700DA2BD6 /* SYNDiscoverViewController.xib in Resources */,
+				9937CA2A19228EFC002D3C23 /* intro-beach~iphone.jpg in Resources */,
 				E9FDCDA0188D92EF00C31CC1 /* ForwardButton.png in Resources */,
 				E985D36D18FED5A000D5A9E1 /* AddButton@2x.png in Resources */,
 				BEB313C2182A82B700FAF98A /* SYNCollectionVideoCell.xib in Resources */,
@@ -4270,11 +4288,12 @@
 				BEC39C18184DFF7D00DA8089 /* SYNOnBoardingHeader.xib in Resources */,
 				E9ACC396191D1F4900ACC929 /* ShopMotionButton@2x.png in Resources */,
 				38A73D8717A0086500AD9E90 /* SYNFriendsViewController~iphone.xib in Resources */,
-				9937C9F4192228F6002D3C23 /* intro-church~iphone.png in Resources */,
 				BEB313B518280F1200FAF98A /* divider_feed.png in Resources */,
 				0E26BB4C182D1209008A57F1 /* SYNChannelDetailsViewController~ipad.xib in Resources */,
 				BE57C0201843588A00C6444A /* SYNOnBoardingViewController.xib in Resources */,
 				1F4560721844E5EF0098983B /* PlaceholderAvatarFriends@2x.png in Resources */,
+				9937CA3119228EFC002D3C23 /* intro-home@2x~ipad.jpg in Resources */,
+				9937CA3319228EFC002D3C23 /* intro-home~iphone.jpg in Resources */,
 				1F458B0117E1C4E6003C14AC /* AppIcon29x29@2x.png in Resources */,
 				BE1B3DC9180D804A00DA2BD6 /* SYNActivityViewController.xib in Resources */,
 				993B1B54191AA4E6008532D4 /* TabSearch~ipad.png in Resources */,
@@ -4291,6 +4310,7 @@
 				9937CA18192250B7002D3C23 /* sign-up-button@2x.png in Resources */,
 				9937C9FD19222CBC002D3C23 /* wonder-logo~ipad.png in Resources */,
 				993B1AD3191A9614008532D4 /* TabSearch~iphone.png in Resources */,
+				9937CA2D19228EFC002D3C23 /* intro-church~iphone.jpg in Resources */,
 				BE06EEED17D759290028F2E3 /* RecentContactPlaceholder@2x.png in Resources */,
 				BE06EEF017D759390028F2E3 /* ABContactPlaceholder.png in Resources */,
 				BE06EEF117D759390028F2E3 /* ABContactPlaceholder@2x.png in Resources */,
