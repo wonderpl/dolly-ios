@@ -840,6 +840,18 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
     
 	self.genres = [[SYNGenreManager sharedManager] genres];
     [self.categoriesCollectionView reloadData];
+    
+    
+    //Loads the initial editors picks data for IPad
+    if ([self.genres count] && IS_IPAD) {
+        NSIndexPath *firstIndexPath = [NSIndexPath indexPathForItem:0 inSection:0];
+		[self selectCategoryForCollection:self.categoriesCollectionView atIndexPath:firstIndexPath];
+        [self.categoriesCollectionView selectItemAtIndexPath:firstIndexPath
+													animated:NO
+											  scrollPosition:UICollectionViewScrollPositionNone];
+        
+    }
+
 	
 }
 
