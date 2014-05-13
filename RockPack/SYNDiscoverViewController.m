@@ -89,9 +89,8 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.automaticallyAdjustsScrollViewInsets = NO;
-
 	
+    self.automaticallyAdjustsScrollViewInsets = NO;
 	
 	self.searchBar.layer.borderWidth = IS_RETINA ? 0.5 : 1.0;
 
@@ -138,6 +137,7 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
         
         CGRect sResRect = self.searchResultsController.view.frame;
         sResRect.size = self.containerView.frame.size;
+		
         self.searchResultsController.view.frame = sResRect;
     }
     
@@ -163,12 +163,19 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 
 }
 
+- (void)scrollToTop:(UIGestureRecognizer *)gestureRecognizer {
+	CGPoint touchLocation = [gestureRecognizer locationInView:self.navigationController.navigationBar];
+	
+	if (touchLocation.x > CGRectGetMaxX(self.categoriesCollectionView.frame)) {
+		[self.searchResultsController.usersCollectionView setContentOffset:CGPointZero animated:YES];
+		[self.searchResultsController.videosCollectionView setContentOffset:CGPointZero animated:YES];
+	} else {
+		[self.categoriesCollectionView setContentOffset:CGPointZero animated:YES];
+	}
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-	
-    if (IS_IPAD) {
-		self.navigationController.navigationBarHidden = YES;
-    }
 	
 	// This is to handle the case where we're on the profile page and popToRootViewControllerAnimated is called.
 	// For some reason viewWillDisappear isn't being called on the SYNProfileRootViewController so the
@@ -212,14 +219,6 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 		NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
 		[notificationCenter removeObserver:self name:UIKeyboardWillShowNotification object:self];
 		[notificationCenter removeObserver:self name:UIKeyboardWillHideNotification object:self];
-	}
-}
-
-- (void) viewDidDisappear:(BOOL)animated {
-	
-	[super viewDidDisappear:animated];
-	if (IS_IPAD) {
-		self.navigationController.navigationBarHidden = NO;
 	}
 }
 

@@ -116,6 +116,9 @@
 	[self resetData];
 }
 
+- (void)scrollToTop:(UIGestureRecognizer *)gestureRecognizer {
+	[self.feedCollectionView setContentOffset:CGPointZero animated:YES];
+}
 
 #pragma mark - Container Scroll Delegates
 

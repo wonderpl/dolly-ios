@@ -212,8 +212,9 @@
     return IS_IPAD ? 92.0f : 76.0f;
 }
 
-
-
+- (void)scrollToTop:(UIGestureRecognizer *)gestureRecognizer {
+	[self.tableView setContentOffset:CGPointMake(0, -64.0) animated:YES];
+}
 
 #pragma mark - Button Delegates
 
