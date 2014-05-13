@@ -38,9 +38,11 @@
 
 @interface SYNVideoPlayerViewController () <UIViewControllerTransitioningDelegate, UIPopoverControllerDelegate, UIScrollViewDelegate, SYNVideoPlayerDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SYNVideoInfoViewControllerDelegate>
 
-@property (nonatomic, weak) IBOutlet UIButton *avatarButton;
+@property (nonatomic, strong) IBOutlet UIButton *avatarButton;
 
-@property (nonatomic, weak) IBOutlet UILabel *videoTitleLabel;
+@property (nonatomic, strong) IBOutlet UIButton *followingButton;
+
+@property (nonatomic, strong) IBOutlet UILabel *videoTitleLabel;
 
 @property (nonatomic, assign) BOOL hasTrackedAirPlayUse;
 
@@ -52,9 +54,9 @@
 
 @property (nonatomic, strong) SYNPagingModel *model;
 
-@property (nonatomic, weak) IBOutlet UIView *videoPlayerContainerView;
+@property (nonatomic, strong) IBOutlet UIView *videoPlayerContainerView;
 
-@property (nonatomic, weak) IBOutlet UICollectionView *videosCollectionView;
+@property (nonatomic, strong) IBOutlet UICollectionView *videosCollectionView;
 
 @property (nonatomic, strong) SYNVideoInfoViewController *videoInfoViewController;
 
@@ -341,6 +343,12 @@
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (IBAction)followButtonPressed:(UIButton *)button {
+	[self followControlPressed:button withChannelOwner:self.videoInstance.originator completion:^{
+		
+	}];
+}
+
 #pragma mark - Notifications
 
 - (void)deviceOrientationChanged:(NSNotification *)notification {
@@ -382,6 +390,8 @@
 	[self.avatarButton setImageWithURL:avatarThumbnailURL forState:UIControlStateNormal];
 	
 	[self.videoTitleLabel setText:videoInstance.title animated:YES];
+	
+	self.followingButton.selected = [[SYNActivityManager sharedInstance] isSubscribedToUserId:videoInstance.originator.uniqueId];
 }
 
 - (BOOL)handleRotationToOrientation:(UIDeviceOrientation)orientation {

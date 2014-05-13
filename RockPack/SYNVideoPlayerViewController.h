@@ -18,9 +18,9 @@
 
 @property (nonatomic, assign, readonly) NSInteger selectedIndex;
 
-@property (nonatomic, weak, readonly) UIView *videoPlayerContainerView;
+@property (nonatomic, strong, readonly) UIView *videoPlayerContainerView;
 @property (nonatomic, strong, readonly) SYNVideoPlayer *currentVideoPlayer;
 
-@property (nonatomic, weak, readonly) UICollectionView *videosCollectionView;
+@property (nonatomic, strong, readonly) UICollectionView *videosCollectionView;
 
 @end

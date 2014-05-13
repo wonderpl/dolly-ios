@@ -16,24 +16,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5NX-qs-qYn">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5NX-qs-qYn">
                                 <rect key="frame" x="10" y="34" width="40" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="tintColor" red="0.46666666670000001" green="0.46666666670000001" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Close">
+                                    <color key="titleColor" red="0.46666666666666667" green="0.46666666666666667" blue="0.50980392156862742" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="closeButtonPressed:" destination="vaj-tD-bEt" eventType="touchUpInside" id="7ql-Bc-OhT"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XvK-bX-B3j">
-                                <rect key="frame" x="244" y="34" width="66" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XvK-bX-B3j">
+                                <rect key="frame" x="265" y="34" width="45" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" red="0.46666666670000001" green="0.46666666670000001" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Following">
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="Follow">
+                                    <color key="titleColor" red="0.46666666666666667" green="0.46666666666666667" blue="0.50980392156862742" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <state key="selected" title="Following"/>
+                                <connections>
+                                    <action selector="followButtonPressed:" destination="vaj-tD-bEt" eventType="touchUpInside" id="rzh-Ht-Cmx"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1nv-tp-TGt" customClass="SYNAvatarButton">
                                 <rect key="frame" x="136" y="34" width="48" height="48"/>
@@ -126,6 +133,7 @@
                     </view>
                     <connections>
                         <outlet property="avatarButton" destination="1nv-tp-TGt" id="wcc-0Y-xDv"/>
+                        <outlet property="followingButton" destination="XvK-bX-B3j" id="Ol8-cQ-PyX"/>
                         <outlet property="videoPlayerContainerView" destination="3Yv-dB-EFS" id="gfu-Oi-KGb"/>
                         <outlet property="videoTitleLabel" destination="nVh-CQ-apC" id="env-DE-dXb"/>
                         <outlet property="videosCollectionView" destination="WS0-IR-w5m" id="6Qf-VK-5G5"/>
