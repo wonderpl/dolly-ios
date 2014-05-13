@@ -293,44 +293,7 @@
 }
 
 - (void)videoCell:(SYNFeedVideoCell *)cell favouritePressed:(UIButton *)button {
-    VideoInstance *videoInstance = cell.videoInstance;
-    
-	[[SYNTrackingManager sharedManager] trackVideoLikeFromScreenName:[self trackingScreenName]];
-	
-    BOOL didStar = (button.selected == NO);
-    
-    button.enabled = NO;
-	
-	SYNAppDelegate *localAppDelegate = appDelegate;
-    
-    [appDelegate.oAuthNetworkEngine recordActivityForUserId: appDelegate.currentUser.uniqueId
-                                                     action: (didStar ? @"star" : @"unstar")
-                                            videoInstanceId: videoInstance.uniqueId
-                                          completionHandler: ^(id response) {
-                                              BOOL previousStarringState = videoInstance.starredByUserValue;
-                                              
-                                              if (didStar) {
-                                                  // Currently highlighted, so increment
-                                                  videoInstance.starredByUserValue = YES;
-                                                  
-                                                  button.selected = YES;
-                                                  
-                                                  [videoInstance addStarrersObject:localAppDelegate.currentUser];
-                                              } else {
-                                                  // Currently highlighted, so decrement
-                                                  videoInstance.starredByUserValue = NO;
-                                                  
-                                                  button.selected = NO;
-                                              }
-                                              
-                                              if (![videoInstance.managedObjectContext save:nil]) {
-                                                  videoInstance.starredByUserValue = previousStarringState;
-                                              }
-                                              
-                                              button.enabled = YES;
-                                          } errorHandler: ^(id error) {
-                                              button.enabled = YES;
-                                          }];
+	[self favouriteButtonPressed:button videoInstance:cell.videoInstance];
 }
 
 - (void)videoCell:(SYNFeedVideoCell *)cell addToChannelPressed:(UIButton *)button {
