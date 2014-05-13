@@ -13,6 +13,7 @@
 #import "SYNFriendCell.h"
 #import "UICollectionReusableView+Helpers.h"
 #import "SYNTrackingManager.h"
+#import "SYNSocialButton.h"
 
 @interface SYNSubscribersViewController () <UICollectionViewDataSource, UICollectionViewDelegate, SYNSocialActionsDelegate>
 

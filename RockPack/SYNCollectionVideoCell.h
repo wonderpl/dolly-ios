@@ -7,8 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-
-#import "SYNSocialButton.h"
 #import "SYNSocialAddButton.h"
 #import "VideoInstance.h"
 #import "SYNSocialActionsDelegate.h"

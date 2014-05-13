@@ -18,6 +18,7 @@
 #import "SYNDeviceManager.h"
 #import "SYNTrackingManager.h"
 #import "SYNProfileHeader.h"
+#import "SYNSocialButton.h"
 
 static const CGFloat TransitionDuration = 0.5f;
 

@@ -20,6 +20,7 @@
 #import "SYNMasterViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "SYNTrackingManager.h"
+#import "SYNSocialButton.h"
 
 @interface SYNFriendsViewController () <UIScrollViewDelegate> {
     BOOL hasAttemptedToLoadData;

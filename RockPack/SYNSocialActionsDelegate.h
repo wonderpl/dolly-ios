@@ -6,8 +6,6 @@
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
 
-#import "SYNSocialButton.h"
-
 @import Foundation;
 
 @class ChannelOwner;

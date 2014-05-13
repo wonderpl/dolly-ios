@@ -31,6 +31,7 @@
 #import "SYNVideoCell.h"
 #import "SYNSearchVideoLargeCell.h"
 #import "SYNSearchVideoSmallCell.h"
+#import "SYNSocialButton.h"
 
 typedef NS_ENUM(NSInteger, SYNSearchType) {
 	SYNSearchTypeUndefined,

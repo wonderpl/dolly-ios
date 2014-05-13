@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SYNSocialButton.h"
 
 @interface SYNRotatingPopoverController : NSObject
 

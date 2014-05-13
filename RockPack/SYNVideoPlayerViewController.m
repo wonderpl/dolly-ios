@@ -14,7 +14,6 @@
 #import "SYNFullScreenVideoAnimator.h"
 #import "SYNVideoPlayer.h"
 #import "SYNOAuthNetworkEngine.h"
-#import "SYNSocialButton.h"
 #import "UIFont+SYNFont.h"
 #import "SYNTrackingManager.h"
 #import "SYNOneToOneSharingController.h"
