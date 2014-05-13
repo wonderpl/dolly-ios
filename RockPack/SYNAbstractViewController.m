@@ -20,7 +20,6 @@
 #import "SYNMasterViewController.h"
 #import "SYNOneToOneSharingController.h"
 #import "SYNProfileRootViewController.h"
-#import "SYNSocialButton.h"
 #import "UIFont+SYNFont.h"
 #import "Video.h"
 #import "VideoInstance.h"
@@ -180,21 +179,6 @@
     self.dataRequestRange = NSMakeRange(nextStart, nextSize);
 }
 
-#pragma mark -
-
-
-- (void) displayVideoViewerFromCell: (UICollectionViewCell *) cell
-                         andSubCell: (UICollectionViewCell *) subCell
-                     atSubCellIndex: (NSInteger) subCellIndex
-{
-    AssertOrLog (@"Shouldn't be calling abstract function");
-}
-
-- (void) displayVideoViewerFromCell: (UICollectionViewCell *) cell
-{
-    AssertOrLog (@"Shouldn't be calling abstract function");
-}
-
 -(void)clearedLocationBoundData
 {
     // to be implemented by child
@@ -215,17 +199,6 @@
 }
 
 #pragma mark - Social Actions Delegate
-
-- (void) likeControlPressed:(SYNSocialButton *)socialControl {
-	if (![socialControl.dataItemLinked isKindOfClass: [VideoInstance class]]) {
-		return; // only relates to video instances
-	}
-	
-	// Get the videoinstance associated with the control pressed
-	VideoInstance *videoInstance = socialControl.dataItemLinked;
-	
-	[self favouriteButtonPressed:socialControl videoInstance:videoInstance];
-}
 
 - (void)favouriteButtonPressed:(UIButton *)button videoInstance:(VideoInstance *)videoInstance {
 	[[SYNTrackingManager sharedManager] trackVideoLikeFromScreenName:[self trackingScreenName]];
@@ -266,45 +239,6 @@
 											  
                                               button.enabled = YES;
                                           }];
-}
-
-- (void) addControlPressed: (SYNSocialButton *) socialControl
-{
-    if (![socialControl.dataItemLinked isKindOfClass: [VideoInstance class]])
-    {
-        return; // only relates to video instances
-    }
-    
-    VideoInstance *videoInstance = socialControl.dataItemLinked;
-	
-	[[SYNTrackingManager sharedManager] trackVideoAddFromScreenName:[self trackingScreenName]];
-	
-    [appDelegate.oAuthNetworkEngine recordActivityForUserId: appDelegate.currentUser.uniqueId
-                                                     action: @"select"
-                                            videoInstanceId: videoInstance.uniqueId
-                                          completionHandler: nil
-                                               errorHandler: nil];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName: kVideoQueueAdd
-                                                        object: self
-                                                      userInfo: @{@"VideoInstance": videoInstance}];
-}
-
-- (void) shareControlPressed: (SYNSocialButton *) socialControl
-{
-    
-    if ([socialControl.dataItemLinked isKindOfClass: [VideoInstance class]])
-    {
-        // Get the videoinstance associated with the control pressed
-        VideoInstance *videoInstance = socialControl.dataItemLinked;
-        
-        [self shareVideoInstance: videoInstance];
-    }
-    else if ([socialControl.dataItemLinked isKindOfClass: [Channel class]])
-    {
-        Channel *channel = socialControl.dataItemLinked;
-		[self shareChannel:channel];
-	}
 }
 
 - (void)shareChannel:(Channel *)channel {

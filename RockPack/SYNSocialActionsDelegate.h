@@ -15,12 +15,9 @@
 @protocol SYNSocialActionsDelegate <NSObject>
 
 - (void)followControlPressed:(UIButton *)button withChannelOwner:(ChannelOwner *)channelOwner completion :(void (^)(void))callbackBlock;
-- (void) shareControlPressed: (SYNSocialButton *) socialButton;
-- (void) likeControlPressed: (SYNSocialButton *) socialButton;
-- (void) addControlPressed: (SYNSocialButton *) socialButton;
 
 //need to change
 @optional
 - (void) videoButtonPressed: (id) cell;
-- (void) channelControlPressed: (UICollectionViewCell *) cell;
+
 @end

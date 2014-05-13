@@ -37,10 +37,6 @@
 @property (nonatomic, readonly) NSString *viewId;
 @property (nonatomic, strong) SYNChannelFooterMoreView *footerView;
 
-- (void) displayVideoViewerFromCell: (UICollectionViewCell *) cell
-                         andSubCell: (UICollectionViewCell *) subCell
-                     atSubCellIndex: (NSInteger) subCellIndex;
-
 - (id) initWithViewId: (NSString *) vid;
 
 - (void) resetDataRequestRange;
