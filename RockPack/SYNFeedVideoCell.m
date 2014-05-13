@@ -84,7 +84,7 @@
 	self.titleLabel.text = videoInstance.title;
 	
 	NSURL *avatarURL = [NSURL URLWithString:self.videoInstance.originator.thumbnailURL];
-	[self.avatarThumbnailButton setImageWithURL:avatarURL forState:UIControlStateNormal];
+	[self.avatarThumbnailButton setImageWithURL:avatarURL forState:UIControlStateNormal placeholderImage:nil options:SDWebImageRetryFailed];
 	
 	NSURL *thumbnailURL = [NSURL URLWithString:videoInstance.thumbnailURL];
 	[self.videoThumbnailButton setImageWithURL:thumbnailURL forState:UIControlStateNormal];
