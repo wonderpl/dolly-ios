@@ -18,6 +18,12 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 
 @implementation SYNWebViewCell
 
+- (void)awakeFromNib {
+	[super awakeFromNib];
+	
+	self.webView.scrollView.scrollEnabled = NO;
+}
+
 - (void)prepareForReuse {
 	[super prepareForReuse];
 	
