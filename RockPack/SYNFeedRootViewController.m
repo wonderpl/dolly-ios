@@ -375,7 +375,7 @@
 }
 
 - (void)channelCell:(SYNFeedChannelCell *)cell followPressed:(UIButton *)button {
-	
+	[self followButtonPressed:button withChannel:cell.channel];
 }
 
 - (void)channelCell:(SYNFeedChannelCell *)cell sharePressed:(UIButton *)button {

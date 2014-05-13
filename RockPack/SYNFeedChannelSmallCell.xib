@@ -76,12 +76,20 @@
                             <action selector="shareButtonPressed:" destination="IUo-RN-cL2" eventType="touchUpInside" id="VLD-e7-KmX"/>
                         </connections>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PO2-9Y-Blu" customClass="SYNFollowChannelButton">
-                        <rect key="frame" x="106" y="250" width="45" height="30"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PO2-9Y-Blu" customClass="SYNFollowChannelButton">
+                        <rect key="frame" x="89" y="250" width="80" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="Cdw-Vb-VCa"/>
+                            <constraint firstAttribute="width" constant="80" id="lhh-py-Esa"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <state key="normal" title="Follow">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
+                        <connections>
+                            <action selector="followButtonPressed:" destination="IUo-RN-cL2" eventType="touchUpInside" id="p3w-uW-i4F"/>
+                        </connections>
                     </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -97,9 +105,11 @@
                 <constraint firstItem="ov9-oB-CVO" firstAttribute="top" secondItem="zTb-nb-qDr" secondAttribute="bottom" constant="8" id="G4U-ao-atg"/>
                 <constraint firstAttribute="centerX" secondItem="zTb-nb-qDr" secondAttribute="centerX" constant="1.5" id="GPy-h9-UzA"/>
                 <constraint firstItem="kF5-cg-XMG" firstAttribute="leading" secondItem="IUo-RN-cL2" secondAttribute="leading" id="NqP-vD-86f"/>
+                <constraint firstAttribute="centerX" secondItem="PO2-9Y-Blu" secondAttribute="centerX" constant="45.5" id="ZYi-CR-jZ5"/>
                 <constraint firstItem="30g-g0-9j5" firstAttribute="top" secondItem="ov9-oB-CVO" secondAttribute="bottom" constant="-4" id="bPY-hB-bpz"/>
                 <constraint firstItem="arF-3m-4tQ" firstAttribute="top" secondItem="30g-g0-9j5" secondAttribute="bottom" constant="19" id="df0-Er-R8E"/>
                 <constraint firstAttribute="bottom" secondItem="kF5-cg-XMG" secondAttribute="bottom" id="dmb-8f-bvW"/>
+                <constraint firstItem="PO2-9Y-Blu" firstAttribute="top" secondItem="30g-g0-9j5" secondAttribute="bottom" constant="25" id="hQL-yw-HkG"/>
                 <constraint firstAttribute="centerX" secondItem="arF-3m-4tQ" secondAttribute="centerX" constant="-59" id="nne-QG-Ptt"/>
                 <constraint firstItem="E3C-aj-aTh" firstAttribute="top" secondItem="IUo-RN-cL2" secondAttribute="top" id="qZ1-vq-jqK"/>
                 <constraint firstAttribute="trailing" secondItem="kF5-cg-XMG" secondAttribute="trailing" id="wSm-ok-3RE"/>
@@ -109,6 +119,7 @@
                 <outlet property="avatarThumbnailButton" destination="zTb-nb-qDr" id="y6p-49-rKR"/>
                 <outlet property="channelOwnerLabel" destination="ov9-oB-CVO" id="hxQ-Cd-0Mu"/>
                 <outlet property="channelTitleButton" destination="30g-g0-9j5" id="Qht-vW-oF4"/>
+                <outlet property="followButton" destination="PO2-9Y-Blu" id="JzE-w6-lLc"/>
             </connections>
         </collectionViewCell>
     </objects>

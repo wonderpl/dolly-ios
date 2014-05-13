@@ -18,18 +18,18 @@
 
 @interface SYNFeedVideoCell () <SYNVideoActionsBarDelegate>
 
-@property (nonatomic, weak) IBOutlet UIButton *avatarThumbnailButton;
+@property (nonatomic, strong) IBOutlet UIButton *avatarThumbnailButton;
 
-@property (nonatomic, weak) IBOutlet UILabel *titleLabel;
+@property (nonatomic, strong) IBOutlet UILabel *titleLabel;
 
-@property (nonatomic, weak) IBOutlet UILabel *labelLabel;
-@property (nonatomic, weak) IBOutlet UIButton *curatedByButton;
+@property (nonatomic, strong) IBOutlet UILabel *labelLabel;
+@property (nonatomic, strong) IBOutlet UIButton *curatedByButton;
 
-@property (nonatomic, weak) IBOutlet UILabel *durationLabel;
+@property (nonatomic, strong) IBOutlet UILabel *durationLabel;
 
-@property (nonatomic, weak) IBOutlet UIButton *videoThumbnailButton;
+@property (nonatomic, strong) IBOutlet UIButton *videoThumbnailButton;
 
-@property (nonatomic, weak) IBOutlet UIView *videoActionsContainer;
+@property (nonatomic, strong) IBOutlet UIView *videoActionsContainer;
 
 @property (nonatomic, strong) SYNVideoActionsBar *actionsBar;
 

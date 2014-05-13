@@ -76,12 +76,20 @@
                             <action selector="shareButtonPressed:" destination="t8u-l2-ZAg" eventType="touchUpInside" id="72z-ce-cWx"/>
                         </connections>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zAy-bh-PZi" customClass="SYNFollowChannelButton">
-                        <rect key="frame" x="257" y="446" width="45" height="30"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zAy-bh-PZi" customClass="SYNFollowChannelButton">
+                        <rect key="frame" x="243" y="449" width="84" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="N7E-d0-fiB"/>
+                            <constraint firstAttribute="width" constant="84" id="ZLW-Cg-76h"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <state key="normal" title="Follow">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
+                        <connections>
+                            <action selector="followButtonPressed:" destination="t8u-l2-ZAg" eventType="touchUpInside" id="n4i-er-sh0"/>
+                        </connections>
                     </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -91,7 +99,9 @@
                 <constraint firstItem="Jtp-MI-4Tn" firstAttribute="top" secondItem="4ce-aa-zxA" secondAttribute="bottom" constant="-4" id="2Nq-Vl-fVo"/>
                 <constraint firstItem="2Ud-a7-SFd" firstAttribute="top" secondItem="Jtp-MI-4Tn" secondAttribute="bottom" constant="84" id="2W9-Bn-aMU"/>
                 <constraint firstAttribute="trailing" secondItem="HXR-Jp-ju4" secondAttribute="trailing" id="4G6-gm-3ef"/>
+                <constraint firstAttribute="centerX" secondItem="zAy-bh-PZi" secondAttribute="centerX" constant="50" id="Fhj-j5-FMU"/>
                 <constraint firstAttribute="centerX" secondItem="2Ud-a7-SFd" secondAttribute="centerX" constant="-59" id="Jjh-zr-WRD"/>
+                <constraint firstItem="zAy-bh-PZi" firstAttribute="top" secondItem="Jtp-MI-4Tn" secondAttribute="bottom" constant="92" id="KD0-IL-zA2"/>
                 <constraint firstItem="qEN-AV-KX8" firstAttribute="leading" secondItem="t8u-l2-ZAg" secondAttribute="leading" id="KLH-jt-bLu"/>
                 <constraint firstAttribute="centerX" secondItem="spX-UP-J1y" secondAttribute="centerX" constant="1.5" id="Odj-dO-6hE"/>
                 <constraint firstAttribute="trailing" secondItem="qEN-AV-KX8" secondAttribute="trailing" id="QL5-1X-nK4"/>
@@ -107,6 +117,7 @@
                 <outlet property="avatarThumbnailButton" destination="spX-UP-J1y" id="TZD-3u-u7N"/>
                 <outlet property="channelOwnerLabel" destination="4ce-aa-zxA" id="w0N-rW-5Kt"/>
                 <outlet property="channelTitleButton" destination="Jtp-MI-4Tn" id="bBl-5I-KT3"/>
+                <outlet property="followButton" destination="zAy-bh-PZi" id="2BI-DF-nn1"/>
             </connections>
         </collectionViewCell>
     </objects>

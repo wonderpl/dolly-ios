@@ -10,6 +10,7 @@
 #import "UIFont+SYNFont.h"
 #import "Channel.h"
 #import "ChannelOwner.h"
+#import "SYNActivityManager.h"
 #import <UIButton+WebCache.h>
 
 @interface SYNFeedChannelCell ()
@@ -20,6 +21,8 @@
 
 @property (nonatomic, strong) IBOutlet UIButton *channelTitleButton;
 
+@property (nonatomic, strong) IBOutlet UIButton *followButton;
+
 @end
 
 @implementation SYNFeedChannelCell
@@ -28,6 +31,8 @@
 	[super awakeFromNib];
 	
 	self.channelOwnerLabel.font = [UIFont italicAlternateFontOfSize:self.channelOwnerLabel.font.pointSize];
+	
+	self.followButton.titleLabel.font = [UIFont regularCustomFontOfSize:self.followButton.titleLabel.font.pointSize];
 	
 	self.channelTitleButton.titleLabel.numberOfLines = 2;
 	self.channelTitleButton.titleLabel.font = [UIFont boldCustomFontOfSize:self.channelTitleButton.titleLabel.font.pointSize];
@@ -48,6 +53,8 @@
 	[channeOwnerString appendAttributedString:[[NSAttributedString alloc] initWithString:channelOwnerName attributes:attributes ]];
 	
 	self.channelOwnerLabel.attributedText = channeOwnerString;
+	
+	self.followButton.selected = ([[SYNActivityManager sharedInstance] isSubscribedToChannelId:channel.uniqueId]);
 	
 	[self.channelTitleButton setTitle:channel.title forState:UIControlStateNormal];
 }
