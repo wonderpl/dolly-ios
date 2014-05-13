@@ -10,6 +10,7 @@
 #import "SYNContainerViewController.h"
 #import "SYNMasterViewController.h"
 #import "SYNNavigationManager.h"
+#import "SYNFeedRootViewController.h"
 
 #define NAV_BAR_ANIMATION_SPEED 0.3f
 
@@ -149,6 +150,10 @@
 - (void)switchToFeed {
 	// FIXME: For some stupid reason the indexes in the view controllers array and the tab bar are different
 	[self navigateToPage:0];
+	UINavigationController *navController = self.containerController.viewControllers[0];
+	[navController popToRootViewControllerAnimated:NO];
+	SYNFeedRootViewController *viewController = (SYNFeedRootViewController *)navController.topViewController;
+	viewController.feedCollectionView.contentOffset = CGPointMake(0, -viewController.feedCollectionView.contentInset.top);
 	
 	for (UIButton *button in self.masterController.tabs) {
 		button.selected = NO;
