@@ -61,7 +61,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </activityIndicatorView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.82352941176470584" green="0.82352941176470584" blue="0.82352941176470584" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="6h9-gx-k0J" firstAttribute="leading" secondItem="dSy-md-8Ml" secondAttribute="leading" constant="10" id="F3m-8D-Hpe"/>
                                     <constraint firstAttribute="centerY" secondItem="kQj-Hn-w86" secondAttribute="centerY" id="Hzb-ji-yXD"/>
