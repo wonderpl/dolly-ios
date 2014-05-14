@@ -146,9 +146,7 @@
         <relationship name="video" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Video" inverseName="videoAnnotations" inverseEntity="Video" syncable="YES"/>
     </entity>
     <entity name="VideoInstance" representedClassName="VideoInstance" parentEntity="AbstractCommon" syncable="YES">
-        <attribute name="commentCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="dateAdded" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="dateOfDayAdded" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="label" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="position" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
@@ -171,6 +169,6 @@
         <element name="User" positionX="0" positionY="0" width="128" height="240"/>
         <element name="Video" positionX="0" positionY="0" width="128" height="253"/>
         <element name="VideoAnnotation" positionX="9" positionY="135" width="128" height="165"/>
-        <element name="VideoInstance" positionX="0" positionY="0" width="128" height="193"/>
+        <element name="VideoInstance" positionX="0" positionY="0" width="128" height="165"/>
     </elements>
 </model>

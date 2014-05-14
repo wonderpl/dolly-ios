@@ -23,10 +23,7 @@ static NSDateFormatter *dateFormatter = nil;
     instance.uniqueId = existingInstance.uniqueId;
     instance.position = existingInstance.position;
     instance.dateAdded = existingInstance.dateAdded;
-    instance.dateOfDayAdded = existingInstance.dateOfDayAdded;
     instance.title = existingInstance.title;
-    instance.commentCount = existingInstance.commentCount;
-    instance.commentCountValue = existingInstance.commentCountValue;
     instance.starredByUserValue = existingInstance.starredByUserValue;
     instance.video = [Video	instanceFromVideo: existingInstance.video
                     usingManagedObjectContext: managedObjectContext];
@@ -150,11 +147,6 @@ static NSDateFormatter *dateFormatter = nil;
                                                  withDefault: [NSDate date]];
 	
 	self.label = [dictionary objectForKey:@"label" withDefault:@""];
-    
-    NSString *dateAdded = [dictionary objectForKey: @"source_date_uploaded"];
-    
-    NSString *dayAdded = [dateAdded substringToIndex: [dateAdded rangeOfString: @"T"].location];
-    self.dateOfDayAdded = [[VideoInstance DayOfDateFormatter] dateFromString: dayAdded];
     
     self.title = [dictionary objectForKey: @"title" withDefault: @""];
 	
