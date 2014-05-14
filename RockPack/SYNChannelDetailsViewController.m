@@ -1585,9 +1585,14 @@
             
             [self.channel addVideoInstancesObject:vidToPlay];
 			
+            self.model = [SYNChannelVideosModel modelWithChannel:self.channel];
+
+            
 			viewController = [SYNVideoPlayerViewController viewControllerWithModel:model
 																	 selectedIndex:[videosArray count] - 1];
         } else {
+            self.model = [SYNChannelVideosModel modelWithChannel:self.channel];
+
 			viewController = [SYNVideoPlayerViewController viewControllerWithModel:model
 																	 selectedIndex:tmpPosition];
         }
