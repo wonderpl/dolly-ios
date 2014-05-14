@@ -30,7 +30,7 @@
                     <string key="text">Something about
                         me...</string>
                     <color key="textColor" red="0.46666666865348816" green="0.46666666865348816" blue="0.50980395078659058" alpha="1" colorSpace="calibratedRGB"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" keyboardType="numberPad" returnKeyType="send"/>
                 </textView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qG4-1X-MoW" userLabel="Button - follow all" customClass="SYNFollowUserButton">
@@ -114,14 +114,14 @@
                     </constraints>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="downarrow.png" translatesAutoresizingMaskIntoConstraints="NO" id="oRL-oT-kvC">
-                    <rect key="frame" x="0.0" y="525" width="320" height="35"/>
+                    <rect key="frame" x="0.0" y="504" width="320" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="35" id="8BQ-uQ-UQd"/>
+                        <constraint firstAttribute="height" constant="20" id="8BQ-uQ-UQd"/>
                     </constraints>
                 </imageView>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yIa-oO-mGN" userLabel="Segmented controller">
-                    <rect key="frame" x="0.0" y="490" width="320" height="34"/>
+                    <rect key="frame" x="0.0" y="469" width="320" height="34"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZcY-bz-9ib" userLabel="Button - Collections tab" customClass="SYNSegmentedButton">
@@ -160,7 +160,7 @@
                 <constraint firstAttribute="bottom" secondItem="WTJ-1k-eNv" secondAttribute="bottom" constant="278" id="Gad-sf-cIj"/>
                 <constraint firstItem="0i5-fa-0Qz" firstAttribute="centerY" secondItem="zuH-da-sGu" secondAttribute="centerY" constant="71" id="Io8-40-mcv"/>
                 <constraint firstItem="3x0-8E-Inl" firstAttribute="leading" secondItem="79y-KX-90i" secondAttribute="leading" constant="12" id="LwQ-y0-WYh"/>
-                <constraint firstAttribute="bottom" secondItem="oRL-oT-kvC" secondAttribute="bottom" id="PVU-eC-GS9"/>
+                <constraint firstAttribute="bottom" secondItem="oRL-oT-kvC" secondAttribute="bottom" constant="36" id="PVU-eC-GS9"/>
                 <constraint firstItem="zuH-da-sGu" firstAttribute="top" secondItem="WTJ-1k-eNv" secondAttribute="bottom" constant="-52" id="PsP-Qw-SNJ"/>
                 <constraint firstItem="0i5-fa-0Qz" firstAttribute="top" secondItem="SPE-qM-wrN" secondAttribute="top" constant="-29" id="Wrx-gT-qJ5"/>
                 <constraint firstItem="SPE-qM-wrN" firstAttribute="leading" secondItem="79y-KX-90i" secondAttribute="leading" constant="20" id="YA6-K1-1Eo"/>
