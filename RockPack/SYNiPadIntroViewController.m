@@ -21,7 +21,7 @@
 
 #define DEGREES_RADIANS(angle) ((angle) / 180.0 * M_PI)
 
-static const CGFloat TransitionPause = 3.5f;
+static const CGFloat TransitionPause = 1.0f;
 
 
 @interface SYNiPadIntroViewController () <UINavigationControllerDelegate>
@@ -100,78 +100,67 @@ static const CGFloat TransitionPause = 3.5f;
         } completion: getNextAnimation()];
     }];
     
-    
     [animationBlocks addObject:^(BOOL finished){;
         self.logoImageView.alpha = 0.5;
         
-        CGRect frame = self.logoImageView.frame;
+        CGRect frame = self.facebookButton.frame;
+        frame.origin.y += 30;
+        self.facebookButton.frame = frame;
+        frame = self.loginButton.frame;
+        frame.origin.y -= 30;
+        self.loginButton.frame = frame;
+        
+        frame = self.signupButton.frame;
+        frame.origin.y -= 30;
+        self.signupButton.frame = frame;
+        
+        frame = self.logoImageView.frame;
         frame.origin.y -= 30;
         self.logoImageView.frame = frame;
 
+        
         [UIView animateWithDuration:1.0 animations:^{
             
             CGRect frame = self.logoImageView.frame;
             frame.origin.y += 30;
-            self.logoImageView.frame = frame;
             
+            self.logoImageView.frame = frame;
             self.logoImageView.alpha = 1.0;
             
-        } completion: getNextAnimation()];
-    }];
-
-    [animationBlocks addObject:^(BOOL finished){;
-        CGRect frame = self.messageView.frame;
-        frame.origin.y -= 30;
-        self.messageView.frame = frame;
-
-        [UIView animateWithDuration:1.0 animations:^{
-            CGRect frame = self.messageView.frame;
-            frame.origin.y += 30;
-            self.messageView.frame = frame;
-            self.messageView.alpha = 1.0;
-        } completion: getNextAnimation()];
-    }];
-
-    [animationBlocks addObject:^(BOOL finished){;
-        
-        CGRect frame = self.facebookButton.frame;
-        frame.origin.y += 50;
-        self.facebookButton.frame = frame;
-        
-        [UIView animateWithDuration:0.4 animations:^{
-            CGRect frame = self.facebookButton.frame;
-            frame.origin.y -= 50;
+            frame = self.facebookButton.frame;
+            frame.origin.y -= 30;
             self.facebookButton.frame = frame;
             self.facebookButton.alpha = 1.0;
             self.orView.alpha = 1.0;
-        } completion: getNextAnimation()];
-    }];
-    
-    [animationBlocks addObject:^(BOOL finished){;
-        
-        CGRect frame = self.loginButton.frame;
-        frame.origin.y -= 50;
-        self.loginButton.frame = frame;
-        
-        [UIView animateWithDuration:0.3 animations:^{
-            CGRect frame = self.loginButton.frame;
-            frame.origin.y += 50;
+            
+            frame = self.loginButton.frame;
+            frame.origin.y += 30;
             self.loginButton.frame = frame;
             self.loginButton.alpha = 1.0;
-        } completion: getNextAnimation()];
-    }];
-    
-    [animationBlocks addObject:^(BOOL finished){;
-        CGRect frame = self.signupButton.frame;
-        frame.origin.y -= 30;
-        self.signupButton.frame = frame;
-        
-        [UIView animateWithDuration:0.3 animations:^{
-            CGRect frame = self.signupButton.frame;
+            
+            frame = self.signupButton.frame;
             frame.origin.y += 30;
             self.signupButton.frame = frame;
             self.signupButton.alpha = 1.0;
             self.alreadyHaveAccountLabel.alpha = 1.0;
+            
+        } completion: getNextAnimation()];
+    }];
+    
+    
+    
+    
+    [animationBlocks addObject:^(BOOL finished){;
+        //            CGRect frame = self.messageView.frame;
+        //            frame.origin.y -= 30;
+        //            self.messageView.frame = frame;
+        //            self.messageView.alpha = 1.0;
+        
+        [UIView animateWithDuration:0.5 animations:^{
+            //                CGRect frame = self.messageView.frame;
+            //                frame.origin.y += 30;
+            //                self.messageView.frame = frame;
+            self.messageView.alpha = 1.0;
         } completion: getNextAnimation()];
     }];
     
@@ -216,7 +205,7 @@ static const CGFloat TransitionPause = 3.5f;
         self.backgroundChurch.translatesAutoresizingMaskIntoConstraints = YES;
         self.backgroundChurch.layer.anchorPoint = CGPointMake(0, 0);
 
-        [UIView animateWithDuration:1.5 delay:3.0 options:UIViewAnimationCurveEaseInOut animations:^{
+        [UIView animateWithDuration:1.5 delay:1.5 options:UIViewAnimationCurveEaseInOut animations:^{
 
                 self.backgroundChurch.alpha = 0.0;
 	            self.backgroundChurch.transform = CGAffineTransformMakeRotation(DEGREES_RADIANS(45));
@@ -230,7 +219,7 @@ static const CGFloat TransitionPause = 3.5f;
 
     [animationBlocks addObject:^(BOOL finished){;
 
-        [UIView animateWithDuration:1.0 delay:TransitionPause options:
+        [UIView animateWithDuration:1.0 delay:2.0 options:
          UIViewAnimationCurveEaseInOut animations:^{
              self.backgroundChurch.transform = CGAffineTransformIdentity;
 
@@ -256,7 +245,7 @@ static const CGFloat TransitionPause = 3.5f;
         
         self.backgroundMountain.frame = frame;
 
-        [UIView animateWithDuration:1.5 delay:TransitionPause options:UIViewAnimationCurveEaseInOut animations:^{
+        [UIView animateWithDuration:1.5 delay:2.0 options:UIViewAnimationCurveEaseInOut animations:^{
             self.backgroundMountain.translatesAutoresizingMaskIntoConstraints = YES;
             self.backgroundMountain.layer.anchorPoint = CGPointMake(1.0, 0.0);
             
