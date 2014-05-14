@@ -197,10 +197,10 @@
     
     if (registrationCheck == YES) {
         // == show on value == 2
-        [[NSUserDefaults standardUserDefaults] setInteger:0 forKey: kUserDefaultsDiscoverVideoFirstTime];
+//        [[NSUserDefaults standardUserDefaults] setInteger:0 forKey: kUserDefaultsDiscoverVideoFirstTime];
         
         // == show on value == 1
-        [[NSUserDefaults standardUserDefaults] setInteger:0 forKey: kUserDefaultsDiscoverUserFirstTime];
+//        [[NSUserDefaults standardUserDefaults] setInteger:0 forKey: kUserDefaultsDiscoverUserFirstTime];
         
         
         // == other user animation < = 2
@@ -209,7 +209,7 @@
         
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey: kUserDefaultsCreateChannelFirstTime];
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey: kUserDefaultsYourProfileFirstTime];
-        [[NSUserDefaults standardUserDefaults] setBool: NO forKey: kUserDefaultsFeedFirstTime];
+//        [[NSUserDefaults standardUserDefaults] setBool: NO forKey: kUserDefaultsFeedFirstTime];
 
     } else {
         // == show on value == 2
