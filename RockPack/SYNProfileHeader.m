@@ -106,7 +106,9 @@
     
     __weak SYNProfileHeader *weakSelf = self;
     
+    
     [self.coverImage setImageWithURL:[NSURL URLWithString: thumbnailUrlString]
+                    placeholderImage:[UIImage imageNamed: @"placeholderwhite"]
                            completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
                                if (image && cacheType == SDImageCacheTypeNone)
                                {
@@ -116,6 +118,7 @@
                                    }];
                                }
                            }];
+
 	
 }
 
