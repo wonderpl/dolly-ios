@@ -72,20 +72,32 @@
                         <action selector="annotationButtonPressed:" destination="RuC-0K-OOM" eventType="touchUpInside" id="wkc-n0-jzO"/>
                     </connections>
                 </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ixh-ks-J92" userLabel="Favourited By Container">
+                    <rect key="frame" x="44" y="8" width="128" height="24"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="24" id="tZR-1z-tv7"/>
+                    </constraints>
+                </view>
             </subviews>
             <constraints>
                 <constraint firstItem="H5R-DI-TgM" firstAttribute="leading" secondItem="RuC-0K-OOM" secondAttribute="leading" id="9rb-kp-IZc"/>
                 <constraint firstAttribute="centerY" secondItem="pXu-bh-Z99" secondAttribute="centerY" id="K1L-o6-O1o"/>
                 <constraint firstItem="gvq-tZ-yxZ" firstAttribute="leading" secondItem="pXu-bh-Z99" secondAttribute="trailing" id="RWm-Ye-tqe"/>
                 <constraint firstItem="Zsz-gD-1Fi" firstAttribute="leading" secondItem="gvq-tZ-yxZ" secondAttribute="trailing" id="V0D-gJ-pPP"/>
+                <constraint firstItem="Ixh-ks-J92" firstAttribute="leading" secondItem="H5R-DI-TgM" secondAttribute="trailing" constant="4" id="aEb-vA-WPh"/>
                 <constraint firstAttribute="centerY" secondItem="gvq-tZ-yxZ" secondAttribute="centerY" id="dDz-FF-wOa"/>
                 <constraint firstAttribute="centerY" secondItem="Zsz-gD-1Fi" secondAttribute="centerY" id="iD5-Fd-Myo"/>
+                <constraint firstItem="pXu-bh-Z99" firstAttribute="leading" secondItem="Ixh-ks-J92" secondAttribute="trailing" constant="8" id="mBX-gS-4x6"/>
                 <constraint firstAttribute="centerY" secondItem="H5R-DI-TgM" secondAttribute="centerY" id="ql9-oP-LiQ"/>
+                <constraint firstAttribute="centerY" secondItem="Ixh-ks-J92" secondAttribute="centerY" id="vN2-Jq-grm"/>
                 <constraint firstAttribute="trailing" secondItem="Zsz-gD-1Fi" secondAttribute="trailing" id="xGv-rq-Cwi"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="favouriteButton" destination="H5R-DI-TgM" id="hvL-IF-NVf"/>
+                <outlet property="favouritedByContainer" destination="Ixh-ks-J92" id="OZ7-vV-XTM"/>
                 <outlet property="shopButton" destination="pXu-bh-Z99" id="L4a-LT-LHZ"/>
             </connections>
         </view>

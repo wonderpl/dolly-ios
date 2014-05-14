@@ -92,6 +92,7 @@
 	NSURL *thumbnailURL = [NSURL URLWithString:videoInstance.thumbnailURL];
 	[self.videoThumbnailButton setImageWithURL:thumbnailURL forState:UIControlStateNormal];
 	
+	self.actionsBar.favouritedBy = [videoInstance.starrers array];
 	self.actionsBar.favouriteButton.selected = videoInstance.starredByUserValue;
 }
 

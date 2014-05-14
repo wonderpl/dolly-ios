@@ -5,6 +5,7 @@
 #import "SYNAppDelegate.h"
 #import "ChannelOwner.h"
 #import "SYNActivityManager.h"
+#import "NSArray+Helpers.h"
 
 @implementation VideoInstance
 
@@ -50,17 +51,20 @@ static NSDateFormatter *dateFormatter = nil;
 	NSArray *videosDictionaries = [dictionaries valueForKey:@"video"];
 	NSArray *channelsDictionaries = [dictionaries valueForKey:@"channel"];
 	
-	NSArray *originatorsDictionaries = [dictionaries valueForKey:@"original_channel_owner"];
-	
 	NSPredicate *notNullPredicate = [NSPredicate predicateWithFormat:@"self != NULL"];
-	originatorsDictionaries = [originatorsDictionaries filteredArrayUsingPredicate:notNullPredicate];
+	
+	NSArray *originatorsDictionaries = [dictionaries valueForKey:@"original_channel_owner"];
+	NSArray *starringUsersDictionaries = [[[dictionaries valueForKey:@"starring_users"] flattenedArray] filteredArrayUsingPredicate:notNullPredicate];
+	
+	NSArray *channelOwnersDictionaries = [originatorsDictionaries filteredArrayUsingPredicate:notNullPredicate];
+	channelOwnersDictionaries = [channelOwnersDictionaries arrayByAddingObjectsFromArray:starringUsersDictionaries];
 	
 	NSMutableDictionary *existingVideoInstances = [[self existingVideoInstancesWithIds:videoInstanceIds
 															   inManagedObjectContext:managedObjectContext] mutableCopy];
 	
 	NSDictionary *videos = [Video videosFromDictionaries:videosDictionaries inManagedObjectContext:managedObjectContext];
 	NSDictionary *channels = [Channel channelsFromDictionaries:channelsDictionaries inManagedObjectContext:managedObjectContext];
-	NSDictionary *originators = [ChannelOwner channelOwnersFromDictionaries:originatorsDictionaries inManagedObjectContext:managedObjectContext];
+	NSDictionary *channelOwners = [ChannelOwner channelOwnersFromDictionaries:channelOwnersDictionaries inManagedObjectContext:managedObjectContext];
 	
 	NSMutableDictionary *videoInstances = [NSMutableDictionary dictionary];
 	for (NSDictionary *dictionary in dictionaries) {
@@ -80,9 +84,14 @@ static NSDateFormatter *dateFormatter = nil;
 		
 		[videoInstance setAttributesFromDictionary:dictionary];
 		
+		NSArray *starringUserIds = [dictionary[@"starring_users"] valueForKey:@"id"];
+		for (NSString *starringUserId in starringUserIds) {
+			[videoInstance addStarrersObject:channelOwners[starringUserId]];
+		}
+		
 		videoInstance.video = videos[videoId];
 		videoInstance.channel = channels[channelId];
-		videoInstance.originator = originators[originatorId] ?: videoInstance.channel.channelOwner;
+		videoInstance.originator = channelOwners[originatorId] ?: videoInstance.channel.channelOwner;
 		
 		videoInstances[videoInstanceId] = videoInstance;
 	}

@@ -8,11 +8,18 @@
 
 #import "SYNVideoActionsBar.h"
 #import "UIFont+SYNFont.h"
+#import "SYNAvatarButton.h"
+#import "ChannelOwner.h"
+#import <UIButton+WebCache.h>
 
 @interface SYNVideoActionsBar ()
 
 @property (nonatomic, weak) IBOutlet UIButton *shopButton;
 @property (nonatomic, weak) IBOutlet UIButton *favouriteButton;
+
+@property (nonatomic, weak) IBOutlet UIView *favouritedByContainer;
+
+@property (nonatomic, copy) NSArray *favouritedByButtons;
 
 @end
 
@@ -27,6 +34,33 @@
 + (instancetype)bar {
 	UINib *nib = [UINib nibWithNibName:NSStringFromClass(self) bundle:nil];
 	return [[nib instantiateWithOwner:self options:nil] firstObject];
+}
+
+- (void)setFavouritedBy:(NSArray *)favouritedBy {
+	_favouritedBy = [favouritedBy copy];
+	
+	for (UIButton *button in self.favouritedByButtons) {
+		[button removeFromSuperview];
+	}
+	
+	CGFloat buttonSize = CGRectGetHeight(self.favouritedByContainer.bounds);
+	
+	NSMutableArray *buttons = [NSMutableArray array];
+	[favouritedBy enumerateObjectsUsingBlock:^(ChannelOwner *channelOwner, NSUInteger idx, BOOL *stop) {
+		CGRect frame = CGRectMake(idx * (buttonSize + 6.0), 0.0, buttonSize, buttonSize);
+		NSURL *thumbnailURL = [NSURL URLWithString:channelOwner.thumbnailURL];
+		
+		SYNAvatarButton *button = [[SYNAvatarButton alloc] initWithFrame:frame];
+		[button setImageWithURL:thumbnailURL
+					   forState:UIControlStateNormal
+			   placeholderImage:[UIImage imageNamed:@"PlaceholderAvatarProfile"]
+						options:SDWebImageRetryFailed];
+		button.enabled = NO;
+		
+		[self.favouritedByContainer addSubview:button];
+	}];
+	
+	self.favouritedByButtons = buttons;
 }
 
 - (IBAction)favouriteButtonPressed:(UIButton *)button {

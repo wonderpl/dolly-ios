@@ -28,6 +28,8 @@
 @property (nonatomic, weak, readonly) UIButton *shopButton;
 @property (nonatomic, weak, readonly) UIButton *favouriteButton;
 
+@property (nonatomic, copy) NSArray *favouritedBy;
+
 + (instancetype)bar;
 
 @end

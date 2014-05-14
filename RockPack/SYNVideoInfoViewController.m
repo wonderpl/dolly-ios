@@ -140,6 +140,8 @@ static const CGFloat UpcomingVideosDividerHeight = 70.0;
 	if (indexPath.section == [self actionsSectionIndex]) {
 		SYNVideoActionsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[SYNVideoActionsCell reuseIdentifier]
 																			  forIndexPath:indexPath];
+		
+		cell.actionsBar.favouritedBy = [self.currentVideoInstance.starrers array];
 		cell.actionsBar.favouriteButton.selected = self.currentVideoInstance.starredByUserValue;
 		cell.actionsBar.delegate = self;
 		cell.actionsBar.shopButton.hidden = ([self.annotations count] == 0);

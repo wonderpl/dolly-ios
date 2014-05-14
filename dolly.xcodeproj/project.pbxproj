@@ -593,6 +593,7 @@
 		E98DCCC0192371A40041DEB4 /* SYNScrubberBar~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E98DCCBF192371A30041DEB4 /* SYNScrubberBar~ipad.xib */; };
 		E98DCCC319237C720041DEB4 /* ScrubberBarFullScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = E98DCCC119237C720041DEB4 /* ScrubberBarFullScreen.png */; };
 		E98DCCC419237C720041DEB4 /* ScrubberBarFullScreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E98DCCC219237C720041DEB4 /* ScrubberBarFullScreen@2x.png */; };
+		E98DCCC719239C000041DEB4 /* NSArray+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = E98DCCC619239C000041DEB4 /* NSArray+Helpers.m */; };
 		E98F609818B24901008AAAA8 /* SYNWonderMailActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = E98F609718B24901008AAAA8 /* SYNWonderMailActivity.m */; };
 		E98F609B18B25CBD008AAAA8 /* NSRegularExpression+Username.m in Sources */ = {isa = PBXBuildFile; fileRef = E98F609A18B25CBD008AAAA8 /* NSRegularExpression+Username.m */; };
 		E9918C19189681BC00767BBD /* SYNTermsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9918C18189681BC00767BBD /* SYNTermsViewController.m */; };
@@ -1522,6 +1523,8 @@
 		E98DCCBF192371A30041DEB4 /* SYNScrubberBar~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNScrubberBar~ipad.xib"; sourceTree = "<group>"; };
 		E98DCCC119237C720041DEB4 /* ScrubberBarFullScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ScrubberBarFullScreen.png; path = Assets/Images/ScrubberBarFullScreen.png; sourceTree = "<group>"; };
 		E98DCCC219237C720041DEB4 /* ScrubberBarFullScreen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ScrubberBarFullScreen@2x.png"; path = "Assets/Images/ScrubberBarFullScreen@2x.png"; sourceTree = "<group>"; };
+		E98DCCC519239C000041DEB4 /* NSArray+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Helpers.h"; sourceTree = "<group>"; };
+		E98DCCC619239C000041DEB4 /* NSArray+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Helpers.m"; sourceTree = "<group>"; };
 		E98F609618B24901008AAAA8 /* SYNWonderMailActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNWonderMailActivity.h; sourceTree = "<group>"; };
 		E98F609718B24901008AAAA8 /* SYNWonderMailActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNWonderMailActivity.m; sourceTree = "<group>"; };
 		E98F609918B25CBD008AAAA8 /* NSRegularExpression+Username.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSRegularExpression+Username.h"; sourceTree = "<group>"; };
@@ -2279,6 +2282,8 @@
 				E98F609A18B25CBD008AAAA8 /* NSRegularExpression+Username.m */,
 				E90506A418E05FD800E0910E /* UIDevice+Helpers.h */,
 				E90506A518E05FD800E0910E /* UIDevice+Helpers.m */,
+				E98DCCC519239C000041DEB4 /* NSArray+Helpers.h */,
+				E98DCCC619239C000041DEB4 /* NSArray+Helpers.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -4471,6 +4476,7 @@
 				BE0815CA16D5478B00ADB1DC /* SYNRegistry.m in Sources */,
 				BE0815CD16D5487B00ADB1DC /* SYNSearchRegistry.m in Sources */,
 				0E5B8EA61846007D0012F460 /* SYNProfileFlowLayout.m in Sources */,
+				E98DCCC719239C000041DEB4 /* NSArray+Helpers.m in Sources */,
 				E9E1E28018561C780051E312 /* SYNiPhonePopoverAnimator.m in Sources */,
 				E9EE08DF18F8089F000DC06A /* SYNVideoActionsCell.m in Sources */,
 				4C0B956F1912838F008D8036 /* SYNSearchVideoLargeCell.m in Sources */,
