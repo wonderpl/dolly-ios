@@ -391,6 +391,7 @@
 	[self.videoTitleLabel setText:videoInstance.title animated:YES];
 	
 	self.followingButton.selected = [[SYNActivityManager sharedInstance] isSubscribedToUserId:videoInstance.originator.uniqueId];
+	[self.followingButton invalidateIntrinsicContentSize];
 }
 
 - (BOOL)handleRotationToOrientation:(UIDeviceOrientation)orientation {
