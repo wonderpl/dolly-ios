@@ -96,6 +96,14 @@ static CGFloat const ControlsFadeTimer = 5.0;
 	}
 }
 
+- (void)scrubberBarFullscreenToggled:(BOOL)fullscreen {
+	if (fullscreen) {
+		[self handleVideoPlayerMaximise];
+	} else {
+		[self handleVideoPlayerMinimise];
+	}
+}
+
 - (void)scrubberBarCurrentTimeWillChange {
 	// We don't want the controls to fade out while they're interacting with them
 	[self stopControlsTimer];
@@ -372,11 +380,13 @@ static CGFloat const ControlsFadeTimer = 5.0;
 
 - (void)handleVideoPlayerMaximise {
 	self.maximised = YES;
+	self.scrubberBar.fullscreen = YES;
 	[self.delegate videoPlayerMaximise];
 }
 
 - (void)handleVideoPlayerMinimise {
 	self.maximised = NO;
+	self.scrubberBar.fullscreen = NO;
 	[self.delegate videoPlayerMinimise];
 }
 

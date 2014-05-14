@@ -16,6 +16,7 @@
 @interface SYNScrubberBar ()
 
 @property (nonatomic, strong) IBOutlet UIButton *playPauseButton;
+@property (nonatomic, strong) IBOutlet UIButton *fullscreenButton;
 
 @property (nonatomic, strong) IBOutlet UILabel *durationLabel;
 
@@ -62,11 +63,12 @@
 	
 	[self.layer addSublayer:self.topLineLayer];
 	
-    UIImage *shuttleSliderRightTrack = [[UIImage imageNamed: @"ShuttleBarRemainingBar.png"] resizableImageWithCapInsets: UIEdgeInsetsMake(0.0f, 10.0f, 0.0f, 10.0f)];
-    UIImage *shuttleSliderLeftTrack = [[UIImage imageNamed: @"ShuttleBarProgressBar.png"] resizableImageWithCapInsets: UIEdgeInsetsMake(0.0f, 10.0f, 0.0f, 10.0f)];
-    [self.progressSlider setMinimumTrackImage: shuttleSliderLeftTrack forState: UIControlStateNormal];
-	[self.progressSlider setMaximumTrackImage: shuttleSliderRightTrack forState: UIControlStateNormal];
-    [self.progressSlider setThumbImage: [UIImage imageNamed: @"ShuttleBarSliderThumb.png"] forState: UIControlStateNormal];
+	UIEdgeInsets sliderEdgeInsets = UIEdgeInsetsMake(0.0f, 10.0f, 0.0f, 10.0f);
+    UIImage *shuttleSliderRightTrack = [[UIImage imageNamed:@"ShuttleBarRemainingBar.png"] resizableImageWithCapInsets:sliderEdgeInsets];
+    UIImage *shuttleSliderLeftTrack = [[UIImage imageNamed:@"ShuttleBarProgressBar.png"] resizableImageWithCapInsets:sliderEdgeInsets];
+    [self.progressSlider setMinimumTrackImage:shuttleSliderLeftTrack forState: UIControlStateNormal];
+	[self.progressSlider setMaximumTrackImage:shuttleSliderRightTrack forState: UIControlStateNormal];
+    [self.progressSlider setThumbImage:[UIImage imageNamed: @"ShuttleBarSliderThumb.png"] forState: UIControlStateNormal];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(wirelessRoutesDidChange:)
 												 name:MPVolumeViewWirelessRoutesAvailableDidChangeNotification
@@ -115,6 +117,12 @@
 //	[self updateHighDefinitionDisplay];
 }
 
+- (void)setFullscreen:(BOOL)fullscreen {
+	_fullscreen = fullscreen;
+	
+	self.fullscreenButton.selected = fullscreen;
+}
+
 - (CALayer *)topLineLayer {
 	if (!_topLineLayer) {
 		CALayer *layer = [CALayer layer];
@@ -156,6 +164,12 @@
 	self.timestampView = nil;
 	
 	[self.delegate scrubberBarCurrentTimeDidChange];
+}
+
+- (IBAction)fullscreenButtonPressed:(UIButton *)button {
+	button.selected = !button.selected;
+	
+	[self.delegate scrubberBarFullscreenToggled:button.selected];
 }
 
 #pragma mark - Private

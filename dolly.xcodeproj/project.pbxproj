@@ -590,6 +590,9 @@
 		E98A851F19096B3C001ADE09 /* SYNFeedChannelSmallCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E98A851E19096B3C001ADE09 /* SYNFeedChannelSmallCell.m */; };
 		E98A852119096B55001ADE09 /* SYNFeedChannelLargeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E98A852019096B55001ADE09 /* SYNFeedChannelLargeCell.xib */; };
 		E98A852319096B63001ADE09 /* SYNFeedChannelSmallCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E98A852219096B63001ADE09 /* SYNFeedChannelSmallCell.xib */; };
+		E98DCCC0192371A40041DEB4 /* SYNScrubberBar~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E98DCCBF192371A30041DEB4 /* SYNScrubberBar~ipad.xib */; };
+		E98DCCC319237C720041DEB4 /* ScrubberBarFullScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = E98DCCC119237C720041DEB4 /* ScrubberBarFullScreen.png */; };
+		E98DCCC419237C720041DEB4 /* ScrubberBarFullScreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E98DCCC219237C720041DEB4 /* ScrubberBarFullScreen@2x.png */; };
 		E98F609818B24901008AAAA8 /* SYNWonderMailActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = E98F609718B24901008AAAA8 /* SYNWonderMailActivity.m */; };
 		E98F609B18B25CBD008AAAA8 /* NSRegularExpression+Username.m in Sources */ = {isa = PBXBuildFile; fileRef = E98F609A18B25CBD008AAAA8 /* NSRegularExpression+Username.m */; };
 		E9918C19189681BC00767BBD /* SYNTermsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9918C18189681BC00767BBD /* SYNTermsViewController.m */; };
@@ -1517,6 +1520,9 @@
 		E98A851E19096B3C001ADE09 /* SYNFeedChannelSmallCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNFeedChannelSmallCell.m; sourceTree = "<group>"; };
 		E98A852019096B55001ADE09 /* SYNFeedChannelLargeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNFeedChannelLargeCell.xib; sourceTree = "<group>"; };
 		E98A852219096B63001ADE09 /* SYNFeedChannelSmallCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNFeedChannelSmallCell.xib; sourceTree = "<group>"; };
+		E98DCCBF192371A30041DEB4 /* SYNScrubberBar~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNScrubberBar~ipad.xib"; sourceTree = "<group>"; };
+		E98DCCC119237C720041DEB4 /* ScrubberBarFullScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ScrubberBarFullScreen.png; path = Assets/Images/ScrubberBarFullScreen.png; sourceTree = "<group>"; };
+		E98DCCC219237C720041DEB4 /* ScrubberBarFullScreen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ScrubberBarFullScreen@2x.png"; path = "Assets/Images/ScrubberBarFullScreen@2x.png"; sourceTree = "<group>"; };
 		E98F609618B24901008AAAA8 /* SYNWonderMailActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNWonderMailActivity.h; sourceTree = "<group>"; };
 		E98F609718B24901008AAAA8 /* SYNWonderMailActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNWonderMailActivity.m; sourceTree = "<group>"; };
 		E98F609918B25CBD008AAAA8 /* NSRegularExpression+Username.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSRegularExpression+Username.h"; sourceTree = "<group>"; };
@@ -2003,6 +2009,8 @@
 		019824DE1629CA5900216900 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				E98DCCC119237C720041DEB4 /* ScrubberBarFullScreen.png */,
+				E98DCCC219237C720041DEB4 /* ScrubberBarFullScreen@2x.png */,
 				E9ACC390191D1F4900ACC929 /* ShopMotionActionButton@2x.png */,
 				E9ACC391191D1F4900ACC929 /* ShopMotionActionButton.png */,
 				E9ACC392191D1F4900ACC929 /* ShopMotionButton@2x.png */,
@@ -2116,6 +2124,7 @@
 				E9921A9218351D66001A4F3B /* SYNScrubberBar.h */,
 				E9921A9318351D66001A4F3B /* SYNScrubberBar.m */,
 				E9921A9718353B33001A4F3B /* SYNScrubberBar.xib */,
+				E98DCCBF192371A30041DEB4 /* SYNScrubberBar~ipad.xib */,
 				E91F04501844BDB50009D610 /* SYNVideoLoadingView.h */,
 				E91F04511844BDB50009D610 /* SYNVideoLoadingView.m */,
 				E99F587018FC102700BA2CE4 /* SYNVideoLoadingView.xib */,
@@ -3999,7 +4008,9 @@
 				0EE380AC182D4DFC001297C7 /* SYNChannelCreateNewCell.xib in Resources */,
 				4C9B519918D71FCB00A3AB0D /* Profile_IPad.storyboard in Resources */,
 				4C5E861518B6357300D0E937 /* SYNDiscoverOverlayVideoViewController.xib in Resources */,
+				E98DCCC419237C720041DEB4 /* ScrubberBarFullScreen@2x.png in Resources */,
 				E985D34D18FECDB800D5A9E1 /* FreightTextPro-BoldItalic.otf in Resources */,
+				E98DCCC0192371A40041DEB4 /* SYNScrubberBar~ipad.xib in Resources */,
 				BEB3138B181FCD9400FAF98A /* SYNIPadFeedRootViewController.xib in Resources */,
 				993B1B47191AA4B5008532D4 /* TabFeedSelected~ipad.png in Resources */,
 				BED027D91834F4EA00636659 /* SYNAccountSettingsViewController.xib in Resources */,
@@ -4189,6 +4200,7 @@
 				9937CA17192250B7002D3C23 /* sign-up-button.png in Resources */,
 				4425147718B3A52F00E5764A /* PlaceholderNotificationVideo@2x.png in Resources */,
 				1F458B0517E1C4E6003C14AC /* AppIcon60x60@2x.png in Resources */,
+				E98DCCC319237C720041DEB4 /* ScrubberBarFullScreen.png in Resources */,
 				993B1AD4191A9614008532D4 /* TabSearchSelected@2x~iphone.png in Resources */,
 				4C5E861E18B6582E00D0E937 /* SYNDiscoverOverlayHighlightsViewController.xib in Resources */,
 				1F22C198174524350065D4BF /* BarSucess.png in Resources */,
