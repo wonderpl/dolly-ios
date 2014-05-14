@@ -548,7 +548,6 @@
 		E92D335B184E239C0025D1DF /* SYNPagingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E92D335A184E239C0025D1DF /* SYNPagingModel.m */; };
 		E93122FB18916A43008ADBEB /* SYNTimestampView.m in Sources */ = {isa = PBXBuildFile; fileRef = E93122FA18916A43008ADBEB /* SYNTimestampView.m */; };
 		E93122FD18916A52008ADBEB /* SYNTimestampView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E93122FC18916A52008ADBEB /* SYNTimestampView.xib */; };
-		E93E10DE1834E93A00A62F64 /* SYNVideoLoadingIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = E93E10DD1834E93A00A62F64 /* SYNVideoLoadingIndicator.m */; };
 		E93E10E31835116D00A62F64 /* SYNVideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = E93E10E21835116D00A62F64 /* SYNVideoPlayer.m */; };
 		E93E10E6183512B800A62F64 /* SYNYouTubeWebVideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = E93E10E5183512B800A62F64 /* SYNYouTubeWebVideoPlayer.m */; };
 		E93E10E9183512D600A62F64 /* SYNOoyalaVideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = E93E10E8183512D600A62F64 /* SYNOoyalaVideoPlayer.m */; };
@@ -1463,8 +1462,6 @@
 		E93122F918916A43008ADBEB /* SYNTimestampView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNTimestampView.h; sourceTree = "<group>"; };
 		E93122FA18916A43008ADBEB /* SYNTimestampView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNTimestampView.m; sourceTree = "<group>"; };
 		E93122FC18916A52008ADBEB /* SYNTimestampView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNTimestampView.xib; sourceTree = "<group>"; };
-		E93E10DC1834E93A00A62F64 /* SYNVideoLoadingIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNVideoLoadingIndicator.h; sourceTree = "<group>"; };
-		E93E10DD1834E93A00A62F64 /* SYNVideoLoadingIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNVideoLoadingIndicator.m; sourceTree = "<group>"; };
 		E93E10E11835116D00A62F64 /* SYNVideoPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNVideoPlayer.h; sourceTree = "<group>"; };
 		E93E10E21835116D00A62F64 /* SYNVideoPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNVideoPlayer.m; sourceTree = "<group>"; };
 		E93E10E4183512B800A62F64 /* SYNYouTubeWebVideoPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNYouTubeWebVideoPlayer.h; sourceTree = "<group>"; };
@@ -2140,8 +2137,6 @@
 				0110AE5F17DF383C00DC7724 /* SYNProgressView.m */,
 				011CC6A7164D19D800F02B6D /* SYNPassthroughView.h */,
 				011CC6A8164D19D800F02B6D /* SYNPassthroughView.m */,
-				E93E10DC1834E93A00A62F64 /* SYNVideoLoadingIndicator.h */,
-				E93E10DD1834E93A00A62F64 /* SYNVideoLoadingIndicator.m */,
 				E9921A9218351D66001A4F3B /* SYNScrubberBar.h */,
 				E9921A9318351D66001A4F3B /* SYNScrubberBar.m */,
 				E9921A9718353B33001A4F3B /* SYNScrubberBar.xib */,
@@ -4485,7 +4480,6 @@
 				01C74BAD169F239800B1CA02 /* SYNNetworkEngine.m in Sources */,
 				E93E10E6183512B800A62F64 /* SYNYouTubeWebVideoPlayer.m in Sources */,
 				015CB01616AE039900FEB8E7 /* User.m in Sources */,
-				E93E10DE1834E93A00A62F64 /* SYNVideoLoadingIndicator.m in Sources */,
 				015CB01916AE03B200FEB8E7 /* _User.m in Sources */,
 				E9918C19189681BC00767BBD /* SYNTermsViewController.m in Sources */,
 				E9D99DD018608F3000212AC5 /* SYNSearchVideoChannelsModel.m in Sources */,
