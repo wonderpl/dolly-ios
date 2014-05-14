@@ -222,6 +222,18 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w5y-pS-6iM">
+                                <rect key="frame" x="364" y="355" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rMu-Rh-wpn">
+                                <rect key="frame" x="363" y="567" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="eGz-2o-yJb" secondAttribute="trailing" id="0k0-o7-DbW"/>
@@ -233,11 +245,17 @@
                             <constraint firstItem="Dbq-5l-DXW" firstAttribute="top" secondItem="qtT-ib-drf" secondAttribute="bottom" constant="233" id="Nab-Ma-3r6"/>
                             <constraint firstItem="Dbq-5l-DXW" firstAttribute="centerX" secondItem="eGz-2o-yJb" secondAttribute="centerX" constant="1" id="QZH-im-mYs"/>
                             <constraint firstItem="eGz-2o-yJb" firstAttribute="leading" secondItem="9qx-sC-vD1" secondAttribute="leading" constant="97" id="RBh-D0-ZgB"/>
+                            <constraint firstItem="rMu-Rh-wpn" firstAttribute="top" secondItem="4OF-Bm-CZ9" secondAttribute="bottom" constant="6" id="ZX0-bY-CuL"/>
+                            <constraint firstItem="w5y-pS-6iM" firstAttribute="top" secondItem="Dbq-5l-DXW" secondAttribute="bottom" constant="6" id="acz-Ln-NeF"/>
+                            <constraint firstItem="w5y-pS-6iM" firstAttribute="centerX" secondItem="Dbq-5l-DXW" secondAttribute="centerX" id="hXi-lP-6bt"/>
+                            <constraint firstItem="rMu-Rh-wpn" firstAttribute="centerX" secondItem="4OF-Bm-CZ9" secondAttribute="centerX" constant="-1" id="oOr-Ee-Ea0"/>
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="671" height="1024"/>
                     <connections>
+                        <outlet property="avatarLabel" destination="rMu-Rh-wpn" id="hWu-pV-RL8"/>
+                        <outlet property="coverPhotoLabel" destination="w5y-pS-6iM" id="CJ5-27-7ew"/>
                         <outlet property="descriptionTextView" destination="bom-ox-Iif" id="M6W-4v-hOO"/>
                         <outlet property="navigationBar" destination="eGz-2o-yJb" id="Gai-3C-T5u"/>
                         <outlet property="topConstraint" destination="Nab-Ma-3r6" id="Ynz-fK-5sk"/>
