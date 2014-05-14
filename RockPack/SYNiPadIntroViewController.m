@@ -229,9 +229,11 @@ static const CGFloat TransitionPause = 3.5f;
     }];
 
     [animationBlocks addObject:^(BOOL finished){;
-        self.backgroundChurch.transform = CGAffineTransformIdentity;
 
-        [UIView animateWithDuration:1.0 delay:TransitionPause options:UIViewAnimationCurveEaseInOut animations:^{
+        [UIView animateWithDuration:1.0 delay:TransitionPause options:
+         UIViewAnimationCurveEaseInOut animations:^{
+             self.backgroundChurch.transform = CGAffineTransformIdentity;
+
             CGRect frame = self.backgroundBeach.frame;
             frame.origin.x -= frame.size.width;
             self.backgroundBeach.frame = frame;
@@ -248,9 +250,6 @@ static const CGFloat TransitionPause = 3.5f;
     }];
     
     [animationBlocks addObject:^(BOOL finished){;
-        self.backgroundMountain.translatesAutoresizingMaskIntoConstraints = YES;
-        self.backgroundMountain.layer.anchorPoint = CGPointMake(1.0, 0.0);
-        
         CGRect frame = self.backgroundMountain.frame;
         frame.origin.x += self.backgroundMountain.frame.size.width/2;
         frame.origin.y -= self.backgroundMountain.frame.size.height/2;
@@ -258,7 +257,10 @@ static const CGFloat TransitionPause = 3.5f;
         self.backgroundMountain.frame = frame;
 
         [UIView animateWithDuration:1.5 delay:TransitionPause options:UIViewAnimationCurveEaseInOut animations:^{
+            self.backgroundMountain.translatesAutoresizingMaskIntoConstraints = YES;
+            self.backgroundMountain.layer.anchorPoint = CGPointMake(1.0, 0.0);
             
+
             self.backgroundMountain.layer.transform = CATransform3DMakeRotation(M_PI/2, 0.0, 1.0, 0.0);
                 self.backgroundMountain.alpha = 0.0;
                 self.messageView4.alpha = 0.0;
