@@ -102,8 +102,8 @@ static const CGFloat TransitionPause = 3.5f;
     self.loginButton.titleLabel.font = [UIFont regularCustomFontOfSize:self.loginButton.titleLabel.font.pointSize];
 
     
-    [self.facebookButton setTitle:@"Login with Facebook" forState:UIControlStateNormal];
-    [self.loginButton setTitle:@"Login" forState:UIControlStateNormal];
+    [self.facebookButton setTitle:@"Log in with Facebook" forState:UIControlStateNormal];
+    [self.loginButton setTitle:@"Log in" forState:UIControlStateNormal];
     
     double delayInSeconds = 1.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
