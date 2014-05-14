@@ -91,6 +91,8 @@
 	[self addChildViewController:self.containerViewController];
 	self.containerViewController.view = self.containerView;
 	
+	[appDelegate handlePendingOpenURL];
+	
     //Hiding the tab bar before a animation to show it
     //Hiding here to keep the nib more clean
     //Animation is done in ViewDidAppear
