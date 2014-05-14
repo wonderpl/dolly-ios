@@ -117,7 +117,7 @@
 }
 
 - (void)scrollToTop:(UIGestureRecognizer *)gestureRecognizer {
-	[self.feedCollectionView setContentOffset:CGPointZero animated:YES];
+	[self.feedCollectionView setContentOffset:CGPointMake(0, -self.feedCollectionView.contentInset.top) animated:YES];
 }
 
 - (void) willRotateToInterfaceOrientation: (UIInterfaceOrientation) toInterfaceOrientation
