@@ -26,7 +26,7 @@ static const CGFloat SEARCHBAR_Y = 430.0f;
 static const CGFloat FULL_NAME_LABEL_IPHONE = 364.0f; // lower is down
 static const CGFloat FULL_NAME_LABEL_IPAD_PORTRAIT = 533.0f;
 static const CGFloat FULLNAMELABELIPADLANDSCAPE = 412.0f;
-static const CGFloat OWNUSERHEADERHEIGHT = 560;
+static const CGFloat OWNUSERHEADERHEIGHT = 523;
 
 @interface SYNProfileSubscriptionViewController () <UISearchBarDelegate, SYNPagingModelDelegate, SYNChannelMidCellDelegate,SYNSearchResultsUserCellDelegate>
 
@@ -247,9 +247,9 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     
     if (IS_IPHONE) {
         if (self.isUserProfile) {
-            return CGSizeMake(320, 560);
+            return CGSizeMake(320, OWNUSERHEADERHEIGHT);
         } else {
-            return CGSizeMake(320, 560);
+            return CGSizeMake(320, OWNUSERHEADERHEIGHT);
         }
     } else {
         if (UIDeviceOrientationIsPortrait([[SYNDeviceManager sharedInstance] orientation])) {

@@ -46,7 +46,7 @@ static const CGFloat OFFSET_DESCRIPTION_EDIT = 130.0f;
 	style.alignment = NSTextAlignmentCenter;
 	
 	NSDictionary *descriptionAttributes = @{NSParagraphStyleAttributeName : style,
-											NSFontAttributeName : [UIFont regularCustomFontOfSize : 20],
+											NSFontAttributeName : [UIFont regularCustomFontOfSize : 16],
 											NSForegroundColorAttributeName : [UIColor dollyTextMediumGray],
 											};
 	
