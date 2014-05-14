@@ -8,14 +8,13 @@
 
 #import "SYNAbstractViewController.h"
 #import "SYNSocialActionsDelegate.h"
-#import "SYNVideoCellDelegate.h"
 
 typedef enum {
     SearchResultsShowingVideos = 0,
     SearchResultsShowingUsers
 } SearchResultsShowing;
 
-@interface SYNSearchResultsViewController : SYNAbstractViewController <SYNSocialActionsDelegate, SYNVideoCellDelegate>
+@interface SYNSearchResultsViewController : SYNAbstractViewController <SYNSocialActionsDelegate>
 
 @property (nonatomic, strong) IBOutlet UIButton* videosTabButton;
 @property (nonatomic, strong) IBOutlet UIButton* usersTabButton;

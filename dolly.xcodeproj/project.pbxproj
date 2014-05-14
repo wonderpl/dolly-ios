@@ -1442,7 +1442,6 @@
 		E92837B1189C0BE9005D5108 /* SYNFacebookButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNFacebookButton.m; sourceTree = "<group>"; };
 		E929AD7018D0AF0B001E1792 /* SYNHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNHTTPSessionManager.h; sourceTree = "<group>"; };
 		E929AD7118D0AF0B001E1792 /* SYNHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNHTTPSessionManager.m; sourceTree = "<group>"; };
-		E92A2C5D187F0A7C002A6447 /* SYNVideoCellDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYNVideoCellDelegate.h; sourceTree = "<group>"; };
 		E92B7BC8190A77BC0099AA44 /* SYNVideoCell~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNVideoCell~ipad.xib"; sourceTree = "<group>"; };
 		E92CBAEC1887E29500A07070 /* SYNVideoPlayerAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNVideoPlayerAnimator.h; sourceTree = "<group>"; };
 		E92CBAED1887E29500A07070 /* SYNVideoPlayerAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNVideoPlayerAnimator.m; sourceTree = "<group>"; };
@@ -3654,7 +3653,6 @@
 			isa = PBXGroup;
 			children = (
 				BEB31375181E715B00FAF98A /* SYNSocialActionsDelegate.h */,
-				E92A2C5D187F0A7C002A6447 /* SYNVideoCellDelegate.h */,
 			);
 			name = Delegates;
 			sourceTree = "<group>";

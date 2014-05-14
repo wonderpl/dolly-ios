@@ -256,22 +256,6 @@ typedef void (^SearchResultCompleteBlock)(int);
 	return nil;
 }
 
-#pragma mark - SYNVideoCellDelegate
-
-- (void)profileButtonPressedForCell:(UICollectionViewCell *)cell {
-	NSIndexPath *indexPath = [self.videosCollectionView indexPathForCell:cell];
-	VideoInstance *videoInstance = self.videosArray[indexPath.row];
-	
-	[self viewProfileDetails:videoInstance.channel.channelOwner];
-}
-
-- (void)channelButtonPressedForCell:(UICollectionViewCell *)cell {
-	NSIndexPath *indexPath = [self.videosCollectionView indexPathForCell:cell];
-	VideoInstance *videoInstance = self.videosArray[indexPath.row];
-	
-	[self viewChannelDetails:videoInstance.channel withAnimation:YES];
-}
-
 #pragma mark - Button Delegates
 
 - (void) profileButtonTapped: (UIButton *) profileButton
