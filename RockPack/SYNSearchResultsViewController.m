@@ -376,7 +376,7 @@ typedef void (^SearchResultCompleteBlock)(int);
 {
 	
 	if (IS_IPHONE) {
-		self.topVideoContraint.constant = 111;
+		self.topVideoContraint.constant = 101;
 
 	} else {
 		self.topVideoContraint.constant = 49;
