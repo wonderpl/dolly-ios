@@ -667,7 +667,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="Log In" backgroundImage="ButtonLogin.png">
+                                <state key="normal" title="Log In" backgroundImage="login-button.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </state>
@@ -1119,7 +1119,7 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="ahx-Sv-3Mj"/>
-        <segue reference="oHh-i9-djB"/>
-        <segue reference="7Bv-VN-bSo"/>
+        <segue reference="a0x-hG-aBP"/>
+        <segue reference="8dQ-Bm-dYZ"/>
     </inferredMetricsTieBreakers>
 </document>
