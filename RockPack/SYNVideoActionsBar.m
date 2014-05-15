@@ -57,6 +57,7 @@
 						options:SDWebImageRetryFailed];
 		button.userInteractionEnabled = NO;
 		
+		[buttons addObject:button];
 		[self.favouritedByContainer addSubview:button];
 	}];
 	
