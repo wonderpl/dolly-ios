@@ -35,6 +35,7 @@
 #import "SYNLocationManager.h"
 #import "SYNAppearanceManager.h"
 #import "SYNFeedModel.h"
+#import "SYNVideoPlayerViewController.h"
 @import AVFoundation;
 
 @interface SYNAppDelegate () {
@@ -1304,6 +1305,12 @@
 		
 		SYNAbstractViewController *currentViewController = self.masterViewController.showingViewController;
         
+        UIViewController *topController = self.masterViewController.presentedViewController;
+        
+        if ([topController isKindOfClass:[SYNVideoPlayerViewController class]]) {
+            [self.masterViewController dismissViewControllerAnimated:NO completion:nil];
+        }
+
         switch (pathComponents.count)
         {
                 // User profile
@@ -1324,7 +1331,6 @@
                 // Channel
             case 3:
             {
-                
                 // Extract the channelId from the path
                 NSString *channelId = pathComponents[2];
                 NSString *resourceURL = [NSString stringWithFormat: @"%@//%@/ws/%@/channels/%@/", httpScheme, hostName, userId, channelId];
@@ -1350,7 +1356,6 @@
                 
                 if (channel)
                 {
-                    
                     [currentViewController viewVideoInstanceInChannel:channel withVideoId:videoId];
                     success = TRUE;
                 }
