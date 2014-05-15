@@ -65,6 +65,11 @@ static const CGSize LandscapeSmallCellSize = { .width = 350.0, .height = 352.0};
 	return CGSizeMake(CGRectGetWidth(self.collectionView.bounds), self.footerTop + footerHeight);
 }
 
+- (CGPoint)targetContentOffsetForProposedContentOffset:(CGPoint)proposedContentOffset {
+	CGFloat blockPosition = self.collectionView.bounds.size.height * self.blockLocation;
+	return CGPointMake(0, blockPosition - self.collectionView.contentInset.top);
+}
+
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect {
 	NSInteger numberOfCells = [self.collectionView numberOfItemsInSection:0];
 	

@@ -12,6 +12,10 @@
 
 @interface SYNIPadFeedLayout : UICollectionViewLayout
 
+// This is set by the view controller so that we can position the collection view properly
+// when the iPad is rotated
+@property (nonatomic, assign) CGFloat blockLocation;
+
 @property (nonatomic, strong) SYNPagingModel *model;
 
 @end

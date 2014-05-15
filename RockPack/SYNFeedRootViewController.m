@@ -30,6 +30,7 @@
 #import "SYNIPhoneFeedRootViewController.h"
 #import "SYNIPadFeedRootViewController.h"
 #import "UINavigationBar+Appearance.h"
+#import "SYNIPadFeedLayout.h"
 
 @interface SYNFeedRootViewController () <UIViewControllerTransitioningDelegate, SYNPagingModelDelegate, SYNVideoPlayerAnimatorDelegate, SYNFeedVideoCellDelegate, SYNFeedChannelCellDelegate>
 
@@ -201,6 +202,15 @@
 - (SYNFeedVideoCell *)videoCellForIndexPath:(NSIndexPath *)indexPath
 							 collectionView:(UICollectionView *)collectionView {
 	return nil;
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+	[super scrollViewDidScroll:scrollView];
+	
+	SYNIPadFeedLayout *layout = (SYNIPadFeedLayout *)self.feedCollectionView.collectionViewLayout;
+	layout.blockLocation = (scrollView.contentOffset.y + scrollView.contentInset.top) / scrollView.bounds.size.height;
 }
 
 #pragma mark - SYNVideoInfoCell
