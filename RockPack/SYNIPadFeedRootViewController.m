@@ -53,6 +53,15 @@
 	[self.feedCollectionView reloadData];
 }
 
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+	[super scrollViewDidScroll:scrollView];
+	
+	SYNIPadFeedLayout *layout = (SYNIPadFeedLayout *)self.feedCollectionView.collectionViewLayout;
+	layout.blockLocation = (scrollView.contentOffset.y + scrollView.contentInset.top) / scrollView.bounds.size.height;
+}
+
 #pragma mark - Overridden
 
 - (SYNFeedChannelCell *)channelCellForIndexPath:(NSIndexPath *)indexPath
