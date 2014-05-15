@@ -46,9 +46,6 @@
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fgh-bY-3NE">
                         <rect key="frame" x="20" y="125" width="280" height="48"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="280" id="Fhh-EJ-WgJ"/>
-                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                         <state key="normal" title="Button">
                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -96,6 +93,8 @@
                 <constraint firstAttribute="bottom" secondItem="qkx-0N-2Vf" secondAttribute="bottom" id="8R5-7s-DMM"/>
                 <constraint firstAttribute="centerX" secondItem="2Rw-WP-yQk" secondAttribute="centerX" id="DMa-AP-cvt"/>
                 <constraint firstItem="Fgh-bY-3NE" firstAttribute="top" secondItem="eHf-7g-4L4" secondAttribute="top" constant="125" id="Gbm-dZ-YaJ"/>
+                <constraint firstItem="Fgh-bY-3NE" firstAttribute="leading" secondItem="eHf-7g-4L4" secondAttribute="leading" constant="20" id="T1h-yN-211"/>
+                <constraint firstAttribute="trailing" secondItem="Fgh-bY-3NE" secondAttribute="trailing" constant="20" id="XAK-aT-1Q1"/>
                 <constraint firstItem="2Rw-WP-yQk" firstAttribute="top" secondItem="eHf-7g-4L4" secondAttribute="top" constant="96" id="ZIn-Yf-o4g"/>
                 <constraint firstItem="6r5-TW-bDU" firstAttribute="top" secondItem="eHf-7g-4L4" secondAttribute="top" constant="21" id="bHg-NR-baV"/>
                 <constraint firstAttribute="trailing" secondItem="nch-3q-JDg" secondAttribute="trailing" constant="70" id="cvb-U7-qNL"/>

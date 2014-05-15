@@ -28,7 +28,7 @@
                         </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jtp-MI-4Tn">
-                        <rect key="frame" x="261" y="285" width="148" height="72"/>
+                        <rect key="frame" x="40" y="285" width="590" height="72"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="50"/>
                         <state key="normal" title="Button">
@@ -103,13 +103,14 @@
                 <constraint firstAttribute="centerX" secondItem="2Ud-a7-SFd" secondAttribute="centerX" constant="-59" id="Jjh-zr-WRD"/>
                 <constraint firstItem="zAy-bh-PZi" firstAttribute="top" secondItem="Jtp-MI-4Tn" secondAttribute="bottom" constant="92" id="KD0-IL-zA2"/>
                 <constraint firstItem="qEN-AV-KX8" firstAttribute="leading" secondItem="t8u-l2-ZAg" secondAttribute="leading" id="KLH-jt-bLu"/>
+                <constraint firstItem="Jtp-MI-4Tn" firstAttribute="leading" secondItem="t8u-l2-ZAg" secondAttribute="leading" constant="40" id="M9F-7K-MfT"/>
                 <constraint firstAttribute="centerX" secondItem="spX-UP-J1y" secondAttribute="centerX" constant="1.5" id="Odj-dO-6hE"/>
                 <constraint firstAttribute="trailing" secondItem="qEN-AV-KX8" secondAttribute="trailing" id="QL5-1X-nK4"/>
                 <constraint firstAttribute="bottom" secondItem="qEN-AV-KX8" secondAttribute="bottom" id="VwR-Zh-Ca8"/>
                 <constraint firstAttribute="centerX" secondItem="4ce-aa-zxA" secondAttribute="centerX" id="ZQ6-Gy-Wzu"/>
+                <constraint firstAttribute="trailing" secondItem="Jtp-MI-4Tn" secondAttribute="trailing" constant="40" id="acK-M3-c6G"/>
                 <constraint firstAttribute="centerY" secondItem="Jtp-MI-4Tn" secondAttribute="centerY" constant="-14" id="c4c-Hg-eWG"/>
                 <constraint firstItem="4ce-aa-zxA" firstAttribute="top" secondItem="spX-UP-J1y" secondAttribute="bottom" constant="7" id="fBd-4V-stk"/>
-                <constraint firstAttribute="centerX" secondItem="Jtp-MI-4Tn" secondAttribute="centerX" id="qy1-Da-05c"/>
                 <constraint firstItem="HXR-Jp-ju4" firstAttribute="top" secondItem="t8u-l2-ZAg" secondAttribute="top" id="u4I-6x-YlX"/>
             </constraints>
             <size key="customSize" width="370" height="218"/>
