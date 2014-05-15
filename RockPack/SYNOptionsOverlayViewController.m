@@ -17,7 +17,6 @@
 #import "SYNFeedbackViewController.h"
 #import "Appirater.h"
 #import "SYNWebViewController.h"
-#import "SYNProfileRootViewController.h"
 #import "SYNContainerViewController.h"
 #import "SYNTrackingManager.h"
 
