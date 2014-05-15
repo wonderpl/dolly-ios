@@ -29,6 +29,9 @@
 }
 
 + (void)setupNavigationBarAppearance {
+    
+    //Set translusent:NO is being done in the Abstract view controller in ViewDidLoad
+    
 	UIImage *backButtonImage = [[UIImage imageNamed:@"BackButtonApp.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
 	[[UINavigationBar appearance] setBackIndicatorImage:backButtonImage];
