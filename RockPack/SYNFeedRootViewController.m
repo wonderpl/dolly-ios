@@ -85,7 +85,7 @@
     [self.refreshControl setTintColor:[UIColor dollyActivityIndicator]];
     
     [self.refreshControl addTarget: self
-                            action: @selector(resetData)
+                            action: @selector(reloadData)
                   forControlEvents: UIControlEventValueChanged];
     
     [self.feedCollectionView addSubview: self.refreshControl];
@@ -94,11 +94,11 @@
                                                         object: self
                                                       userInfo: @{kScrollingDirection:@(ScrollingDirectionUp)}];
 	
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetData) name:kReloadFeed object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData) name:kReloadFeed object:nil];
 }
 
-- (void) viewWillAppear: (BOOL) animated {
-    [super viewWillAppear: animated];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
 	
 	if (![self isBeingPresented]) {
 		self.model.delegate = self;
@@ -113,7 +113,7 @@
 	
 	[[SYNTrackingManager sharedManager] trackFeedScreenView];
 	
-	[self resetData];
+	[self reloadData];
 }
 
 - (void)scrollToTop:(UIGestureRecognizer *)gestureRecognizer {
@@ -130,7 +130,7 @@
 }
 
 - (void)clearedLocationBoundData {
-	[self resetData];
+	[self reloadData];
 
 	[self.feedCollectionView reloadData];
 }
@@ -238,19 +238,23 @@
 	return @"MyWonders";
 }
 
-- (void)resetData {
+- (void)reloadDataAndSwitchToFeed:(BOOL)shouldSwitch {
 	[self.model reloadInitialPageWithCompletionHandler:^(BOOL success, BOOL hasChanged) {
-		if (hasChanged) {
+		if (shouldSwitch && hasChanged) {
 			self.feedCollectionView.contentOffset = CGPointMake(0, -self.feedCollectionView.contentInset.top);
 			[appDelegate.navigationManager switchToFeed];
 		}
 	}];
 }
 
+- (void)reloadData {
+	[self reloadDataAndSwitchToFeed:NO];
+}
+
 - (void) applicationWillEnterForeground: (UIApplication *) application {
 	[super applicationWillEnterForeground: application];
 	
-	[self resetData];
+	[self reloadDataAndSwitchToFeed:YES];
 }
 
 - (void) showInboarding {
