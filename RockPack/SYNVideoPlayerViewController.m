@@ -68,7 +68,7 @@
 
 #pragma mark - Factory
 
-+ (UIViewController *)viewControllerWithModel:(SYNPagingModel *)model selectedIndex:(NSInteger)selectedIndex {
++ (instancetype)viewControllerWithModel:(SYNPagingModel *)model selectedIndex:(NSInteger)selectedIndex {
 	NSString *suffix = ([[UIDevice currentDevice] isPhone] ? @"iphone" : @"ipad");
 	NSString *storyboardName = [NSString stringWithFormat:@"%@_%@", NSStringFromClass(self), suffix];
 	UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle:nil];

@@ -14,7 +14,7 @@
 
 @interface SYNVideoPlayerViewController : SYNAbstractViewController
 
-+ (UIViewController *)viewControllerWithModel:(SYNPagingModel *)model selectedIndex:(NSInteger)selectedIndex;
++ (instancetype)viewControllerWithModel:(SYNPagingModel *)model selectedIndex:(NSInteger)selectedIndex;
 
 @property (nonatomic, assign, readonly) NSInteger selectedIndex;
 
