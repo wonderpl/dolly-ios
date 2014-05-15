@@ -122,9 +122,6 @@
     if (IS_IPAD) {
         self.navigationItem.title = @"";
     }
-    
-    [self.navigationController.navigationBar setTranslucent:NO];
-
 }
 
 -(void)viewWillAppear:(BOOL)animated {
