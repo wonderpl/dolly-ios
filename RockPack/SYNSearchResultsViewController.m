@@ -94,7 +94,6 @@ typedef void (^SearchResultCompleteBlock)(int);
                                                                             target:nil
                                                                             action:nil];
     
-    
     self.view.autoresizesSubviews = YES;
 	
     [self.videosCollectionView registerNib:[SYNSearchVideoCell nib]
@@ -102,12 +101,10 @@ typedef void (^SearchResultCompleteBlock)(int);
     
 	[self.videosCollectionView registerNib:[SYNSearchVideoLargeCell nib]
                 forCellWithReuseIdentifier:[SYNSearchVideoLargeCell reuseIdentifier]];
-
 	
 	[self.videosCollectionView registerNib:[SYNSearchVideoSmallCell nib]
                 forCellWithReuseIdentifier:[SYNSearchVideoSmallCell reuseIdentifier]];
 
-	
     [self.videosCollectionView registerNib:[SYNChannelFooterMoreView nib]
                 forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
                        withReuseIdentifier:[SYNChannelFooterMoreView reuseIdentifier]];
@@ -118,9 +115,6 @@ typedef void (^SearchResultCompleteBlock)(int);
     [self.usersCollectionView registerNib:[SYNChannelFooterMoreView nib]
                forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
                       withReuseIdentifier:[SYNChannelFooterMoreView reuseIdentifier]];
-    
-    
-    
     
     // == Define Completion Blocks for operations == //
     
@@ -157,8 +151,6 @@ typedef void (^SearchResultCompleteBlock)(int);
     
     self.userSearchCompleteBlock = ^(int count) {
         NSArray *fetchedObjects = [wself getSearchEntitiesByName:[ChannelOwner entityName]];
-        
-        
         
         if (!fetchedObjects) {
             // handle error
@@ -241,9 +233,6 @@ typedef void (^SearchResultCompleteBlock)(int);
     pMsgView.frame = rect;
     
     return pMsgView;
-    
-    
-
 }
 
 - (NSString *)trackingScreenName {
@@ -297,7 +286,6 @@ typedef void (^SearchResultCompleteBlock)(int);
 {	
 	if (IS_IPHONE) {
 		self.topVideoContraint.constant = 64;
-
 	} else {
 		self.topVideoContraint.constant = 0;
 		self.topUserContraint.constant = 19;
@@ -315,10 +303,8 @@ typedef void (^SearchResultCompleteBlock)(int);
     
     [self.usersTabButton setTitle:(NSLocalizedString(@"collections", @"Collections, discover tab")) forState:UIControlStateNormal];
     [self.usersTabButton setTitle:(NSLocalizedString(@"collections", @"Collections, discover tab")) forState:UIControlStateSelected];
-
     
-    if([_currentSearchGenre isEqualToString: genreId])
-    {
+    if([_currentSearchGenre isEqualToString: genreId]){
         return;
     }
 	
@@ -351,9 +337,6 @@ typedef void (^SearchResultCompleteBlock)(int);
                                                             self.userSearchCompleteBlock(value);
                                                             [self showUserOverLay];
                                                         }];
-	
-	
-    
 }
 
 - (void) searchForTerm: (NSString *) newSearchTerm
@@ -677,17 +660,6 @@ referenceSizeForFooterInSection: (NSInteger) section
 {
     [self.usersCollectionView.collectionViewLayout invalidateLayout];
 	[self.videosCollectionView.collectionViewLayout invalidateLayout];
-	
-	
-	
-	if (UIDeviceOrientationIsPortrait([[SYNDeviceManager sharedInstance] orientation])) {
-		
-		
-	} else {
-		
-		
-	}
-	
 	[self.usersCollectionView reloadData];
 	[self.videosCollectionView reloadData];
 
