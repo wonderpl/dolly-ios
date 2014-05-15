@@ -234,8 +234,6 @@
 	}
 }
 
-#pragma mark - Helper Methods to get AggreagateCell's Data
-
 - (NSString *)trackingScreenName {
 	return @"MyWonders";
 }
