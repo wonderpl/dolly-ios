@@ -319,24 +319,7 @@
                                              ignoringObjectTypes: ignoringObjects | kIgnoreChannelObjects];
     }
     
-//    self.subscribedByUserValue = YES;
-    
     self.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribedToUserId:self.uniqueId];
-    
-    if (self.favouritesValue)
-    {
-        SYNAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-        
-        if ([appDelegate.currentUser.uniqueId isEqualToString:self.channelOwner.uniqueId])
-        {
-            self.title = [NSString stringWithFormat:@"My %@", NSLocalizedString(@"Favorites", nil)];
-        }
-        else
-        {
-			NSString *displayName = [self.channelOwner.displayName apostrophisedString];
-			self.title = [NSString stringWithFormat:@"%@ %@", displayName, NSLocalizedString(@"Favorites", nil)];
-        }
-    }
 }
 
 
@@ -396,6 +379,20 @@
     }
 
  
+}
+
+- (NSString *)title {
+	if (self.favouritesValue) {
+        SYNAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+        
+        if ([appDelegate.currentUser.uniqueId isEqualToString:self.channelOwner.uniqueId]) {
+            return [NSString stringWithFormat:@"My %@", NSLocalizedString(@"Favorites", nil)];
+        } else {
+			NSString *displayName = [self.channelOwner.displayName apostrophisedString];
+			return [NSString stringWithFormat:@"%@ %@", displayName, NSLocalizedString(@"Favorites", nil)];
+        }
+    }
+	return self.primitiveTitle;
 }
 
 
