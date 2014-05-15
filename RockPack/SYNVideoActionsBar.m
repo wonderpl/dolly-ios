@@ -55,7 +55,7 @@
 					   forState:UIControlStateNormal
 			   placeholderImage:[UIImage imageNamed:@"PlaceholderAvatarProfile"]
 						options:SDWebImageRetryFailed];
-		button.enabled = NO;
+		button.userInteractionEnabled = NO;
 		
 		[self.favouritedByContainer addSubview:button];
 	}];
