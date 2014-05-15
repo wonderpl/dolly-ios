@@ -933,22 +933,8 @@
 
 - (IBAction)avatarTapped:(id)sender
 {
-    User *tmpUser = [((SYNAppDelegate*)[[UIApplication sharedApplication] delegate]) currentUser];
-    
-    SYNProfileRootViewController *profileVC;
-    
-    if (tmpUser.uniqueId == self.channel.channelOwner.uniqueId) {
-        profileVC = [[SYNProfileRootViewController alloc] initWithViewId: kProfileViewId andChannelOwner:self.channel.channelOwner];
-        profileVC.navigationItem.backBarButtonItem.title = @"";
-        
-    }
-    else
-    {
-        profileVC = [[SYNProfileRootViewController alloc] initWithViewId: kProfileViewId andChannelOwner:self.channel.channelOwner];
-        profileVC.navigationItem.backBarButtonItem.title = @"";
-        
-    }
-    [self.navigationController pushViewController:profileVC animated:YES];
+    self.navigationItem.backBarButtonItem.title = @"";
+    [self viewProfileDetails:self.channel.channelOwner];
 }
 
 
