@@ -660,11 +660,15 @@
 		{
 			[self displayChannelDetails];
 		}
+        
+        self.model = [SYNChannelVideosModel modelWithChannel:self.channel];
+        [self.videoThumbnailCollectionView reloadData];
 
 	});
 }
 
 - (void) reloadCollectionViews {
+
     [self.videoThumbnailCollectionView reloadData];
 	
     [self displayChannelDetails];
@@ -1563,14 +1567,10 @@
             
             [self.channel addVideoInstancesObject:vidToPlay];
 			
-            self.model = [SYNChannelVideosModel modelWithChannel:self.channel];
-
             
 			viewController = [SYNVideoPlayerViewController viewControllerWithModel:model
 																	 selectedIndex:[videosArray count] - 1];
         } else {
-            self.model = [SYNChannelVideosModel modelWithChannel:self.channel];
-
 			viewController = [SYNVideoPlayerViewController viewControllerWithModel:model
 																	 selectedIndex:position];
         }
