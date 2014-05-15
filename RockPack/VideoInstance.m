@@ -84,6 +84,7 @@ static NSDateFormatter *dateFormatter = nil;
 		
 		[videoInstance setAttributesFromDictionary:dictionary];
 		
+		[videoInstance.starrersSet removeAllObjects];
 		NSArray *starringUserIds = [dictionary[@"starring_users"] valueForKey:@"id"];
 		for (NSString *starringUserId in starringUserIds) {
 			[videoInstance addStarrersObject:channelOwners[starringUserId]];
