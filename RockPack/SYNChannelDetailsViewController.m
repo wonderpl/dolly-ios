@@ -1546,28 +1546,20 @@
 {
     
     __block UIViewController *viewController;
-    
+	
     [appDelegate.oAuthNetworkEngine videoForChannelForUserId:appDelegate.currentUser.uniqueId channelId:self.channel.uniqueId instanceId:autoplayId completionHandler:^(id response) {
         
         VideoInstance *vidToPlay = [VideoInstance instanceFromDictionary:response usingManagedObjectContext:appDelegate.mainManagedObjectContext];
-        
-        
-        NSInteger tmpPosition = NSNotFound;
-        
-		// Check if the video instance is in the first set of videos
-		for (int i = 0; i<self.model.itemCount; i++) {
-			VideoInstance *videoInstance = [self.model itemAtIndex:i];
-			//If the video is found, set the position
-			if ([videoInstance.uniqueId isEqual:vidToPlay.uniqueId]) {
-				tmpPosition = i;
-			}
-		}
+		
+		NSInteger position = [self.channel.videoInstances indexOfObjectPassingTest:^BOOL(VideoInstance *videoInstance, NSUInteger idx, BOOL *stop) {
+			return [videoInstance.uniqueId isEqual:vidToPlay.uniqueId];
+		}];
 		
 		NSArray *videosArray = [self.channel.videoInstancesSet array];
 		SYNPagingModel *model = [[SYNStaticModel alloc] initWithItems:videosArray];
         
         //If the Video was not found, add the video instance to th end.
-        if (tmpPosition == NSNotFound) {
+        if (position == NSNotFound) {
             
             [self.channel addVideoInstancesObject:vidToPlay];
 			
@@ -1580,7 +1572,7 @@
             self.model = [SYNChannelVideosModel modelWithChannel:self.channel];
 
 			viewController = [SYNVideoPlayerViewController viewControllerWithModel:model
-																	 selectedIndex:tmpPosition];
+																	 selectedIndex:position];
         }
         
 		[self.navigationController presentViewController:viewController animated:YES completion:nil];
