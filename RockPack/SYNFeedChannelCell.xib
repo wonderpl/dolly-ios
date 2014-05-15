@@ -37,7 +37,7 @@
                         </constraints>
                     </view>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Rw-WP-yQk">
-                        <rect key="frame" x="142" y="96" width="36" height="17"/>
+                        <rect key="frame" x="142" y="85" width="36" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.46666666666666667" green="0.46666666666666667" blue="0.50980392156862742" alpha="1" colorSpace="calibratedRGB"/>
@@ -95,7 +95,7 @@
                 <constraint firstItem="Fgh-bY-3NE" firstAttribute="top" secondItem="eHf-7g-4L4" secondAttribute="top" constant="125" id="Gbm-dZ-YaJ"/>
                 <constraint firstItem="Fgh-bY-3NE" firstAttribute="leading" secondItem="eHf-7g-4L4" secondAttribute="leading" constant="20" id="T1h-yN-211"/>
                 <constraint firstAttribute="trailing" secondItem="Fgh-bY-3NE" secondAttribute="trailing" constant="20" id="XAK-aT-1Q1"/>
-                <constraint firstItem="2Rw-WP-yQk" firstAttribute="top" secondItem="eHf-7g-4L4" secondAttribute="top" constant="96" id="ZIn-Yf-o4g"/>
+                <constraint firstItem="2Rw-WP-yQk" firstAttribute="top" secondItem="eHf-7g-4L4" secondAttribute="top" constant="85" id="ZIn-Yf-o4g"/>
                 <constraint firstItem="6r5-TW-bDU" firstAttribute="top" secondItem="eHf-7g-4L4" secondAttribute="top" constant="21" id="bHg-NR-baV"/>
                 <constraint firstAttribute="trailing" secondItem="nch-3q-JDg" secondAttribute="trailing" constant="70" id="cvb-U7-qNL"/>
                 <constraint firstAttribute="centerX" secondItem="6r5-TW-bDU" secondAttribute="centerX" id="fvf-hC-cHm"/>

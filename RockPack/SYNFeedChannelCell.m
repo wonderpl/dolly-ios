@@ -35,6 +35,7 @@
 	self.followButton.titleLabel.font = [UIFont regularCustomFontOfSize:self.followButton.titleLabel.font.pointSize];
 	
 	self.channelTitleButton.titleLabel.numberOfLines = 2;
+	self.channelTitleButton.titleLabel.textAlignment = NSTextAlignmentCenter;
 	self.channelTitleButton.titleLabel.font = [UIFont boldCustomFontOfSize:self.channelTitleButton.titleLabel.font.pointSize];
 }
 

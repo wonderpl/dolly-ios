@@ -14,7 +14,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="spX-UP-J1y" customClass="SYNAvatarButton">
-                        <rect key="frame" x="312" y="218" width="43" height="43"/>
+                        <rect key="frame" x="312" y="184" width="43" height="43"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="43" id="3qR-IO-ww1"/>
@@ -40,7 +40,7 @@
                         </connections>
                     </button>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ce-aa-zxA">
-                        <rect key="frame" x="314" y="268" width="42" height="21"/>
+                        <rect key="frame" x="314" y="234" width="42" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -96,7 +96,7 @@
             </view>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="HXR-Jp-ju4" secondAttribute="bottom" id="0jm-LT-D6Y"/>
-                <constraint firstItem="Jtp-MI-4Tn" firstAttribute="top" secondItem="4ce-aa-zxA" secondAttribute="bottom" constant="-4" id="2Nq-Vl-fVo"/>
+                <constraint firstItem="Jtp-MI-4Tn" firstAttribute="top" secondItem="4ce-aa-zxA" secondAttribute="bottom" constant="30" id="2Nq-Vl-fVo"/>
                 <constraint firstItem="2Ud-a7-SFd" firstAttribute="top" secondItem="Jtp-MI-4Tn" secondAttribute="bottom" constant="84" id="2W9-Bn-aMU"/>
                 <constraint firstAttribute="trailing" secondItem="HXR-Jp-ju4" secondAttribute="trailing" id="4G6-gm-3ef"/>
                 <constraint firstAttribute="centerX" secondItem="zAy-bh-PZi" secondAttribute="centerX" constant="50" id="Fhj-j5-FMU"/>

@@ -14,7 +14,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zTb-nb-qDr" customClass="SYNAvatarButton">
-                        <rect key="frame" x="151" y="109" width="43" height="43"/>
+                        <rect key="frame" x="151" y="85" width="43" height="43"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="43" id="B2F-jq-WYO"/>
@@ -40,7 +40,7 @@
                         </connections>
                     </button>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ov9-oB-CVO">
-                        <rect key="frame" x="153" y="160" width="42" height="21"/>
+                        <rect key="frame" x="153" y="136" width="42" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -95,9 +95,7 @@
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
-                <constraint firstItem="30g-g0-9j5" firstAttribute="top" secondItem="ov9-oB-CVO" secondAttribute="bottom" constant="-4" id="0oF-pA-rcF"/>
                 <constraint firstAttribute="trailing" secondItem="E3C-aj-aTh" secondAttribute="trailing" id="2A2-mN-E3z"/>
-                <constraint firstItem="30g-g0-9j5" firstAttribute="top" secondItem="ov9-oB-CVO" secondAttribute="bottom" constant="-4" id="2W0-bB-l6C"/>
                 <constraint firstAttribute="centerX" secondItem="ov9-oB-CVO" secondAttribute="centerX" id="8ou-9q-a9t"/>
                 <constraint firstAttribute="centerY" secondItem="30g-g0-9j5" secondAttribute="centerY" constant="-23" id="CRY-NH-wuN"/>
                 <constraint firstAttribute="bottom" secondItem="E3C-aj-aTh" secondAttribute="bottom" id="Fhq-sY-RNN"/>
@@ -106,7 +104,7 @@
                 <constraint firstItem="30g-g0-9j5" firstAttribute="leading" secondItem="IUo-RN-cL2" secondAttribute="leading" constant="20" id="Gj6-YB-8tf"/>
                 <constraint firstItem="kF5-cg-XMG" firstAttribute="leading" secondItem="IUo-RN-cL2" secondAttribute="leading" id="NqP-vD-86f"/>
                 <constraint firstAttribute="centerX" secondItem="PO2-9Y-Blu" secondAttribute="centerX" constant="45.5" id="ZYi-CR-jZ5"/>
-                <constraint firstItem="30g-g0-9j5" firstAttribute="top" secondItem="ov9-oB-CVO" secondAttribute="bottom" constant="-4" id="bPY-hB-bpz"/>
+                <constraint firstItem="30g-g0-9j5" firstAttribute="top" secondItem="ov9-oB-CVO" secondAttribute="bottom" constant="20" id="bPY-hB-bpz"/>
                 <constraint firstItem="arF-3m-4tQ" firstAttribute="top" secondItem="30g-g0-9j5" secondAttribute="bottom" constant="19" id="df0-Er-R8E"/>
                 <constraint firstAttribute="bottom" secondItem="kF5-cg-XMG" secondAttribute="bottom" id="dmb-8f-bvW"/>
                 <constraint firstItem="PO2-9Y-Blu" firstAttribute="top" secondItem="30g-g0-9j5" secondAttribute="bottom" constant="25" id="hQL-yw-HkG"/>
