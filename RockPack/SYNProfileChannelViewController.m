@@ -700,7 +700,11 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 
 
 - (void) followButtonTapped:(SYNChannelMidCell *)cell {
-	[self followButtonPressed:cell.followButton withChannel:cell.channel];
+    
+    [self followButtonPressed:cell.followButton withChannel:cell.channel completion:^{
+        
+        [self.cv reloadData];
+    }];
 }
 
 #pragma mark - Alertview delegate

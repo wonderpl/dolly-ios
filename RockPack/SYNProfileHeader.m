@@ -15,6 +15,7 @@
 #import "SYNSocialFollowButton.h"
 #import "SYNFollowUserButton.h"
 #import "SYNSegmentedButton.h"
+#import "SYNActivityManager.h"
 
 @interface SYNProfileHeader ()
 
@@ -62,7 +63,8 @@
     [self.segmentedController layoutIfNeeded];
 
     self.aboutMeTextView.text = channelOwner.channelOwnerDescription;
-    [self.followAllButton setSelected:self.channelOwner.subscribedByUserValue];
+    [self.followAllButton setSelected:[[SYNActivityManager sharedInstance] isSubscribedToUserId:self.channelOwner.uniqueId]];
+    
 	[self setDescriptionText:channelOwner.channelOwnerDescription];
     [self setUpViews];
     [self setFollowersCountLabel];

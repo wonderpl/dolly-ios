@@ -625,8 +625,29 @@
 	button.enabled = NO;
 	[button invalidateIntrinsicContentSize];
 	
-	if (channelOwner.subscribedByUserValue == NO) {
-		[[SYNActivityManager sharedInstance] subscribeToUser:channelOwner
+    
+    
+	if ([[SYNActivityManager sharedInstance] isSubscribedToUserId:channelOwner.uniqueId]) {
+        [[SYNActivityManager sharedInstance] unsubscribeToUser:channelOwner
+											 completionHandler:^(id responce) {
+												 
+												 button.selected = NO;
+												 button.enabled = YES;
+												 [[NSNotificationCenter defaultCenter] postNotificationName:kReloadFeed object:self userInfo:nil];
+                                                 
+                                                 if (callbackBlock) {
+                                                     callbackBlock();
+                                                 }
+                                                 
+												 [button invalidateIntrinsicContentSize];
+                                                 
+											 } errorHandler:^(id error) {
+												 button.enabled = YES;
+												 [button invalidateIntrinsicContentSize];
+											 }];
+	} else {
+		
+        [[SYNActivityManager sharedInstance] subscribeToUser:channelOwner
 										   completionHandler: ^(id responce) {
 											   
 											   button.selected = YES;
@@ -634,71 +655,60 @@
 											   
 											   [[NSNotificationCenter defaultCenter] postNotificationName:kReloadFeed object:self userInfo:nil];
 											   [button invalidateIntrinsicContentSize];
-
+                                               
                                                if (callbackBlock) {
                                                    callbackBlock();
                                                }
-
+                                               
 										   } errorHandler: ^(id error) {
 											   button.enabled = YES;
-
+                                               
 											   [button invalidateIntrinsicContentSize];
 										   }];
-	} else {
-		[[SYNActivityManager sharedInstance] unsubscribeToUser:channelOwner
-											 completionHandler:^(id responce) {
-												 
-												 button.selected = NO;
-												 button.enabled = YES;
-												 [[NSNotificationCenter defaultCenter] postNotificationName:kReloadFeed object:self userInfo:nil];
 
-
-                                                 
-
-												 [button invalidateIntrinsicContentSize];
-                                                 
-                                                 
-
-											 } errorHandler:^(id error) {
-												 button.enabled = YES;
-												 [button invalidateIntrinsicContentSize];
-											 }];
 	}
 }
 
-
-- (void)followButtonPressed:(UIButton *)button withChannel:(Channel *)channel {
-	button.enabled = NO;
-	
-	[[SYNTrackingManager sharedManager] trackCollectionFollowFromScreenName:[self trackingScreenName]];
-	
-	channel.subscribedByUserValue = [[SYNActivityManager sharedInstance]isSubscribedToChannelId:channel.uniqueId];
+- (void)followButtonPressed:(UIButton *)button withChannel:(Channel *)channel completion :(void (^)(void))callbackBlock {
     
-	if (channel.subscribedByUserValue) {
+    [[SYNTrackingManager sharedManager] trackCollectionFollowFromScreenName:[self trackingScreenName]];
+    
+	if ([[SYNActivityManager sharedInstance]isSubscribedToChannelId:channel.uniqueId]) {
         [[SYNActivityManager sharedInstance] unsubscribeToChannel: channel
-												  completionHandler:^(NSDictionary *responseDictionary) {
-													  
-													  button.selected = NO;
-													  button.enabled = YES;
-                                                      [[NSNotificationCenter defaultCenter] postNotificationName:kReloadFeed object:self userInfo:nil];
+                                                completionHandler:^(NSDictionary *responseDictionary) {
+                                                    
+                                                    button.selected = NO;
+                                                    button.enabled = YES;
+                                                    [[NSNotificationCenter defaultCenter] postNotificationName:kReloadFeed object:self userInfo:nil];
+                                                    
+                                                    
+                                                    if (callbackBlock) {
+                                                        callbackBlock();
+                                                    }
 
-												  } errorHandler: ^(NSDictionary *errorDictionary) {
-													  button.enabled = YES;
-												  }];
+                                                } errorHandler: ^(NSDictionary *errorDictionary) {
+                                                    button.enabled = YES;
+                                                }];
 	} else {
         [[SYNActivityManager sharedInstance] subscribeToChannel: channel
 											  completionHandler: ^(NSDictionary *responseDictionary) {
 												  [[SYNTrackingManager sharedManager] trackCollectionFollowCompleted];
 												  
-													button.selected = YES;
-													button.enabled = YES;
+                                                  button.selected = YES;
+                                                  button.enabled = YES;
                                                   [[NSNotificationCenter defaultCenter] postNotificationName:kReloadFeed object:self userInfo:nil];
+                                                  
+                                                  if (callbackBlock) {
+                                                      callbackBlock();
+                                                  }
 
-												} errorHandler: ^(NSDictionary *errorDictionary) {
-													button.enabled = YES;
-												}];
+                                              } errorHandler: ^(NSDictionary *errorDictionary) {
+                                                  button.enabled = YES;
+                                              }];
 	}
+
 }
+
 
 #pragma mark - UIViewControllerTransitioningDelegate
 

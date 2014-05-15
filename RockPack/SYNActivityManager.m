@@ -115,15 +115,16 @@
 
 
 
-
 - (void) subscribeToChannel: (Channel *) channel
           completionHandler: (MKNKUserSuccessBlock) completionBlock
                errorHandler: (MKNKUserErrorBlock) errorBlock
 {
     
-    [self.appDelegate.oAuthNetworkEngine channelSubscribeForUserId:self.appDelegate.currentUser.uniqueId channelURL:channel.resourceURL completionHandler:^(NSDictionary *responseDictionary) {
-		channel.subscribedByUserValue = YES;
-		[self.channelSubscriptions addObject:channel.uniqueId];
+    [self.appDelegate.oAuthNetworkEngine channelSubscribeForUserId:self.appDelegate.currentUser.uniqueId channelId:channel.uniqueId completionHandler:^(NSDictionary *responseDictionary) {
+        
+        if (responseDictionary && [responseDictionary isKindOfClass:[NSDictionary class]]) {
+            [self registerActivityFromDictionary:responseDictionary];
+        }
         if (completionBlock)
         {
             completionBlock(responseDictionary);
@@ -143,9 +144,11 @@
                errorHandler: (MKNKUserErrorBlock) errorBlock
 {
     [self.appDelegate.oAuthNetworkEngine channelUnsubscribeForUserId:self.appDelegate.currentUser.uniqueId channelId:channel.uniqueId completionHandler:^(NSDictionary *responseDictionary) {
-		channel.subscribedByUserValue = NO;
-        [self.channelSubscriptions removeObject:channel.uniqueId];
+
         
+        if (responseDictionary && [responseDictionary isKindOfClass:[NSDictionary class]]) {
+            [self registerActivityFromDictionary:responseDictionary];
+        }
         if (completionBlock)
         {
             completionBlock(responseDictionary);
@@ -168,31 +171,24 @@
                errorHandler: (MKNKUserErrorBlock) errorBlock
 {
     [self.appDelegate.oAuthNetworkEngine subscribeAllForUserId: self.appDelegate.currentUser.uniqueId
-                                                subUserId: channelOwner.uniqueId
- completionHandler:^(NSDictionary *responseDictionary) {
-     
-        if (completionBlock)
-        {
-			//TODO: remove when the server response changes
-            [self addUserSubscriptonsObject:channelOwner];
-
-            for (Channel *tmpChannel in channelOwner.channels) {
-                [self addChannelSubscriptionsObject:tmpChannel];
-            }
-			
-			if (responseDictionary && [responseDictionary isKindOfClass:[NSDictionary class]]) {
-				[self registerActivityFromDictionary:responseDictionary];
-			}
-            completionBlock(responseDictionary);
-        }
-        
-    } errorHandler:^(NSDictionary *error) {
-        
-        if (errorBlock)
-        {
-            errorBlock(error);
-        }
-    }];
+                                                     subUserId: channelOwner.uniqueId
+                                             completionHandler:^(NSDictionary *responseDictionary) {
+                                                 
+                                                 if (responseDictionary && [responseDictionary isKindOfClass:[NSDictionary class]]) {
+                                                     [self registerActivityFromDictionary:responseDictionary];
+                                                 }
+                                                 if (completionBlock)
+                                                 {
+                                                     completionBlock(responseDictionary);
+                                                 }
+                                                 
+                                             } errorHandler:^(NSDictionary *error) {
+                                                 
+                                                 if (errorBlock)
+                                                 {
+                                                     errorBlock(error);
+                                                 }
+                                             }];
 }
 
 
@@ -201,27 +197,14 @@
             errorHandler: (MKNKUserErrorBlock) errorBlock
 {
 
-    
     [self.appDelegate.oAuthNetworkEngine unsubscribeAllForUserId: self.appDelegate.currentUser.uniqueId
                                                      subUserId: channelOwner.uniqueId
                                              completionHandler:^(NSDictionary *responseDictionary) {
 
-                                                 if (completionBlock)
-                                                 {
-													 //TODO: remove when the server response changes
-
-                                                     for (Channel *tmpChannel in channelOwner.channels) {
-                                                         [self.channelSubscriptions removeObject:tmpChannel.uniqueId];
-                                                         tmpChannel.subscribedByUserValue = NO;
-                                                     }
-                                                     
-                                                     [self.userSubscriptons removeObject:channelOwner.uniqueId];
-                                                     channelOwner.subscribedByUserValue = NO;
-
-													 
 													 if (responseDictionary && [responseDictionary isKindOfClass:[NSDictionary class]]) {
 														 [self registerActivityFromDictionary:responseDictionary];
 													 }
+                                                 if (completionBlock) {
                                                      completionBlock(responseDictionary);
                                                  }
                                                  

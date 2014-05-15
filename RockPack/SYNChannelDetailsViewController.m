@@ -368,7 +368,7 @@
         [self updateButtonCounts];
     }
     
-	[self followButtonPressed:socialControl withChannel:self.channel];
+    [self followButtonPressed:socialControl withChannel:self.channel completion:nil];
 }
 
 

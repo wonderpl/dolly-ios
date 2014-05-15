@@ -383,8 +383,6 @@ static const CGFloat TransitionDuration = 0.5f;
 	[[SYNTrackingManager sharedManager] trackUserCollectionsFollowFromScreenName:[self trackingScreenName]];
     
     if (buttonIndex == 1) {
-        self.channelOwner.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribedToUserId:self.channelOwner.uniqueId];
-		
 		[self followControlPressed:self.followAllButton withChannelOwner:self.channelOwner completion:^{
 			[self reloadCollectionViews];
 		}];

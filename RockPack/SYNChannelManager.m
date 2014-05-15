@@ -208,58 +208,58 @@
 - (void) subscribeToChannel: (Channel *) channel
 {
     // To prevent crashes that would occur when faulting object that have disappeared
-    NSManagedObjectID *channelObjectId = channel.objectID;
-    NSManagedObjectContext *channelObjectMOC = channel.managedObjectContext;
-    
-    [appDelegate.oAuthNetworkEngine channelSubscribeForUserId: appDelegate.currentOAuth2Credentials.userId
-                                                   channelURL: channel.resourceURL
-                                            completionHandler: ^(NSDictionary *responseDictionary) {
-												
-                                                NSError *error = nil;
-                                                Channel *channelFromId = (Channel *)[channelObjectMOC existingObjectWithID: channelObjectId
-                                                                                                                          error: &error];
-                                                
-                                                if (channelFromId)
-                                                {
-                                                    // This notifies the ChannelDetails through KVO
-                                                    channelFromId.hasChangedSubscribeValue = YES;
-                                                    channelFromId.subscribedByUserValue = YES;
-                                                    channelFromId.subscribersCountValue += 1;
-                                                    
-                                                    // the channel that got updated was a copy inside the ChannelDetails, so we must copy it to user
-                                                    IgnoringObjects copyFlags = kIgnoreVideoInstanceObjects;
-                                                    
-                                                    Channel *subscription = [Channel instanceFromChannel: channelFromId
-                                                                                               andViewId: kProfileViewId
-                                                                               usingManagedObjectContext: appDelegate.currentUser.managedObjectContext
-                                                                                     ignoringObjectTypes: copyFlags];
-
-                                                    subscription.hasChangedSubscribeValue = YES;
-                                                    
-                                                    [appDelegate.currentUser addSubscriptionsObject: subscription];
-                                                    
-                                                    // might be in search context
-                                                    [channelFromId.managedObjectContext save: &error];
-                                                    
-                                                    if (error)
-                                                    {
-                                                        [[NSNotificationCenter defaultCenter] postNotificationName: kUpdateFailed
-                                                                                                            object: self];
-                                                    }
-                                                    else
-                                                    {
-                                                        [appDelegate saveContext: YES];
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    DebugLog (@"Channel disappeared from underneath us");
-                                                }
-                                                
-                                            } errorHandler: ^(NSDictionary *errorDictionary) {
-                                                [[NSNotificationCenter defaultCenter] postNotificationName: kUpdateFailed
-                                                                                                    object: self];
-                                            }];
+//    NSManagedObjectID *channelObjectId = channel.objectID;
+//    NSManagedObjectContext *channelObjectMOC = channel.managedObjectContext;
+//    
+//    [appDelegate.oAuthNetworkEngine channelSubscribeForUserId: appDelegate.currentOAuth2Credentials.userId
+//                                                   channelURL: channel.resourceURL
+//                                            completionHandler: ^(NSDictionary *responseDictionary) {
+//												
+//                                                NSError *error = nil;
+//                                                Channel *channelFromId = (Channel *)[channelObjectMOC existingObjectWithID: channelObjectId
+//                                                                                                                          error: &error];
+//                                                
+//                                                if (channelFromId)
+//                                                {
+//                                                    // This notifies the ChannelDetails through KVO
+//                                                    channelFromId.hasChangedSubscribeValue = YES;
+//                                                    channelFromId.subscribedByUserValue = YES;
+//                                                    channelFromId.subscribersCountValue += 1;
+//                                                    
+//                                                    // the channel that got updated was a copy inside the ChannelDetails, so we must copy it to user
+//                                                    IgnoringObjects copyFlags = kIgnoreVideoInstanceObjects;
+//                                                    
+//                                                    Channel *subscription = [Channel instanceFromChannel: channelFromId
+//                                                                                               andViewId: kProfileViewId
+//                                                                               usingManagedObjectContext: appDelegate.currentUser.managedObjectContext
+//                                                                                     ignoringObjectTypes: copyFlags];
+//
+//                                                    subscription.hasChangedSubscribeValue = YES;
+//                                                    
+//                                                    [appDelegate.currentUser addSubscriptionsObject: subscription];
+//                                                    
+//                                                    // might be in search context
+//                                                    [channelFromId.managedObjectContext save: &error];
+//                                                    
+//                                                    if (error)
+//                                                    {
+//                                                        [[NSNotificationCenter defaultCenter] postNotificationName: kUpdateFailed
+//                                                                                                            object: self];
+//                                                    }
+//                                                    else
+//                                                    {
+//                                                        [appDelegate saveContext: YES];
+//                                                    }
+//                                                }
+//                                                else
+//                                                {
+//                                                    DebugLog (@"Channel disappeared from underneath us");
+//                                                }
+//                                                
+//                                            } errorHandler: ^(NSDictionary *errorDictionary) {
+//                                                [[NSNotificationCenter defaultCenter] postNotificationName: kUpdateFailed
+//                                                                                                    object: self];
+//                                            }];
 }
 
 
