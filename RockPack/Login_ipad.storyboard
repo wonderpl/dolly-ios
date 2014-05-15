@@ -381,15 +381,15 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="obP-kh-Tzz" userLabel="Register Button">
-                                <rect key="frame" x="224" y="354" width="320" height="38"/>
+                                <rect key="frame" x="224" y="354" width="320" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="38" id="Gb4-wP-Ozr"/>
+                                    <constraint firstAttribute="height" constant="50" id="Gb4-wP-Ozr"/>
                                     <constraint firstAttribute="width" constant="320" id="Q5d-tf-ccG"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="Register" backgroundImage="ButtonLogin.png">
+                                <state key="normal" title="Register" backgroundImage="login-button.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </state>
@@ -658,11 +658,11 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LU7-FI-6lq" userLabel="Login (Final) UIButton">
-                                <rect key="frame" x="224" y="267" width="320" height="38"/>
+                                <rect key="frame" x="224" y="267" width="320" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" label="Login Action"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="38" id="7eY-Po-jEF"/>
+                                    <constraint firstAttribute="height" constant="50" id="7eY-Po-jEF"/>
                                     <constraint firstAttribute="width" constant="320" id="NRe-pR-Rmu"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -872,15 +872,15 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="so5-vB-GdT" userLabel="Final Register UIButton">
-                                <rect key="frame" x="224" y="258" width="320" height="38"/>
+                                <rect key="frame" x="224" y="258" width="320" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="38" id="c7N-5E-5gk"/>
+                                    <constraint firstAttribute="height" constant="50" id="c7N-5E-5gk"/>
                                     <constraint firstAttribute="width" constant="320" id="gZx-AZ-yLw"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="Send" backgroundImage="ButtonLogin.png">
+                                <state key="normal" title="Send" backgroundImage="login-button.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </state>
@@ -973,7 +973,7 @@
                             <constraint firstItem="I85-Nt-QqY" firstAttribute="centerX" secondItem="m0T-Xa-EzP" secondAttribute="centerX" constant="-0.5" id="EaZ-79-NY9"/>
                             <constraint firstItem="I85-Nt-QqY" firstAttribute="top" secondItem="m0T-Xa-EzP" secondAttribute="bottom" constant="8" id="F4N-k3-67b"/>
                             <constraint firstItem="mEw-ky-yDJ" firstAttribute="top" secondItem="fmg-Me-Yio" secondAttribute="bottom" constant="8" id="PLr-Dp-gCK"/>
-                            <constraint firstItem="URI-Th-XfO" firstAttribute="bottom" secondItem="so5-vB-GdT" secondAttribute="bottom" constant="-64" id="Qfv-TW-qzb"/>
+                            <constraint firstItem="URI-Th-XfO" firstAttribute="bottom" secondItem="so5-vB-GdT" secondAttribute="bottom" constant="-76" id="Qfv-TW-qzb"/>
                             <constraint firstAttribute="centerX" secondItem="mEw-ky-yDJ" secondAttribute="centerX" id="VI4-Cx-O6d"/>
                             <constraint firstAttribute="trailing" secondItem="I85-Nt-QqY" secondAttribute="trailing" constant="34" id="YCd-aL-OTz"/>
                             <constraint firstAttribute="centerX" secondItem="fmg-Me-Yio" secondAttribute="centerX" id="Ygr-cd-Myy"/>
@@ -1097,7 +1097,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ButtonLogin.png" width="280" height="44"/>
         <image name="ButtonUpload.png" width="96" height="96"/>
         <image name="DividerLogin.png" width="306" height="3"/>
         <image name="facebook-login-button.png" width="286" height="50"/>
@@ -1118,8 +1117,8 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="ahx-Sv-3Mj"/>
-        <segue reference="oHh-i9-djB"/>
-        <segue reference="a0x-hG-aBP"/>
+        <segue reference="7Bv-VN-bSo"/>
+        <segue reference="8dQ-Bm-dYZ"/>
+        <segue reference="fNr-jN-dIg"/>
     </inferredMetricsTieBreakers>
 </document>
