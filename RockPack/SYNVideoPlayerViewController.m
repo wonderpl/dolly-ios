@@ -114,10 +114,6 @@
 	}
 	[self updateVideoInstanceDetails:self.videoInstance];
 	
-	if (self.currentVideoPlayer) {
-		[self.currentVideoPlayer play];
-	}
-	
 	AVAudioSession *audioSession = [AVAudioSession sharedInstance];
 	[audioSession setActive:YES withOptions:0 error:nil];
 }
