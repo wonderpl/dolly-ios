@@ -77,7 +77,6 @@
 
 - (CGSize) footerSize;
 
-- (void)followButtonPressed:(UIButton *)button withChannel:(Channel *)channel;
 - (void)followControlPressed:(UIButton *)button withChannelOwner:(ChannelOwner *)channelOwner completion :(void (^)(void))callbackBlock;
 - (void)followButtonPressed:(UIButton *)button withChannel:(Channel *)channel completion :(void (^)(void))callbackBlock;
 
