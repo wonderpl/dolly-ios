@@ -449,12 +449,12 @@ UISearchBarDelegate>
                 }
             }
             
-            if (existingFriend.lastShareDate)
+            if (existingFriend.lastShareDate && existingFriend.email)
             {
-                if (![lastSharedEmail objectForKey:existingFriend.email]) {
+				if (!lastSharedEmail[existingFriend.email]) {
                     [recentlySharedFriendsMutableArray addObject: existingFriend];
-                    [lastSharedEmail setObject:existingFriend forKey:existingFriend.email];
-                }
+                    lastSharedEmail[existingFriend.email] = existingFriend.email;
+				}
 
             }
         }
