@@ -51,7 +51,7 @@
     
     recommendation.descriptionText = recommendation.descriptionText;
 	
-    self.descriptionLabel.text = recommendation.descriptionText;
+    self.descriptionLabel.attributedText = [self attributedDescriptionStringFrom: recommendation.descriptionText];
     
     if ([self.descriptionLabel.text isEqualToString:@""]) {
         self.descriptionLabel.text = @"";
@@ -72,9 +72,28 @@
 
 }
 - (IBAction)followButtonTapped:(id)sender {
-	
 	[self.delegate followControlPressed:self.followButton withChannelOwner:self.channelOwner completion:nil];
-
 }
+
+-(NSMutableAttributedString*) attributedDescriptionStringFrom:(NSString *) string {
+	
+	if (!string) {
+		return [[NSMutableAttributedString alloc] initWithString: @""];
+	}
+	NSMutableAttributedString *channelDescription = [[NSMutableAttributedString alloc] initWithString: string];
+	
+	NSInteger strLength = [channelDescription length];
+	NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+	style.lineBreakMode = NSLineBreakByWordWrapping;
+	[style setLineSpacing:1];
+	[style setAlignment:NSTextAlignmentCenter];
+	
+	[channelDescription addAttribute:NSParagraphStyleAttributeName
+							   value:style
+							   range:NSMakeRange(0, strLength)];
+	return channelDescription;
+}
+
+
 
 @end
