@@ -16,8 +16,6 @@
 #import "SYNContainerViewController.h"
 #import "SYNDeviceManager.h"
 #import "SYNFacebookManager.h"
-#import "SYNLoginViewController.h"
-#import "SYNLoginViewControllerIphone.h"
 #import "SYNMasterViewController.h"
 #import "SYNNetworkEngine.h"
 #import "SYNOAuthNetworkEngine.h"
@@ -51,7 +49,7 @@
 @property (nonatomic, strong) NSString *userAgentString;
 @property (nonatomic, strong) NSURLConnection *connection;
 @property (nonatomic, strong) SYNChannelManager *channelManager;
-@property (nonatomic, strong) SYNLoginBaseViewController *loginViewController;
+@property (nonatomic, strong) UIViewController *loginViewController;
 @property (nonatomic, strong) SYNMasterViewController *masterViewController;
 @property (nonatomic, strong) SYNNetworkEngine *networkEngine;
 @property (nonatomic, strong) SYNOAuthNetworkEngine *oAuthNetworkEngine;
