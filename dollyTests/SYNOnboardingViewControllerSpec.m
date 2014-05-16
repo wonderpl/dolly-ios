@@ -12,7 +12,7 @@
 
 @property (nonatomic, copy) NSArray *groupedRecommendations;
 
-- (void)followControlPressed:(SYNSocialButton *)socialButton;
+- (void)followControlPressed:(UIButton *)button withChannelOwner:(ChannelOwner *)channelOwner completion :(void (^)(void))callbackBlock;
 
 @end
 
@@ -34,27 +34,29 @@ describe(@"SYNOnboardingViewController", ^{
 		
 		it(@"should increment when someone is followed", ^{
 			
-			SYNSocialButton *mockButton = [SYNSocialButton nullMock];
+			UIButton *mockButton = [UIButton nullMock];
 			[mockButton stub:@selector(isSelected) andReturn:theValue(NO)];
 			
 			SYNOnBoardingViewController *viewController = [[SYNOnBoardingViewController alloc] init];
-			[viewController followControlPressed:mockButton];
+			[viewController followControlPressed:mockButton withChannelOwner:nil completion:^{
+                
+                [[theValue(viewController.followedCount) should] equal:theValue(1)];
+            }];
 			
-			[[theValue(viewController.followedCount) should] equal:theValue(1)];
 			
 		});
 		
 		it(@"should decrement when someone is unfollowed", ^{
 			
-			SYNSocialButton *mockButton = [SYNSocialButton nullMock];
+			UIButton *mockButton = [UIButton nullMock];
 			[mockButton stub:@selector(isSelected) andReturn:theValue(YES)];
 			
 			SYNOnBoardingViewController *viewController = [[SYNOnBoardingViewController alloc] init];
 			
 			viewController.followedCount = 1;
-			[viewController followControlPressed:mockButton];
-			
-			[[theValue(viewController.followedCount) should] equal:theValue(0)];
+			[viewController followControlPressed:mockButton withChannelOwner:nil completion:^{
+                [[theValue(viewController.followedCount) should] equal:theValue(0)];
+            }];
 			
 		});
 		
