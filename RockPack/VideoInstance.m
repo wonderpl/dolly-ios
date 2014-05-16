@@ -269,39 +269,6 @@ static NSDateFormatter *dateFormatter = nil;
     }
 }
 
-
-#pragma mark - Helper methods
-
-- (NSDateComponents *) timeAgo
-{
-    NSCalendarUnit flags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit |NSCalendarUnitHour | kCFCalendarUnitMinute;
-    return [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] components:flags
-                                                                                  fromDate:self.dateAdded
-                                                                                    toDate:NSDate.date
-                                                                                   options:0];
-    
-}
-
-
-// Used for dates in the following format "2012-12-14T09:59:46.000Z"
-// 2013-01-30T15:43:18.806454+00:00
-+ (NSDateFormatter *) DayOfDateFormatter
-{
-    if (dateFormatter == nil)
-    {
-        // Do once, and only once
-        static dispatch_once_t oncePredicate;
-        dispatch_once(&oncePredicate, ^
-                      {
-                          dateFormatter = [[NSDateFormatter alloc] init];
-                          [dateFormatter setTimeZone: [NSTimeZone timeZoneWithName: @"UTC"]];
-                          [dateFormatter setDateFormat: @"yyyy-MM-dd"];
-                      });
-    }
-    
-    return dateFormatter;
-}
-
 #pragma mark - Starrers
 
 -(void)addStarrersObject:(ChannelOwner *)value_

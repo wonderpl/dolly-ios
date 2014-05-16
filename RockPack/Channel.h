@@ -7,8 +7,6 @@
 
 @property (nonatomic, strong) NSString* autoplayId;
 
-@property (nonatomic, readonly) NSDateComponents* timeAgo;
-
 + (Channel *) instanceFromDictionary: (NSDictionary *) dictionary
            usingManagedObjectContext: (NSManagedObjectContext *) managedObjectContext
                  ignoringObjectTypes: (IgnoringObjects) ignoringObjects;

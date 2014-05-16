@@ -492,16 +492,6 @@
     [self.videoInstancesSet removeObject: value_];
 }
 
-- (NSDateComponents *) timeAgo
-{
-    NSCalendarUnit flags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit |NSCalendarUnitHour | kCFCalendarUnitMinute;
-    return [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] components:flags
-                                                                                  fromDate:self.datePublished
-                                                                                    toDate:NSDate.date
-                                                                                   options:0];
-    
-}
-
 #pragma mark - Object reference counting
 
 // This is very important, we need to set the delete rule to 'Nullify' and then custom delete our connected NSManagedObjects
