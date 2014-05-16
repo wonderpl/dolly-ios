@@ -27,6 +27,7 @@
 #import "SYNNetworkMessageView.h"
 #import "SYNActivityManager.h"
 #import "UIViewController+PresentNotification.h"
+#import "SYNDiscoverSectionHeaderView.h"
 
 @interface SYNOnBoardingViewController () <UIBarPositioningDelegate, UICollectionViewDataSource, UICollectionViewDelegate, SYNOnboardingFooterDelegate>
 
@@ -54,9 +55,9 @@
           forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
                  withReuseIdentifier:[SYNOnBoardingHeader reuseIdentifier]];
     
-    [self.collectionView registerNib:[SYNOnBoardingSectionHeader nib]
+    [self.collectionView registerNib:[SYNDiscoverSectionHeaderView nib]
           forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
-                 withReuseIdentifier:[SYNOnBoardingSectionHeader reuseIdentifier]];
+                 withReuseIdentifier:[SYNDiscoverSectionHeaderView reuseIdentifier]];
     
     [self.collectionView registerNib:[SYNOnBoardingFooter nib]
           forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
@@ -73,6 +74,8 @@
 	if ([[UIDevice currentDevice] isPhone]) {
 		self.collectionView.contentInset = UIEdgeInsetsMake(64.0, 0.0, 0.0, 0.0);
 	}
+    
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -202,21 +205,22 @@
 	} else {
        cell.followButton.selected = [[SYNActivityManager sharedInstance] isSubscribedToUserId:recommendation.uniqueId];
     }
+    
+    if (indexPath.row == [self numberOfRecommendationsForSection:indexPath.section]-1) {
+        cell.bottomBorderView.hidden = YES;
+    }
 	
-	if ([[UIDevice currentDevice] isPad]) {
-		cell.subGenreLabel.text = [self titleForIndexPath:indexPath];
-		cell.subGenreLabel.backgroundColor = [self colorForIndexPath:indexPath];
-	}
-
     cell.delegate = self;
     
     return cell;
 }
 
+
+
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
     if ([[UIDevice currentDevice] isPad]) {
         if (section == 0) {
-            return CGSizeMake(320, 108);
+            return CGSizeMake(320, 76);
 		} else {
             return CGSizeMake(self.view.frame.size.width, 47);
         }
@@ -231,7 +235,11 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
 	if (section == [self.groupedRecommendations count]) {
-		return CGSizeMake(320, 76);
+        if (IS_IPHONE) {
+            return CGSizeMake(320, 50);
+        } else {
+            return CGSizeMake(self.view.frame.size.width, 58);
+        }
 	}
     
 	return CGSizeZero;
@@ -248,13 +256,11 @@
 															 forIndexPath:indexPath];
             
         } else {
+            SYNDiscoverSectionHeaderView *sectionHeader = [collectionView dequeueReusableSupplementaryViewOfKind: kind
+                                                                                                 withReuseIdentifier: [SYNDiscoverSectionHeaderView reuseIdentifier]
+                                                                                                        forIndexPath: indexPath];
 			
-			SYNOnBoardingSectionHeader *sectionHeader = [collectionView dequeueReusableSupplementaryViewOfKind:kind
-																						   withReuseIdentifier:[SYNOnBoardingSectionHeader reuseIdentifier]
-																								  forIndexPath:indexPath];
-			
-			sectionHeader.sectionTitle.backgroundColor = [self colorForIndexPath:indexPath];
-			sectionHeader.sectionTitle.text = [self titleForIndexPath:indexPath];
+			[sectionHeader setTitleText: [self titleForIndexPath:indexPath]];
             
 			return sectionHeader;
         }
@@ -321,14 +327,6 @@
 #pragma mark - AutoRotation
 
 - (void)updateLayoutForOrientation:(UIDeviceOrientation)orientation {
-	UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)[self.collectionView collectionViewLayout];
-	
-	if (UIInterfaceOrientationIsPortrait(orientation)) {
-		layout.sectionInset = UIEdgeInsetsMake(0, 24, 0, 24);
-	} else {
-		layout.sectionInset = UIEdgeInsetsMake(0, 24, 0, 24);
-	}
-	
 	[self.collectionView.collectionViewLayout invalidateLayout];
 }
 
@@ -347,9 +345,19 @@
 
                 [self presentNotificationWithMessage: text andType:NotificationMessageTypeSuccess];
             }
+        
+        if (button.selected) {
+            self.followedCount++;
+        } else {
+            self.followedCount--;
+        }
+
+        NSLog(@"%ld", (long)self.followedCount);
+        
     }];
     
 }
+
 
 
 @end

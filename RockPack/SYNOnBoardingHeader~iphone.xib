@@ -10,19 +10,18 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="You're subscribed to Editor's Picks, now pick other people to follow, then tap Continue" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="290" translatesAutoresizingMaskIntoConstraints="NO" id="uiX-PJ-MoE">
-                    <rect key="frame" x="15" y="20" width="290" height="41"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tell us your interests, and we'll show you  some great videos." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="268" translatesAutoresizingMaskIntoConstraints="NO" id="uiX-PJ-MoE">
+                    <rect key="frame" x="26" y="28" width="268" height="34"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" red="0.46666666666666667" green="0.46666666666666667" blue="0.50980392156862742" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="uiX-PJ-MoE" firstAttribute="leading" secondItem="QkO-3r-pYM" secondAttribute="leading" constant="15" id="22e-b9-Ji7"/>
-                <constraint firstItem="uiX-PJ-MoE" firstAttribute="top" secondItem="QkO-3r-pYM" secondAttribute="top" constant="20" id="COW-54-Cob"/>
-                <constraint firstAttribute="trailing" secondItem="uiX-PJ-MoE" secondAttribute="trailing" constant="15" id="jhj-a0-PNW"/>
+                <constraint firstAttribute="centerX" secondItem="uiX-PJ-MoE" secondAttribute="centerX" id="YJE-OE-edn"/>
+                <constraint firstAttribute="centerY" secondItem="uiX-PJ-MoE" secondAttribute="centerY" id="Ysv-yM-sZr"/>
             </constraints>
             <connections>
                 <outlet property="textLabel" destination="uiX-PJ-MoE" id="1dZ-My-bDN"/>

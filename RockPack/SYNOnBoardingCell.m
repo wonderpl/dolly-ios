@@ -19,17 +19,11 @@
 - (void) awakeFromNib
 {
     [super awakeFromNib];
-    
-    
     self.descriptionLabel.font = [UIFont regularCustomFontOfSize:self.descriptionLabel.font.pointSize];
-    self.subGenreLabel.font = [UIFont regularCustomFontOfSize:self.subGenreLabel.font.pointSize];
     self.nameLabel.font = [UIFont regularCustomFontOfSize:self.nameLabel.font.pointSize];
     
     // store the values as read from the XIB file
     nameLabelOrigin = self.nameLabel.frame.origin;
-    subGenreLabelOrigin = self.subGenreLabel.frame.origin;
-    
-    
 }
 
 -(void)prepareForReuse
@@ -38,15 +32,10 @@
     CGRect rect = self.nameLabel.frame;
     rect.origin = nameLabelOrigin;
     self.nameLabel.frame = rect;
-    
-    rect = self.subGenreLabel.frame;
-    rect.origin = subGenreLabelOrigin;
-    self.subGenreLabel.frame = rect;
-    [self.subGenreLabel setBackgroundColor:[UIColor clearColor]];
-    
     self.descriptionLabel.hidden = NO;
     self.followButton.selected = NO;
     self.followButton.userInteractionEnabled = YES;
+    self.bottomBorderView.hidden = NO;
 
 }
 
@@ -62,11 +51,6 @@
     
     recommendation.descriptionText = recommendation.descriptionText;
 	
-    if (IS_IPAD) {
-		SYNGenreManager *genreManager = [SYNGenreManager sharedManager];
-		self.subGenreLabel.backgroundColor = [genreManager colorForGenreWithId:recommendation.categoryId];
-    }
-    
     self.descriptionLabel.text = recommendation.descriptionText;
     
     if ([self.descriptionLabel.text isEqualToString:@""]) {

@@ -23,7 +23,7 @@
 - (void)awakeFromNib {
 	[super awakeFromNib];
 
-	UIColor *color = [UIColor colorWithRed:(188.0f/255.0f) green:(186.0f/255.0f) blue:(212.0f/255.0f) alpha:1.0f];
+	UIColor *color = [UIColor colorWithRed:(214.0f/255.0f) green:(214.0f/255.0f) blue:(214.0f/255.0f) alpha:1.0f];
 
 	self.continueButton.titleLabel.font = [UIFont regularCustomFontOfSize:self.continueButton.titleLabel.font.pointSize];
 

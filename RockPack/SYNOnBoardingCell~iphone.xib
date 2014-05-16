@@ -14,14 +14,14 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;Name Label>" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ct3-5L-Zdd" userLabel="Name Label">
-                        <rect key="frame" x="82" y="6" width="82" height="15"/>
+                        <rect key="frame" x="82" y="14" width="82" height="15"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;Description Text>" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="121" translatesAutoresizingMaskIntoConstraints="NO" id="x0p-6l-BAu" userLabel="Description">
-                        <rect key="frame" x="82" y="27" width="121" height="14"/>
+                        <rect key="frame" x="82" y="35" width="121" height="14"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" red="0.59607845544815063" green="0.59607845544815063" blue="0.59607845544815063" alpha="1" colorSpace="calibratedRGB"/>
@@ -45,7 +45,7 @@
                         </state>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eIs-wc-12W" userLabel="Follow Button" customClass="SYNFollowChannelButton">
-                        <rect key="frame" x="223" y="20" width="80" height="34"/>
+                        <rect key="frame" x="223" y="20" width="80" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <state key="normal">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -54,10 +54,10 @@
                             <action selector="followButtonTapped:" destination="mFM-Us-01N" eventType="touchUpInside" id="a8o-3V-TOY"/>
                         </connections>
                     </button>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SZD-ll-VDi">
-                        <rect key="frame" x="0.0" y="92" width="320" height="4"/>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SZD-ll-VDi" userLabel="Bottom border">
+                        <rect key="frame" x="0.0" y="95" width="320" height="1"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.81176470590000005" green="0.85098039219999999" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -65,7 +65,7 @@
             <constraints>
                 <constraint firstItem="ct3-5L-Zdd" firstAttribute="leading" secondItem="Rhf-2u-7gT" secondAttribute="trailing" constant="17" id="24X-zs-PhQ"/>
                 <constraint firstItem="x0p-6l-BAu" firstAttribute="leading" secondItem="Rhf-2u-7gT" secondAttribute="trailing" constant="17" id="BDK-3B-RxD"/>
-                <constraint firstItem="ct3-5L-Zdd" firstAttribute="top" secondItem="mFM-Us-01N" secondAttribute="top" constant="6" id="KHd-jB-viC"/>
+                <constraint firstItem="ct3-5L-Zdd" firstAttribute="top" secondItem="mFM-Us-01N" secondAttribute="top" constant="14" id="KHd-jB-viC"/>
                 <constraint firstItem="Rhf-2u-7gT" firstAttribute="top" secondItem="mFM-Us-01N" secondAttribute="top" constant="12" id="Ouv-27-XM3"/>
                 <constraint firstItem="Rhf-2u-7gT" firstAttribute="leading" secondItem="mFM-Us-01N" secondAttribute="leading" constant="17" id="frT-v5-peP"/>
                 <constraint firstAttribute="trailing" secondItem="x0p-6l-BAu" secondAttribute="trailing" constant="117" id="fsT-oj-GrC"/>
@@ -74,6 +74,7 @@
             <size key="customSize" width="332" height="73"/>
             <connections>
                 <outlet property="avatarButton" destination="Rhf-2u-7gT" id="fIP-rF-piu"/>
+                <outlet property="bottomBorderView" destination="SZD-ll-VDi" id="p7Y-hZ-evY"/>
                 <outlet property="descriptionLabel" destination="x0p-6l-BAu" id="iLO-qh-7vx"/>
                 <outlet property="followButton" destination="eIs-wc-12W" id="Wiw-5v-6jz"/>
                 <outlet property="nameLabel" destination="ct3-5L-Zdd" id="G3i-Uz-NlJ"/>
