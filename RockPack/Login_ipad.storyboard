@@ -20,10 +20,22 @@
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="intro-mountains-sea.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="86C-w0-zml" userLabel="mountain background">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HIy-0P-YCj">
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="intro-mountains-sea.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="86C-w0-zml" userLabel="mountain background">
+                                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="86C-w0-zml" secondAttribute="trailing" id="CAd-jl-LGq"/>
+                                    <constraint firstAttribute="bottom" secondItem="86C-w0-zml" secondAttribute="bottom" id="QPt-8s-xjK"/>
+                                    <constraint firstItem="86C-w0-zml" firstAttribute="leading" secondItem="HIy-0P-YCj" secondAttribute="leading" id="TZG-gI-dvc"/>
+                                    <constraint firstItem="86C-w0-zml" firstAttribute="top" secondItem="HIy-0P-YCj" secondAttribute="top" id="lSa-Jx-ZNl"/>
+                                </constraints>
+                            </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="intro-beach.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Tq0-Em-HOe" userLabel="beach background">
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -217,9 +229,9 @@
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="qMr-3b-WtQ" secondAttribute="centerX" id="AXq-ZD-0MN"/>
                             <constraint firstItem="54G-xj-dpn" firstAttribute="leading" secondItem="zle-rK-vkk" secondAttribute="leading" id="Asn-1m-rs7"/>
+                            <constraint firstItem="Xm2-MX-96s" firstAttribute="top" secondItem="HIy-0P-YCj" secondAttribute="bottom" id="FGU-Dy-5wH"/>
                             <constraint firstItem="zXm-b9-WkI" firstAttribute="top" secondItem="Qoj-bm-0fN" secondAttribute="bottom" constant="-20" id="HNV-M3-o9y"/>
                             <constraint firstAttribute="trailing" secondItem="Tq0-Em-HOe" secondAttribute="trailing" id="IJg-ae-1eH"/>
-                            <constraint firstItem="86C-w0-zml" firstAttribute="top" secondItem="Qoj-bm-0fN" secondAttribute="bottom" constant="-20" id="Ikx-3S-ZZR"/>
                             <constraint firstAttribute="trailing" secondItem="54G-xj-dpn" secondAttribute="trailing" id="Jmw-19-V7Z"/>
                             <constraint firstAttribute="trailing" secondItem="hG9-qn-YA6" secondAttribute="trailing" id="LkS-b2-sQZ"/>
                             <constraint firstItem="qMr-3b-WtQ" firstAttribute="bottom" secondItem="rf0-Xo-Csq" secondAttribute="bottom" constant="-355" id="O0m-xg-I0H"/>
@@ -231,18 +243,18 @@
                             <constraint firstItem="qMr-3b-WtQ" firstAttribute="top" secondItem="kcf-dV-8Oi" secondAttribute="top" constant="141" id="UKu-9r-gYQ"/>
                             <constraint firstItem="54G-xj-dpn" firstAttribute="top" secondItem="Qoj-bm-0fN" secondAttribute="bottom" constant="-20" id="WeL-TA-AB6"/>
                             <constraint firstItem="hG9-qn-YA6" firstAttribute="leading" secondItem="zle-rK-vkk" secondAttribute="leading" id="X89-PU-0zK"/>
-                            <constraint firstItem="86C-w0-zml" firstAttribute="leading" secondItem="zle-rK-vkk" secondAttribute="leading" id="Y1S-Ud-b7t"/>
                             <constraint firstItem="Tq0-Em-HOe" firstAttribute="top" secondItem="Qoj-bm-0fN" secondAttribute="bottom" constant="-20" id="Zmn-ZT-EJO"/>
                             <constraint firstAttribute="centerY" secondItem="rf0-Xo-Csq" secondAttribute="centerY" constant="-106.5" id="aQC-o6-cIp"/>
                             <constraint firstItem="Tq0-Em-HOe" firstAttribute="leading" secondItem="zle-rK-vkk" secondAttribute="leading" id="aTk-XR-D3l"/>
                             <constraint firstItem="qMr-3b-WtQ" firstAttribute="width" secondItem="zle-rK-vkk" secondAttribute="width" id="eUC-sz-j8l"/>
                             <constraint firstItem="Xm2-MX-96s" firstAttribute="top" secondItem="54G-xj-dpn" secondAttribute="bottom" constant="-1" id="hHS-NN-Gfz"/>
+                            <constraint firstAttribute="trailing" secondItem="HIy-0P-YCj" secondAttribute="trailing" id="hNb-QU-1KQ"/>
                             <constraint firstAttribute="centerX" secondItem="kcf-dV-8Oi" secondAttribute="centerX" constant="-0.5" id="hY1-yE-VUI"/>
                             <constraint firstAttribute="centerX" secondItem="rf0-Xo-Csq" secondAttribute="centerX" id="jpG-S0-EpW"/>
                             <constraint firstItem="hG9-qn-YA6" firstAttribute="top" secondItem="Qoj-bm-0fN" secondAttribute="bottom" constant="-20" id="rZb-eX-dXP"/>
-                            <constraint firstItem="Xm2-MX-96s" firstAttribute="top" secondItem="86C-w0-zml" secondAttribute="bottom" id="uGS-st-Qh5"/>
-                            <constraint firstAttribute="trailing" secondItem="86C-w0-zml" secondAttribute="trailing" id="uj8-i5-m4U"/>
                             <constraint firstItem="Xm2-MX-96s" firstAttribute="top" secondItem="hG9-qn-YA6" secondAttribute="bottom" id="v2L-ME-0GI"/>
+                            <constraint firstItem="HIy-0P-YCj" firstAttribute="leading" secondItem="zle-rK-vkk" secondAttribute="leading" id="y9A-Wy-E9H"/>
+                            <constraint firstItem="HIy-0P-YCj" firstAttribute="top" secondItem="Qoj-bm-0fN" secondAttribute="bottom" constant="-20" id="yjd-1q-gkp"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="H1g-nk-cL5"/>
@@ -1117,8 +1129,8 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="ahx-Sv-3Mj"/>
+        <segue reference="oHh-i9-djB"/>
         <segue reference="7Bv-VN-bSo"/>
-        <segue reference="8dQ-Bm-dYZ"/>
-        <segue reference="fNr-jN-dIg"/>
     </inferredMetricsTieBreakers>
 </document>
