@@ -10,7 +10,6 @@
 #import "SYNVideoPlayerViewController.h"
 #import "SYNFullScreenVideoViewController.h"
 #import "SYNVideoPlayer.h"
-#import "SYNVideoPlayerCell.h"
 #import "SYNDeviceManager.h"
 #import <Masonry.h>
 

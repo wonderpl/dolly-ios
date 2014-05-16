@@ -2065,7 +2065,7 @@
 				BE08158F16D3C46800ADB1DC /* Search and Discovery */,
 				0E2AB16818846391004557A4 /* WebView */,
 				BE7D02F1178C1D13008053DC /* Users */,
-				01F8E77B16B039E6000D44B9 /* Video Player */,
+				01F8E77B16B039E6000D44B9 /* Video */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -2505,16 +2505,10 @@
 			path = Assets/HTML;
 			sourceTree = "<group>";
 		};
-		01F8E77B16B039E6000D44B9 /* Video Player */ = {
+		01F8E77B16B039E6000D44B9 /* Video */ = {
 			isa = PBXGroup;
 			children = (
-				E93E10E11835116D00A62F64 /* SYNVideoPlayer.h */,
-				E9F7CC73184616E40026C97D /* SYNVideoPlayer+Protected.h */,
-				E93E10E21835116D00A62F64 /* SYNVideoPlayer.m */,
-				E93E10E4183512B800A62F64 /* SYNYouTubeWebVideoPlayer.h */,
-				E93E10E5183512B800A62F64 /* SYNYouTubeWebVideoPlayer.m */,
-				E93E10E7183512D600A62F64 /* SYNOoyalaVideoPlayer.h */,
-				E93E10E8183512D600A62F64 /* SYNOoyalaVideoPlayer.m */,
+				E995ACD3192625BE004A8075 /* Video Players */,
 				E914BED5183CF018001616D3 /* SYNFullScreenVideoViewController.h */,
 				E914BED6183CF018001616D3 /* SYNFullScreenVideoViewController.m */,
 				E914BED8183CF33A001616D3 /* SYNFullScreenVideoAnimator.h */,
@@ -2527,34 +2521,15 @@
 				E98369D81889457500363709 /* SYNVideoInfoCell.h */,
 				E9F7D9FA189A99D400BA79D4 /* SYNVideoCollectionView.h */,
 				E9F7D9FB189A99D400BA79D4 /* SYNVideoCollectionView.m */,
-				E947097118D70F21000174A7 /* SYNYouTubeWebView.h */,
-				E947097218D70F21000174A7 /* SYNYouTubeWebView.m */,
 				E960239C18E5E6BA00A96CB4 /* SYNVideoPlayerViewController_iphone.storyboard */,
 				E994A91C1907BB3000C37AFB /* SYNVideoPlayerViewController_ipad.storyboard */,
 				E9577E9F18EAF62300E95127 /* SYNVideoPlayerCell.h */,
 				E9577EA018EAF62300E95127 /* SYNVideoPlayerCell.m */,
-				E9EE08C618F6D825000DC06A /* SYNVideoInfoViewController.h */,
-				E9EE08C718F6D825000DC06A /* SYNVideoInfoViewController.m */,
-				E9EE08C918F6E139000DC06A /* SYNVideoCell.h */,
-				E9EE08CA18F6E139000DC06A /* SYNVideoCell.m */,
-				E9EE08CC18F6E377000DC06A /* SYNVideoCell.xib */,
-				E92B7BC8190A77BC0099AA44 /* SYNVideoCell~ipad.xib */,
-				E9EE08CE18F6FC49000DC06A /* SYNWebViewCell.h */,
-				E9EE08CF18F6FC49000DC06A /* SYNWebViewCell.m */,
-				E9EE08D118F6FD47000DC06A /* SYNWebViewCell.xib */,
-				E9EE08DD18F8089F000DC06A /* SYNVideoActionsCell.h */,
-				E9EE08DE18F8089F000DC06A /* SYNVideoActionsCell.m */,
-				E9C1A05A18F8448E00CC3F3E /* SYNVideoActionsCell.xib */,
-				E9EE08E018F80BB2000DC06A /* SYNVideoClickToMoreCell.h */,
-				E9EE08E118F80BB2000DC06A /* SYNVideoClickToMoreCell.m */,
-				E9EE08E318F80BD8000DC06A /* SYNVideoClickToMoreCell.xib */,
-				E99F586918FBFCF700BA2CE4 /* SYNVideoDivider.h */,
-				E99F586A18FBFCF700BA2CE4 /* SYNVideoDivider.m */,
-				E9C1A05818F8415300CC3F3E /* SYNVideoDivider.xib */,
+				E995ACD21926259B004A8075 /* Video Info */,
 				E915A1B0191A9A30001DC76A /* SYNVideoAnnotationButton.h */,
 				E915A1B1191A9A30001DC76A /* SYNVideoAnnotationButton.m */,
 			);
-			name = "Video Player";
+			name = Video;
 			sourceTree = "<group>";
 		};
 		0E26BB4E182D1214008A57F1 /* ChannelDetails */ = {
@@ -3675,6 +3650,47 @@
 				E947097C18D76277000174A7 /* SYNStringResponseSerializer.m */,
 			);
 			name = Serializers;
+			sourceTree = "<group>";
+		};
+		E995ACD21926259B004A8075 /* Video Info */ = {
+			isa = PBXGroup;
+			children = (
+				E9EE08C618F6D825000DC06A /* SYNVideoInfoViewController.h */,
+				E9EE08C718F6D825000DC06A /* SYNVideoInfoViewController.m */,
+				E9EE08C918F6E139000DC06A /* SYNVideoCell.h */,
+				E9EE08CA18F6E139000DC06A /* SYNVideoCell.m */,
+				E9EE08CC18F6E377000DC06A /* SYNVideoCell.xib */,
+				E92B7BC8190A77BC0099AA44 /* SYNVideoCell~ipad.xib */,
+				E9EE08CE18F6FC49000DC06A /* SYNWebViewCell.h */,
+				E9EE08CF18F6FC49000DC06A /* SYNWebViewCell.m */,
+				E9EE08D118F6FD47000DC06A /* SYNWebViewCell.xib */,
+				E9EE08DD18F8089F000DC06A /* SYNVideoActionsCell.h */,
+				E9EE08DE18F8089F000DC06A /* SYNVideoActionsCell.m */,
+				E9C1A05A18F8448E00CC3F3E /* SYNVideoActionsCell.xib */,
+				E9EE08E018F80BB2000DC06A /* SYNVideoClickToMoreCell.h */,
+				E9EE08E118F80BB2000DC06A /* SYNVideoClickToMoreCell.m */,
+				E9EE08E318F80BD8000DC06A /* SYNVideoClickToMoreCell.xib */,
+				E99F586918FBFCF700BA2CE4 /* SYNVideoDivider.h */,
+				E99F586A18FBFCF700BA2CE4 /* SYNVideoDivider.m */,
+				E9C1A05818F8415300CC3F3E /* SYNVideoDivider.xib */,
+			);
+			name = "Video Info";
+			sourceTree = "<group>";
+		};
+		E995ACD3192625BE004A8075 /* Video Players */ = {
+			isa = PBXGroup;
+			children = (
+				E93E10E11835116D00A62F64 /* SYNVideoPlayer.h */,
+				E9F7CC73184616E40026C97D /* SYNVideoPlayer+Protected.h */,
+				E93E10E21835116D00A62F64 /* SYNVideoPlayer.m */,
+				E947097118D70F21000174A7 /* SYNYouTubeWebView.h */,
+				E947097218D70F21000174A7 /* SYNYouTubeWebView.m */,
+				E93E10E4183512B800A62F64 /* SYNYouTubeWebVideoPlayer.h */,
+				E93E10E5183512B800A62F64 /* SYNYouTubeWebVideoPlayer.m */,
+				E93E10E7183512D600A62F64 /* SYNOoyalaVideoPlayer.h */,
+				E93E10E8183512D600A62F64 /* SYNOoyalaVideoPlayer.m */,
+			);
+			name = "Video Players";
 			sourceTree = "<group>";
 		};
 		E9B8A501185B209B00F0D625 /* Animators */ = {

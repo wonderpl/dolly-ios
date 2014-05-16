@@ -28,7 +28,6 @@
 #import "SYNVideoPlayerViewController.h"
 #import "SYNStaticModel.h"
 #import "SYNSearchVideoCell.h"
-#import "SYNVideoCell.h"
 #import "SYNSearchVideoLargeCell.h"
 #import "SYNSearchVideoSmallCell.h"
 #import "SYNSocialButton.h"
