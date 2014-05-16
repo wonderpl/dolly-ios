@@ -2880,7 +2880,6 @@
 			children = (
 				4CDD76A118CA012B000B2CBD /* Feed */,
 				4C5E862818B6812900D0E937 /* Collection details */,
-				4C5E860318B6332100D0E937 /* Mood */,
 				4C5E860218B6331800D0E937 /* Discover */,
 				4C5E85F518B62F3400D0E937 /* Onboarding */,
 				4C5E85F418B62F2500D0E937 /* Abstract */,
@@ -2915,13 +2914,6 @@
 				4C5E861618B6572B00D0E937 /* Video Overlay */,
 			);
 			name = Discover;
-			sourceTree = "<group>";
-		};
-		4C5E860318B6332100D0E937 /* Mood */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Mood;
 			sourceTree = "<group>";
 		};
 		4C5E861618B6572B00D0E937 /* Video Overlay */ = {
