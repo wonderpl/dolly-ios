@@ -28,12 +28,14 @@
 #import "SYNActivityManager.h"
 #import "UIViewController+PresentNotification.h"
 #import "SYNDiscoverSectionHeaderView.h"
+#import "SYNIPadOnBoardingLayout.h"
 
 @interface SYNOnBoardingViewController () <UIBarPositioningDelegate, UICollectionViewDataSource, UICollectionViewDelegate, SYNOnboardingFooterDelegate>
 
 @property (nonatomic, strong) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView *spinner;
 @property (nonatomic, strong) SYNNetworkMessageView* networkMessageView;
+@property (strong, nonatomic) IBOutlet SYNIPadOnBoardingLayout *collectionLayout;
 
 @property (nonatomic, assign) NSInteger followedCount;
 
@@ -222,7 +224,7 @@
         if (section == 0) {
             return CGSizeMake(320, 76);
 		} else {
-            return CGSizeMake(self.view.frame.size.width, 47);
+            return CGSizeMake(self.view.frame.size.width, 60);
         }
     } else {
 		if (section == 0) {
@@ -327,6 +329,15 @@
 #pragma mark - AutoRotation
 
 - (void)updateLayoutForOrientation:(UIDeviceOrientation)orientation {
+    
+    
+    
+    if (UIDeviceOrientationIsPortrait(orientation)) {
+        self.collectionLayout.minimumInteritemSpacing = 22;
+    } else {
+        self.collectionLayout.minimumInteritemSpacing = 34;
+    }
+
 	[self.collectionView.collectionViewLayout invalidateLayout];
 }
 

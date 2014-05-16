@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNOnBoardingViewController">
             <connections>
+                <outlet property="collectionLayout" destination="AW9-nx-I3h" id="JhA-cw-3wI"/>
                 <outlet property="collectionView" destination="mhE-ZL-YwO" id="dld-MZ-TIA"/>
                 <outlet property="spinner" destination="kHx-SZ-Omg" id="9zB-DH-xm2"/>
                 <outlet property="view" destination="2" id="3"/>
@@ -26,11 +27,11 @@
                     <rect key="frame" x="0.0" y="64" width="1024" height="704"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="34" minimumInteritemSpacing="0.0" id="AW9-nx-I3h" customClass="SYNIPadOnBoardingLayout">
-                        <size key="itemSize" width="196" height="196"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="17" minimumInteritemSpacing="0.0" id="AW9-nx-I3h" customClass="SYNIPadOnBoardingLayout">
+                        <size key="itemSize" width="196" height="212"/>
                         <size key="headerReferenceSize" width="1024" height="108"/>
                         <size key="footerReferenceSize" width="1" height="76"/>
-                        <inset key="sectionInset" minX="90" minY="16" maxX="90" maxY="34"/>
+                        <inset key="sectionInset" minX="90" minY="16" maxX="90" maxY="17"/>
                     </collectionViewFlowLayout>
                     <cells/>
                     <connections>

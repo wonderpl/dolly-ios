@@ -7,14 +7,14 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="3I8-lG-xrI" customClass="SYNOnBoardingCell">
-            <rect key="frame" x="0.0" y="0.0" width="196" height="197"/>
+            <rect key="frame" x="0.0" y="0.0" width="196" height="212"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="196" height="197"/>
+                <rect key="frame" x="0.0" y="0.0" width="196" height="212"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JdY-a8-daP" userLabel="User Thumbnail Button" customClass="SYNAvatarButton">
-                        <rect key="frame" x="74" y="0.0" width="48" height="48"/>
+                        <rect key="frame" x="74" y="16" width="48" height="48"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -31,21 +31,21 @@
                         </state>
                     </button>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HQx-0D-x5c" userLabel="Name Label">
-                        <rect key="frame" x="13" y="67" width="174" height="22"/>
+                        <rect key="frame" x="13" y="83" width="174" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="183" translatesAutoresizingMaskIntoConstraints="NO" id="Qdh-Yr-ubO" userLabel="Description">
-                        <rect key="frame" x="7" y="105" width="183" height="17"/>
+                        <rect key="frame" x="7" y="121" width="183" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.46666666666666667" green="0.46666666666666667" blue="0.50980392156862742" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rcF-io-PRY" userLabel="Follow Button" customClass="SYNFollowChannelButton">
-                        <rect key="frame" x="60" y="166" width="80" height="30"/>
+                        <rect key="frame" x="60" y="182" width="80" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="4ms-Nq-d8a"/>
@@ -66,11 +66,11 @@
                 <constraint firstItem="HQx-0D-x5c" firstAttribute="leading" secondItem="3I8-lG-xrI" secondAttribute="leading" constant="13" id="7JH-S4-Zhx"/>
                 <constraint firstItem="Qdh-Yr-ubO" firstAttribute="top" secondItem="HQx-0D-x5c" secondAttribute="bottom" constant="16" id="KHz-XG-XTw"/>
                 <constraint firstAttribute="centerX" secondItem="JdY-a8-daP" secondAttribute="centerX" id="RGf-5I-drm"/>
-                <constraint firstAttribute="bottom" secondItem="rcF-io-PRY" secondAttribute="bottom" constant="1" id="TcF-gU-Qmm"/>
+                <constraint firstAttribute="bottom" secondItem="rcF-io-PRY" secondAttribute="bottom" id="TcF-gU-Qmm"/>
                 <constraint firstAttribute="centerX" secondItem="rcF-io-PRY" secondAttribute="centerX" constant="-2" id="Vb8-Fr-P6b"/>
                 <constraint firstAttribute="trailing" secondItem="Qdh-Yr-ubO" secondAttribute="trailing" constant="6" id="Xsq-N8-y6Y"/>
                 <constraint firstAttribute="trailing" secondItem="HQx-0D-x5c" secondAttribute="trailing" constant="9" id="gRA-XS-Oiw"/>
-                <constraint firstItem="JdY-a8-daP" firstAttribute="top" secondItem="3I8-lG-xrI" secondAttribute="top" id="gjv-Oy-8MI"/>
+                <constraint firstItem="JdY-a8-daP" firstAttribute="top" secondItem="3I8-lG-xrI" secondAttribute="top" constant="16" id="gjv-Oy-8MI"/>
                 <constraint firstItem="Qdh-Yr-ubO" firstAttribute="leading" secondItem="3I8-lG-xrI" secondAttribute="leading" constant="7" id="kE9-qK-L42"/>
                 <constraint firstAttribute="centerX" secondItem="HQx-0D-x5c" secondAttribute="centerX" constant="-2" id="vwD-I2-E7T"/>
             </constraints>
