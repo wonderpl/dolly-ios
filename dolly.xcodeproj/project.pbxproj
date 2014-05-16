@@ -94,7 +94,6 @@
 		019825F1162C94A300216900 /* UIColor+SYNColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 019825F0162C94A300216900 /* UIColor+SYNColor.m */; };
 		019825F4162C94B500216900 /* UIFont+SYNFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 019825F3162C94B500216900 /* UIFont+SYNFont.m */; };
 		0199F13B16721A4500E479C6 /* SYNFeedRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0199F13916721A4500E479C6 /* SYNFeedRootViewController.m */; };
-		019CB6A8181187E80079DFCF /* SYNFadingFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 019CB6A7181187E80079DFCF /* SYNFadingFlowLayout.m */; };
 		019E6A61165FD99A002B312A /* SYNOAuth2Credential.m in Sources */ = {isa = PBXBuildFile; fileRef = 019E6A60165FD99A002B312A /* SYNOAuth2Credential.m */; };
 		019E6A64165FD9AC002B312A /* SYNOAuthNetworkEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 019E6A63165FD9AC002B312A /* SYNOAuthNetworkEngine.m */; };
 		01A79B9116F32C3400B05084 /* ShuttleBarRemainingBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 01A79B8216F32C3400B05084 /* ShuttleBarRemainingBar.png */; };
@@ -623,7 +622,6 @@
 		E9CE79E21886B20400023A86 /* SYNiPadLoginToForgotPasswordAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CE79E11886B20400023A86 /* SYNiPadLoginToForgotPasswordAnimator.m */; };
 		E9CE7A2D1887057500023A86 /* SYNiPadLoginToSignupAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CE7A2C1887057500023A86 /* SYNiPadLoginToSignupAnimator.m */; };
 		E9CE7A301887161B00023A86 /* SYNiPadIntroToSignupAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CE7A2F1887161B00023A86 /* SYNiPadIntroToSignupAnimator.m */; };
-		E9D71AD7187DCD8A00C3FAB8 /* SYNRotatingPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D71AD6187DCD8A00C3FAB8 /* SYNRotatingPopoverController.m */; };
 		E9D8E5A418995F1800EB1CD5 /* SYNNotificationsTableViewCell~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9D8E5A318995F1800EB1CD5 /* SYNNotificationsTableViewCell~iphone.xib */; };
 		E9D99DD018608F3000212AC5 /* SYNSearchVideoChannelsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D99DCF18608F3000212AC5 /* SYNSearchVideoChannelsModel.m */; };
 		E9E1E28018561C780051E312 /* SYNiPhonePopoverAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E1E27B18561C780051E312 /* SYNiPhonePopoverAnimator.m */; };
@@ -820,8 +818,6 @@
 		019825F3162C94B500216900 /* UIFont+SYNFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+SYNFont.m"; sourceTree = "<group>"; };
 		0199F13816721A4500E479C6 /* SYNFeedRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNFeedRootViewController.h; sourceTree = "<group>"; };
 		0199F13916721A4500E479C6 /* SYNFeedRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNFeedRootViewController.m; sourceTree = "<group>"; };
-		019CB6A6181187E80079DFCF /* SYNFadingFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNFadingFlowLayout.h; sourceTree = "<group>"; };
-		019CB6A7181187E80079DFCF /* SYNFadingFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNFadingFlowLayout.m; sourceTree = "<group>"; };
 		019E6A5F165FD99A002B312A /* SYNOAuth2Credential.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNOAuth2Credential.h; sourceTree = "<group>"; };
 		019E6A60165FD99A002B312A /* SYNOAuth2Credential.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNOAuth2Credential.m; sourceTree = "<group>"; };
 		019E6A62165FD9AC002B312A /* SYNOAuthNetworkEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNOAuthNetworkEngine.h; sourceTree = "<group>"; };
@@ -1560,8 +1556,6 @@
 		E9CE7A2C1887057500023A86 /* SYNiPadLoginToSignupAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNiPadLoginToSignupAnimator.m; sourceTree = "<group>"; };
 		E9CE7A2E1887161B00023A86 /* SYNiPadIntroToSignupAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNiPadIntroToSignupAnimator.h; sourceTree = "<group>"; };
 		E9CE7A2F1887161B00023A86 /* SYNiPadIntroToSignupAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNiPadIntroToSignupAnimator.m; sourceTree = "<group>"; };
-		E9D71AD5187DCD8A00C3FAB8 /* SYNRotatingPopoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNRotatingPopoverController.h; sourceTree = "<group>"; };
-		E9D71AD6187DCD8A00C3FAB8 /* SYNRotatingPopoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNRotatingPopoverController.m; sourceTree = "<group>"; };
 		E9D8E5A318995F1800EB1CD5 /* SYNNotificationsTableViewCell~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNNotificationsTableViewCell~iphone.xib"; sourceTree = "<group>"; };
 		E9D99DCE18608F3000212AC5 /* SYNSearchVideoChannelsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNSearchVideoChannelsModel.h; sourceTree = "<group>"; };
 		E9D99DCF18608F3000212AC5 /* SYNSearchVideoChannelsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNSearchVideoChannelsModel.m; sourceTree = "<group>"; };
@@ -2054,7 +2048,6 @@
 		019824E11629CAB600216900 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				BEE01B5D1851E121000CF681 /* Commenting */,
 				4C5E85EC18B6203600D0E937 /* In Boarding */,
 				BE57C01B1843585E00C6444A /* On Boarding */,
 				BE0815C216D5386B00ADB1DC /* Master */,
@@ -2065,7 +2058,6 @@
 				BEF9E5A516DBCDEF00286113 /* Components */,
 				01982562162ADE5200216900 /* Container */,
 				0199F1371672199F00E479C6 /* Feed */,
-				BE1B3DCC180E8FDC00DA2BD6 /* Mood */,
 				BE7D34D017159DF20085AB81 /* Activity (Notifications) */,
 				BE270B7B16EDE0A500CDDA6D /* Login */,
 				BE3574E517CE07860083CBB1 /* One to One Sharing */,
@@ -2327,13 +2319,6 @@
 				E98A852219096B63001ADE09 /* SYNFeedChannelSmallCell.xib */,
 			);
 			name = Feed;
-			sourceTree = "<group>";
-		};
-		019CB69F18117CB60079DFCF /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Cells;
 			sourceTree = "<group>";
 		};
 		019E6A5E165FD958002B312A /* OAuth2 */ = {
@@ -3093,15 +3078,6 @@
 			name = Master;
 			sourceTree = "<group>";
 		};
-		BE1B3DCC180E8FDC00DA2BD6 /* Mood */ = {
-			isa = PBXGroup;
-			children = (
-				BE31EFAC182CF969006E20E2 /* Layout */,
-				019CB69F18117CB60079DFCF /* Cells */,
-			);
-			name = Mood;
-			sourceTree = "<group>";
-		};
 		BE1B3DE31810263B00DA2BD6 /* Navigation Manager */ = {
 			isa = PBXGroup;
 			children = (
@@ -3266,15 +3242,6 @@
 			children = (
 			);
 			name = About;
-			sourceTree = "<group>";
-		};
-		BE31EFAC182CF969006E20E2 /* Layout */ = {
-			isa = PBXGroup;
-			children = (
-				019CB6A6181187E80079DFCF /* SYNFadingFlowLayout.h */,
-				019CB6A7181187E80079DFCF /* SYNFadingFlowLayout.m */,
-			);
-			name = Layout;
 			sourceTree = "<group>";
 		};
 		BE31EFAD182D4729006E20E2 /* Cells */ = {
@@ -3681,15 +3648,6 @@
 				BED027C51834D4CC00636659 /* ButtonMoreSettings@2x.png */,
 			);
 			name = Options;
-			sourceTree = "<group>";
-		};
-		BEE01B5D1851E121000CF681 /* Commenting */ = {
-			isa = PBXGroup;
-			children = (
-				E9D71AD5187DCD8A00C3FAB8 /* SYNRotatingPopoverController.h */,
-				E9D71AD6187DCD8A00C3FAB8 /* SYNRotatingPopoverController.m */,
-			);
-			name = Commenting;
 			sourceTree = "<group>";
 		};
 		BEF9E5A516DBCDEF00286113 /* Components */ = {
@@ -4475,7 +4433,6 @@
 				4CF39EF418CDF4420077CDF0 /* SYNProfileSubscriptionViewController.m in Sources */,
 				E9F62550188404A8000EF6A2 /* SYNiPhoneLoginAnimator.m in Sources */,
 				BE21EEB216FB56090067223B /* SYNPaddedUITextField.m in Sources */,
-				019CB6A8181187E80079DFCF /* SYNFadingFlowLayout.m in Sources */,
 				E91F04521844BDB50009D610 /* SYNVideoLoadingView.m in Sources */,
 				BE13E38916FB85220098F23C /* SYNAccountSettingsLocation.m in Sources */,
 				01AEFBCD1701AC460060467A /* SYNActivityManager.m in Sources */,
@@ -4558,7 +4515,6 @@
 				E98F609B18B25CBD008AAAA8 /* NSRegularExpression+Username.m in Sources */,
 				1F356185175F6F7400829457 /* SYNAccountSettingOtherTableViewCell.m in Sources */,
 				E9EE08D018F6FC49000DC06A /* SYNWebViewCell.m in Sources */,
-				E9D71AD7187DCD8A00C3FAB8 /* SYNRotatingPopoverController.m in Sources */,
 				BEA216B217E8A611007C6DF7 /* SYNOneToOneSharingFriendCell.m in Sources */,
 				E9AD5B6C187D767200298D95 /* SYNiPhoneLoginViewController.m in Sources */,
 				BE7D02EA178B138B008053DC /* SYNUserThumbnailCell.m in Sources */,
