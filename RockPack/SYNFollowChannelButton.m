@@ -20,11 +20,11 @@
 }
 
 - (UIColor*) selectedColor {
-	return [UIColor dollyGreen];
+	return [UIColor blackColor];
 }
 
 - (UIColor*) defaultColor {
-	return [UIColor dollyTextMediumGray];
+	return [UIColor dollyGreen];
 }
 
 - (UIFont*)selectedFont {
@@ -36,11 +36,11 @@
 }
 
 - (UIColor*) selectedBorderColor {
-	return [UIColor dollyGreen];
+	return [UIColor blackColor];
 }
 
 - (UIColor*) defaultBorderColor {
-	return [UIColor dollyTextMediumGray];
+	return [UIColor dollyGreen];
 }
 
 
