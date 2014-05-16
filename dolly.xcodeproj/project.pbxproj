@@ -624,6 +624,8 @@
 		E9CE79E21886B20400023A86 /* SYNiPadLoginToForgotPasswordAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CE79E11886B20400023A86 /* SYNiPadLoginToForgotPasswordAnimator.m */; };
 		E9CE7A2D1887057500023A86 /* SYNiPadLoginToSignupAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CE7A2C1887057500023A86 /* SYNiPadLoginToSignupAnimator.m */; };
 		E9CE7A301887161B00023A86 /* SYNiPadIntroToSignupAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CE7A2F1887161B00023A86 /* SYNiPadIntroToSignupAnimator.m */; };
+		E9D2E44D192667B80064F1A6 /* SYNIPadOnBoardingLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D2E44C192667B80064F1A6 /* SYNIPadOnBoardingLayout.m */; };
+		E9D2E44F192670FC0064F1A6 /* SYNIPadOnBoardingLayoutSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D2E44E192670FC0064F1A6 /* SYNIPadOnBoardingLayoutSpec.m */; };
 		E9D8E5A418995F1800EB1CD5 /* SYNNotificationsTableViewCell~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9D8E5A318995F1800EB1CD5 /* SYNNotificationsTableViewCell~iphone.xib */; };
 		E9D99DD018608F3000212AC5 /* SYNSearchVideoChannelsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D99DCF18608F3000212AC5 /* SYNSearchVideoChannelsModel.m */; };
 		E9E1E28018561C780051E312 /* SYNiPhonePopoverAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E1E27B18561C780051E312 /* SYNiPhonePopoverAnimator.m */; };
@@ -1560,6 +1562,9 @@
 		E9CE7A2C1887057500023A86 /* SYNiPadLoginToSignupAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNiPadLoginToSignupAnimator.m; sourceTree = "<group>"; };
 		E9CE7A2E1887161B00023A86 /* SYNiPadIntroToSignupAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNiPadIntroToSignupAnimator.h; sourceTree = "<group>"; };
 		E9CE7A2F1887161B00023A86 /* SYNiPadIntroToSignupAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNiPadIntroToSignupAnimator.m; sourceTree = "<group>"; };
+		E9D2E44B192667B80064F1A6 /* SYNIPadOnBoardingLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNIPadOnBoardingLayout.h; sourceTree = "<group>"; };
+		E9D2E44C192667B80064F1A6 /* SYNIPadOnBoardingLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNIPadOnBoardingLayout.m; sourceTree = "<group>"; };
+		E9D2E44E192670FC0064F1A6 /* SYNIPadOnBoardingLayoutSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNIPadOnBoardingLayoutSpec.m; sourceTree = "<group>"; };
 		E9D8E5A318995F1800EB1CD5 /* SYNNotificationsTableViewCell~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNNotificationsTableViewCell~iphone.xib"; sourceTree = "<group>"; };
 		E9D99DCE18608F3000212AC5 /* SYNSearchVideoChannelsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNSearchVideoChannelsModel.h; sourceTree = "<group>"; };
 		E9D99DCF18608F3000212AC5 /* SYNSearchVideoChannelsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNSearchVideoChannelsModel.m; sourceTree = "<group>"; };
@@ -1956,6 +1961,7 @@
 				E94E9C7618E44D8700E8CE84 /* NSString+TestHelpers.m */,
 				E98A85151909689B001ADE09 /* NSManagedObjectContext+TestHelpers.h */,
 				E98A85161909689B001ADE09 /* NSManagedObjectContext+TestHelpers.m */,
+				E9D2E44E192670FC0064F1A6 /* SYNIPadOnBoardingLayoutSpec.m */,
 			);
 			name = Tests;
 			path = dollyTests;
@@ -3292,6 +3298,8 @@
 				BE57C01D1843588A00C6444A /* SYNOnBoardingViewController.m */,
 				BE57C01E1843588A00C6444A /* SYNOnBoardingViewController.xib */,
 				BE57C021184358BA00C6444A /* SYNOnBoardingViewController~iphone.xib */,
+				E9D2E44B192667B80064F1A6 /* SYNIPadOnBoardingLayout.h */,
+				E9D2E44C192667B80064F1A6 /* SYNIPadOnBoardingLayout.m */,
 			);
 			name = "On Boarding";
 			sourceTree = "<group>";
@@ -4480,6 +4488,7 @@
 				BE7D35051715CE450085AB81 /* SYNNotification.m in Sources */,
 				BE86BF1A171F07B10006DC8A /* SYNChannelMidCell.m in Sources */,
 				0E19FBC2182273EE0007DF5B /* SYNChannelSearchCell.m in Sources */,
+				E9D2E44D192667B80064F1A6 /* SYNIPadOnBoardingLayout.m in Sources */,
 				99F300CA191BCBFF002C1D25 /* SYNActivityTabButton.m in Sources */,
 				BEB313561817D8C400FAF98A /* SYNSearchResultsUserCell.m in Sources */,
 				BEFAE89C1725485B009B2F66 /* SYNVideoQueue.m in Sources */,
@@ -4587,6 +4596,7 @@
 				E98A8519190968C2001ADE09 /* NSString+TestHelpers.m in Sources */,
 				E98A8518190968BA001ADE09 /* NSManagedObjectContext+TestHelpers.m in Sources */,
 				E94BEFAE18CA0E6B00762651 /* NSStringTimecodeSpec.m in Sources */,
+				E9D2E44F192670FC0064F1A6 /* SYNIPadOnBoardingLayoutSpec.m in Sources */,
 				E9F7CC791846289B0026C97D /* NSStringValidationSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

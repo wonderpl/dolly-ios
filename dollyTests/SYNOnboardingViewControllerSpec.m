@@ -2,6 +2,7 @@
 #import "SYNOnBoardingViewController.h"
 #import "SYNTrackingManager.h"
 #import "SYNOnBoardingFooter.h"
+#import "SYNSocialButton.h"
 
 @interface SYNOnBoardingViewController () <UIBarPositioningDelegate, UICollectionViewDataSource, UICollectionViewDelegate, SYNOnboardingFooterDelegate>
 

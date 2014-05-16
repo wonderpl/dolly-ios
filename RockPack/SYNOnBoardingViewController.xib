@@ -26,7 +26,7 @@
                     <rect key="frame" x="0.0" y="64" width="1024" height="704"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="34" minimumInteritemSpacing="0.0" id="AW9-nx-I3h">
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="34" minimumInteritemSpacing="0.0" id="AW9-nx-I3h" customClass="SYNIPadOnBoardingLayout">
                         <size key="itemSize" width="196" height="196"/>
                         <size key="headerReferenceSize" width="1024" height="108"/>
                         <size key="footerReferenceSize" width="1" height="76"/>
