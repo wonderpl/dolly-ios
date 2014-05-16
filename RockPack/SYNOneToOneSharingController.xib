@@ -60,10 +60,6 @@
                     <rect key="frame" x="0.0" y="44" width="420" height="104"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="share-message-background.png" id="y2f-0I-SEz">
-                            <rect key="frame" x="0.0" y="0.0" width="420" height="104"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        </imageView>
                         <view contentMode="scaleToFill" id="Zzs-x9-OBg" userLabel="Container">
                             <rect key="frame" x="0.0" y="2" width="420" height="91"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -83,6 +79,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
+                            <color key="backgroundColor" red="0.10588235294117647" green="0.1764705882352941" blue="0.23137254901960785" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
                     </subviews>
                 </view>
@@ -99,7 +96,4 @@
             </connections>
         </tableView>
     </objects>
-    <resources>
-        <image name="share-message-background.png" width="420" height="103"/>
-    </resources>
 </document>
