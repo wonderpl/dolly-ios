@@ -18,11 +18,13 @@
 
 #import "FBError.h"
 #import "FBFrictionlessRequestSettings.h"
+#import "FBLogger.h"
 #import "FBLoginDialog.h"
 #import "FBRequest.h"
 #import "FBSession+Internal.h"
 #import "FBSessionManualTokenCachingStrategy.h"
 #import "FBSessionUtility.h"
+#import "FBSettings.h"
 #import "FBUtility.h"
 
 static NSString *kRedirectURL = @"fbconnect://success";
@@ -236,11 +238,10 @@ static NSString *const FBexpirationDatePropertyName = @"expirationDate";
     NSMutableDictionary *params = [[[NSMutableDictionary alloc] init] autorelease];
     for (NSString *pair in pairs) {
         NSArray *kv = [pair componentsSeparatedByString:@"="];
-        NSString *val =
-        [[kv objectAtIndex:1]
-         stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-
-        [params setObject:val forKey:[kv objectAtIndex:0]];
+        if ([kv count] > 1) {
+            [params setObject:[[kv objectAtIndex:1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
+                       forKey:[kv objectAtIndex:0]];
+        }
     }
     return params;
 }
@@ -475,7 +476,8 @@ static NSString *const FBexpirationDatePropertyName = @"expirationDate";
 - (FBRequest *)requestWithParams:(NSMutableDictionary *)params
                      andDelegate:(id<FBRequestDelegate>)delegate {
     if ([params objectForKey:@"method"] == nil) {
-        NSLog(@"API Method must be specified");
+        [FBLogger singleShotLogEntry:FBLoggingBehaviorDeveloperErrors
+                        formatString:@"API Method must be specified: %@", params];
         return nil;
     }
 

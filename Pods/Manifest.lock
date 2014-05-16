@@ -1,26 +1,28 @@
 PODS:
-  - AFNetworking (2.2.1):
+  - AFNetworking (2.2.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
     - AFNetworking/UIKit
-  - AFNetworking/NSURLConnection (2.2.1):
+  - AFNetworking/NSURLConnection (2.2.4):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.2.1):
+  - AFNetworking/NSURLSession (2.2.4):
     - AFNetworking/NSURLConnection
-  - AFNetworking/Reachability (2.2.1)
-  - AFNetworking/Security (2.2.1)
-  - AFNetworking/Serialization (2.2.1)
-  - AFNetworking/UIKit (2.2.1):
+  - AFNetworking/Reachability (2.2.4)
+  - AFNetworking/Security (2.2.4)
+  - AFNetworking/Serialization (2.2.4)
+  - AFNetworking/UIKit (2.2.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - Appirater (2.0.2)
-  - Facebook-iOS-SDK (3.13.0)
-  - GoogleAnalytics-iOS-SDK (3.0.3)
+  - Bolts (1.1.0)
+  - Facebook-iOS-SDK (3.14.1):
+    - Bolts
+  - GoogleAnalytics-iOS-SDK (3.0.7)
   - GoogleConversionTracking (3.0.0)
   - ISO8601DateFormatter (0.7)
   - Kiwi/ARC (2.2.4)
@@ -28,14 +30,14 @@ PODS:
   - Kiwi/XCTest (2.2.4):
     - Kiwi/ARC
     - Kiwi/NonARC
-  - Masonry (0.4.0)
+  - Masonry (0.5.0)
   - MKNetworkKit (0.87):
     - Reachability (~> 3.1.0)
   - Ooyala (1.5.1)
   - Reachability (3.1.1)
-  - SDWebImage (3.5.4):
+  - SDWebImage (3.6):
     - SDWebImage/Core
-  - SDWebImage/Core (3.5.4)
+  - SDWebImage/Core (3.6)
   - SSKeychain (0.2.1)
   - TestFlightSDK (3.0.0)
 
@@ -61,19 +63,20 @@ EXTERNAL SOURCES:
     :git: https://github.com/rockpack/MKNetworkKit.git
 
 SPEC CHECKSUMS:
-  AFNetworking: 0121f4b69be3fa58d1ab317866e036e12ac9651d
+  AFNetworking: 01aa7c3aa9a200b94943e54072a4373f14b3d219
   Appirater: 32fb9089615b5e542c7ad7b5749741a8aed55290
-  Facebook-iOS-SDK: 5788541337dc88265bc940cb5ffb05915f9b64e3
-  GoogleAnalytics-iOS-SDK: 7b0e55cfe5e70d60478a7b105f15ac71e8bc373e
-  GoogleConversionTracking: cb1368fb8c3229ca374a3554a2a9ce50dfa1fa9d
+  Bolts: dc620a31cf67c29bce3e3d14a07a12e797a1a154
+  Facebook-iOS-SDK: 97e68fb37468bee2d90201fd0c9e4dccce5683d9
+  GoogleAnalytics-iOS-SDK: 594702aaf93e6ee497140fd31e758c2e2fa44315
+  GoogleConversionTracking: 8e767c5033aa9802d661970e733f31b9d4e0731a
   ISO8601DateFormatter: 00944e437ea647f4244454ce8809d313861d08de
   Kiwi: d60d7498b640a16f58b01925fc3c8d7c4d809f66
-  Masonry: d673617c9cbc24aaea90fba20b10e47fd9970a39
+  Masonry: bef482b29f00b33a2da916e1011af85f5d371d66
   MKNetworkKit: e92724a21c0392c2f4181978135f3ae715863f1a
-  Ooyala: 5371cc4cb8a8cfa889d17d0353510eebe5360869
+  Ooyala: 1550fdef31d67149684b481a4f6c80a0c625ebac
   Reachability: be4883bb93f31e38266ae3365e5600a317aae735
-  SDWebImage: 1a62010700adbba823b621fc217906739dbf6aa5
-  SSKeychain: ffa1a79eb716d9ed1ca184fb0cf218087ca28486
-  TestFlightSDK: 71e3e78d3a46144dbad975a4bf80a14dae6a818a
+  SDWebImage: 7eb273e54ca8a2e506ad9bd5e80c35b2a4d7c95e
+  SSKeychain: ff035de8a52ecb729f4ddcc2d09e49e6826d9778
+  TestFlightSDK: fe0567a897456b6f65b180541892ef0154986e01
 
-COCOAPODS: 0.31.1
+COCOAPODS: 0.32.1

@@ -3,6 +3,4 @@
 #endif
 
 #import "Pods-dollyTests-environment.h"
-
-
 #import <XCTest/XCTest.h>

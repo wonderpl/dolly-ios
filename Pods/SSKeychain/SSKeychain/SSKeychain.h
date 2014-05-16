@@ -6,8 +6,8 @@
 //  Copyright (c) 2009-2011 Sam Soffes. All rights reserved.
 //
 
-@import Foundation;
-@import Security;
+#import <Foundation/Foundation.h>
+#import <Security/Security.h>
 
 
 /**

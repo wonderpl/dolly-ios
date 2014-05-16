@@ -110,4 +110,10 @@
  */
 - (void)insertAd:(OOAdSpot *)ad;
 
+/**
+ * Edit the list of ads, allowing for removal of ads.
+ * @param block returns TRUE for ads to keep, FALSE for ads to remove.
+ */
+-(void)filterAds:(NSPredicate*)predicate;
+
 @end
