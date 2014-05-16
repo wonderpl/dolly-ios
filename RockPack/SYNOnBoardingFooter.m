@@ -27,10 +27,6 @@
 
 	self.continueButton.titleLabel.font = [UIFont regularCustomFontOfSize:self.continueButton.titleLabel.font.pointSize];
 
-	self.continueButton.layer.borderWidth = 1.0;
-	self.continueButton.layer.borderColor = [color CGColor];
-	self.continueButton.layer.cornerRadius = 15.5f;
-
 	[self.border.layer setBorderColor:[color CGColor]];
 	[self.border.layer setBorderWidth:1.0f];
 }

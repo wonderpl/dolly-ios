@@ -334,6 +334,8 @@
 		993B1B5D191AA526008532D4 /* TabActivity~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 993B1B59191AA526008532D4 /* TabActivity~ipad.png */; };
 		993B1B5E191AA526008532D4 /* TabActivitySelected@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 993B1B5A191AA526008532D4 /* TabActivitySelected@2x~ipad.png */; };
 		993B1B5F191AA526008532D4 /* TabActivitySelected~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 993B1B5B191AA526008532D4 /* TabActivitySelected~ipad.png */; };
+		9959249719267B4C00CCAACF /* continue-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 9959249519267B4C00CCAACF /* continue-button.png */; };
+		9959249819267B4C00CCAACF /* continue-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9959249619267B4C00CCAACF /* continue-button@2x.png */; };
 		99BEAEC1191D1F6500A27FC7 /* facebook-login-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 99BEAEBB191D1F6500A27FC7 /* facebook-login-button.png */; };
 		99BEAEC2191D1F6500A27FC7 /* facebook-login-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 99BEAEBC191D1F6500A27FC7 /* facebook-login-button@2x.png */; };
 		99BEAEC3191D1F6500A27FC7 /* login-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 99BEAEBD191D1F6500A27FC7 /* login-button.png */; };
@@ -1126,6 +1128,8 @@
 		993B1B59191AA526008532D4 /* TabActivity~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabActivity~ipad.png"; sourceTree = "<group>"; };
 		993B1B5A191AA526008532D4 /* TabActivitySelected@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabActivitySelected@2x~ipad.png"; sourceTree = "<group>"; };
 		993B1B5B191AA526008532D4 /* TabActivitySelected~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabActivitySelected~ipad.png"; sourceTree = "<group>"; };
+		9959249519267B4C00CCAACF /* continue-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "continue-button.png"; sourceTree = "<group>"; };
+		9959249619267B4C00CCAACF /* continue-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "continue-button@2x.png"; sourceTree = "<group>"; };
 		99BEAEBB191D1F6500A27FC7 /* facebook-login-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook-login-button.png"; sourceTree = "<group>"; };
 		99BEAEBC191D1F6500A27FC7 /* facebook-login-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook-login-button@2x.png"; sourceTree = "<group>"; };
 		99BEAEBD191D1F6500A27FC7 /* login-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-button.png"; sourceTree = "<group>"; };
@@ -1983,6 +1987,7 @@
 		019824DE1629CA5900216900 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				9959249419267B3B00CCAACF /* Onboarding */,
 				E98DCCC119237C720041DEB4 /* ScrubberBarFullScreen.png */,
 				E98DCCC219237C720041DEB4 /* ScrubberBarFullScreen@2x.png */,
 				E9ACC390191D1F4900ACC929 /* ShopMotionActionButton@2x.png */,
@@ -2959,6 +2964,15 @@
 				4CBDC402190FE820009F56F1 /* SYNSegmentedButton.m */,
 			);
 			name = "new profile";
+			sourceTree = "<group>";
+		};
+		9959249419267B3B00CCAACF /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				9959249519267B4C00CCAACF /* continue-button.png */,
+				9959249619267B4C00CCAACF /* continue-button@2x.png */,
+			);
+			name = Onboarding;
 			sourceTree = "<group>";
 		};
 		99BEAEBA191D1F5400A27FC7 /* Backgrounds */ = {
@@ -3942,6 +3956,7 @@
 				0EE380AD182D4DFC001297C7 /* SYNChannelCreateNewCell~iphone.xib in Resources */,
 				1F458B0417E1C4E6003C14AC /* AppIcon60x60.png in Resources */,
 				4C102A3C1896D80E00C367E8 /* IconWonderAbout.png in Resources */,
+				9959249819267B4C00CCAACF /* continue-button@2x.png in Resources */,
 				E9FDCD98188D902A00C31CC1 /* WebView.storyboard in Resources */,
 				BE57C0351844FAB600C6444A /* SYNSubscribersViewController.xib in Resources */,
 				BEC39C1D184E363C00DA8089 /* SYNOnBoardingFooter.xib in Resources */,
@@ -3994,6 +4009,7 @@
 				E972DFB1187C6FD900CB9C78 /* Login_iphone.storyboard in Resources */,
 				0EF0786B181EAE9100667417 /* ButtonMore@2x~iphone.png in Resources */,
 				BED027D51834D4CC00636659 /* ButtonMoreSettings@2x.png in Resources */,
+				9959249719267B4C00CCAACF /* continue-button.png in Resources */,
 				1F458B2E17E1CE8E003C14AC /* AppIcon-Dev-76x76.png in Resources */,
 				4C5E860118B630A000D0E937 /* SYNOnBoardingOverlayViewController.xib in Resources */,
 				BED027D71834F3B500636659 /* SYNAccountSettingsViewController~iphone.xib in Resources */,
