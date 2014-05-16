@@ -14,6 +14,7 @@
 #import "UIFont+SYNFont.h"
 #import "SYNiPadLoginToForgotPasswordAnimator.h"
 #import "SYNiPadPasswordForgotViewController.h"
+#import "UIColor+SYNColor.h"
 
 @interface SYNiPadLoginViewController () <UITextFieldDelegate, UIViewControllerTransitioningDelegate>
 
@@ -39,7 +40,11 @@
     
     [self.forgotPasswordButton.titleLabel setFont:[UIFont regularCustomFontOfSize:15]];
     
-    
+    self.loginButton.backgroundColor = [UIColor clearColor];
+    self.loginButton.layer.cornerRadius = self.loginButton.frame.size.height * 0.5;
+	[self.loginButton setTitleColor:[UIColor dollyGreen] forState:UIControlStateNormal];
+    self.loginButton.layer.borderColor = [[UIColor dollyGreen] CGColor];
+    self.loginButton.layer.borderWidth = 1;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
