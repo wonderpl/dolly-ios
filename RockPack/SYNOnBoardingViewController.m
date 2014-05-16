@@ -115,16 +115,7 @@
 												  NSArray *recommendations = [self fetchRecommendations];
 												  NSArray *groupedRecommendations = [self groupRecommendations:recommendations byGenres:genres];
 												  
-												  if ([[UIDevice currentDevice] isPhone]) {
 													  self.groupedRecommendations = groupedRecommendations;
-												  } else {
-													  // For the iPad we only have one section so we're going to flatten the array
-													  NSMutableArray *array = [NSMutableArray array];
-													  for (NSArray *groupedRecommendation in groupedRecommendations) {
-														  [array addObjectsFromArray:groupedRecommendation];
-													  }
-													  self.groupedRecommendations = @[ array ];
-												  }
                                                   
 												  [self.collectionView reloadData];
                                                   
@@ -227,22 +218,18 @@
         if (section == 0) {
             return CGSizeMake(320, 108);
 		} else {
-            return CGSizeZero;
+            return CGSizeMake(self.view.frame.size.width, 47);
         }
     } else {
 		if (section == 0) {
-			return CGSizeMake(320, 90);
+			return CGSizeMake(320, 51);
 		} else {
-			return CGSizeMake(320, 30);
+			return CGSizeMake(320, 42);
 		}
 	}
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
-    if (IS_IPAD && section != 0) {
-        return CGSizeMake(320, 76);
-    }
-	
 	if (section == [self.groupedRecommendations count]) {
 		return CGSizeMake(320, 76);
 	}
@@ -337,9 +324,9 @@
 	UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)[self.collectionView collectionViewLayout];
 	
 	if (UIInterfaceOrientationIsPortrait(orientation)) {
-		layout.sectionInset = UIEdgeInsetsMake(0, 120, 0, 120);
+		layout.sectionInset = UIEdgeInsetsMake(0, 24, 0, 24);
 	} else {
-		layout.sectionInset = UIEdgeInsetsMake(0, 100, 0, 100);
+		layout.sectionInset = UIEdgeInsetsMake(0, 24, 0, 24);
 	}
 	
 	[self.collectionView.collectionViewLayout invalidateLayout];
