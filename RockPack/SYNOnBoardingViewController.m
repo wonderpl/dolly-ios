@@ -363,7 +363,6 @@
             self.followedCount--;
         }
 
-        NSLog(@"%ld", (long)self.followedCount);
         
     }];
     
