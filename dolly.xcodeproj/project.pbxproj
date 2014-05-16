@@ -336,6 +336,8 @@
 		9959249819267B4C00CCAACF /* continue-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9959249619267B4C00CCAACF /* continue-button@2x.png */; };
 		9959249B19268F6300CCAACF /* BarSucess.png in Resources */ = {isa = PBXBuildFile; fileRef = 9959249919268F6300CCAACF /* BarSucess.png */; };
 		9959249C19268F6300CCAACF /* BarSucess@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9959249A19268F6300CCAACF /* BarSucess@2x.png */; };
+		9959249F192696AE00CCAACF /* register-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 9959249D192696AE00CCAACF /* register-button.png */; };
+		995924A0192696AE00CCAACF /* register-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9959249E192696AE00CCAACF /* register-button@2x.png */; };
 		99BEAEC1191D1F6500A27FC7 /* facebook-login-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 99BEAEBB191D1F6500A27FC7 /* facebook-login-button.png */; };
 		99BEAEC2191D1F6500A27FC7 /* facebook-login-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 99BEAEBC191D1F6500A27FC7 /* facebook-login-button@2x.png */; };
 		99BEAEC3191D1F6500A27FC7 /* login-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 99BEAEBD191D1F6500A27FC7 /* login-button.png */; };
@@ -1132,6 +1134,8 @@
 		9959249619267B4C00CCAACF /* continue-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "continue-button@2x.png"; sourceTree = "<group>"; };
 		9959249919268F6300CCAACF /* BarSucess.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BarSucess.png; sourceTree = "<group>"; };
 		9959249A19268F6300CCAACF /* BarSucess@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BarSucess@2x.png"; sourceTree = "<group>"; };
+		9959249D192696AE00CCAACF /* register-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "register-button.png"; sourceTree = "<group>"; };
+		9959249E192696AE00CCAACF /* register-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "register-button@2x.png"; sourceTree = "<group>"; };
 		99BEAEBB191D1F6500A27FC7 /* facebook-login-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook-login-button.png"; sourceTree = "<group>"; };
 		99BEAEBC191D1F6500A27FC7 /* facebook-login-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook-login-button@2x.png"; sourceTree = "<group>"; };
 		99BEAEBD191D1F6500A27FC7 /* login-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-button.png"; sourceTree = "<group>"; };
@@ -3172,6 +3176,8 @@
 		BE270B8516EE485200CDDA6D /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				9959249D192696AE00CCAACF /* register-button.png */,
+				9959249E192696AE00CCAACF /* register-button@2x.png */,
 				9937CA15192250B7002D3C23 /* sign-up-button.png */,
 				9937CA16192250B7002D3C23 /* sign-up-button@2x.png */,
 				9937CA0319222CE5002D3C23 /* right-separator.png */,
@@ -3877,6 +3883,7 @@
 				BEC39C10184CA50C00DA8089 /* SYNFeedbackViewController~iphone.xib in Resources */,
 				011A15F916EE3F05008CF25E /* SYNCameraPopoverViewController.xib in Resources */,
 				993B1ACC191A95FC008532D4 /* TabProfileSelected@2x~iphone.png in Resources */,
+				995924A0192696AE00CCAACF /* register-button@2x.png in Resources */,
 				E9EE08D218F6FD47000DC06A /* SYNWebViewCell.xib in Resources */,
 				99BEAEC4191D1F6500A27FC7 /* login-button@2x.png in Resources */,
 				0EAC51E5180EBE67005F4D42 /* SYNProfileRootViewController~iphone.xib in Resources */,
@@ -3934,6 +3941,7 @@
 				BE21EE9E16FA28680067223B /* IconLocation@2x.png in Resources */,
 				BE21EE9F16FA28680067223B /* IconUsername.png in Resources */,
 				BE21EEA016FA28680067223B /* IconUsername@2x.png in Resources */,
+				9959249F192696AE00CCAACF /* register-button.png in Resources */,
 				E9FDCDA1188D92EF00C31CC1 /* ForwardButton@2x.png in Resources */,
 				BED027CE1834D4CC00636659 /* ButtonMoreHelp.png in Resources */,
 				BE57C02A1843608500C6444A /* SYNOnBoardingCell~iphone.xib in Resources */,
