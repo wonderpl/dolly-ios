@@ -86,7 +86,7 @@
 	NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
 	style.lineBreakMode = NSLineBreakByWordWrapping;
 	[style setLineSpacing:1];
-	[style setAlignment:NSTextAlignmentCenter];
+	[style setAlignment:NSTextAlignmentLeft];
 	
 	[channelDescription addAttribute:NSParagraphStyleAttributeName
 							   value:style
