@@ -28,16 +28,19 @@
 		
 		NSMutableArray *sectionLayoutAttributes = [NSMutableArray array];
 		
-		NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:section];
-		UICollectionViewLayoutAttributes *attrs = [UICollectionViewLayoutAttributes layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionHeader
-																												 withIndexPath:indexPath];
-		
 		CGSize headerSize = [self headerSizeForSection:section];
-		attrs.frame = CGRectMake(0, currentY, CGRectGetWidth(self.collectionView.bounds), headerSize.height);
 		
-		currentY += headerSize.height;
-		
-		[sectionLayoutAttributes addObject:attrs];
+		if (headerSize.height) {
+			NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:section];
+			UICollectionViewLayoutAttributes *attrs = [UICollectionViewLayoutAttributes layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionHeader
+																													 withIndexPath:indexPath];
+			
+			attrs.frame = CGRectMake(0, currentY, CGRectGetWidth(self.collectionView.bounds), headerSize.height);
+			
+			currentY += headerSize.height;
+			
+			[sectionLayoutAttributes addObject:attrs];
+		}
 		
 		NSInteger numberOfItems = [self.collectionView numberOfItemsInSection:section];
 		
@@ -67,6 +70,20 @@
 			}
 			
 			currentY += self.itemSize.height + self.minimumLineSpacing;
+		}
+		
+		CGSize footerSize = [self footerSizeForSection:section];
+		
+		if (footerSize.height) {
+			NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:section];
+			UICollectionViewLayoutAttributes *attrs = [UICollectionViewLayoutAttributes layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionFooter
+																													 withIndexPath:indexPath];
+			
+			attrs.frame = CGRectMake(0, currentY, CGRectGetWidth(self.collectionView.bounds), footerSize.height);
+			
+			currentY += footerSize.height;
+			
+			[sectionLayoutAttributes addObject:attrs];
 		}
 		
 		[layoutAttributes addObject:sectionLayoutAttributes];
@@ -119,7 +136,7 @@
 
 - (CGSize)footerSizeForSection:(NSInteger)section {
 	id<UICollectionViewDelegateFlowLayout> delegate = (id<UICollectionViewDelegateFlowLayout>)self.collectionView.delegate;
-	if ([delegate respondsToSelector:@selector(collectionView:layout:referenceSizeForFooterInSection::)]) {
+	if ([delegate respondsToSelector:@selector(collectionView:layout:referenceSizeForFooterInSection:)]) {
 		return [delegate collectionView:self.collectionView layout:self referenceSizeForFooterInSection:section];
 	}
 	return self.footerReferenceSize;
