@@ -82,11 +82,13 @@
 	}
 	NSMutableAttributedString *channelDescription = [[NSMutableAttributedString alloc] initWithString: string];
 	
+    
+    UITextAlignment alignment = IS_IPHONE ? NSTextAlignmentLeft : NSTextAlignmentCenter;
 	NSInteger strLength = [channelDescription length];
 	NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
 	style.lineBreakMode = NSLineBreakByWordWrapping;
 	[style setLineSpacing:1];
-	[style setAlignment:NSTextAlignmentLeft];
+	[style setAlignment:alignment];
 	
 	[channelDescription addAttribute:NSParagraphStyleAttributeName
 							   value:style
