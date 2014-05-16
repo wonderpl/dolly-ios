@@ -67,8 +67,6 @@
 - (void)viewChannelDetails:(Channel *)channel withAnimation:(BOOL)animated;
 - (void)viewVideoInstanceInChannel:(Channel*) channel withVideoId:videoId;
 
-- (void) shouldHideTabBar;
-
 - (NSString *)trackingScreenName;
 
 - (void)favouriteButtonPressed:(UIButton *)button videoInstance:(VideoInstance *)videoInstance;
