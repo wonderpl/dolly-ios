@@ -12,9 +12,6 @@
 @synthesize starredByUser = _starredByUser;
 @synthesize selectedForVideoQueue;
 
-// Store our date formatter as a static for optimization purposes
-static NSDateFormatter *dateFormatter = nil;
-
 + (VideoInstance *) instanceFromVideoInstance: (VideoInstance *) existingInstance
                     usingManagedObjectContext: (NSManagedObjectContext *) managedObjectContext
                           ignoringObjectTypes: (IgnoringObjects) ignoringObjects
