@@ -427,7 +427,7 @@
                                         <size key="contentOffset" width="0.0" height="1"/>
                                     </segment>
                                 </segments>
-                                <color key="tintColor" red="0.73725490199999999" green="0.73333333329999995" blue="0.83137254900000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.2901960784" green="0.68627450980000004" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Lq-mR-Smo" userLabel="Button - Change avatar">
                                 <rect key="frame" x="35" y="82" width="154" height="154"/>

@@ -491,7 +491,7 @@
                                                 <size key="contentOffset" width="0.0" height="1"/>
                                             </segment>
                                         </segments>
-                                        <color key="tintColor" red="0.73725490199999999" green="0.73333333329999995" blue="0.83137254900000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" red="0.29019607843137252" green="0.68627450980392157" blue="0.36078431372549019" alpha="1" colorSpace="calibratedRGB"/>
                                     </segmentedControl>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="fZG-IX-cQF" userLabel="Label - signup error label">
                                         <rect key="frame" x="19" y="296" width="280" height="34"/>
@@ -952,6 +952,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="uhx-wm-F66"/>
+        <segue reference="1fQ-HG-P1W"/>
     </inferredMetricsTieBreakers>
 </document>
