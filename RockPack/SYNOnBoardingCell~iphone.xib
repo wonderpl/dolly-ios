@@ -14,14 +14,14 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;Name Label>" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ct3-5L-Zdd" userLabel="Name Label">
-                        <rect key="frame" x="82" y="14" width="82" height="15"/>
+                        <rect key="frame" x="82" y="14" width="124" height="15"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;Description Text>" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="121" translatesAutoresizingMaskIntoConstraints="NO" id="x0p-6l-BAu" userLabel="Description">
-                        <rect key="frame" x="82" y="35" width="121" height="14"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;Description Text>" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="124" translatesAutoresizingMaskIntoConstraints="NO" id="x0p-6l-BAu" userLabel="Description">
+                        <rect key="frame" x="82" y="35" width="124" height="14"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" red="0.59607845544815063" green="0.59607845544815063" blue="0.59607845544815063" alpha="1" colorSpace="calibratedRGB"/>
@@ -44,9 +44,13 @@
                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eIs-wc-12W" userLabel="Follow Button" customClass="SYNFollowChannelButton">
-                        <rect key="frame" x="223" y="20" width="80" height="32"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eIs-wc-12W" userLabel="Follow Button" customClass="SYNFollowChannelButton">
+                        <rect key="frame" x="223" y="19" width="80" height="33"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="80" id="QEf-b8-Mfk"/>
+                            <constraint firstAttribute="height" constant="33" id="UoU-vz-kbT"/>
+                        </constraints>
                         <state key="normal">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
@@ -64,12 +68,15 @@
             </view>
             <constraints>
                 <constraint firstItem="ct3-5L-Zdd" firstAttribute="leading" secondItem="Rhf-2u-7gT" secondAttribute="trailing" constant="17" id="24X-zs-PhQ"/>
+                <constraint firstAttribute="bottom" secondItem="eIs-wc-12W" secondAttribute="bottom" constant="44" id="5jf-Gp-epV"/>
                 <constraint firstItem="x0p-6l-BAu" firstAttribute="leading" secondItem="Rhf-2u-7gT" secondAttribute="trailing" constant="17" id="BDK-3B-RxD"/>
+                <constraint firstItem="eIs-wc-12W" firstAttribute="leading" secondItem="x0p-6l-BAu" secondAttribute="trailing" constant="17" id="GF4-Ca-7kK"/>
                 <constraint firstItem="ct3-5L-Zdd" firstAttribute="top" secondItem="mFM-Us-01N" secondAttribute="top" constant="14" id="KHd-jB-viC"/>
                 <constraint firstItem="Rhf-2u-7gT" firstAttribute="top" secondItem="mFM-Us-01N" secondAttribute="top" constant="12" id="Ouv-27-XM3"/>
                 <constraint firstItem="Rhf-2u-7gT" firstAttribute="leading" secondItem="mFM-Us-01N" secondAttribute="leading" constant="17" id="frT-v5-peP"/>
-                <constraint firstAttribute="trailing" secondItem="x0p-6l-BAu" secondAttribute="trailing" constant="117" id="fsT-oj-GrC"/>
+                <constraint firstItem="eIs-wc-12W" firstAttribute="leading" secondItem="ct3-5L-Zdd" secondAttribute="trailing" constant="17" id="gec-S7-PKS"/>
                 <constraint firstItem="x0p-6l-BAu" firstAttribute="top" secondItem="ct3-5L-Zdd" secondAttribute="bottom" constant="6" id="h0C-RZ-N2A"/>
+                <constraint firstAttribute="trailing" secondItem="eIs-wc-12W" secondAttribute="trailing" constant="17" id="zCy-a7-tYp"/>
             </constraints>
             <size key="customSize" width="332" height="73"/>
             <connections>
