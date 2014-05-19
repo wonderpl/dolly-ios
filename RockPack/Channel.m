@@ -274,6 +274,10 @@
             {
                 videoInstance.position = newPosition;
             }
+			
+			if (!videoInstance.originator) {
+				videoInstance.originator = self.channelOwner;
+			}
             
             // Starres
             
