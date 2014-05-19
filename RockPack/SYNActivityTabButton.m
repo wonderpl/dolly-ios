@@ -29,6 +29,8 @@
     
     if (badageNumber > 0) {
         [super setTitle:strValue forState:UIControlStateNormal];
+    } else if (badageNumber == 0) {
+        [super setTitle:@"" forState:UIControlStateNormal];
     }
 }
 

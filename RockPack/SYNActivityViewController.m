@@ -322,6 +322,9 @@
     if (self.hasUnreadNotifications)
         notification = nil;
     
+    SYNActivityTabButton *activityTab = appDelegate.masterViewController.activityTab;
+    activityTab.badageNumber = 0;
+
     [self markAsReadForNotification: notification];
 
 }
@@ -395,9 +398,7 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
 	if ([keyPath isEqualToString:NSStringFromSelector(@selector(notificationCounter))]) {
 		SYNActivityTabButton *activityTab = appDelegate.masterViewController.activityTab;
-		if (self.notificationCounter > 0) {
-            activityTab.badageNumber = self.notificationCounter;
-		}
+        activityTab.badageNumber = self.notificationCounter;
 	}
 }
 
