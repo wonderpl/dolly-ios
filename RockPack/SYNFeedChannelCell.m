@@ -43,7 +43,10 @@
 	_channel = channel;
 	
 	NSURL *avatarURL = [NSURL URLWithString:channel.channelOwner.thumbnailURL];
-	[self.avatarThumbnailButton setImageWithURL:avatarURL forState:UIControlStateNormal];
+	[self.avatarThumbnailButton setImageWithURL:avatarURL
+									   forState:UIControlStateNormal
+							   placeholderImage:[UIImage imageNamed:@"PlaceholderAvatarProfile"]
+										options:SDWebImageRetryFailed];
 	
 	NSMutableAttributedString *channeOwnerString = [[NSMutableAttributedString alloc] initWithString:@"New by "];
 
