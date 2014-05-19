@@ -47,6 +47,7 @@ typedef enum {
 @property (strong, nonatomic) IBOutlet UIView *bottomBarView;
 @property (strong, nonatomic) IBOutlet UIView *view;
 @property (nonatomic) ChannelMidCellState state;
+@property (assign, nonatomic) BOOL isFromProfile;
 
 @property (strong, nonatomic) IBOutlet SYNSocialButton *followButton;
 @property (strong, nonatomic) IBOutlet UILabel *descriptionLabel;

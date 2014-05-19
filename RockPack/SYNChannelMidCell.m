@@ -34,7 +34,6 @@
 @property (nonatomic, strong) UISwipeGestureRecognizer *rightSwipe;
 @property (nonatomic, strong) UISwipeGestureRecognizer *leftSwipe;
 @property (strong, nonatomic) IBOutlet UIButton *deleteButton;
-
 @property (nonatomic, strong) IBOutlet UIView *separatorView;
 
 @end
@@ -86,6 +85,7 @@
     
     self.selected = NO;
 
+    self.isFromProfile = NO;
 }
 
 - (void)setViewControllerDelegate: (id<SYNChannelMidCellDelegate>)  viewControllerDelegate {
@@ -416,6 +416,10 @@
 {
     _selected = selected;
 	
+    
+    if (self.isFromProfile) {
+        return;
+    }
     if (selected) {
 		[UIView animateWithDuration:0.2 animations:^{
 			self.videoTitleLabel.textColor = [UIColor whiteColor];

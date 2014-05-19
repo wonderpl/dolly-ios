@@ -159,7 +159,8 @@
         
         existingChannel.channel = channel;
         existingChannel.followButton.hidden = YES;
-        
+        existingChannel.isFromProfile = NO;
+
         cell = existingChannel;
     }
     

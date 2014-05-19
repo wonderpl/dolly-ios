@@ -224,7 +224,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
         BOOL deletableChannelCheck = (!self.isUserProfile || channel.favouritesValue);
         channelThumbnailCell.deletableCell = !deletableChannelCheck;
 		
-        
+        channelThumbnailCell.isFromProfile = YES;
         channelThumbnailCell.viewControllerDelegate = self;
         cell = channelThumbnailCell;
     }
