@@ -39,6 +39,9 @@
 #import "SYNGenreManager.h"
 #import "SYNStaticModel.h"
 #import "UIPlaceHolderTextView.h"
+#import "SYNVideoActionsBar.h"
+#import "SYNCollectionVideoCell.h"
+#import "SYNAddToChannelViewController.h"
 
 #define kHeightChange 40.0f
 #define FULL_NAME_LABEL_IPHONE 147.0f
@@ -46,7 +49,7 @@
 #define FULLNAMELABELIPADLANDSCAPE 258.0f
 
 
-@interface SYNChannelDetailsViewController () <UITextViewDelegate, LXReorderableCollectionViewDelegateFlowLayout, SYNImagePickerControllerDelegate, SYNPagingModelDelegate, SYNVideoPlayerAnimatorDelegate>
+@interface SYNChannelDetailsViewController () <UITextViewDelegate, UIViewControllerTransitioningDelegate, LXReorderableCollectionViewDelegateFlowLayout, SYNImagePickerControllerDelegate, SYNPagingModelDelegate, SYNVideoPlayerAnimatorDelegate,SYNCollectionVideoCellDelegate>
 
 @property (nonatomic, strong) UIActivityIndicatorView *subscribingIndicator;
 @property (nonatomic, weak) Channel *originalChannel;
@@ -1345,7 +1348,6 @@
 											 self.lblChannelTitle.text = IS_IPHONE ? self.txtViewTitle.text : self.txtFieldChannelName.text;
 											 [[SYNTrackingManager sharedManager] trackCollectionEdited:[self.txtFieldChannelName.text uppercaseString]];
                                              
-                                            
                                              
                                              NSString *channelId = resourceCreated[@"id"];
                                             
@@ -1602,6 +1604,65 @@
 							   value:style
 							   range:NSMakeRange(0, strLength)];
 	return channelDescription;
+}
+
+#pragma mark - SYNCollectionVideoCellDelegate
+
+- (void)videoCell:(SYNCollectionVideoCell *)cell favouritePressed:(UIButton *)button {
+	[self favouriteButtonPressed:button videoInstance:cell.videoInstance];
+}
+
+
+// TODO: abstract this call, Copy paste from Feed Root.
+- (void)videoCell:(SYNCollectionVideoCell *)cell addToChannelPressed:(UIButton *)button {
+
+    VideoInstance *videoInstance = cell.videoInstance;
+	
+	[[SYNTrackingManager sharedManager] trackVideoAddFromScreenName:[self trackingScreenName]];
+	
+    [appDelegate.oAuthNetworkEngine recordActivityForUserId:appDelegate.currentUser.uniqueId
+                                                     action:@"select"
+                                            videoInstanceId:videoInstance.uniqueId
+                                          completionHandler:nil
+                                               errorHandler:nil];
+	
+	SYNAddToChannelViewController *viewController = [[SYNAddToChannelViewController alloc] initWithViewId:kExistingChannelsViewId];
+	viewController.modalPresentationStyle = UIModalPresentationCustom;
+	viewController.transitioningDelegate = self;
+	viewController.videoInstance = videoInstance;
+	
+	[self presentViewController:viewController animated:YES completion:nil];
+
+}
+
+- (void)videoCell:(SYNCollectionVideoCell *)cell sharePressed:(UIButton *)button {
+    [self shareVideoInstance:cell.videoInstance];
+}
+
+- (void)showVideoForCell:(SYNCollectionVideoCell *)cell {
+    UIView *candidateCell = cell;
+    
+    while (![candidateCell isKindOfClass: [SYNCollectionVideoCell class]])
+    {
+        candidateCell = candidateCell.superview;
+    }
+    
+    
+    SYNCollectionVideoCell *selectedCell = (SYNCollectionVideoCell *) candidateCell;
+    NSIndexPath *indexPath = [self.videoThumbnailCollectionView indexPathForItemAtPoint: selectedCell.center];
+	
+	UIViewController *viewController = [SYNVideoPlayerViewController viewControllerWithModel:self.model
+																			   selectedIndex:indexPath.item];
+	
+	SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
+	animator.delegate = self;
+	animator.cellIndexPath = indexPath;
+	
+	self.videoPlayerAnimator = animator;
+	viewController.transitioningDelegate = animator;
+	
+	[self presentViewController:viewController animated:YES completion:nil];
+
 }
 
 @end

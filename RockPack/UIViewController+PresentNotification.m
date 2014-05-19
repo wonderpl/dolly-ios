@@ -36,7 +36,7 @@
         if (type == NotificationMessageTypeSuccess)
         {
             [UIView animateWithDuration: 0.3f
-                                  delay: 0.7f
+                                  delay: 2.0f
                                 options: UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState
                              animations: ^{
                                  

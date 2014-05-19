@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="faf-aZ-ZOn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="faf-aZ-ZOn">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -1040,7 +1040,7 @@
                                     </fragment>
                                     <fragment content="Terms of Services">
                                         <attributes>
-                                            <color key="NSColor" red="0.73725490196078436" green="0.72941176470588232" blue="0.83137254901960778" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="NSColor" red="0.29019607843137252" green="0.68627450980392157" blue="0.36078431372549019" alpha="1" colorSpace="calibratedRGB"/>
                                             <font key="NSFont" size="12" name="HelveticaNeue"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                         </attributes>
@@ -1054,7 +1054,7 @@
                                     </fragment>
                                     <fragment content="Privacy Policy">
                                         <attributes>
-                                            <color key="NSColor" red="0.73725490196078436" green="0.72941176470588232" blue="0.83137254901960778" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="NSColor" red="0.29019607843137252" green="0.68627450980392157" blue="0.36078431372549019" alpha="1" colorSpace="calibratedRGB"/>
                                             <font key="NSFont" size="12" name="HelveticaNeue"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                         </attributes>
@@ -1130,8 +1130,8 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="fNr-jN-dIg"/>
+        <segue reference="7Bv-VN-bSo"/>
         <segue reference="8dQ-Bm-dYZ"/>
-        <segue reference="a0x-hG-aBP"/>
+        <segue reference="fNr-jN-dIg"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -38,10 +38,7 @@
     self.termsButton.layer.cornerRadius = 18.0f;
     self.policyButton.layer.cornerRadius = 18.0f;
     
-    UIColor* color = [UIColor colorWithRed:(188.0f/255.0f)
-                                     green:(186.0f/255.0f)
-                                      blue:(212.0f/255.0f)
-                                     alpha:1.0f];
+    UIColor* color = [UIColor dollyGreen];
     
     
     self.termsButton.layer.borderColor = color.CGColor;

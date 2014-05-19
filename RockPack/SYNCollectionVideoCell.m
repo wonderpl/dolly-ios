@@ -39,10 +39,8 @@
 - (void)setVideoInstance: (VideoInstance *) videoInstance{
     _videoInstance = videoInstance;
     
-	
 	self.durationLabel.text = [NSString friendlyLengthFromTimeInterval:videoInstance.video.durationValue];
 
-    
     if (!_videoInstance)
         return;
     
@@ -51,13 +49,15 @@
                             options: SDImageCacheTypeNone];
     
     self.titleLabel.text = videoInstance.title;
-    
+    self.actionsBar.favouritedBy = [videoInstance.starrers array];
+	self.actionsBar.favouriteButton.selected = videoInstance.starredByUserValue;
+
 }
 
 #pragma mark - Set delegate
 
 
-- (void)setDelegate:(id<SYNSocialActionsDelegate>)delegate {
+- (void)setDelegate:(id<SYNCollectionVideoCellDelegate>)delegate {
     _delegate = delegate;
     
     //set an extra delete delegate
@@ -75,9 +75,6 @@
 
 }
 
-- (void)showVideo {
-    [self.delegate videoButtonPressed:self];
-}
 
 - (SYNVideoActionsBar *)actionsBar {
 	if (!_actionsBar) {
@@ -89,16 +86,20 @@
 	return _actionsBar;
 }
 
-
-
 - (void)videoActionsBar:(SYNVideoActionsBar *)bar favouritesButtonPressed:(UIButton *)button {
-	
+	[self.delegate videoCell:self favouritePressed:button];
 }
+
 - (void)videoActionsBar:(SYNVideoActionsBar *)bar addToChannelButtonPressed:(UIButton *)button {
-	
+	[self.delegate videoCell:self addToChannelPressed:button];
 }
+
 - (void)videoActionsBar:(SYNVideoActionsBar *)bar shareButtonPressed:(UIButton *)button {
-	
+	[self.delegate videoCell:self sharePressed:button];
+}
+
+- (void)showVideo {
+    [self.delegate showVideoForCell:self];
 }
 
 

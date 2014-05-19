@@ -199,9 +199,9 @@ return [UIColor colorWithRed: 136.0f / 255.0f
 
 + (UIColor*)dollyGreen {
 	
-	return [UIColor colorWithRed: 81.0f / 255.0f
-                           green: 179.0f / 255.0f
-                            blue: 100.0f / 255.0f
+	return [UIColor colorWithRed: 74.0f / 255.0f
+                           green: 175.0f / 255.0f
+                            blue: 92.0f / 255.0f
                            alpha: 1.0f];
 }
 
