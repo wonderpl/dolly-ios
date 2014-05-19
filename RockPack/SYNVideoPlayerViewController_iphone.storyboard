@@ -30,11 +30,11 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XvK-bX-B3j" customClass="SYNFollowChannelButton">
-                                <rect key="frame" x="220" y="34" width="90" height="30"/>
+                                <rect key="frame" x="230" y="34" width="80" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="90" id="kU5-hQ-v1K"/>
-                                    <constraint firstAttribute="height" constant="30" id="w6F-0f-KP5"/>
+                                    <constraint firstAttribute="width" constant="80" id="kU5-hQ-v1K"/>
+                                    <constraint firstAttribute="height" constant="32" id="w6F-0f-KP5"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" title="Follow">

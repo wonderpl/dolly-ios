@@ -17,11 +17,11 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5hW-91-img" customClass="SYNFollowChannelButton">
-                                <rect key="frame" x="658" y="30" width="90" height="30"/>
+                                <rect key="frame" x="668" y="30" width="80" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="9Uk-C8-ES2"/>
-                                    <constraint firstAttribute="width" constant="90" id="DzT-nE-CnY"/>
+                                    <constraint firstAttribute="height" constant="32" id="9Uk-C8-ES2"/>
+                                    <constraint firstAttribute="width" constant="80" id="DzT-nE-CnY"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="tintColor" red="0.46666666670000001" green="0.46666666670000001" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
