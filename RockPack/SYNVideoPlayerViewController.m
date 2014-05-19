@@ -381,8 +381,11 @@
 }
 
 - (void)updateVideoInstanceDetails:(VideoInstance *)videoInstance {
-	NSURL *avatarThumbnailURL = [NSURL URLWithString:videoInstance.originator.thumbnailURL];
-	[self.avatarButton setImageWithURL:avatarThumbnailURL forState:UIControlStateNormal];
+	NSURL *avatarURL = [NSURL URLWithString:videoInstance.originator.thumbnailURL];
+	[self.avatarButton setImageWithURL:avatarURL
+							  forState:UIControlStateNormal
+					  placeholderImage:[UIImage imageNamed:@"PlaceholderAvatarProfile"]
+							   options:SDWebImageRetryFailed];
 	
 	[self.videoTitleLabel setText:videoInstance.title animated:YES];
 	
