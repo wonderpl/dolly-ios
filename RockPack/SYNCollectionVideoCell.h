@@ -12,6 +12,16 @@
 #import "SYNSocialActionsDelegate.h"
 #import "SYNVideoInfoCell.h"
 
+@class SYNCollectionVideoCell;
+
+@protocol SYNCollectionVideoCellDelegate <NSObject>
+
+- (void)videoCell:(SYNCollectionVideoCell *)cell favouritePressed:(UIButton *)button;
+- (void)videoCell:(SYNCollectionVideoCell *)cell addToChannelPressed:(UIButton *)button;
+- (void)videoCell:(SYNCollectionVideoCell *)cell sharePressed:(UIButton *)button;
+- (void)showVideoForCell:(SYNCollectionVideoCell *)cell;
+@end
+
 @interface SYNCollectionVideoCell : UICollectionViewCell <SYNVideoInfoCell>
  
 @property (nonatomic, strong) IBOutlet UILabel *durationLabel;
@@ -22,7 +32,7 @@
 
 @property (nonatomic, strong) UITapGestureRecognizer *tap;
 
-@property (nonatomic, weak) id<SYNSocialActionsDelegate> delegate;
+@property (nonatomic, weak) id<SYNCollectionVideoCellDelegate> delegate;
 @property (nonatomic, weak) VideoInstance* videoInstance;
 
 
