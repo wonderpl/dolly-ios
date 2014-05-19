@@ -865,7 +865,7 @@
                                     </fragment>
                                     <fragment content="Terms of Services">
                                         <attributes>
-                                            <color key="NSColor" red="0.73725490196078436" green="0.72941176470588232" blue="0.83137254901960778" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="NSColor" red="0.29019607843137252" green="0.68627450980392157" blue="0.36078431372549019" alpha="1" colorSpace="calibratedRGB"/>
                                             <font key="NSFont" size="12" name="HelveticaNeue"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                         </attributes>
@@ -879,7 +879,7 @@
                                     </fragment>
                                     <fragment content="Privacy Policy">
                                         <attributes>
-                                            <color key="NSColor" red="0.73725490196078436" green="0.72941176470588232" blue="0.83137254901960778" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="NSColor" red="0.29019607843137252" green="0.68627450980392157" blue="0.36078431372549019" alpha="1" colorSpace="calibratedRGB"/>
                                             <font key="NSFont" size="12" name="HelveticaNeue"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                         </attributes>
