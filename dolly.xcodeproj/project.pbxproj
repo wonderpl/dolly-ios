@@ -671,6 +671,7 @@
 		E9FDCDA1188D92EF00C31CC1 /* ForwardButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E9FDCD9D188D92EF00C31CC1 /* ForwardButton@2x.png */; };
 		E9FECE691855E73D00BBE7F2 /* SYNCenteredFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = E9FECE681855E73D00BBE7F2 /* SYNCenteredFlowLayout.m */; };
 		E9FECE6C1856000800BBE7F2 /* SYNStaticModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9FECE6B1856000800BBE7F2 /* SYNStaticModel.m */; };
+		F419A150192A444200DBA621 /* profile-cover-gradient.png in Resources */ = {isa = PBXBuildFile; fileRef = F419A14F192A444200DBA621 /* profile-cover-gradient.png */; };
 		FEA605CC5F8E4BFCA67EBDD6 /* libPods-dollyTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B1174E5E25AB4317A22BA4F9 /* libPods-dollyTests.a */; };
 /* End PBXBuildFile section */
 
@@ -1638,6 +1639,7 @@
 		E9FECE681855E73D00BBE7F2 /* SYNCenteredFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNCenteredFlowLayout.m; sourceTree = "<group>"; };
 		E9FECE6A1856000800BBE7F2 /* SYNStaticModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNStaticModel.h; sourceTree = "<group>"; };
 		E9FECE6B1856000800BBE7F2 /* SYNStaticModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNStaticModel.m; sourceTree = "<group>"; };
+		F419A14F192A444200DBA621 /* profile-cover-gradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile-cover-gradient.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1987,7 +1989,6 @@
 				019824FB1629D19600216900 /* Fonts */,
 				01F8E76216B0312E000D44B9 /* HTML */,
 				019824DE1629CA5900216900 /* Images */,
-				E985D36B18FED5A000D5A9E1 /* AddButton@2x.png */,
 				019824DF1629CA6000216900 /* Property List */,
 				019824E01629CA9400216900 /* Strings */,
 			);
@@ -1997,6 +1998,7 @@
 		019824DE1629CA5900216900 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				E985D36B18FED5A000D5A9E1 /* AddButton@2x.png */,
 				9959249419267B3B00CCAACF /* Onboarding */,
 				E98DCCC119237C720041DEB4 /* ScrubberBarFullScreen.png */,
 				E98DCCC219237C720041DEB4 /* ScrubberBarFullScreen@2x.png */,
@@ -3035,6 +3037,7 @@
 		BE03A69716F7691B00245314 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				F419A14F192A444200DBA621 /* profile-cover-gradient.png */,
 				4C72DD4B18FEBD00004AC132 /* downarrow.png */,
 				4C72DD4C18FEBD00004AC132 /* downarrow@2x.png */,
 				0EF07865181EAE8300667417 /* ButtonMore.png */,
@@ -3879,6 +3882,7 @@
 				E960239D18E5E6BA00A96CB4 /* SYNVideoPlayerViewController_iphone.storyboard in Resources */,
 				BE851B49183BE6BC00B8E8C6 /* ButtonUpload@2x.png in Resources */,
 				BE0815C716D5389C00ADB1DC /* SYNMasterViewController.xib in Resources */,
+				F419A150192A444200DBA621 /* profile-cover-gradient.png in Resources */,
 				0194FD2216DE6FE40058A7C2 /* SYNVideoThumbnailCell~ipad.xib in Resources */,
 				BEC39C10184CA50C00DA8089 /* SYNFeedbackViewController~iphone.xib in Resources */,
 				011A15F916EE3F05008CF25E /* SYNCameraPopoverViewController.xib in Resources */,

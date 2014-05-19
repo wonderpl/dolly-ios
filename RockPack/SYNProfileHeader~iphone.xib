@@ -14,6 +14,10 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="282"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="profile-cover-gradient.png" translatesAutoresizingMaskIntoConstraints="NO" id="OMl-zg-Lz8">
+                    <rect key="frame" x="0.0" y="0.0" width="321" height="282"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
                 <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mr2-HA-7xn" userLabel="View - Background ">
                     <rect key="frame" x="0.0" y="338" width="321" height="152"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -200,5 +204,6 @@
     <resources>
         <image name="ButtonMore.png" width="56" height="56"/>
         <image name="downarrow.png" width="17" height="9"/>
+        <image name="profile-cover-gradient.png" width="512" height="390"/>
     </resources>
 </document>
