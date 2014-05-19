@@ -25,4 +25,45 @@
     return self;
 }
 
+
+-(UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionViewLayoutAttributes *attributes =
+    [super layoutAttributesForItemAtIndexPath:indexPath];
+    
+	attributes.frame = [self frameForItem :attributes];
+    
+	return attributes;
+}
+
+
+-(NSArray *)layoutAttributesForElementsInRect:(CGRect)rect
+{
+    NSArray *attributesArray = [super layoutAttributesForElementsInRect:rect];
+    
+    for (UICollectionViewLayoutAttributes *attributes in attributesArray)
+    {
+        attributes.frame = [self frameForItem :attributes];
+    }
+    return attributesArray;
+}
+
+- (CGRect) frameForItem: (UICollectionViewLayoutAttributes*) attributes {
+	CGRect cellFrame = attributes.frame;
+    
+	if (attributes.indexPath.item == 0 && !attributes.representedElementKind) {
+        if (IS_IPHONE) {
+            cellFrame.size.height = 60;
+        }
+	} else {
+        if (IS_IPHONE) {
+            cellFrame.origin.y -= 31;
+        }
+    }
+    
+	return cellFrame;
+}
+
+
+
 @end

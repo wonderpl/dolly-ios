@@ -205,6 +205,11 @@ return [UIColor colorWithRed: 136.0f / 255.0f
                            alpha: 1.0f];
 }
 
++ (UIColor*)dollyBlue {
+    return RGB(51,91,112);
+}
+
+
 + (UIColor *)defaultCategoryColor {
 	return WA(200, 1);
 }

@@ -33,10 +33,10 @@
 + (UIColor *) dollyTabColorSelectedText;
 + (UIColor *) dollyMoodColor;
 + (UIColor*) dollyGreen;
-
++ (UIColor*) dollyBlue;
 + (UIColor *) dollySearchBarColor;
 
-+ (UIColor *)dollyButtonGreenColor;
++ (UIColor *) dollyButtonGreenColor;
 
 + (UIColor *) facebookColor;
 + (UIColor *) lighterColorForColor:(UIColor *)c;

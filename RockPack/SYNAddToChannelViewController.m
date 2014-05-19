@@ -24,6 +24,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "SYNGenreManager.h"
 #import "SYNTrackingManager.h"
+#import "SYNChannelMidCell.h"
 
 #define kAnimationExpansion 0.4f
 
@@ -83,9 +84,12 @@
     [self.currentChannelsCollectionView registerNib:[SYNAddToChannelCell nib]
 						 forCellWithReuseIdentifier:[SYNAddToChannelCell reuseIdentifier]];
     
+    [self.currentChannelsCollectionView registerNib:[SYNChannelMidCell nib] forCellWithReuseIdentifier:[SYNChannelMidCell reuseIdentifier]];
     
     self.currentChannelsCollectionView.scrollsToTop = NO;
 
+    self.currentChannelsCollectionView.layer.borderColor = [[UIColor whiteColor] CGColor];
+    
 	self.closeButton.titleLabel.font = [UIFont regularCustomFontOfSize:self.closeButton.titleLabel.font.pointSize];
 	self.confirmButton.titleLabel.font = [UIFont regularCustomFontOfSize:self.confirmButton.titleLabel.font.pointSize];
     self.titleLabel.font = [UIFont regularCustomFontOfSize: self.titleLabel.font.pointSize];
@@ -150,12 +154,11 @@
     else
     {
         Channel *channel = (Channel *) self.channels[indexPath.row - 1];
-        SYNAddToChannelCell *existingChannel = [collectionView dequeueReusableCellWithReuseIdentifier:[SYNAddToChannelCell reuseIdentifier]
+        SYNChannelMidCell *existingChannel = [collectionView dequeueReusableCellWithReuseIdentifier:[SYNChannelMidCell reuseIdentifier]
 																						 forIndexPath:indexPath];
         
-        existingChannel.titleLabel.text = [channel.title uppercaseString];
-        
-        [existingChannel.bottomStripView setBackgroundColor:[[SYNGenreManager sharedManager] colorForGenreWithId:channel.categoryId]];
+        existingChannel.channel = channel;
+        existingChannel.followButton.hidden = YES;
         
         cell = existingChannel;
     }

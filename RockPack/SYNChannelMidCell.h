@@ -33,7 +33,9 @@ typedef enum {
 @end
 
 
-@interface SYNChannelMidCell : UICollectionViewCell
+@interface SYNChannelMidCell : UICollectionViewCell{
+    BOOL _selected;
+}
 
 @property (nonatomic, weak) Channel* channel;
 @property (nonatomic) BOOL deletableCell;

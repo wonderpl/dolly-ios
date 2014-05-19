@@ -15,6 +15,7 @@
 #import "SYNAppDelegate.h"
 #import "SYNGenreManager.h"
 #import "SYNActivityManager.h"
+#import "UIColor+SYNColor.h"
 
 
 @import QuartzCore;
@@ -82,6 +83,8 @@
 	self.descriptionLabel.backgroundColor = [UIColor colorWithRed:242.0f/255.0f green:242.0f/255.0f blue:242.0f/255.0f alpha:1.0f];
 
 	self.view.backgroundColor = [UIColor colorWithRed:242.0f/255.0f green:242.0f/255.0f blue:242.0f/255.0f alpha:1.0f];
+    
+    self.selected = NO;
 
 }
 
@@ -96,6 +99,8 @@
     self.descriptionLabel.text = @"";
     [self.view.layer setBorderWidth:0.0f];
     self.deletableCell = NO;
+    self.selected = NO;
+
 }
 
 #pragma mark - Gesture regognizer support
@@ -406,5 +411,34 @@
         
     }];
 }
+
+-(void)setSelected:(BOOL)selected
+{
+    _selected = selected;
+	
+    if (selected) {
+		[UIView animateWithDuration:0.2 animations:^{
+			self.videoTitleLabel.textColor = [UIColor whiteColor];
+			self.followerCountLabel.textColor = [UIColor whiteColor];
+            self.containerView.backgroundColor = [UIColor dollyBlue];
+            
+		}];
+    } else {
+		[UIView animateWithDuration:0.2 animations:^{
+			self.videoTitleLabel.textColor = [UIColor blackColor];
+			self.followerCountLabel.textColor = [UIColor colorWithRed: 175.0f / 255.0f
+                                                                green: 175.0f / 255.0f
+                                                                 blue: 181.0f / 255.0f
+                                                                alpha: 1.0f];
+			self.containerView.backgroundColor = [UIColor whiteColor];
+		}];
+    }
+    
+}
+-(BOOL)isSelected
+{
+    return _selected;
+}
+
 
 @end

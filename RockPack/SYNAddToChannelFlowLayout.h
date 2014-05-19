@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#define kChannelCellDefaultHeight 60.0f
+#define kChannelCellDefaultHeight 90.0f
 #define kChannelCellExpandedHeight 200.0f
 
 @interface SYNAddToChannelFlowLayout : UICollectionViewFlowLayout

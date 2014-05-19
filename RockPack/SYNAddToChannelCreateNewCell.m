@@ -25,8 +25,8 @@
 {
     [super awakeFromNib];
     
-    self.createNewButton.titleLabel.font = [UIFont lightCustomFontOfSize:self.createNewButton.titleLabel.font.pointSize];
-	
+    [self.createNewButton.titleLabel setFont:[UIFont boldCustomFontOfSize:self.createNewButton.titleLabel.font.pointSize]];
+
     self.descriptionTextView.font = [UIFont regularCustomFontOfSize:self.descriptionTextView.font.pointSize];
     self.descriptionTextView.hidden = NO;
     self.descriptionTextView.alpha = 0.0f;
@@ -47,7 +47,9 @@
     {
         // == Add two lines, one top one bottom
         
-        CGRect lineFrame = CGRectMake(0.0f, 0.0f, self.frame.size.width, 1.0f);
+        
+        
+        CGRect lineFrame = CGRectMake(0.0f, 0.0f, self.frame.size.width, IS_RETINA ? 0.5 : 1.0);
         separatorTop = [[UIView alloc] initWithFrame:lineFrame];
         
         self.separatorBottom = [[UIView alloc] initWithFrame:lineFrame];
