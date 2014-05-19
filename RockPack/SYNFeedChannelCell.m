@@ -54,7 +54,7 @@
 	UIFont *boldFont = [UIFont boldItalicAlternateFontOfSize:self.channelOwnerLabel.font.pointSize];
 	NSDictionary *attributes = @{ NSFontAttributeName : boldFont };
 	
-	[channeOwnerString appendAttributedString:[[NSAttributedString alloc] initWithString:channelOwnerName attributes:attributes ]];
+	[channeOwnerString appendAttributedString:[[NSAttributedString alloc] initWithString:channelOwnerName attributes:attributes]];
 	
 	self.channelOwnerLabel.attributedText = channeOwnerString;
 	
