@@ -299,6 +299,10 @@ static const CGFloat TransitionPause = 1.0f;
 	return nil;
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle {
+	return UIStatusBarStyleLightContent;
+}
+
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
 	

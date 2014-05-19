@@ -290,6 +290,7 @@ static const CGFloat TransitionPause = 1.0f;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+	[super viewWillDisappear:animated];
 
     self.messageView.hidden = YES;
     self.messageView2.hidden = YES;
@@ -309,6 +310,10 @@ static const CGFloat TransitionPause = 1.0f;
     [super viewWillAppear:animated];
 
 	[[SYNTrackingManager sharedManager] trackStartScreenView];
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+	return UIStatusBarStyleLightContent;
 }
 
 #pragma mark - UINavigationControllerDelegate
