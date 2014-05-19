@@ -892,7 +892,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="Send" backgroundImage="login-button.png">
+                                <state key="normal" title="Send">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </state>
@@ -1005,6 +1005,7 @@
                         <outlet property="errorLabel" destination="cex-50-2hZ" id="FMJ-Sa-SwE"/>
                         <outlet property="haveAnAccountLabel" destination="m0T-Xa-EzP" id="cak-na-dah"/>
                         <outlet property="loginButton" destination="I85-Nt-QqY" id="CBX-cj-LGv"/>
+                        <outlet property="sendButton" destination="so5-vB-GdT" id="CzX-ym-X2T"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GcK-9M-dAX" userLabel="First Responder" sceneMemberID="firstResponder"/>

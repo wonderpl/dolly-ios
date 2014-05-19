@@ -11,6 +11,7 @@
 #import "SYNTrackingManager.h"
 #import "SYNTextFieldLogin.h"
 #import "SYNLoginManager.h"
+#import "UIColor+SYNColor.h"
 
 @interface SYNiPadPasswordForgotViewController () <UITextFieldDelegate>
 
@@ -30,6 +31,13 @@
 	[super viewDidLoad];
 	
 	[self.haveAnAccountLabel setFont:[UIFont regularCustomFontOfSize:19]];
+    
+    self.sendButton.layer.borderColor = [[UIColor dollyGreen] CGColor];
+    self.sendButton.layer.borderWidth = 1.0;
+    self.sendButton.layer.cornerRadius = self.sendButton.frame.size.height/2;
+    [self.sendButton.titleLabel setFont:[UIFont regularCustomFontOfSize:self.sendButton.titleLabel.font.pointSize]];
+    [self.sendButton setTitleColor:[UIColor dollyGreen]  forState:UIControlStateNormal];
+    [self.sendButton setTitleColor:[UIColor dollyGreen]  forState:UIControlStateSelected];
 
 }
 
