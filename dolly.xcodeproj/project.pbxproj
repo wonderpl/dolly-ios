@@ -83,8 +83,6 @@
 		01946B921683335400354601 /* _VideoInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = 01946B901683335400354601 /* _VideoInstance.m */; };
 		01946B971683339F00354601 /* ChannelOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = 01946B941683339F00354601 /* ChannelOwner.m */; };
 		01946B981683339F00354601 /* VideoInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = 01946B961683339F00354601 /* VideoInstance.m */; };
-		0194FD2216DE6FE40058A7C2 /* SYNVideoThumbnailCell~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01EA81C616B9487A0069AFF9 /* SYNVideoThumbnailCell~ipad.xib */; };
-		0194FD2316DE6FE90058A7C2 /* SYNVideoThumbnailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EA81C416B9483D0069AFF9 /* SYNVideoThumbnailCell.m */; };
 		019824F01629CC7600216900 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 019824EE1629CC7600216900 /* libTestFlight.a */; };
 		019824F21629CE1600216900 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 019824F11629CE1600216900 /* libz.dylib */; };
 		0198250D1629DCF100216900 /* SYNContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0198250B1629DCF100216900 /* SYNContainerViewController.m */; };
@@ -182,7 +180,6 @@
 		1F51A6BA1742A959009907CA /* PlaceholderChannelSmall@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F51A6AE1742A959009907CA /* PlaceholderChannelSmall@2x~iphone.png */; };
 		1F51A6BB1742A959009907CA /* PlaceholderChannelSmall~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F51A6AF1742A959009907CA /* PlaceholderChannelSmall~iphone.png */; };
 		1F65D49017EB3C8C004326A9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F65D48F17EB3C8B004326A9 /* Images.xcassets */; };
-		3862E8A4172979120066E8E7 /* SYNVideoThumbnailCell~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3862E8A2172979120066E8E7 /* SYNVideoThumbnailCell~iphone.xib */; };
 		3862E8B7172979410066E8E7 /* SYNChannelMidCell~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3862E8AF172979410066E8E7 /* SYNChannelMidCell~iphone.xib */; };
 		3862E8BA1729797F0066E8E7 /* SYNMasterViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3862E8B91729797F0066E8E7 /* SYNMasterViewController~iphone.xib */; };
 		3864D2DC1743DB3000A90ED3 /* SYNImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3864D2DB1743DB3000A90ED3 /* SYNImagePickerController.m */; };
@@ -857,9 +854,6 @@
 		01E427ED1664EE52009B941F /* _Channel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Channel.m; sourceTree = "<group>"; };
 		01E427EE1664EE52009B941F /* _Video.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Video.h; sourceTree = "<group>"; };
 		01E427EF1664EE52009B941F /* _Video.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Video.m; sourceTree = "<group>"; };
-		01EA81C316B9483D0069AFF9 /* SYNVideoThumbnailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNVideoThumbnailCell.h; sourceTree = "<group>"; };
-		01EA81C416B9483D0069AFF9 /* SYNVideoThumbnailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNVideoThumbnailCell.m; sourceTree = "<group>"; };
-		01EA81C616B9487A0069AFF9 /* SYNVideoThumbnailCell~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNVideoThumbnailCell~ipad.xib"; sourceTree = "<group>"; };
 		01F7C9671748ED0B00E36994 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		0D1292A190C148B79DB3A513 /* Pods-dollyTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dollyTests.xcconfig"; path = "Pods/Pods-dollyTests.xcconfig"; sourceTree = "<group>"; };
 		0E0062DF188EBBCB00429C79 /* SYNOnBoardingSectionHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNOnBoardingSectionHeader.h; sourceTree = "<group>"; };
@@ -938,7 +932,6 @@
 		276F95C3CF7F47FE9BF50F40 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		3685246F69AA4C9B93DDEDAC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3854788017940F75006EB38B /* Rockpack 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Rockpack 5.xcdatamodel"; sourceTree = "<group>"; };
-		3862E8A2172979120066E8E7 /* SYNVideoThumbnailCell~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNVideoThumbnailCell~iphone.xib"; sourceTree = "<group>"; };
 		3862E8AF172979410066E8E7 /* SYNChannelMidCell~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNChannelMidCell~iphone.xib"; sourceTree = "<group>"; };
 		3862E8B91729797F0066E8E7 /* SYNMasterViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNMasterViewController~iphone.xib"; sourceTree = "<group>"; };
 		3864D2DA1743DB3000A90ED3 /* SYNImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNImagePickerController.h; sourceTree = "<group>"; };
@@ -1844,7 +1837,6 @@
 				01B7CD9E166E163D001F4AF0 /* Channel cells */,
 				0199F12D166F95C000E479C6 /* Collections */,
 				012632C7162DF4C40009FF9C /* Layout Engine Support */,
-				01B7CD9D166E1616001F4AF0 /* Video cells */,
 			);
 			name = "Collection Assets";
 			sourceTree = "<group>";
@@ -2325,17 +2317,6 @@
 				01AEFBCC1701AC460060467A /* SYNActivityManager.m */,
 			);
 			name = "Activity Manager";
-			sourceTree = "<group>";
-		};
-		01B7CD9D166E1616001F4AF0 /* Video cells */ = {
-			isa = PBXGroup;
-			children = (
-				01EA81C316B9483D0069AFF9 /* SYNVideoThumbnailCell.h */,
-				01EA81C416B9483D0069AFF9 /* SYNVideoThumbnailCell.m */,
-				01EA81C616B9487A0069AFF9 /* SYNVideoThumbnailCell~ipad.xib */,
-				3862E8A2172979120066E8E7 /* SYNVideoThumbnailCell~iphone.xib */,
-			);
-			name = "Video cells";
 			sourceTree = "<group>";
 		};
 		01B7CD9E166E163D001F4AF0 /* Channel cells */ = {
@@ -3840,7 +3821,6 @@
 				BE851B49183BE6BC00B8E8C6 /* ButtonUpload@2x.png in Resources */,
 				BE0815C716D5389C00ADB1DC /* SYNMasterViewController.xib in Resources */,
 				F419A150192A444200DBA621 /* profile-cover-gradient.png in Resources */,
-				0194FD2216DE6FE40058A7C2 /* SYNVideoThumbnailCell~ipad.xib in Resources */,
 				BEC39C10184CA50C00DA8089 /* SYNFeedbackViewController~iphone.xib in Resources */,
 				011A15F916EE3F05008CF25E /* SYNCameraPopoverViewController.xib in Resources */,
 				993B1ACC191A95FC008532D4 /* TabProfileSelected@2x~iphone.png in Resources */,
@@ -3953,7 +3933,6 @@
 				BE285DC41726996700D995AB /* IconNetwork.png in Resources */,
 				BE285DC51726996700D995AB /* IconNetwork@2x.png in Resources */,
 				1F458B2317E1CE8E003C14AC /* AppIcon-Dev-29x29@2x.png in Resources */,
-				3862E8A4172979120066E8E7 /* SYNVideoThumbnailCell~iphone.xib in Resources */,
 				E99AA424188035F100330ABB /* LoginLogo.png in Resources */,
 				993B1ADF191A9676008532D4 /* TabFeed@2x~iphone.png in Resources */,
 				9937CA3019228EFC002D3C23 /* intro-food~iphone.jpg in Resources */,
@@ -4382,7 +4361,6 @@
 				E9E1E28018561C780051E312 /* SYNiPhonePopoverAnimator.m in Sources */,
 				E9EE08DF18F8089F000DC06A /* SYNVideoActionsCell.m in Sources */,
 				4C0B956F1912838F008D8036 /* SYNSearchVideoLargeCell.m in Sources */,
-				0194FD2316DE6FE90058A7C2 /* SYNVideoThumbnailCell.m in Sources */,
 				4C72DD4A18FD96E6004AC132 /* SYNFollowChannelButton.m in Sources */,
 				4C5E861B18B6580300D0E937 /* SYNDiscoverOverlayHighlightsViewController.m in Sources */,
 				E98A851C19096B30001ADE09 /* SYNFeedChannelLargeCell.m in Sources */,
