@@ -23,7 +23,6 @@
 #import "Video.h"
 #import "SYNChannelDetailsViewController.h"
 #import "UIImage+blur.h"
-#import "SYNProfileFlowLayout.h"
 #import "SYNChannelCreateNewCell.h"
 #import "SYNProfileExpandedFlowLayout.h"
 #import "SYNActivityManager.h"
