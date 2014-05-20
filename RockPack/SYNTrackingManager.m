@@ -367,7 +367,7 @@ static const NSInteger TrackingDimensionConnection = 6;
 	[self trackScreenViewWithName:@"Rate"];
 }
 
-- (void)trackCarouselVideoPlayerScreenView {
+- (void)trackVideoPlayerScreenView {
 	[self trackScreenViewWithName:@"Video"];
 }
 
