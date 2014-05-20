@@ -220,8 +220,6 @@
                                                   videoInstance.starredByUserValue = YES;
                                                   
                                                   button.selected = YES;
-                                                  
-                                                  [videoInstance addStarrersObject:currentUser];
                                               } else {
                                                   // Currently highlighted, so decrement
                                                   videoInstance.starredByUserValue = NO;
