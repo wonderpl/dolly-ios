@@ -36,7 +36,7 @@
                                errorHandler: (MKNKUserErrorBlock) errorBlock
                            retryInputStream: (NSInputStream*) retryInputStream;
 
-- (IBAction) refreshOAuthTokenWithCompletionHandler: (MKNKUserErrorBlock) completionBlock
+- (void) refreshOAuthTokenWithCompletionHandler: (MKNKUserErrorBlock) completionBlock
                                        errorHandler: (MKNKUserSuccessBlock) errorBlock;
 
 
