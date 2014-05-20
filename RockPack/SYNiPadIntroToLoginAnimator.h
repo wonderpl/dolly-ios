@@ -10,4 +10,6 @@
 
 @interface SYNiPadIntroToLoginAnimator : NSObject <UIViewControllerAnimatedTransitioning>
 
++ (instancetype)animatorForPresentation:(BOOL)presenting;
+
 @end

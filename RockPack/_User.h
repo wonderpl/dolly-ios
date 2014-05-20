@@ -5,8 +5,6 @@
 #import "ChannelOwner.h"
 
 extern const struct UserAttributes {
-	__unsafe_unretained NSString *activityUrl;
-	__unsafe_unretained NSString *coverartUrl;
 	__unsafe_unretained NSString *current;
 	__unsafe_unretained NSString *dateOfBirth;
 	__unsafe_unretained NSString *emailAddress;
@@ -16,7 +14,6 @@ extern const struct UserAttributes {
 	__unsafe_unretained NSString *lastName;
 	__unsafe_unretained NSString *locale;
 	__unsafe_unretained NSString *loginOrigin;
-	__unsafe_unretained NSString *subscriptionsUrl;
 } UserAttributes;
 
 extern const struct UserRelationships {
@@ -38,9 +35,6 @@ extern const struct UserFetchedProperties {
 
 
 
-
-
-
 @interface UserID : NSManagedObjectID {}
 @end
 
@@ -49,26 +43,6 @@ extern const struct UserFetchedProperties {
 + (NSString*)entityName;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 - (UserID*)objectID;
-
-
-
-
-
-@property (nonatomic, strong) NSString* activityUrl;
-
-
-
-//- (BOOL)validateActivityUrl:(id*)value_ error:(NSError**)error_;
-
-
-
-
-
-@property (nonatomic, strong) NSString* coverartUrl;
-
-
-
-//- (BOOL)validateCoverartUrl:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -180,16 +154,6 @@ extern const struct UserFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSString* subscriptionsUrl;
-
-
-
-//- (BOOL)validateSubscriptionsUrl:(id*)value_ error:(NSError**)error_;
-
-
-
-
-
 @property (nonatomic, strong) NSSet *externalAccounts;
 
 - (NSMutableSet*)externalAccountsSet;
@@ -210,18 +174,6 @@ extern const struct UserFetchedProperties {
 @end
 
 @interface _User (CoreDataGeneratedPrimitiveAccessors)
-
-
-- (NSString*)primitiveActivityUrl;
-- (void)setPrimitiveActivityUrl:(NSString*)value;
-
-
-
-
-- (NSString*)primitiveCoverartUrl;
-- (void)setPrimitiveCoverartUrl:(NSString*)value;
-
-
 
 
 - (NSNumber*)primitiveCurrent;
@@ -286,12 +238,6 @@ extern const struct UserFetchedProperties {
 
 - (int16_t)primitiveLoginOriginValue;
 - (void)setPrimitiveLoginOriginValue:(int16_t)value_;
-
-
-
-
-- (NSString*)primitiveSubscriptionsUrl;
-- (void)setPrimitiveSubscriptionsUrl:(NSString*)value;
 
 
 

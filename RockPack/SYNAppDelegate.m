@@ -841,21 +841,7 @@
     {
         [self.mainManagedObjectContext deleteObject: objectToDelete];
     }
-    
-    // == Clear Cover Art == //
-    [fetchRequest setEntity: [NSEntityDescription entityForName: @"CoverArt"
-                                         inManagedObjectContext: self.mainManagedObjectContext]];
-    
-    
-    itemsToDelete = [self.mainManagedObjectContext executeFetchRequest: fetchRequest
-                                                                 error: &error];
-    
-    for (NSManagedObject *objectToDelete in itemsToDelete)
-    {
-        [self.mainManagedObjectContext deleteObject: objectToDelete];
-    }
-    
-    
+	
     // === Clear Channels === //
     
     if (!userBound)

@@ -114,11 +114,6 @@ typedef enum : NSInteger {
 #define kAPIRecordUserActivity      @"/ws/USERID/activity/"                     /* POST */
 #define kAPIGetUserActivity         @"/ws/USERID/activity/"                     /* GET */
 
-// Cover art
-#define kAPIGetUserCoverArt         @"/ws/USERID/cover_art/"                    /* GET */
-#define kAPIUploadUserCoverArt      @"/ws/USERID/cover_art/"                    /* POST */
-#define kAPIDeleteUserCoverArt      @"/ws/USERID/cover_art/COVERID"             /* DELETE */
-
 // User subscriptions
 #define kAPIGetUserSubscriptions    @"/ws/USERID/subscriptions/users/"			/* GET */
 #define kAPICreateUserSubscription  @"/ws/USERID/subscriptions/"                /* POST */
@@ -128,8 +123,6 @@ typedef enum : NSInteger {
 
 #define kAPIUserSubscriptionUpdates @"/ws/USERID/subscriptions/recent_videos/"  /* GET */
 #define kAPIContentFeedUpdates      @"/ws/USERID/content_feed/"
-// Cover art
-#define kAPIGetCoverArt             @"/ws/cover_art/"                           /* GET */
 
 // Something
 #define kAPIVideos                  @"/ws/videos/"                              /* GET */

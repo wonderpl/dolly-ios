@@ -4,8 +4,6 @@
 #import "_User.h"
 
 const struct UserAttributes UserAttributes = {
-	.activityUrl = @"activityUrl",
-	.coverartUrl = @"coverartUrl",
 	.current = @"current",
 	.dateOfBirth = @"dateOfBirth",
 	.emailAddress = @"emailAddress",
@@ -15,7 +13,6 @@ const struct UserAttributes UserAttributes = {
 	.lastName = @"lastName",
 	.locale = @"locale",
 	.loginOrigin = @"loginOrigin",
-	.subscriptionsUrl = @"subscriptionsUrl",
 };
 
 const struct UserRelationships UserRelationships = {
@@ -74,20 +71,6 @@ const struct UserFetchedProperties UserFetchedProperties = {
 
 	return keyPaths;
 }
-
-
-
-
-@dynamic activityUrl;
-
-
-
-
-
-
-@dynamic coverartUrl;
-
-
 
 
 
@@ -226,13 +209,6 @@ const struct UserFetchedProperties UserFetchedProperties = {
 - (void)setPrimitiveLoginOriginValue:(int16_t)value_ {
 	[self setPrimitiveLoginOrigin:[NSNumber numberWithShort:value_]];
 }
-
-
-
-
-
-@dynamic subscriptionsUrl;
-
 
 
 

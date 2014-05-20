@@ -274,12 +274,29 @@ static const CGFloat TransitionPause = 1.0f;
 											   object:nil];
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:YES];
+    
+    self.messageView.hidden = YES;
+    self.messageView2.hidden = YES;
+    self.messageView3.hidden = YES;
+    self.messageView4.hidden = YES;
+	self.messageView5.hidden = NO;
+    self.messageView5.alpha = 1.0;
+    
+    self.backgroundFood.hidden = YES;
+    self.backgroundBeach.hidden = YES;
+    self.backgroundMountain.hidden = YES;
+    self.backgroundChurch.hidden = YES;
+
+}
+
 - (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController
 								  animationControllerForOperation:(UINavigationControllerOperation)operation
 											   fromViewController:(UIViewController *)fromVC
 												 toViewController:(UIViewController *)toVC {
 	if ([fromVC isKindOfClass:[SYNiPadIntroViewController class]] && [toVC isKindOfClass:[SYNiPadLoginViewController class]]) {
-		return [[SYNiPadIntroToLoginAnimator alloc] init];
+		return [SYNiPadIntroToLoginAnimator animatorForPresentation:YES];
 	}
 	if ([fromVC isKindOfClass:[SYNiPadLoginViewController class]] && [toVC isKindOfClass:[SYNiPadPasswordForgotViewController class]]) {
 		return [SYNiPadLoginToForgotPasswordAnimator animatorForPresentation:YES];
@@ -294,8 +311,16 @@ static const CGFloat TransitionPause = 1.0f;
 		return [SYNiPadLoginToSignupAnimator animatorForPresentation:NO];
 	}
 	if ([fromVC isKindOfClass:[SYNiPadIntroViewController class]] && [toVC isKindOfClass:[SYNIPadSignupViewController class]]) {
-		return [[SYNiPadIntroToSignupAnimator alloc] init];
+		return [SYNiPadIntroToSignupAnimator animatorForPresentation:YES];
 	}
+    if ([fromVC isKindOfClass:[SYNIPadSignupViewController class]] && [toVC isKindOfClass:[SYNiPadIntroViewController class]]) {
+        return [SYNiPadIntroToSignupAnimator animatorForPresentation:NO];
+	}
+    
+    if ([fromVC isKindOfClass:[SYNiPadLoginViewController class]] && [toVC isKindOfClass:[SYNiPadIntroViewController class]]) {
+        return [SYNiPadIntroToLoginAnimator animatorForPresentation:NO];
+    }
+
 	return nil;
 }
 

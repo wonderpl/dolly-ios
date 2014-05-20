@@ -15,8 +15,11 @@
 #import "NSString+Validation.h"
 #import "SYNLoginManager.h"
 #import "UIColor+SYNColor.h"
+#import "SYNiPadIntroToSignupAnimator.h"
+#import "SYNiPadIntroViewController.h"
 
-@interface SYNIPadSignupViewController () <SYNImagePickerControllerDelegate>
+
+@interface SYNIPadSignupViewController () <SYNImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic, strong) IBOutlet SYNTextFieldLogin *emailTextField;
 @property (nonatomic, strong) IBOutlet SYNTextFieldLogin *firstNameTextField;
@@ -55,7 +58,6 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
-
 	
 	self.emailTextField.font = [UIFont lightCustomFontOfSize:self.emailTextField.font.pointSize];
 	self.passwordTextField.font = [UIFont lightCustomFontOfSize:self.passwordTextField.font.pointSize];
@@ -80,6 +82,8 @@
     self.uploadPhotoButton.clipsToBounds = YES;
     [self.uploadPhotoButton.imageView setContentMode: UIViewContentModeScaleAspectFill];
 	[self updateDateOfBirthFieldsForLocale];
+    
+    
 }
 
 
@@ -104,6 +108,7 @@
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	
+    
 	[self.emailTextField becomeFirstResponder];
 }
 
@@ -342,5 +347,13 @@
 																 otherButtonTitles: nil] show];
 										  }];
 }
+
+
+
+- (IBAction)goBack:(id)sender {
+
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 
 @end

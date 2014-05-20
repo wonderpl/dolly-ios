@@ -73,7 +73,6 @@ static const NSInteger TrackingDimensionConnection = 6;
 	GAI *gai = [GAI sharedInstance];
 	
     [gai trackerWithTrackingId:kGoogleAnalyticsId];
-	[[gai logger] setLogLevel:kGAILogLevelVerbose];
 	
 	gai.trackUncaughtExceptions = YES;
     gai.dispatchInterval = 30;
@@ -176,15 +175,15 @@ static const NSInteger TrackingDimensionConnection = 6;
 }
 
 - (void)trackVideoDescriptionViewForTitle:(NSString *)title {
-	[self trackEventWithCategory:GoalCategory action:@"videoReadWatchScrolled"];
+	[self trackEventWithCategory:GoalCategory action:@"videoReadWatchScrolled" label:title value:nil];
 }
 
 - (void)trackVideoUpcomingVideosViewForTitle:(NSString *)title {
-	[self trackEventWithCategory:GoalCategory action:@"videoNext3VideoScrolled"];
+	[self trackEventWithCategory:GoalCategory action:@"videoNext3VideoScrolled" label:title value:nil];
 }
 
 - (void)trackUpcomingVideoSelectedForTitle:(NSString *)title {
-	[self trackEventWithCategory:UIActionCategory action:@"videoNext3videoClick"];
+	[self trackEventWithCategory:UIActionCategory action:@"videoNext3videoClick" label:title value:nil];
 }
 
 - (void)trackVideoMaximiseViaRotation {
