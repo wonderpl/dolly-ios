@@ -24,9 +24,6 @@
     instance.emailAddress = oldUser.emailAddress;
     instance.firstName = oldUser.firstName;
     instance.lastName = oldUser.lastName;
-    instance.activityUrl = oldUser.activityUrl;
-    instance.coverartUrl = oldUser.coverartUrl;
-    instance.subscriptionsUrl = oldUser.subscriptionsUrl;
     instance.genderValue = oldUser.genderValue;
     instance.dateOfBirth = oldUser.dateOfBirth;
     instance.locale = oldUser.locale;
@@ -94,28 +91,12 @@
     
     if (activity_dict)
     {
-        self.activityUrl = activity_dict[@"resource_url"];
-        
         if(activity_dict[@"recently_starred"])
         {
             // if this is set it means we have activity data with the response, usually by setting '&data=activity' in the request
             // the objects contained are 'recently_starred', 'recently_viewed' and 'subscribed' and 'user_subscribed'
             [SYNActivityManager.sharedInstance registerActivityFromDictionary:activity_dict];
         }
-    }
-    
-    NSDictionary *coverart_url_dict = dictionary[@"cover_art"];
-    
-    if (coverart_url_dict)
-    {
-        self.coverartUrl = coverart_url_dict[@"resource_url"];
-    }
-    
-    NSDictionary *subscriptions_url_dict = dictionary[@"subscriptions"];
-    
-    if (subscriptions_url_dict)
-    {
-        self.subscriptionsUrl = coverart_url_dict[@"resource_url"];
     }
     
     // == Gender == //
