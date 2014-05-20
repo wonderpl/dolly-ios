@@ -11,7 +11,6 @@
 #import "SYNFeedRootViewController.h"
 #import "SYNActivityViewController.h"
 #import "SYNDiscoverViewController.h"
-#import "SYNProfileRootViewController.h"
 #import "UIFont+SYNFont.h"
 #import "UINavigationBar+Appearance.h"
 #import "SYNProfileViewController.h"

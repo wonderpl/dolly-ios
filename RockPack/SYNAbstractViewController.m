@@ -19,7 +19,6 @@
 #import "SYNDeviceManager.h"
 #import "SYNMasterViewController.h"
 #import "SYNOneToOneSharingController.h"
-#import "SYNProfileRootViewController.h"
 #import "UIFont+SYNFont.h"
 #import "Video.h"
 #import "VideoInstance.h"

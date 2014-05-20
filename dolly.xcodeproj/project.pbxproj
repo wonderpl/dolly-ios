@@ -65,7 +65,6 @@
 		0125FBAD1831046700EC822E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 011CC67F164AA42300F02B6D /* AVFoundation.framework */; };
 		012CDC3017E1CE1A00C723BB /* UIDevice+Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 012CDC2F17E1CE1A00C723BB /* UIDevice+Hardware.m */; };
 		01363EB5162FDEA600FFAA09 /* NSObject+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 01363EB4162FDEA600FFAA09 /* NSObject+Blocks.m */; };
-		0142ED8C16B1B39D008694DA /* SYNProfileRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0142ED8816B19FBE008694DA /* SYNProfileRootViewController.m */; };
 		014A456816691A680091E4E5 /* LXReorderableCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 014A456716691A680091E4E5 /* LXReorderableCollectionViewFlowLayout.m */; };
 		014D514F16F738C500B82B00 /* SYNAbstractNetworkEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 014D514E16F738C500B82B00 /* SYNAbstractNetworkEngine.m */; };
 		0155FA2817A81D7600B04B51 /* SYNSessionTokenCachingStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0155FA2717A81D7600B04B51 /* SYNSessionTokenCachingStrategy.m */; };
@@ -121,7 +120,6 @@
 		01F7C9681748ED0B00E36994 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 01F7C9671748ED0B00E36994 /* libsqlite3.dylib */; };
 		0E0062E1188EBBCB00429C79 /* SYNOnBoardingSectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0062E0188EBBCB00429C79 /* SYNOnBoardingSectionHeader.m */; };
 		0E0062E5188EBCCC00429C79 /* SYNOnBoardingSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E0062E4188EBCCC00429C79 /* SYNOnBoardingSectionHeader.xib */; };
-		0E118A3818475EEA00A0D32A /* SYNProfileExpandedFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E118A3718475EEA00A0D32A /* SYNProfileExpandedFlowLayout.m */; };
 		0E19FBBF1822738A0007DF5B /* SYNChannelSearchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E19FBBE1822738A0007DF5B /* SYNChannelSearchCell.xib */; };
 		0E19FBC2182273EE0007DF5B /* SYNChannelSearchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E19FBC1182273EE0007DF5B /* SYNChannelSearchCell.m */; };
 		0E26BB4B182D1209008A57F1 /* SYNChannelDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E26BB48182D1209008A57F1 /* SYNChannelDetailsViewController.m */; };
@@ -129,8 +127,6 @@
 		0E26BB4D182D1209008A57F1 /* SYNChannelDetailsViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E26BB4A182D1209008A57F1 /* SYNChannelDetailsViewController~iphone.xib */; };
 		0E2AB166188462DD004557A4 /* SYNWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2AB164188462DD004557A4 /* SYNWebViewController.m */; };
 		0E3AE6901875DE8C008A8D00 /* SYNGenreManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E3AE68F1875DE8C008A8D00 /* SYNGenreManager.m */; };
-		0EAC5162180D4981005F4D42 /* SYNProfileRootViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EAC5161180D4980005F4D42 /* SYNProfileRootViewController~ipad.xib */; };
-		0EAC51E5180EBE67005F4D42 /* SYNProfileRootViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EAC51E4180EBE67005F4D42 /* SYNProfileRootViewController~iphone.xib */; };
 		0ECBED3A187C66F900F28EB2 /* SYNFollowUserButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECBED39187C66F900F28EB2 /* SYNFollowUserButton.m */; };
 		0EE380AB182D4DFC001297C7 /* SYNChannelCreateNewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE380A8182D4DFC001297C7 /* SYNChannelCreateNewCell.m */; };
 		0EE380AC182D4DFC001297C7 /* SYNChannelCreateNewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EE380A9182D4DFC001297C7 /* SYNChannelCreateNewCell.xib */; };
@@ -762,8 +758,6 @@
 		01363EB1162F5C8A00FFAA09 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		01363EB3162FDEA600FFAA09 /* NSObject+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Blocks.h"; sourceTree = "<group>"; };
 		01363EB4162FDEA600FFAA09 /* NSObject+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Blocks.m"; sourceTree = "<group>"; };
-		0142ED8716B19FBE008694DA /* SYNProfileRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNProfileRootViewController.h; sourceTree = "<group>"; };
-		0142ED8816B19FBE008694DA /* SYNProfileRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNProfileRootViewController.m; sourceTree = "<group>"; };
 		014A456616691A680091E4E5 /* LXReorderableCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXReorderableCollectionViewFlowLayout.h; sourceTree = "<group>"; };
 		014A456716691A680091E4E5 /* LXReorderableCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXReorderableCollectionViewFlowLayout.m; sourceTree = "<group>"; };
 		014D514D16F738C500B82B00 /* SYNAbstractNetworkEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAbstractNetworkEngine.h; sourceTree = "<group>"; };
@@ -859,8 +853,6 @@
 		0E0062DF188EBBCB00429C79 /* SYNOnBoardingSectionHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNOnBoardingSectionHeader.h; sourceTree = "<group>"; };
 		0E0062E0188EBBCB00429C79 /* SYNOnBoardingSectionHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNOnBoardingSectionHeader.m; sourceTree = "<group>"; };
 		0E0062E4188EBCCC00429C79 /* SYNOnBoardingSectionHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNOnBoardingSectionHeader.xib; sourceTree = "<group>"; };
-		0E118A3618475EEA00A0D32A /* SYNProfileExpandedFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNProfileExpandedFlowLayout.h; sourceTree = "<group>"; };
-		0E118A3718475EEA00A0D32A /* SYNProfileExpandedFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNProfileExpandedFlowLayout.m; sourceTree = "<group>"; };
 		0E19FBBE1822738A0007DF5B /* SYNChannelSearchCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNChannelSearchCell.xib; sourceTree = "<group>"; };
 		0E19FBC0182273EE0007DF5B /* SYNChannelSearchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNChannelSearchCell.h; sourceTree = "<group>"; };
 		0E19FBC1182273EE0007DF5B /* SYNChannelSearchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNChannelSearchCell.m; sourceTree = "<group>"; };
@@ -872,8 +864,6 @@
 		0E2AB164188462DD004557A4 /* SYNWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNWebViewController.m; sourceTree = "<group>"; };
 		0E3AE68E1875DE8C008A8D00 /* SYNGenreManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNGenreManager.h; sourceTree = "<group>"; };
 		0E3AE68F1875DE8C008A8D00 /* SYNGenreManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNGenreManager.m; sourceTree = "<group>"; };
-		0EAC5161180D4980005F4D42 /* SYNProfileRootViewController~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNProfileRootViewController~ipad.xib"; sourceTree = "<group>"; };
-		0EAC51E4180EBE67005F4D42 /* SYNProfileRootViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNProfileRootViewController~iphone.xib"; sourceTree = "<group>"; };
 		0ECBED38187C66F900F28EB2 /* SYNFollowUserButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNFollowUserButton.h; sourceTree = "<group>"; };
 		0ECBED39187C66F900F28EB2 /* SYNFollowUserButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNFollowUserButton.m; sourceTree = "<group>"; };
 		0EE380A7182D4DFC001297C7 /* SYNChannelCreateNewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNChannelCreateNewCell.h; sourceTree = "<group>"; };
@@ -1889,8 +1879,6 @@
 			children = (
 				014A456616691A680091E4E5 /* LXReorderableCollectionViewFlowLayout.h */,
 				014A456716691A680091E4E5 /* LXReorderableCollectionViewFlowLayout.m */,
-				0E118A3618475EEA00A0D32A /* SYNProfileExpandedFlowLayout.h */,
-				0E118A3718475EEA00A0D32A /* SYNProfileExpandedFlowLayout.m */,
 			);
 			name = Layouts;
 			sourceTree = "<group>";
@@ -2156,11 +2144,29 @@
 		01982560162ADE3300216900 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				4CF39EE918CDD36C0077CDF0 /* new profile */,
-				0142ED8716B19FBE008694DA /* SYNProfileRootViewController.h */,
-				0142ED8816B19FBE008694DA /* SYNProfileRootViewController.m */,
-				0EAC5161180D4980005F4D42 /* SYNProfileRootViewController~ipad.xib */,
-				0EAC51E4180EBE67005F4D42 /* SYNProfileRootViewController~iphone.xib */,
+				4CE0B4BF18CE258A009859CB /* SYNProfileHeader.h */,
+				4CE0B4C018CE258A009859CB /* SYNProfileHeader.m */,
+				4CE0B4C218CE25E6009859CB /* SYNProfileHeader~iphone.xib */,
+				4C9B519A18D721D600A3AB0D /* SYNProfileHeader~ipad.xib */,
+				4CF39EEC18CDD5850077CDF0 /* SYNProfileViewController.h */,
+				4CF39EED18CDD5850077CDF0 /* SYNProfileViewController.m */,
+				4CE0B4BC18CE1ADF009859CB /* SYNProfileEditViewController.h */,
+				4CE0B4BD18CE1ADF009859CB /* SYNProfileEditViewController.m */,
+				4CF39EEF18CDD5FA0077CDF0 /* SYNProfileChannelViewController.h */,
+				4CF39EF018CDD5FA0077CDF0 /* SYNProfileChannelViewController.m */,
+				4CF39EF218CDF4420077CDF0 /* SYNProfileSubscriptionViewController.h */,
+				4CF39EF318CDF4420077CDF0 /* SYNProfileSubscriptionViewController.m */,
+				4C9B519C18D72B5100A3AB0D /* SYNIPadCreateChannelLayout.h */,
+				4C9B519D18D72B5100A3AB0D /* SYNIPadCreateChannelLayout.m */,
+				4C56F15618CF76E0005E4A7C /* SYNIPhoneCreateChannelLayout.h */,
+				4C56F15718CF76E0005E4A7C /* SYNIPhoneCreateChannelLayout.m */,
+				4C9B519818D71FCB00A3AB0D /* Profile_IPad.storyboard */,
+				4C9B51A118D74A7200A3AB0D /* Profile_IPhone.storyboard */,
+				4C1D30A718D9ECAC00F96F7C /* SYNProfileEditDelegate.h */,
+				4CAC2B0D18E070C2004AB77E /* SYNProfileHeaderDelegate.h */,
+				4C0CAF3918EB0ABA004A2911 /* SYNProfileNavigationBarDelegate.h */,
+				4CBDC401190FE820009F56F1 /* SYNSegmentedButton.h */,
+				4CBDC402190FE820009F56F1 /* SYNSegmentedButton.m */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -2888,36 +2894,6 @@
 				4CDD76A518CA014A000B2CBD /* SYNFeedOverlayViewController~iphone.xib */,
 			);
 			name = Feed;
-			sourceTree = "<group>";
-		};
-		4CF39EE918CDD36C0077CDF0 /* new profile */ = {
-			isa = PBXGroup;
-			children = (
-				4CE0B4BF18CE258A009859CB /* SYNProfileHeader.h */,
-				4CE0B4C018CE258A009859CB /* SYNProfileHeader.m */,
-				4CE0B4C218CE25E6009859CB /* SYNProfileHeader~iphone.xib */,
-				4C9B519A18D721D600A3AB0D /* SYNProfileHeader~ipad.xib */,
-				4CF39EEC18CDD5850077CDF0 /* SYNProfileViewController.h */,
-				4CF39EED18CDD5850077CDF0 /* SYNProfileViewController.m */,
-				4CE0B4BC18CE1ADF009859CB /* SYNProfileEditViewController.h */,
-				4CE0B4BD18CE1ADF009859CB /* SYNProfileEditViewController.m */,
-				4CF39EEF18CDD5FA0077CDF0 /* SYNProfileChannelViewController.h */,
-				4CF39EF018CDD5FA0077CDF0 /* SYNProfileChannelViewController.m */,
-				4CF39EF218CDF4420077CDF0 /* SYNProfileSubscriptionViewController.h */,
-				4CF39EF318CDF4420077CDF0 /* SYNProfileSubscriptionViewController.m */,
-				4C9B519C18D72B5100A3AB0D /* SYNIPadCreateChannelLayout.h */,
-				4C9B519D18D72B5100A3AB0D /* SYNIPadCreateChannelLayout.m */,
-				4C56F15618CF76E0005E4A7C /* SYNIPhoneCreateChannelLayout.h */,
-				4C56F15718CF76E0005E4A7C /* SYNIPhoneCreateChannelLayout.m */,
-				4C9B519818D71FCB00A3AB0D /* Profile_IPad.storyboard */,
-				4C9B51A118D74A7200A3AB0D /* Profile_IPhone.storyboard */,
-				4C1D30A718D9ECAC00F96F7C /* SYNProfileEditDelegate.h */,
-				4CAC2B0D18E070C2004AB77E /* SYNProfileHeaderDelegate.h */,
-				4C0CAF3918EB0ABA004A2911 /* SYNProfileNavigationBarDelegate.h */,
-				4CBDC401190FE820009F56F1 /* SYNSegmentedButton.h */,
-				4CBDC402190FE820009F56F1 /* SYNSegmentedButton.m */,
-			);
-			name = "new profile";
 			sourceTree = "<group>";
 		};
 		9959249419267B3B00CCAACF /* Onboarding */ = {
@@ -3826,7 +3802,6 @@
 				993B1ACC191A95FC008532D4 /* TabProfileSelected@2x~iphone.png in Resources */,
 				E9EE08D218F6FD47000DC06A /* SYNWebViewCell.xib in Resources */,
 				99BEAEC4191D1F6500A27FC7 /* login-button@2x.png in Resources */,
-				0EAC51E5180EBE67005F4D42 /* SYNProfileRootViewController~iphone.xib in Resources */,
 				1F458B0017E1C4E6003C14AC /* AppIcon29x29.png in Resources */,
 				993B1ADD191A962F008532D4 /* TabActivitySelected~iphone.png in Resources */,
 				9937CA0219222CD6002D3C23 /* left-separator@2x.png in Resources */,
@@ -4043,7 +4018,6 @@
 				E985D37218FED76E00D5A9E1 /* AddButton.png in Resources */,
 				7D6D4F5B192A275C0084DC84 /* TabProfileSelected@2x~ipad.png in Resources */,
 				E985D34B18FEC80500D5A9E1 /* SYNFeedChannelCell.xib in Resources */,
-				0EAC5162180D4981005F4D42 /* SYNProfileRootViewController~ipad.xib in Resources */,
 				E93122FD18916A52008ADBEB /* SYNTimestampView.xib in Resources */,
 				1F458B2417E1CE8E003C14AC /* AppIcon-Dev-40x40.png in Resources */,
 				BEB1577B173C10E900DAFA2F /* Localizable.strings in Resources */,
@@ -4325,7 +4299,6 @@
 				BE31EFBA18314CE8006E20E2 /* SYNAddToChannelFlowLayout.m in Sources */,
 				01C6FD0F169DDEDB00E01AA3 /* NSDictionary+Validation.m in Sources */,
 				01C6FD14169E11B000E01AA3 /* _AbstractCommon.m in Sources */,
-				0E118A3818475EEA00A0D32A /* SYNProfileExpandedFlowLayout.m in Sources */,
 				01C6FD15169E11B000E01AA3 /* AbstractCommon.m in Sources */,
 				01C74BAD169F239800B1CA02 /* SYNNetworkEngine.m in Sources */,
 				E93E10E6183512B800A62F64 /* SYNYouTubeWebVideoPlayer.m in Sources */,
@@ -4335,7 +4308,6 @@
 				E9F6257018868A2B000EF6A2 /* SYNiPadPasswordForgotViewController.m in Sources */,
 				BE57C0261843604200C6444A /* SYNOnBoardingCell.m in Sources */,
 				4C5E85F018B620A200D0E937 /* SYNInBoardingViewController.m in Sources */,
-				0142ED8C16B1B39D008694DA /* SYNProfileRootViewController.m in Sources */,
 				BEA043E716CAA8E1005406E7 /* Genre.m in Sources */,
 				012CDC3017E1CE1A00C723BB /* UIDevice+Hardware.m in Sources */,
 				BEA043E816CAA8E1005406E7 /* SubGenre.m in Sources */,

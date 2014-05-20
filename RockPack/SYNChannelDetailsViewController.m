@@ -29,7 +29,6 @@
 #import "SYNSubscribersViewController.h"
 #import "UIColor+SYNColor.h"
 #import "UICollectionReusableView+Helpers.h"
-#import "SYNProfileRootViewController.h"
 #import "SYNChannelVideosModel.h"
 #import "SYNVideoPlayerViewController.h"
 #import "UINavigationBar+Appearance.h"

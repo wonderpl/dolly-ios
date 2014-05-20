@@ -18,7 +18,6 @@
 #import "SYNIPadCreateChannelLayout.h"
 #import "UICollectionReusableView+Helpers.h"
 #import "SYNChannelFooterMoreView.h"
-#import "SYNProfileExpandedFlowLayout.h"
 #import "UINavigationBar+Appearance.h"
 
 static const CGFloat PARALLAX_SCROLL_VALUE = 2.0f;
