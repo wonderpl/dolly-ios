@@ -368,11 +368,7 @@ static const NSInteger TrackingDimensionConnection = 6;
 }
 
 - (void)trackCarouselVideoPlayerScreenView {
-	[self trackScreenViewWithName:@"Video 1"];
-}
-
-- (void)trackSearchVideoPlayerScreenView {
-	[self trackScreenViewWithName:@"Video 2"];
+	[self trackScreenViewWithName:@"Video"];
 }
 
 - (void)trackClickToMoreScreenView {

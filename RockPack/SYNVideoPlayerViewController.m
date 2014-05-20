@@ -127,6 +127,7 @@
 	
 	Genre *genre = [[SYNGenreManager sharedManager] genreWithId:self.videoInstance.channel.categoryId];
 	[[SYNTrackingManager sharedManager] setCategoryDimension:genre.name];
+	[[SYNTrackingManager sharedManager] trackVideoPlayerScreenView];
 	
 	if (IS_IPHONE) {
 		UIDevice *device = [UIDevice currentDevice];
