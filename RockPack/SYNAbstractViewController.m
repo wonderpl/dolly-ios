@@ -206,8 +206,6 @@
     
     button.enabled = NO;
 	
-	ChannelOwner *currentUser = appDelegate.currentUser;
-    
     [appDelegate.oAuthNetworkEngine recordActivityForUserId: appDelegate.currentUser.uniqueId
                                                      action: (didStar ? @"star" : @"unstar")
                                             videoInstanceId: videoInstance.uniqueId
