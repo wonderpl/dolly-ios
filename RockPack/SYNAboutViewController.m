@@ -75,7 +75,7 @@
                                                                                                NSFontAttributeName: [UIFont regularCustomFontOfSize:15]}]];
     
     
-    NSArray* creditsArray = @[@"Appirater by Arash Payan", @"GKImagePicker by George Kitz", @"FacebookSDK by Facebook",
+    NSArray* creditsArray = @[@"Use of the image ‘Home’ by kind permission of Kate Ware (http://www.katewares.com)", @"Appirater by Arash Payan", @"GKImagePicker by George Kitz", @"FacebookSDK by Facebook",
                               @"Google Analytics by Google", @"Google Conversion Tracking by Google", @"ISO8601DateFormatter by Peter Hosey",
                               @"MKNetworkKit by Mugunth Kumar", @"SDWebImage by Olivier Poitrey", @"SSKeychain by Sam Soffes",
 							  @"OWActivityViewController by Roman Efimov", @"LXReorderableCollectionViewFlowLayout by Stan Chang Khin Boon"];
