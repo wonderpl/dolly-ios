@@ -265,8 +265,10 @@ static NSString* kPopularGenreUniqueId = @"1979";
 #define kUserDefaultsCreateChannelFirstTime @"UD_Create_Channel_First_Time"
 #define kUserDefaultsOtherPersonsProfile @"UD_Other_Persons_Profile"
 #define kUserDefaultsSharingAlert @"UD_Sharing_Alert_Count"
-#define kUserDefaultsFeedFirstTime @"UD_Feed_First_Time"
 #define kUserDefaultsRecentlyViewed @"UD_Recently_Viewed"
+#define kUserDefaultsFeedCount @"UD_Feed_Count"
+#define kUserDefaultsShareFirstTime @"UD_Share_First_Time"
+#define kUserDefaultsAddToCollectionFirstTime @"UD_Add_To_Collection_First_Time"
 
 
 

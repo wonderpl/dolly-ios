@@ -8,6 +8,6 @@
 
 #import "SYNInBoardingViewController.h"
 
-@interface SYNFeedOverlayViewController : SYNInBoardingViewController
+@interface SYNFeedOverlayAddingViewController : SYNInBoardingViewController
 
 @end

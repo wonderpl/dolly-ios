@@ -25,6 +25,7 @@
 #import "SYNGenreManager.h"
 #import "SYNTrackingManager.h"
 #import "SYNChannelMidCell.h"
+#import "SYNAddToChannelOverlayViewController.h"
 
 #define kAnimationExpansion 0.4f
 
@@ -54,7 +55,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 
 @property (weak, nonatomic) UICollectionViewCell* selectedCell;
+@property (strong, nonatomic) IBOutlet UIView *topCorner;
 
+@property (strong, nonatomic) IBOutlet UIView *topBarBackground;
 
 
 @end
@@ -95,6 +98,14 @@
     self.titleLabel.font = [UIFont regularCustomFontOfSize: self.titleLabel.font.pointSize];
     
     self.selectedChannel = nil;
+    
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.topBarBackground.bounds byRoundingCorners:UIRectCornerTopLeft| UIRectCornerTopRight                                                         cornerRadii:CGSizeMake(10.0, 10.0)];
+    CAShapeLayer *maskLayer = [CAShapeLayer layer];
+    maskLayer.frame = self.topBarBackground.bounds;
+    maskLayer.path = maskPath.CGPath;
+    self.topBarBackground.layer.mask = maskLayer;
+
+    
 }
 
 - (void) viewWillAppear: (BOOL) animated
@@ -110,6 +121,8 @@
     self.channels = [appDelegate.currentUser.channels array];
     
     [self.currentChannelsCollectionView reloadData];
+    [self showInboarding];
+
 }
 
 
@@ -122,6 +135,14 @@
     self.channels = nil;
 }
 
+- (void)showInboarding {
+    
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultsAddToCollectionFirstTime]) {
+		SYNAddToChannelOverlayViewController *overlay = [[SYNAddToChannelOverlayViewController alloc] init];
+        [overlay addToViewController:self];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kUserDefaultsAddToCollectionFirstTime];
+    }
+}
 
 #pragma mark - UICollectionView DataSource
 

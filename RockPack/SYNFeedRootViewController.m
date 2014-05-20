@@ -20,7 +20,7 @@
 #import "SYNVideoPlayerAnimator.h"
 #import "UIColor+SYNColor.h"
 #import "SYNTrackingManager.h"
-#import "SYNFeedOverlayViewController.h"
+#import "SYNFeedOverlayAddingViewController.h"
 #import "SYNVideoPlayerViewController.h"
 #import "SYNFeedVideoCell.h"
 #import "SYNAddToChannelViewController.h"
@@ -29,6 +29,7 @@
 #import "UIDevice+Helpers.h"
 #import "SYNIPhoneFeedRootViewController.h"
 #import "SYNIPadFeedRootViewController.h"
+#import "SYNFeedOverlayLovingViewController.h"
 #import "UINavigationBar+Appearance.h"
 #import "SYNIPadFeedLayout.h"
 
@@ -39,6 +40,8 @@
 
 @property (nonatomic, strong) SYNFeedModel *model;
 @property (nonatomic, strong) SYNVideoPlayerAnimator *videoPlayerAnimator;
+
+@property (nonatomic, assign) BOOL shownInboarding;
 
 @end
 
@@ -105,8 +108,7 @@
 		self.model.delegate = self;
 	}
     [self.feedCollectionView reloadData];
-	
-    [self showInboarding];
+	self.shownInboarding = NO;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -265,13 +267,27 @@
 }
 
 - (void) showInboarding {
-    
-    if (![[NSUserDefaults standardUserDefaults] boolForKey: kUserDefaultsFeedFirstTime]) {
-        if ([self.model itemCount]>0) {
-            SYNFeedOverlayViewController* feedOverlay = [[SYNFeedOverlayViewController alloc] init];
-            [feedOverlay addToViewController:appDelegate.masterViewController];
-            [[NSUserDefaults standardUserDefaults] setBool: YES
-                                                    forKey: kUserDefaultsFeedFirstTime];
+    NSInteger value = [[NSUserDefaults standardUserDefaults] integerForKey: kUserDefaultsFeedCount];
+
+    if (value < 3 && self.shownInboarding == NO) {
+        if ([self.model itemCount]>0 && [self.model itemIndexForFeedIndex:0] == FeedItemResourceTypeVideo ) {
+            
+            [self.feedCollectionView setContentOffset:CGPointMake(0, -self.feedCollectionView.contentInset.top) animated:NO];
+
+            if (value == 1) {
+                SYNFeedOverlayAddingViewController* feedOverlay = [[SYNFeedOverlayAddingViewController alloc] init];
+                [feedOverlay addToViewController:appDelegate.masterViewController];
+            }
+            
+            if (value == 2) {
+                SYNFeedOverlayLovingViewController* overlay = [[SYNFeedOverlayLovingViewController alloc] init];
+                [overlay addToViewController:appDelegate.masterViewController];
+            }
+            
+            self.shownInboarding = YES;
+            
+            value+=1;
+            [[NSUserDefaults standardUserDefaults] setInteger:value forKey:kUserDefaultsFeedCount];
         }
     }
 }

@@ -25,6 +25,8 @@
 #import "UICollectionReusableView+Helpers.h"
 #import "SYNWonderMailActivity.h"
 #import "SYNTrackingManager.h"
+#import "SYNShareOverlayViewController.h"
+
 @import AddressBook;
 @import QuartzCore;
 
@@ -66,6 +68,7 @@ UISearchBarDelegate>
 @property (strong, nonatomic) NSMutableDictionary *mutableShareDictionary;
 @property (strong, nonatomic) OWActivityViewController *activityViewController;
 @property (strong, nonatomic) IBOutlet UIView *textContainerView;
+@property (strong, nonatomic) IBOutlet UIView *searchBarContainer;
 
 @end
 
@@ -146,6 +149,13 @@ UISearchBarDelegate>
         self.textContainerView.frame = frame;
     }
     
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.searchBarContainer.frame byRoundingCorners:UIRectCornerTopLeft| UIRectCornerTopRight                                                         cornerRadii:CGSizeMake(10.0, 10.0)];
+    CAShapeLayer *maskLayer = [CAShapeLayer layer];
+    maskLayer.frame = self.searchBarContainer.bounds;
+    maskLayer.path = maskPath.CGPath;
+    self.searchBarContainer.layer.mask = maskLayer;
+
+    
     // Basic recognition
     self.loader.hidden = YES;
     
@@ -223,6 +233,8 @@ UISearchBarDelegate>
     }
 	
 	[[SYNTrackingManager sharedManager] trackShareScreenView];
+    
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -231,6 +243,15 @@ UISearchBarDelegate>
 	[[SYNTrackingManager sharedManager] trackShareScreenView];
     
     [self.recentFriendsCollectionView reloadData];
+    
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultsShareFirstTime]) {
+        
+        SYNShareOverlayViewController *overlay = [[SYNShareOverlayViewController alloc] init];
+        [overlay addToViewController:self];
+        
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kUserDefaultsShareFirstTime];
+    }
+   
 }
 
 - (void) viewDidDisappear:(BOOL)animated {
