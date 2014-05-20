@@ -10,29 +10,25 @@
             <rect key="frame" x="0.0" y="0.0" width="300" height="42"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ji-gI-euP">
-                    <rect key="frame" x="122" y="6" width="56" height="28"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ji-gI-euP">
+                    <rect key="frame" x="10" y="6" width="282" height="28"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="23"/>
                     <color key="textColor" red="0.4392156862745098" green="0.47450980392156861" blue="0.4823529411764706" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l8A-ll-eTx" userLabel="View - Line">
-                    <rect key="frame" x="69" y="36" width="163" height="1"/>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l8A-ll-eTx" userLabel="View - Line">
+                    <rect key="frame" x="10" y="36" width="163" height="1"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.81176470588235294" green="0.85098039215686272" blue="0.85882352941176465" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="1" id="T2n-o5-cWk"/>
-                        <constraint firstAttribute="width" constant="163" id="xd4-fw-A3j"/>
-                    </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="l8A-ll-eTx" firstAttribute="centerX" secondItem="5Ji-gI-euP" secondAttribute="centerX" constant="0.5" id="cr3-BP-KpB"/>
-                <constraint firstItem="l8A-ll-eTx" firstAttribute="top" secondItem="5Ji-gI-euP" secondAttribute="bottom" constant="2" id="dO9-2G-Bpe"/>
-                <constraint firstAttribute="centerY" secondItem="5Ji-gI-euP" secondAttribute="centerY" constant="1" id="tdr-w8-M4J"/>
-                <constraint firstAttribute="centerX" secondItem="5Ji-gI-euP" secondAttribute="centerX" id="ysC-98-9xW"/>
+                <constraint firstItem="5Ji-gI-euP" firstAttribute="top" secondItem="tXm-fx-ubR" secondAttribute="top" constant="6" id="10b-1a-s2L"/>
+                <constraint firstItem="5Ji-gI-euP" firstAttribute="leading" secondItem="tXm-fx-ubR" secondAttribute="leading" constant="10" id="FCf-4W-9Yk"/>
+                <constraint firstAttribute="bottom" secondItem="5Ji-gI-euP" secondAttribute="bottom" constant="8" id="fGh-jq-D9G"/>
+                <constraint firstAttribute="trailing" secondItem="5Ji-gI-euP" secondAttribute="trailing" constant="8" id="la6-Qm-wqJ"/>
             </constraints>
             <connections>
                 <outlet property="titleLabel" destination="5Ji-gI-euP" id="i77-eu-etB"/>

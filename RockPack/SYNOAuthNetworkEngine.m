@@ -250,7 +250,7 @@
 }
 
 
-- (IBAction) refreshOAuthTokenWithCompletionHandler: (MKNKUserErrorBlock) completionBlock
+- (void) refreshOAuthTokenWithCompletionHandler: (MKNKUserErrorBlock) completionBlock
                                        errorHandler: (MKNKUserSuccessBlock) errorBlock
 {
     // Check to see that our stored refresh token is not actually nil

@@ -14,8 +14,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="256" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="CREATE NEW PACK" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="VDA-cz-Gkg" userLabel="Title Label">
-                        <rect key="frame" x="0.0" y="0.0" width="256" height="44"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="CREATE NEW PACK" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="VDA-cz-Gkg" userLabel="Title Label">
+                        <rect key="frame" x="12" y="0.0" width="244" height="44"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                         <nil key="highlightedColor"/>
@@ -37,7 +37,7 @@
                 <constraint firstAttribute="trailing" secondItem="7ma-il-ldL" secondAttribute="trailing" constant="12" id="QHe-pw-XaA"/>
                 <constraint firstAttribute="bottom" secondItem="VDA-cz-Gkg" secondAttribute="bottom" id="RFq-eY-xVk"/>
                 <constraint firstAttribute="centerY" secondItem="7ma-il-ldL" secondAttribute="centerY" id="bq8-Di-eid"/>
-                <constraint firstItem="VDA-cz-Gkg" firstAttribute="leading" secondItem="DiE-ts-EYH" secondAttribute="leading" id="lkf-Ob-NaB"/>
+                <constraint firstItem="VDA-cz-Gkg" firstAttribute="leading" secondItem="DiE-ts-EYH" secondAttribute="leading" constant="12" id="lkf-Ob-NaB"/>
                 <constraint firstAttribute="trailing" secondItem="VDA-cz-Gkg" secondAttribute="trailing" id="qix-jn-0fG"/>
             </constraints>
             <size key="customSize" width="332" height="67"/>

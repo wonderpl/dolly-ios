@@ -19,7 +19,6 @@
 #import "SYNDeviceManager.h"
 #import "SYNMasterViewController.h"
 #import "SYNOneToOneSharingController.h"
-#import "SYNProfileRootViewController.h"
 #import "UIFont+SYNFont.h"
 #import "Video.h"
 #import "VideoInstance.h"
@@ -207,8 +206,6 @@
     
     button.enabled = NO;
 	
-	ChannelOwner *currentUser = appDelegate.currentUser;
-    
     [appDelegate.oAuthNetworkEngine recordActivityForUserId: appDelegate.currentUser.uniqueId
                                                      action: (didStar ? @"star" : @"unstar")
                                             videoInstanceId: videoInstance.uniqueId
@@ -220,8 +217,6 @@
                                                   videoInstance.starredByUserValue = YES;
                                                   
                                                   button.selected = YES;
-                                                  
-                                                  [videoInstance addStarrersObject:currentUser];
                                               } else {
                                                   // Currently highlighted, so decrement
                                                   videoInstance.starredByUserValue = NO;

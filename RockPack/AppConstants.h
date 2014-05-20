@@ -185,11 +185,8 @@ typedef enum : NSInteger {
 // Push notification
 #define kAccountSettingsLogout      @"kAccountSettingsLogout"
 #define kUserDataChanged            @"kUserDataChanged"
-#define kChannelSubscribeRequest    @"kChannelSubscribeRequest"
 #define kChannelUpdateRequest       @"kChannelUpdateRequest"
 #define kChannelOwnerUpdateRequest  @"kChannelOwnerUpdateRequest"
-#define kChannelDeleteRequest       @"kChannelDeleteRequest"
-#define kChannelOwnerSubscribeToUserRequest @"kChannelOwnerSubscribeToUserRequest"
 
 
 #define kUpdateFailed               @"kUpdateFailed"

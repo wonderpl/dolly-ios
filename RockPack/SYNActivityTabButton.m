@@ -15,13 +15,15 @@
 
 - (void)awakeFromNib {
 
+    
     if (IS_IPAD) {
-        [self setTitleEdgeInsets:UIEdgeInsetsMake(0, 5, 19, 0)];
+        [self setTitleEdgeInsets:UIEdgeInsetsMake(0, 7, 24, 0)];
     } else {
-        [self setTitleEdgeInsets:UIEdgeInsetsMake(0, 6, 15, 0)];
+        [self setTitleEdgeInsets:UIEdgeInsetsMake(0, 6, 14, 0)];
     }
     
     [self.titleLabel setFont:[UIFont regularCustomFontOfSize:12]];
+    [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 }
 
 - (void) setBadageNumber:(int)badageNumber {

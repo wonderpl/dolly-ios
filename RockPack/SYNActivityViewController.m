@@ -154,15 +154,13 @@
     self.hasUnreadNotifications = NO;
     for (NSDictionary* itemData in itemsArray)
     {
-        
-        
         SYNNotification* notification = [SYNNotification notificationWithDictionary:itemData];
         
         if (!notification || notification.objectType == kNotificationObjectTypeUnknown)
             continue;
         
         if(!notification.read) {
-            self.notificationCounter ++;
+            self.notificationCounter++;
         }
         
         [inNotificationsutArray addObject:notification];
@@ -321,11 +319,12 @@
 
     if (self.hasUnreadNotifications)
         notification = nil;
+
+    [self markAsReadForNotification: notification];
     
     SYNActivityTabButton *activityTab = appDelegate.masterViewController.activityTab;
     activityTab.badageNumber = 0;
 
-    [self markAsReadForNotification: notification];
 
 }
 
@@ -398,7 +397,14 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
 	if ([keyPath isEqualToString:NSStringFromSelector(@selector(notificationCounter))]) {
 		SYNActivityTabButton *activityTab = appDelegate.masterViewController.activityTab;
+
         activityTab.badageNumber = self.notificationCounter;
+        
+        if (self.notificationCounter > 0) {
+            [activityTab setBackgroundImage:[UIImage imageNamed:@"TabActivityNotification"] forState:UIControlStateNormal];
+        } else {
+            [activityTab setBackgroundImage:[UIImage imageNamed:@"TabActivity"] forState:UIControlStateNormal];
+        }
 	}
 }
 

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface SYNOnBoardingSectionHeader : UICollectionReusableView
-@property (strong, nonatomic) IBOutlet UILabel *sectionTitle;
+
+- (void)setTitleText : (NSString*) string;
 
 @end

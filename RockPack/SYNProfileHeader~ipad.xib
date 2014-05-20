@@ -15,6 +15,10 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile-cover-gradient.png" translatesAutoresizingMaskIntoConstraints="NO" id="zrH-uQ-uoU">
+                    <rect key="frame" x="0.0" y="0.0" width="671" height="512"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
                 <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7YV-aZ-EKa" userLabel="Button - follow all" customClass="SYNFollowUserButton">
                     <rect key="frame" x="571" y="466" width="80" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -169,14 +173,18 @@
                 <constraint firstAttribute="bottom" secondItem="r8W-Sv-btW" secondAttribute="bottom" constant="212" id="4go-k2-Jmd"/>
                 <constraint firstItem="9PC-4a-87q" firstAttribute="leading" secondItem="CwX-kR-DQ1" secondAttribute="leading" id="995-nl-dSb"/>
                 <constraint firstAttribute="bottom" secondItem="9PC-4a-87q" secondAttribute="bottom" constant="268" id="IsT-oA-MPv"/>
+                <constraint firstItem="zrH-uQ-uoU" firstAttribute="leading" secondItem="CwX-kR-DQ1" secondAttribute="leading" id="JBh-XB-yQP"/>
                 <constraint firstAttribute="trailing" secondItem="r8W-Sv-btW" secondAttribute="trailing" id="JKD-rm-OOd"/>
                 <constraint firstAttribute="bottom" secondItem="88l-sj-JDE" secondAttribute="bottom" constant="241" id="KQp-Vs-Ay7"/>
                 <constraint firstAttribute="bottom" secondItem="a3W-xz-Bg8" secondAttribute="bottom" constant="20" id="MtS-gt-Qag"/>
+                <constraint firstAttribute="bottom" secondItem="zrH-uQ-uoU" secondAttribute="bottom" constant="268" id="S5S-yL-IGR"/>
                 <constraint firstItem="9PC-4a-87q" firstAttribute="top" secondItem="CwX-kR-DQ1" secondAttribute="top" id="S7f-yg-ibX"/>
                 <constraint firstItem="88l-sj-JDE" firstAttribute="leading" secondItem="CwX-kR-DQ1" secondAttribute="leading" constant="12" id="Y2g-Ra-s0u"/>
                 <constraint firstAttribute="trailing" secondItem="9PC-4a-87q" secondAttribute="trailing" id="ZrX-cP-cbw"/>
                 <constraint firstAttribute="bottom" secondItem="7YV-aZ-EKa" secondAttribute="bottom" constant="282" id="cDi-J3-zEH"/>
+                <constraint firstAttribute="trailing" secondItem="zrH-uQ-uoU" secondAttribute="trailing" id="oXw-Od-asl"/>
                 <constraint firstAttribute="centerX" secondItem="a3W-xz-Bg8" secondAttribute="centerX" constant="-0.5" id="sUk-CW-fcI"/>
+                <constraint firstItem="zrH-uQ-uoU" firstAttribute="top" secondItem="CwX-kR-DQ1" secondAttribute="top" id="vKA-NT-H2z"/>
                 <constraint firstAttribute="trailing" secondItem="7YV-aZ-EKa" secondAttribute="trailing" constant="20" id="zRV-rD-Wzq"/>
             </constraints>
             <connections>
@@ -200,5 +208,6 @@
     </objects>
     <resources>
         <image name="ButtonMore.png" width="56" height="56"/>
+        <image name="profile-cover-gradient.png" width="512" height="390"/>
     </resources>
 </document>

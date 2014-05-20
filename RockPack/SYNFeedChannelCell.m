@@ -43,7 +43,10 @@
 	_channel = channel;
 	
 	NSURL *avatarURL = [NSURL URLWithString:channel.channelOwner.thumbnailURL];
-	[self.avatarThumbnailButton setImageWithURL:avatarURL forState:UIControlStateNormal];
+	[self.avatarThumbnailButton setImageWithURL:avatarURL
+									   forState:UIControlStateNormal
+							   placeholderImage:[UIImage imageNamed:@"PlaceholderAvatarProfile"]
+										options:SDWebImageRetryFailed];
 	
 	NSMutableAttributedString *channeOwnerString = [[NSMutableAttributedString alloc] initWithString:@"New by "];
 
@@ -51,7 +54,7 @@
 	UIFont *boldFont = [UIFont boldItalicAlternateFontOfSize:self.channelOwnerLabel.font.pointSize];
 	NSDictionary *attributes = @{ NSFontAttributeName : boldFont };
 	
-	[channeOwnerString appendAttributedString:[[NSAttributedString alloc] initWithString:channelOwnerName attributes:attributes ]];
+	[channeOwnerString appendAttributedString:[[NSAttributedString alloc] initWithString:channelOwnerName attributes:attributes]];
 	
 	self.channelOwnerLabel.attributedText = channeOwnerString;
 	

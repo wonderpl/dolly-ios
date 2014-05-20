@@ -170,6 +170,7 @@
                 break;
                 
             // Locale
+            // We only support these 2 locales currently. 
             case 3:
                 if ([user.locale isEqualToString:@"en-gb"])
                 {

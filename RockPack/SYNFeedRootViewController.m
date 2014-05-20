@@ -255,7 +255,9 @@
 - (void) applicationWillEnterForeground: (UIApplication *) application {
 	[super applicationWillEnterForeground: application];
 	
-	[self reloadDataAndSwitchToFeed:YES];
+	if (appDelegate.currentOAuth2Credentials.userId) {
+		[self reloadDataAndSwitchToFeed:YES];
+	}
 }
 
 - (void) showInboarding {
