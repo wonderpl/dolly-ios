@@ -207,7 +207,11 @@
 #pragma mark - SYNVideoInfoCell
 
 - (id<SYNVideoInfoCell>)videoCellForIndexPath:(NSIndexPath *)indexPath {
-	return (SYNFeedVideoCell *)[self.feedCollectionView cellForItemAtIndexPath:indexPath];
+	UICollectionViewCell *cell = [self.feedCollectionView cellForItemAtIndexPath:indexPath];
+	if ([cell conformsToProtocol:@protocol(SYNVideoInfoCell)]) {
+		return (id<SYNVideoInfoCell>)cell;
+	}
+	return nil;
 }
 
 #pragma mark - SYNPagingModelDelegate
