@@ -849,43 +849,6 @@
                                     <constraint firstAttribute="height" constant="2" id="qdt-Kg-YtV"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I85-Nt-QqY" userLabel="Login UIButton" customClass="SYNFormButton">
-                                <rect key="frame" x="638" y="609" width="96" height="38"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
-                                <accessibility key="accessibilityConfiguration" label="Login Navigation"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="96" id="3B9-K0-Pi9"/>
-                                    <constraint firstAttribute="height" constant="38" id="kx4-hy-d4B"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="Log In">
-                                    <color key="titleColor" red="0.65490196079999996" green="0.65490196079999996" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="selected">
-                                    <color key="titleColor" red="0.83278566430000001" green="0.82134538830000003" blue="0.93503736410000005" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" red="0.83278566430000001" green="0.82134538830000003" blue="0.93503736410000005" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="loginButtonPressed:" destination="AlN-Zq-Hwn" eventType="touchUpInside" id="F0Q-tA-BSG"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Have an account?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="113" translatesAutoresizingMaskIntoConstraints="NO" id="m0T-Xa-EzP" userLabel="Member? UILabel">
-                                <rect key="frame" x="630" y="554" width="113" height="47"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="113" id="kVt-0B-9nJ"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <color key="textColor" red="0.65490196079999996" green="0.65490196079999996" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                                <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.25" colorSpace="calibratedRGB"/>
-                                <size key="shadowOffset" width="0.0" height="1"/>
-                            </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="210" translatesAutoresizingMaskIntoConstraints="NO" id="cex-50-2hZ" userLabel="Error Label">
                                 <rect key="frame" x="552" y="209" width="210" height="0.0"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -907,23 +870,36 @@
                                     <outlet property="delegate" destination="AlN-Zq-Hwn" id="UdO-dw-104"/>
                                 </connections>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dHs-X7-hMT" userLabel="Back Button">
+                                <rect key="frame" x="27" y="29" width="20" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="29" id="cv4-Vw-ZYt"/>
+                                    <constraint firstAttribute="width" constant="20" id="qPp-pj-6Bd"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="BackButtonApp.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="goBack:" destination="ahm-cM-pmF" eventType="touchUpInside" id="9zS-mU-Il8"/>
+                                    <action selector="goBack:" destination="AlN-Zq-Hwn" eventType="touchUpInside" id="Bsa-vj-Q8q"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="URI-Th-XfO" firstAttribute="centerY" secondItem="cex-50-2hZ" secondAttribute="centerY" constant="4" id="AJX-ss-6Ab"/>
-                            <constraint firstItem="I85-Nt-QqY" firstAttribute="centerX" secondItem="m0T-Xa-EzP" secondAttribute="centerX" constant="-0.5" id="EaZ-79-NY9"/>
-                            <constraint firstItem="I85-Nt-QqY" firstAttribute="top" secondItem="m0T-Xa-EzP" secondAttribute="bottom" constant="8" id="F4N-k3-67b"/>
                             <constraint firstItem="mEw-ky-yDJ" firstAttribute="top" secondItem="fmg-Me-Yio" secondAttribute="bottom" constant="8" id="PLr-Dp-gCK"/>
                             <constraint firstItem="URI-Th-XfO" firstAttribute="bottom" secondItem="so5-vB-GdT" secondAttribute="bottom" constant="-76" id="Qfv-TW-qzb"/>
                             <constraint firstAttribute="centerX" secondItem="mEw-ky-yDJ" secondAttribute="centerX" id="VI4-Cx-O6d"/>
-                            <constraint firstAttribute="trailing" secondItem="I85-Nt-QqY" secondAttribute="trailing" constant="34" id="YCd-aL-OTz"/>
                             <constraint firstAttribute="centerX" secondItem="fmg-Me-Yio" secondAttribute="centerX" id="Ygr-cd-Myy"/>
+                            <constraint firstItem="dHs-X7-hMT" firstAttribute="top" secondItem="qPr-d5-suY" secondAttribute="bottom" constant="9" id="aby-J5-2so"/>
                             <constraint firstItem="fmg-Me-Yio" firstAttribute="top" secondItem="WFF-P7-pp5" secondAttribute="top" constant="123" id="hfm-qp-9p4"/>
                             <constraint firstItem="mEw-ky-yDJ" firstAttribute="top" secondItem="URI-Th-XfO" secondAttribute="top" constant="-61" id="iSM-4w-yPu"/>
                             <constraint firstAttribute="centerX" secondItem="so5-vB-GdT" secondAttribute="centerX" id="nxB-s3-Zo7"/>
-                            <constraint firstItem="6Yf-mo-9QR" firstAttribute="top" secondItem="I85-Nt-QqY" secondAttribute="bottom" constant="377" id="o9u-8S-l3C"/>
                             <constraint firstItem="cex-50-2hZ" firstAttribute="leading" secondItem="URI-Th-XfO" secondAttribute="trailing" constant="8" id="oC7-z9-fxK"/>
                             <constraint firstAttribute="trailing" secondItem="cex-50-2hZ" secondAttribute="trailing" constant="6" id="oEj-mB-aym"/>
+                            <constraint firstItem="dHs-X7-hMT" firstAttribute="leading" secondItem="WFF-P7-pp5" secondAttribute="leading" constant="27" id="oa3-dk-dMl"/>
                             <constraint firstItem="mEw-ky-yDJ" firstAttribute="centerX" secondItem="URI-Th-XfO" secondAttribute="centerX" constant="0.5" id="uqa-fl-zmY"/>
                         </constraints>
                     </view>
@@ -932,8 +908,6 @@
                         <outlet property="accountLabel" destination="mEw-ky-yDJ" id="7gV-wf-1KO"/>
                         <outlet property="emailUsernameTextField" destination="URI-Th-XfO" id="HFa-6b-yzy"/>
                         <outlet property="errorLabel" destination="cex-50-2hZ" id="FMJ-Sa-SwE"/>
-                        <outlet property="haveAnAccountLabel" destination="m0T-Xa-EzP" id="cak-na-dah"/>
-                        <outlet property="loginButton" destination="I85-Nt-QqY" id="CBX-cj-LGv"/>
                         <outlet property="sendButton" destination="so5-vB-GdT" id="CzX-ym-X2T"/>
                     </connections>
                 </viewController>
@@ -1061,6 +1035,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="7Bv-VN-bSo"/>
+        <segue reference="a0x-hG-aBP"/>
     </inferredMetricsTieBreakers>
 </document>
