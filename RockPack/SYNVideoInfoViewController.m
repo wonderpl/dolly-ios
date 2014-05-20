@@ -265,6 +265,8 @@ static const CGFloat UpcomingVideosDividerHeight = 70.0;
 	VideoAnnotation *annotation = [self.annotations firstObject];
 	NSURL *url = [NSURL URLWithString:annotation.url];
 	
+	[[SYNTrackingManager sharedManager] trackShopMotionBagPressForTitle:self.currentVideoInstance.title URL:url];
+	
 	UIViewController *viewController = [SYNWebViewController webViewControllerForURL:url];
 	[self presentViewController:viewController animated:YES completion:nil];
 }

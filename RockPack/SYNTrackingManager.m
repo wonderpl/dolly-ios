@@ -186,6 +186,14 @@ static const NSInteger TrackingDimensionConnection = 6;
 	[self trackEventWithCategory:UIActionCategory action:@"videoNext3videoClick" label:title value:nil];
 }
 
+- (void)trackShopMotionAnnotationPressForTitle:(NSString *)title {
+	[self trackEventWithCategory:UIActionCategory action:@"videoTouchPointClick" label:title value:nil];
+}
+- (void)trackShopMotionBagPressForTitle:(NSString *)title URL:(NSURL *)URL {
+	NSString *label = [NSString stringWithFormat:@"%@ - %@", title, URL];
+	[self trackEventWithCategory:UIActionCategory action:@"videoShopMotionBagClick" label:label value:nil];
+}
+
 - (void)trackVideoMaximiseViaRotation {
 	[self trackEventWithCategory:UIActionCategory action:@"videoMaximizeTurn"];
 }

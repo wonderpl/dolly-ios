@@ -312,6 +312,8 @@
 }
 
 - (void)videoPlayerAnnotationSelected:(VideoAnnotation *)annotation {
+	[[SYNTrackingManager sharedManager] trackShopMotionAnnotationPressForTitle:self.videoInstance.title];
+	
 	[self.videoInfoViewController addVideoAnnotation:annotation];
 }
 
