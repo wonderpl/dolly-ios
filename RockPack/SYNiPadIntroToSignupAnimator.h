@@ -10,4 +10,7 @@
 
 @interface SYNiPadIntroToSignupAnimator : NSObject <UIViewControllerAnimatedTransitioning>
 
+
++ (instancetype)animatorForPresentation:(BOOL)presenting;
+
 @end

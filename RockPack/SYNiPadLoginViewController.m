@@ -234,7 +234,14 @@
 }
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
-	return [SYNiPadLoginToForgotPasswordAnimator animatorForPresentation:NO];
+    
+	return [SYNiPadLoginToForgotPasswordAnimator animatorForPresentation:YES];
+}
+
+- (IBAction)goBack:(id)sender {
+    
+    [[self navigationController] popViewControllerAnimated:YES];
+
 }
 
 @end
