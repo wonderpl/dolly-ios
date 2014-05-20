@@ -27,7 +27,6 @@
 #import "SYNNetworkMessageView.h"
 #import "SYNActivityManager.h"
 #import "UIViewController+PresentNotification.h"
-#import "SYNDiscoverSectionHeaderView.h"
 #import "SYNIPadOnBoardingLayout.h"
 
 @interface SYNOnBoardingViewController () <UIBarPositioningDelegate, UICollectionViewDataSource, UICollectionViewDelegate, SYNOnboardingFooterDelegate>
@@ -57,9 +56,9 @@
           forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
                  withReuseIdentifier:[SYNOnBoardingHeader reuseIdentifier]];
     
-    [self.collectionView registerNib:[SYNDiscoverSectionHeaderView nib]
+    [self.collectionView registerNib:[SYNOnBoardingSectionHeader nib]
           forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
-                 withReuseIdentifier:[SYNDiscoverSectionHeaderView reuseIdentifier]];
+                 withReuseIdentifier:[SYNOnBoardingSectionHeader reuseIdentifier]];
     
     [self.collectionView registerNib:[SYNOnBoardingFooter nib]
           forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
@@ -258,8 +257,8 @@
 															 forIndexPath:indexPath];
             
         } else {
-            SYNDiscoverSectionHeaderView *sectionHeader = [collectionView dequeueReusableSupplementaryViewOfKind: kind
-                                                                                                 withReuseIdentifier: [SYNDiscoverSectionHeaderView reuseIdentifier]
+            SYNOnBoardingSectionHeader *sectionHeader = [collectionView dequeueReusableSupplementaryViewOfKind: kind
+                                                                                                 withReuseIdentifier: [SYNOnBoardingSectionHeader reuseIdentifier]
                                                                                                         forIndexPath: indexPath];
 			
 			[sectionHeader setTitleText: [self titleForIndexPath:indexPath]];

@@ -6,25 +6,36 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SYNOnBoardingSectionHeader" id="3yL-lb-2ac" customClass="SYNOnBoardingSectionHeader">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="42"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="SYNDiscoverSectionHeaderView" reuseIdentifier="SYNOnBoardingSectionHeader" id="bTP-mB-YSr" customClass="SYNOnBoardingSectionHeader">
+            <rect key="frame" x="0.0" y="0.0" width="300" height="42"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LABEL" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xaY-iE-t8T">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="42"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jxj-mm-AME">
+                    <rect key="frame" x="122" y="6" width="56" height="28"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                    <color key="textColor" red="0.43921568630000002" green="0.47450980390000003" blue="0.4823529412" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vn7-ig-f0D" userLabel="View - Line">
+                    <rect key="frame" x="69" y="36" width="163" height="1"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.81176470590000005" green="0.85098039219999999" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="5Be-L6-l3m"/>
+                        <constraint firstAttribute="width" constant="163" id="UBi-lM-Q3A"/>
+                    </constraints>
+                </view>
             </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="xaY-iE-t8T" firstAttribute="top" secondItem="3yL-lb-2ac" secondAttribute="top" id="5pC-Id-JsQ"/>
-                <constraint firstAttribute="bottom" secondItem="xaY-iE-t8T" secondAttribute="bottom" id="EJn-Wd-3Ge"/>
-                <constraint firstItem="xaY-iE-t8T" firstAttribute="leading" secondItem="3yL-lb-2ac" secondAttribute="leading" id="ZJF-rm-Xuw"/>
-                <constraint firstAttribute="trailing" secondItem="xaY-iE-t8T" secondAttribute="trailing" id="bHz-6g-rCL"/>
+                <constraint firstItem="vn7-ig-f0D" firstAttribute="centerX" secondItem="Jxj-mm-AME" secondAttribute="centerX" constant="0.5" id="6Rf-b1-ZLP"/>
+                <constraint firstItem="vn7-ig-f0D" firstAttribute="top" secondItem="Jxj-mm-AME" secondAttribute="bottom" constant="2" id="UEQ-aN-GjD"/>
+                <constraint firstAttribute="centerY" secondItem="Jxj-mm-AME" secondAttribute="centerY" constant="1" id="Vc1-7h-1NX"/>
+                <constraint firstAttribute="centerX" secondItem="Jxj-mm-AME" secondAttribute="centerX" id="dK1-nx-raX"/>
             </constraints>
             <connections>
-                <outlet property="sectionTitle" destination="xaY-iE-t8T" id="Jtq-bL-h7m"/>
+                <outlet property="sectionTitle" destination="Jxj-mm-AME" id="HUn-Aa-ksP"/>
             </connections>
         </collectionReusableView>
     </objects>
