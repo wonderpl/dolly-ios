@@ -551,7 +551,6 @@
 		E94BEFA918C9F18F00762651 /* _Recommendation.m in Sources */ = {isa = PBXBuildFile; fileRef = E94BEFA818C9F18F00762651 /* _Recommendation.m */; };
 		E94BEFAC18C9F19A00762651 /* Recommendation.m in Sources */ = {isa = PBXBuildFile; fileRef = E94BEFAB18C9F19A00762651 /* Recommendation.m */; };
 		E94BEFAE18CA0E6B00762651 /* NSStringTimecodeSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = E94BEFAD18CA0E6B00762651 /* NSStringTimecodeSpec.m */; };
-		E9533228185B7CE30031CA2B /* SYNSearchVideoLikesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9533227185B7CE30031CA2B /* SYNSearchVideoLikesModel.m */; };
 		E9577EA118EAF62300E95127 /* SYNVideoPlayerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9577EA018EAF62300E95127 /* SYNVideoPlayerCell.m */; };
 		E960239D18E5E6BA00A96CB4 /* SYNVideoPlayerViewController_iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E960239C18E5E6BA00A96CB4 /* SYNVideoPlayerViewController_iphone.storyboard */; };
 		E96A4C6A18439CD100ED5782 /* CIFilter+Monochrome.m in Sources */ = {isa = PBXBuildFile; fileRef = E96A4C6918439CD100ED5782 /* CIFilter+Monochrome.m */; };
@@ -627,7 +626,6 @@
 		E9D2E44D192667B80064F1A6 /* SYNIPadOnBoardingLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D2E44C192667B80064F1A6 /* SYNIPadOnBoardingLayout.m */; };
 		E9D2E44F192670FC0064F1A6 /* SYNIPadOnBoardingLayoutSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D2E44E192670FC0064F1A6 /* SYNIPadOnBoardingLayoutSpec.m */; };
 		E9D8E5A418995F1800EB1CD5 /* SYNNotificationsTableViewCell~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9D8E5A318995F1800EB1CD5 /* SYNNotificationsTableViewCell~iphone.xib */; };
-		E9D99DD018608F3000212AC5 /* SYNSearchVideoChannelsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D99DCF18608F3000212AC5 /* SYNSearchVideoChannelsModel.m */; };
 		E9E1E28018561C780051E312 /* SYNiPhonePopoverAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E1E27B18561C780051E312 /* SYNiPhonePopoverAnimator.m */; };
 		E9E1E28118561C780051E312 /* SYNPopoverAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E1E27D18561C780051E312 /* SYNPopoverAnimator.m */; };
 		E9E1E28218561C780051E312 /* SYNiPadPopoverAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E9E1E27F18561C780051E312 /* SYNiPadPopoverAnimator.m */; };
@@ -1458,8 +1456,6 @@
 		E94BEFAD18CA0E6B00762651 /* NSStringTimecodeSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSStringTimecodeSpec.m; sourceTree = "<group>"; };
 		E94E9C7518E44D8700E8CE84 /* NSString+TestHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+TestHelpers.h"; sourceTree = "<group>"; };
 		E94E9C7618E44D8700E8CE84 /* NSString+TestHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+TestHelpers.m"; sourceTree = "<group>"; };
-		E9533226185B7CE30031CA2B /* SYNSearchVideoLikesModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNSearchVideoLikesModel.h; sourceTree = "<group>"; };
-		E9533227185B7CE30031CA2B /* SYNSearchVideoLikesModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNSearchVideoLikesModel.m; sourceTree = "<group>"; };
 		E9577E9F18EAF62300E95127 /* SYNVideoPlayerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNVideoPlayerCell.h; sourceTree = "<group>"; };
 		E9577EA018EAF62300E95127 /* SYNVideoPlayerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNVideoPlayerCell.m; sourceTree = "<group>"; };
 		E960239C18E5E6BA00A96CB4 /* SYNVideoPlayerViewController_iphone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SYNVideoPlayerViewController_iphone.storyboard; sourceTree = "<group>"; };
@@ -1569,8 +1565,6 @@
 		E9D2E44C192667B80064F1A6 /* SYNIPadOnBoardingLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNIPadOnBoardingLayout.m; sourceTree = "<group>"; };
 		E9D2E44E192670FC0064F1A6 /* SYNIPadOnBoardingLayoutSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNIPadOnBoardingLayoutSpec.m; sourceTree = "<group>"; };
 		E9D8E5A318995F1800EB1CD5 /* SYNNotificationsTableViewCell~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNNotificationsTableViewCell~iphone.xib"; sourceTree = "<group>"; };
-		E9D99DCE18608F3000212AC5 /* SYNSearchVideoChannelsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNSearchVideoChannelsModel.h; sourceTree = "<group>"; };
-		E9D99DCF18608F3000212AC5 /* SYNSearchVideoChannelsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNSearchVideoChannelsModel.m; sourceTree = "<group>"; };
 		E9E1E27A18561C780051E312 /* SYNiPhonePopoverAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNiPhonePopoverAnimator.h; sourceTree = "<group>"; };
 		E9E1E27B18561C780051E312 /* SYNiPhonePopoverAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNiPhonePopoverAnimator.m; sourceTree = "<group>"; };
 		E9E1E27C18561C780051E312 /* SYNPopoverAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNPopoverAnimator.h; sourceTree = "<group>"; };
@@ -3749,10 +3743,6 @@
 				E9765BA6184F9ABA005D02E9 /* SYNFeedModel.m */,
 				E9FECE6A1856000800BBE7F2 /* SYNStaticModel.h */,
 				E9FECE6B1856000800BBE7F2 /* SYNStaticModel.m */,
-				E9533226185B7CE30031CA2B /* SYNSearchVideoLikesModel.h */,
-				E9533227185B7CE30031CA2B /* SYNSearchVideoLikesModel.m */,
-				E9D99DCE18608F3000212AC5 /* SYNSearchVideoChannelsModel.h */,
-				E9D99DCF18608F3000212AC5 /* SYNSearchVideoChannelsModel.m */,
 				4CCAD0B018D7520F00EC0F03 /* SYNProfileChannelModel.h */,
 				4CCAD0B118D7520F00EC0F03 /* SYNProfileChannelModel.m */,
 				4CCAD0B318D7530600EC0F03 /* SYNProfileSubscriptionModel.h */,
@@ -4397,7 +4387,6 @@
 				015CB01616AE039900FEB8E7 /* User.m in Sources */,
 				015CB01916AE03B200FEB8E7 /* _User.m in Sources */,
 				E9918C19189681BC00767BBD /* SYNTermsViewController.m in Sources */,
-				E9D99DD018608F3000212AC5 /* SYNSearchVideoChannelsModel.m in Sources */,
 				E9F6257018868A2B000EF6A2 /* SYNiPadPasswordForgotViewController.m in Sources */,
 				BE57C0261843604200C6444A /* SYNOnBoardingCell.m in Sources */,
 				4C5E85F018B620A200D0E937 /* SYNInBoardingViewController.m in Sources */,
@@ -4478,7 +4467,6 @@
 				BEE01B7018521DB8000CF681 /* _Comment.m in Sources */,
 				4C56F15818CF76E0005E4A7C /* SYNIPhoneCreateChannelLayout.m in Sources */,
 				E9EF288E18FD5E93003B2D0F /* SYNFeedVideoCell.m in Sources */,
-				E9533228185B7CE30031CA2B /* SYNSearchVideoLikesModel.m in Sources */,
 				E947097918D75F5A000174A7 /* SYNLocationManager.m in Sources */,
 				E994A92419080E9900C37AFB /* SYNFeedVideoLargeCell.m in Sources */,
 				BE21EEAF16FB4ECE0067223B /* SYNAccountSettingsPassword.m in Sources */,
