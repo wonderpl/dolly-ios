@@ -73,6 +73,7 @@ static const NSInteger TrackingDimensionConnection = 6;
 	GAI *gai = [GAI sharedInstance];
 	
     [gai trackerWithTrackingId:kGoogleAnalyticsId];
+	[[gai logger] setLogLevel:kGAILogLevelVerbose];
 	
 	gai.trackUncaughtExceptions = YES;
     gai.dispatchInterval = 30;
@@ -91,10 +92,6 @@ static const NSInteger TrackingDimensionConnection = 6;
 
 - (void)trackVideoLikeFromScreenName:(NSString *)screenName {
 	[self trackEventWithCategory:UIActionCategory action:@"videoLoveButtonClick" label:screenName value:nil];
-}
-
-- (void)trackVideoCommentFromScreenName:(NSString *)screenName {
-	[self trackEventWithCategory:UIActionCategory action:@"CommentButtonClick" label:screenName value:nil];
 }
 
 - (void)trackFacebookLogin {
@@ -178,6 +175,18 @@ static const NSInteger TrackingDimensionConnection = 6;
 	[self trackEventWithCategory:NetworkCategory action:@"videoLoadTime" label:nil value:@(loadTimeInMilliseconds)];
 }
 
+- (void)trackVideoDescriptionViewForTitle:(NSString *)title {
+	[self trackEventWithCategory:GoalCategory action:@"videoReadWatchScrolled"];
+}
+
+- (void)trackVideoUpcomingVideosViewForTitle:(NSString *)title {
+	[self trackEventWithCategory:GoalCategory action:@"videoNext3VideoScrolled"];
+}
+
+- (void)trackUpcomingVideoSelectedForTitle:(NSString *)title {
+	[self trackEventWithCategory:UIActionCategory action:@"videoNext3videoClick"];
+}
+
 - (void)trackVideoMaximiseViaRotation {
 	[self trackEventWithCategory:UIActionCategory action:@"videoMaximizeTurn"];
 }
@@ -190,25 +199,8 @@ static const NSInteger TrackingDimensionConnection = 6;
 	[self trackEventWithCategory:UIActionCategory action:@"videoAirPlayUsed"];
 }
 
-- (void)trackCarouselVideoSelected {
-	[self trackEventWithCategory:UIActionCategory action:@"videoBarClick"];
-}
-
-- (void)trackSearchVideoPlayerAppearsInSelected {
-	[self trackEventWithCategory:UIActionCategory action:@"viewer2AppearsIn"];
-}
-
-- (void)trackSearchVideoPlayerLovedBySelected {
-	[self trackEventWithCategory:UIActionCategory action:@"viewer2LovedBy"];
-}
-
 - (void)trackSearchInitiated {
 	[self trackEventWithCategory:UIActionCategory action:@"searchInitiate"];
-}
-
-- (void)trackCommentPostedWithTaggedUsers:(BOOL)hasTaggedUsers {
-	NSString *label = (hasTaggedUsers ? @"taggeduser" : @"notags");
-	[self trackEventWithCategory:GoalCategory action:@"CommentPosted" label:label value:nil];
 }
 
 - (void)trackCoverPhotoUploadCompleted {
@@ -330,10 +322,6 @@ static const NSInteger TrackingDimensionConnection = 6;
 
 - (void)trackCollectionFollowersScreenView {
 	[self trackScreenViewWithName:@"Subscriber list"];
-}
-
-- (void)trackCommentingScreenView {
-	[self trackScreenViewWithName:@"Commenting"];
 }
 
 - (void)trackAccountSettingsScreenView {

@@ -20,7 +20,6 @@ typedef NS_ENUM(NSInteger, kNotificationObjectType);
 - (void)trackClickToMoreWithTitle:(NSString *)title URL:(NSString *)URL;
 - (void)trackVideoAddFromScreenName:(NSString *)screenName;
 - (void)trackVideoLikeFromScreenName:(NSString *)screenName;
-- (void)trackVideoCommentFromScreenName:(NSString *)screenName;
 - (void)trackFacebookLogin;
 - (void)trackUserLoginFromOrigin:(NSString *)origin;
 - (void)trackUserRegistrationFromOrigin:(NSString *)origin;
@@ -39,10 +38,6 @@ typedef NS_ENUM(NSInteger, kNotificationObjectType);
 - (void)trackVideoAirPlayUsed;
 
 - (void)trackCreateChannelScreenView;
-
-- (void)trackCarouselVideoSelected;
-- (void)trackSearchVideoPlayerAppearsInSelected;
-- (void)trackSearchVideoPlayerLovedBySelected;
 
 - (void)trackCollectionSelectedIsNew:(BOOL)isNew;
 - (void)trackCollectionSaved;
@@ -65,13 +60,15 @@ typedef NS_ENUM(NSInteger, kNotificationObjectType);
 - (void)trackShareFriendSearch;
 - (void)trackShareFriendSearchSelect:(NSString *)origin;
 
-- (void)trackCommentPostedWithTaggedUsers:(BOOL)hasTaggedUsers;
-
 - (void)trackCollectionEdited:(NSString *)name;
 
 - (void)trackVideoLoadTime:(NSTimeInterval)loadTime;
 
 - (void)trackVideoView:(NSString *)videoId currentTime:(CGFloat)currentTime duration:(CGFloat)duration;
+
+- (void)trackVideoDescriptionViewForTitle:(NSString *)title;
+- (void)trackVideoUpcomingVideosViewForTitle:(NSString *)title;
+- (void)trackUpcomingVideoSelectedForTitle:(NSString *)title;
 
 - (void)trackAccountPropertyChanged:(NSString *)property;
 
@@ -116,8 +113,6 @@ typedef NS_ENUM(NSInteger, kNotificationObjectType);
 - (void)trackOtherUserProfileScreenView;
 - (void)trackOtherUserCollectionFollowingScreenView;
 - (void)trackOtherUserCollectionScreenView;
-
-- (void)trackCommentingScreenView;
 
 - (void)trackVideoSwipeToVideo:(BOOL)isPrevious;
 

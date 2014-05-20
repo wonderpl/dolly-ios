@@ -40,6 +40,9 @@ static const CGFloat UpcomingVideosDividerHeight = 70.0;
 
 @property (nonatomic, weak) SYNVideoActionsBar *videoActionsBar;
 
+@property (nonatomic, assign) BOOL hasTrackedDescriptionView;
+@property (nonatomic, assign) BOOL hasTrackedUpcomingVideosView;
+
 @end
 
 @implementation SYNVideoInfoViewController
@@ -115,6 +118,9 @@ static const CGFloat UpcomingVideosDividerHeight = 70.0;
 	
 	[self.collectionView reloadData];
 	self.collectionView.contentOffset = CGPointZero;
+	
+	self.hasTrackedDescriptionView = NO;
+	self.hasTrackedUpcomingVideosView = NO;
 }
 
 - (VideoInstance *)currentVideoInstance {
@@ -174,7 +180,10 @@ static const CGFloat UpcomingVideosDividerHeight = 70.0;
 	}
 }
 
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
+		   viewForSupplementaryElementOfKind:(NSString *)kind
+								 atIndexPath:(NSIndexPath *)indexPath {
+	
 	if (indexPath.section == [self upcomingVideosSectionIndex] && [kind isEqualToString:UICollectionElementKindSectionHeader]) {
 		UICollectionReusableView *reusableView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
 																					withReuseIdentifier:[SYNVideoDivider reuseIdentifier]
@@ -188,6 +197,7 @@ static const CGFloat UpcomingVideosDividerHeight = 70.0;
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.section == [self upcomingVideosSectionIndex]) {
+		[[SYNTrackingManager sharedManager] trackUpcomingVideoSelectedForTitle:self.currentVideoInstance.title];
 		[self.delegate videoInfoViewController:self didSelectVideoAtIndex:self.selectedIndex + indexPath.row + 1];
 	}
 }
@@ -218,6 +228,31 @@ static const CGFloat UpcomingVideosDividerHeight = 70.0;
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 	[self.delegate videoInfoViewController:self didScrollToContentOffset:scrollView.contentOffset];
+	
+	NSInteger descriptionSectionIndex = [self descriptionSectionIndex];
+	if (!self.hasTrackedDescriptionView && descriptionSectionIndex != NSNotFound) {
+		NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:descriptionSectionIndex];
+		UICollectionViewLayoutAttributes *attrs = [self.collectionView.collectionViewLayout layoutAttributesForItemAtIndexPath:indexPath];
+		
+		CGRect frame = attrs.frame;
+		if (CGRectGetMaxY(self.collectionView.bounds) >= CGRectGetMaxY(frame)) {
+			[[SYNTrackingManager sharedManager] trackVideoDescriptionViewForTitle:self.currentVideoInstance.title];
+			self.hasTrackedDescriptionView = YES;
+		}
+	}
+	
+	NSInteger upcomingVideosSectionIndex = [self upcomingVideosSectionIndex];
+	NSInteger numberOfItemsInSection = [self.collectionView numberOfItemsInSection:upcomingVideosSectionIndex];
+	if (!self.hasTrackedUpcomingVideosView && numberOfItemsInSection) {
+		NSIndexPath *indexPath = [NSIndexPath indexPathForItem:numberOfItemsInSection - 1 inSection:upcomingVideosSectionIndex];
+		UICollectionViewLayoutAttributes *attrs = [self.collectionView.collectionViewLayout layoutAttributesForItemAtIndexPath:indexPath];
+		
+		CGRect frame = attrs.frame;
+		if (CGRectGetMaxY(self.collectionView.bounds) >= CGRectGetMaxY(frame)) {
+			[[SYNTrackingManager sharedManager] trackVideoUpcomingVideosViewForTitle:self.currentVideoInstance.title];
+			self.hasTrackedUpcomingVideosView = YES;
+		}
+	}
 }
 
 #pragma mark - SYNVideoActionsBarDelegate
