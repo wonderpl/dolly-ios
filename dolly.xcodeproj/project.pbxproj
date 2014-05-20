@@ -538,7 +538,6 @@
 		E94BEFAE18CA0E6B00762651 /* NSStringTimecodeSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = E94BEFAD18CA0E6B00762651 /* NSStringTimecodeSpec.m */; };
 		E9577EA118EAF62300E95127 /* SYNVideoPlayerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E9577EA018EAF62300E95127 /* SYNVideoPlayerCell.m */; };
 		E960239D18E5E6BA00A96CB4 /* SYNVideoPlayerViewController_iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E960239C18E5E6BA00A96CB4 /* SYNVideoPlayerViewController_iphone.storyboard */; };
-		E96A4C6A18439CD100ED5782 /* CIFilter+Monochrome.m in Sources */ = {isa = PBXBuildFile; fileRef = E96A4C6918439CD100ED5782 /* CIFilter+Monochrome.m */; };
 		E972DFAF187C6A5E00CB9C78 /* SYNiPhoneIntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E972DFAE187C6A5E00CB9C78 /* SYNiPhoneIntroViewController.m */; };
 		E972DFB1187C6FD900CB9C78 /* Login_iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E972DFB0187C6FD900CB9C78 /* Login_iphone.storyboard */; };
 		E9765BA7184F9ABA005D02E9 /* SYNFeedModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9765BA6184F9ABA005D02E9 /* SYNFeedModel.m */; };
@@ -1424,8 +1423,6 @@
 		E9577E9F18EAF62300E95127 /* SYNVideoPlayerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNVideoPlayerCell.h; sourceTree = "<group>"; };
 		E9577EA018EAF62300E95127 /* SYNVideoPlayerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNVideoPlayerCell.m; sourceTree = "<group>"; };
 		E960239C18E5E6BA00A96CB4 /* SYNVideoPlayerViewController_iphone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SYNVideoPlayerViewController_iphone.storyboard; sourceTree = "<group>"; };
-		E96A4C6818439CD100ED5782 /* CIFilter+Monochrome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CIFilter+Monochrome.h"; sourceTree = "<group>"; };
-		E96A4C6918439CD100ED5782 /* CIFilter+Monochrome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CIFilter+Monochrome.m"; sourceTree = "<group>"; };
 		E972DFAD187C6A5E00CB9C78 /* SYNiPhoneIntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNiPhoneIntroViewController.h; sourceTree = "<group>"; };
 		E972DFAE187C6A5E00CB9C78 /* SYNiPhoneIntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNiPhoneIntroViewController.m; sourceTree = "<group>"; };
 		E972DFB0187C6FD900CB9C78 /* Login_iphone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login_iphone.storyboard; sourceTree = "<group>"; };
@@ -2213,8 +2210,6 @@
 				011A160D16EE53A0008CF25E /* UIImage+Resize.m */,
 				012CDC2E17E1CE1A00C723BB /* UIDevice+Hardware.h */,
 				012CDC2F17E1CE1A00C723BB /* UIDevice+Hardware.m */,
-				E96A4C6818439CD100ED5782 /* CIFilter+Monochrome.h */,
-				E96A4C6918439CD100ED5782 /* CIFilter+Monochrome.m */,
 				E9F7CC741846273E0026C97D /* NSString+Validation.h */,
 				E9F7CC751846273E0026C97D /* NSString+Validation.m */,
 				E92D3356184CDFEA0025D1DF /* UICollectionReusableView+Helpers.h */,
@@ -4466,7 +4461,6 @@
 				E9EE08CB18F6E139000DC06A /* SYNVideoCell.m in Sources */,
 				3864D2DC1743DB3000A90ED3 /* SYNImagePickerController.m in Sources */,
 				E9765BA7184F9ABA005D02E9 /* SYNFeedModel.m in Sources */,
-				E96A4C6A18439CD100ED5782 /* CIFilter+Monochrome.m in Sources */,
 				BE2D3EEE183A3C2C003B2C26 /* SYNAboutViewController.m in Sources */,
 				BE5D29EB17577E2800C00486 /* SYNPopupMessageView.m in Sources */,
 				E98F609B18B25CBD008AAAA8 /* NSRegularExpression+Username.m in Sources */,
