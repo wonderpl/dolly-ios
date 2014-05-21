@@ -23,24 +23,13 @@
 - (void)registerActivityFromDictionary:(NSDictionary*)dictionary;
 - (void) updateActivityForCurrentUserWithReset:(BOOL) reset;
 
-
-//- (void) subscriptionRequestToChannel: (Channel *) channel
-//                    completionHandler: (MKNKUserSuccessBlock) completionBlock
-//                         errorHandler: (MKNKUserErrorBlock) errorBlock;
-
-
 - (void) subscribeToChannel: (Channel *) channel
           completionHandler: (MKNKUserSuccessBlock) completionBlock
                errorHandler: (MKNKUserErrorBlock) errorBlock;
 
-//-(void) subscribetoChannel :(Channel*) channel;
-
 - (void) unsubscribeToChannel: (Channel *) channel
             completionHandler: (MKNKUserSuccessBlock) completionBlock
                  errorHandler: (MKNKUserErrorBlock) errorBlock;
-//-(void) unsubscribetoChannel :(Channel*) channel;
-
-
 
 - (void) subscribeToUser: (ChannelOwner *) channelOwner
        completionHandler: (MKNKUserSuccessBlock) completionBlock
@@ -53,4 +42,6 @@
 - (void) addChannelSubscriptionsObject:(Channel *)channel;
 - (void) addUserSubscriptonsObject:(ChannelOwner*)channelOwner;
 - (void) subscribedList;
+- (NSUInteger) userFollowingCount;
+
 @end
