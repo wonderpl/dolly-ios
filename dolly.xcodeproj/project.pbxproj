@@ -518,6 +518,7 @@
 		E91E3B2118C7292400F79020 /* ButtonVideoDeleteDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = E91E3B1F18C7292400F79020 /* ButtonVideoDeleteDefault.png */; };
 		E91E3B2218C7292400F79020 /* ButtonVideoDeleteDefault@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E91E3B2018C7292400F79020 /* ButtonVideoDeleteDefault@2x.png */; };
 		E91F04521844BDB50009D610 /* SYNVideoLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = E91F04511844BDB50009D610 /* SYNVideoLoadingView.m */; };
+		E924DEBC192CC457004A3C9E /* SYNTimestampLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E924DEBB192CC457004A3C9E /* SYNTimestampLabel.m */; };
 		E92835DF18D9B78F00F7DA27 /* SYNAppearanceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E92835DE18D9B78F00F7DA27 /* SYNAppearanceManager.m */; };
 		E92837B2189C0BE9005D5108 /* SYNFacebookButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E92837B1189C0BE9005D5108 /* SYNFacebookButton.m */; };
 		E929AD7218D0AF0B001E1792 /* SYNHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E929AD7118D0AF0B001E1792 /* SYNHTTPSessionManager.m */; };
@@ -1384,6 +1385,8 @@
 		E91F04501844BDB50009D610 /* SYNVideoLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNVideoLoadingView.h; sourceTree = "<group>"; };
 		E91F04511844BDB50009D610 /* SYNVideoLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNVideoLoadingView.m; sourceTree = "<group>"; };
 		E91F04531844C4410009D610 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		E924DEBA192CC457004A3C9E /* SYNTimestampLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNTimestampLabel.h; sourceTree = "<group>"; };
+		E924DEBB192CC457004A3C9E /* SYNTimestampLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNTimestampLabel.m; sourceTree = "<group>"; };
 		E92835DD18D9B78F00F7DA27 /* SYNAppearanceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAppearanceManager.h; sourceTree = "<group>"; };
 		E92835DE18D9B78F00F7DA27 /* SYNAppearanceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAppearanceManager.m; sourceTree = "<group>"; };
 		E92837B0189C0BE9005D5108 /* SYNFacebookButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNFacebookButton.h; sourceTree = "<group>"; };
@@ -2064,6 +2067,8 @@
 				E985D34E18FED3BF00D5A9E1 /* SYNVideoActionsBar.h */,
 				E985D34F18FED3BF00D5A9E1 /* SYNVideoActionsBar.m */,
 				E985D35118FED3CD00D5A9E1 /* SYNVideoActionsBar.xib */,
+				E924DEBA192CC457004A3C9E /* SYNTimestampLabel.h */,
+				E924DEBB192CC457004A3C9E /* SYNTimestampLabel.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -4438,6 +4443,7 @@
 				E9F7CC7C1846562F0026C97D /* SYNVideoPlayerViewController.m in Sources */,
 				011C1684173003E800CF50B9 /* OWTwitterActivity.m in Sources */,
 				38A2FF1B17314B3E00FB9F57 /* SYNDiscoverAutocompleteCell.m in Sources */,
+				E924DEBC192CC457004A3C9E /* SYNTimestampLabel.m in Sources */,
 				E93E10E9183512D600A62F64 /* SYNOoyalaVideoPlayer.m in Sources */,
 				E92D335B184E239C0025D1DF /* SYNPagingModel.m in Sources */,
 				4CE0B4C118CE258A009859CB /* SYNProfileHeader.m in Sources */,

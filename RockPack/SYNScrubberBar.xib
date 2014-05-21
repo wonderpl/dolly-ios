@@ -22,7 +22,7 @@
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1TK-HE-31a" customClass="SYNProgressView">
-                    <rect key="frame" x="42" y="7" width="165" height="10"/>
+                    <rect key="frame" x="69" y="7" width="138" height="10"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     <constraints>
@@ -30,7 +30,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UPL-IY-mRy" customClass="UISlider">
-                    <rect key="frame" x="42" y="-6" width="165" height="34"/>
+                    <rect key="frame" x="69" y="-6" width="138" height="34"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="34" id="oQs-3a-YDo"/>
@@ -65,12 +65,21 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e9l-ov-1Zi" customClass="SYNTimestampLabel">
+                    <rect key="frame" x="38" y="5" width="25" height="15"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="0.47843137254901957" green="0.50196078431372548" blue="0.52156862745098043" alpha="0.38" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="centerY" secondItem="2HY-ng-bdK" secondAttribute="centerY" id="1uY-Kv-the"/>
+                <constraint firstAttribute="centerY" secondItem="e9l-ov-1Zi" secondAttribute="centerY" id="99E-6U-MCt"/>
                 <constraint firstAttribute="trailing" secondItem="Kmx-LH-wU8" secondAttribute="trailing" constant="4" id="A1f-Ar-Reh"/>
                 <constraint firstAttribute="centerY" secondItem="1TK-HE-31a" secondAttribute="centerY" id="HcR-XS-nMI"/>
+                <constraint firstItem="1TK-HE-31a" firstAttribute="leading" secondItem="e9l-ov-1Zi" secondAttribute="trailing" constant="6" id="JJd-4P-TrL"/>
                 <constraint firstItem="Kmx-LH-wU8" firstAttribute="leading" secondItem="GtO-iW-TPz" secondAttribute="trailing" constant="10" id="MxH-Fa-Rll"/>
                 <constraint firstItem="2HY-ng-bdK" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="V9l-Ok-PU8"/>
                 <constraint firstItem="1TK-HE-31a" firstAttribute="leading" secondItem="UPL-IY-mRy" secondAttribute="leading" id="bFK-vf-WoG"/>
@@ -78,10 +87,10 @@
                 <constraint firstItem="1TK-HE-31a" firstAttribute="trailing" secondItem="UPL-IY-mRy" secondAttribute="trailing" id="eiy-UR-iBX"/>
                 <constraint firstAttribute="centerY" secondItem="GtO-iW-TPz" secondAttribute="centerY" id="fxQ-TQ-QCH"/>
                 <constraint firstItem="hzL-mR-Ilh" firstAttribute="leading" secondItem="1TK-HE-31a" secondAttribute="trailing" constant="6" id="glw-Cq-MEl"/>
+                <constraint firstItem="e9l-ov-1Zi" firstAttribute="leading" secondItem="2HY-ng-bdK" secondAttribute="trailing" id="j5R-QD-phd"/>
                 <constraint firstAttribute="centerY" secondItem="hzL-mR-Ilh" secondAttribute="centerY" id="n5H-PA-szk"/>
                 <constraint firstAttribute="centerY" secondItem="Kmx-LH-wU8" secondAttribute="centerY" id="oAE-WV-mJz"/>
                 <constraint firstItem="GtO-iW-TPz" firstAttribute="leading" secondItem="hzL-mR-Ilh" secondAttribute="trailing" constant="4" id="rLc-XT-wPR"/>
-                <constraint firstItem="1TK-HE-31a" firstAttribute="leading" secondItem="2HY-ng-bdK" secondAttribute="trailing" constant="4" id="v2q-dp-Ntm"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
@@ -91,6 +100,7 @@
                 <outlet property="highDefinitionWidth" destination="jlD-jx-yCU" id="qui-ec-Kze"/>
                 <outlet property="playPauseButton" destination="2HY-ng-bdK" id="VHc-Dp-nzo"/>
                 <outlet property="progressSlider" destination="UPL-IY-mRy" id="Ap2-P6-ftg"/>
+                <outlet property="timestampLabel" destination="e9l-ov-1Zi" id="TDb-5j-J62"/>
                 <outlet property="volumeView" destination="Kmx-LH-wU8" id="4LJ-vJ-lkM"/>
                 <outlet property="volumeViewTrailingSpace" destination="A1f-Ar-Reh" id="6Ce-gx-a5C"/>
             </connections>
