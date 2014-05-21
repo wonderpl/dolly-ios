@@ -17,15 +17,12 @@
 @implementation SYNVideoPlayerCell
 
 - (void)setVideoPlayer:(SYNVideoPlayer *)videoPlayer {
-	if (_videoPlayer) {
-		[_videoPlayer removeFromSuperview];
-	}
 	_videoPlayer = videoPlayer;
 	
 	videoPlayer.frame = self.bounds;
 	videoPlayer.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
 	
-	[self.contentView addSubview:videoPlayer];
+	[self addSubview:videoPlayer];
 }
 
 @end
