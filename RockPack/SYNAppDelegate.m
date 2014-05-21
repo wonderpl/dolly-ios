@@ -169,7 +169,7 @@
     }
     else
     {
-        if (self.currentUser || credential)
+        if ((self.currentUser || credential) && application.protectedDataAvailable)
         {
             [self logout];
         }
@@ -194,7 +194,6 @@
     
     return YES;
 }
-
 
 - (void) refreshFacebookSession
 {
