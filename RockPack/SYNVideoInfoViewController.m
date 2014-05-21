@@ -197,7 +197,6 @@ static const CGFloat UpcomingVideosDividerHeight = 70.0;
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.section == [self upcomingVideosSectionIndex]) {
-		[[SYNTrackingManager sharedManager] trackUpcomingVideoSelectedForTitle:self.currentVideoInstance.title];
 		[self.delegate videoInfoViewController:self didSelectVideoAtIndex:self.selectedIndex + indexPath.row + 1];
 	}
 }

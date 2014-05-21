@@ -332,6 +332,9 @@
 }
 
 - (void)videoInfoViewController:(SYNVideoInfoViewController *)viewController didSelectVideoAtIndex:(NSInteger)index {
+	VideoInstance *videoInstance = [self.model itemAtIndex:index];
+	[[SYNTrackingManager sharedManager] trackUpcomingVideoSelectedForTitle:videoInstance.title];
+
 	self.selectedIndex = index;
 }
 
