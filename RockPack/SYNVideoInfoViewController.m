@@ -36,7 +36,7 @@ static const CGFloat UpcomingVideosDividerHeight = 70.0;
 
 @property (nonatomic, strong, readonly) VideoInstance *currentVideoInstance;
 
-@property (nonatomic, strong) NSMutableArray *annotations;
+@property (nonatomic, strong) NSMutableOrderedSet *annotations;
 
 @property (nonatomic, weak) SYNVideoActionsBar *videoActionsBar;
 
@@ -52,7 +52,7 @@ static const CGFloat UpcomingVideosDividerHeight = 70.0;
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
-	self.annotations = [NSMutableArray array];
+	self.annotations = [NSMutableOrderedSet orderedSet];
 	self.descriptionHeight = 50;
 	
 	[self.collectionView registerNib:[SYNVideoDivider nib]
@@ -113,7 +113,7 @@ static const CGFloat UpcomingVideosDividerHeight = 70.0;
 	_selectedIndex = selectedIndex;
 	
 	if (selectedIndexChanged) {
-		self.annotations = [NSMutableArray array];
+		self.annotations = [NSMutableOrderedSet orderedSet];
 	}
 	
 	[self.collectionView reloadData];
