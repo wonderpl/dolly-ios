@@ -57,13 +57,14 @@
         
         UIImage *image = userInfo[@"image"];
         NSURL *url = userInfo[@"url"];
-        
+		
 		UIViewController *shareViewController = activityViewController.presentingController;
 		UIViewController *presentingViewController = shareViewController.presentingViewController;
         [shareViewController dismissViewControllerAnimated: YES
 												completion: ^{
                                                        MFMailComposeViewController *mailComposeViewController = [[MFMailComposeViewController alloc] init];
                                                        [OWActivityDelegateObject sharedObject].controller = presentingViewController;
+													[OWActivityDelegateObject sharedObject].isSharingVideo = [userInfo[@"video"] boolValue];
                                                        mailComposeViewController.mailComposeDelegate = [OWActivityDelegateObject sharedObject];
                                                        
                                                        if (text && !url)

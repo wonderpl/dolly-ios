@@ -18,7 +18,6 @@
 
 @interface SYNiPadLoginViewController () <UITextFieldDelegate, UIViewControllerTransitioningDelegate>
 
-@property (nonatomic, strong) IBOutlet UIButton *facebookButton;
 @property (nonatomic, strong) IBOutlet SYNTextFieldLogin *emailUsernameTextField;
 @property (nonatomic, strong) IBOutlet UILabel *emailUsernameErrorLabel;
 @property (nonatomic, strong) IBOutlet SYNTextFieldLogin *passwordTextField;
@@ -35,8 +34,6 @@
 	[super viewDidLoad];
 	
 	self.loginButton.titleLabel.font = [UIFont lightCustomFontOfSize:self.loginButton.titleLabel.font.pointSize];
-    
-    [self.CreateAnAccountLabel setFont:[UIFont regularCustomFontOfSize:19]];
     
     [self.forgotPasswordButton.titleLabel setFont:[UIFont regularCustomFontOfSize:15]];
     

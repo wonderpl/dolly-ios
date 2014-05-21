@@ -84,12 +84,18 @@
         {
             self.objectType = kNotificationObjectTypeCommentMention;
         }
+		else if ([self.messageType isEqualToString:@"video_shared"]) {
+			self.objectType = kNotificationObjectTypeShareVideo;
+		}
+		else if ([self.messageType isEqualToString:@"channel_shared"]) {
+			self.objectType = kNotificationObjectTypeShareChannel;
+		}
         else
         {
             // Unexpected object, this is used so that the message can be safely ignored by receipients
             self.objectType = kNotificationObjectTypeUnknown;
         }
-        
+		
         NSString *dateString = data[@"date_created"];
         if(dateString)
             self.dateDifferenceString = [self parseDateString:dateString];

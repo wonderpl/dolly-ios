@@ -253,7 +253,7 @@
     switch (notification.objectType)
     {
             
-        
+        case kNotificationObjectTypeShareVideo:
         case kNotificationObjectTypeUserAddedYourVideo:
         case kNotificationObjectTypeUserLikedYourVideo:
         {
@@ -266,6 +266,7 @@
             break;
         }
             
+		case kNotificationObjectTypeShareChannel:
         case kNotificationObjectTypeUserSubscibedToYourChannel:
         {
             Channel* channel = [Channel instanceFromDictionary: @{@"id" : notification.channelId, @"resource_url" : notification.channelResourceUrl}

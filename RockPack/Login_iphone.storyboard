@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="h6T-H1-ExR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="h6T-H1-ExR">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -249,7 +249,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OJf-c6-72A" userLabel="Button photo">
-                                        <rect key="frame" x="106" y="64" width="108" height="108"/>
+                                        <rect key="frame" x="111" y="64" width="98" height="98"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" image="ButtonUpload.png">
@@ -264,12 +264,12 @@
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EQP-Lj-nBZ" userLabel="Avatar">
-                                        <rect key="frame" x="106" y="64" width="108" height="108"/>
+                                        <rect key="frame" x="111" y="68" width="98" height="98"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="108" id="R5n-Zu-hkb"/>
-                                            <constraint firstAttribute="width" constant="108" id="aOm-ky-Nr5"/>
+                                            <constraint firstAttribute="height" constant="98" id="R5n-Zu-hkb"/>
+                                            <constraint firstAttribute="width" constant="98" id="aOm-ky-Nr5"/>
                                         </constraints>
                                     </imageView>
                                     <textField opaque="NO" clipsSubviews="YES" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First Name" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="YTM-1r-Zpl" userLabel="First Name Text Field" customClass="SYNTextFieldLogin">
@@ -338,7 +338,7 @@
                                         </connections>
                                     </textField>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h1H-Rt-KbK">
-                                        <rect key="frame" x="141" y="162" width="38" height="18"/>
+                                        <rect key="frame" x="141" y="169" width="38" height="18"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="0.59607843137254901" green="0.59607843137254901" blue="0.59607843137254901" alpha="1" colorSpace="calibratedRGB"/>
@@ -349,11 +349,11 @@
                                     <constraint firstItem="Gk4-sP-JFJ" firstAttribute="top" secondItem="JPL-Qb-onL" secondAttribute="bottom" constant="11" id="1Or-9m-XF7"/>
                                     <constraint firstAttribute="centerX" secondItem="aB2-qR-1JB" secondAttribute="centerX" id="4zT-oh-1SB"/>
                                     <constraint firstAttribute="centerX" secondItem="YTM-1r-Zpl" secondAttribute="centerX" id="5HE-WH-hD7"/>
-                                    <constraint firstItem="EQP-Lj-nBZ" firstAttribute="centerY" secondItem="OJf-c6-72A" secondAttribute="centerY" id="5wy-K0-gGT"/>
+                                    <constraint firstItem="EQP-Lj-nBZ" firstAttribute="centerY" secondItem="OJf-c6-72A" secondAttribute="centerY" constant="4" id="5wy-K0-gGT"/>
                                     <constraint firstAttribute="centerX" secondItem="x7X-da-tl9" secondAttribute="centerX" id="8ZV-NH-shi"/>
                                     <constraint firstItem="YTM-1r-Zpl" firstAttribute="top" secondItem="PqI-FD-gXl" secondAttribute="top" constant="188" id="EOB-w8-f6w"/>
                                     <constraint firstItem="EQP-Lj-nBZ" firstAttribute="width" secondItem="OJf-c6-72A" secondAttribute="width" id="H0C-L8-LHI"/>
-                                    <constraint firstItem="EQP-Lj-nBZ" firstAttribute="top" secondItem="PqI-FD-gXl" secondAttribute="top" constant="64" id="IJy-uP-UcD"/>
+                                    <constraint firstItem="EQP-Lj-nBZ" firstAttribute="top" secondItem="PqI-FD-gXl" secondAttribute="top" constant="68" id="IJy-uP-UcD"/>
                                     <constraint firstItem="JPL-Qb-onL" firstAttribute="top" secondItem="x7X-da-tl9" secondAttribute="bottom" constant="8" id="Xcv-VG-Ip3"/>
                                     <constraint firstItem="h1H-Rt-KbK" firstAttribute="centerX" secondItem="EQP-Lj-nBZ" secondAttribute="centerX" id="b2P-LD-Ihh"/>
                                     <constraint firstAttribute="centerX" secondItem="Gk4-sP-JFJ" secondAttribute="centerX" id="e26-Fc-bbn"/>
@@ -361,7 +361,7 @@
                                     <constraint firstAttribute="centerX" secondItem="JPL-Qb-onL" secondAttribute="centerX" id="fsZ-hF-7T1"/>
                                     <constraint firstItem="x7X-da-tl9" firstAttribute="top" secondItem="YTM-1r-Zpl" secondAttribute="bottom" constant="8" id="hvq-WE-vyM"/>
                                     <constraint firstItem="EQP-Lj-nBZ" firstAttribute="height" secondItem="OJf-c6-72A" secondAttribute="height" id="o75-dd-HPj"/>
-                                    <constraint firstItem="h1H-Rt-KbK" firstAttribute="top" secondItem="EQP-Lj-nBZ" secondAttribute="bottom" constant="-10" id="pis-nV-eu4"/>
+                                    <constraint firstItem="h1H-Rt-KbK" firstAttribute="top" secondItem="EQP-Lj-nBZ" secondAttribute="bottom" constant="3" id="pis-nV-eu4"/>
                                     <constraint firstAttribute="centerX" secondItem="EQP-Lj-nBZ" secondAttribute="centerX" id="vCY-Ta-8Ya"/>
                                     <constraint firstItem="EQP-Lj-nBZ" firstAttribute="centerX" secondItem="OJf-c6-72A" secondAttribute="centerX" id="yXO-yO-h4u"/>
                                 </constraints>
@@ -953,6 +953,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="1fQ-HG-P1W"/>
+        <segue reference="uhx-wm-F66"/>
     </inferredMetricsTieBreakers>
 </document>

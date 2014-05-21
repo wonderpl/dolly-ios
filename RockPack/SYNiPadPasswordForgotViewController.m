@@ -20,8 +20,6 @@
 @property (nonatomic, strong) IBOutlet UIButton *sendButton;
 
 @property (nonatomic, strong) IBOutlet UILabel *accountLabel;
-@property (nonatomic, strong) IBOutlet UIButton *loginButton;
-@property (nonatomic, strong) IBOutlet UILabel *haveAnAccountLabel;
 
 @end
 
@@ -29,8 +27,6 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
-	
-	[self.haveAnAccountLabel setFont:[UIFont regularCustomFontOfSize:19]];
     
     self.sendButton.layer.borderColor = [[UIColor dollyGreen] CGColor];
     self.sendButton.layer.borderWidth = 1.0;
@@ -53,7 +49,8 @@
 	[[SYNTrackingManager sharedManager] trackForgotPasswordScreenView];
 }
 
-- (IBAction)loginButtonPressed:(UIButton *)button {
+
+- (IBAction)goBack:(id)sender {
 	[self.navigationController popViewControllerAnimated:YES];
 }
 

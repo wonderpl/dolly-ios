@@ -70,6 +70,9 @@ typedef NS_ENUM(NSInteger, kNotificationObjectType);
 - (void)trackVideoUpcomingVideosViewForTitle:(NSString *)title;
 - (void)trackUpcomingVideoSelectedForTitle:(NSString *)title;
 
+- (void)trackShopMotionAnnotationPressForTitle:(NSString *)title;
+- (void)trackShopMotionBagPressForTitle:(NSString *)title URL:(NSURL *)URL;
+
 - (void)trackAccountPropertyChanged:(NSString *)property;
 
 - (void)trackAddressBookPermission:(BOOL)granted;
@@ -116,8 +119,7 @@ typedef NS_ENUM(NSInteger, kNotificationObjectType);
 
 - (void)trackVideoSwipeToVideo:(BOOL)isPrevious;
 
-- (void)trackCarouselVideoPlayerScreenView;
-- (void)trackSearchVideoPlayerScreenView;
+- (void)trackVideoPlayerScreenView;
 
 - (void)trackShareScreenView;
 

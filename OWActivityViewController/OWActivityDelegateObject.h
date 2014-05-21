@@ -30,6 +30,8 @@
 
 @property (strong, nonatomic) UIViewController *controller;
 
+@property (nonatomic, assign) BOOL isSharingVideo;
+
 + (OWActivityDelegateObject *)sharedObject;
 
 @end

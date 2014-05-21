@@ -186,6 +186,14 @@ static const NSInteger TrackingDimensionConnection = 6;
 	[self trackEventWithCategory:UIActionCategory action:@"videoNext3videoClick" label:title value:nil];
 }
 
+- (void)trackShopMotionAnnotationPressForTitle:(NSString *)title {
+	[self trackEventWithCategory:UIActionCategory action:@"videoTouchPointClick" label:title value:nil];
+}
+- (void)trackShopMotionBagPressForTitle:(NSString *)title URL:(NSURL *)URL {
+	NSString *label = [NSString stringWithFormat:@"%@ - %@", title, URL];
+	[self trackEventWithCategory:UIActionCategory action:@"videoShopMotionBagClick" label:label value:nil];
+}
+
 - (void)trackVideoMaximiseViaRotation {
 	[self trackEventWithCategory:UIActionCategory action:@"videoMaximizeTurn"];
 }
@@ -359,12 +367,8 @@ static const NSInteger TrackingDimensionConnection = 6;
 	[self trackScreenViewWithName:@"Rate"];
 }
 
-- (void)trackCarouselVideoPlayerScreenView {
-	[self trackScreenViewWithName:@"Video 1"];
-}
-
-- (void)trackSearchVideoPlayerScreenView {
-	[self trackScreenViewWithName:@"Video 2"];
+- (void)trackVideoPlayerScreenView {
+	[self trackScreenViewWithName:@"Video"];
 }
 
 - (void)trackClickToMoreScreenView {

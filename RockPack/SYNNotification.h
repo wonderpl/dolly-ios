@@ -10,14 +10,16 @@
 @import Foundation;
 
 typedef NS_ENUM(NSInteger, kNotificationObjectType) {
-    kNotificationObjectTypeUserLikedYourVideo = 0,
-    kNotificationObjectTypeUserSubscibedToYourChannel = 1,
-    kNotificationObjectTypeFacebookFriendJoined = 2,
-    kNotificationObjectTypeUserAddedYourVideo = 3, // Repack
-    kNotificationObjectTypeYourVideoNotAvailable = 4, // One of your videos is no longer available
-    kNotificationObjectTypeCommentMention = 5, // Comment
+    kNotificationObjectTypeUserLikedYourVideo,
+    kNotificationObjectTypeUserSubscibedToYourChannel,
+    kNotificationObjectTypeFacebookFriendJoined,
+    kNotificationObjectTypeUserAddedYourVideo, // Repack
+    kNotificationObjectTypeYourVideoNotAvailable, // One of your videos is no longer available
+    kNotificationObjectTypeCommentMention, // Comment
+	kNotificationObjectTypeShareVideo,
+	kNotificationObjectTypeShareChannel,
 
-    kNotificationObjectTypeUnknown = 666
+    kNotificationObjectTypeUnknown = NSNotFound
 };
 
 @interface SYNNotification : NSObject

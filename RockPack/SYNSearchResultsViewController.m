@@ -405,7 +405,14 @@ typedef void (^SearchResultCompleteBlock)(int);
 }
 
 - (BOOL) clearSearchEntities {
-	[appDelegate.searchManagedObjectContext reset];
+	
+	NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[AbstractCommon entityName]];
+	NSArray *array = [appDelegate.searchManagedObjectContext executeFetchRequest:fetchRequest error:nil];
+	for (AbstractCommon *object in array) {
+		[appDelegate.searchManagedObjectContext deleteObject:object];
+	}
+	
+	[appDelegate.searchManagedObjectContext save:nil];
 
 	self.videosArray = @[];
 	self.usersArray = @[];

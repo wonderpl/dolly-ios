@@ -25,8 +25,7 @@
 
 #import "Appirater.h"
 #import "OWActivityDelegateObject.h"
-
-
+#import "SYNTrackingManager.h"
 
 @implementation OWActivityDelegateObject
 
@@ -63,6 +62,14 @@ static OWActivityDelegateObject *_sharedObject = nil;
 - (void) mailComposeController: (MFMailComposeViewController *) controller didFinishWithResult: (MFMailComposeResult) result error: (NSError *) error
 {
     [Appirater userDidSignificantEvent: FALSE];
+	
+	if (result == MFMailComposeResultSent) {
+		if (self.isSharingVideo) {
+			[[SYNTrackingManager sharedManager] trackVideoShareCompletedWithService:@"email"];
+		} else {
+			[[SYNTrackingManager sharedManager] trackCollectionShareCompletedWithService:@"email"];
+		}
+	}
     
     [self.controller dismissViewControllerAnimated: YES
                                         completion:^{
