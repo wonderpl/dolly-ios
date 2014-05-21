@@ -132,7 +132,9 @@ typedef NS_ENUM(NSInteger, SYNNotificationsTableViewCellThumbnailType) {
 									 @(kNotificationObjectTypeUserLikedYourVideo) : @"notification_liked_action",
 									 @(kNotificationObjectTypeUserAddedYourVideo) : @"notification_repack_action",
 									 @(kNotificationObjectTypeYourVideoNotAvailable) : @"notification_unavailable_action",
-                                     @(kNotificationObjectTypeCommentMention) : @"notification_comment_action" };
+                                     @(kNotificationObjectTypeCommentMention) : @"notification_comment_action",
+									 @(kNotificationObjectTypeShareVideo) : @"notification_share_video",
+									 @(kNotificationObjectTypeShareChannel) : @"notification_share_channel" };
 	
 	NSString *mappedKey = stringMapping[@(notification.objectType)];
     
