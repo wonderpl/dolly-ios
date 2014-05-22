@@ -34,6 +34,7 @@
 #import "SYNVideoInfoViewController.h"
 @import AVFoundation;
 @import MediaPlayer;
+@import MessageUI;
 
 @interface SYNVideoPlayerViewController () <UIViewControllerTransitioningDelegate, UIPopoverControllerDelegate, UIScrollViewDelegate, SYNVideoPlayerDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SYNVideoInfoViewControllerDelegate>
 
@@ -169,8 +170,11 @@
 	AVAudioSession *audioSession = [AVAudioSession sharedInstance];
 	[audioSession setActive:NO withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation error:nil];
 	
-	// If we're showing another view controller which isn't the full screen one then we want to pause the video
-	if (![self.presentedViewController isKindOfClass:[SYNFullScreenVideoViewController class]]) {
+	BOOL isShowingMail = [self.presentedViewController isKindOfClass:[MFMailComposeViewController class]];
+	BOOL isShowingFullScreen = [self.presentedViewController isKindOfClass:[SYNFullScreenVideoViewController class]];
+	
+	// If we're showing another view controller which isn't full screen or mail then we want to pause the video
+	if (!isShowingFullScreen && !isShowingMail) {
 		[self.currentVideoPlayer pause];
 	}
 }
