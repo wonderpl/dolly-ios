@@ -145,6 +145,11 @@
     SYNOAuth2Credential *credential = [SYNOAuth2Credential credentialFromKeychainForService: [[NSBundle mainBundle] bundleIdentifier]
                                                                                     account: self.currentUser.uniqueId];
     
+	TFLog(@"Starting app in state: %d", application.applicationState);
+	TFLog(@"Protected data available: %d", application.protectedDataAvailable);
+	TFLog(@"Current username: %@", self.currentUser.username);
+	TFLog(@"Credential: %@", credential);
+	
     if (self.currentUser && credential)
     {
 		[[SYNTrackingManager sharedManager] setAgeDimensionFromBirthDate:self.currentUser.dateOfBirth];
@@ -169,8 +174,11 @@
     }
     else
     {
+		TFLog(@"Showing login view controller");
+		
         if ((self.currentUser || credential) && application.protectedDataAvailable)
         {
+			TFLog(@"Logging the user out");
             [self logout];
         }
         
@@ -325,6 +333,8 @@
 
 - (void) logout
 {
+	TFLog(@"Logging out, call stack: %@", [NSThread callStackSymbols]);
+	
     // As we are logging out, we need to unregister the current user (the new user will be re-registered on login below)
     [[UIApplication sharedApplication] unregisterForRemoteNotifications];
 	[[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalNever];
