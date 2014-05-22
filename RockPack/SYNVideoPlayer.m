@@ -201,12 +201,13 @@ static CGFloat const ControlsFadeTimer = 5.0;
 		[self addGestureRecognizer:self.maximiseMinimiseGestureRecognizer];
 		[self addGestureRecognizer:self.maximiseMinimisePinchGestureRecognizer];
 		
+		[self startUpdatingProgress];
+		
 		self.hasBeganPlaying = YES;
 	}
 	
 	self.state = SYNVideoPlayerStatePlaying;
 	
-	[self startUpdatingProgress];
 	self.scrubberBar.playing = YES;
 }
 
