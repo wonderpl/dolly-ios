@@ -73,7 +73,7 @@ static CGFloat const ControlsFadeTimer = 5.0;
 	[super willMoveToSuperview:newSuperview];
 	
 	if (!newSuperview) {
-		[self stopControlsTimer];
+		[self stopControlsFadeTimer];
 		[self stopUpdatingProgress];
 	}
 }
