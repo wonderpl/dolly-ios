@@ -1509,7 +1509,6 @@
 		E9AD5B67187D6B9600298D95 /* ButtonFacebook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ButtonFacebook@2x.png"; path = "Assets/Images/ButtonFacebook@2x.png"; sourceTree = "<group>"; };
 		E9AD5B6A187D767200298D95 /* SYNiPhoneLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNiPhoneLoginViewController.h; sourceTree = "<group>"; };
 		E9AD5B6B187D767200298D95 /* SYNiPhoneLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNiPhoneLoginViewController.m; sourceTree = "<group>"; };
-		E9B75F5D1848ADB50066420E /* SYNVideoPlayerViewController+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SYNVideoPlayerViewController+Protected.h"; sourceTree = "<group>"; };
 		E9B8A502185B20D300F0D625 /* SYNChannelVideosModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNChannelVideosModel.m; sourceTree = "<group>"; };
 		E9B8A503185B20D300F0D625 /* SYNChannelVideosModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNChannelVideosModel.h; sourceTree = "<group>"; };
 		E9C1A05818F8415300CC3F3E /* SYNVideoDivider.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNVideoDivider.xib; sourceTree = "<group>"; };
@@ -2476,7 +2475,6 @@
 				E914BED8183CF33A001616D3 /* SYNFullScreenVideoAnimator.h */,
 				E914BED9183CF33A001616D3 /* SYNFullScreenVideoAnimator.m */,
 				E9F7CC7A1846562F0026C97D /* SYNVideoPlayerViewController.h */,
-				E9B75F5D1848ADB50066420E /* SYNVideoPlayerViewController+Protected.h */,
 				E9F7CC7B1846562F0026C97D /* SYNVideoPlayerViewController.m */,
 				E92CBAEC1887E29500A07070 /* SYNVideoPlayerAnimator.h */,
 				E92CBAED1887E29500A07070 /* SYNVideoPlayerAnimator.m */,
