@@ -69,15 +69,6 @@ static CGFloat const ControlsFadeTimer = 5.0;
 
 #pragma mark - Overridden
 
-- (void)willMoveToSuperview:(UIView *)newSuperview {
-	[super willMoveToSuperview:newSuperview];
-	
-	if (!newSuperview) {
-		[self stopControlsFadeTimer];
-		[self stopUpdatingProgress];
-	}
-}
-
 - (void)layoutSubviews {
 	[super layoutSubviews];
 	
@@ -223,6 +214,14 @@ static CGFloat const ControlsFadeTimer = 5.0;
 	self.state = SYNVideoPlayerStatePaused;
 	
 	self.scrubberBar.playing = NO;
+}
+
+- (void)stop {
+	self.state = SYNVideoPlayerStateInitialised;
+	self.hasBeganPlaying = NO;
+	
+	[self stopControlsFadeTimer];
+	[self stopUpdatingProgress];
 }
 
 - (NSTimeInterval)duration {

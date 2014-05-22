@@ -50,6 +50,7 @@ typedef NS_ENUM(NSInteger, SYNVideoPlayerState) {
 
 - (void)play;
 - (void)pause;
+- (void)stop;
 
 - (NSTimeInterval)duration;
 

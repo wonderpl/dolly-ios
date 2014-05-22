@@ -367,7 +367,7 @@
 #pragma mark - Private
 
 - (void)playCurrentVideo {
-	[self.currentVideoPlayer pause];
+	[self.currentVideoPlayer stop];
 	
 	NSIndexPath *indexPath = [NSIndexPath indexPathForItem:self.selectedIndex inSection:0];
 	SYNVideoPlayerCell *cell = (SYNVideoPlayerCell *)[self.videosCollectionView cellForItemAtIndexPath:indexPath];
