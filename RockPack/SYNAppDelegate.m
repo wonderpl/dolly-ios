@@ -1378,6 +1378,11 @@
 }
 
 - (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+	
+	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+		TFLog(@"PERFORMING FETCH");
+	});
+	
 	if (!self.currentOAuth2Credentials.userId) {
 		completionHandler(UIBackgroundFetchResultNoData);
 		return;
@@ -1400,7 +1405,8 @@
 		}
 		
 		// Wait a second to give the images a chance to download
-		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+			NSLog(@"COMPLETED FETCH");
 			completionHandler(result);
 		});
 	}];
