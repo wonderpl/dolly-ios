@@ -374,9 +374,6 @@
 	
 	if ([SYNLoginManager sharedManager].registrationCheck) {
 		self.window.rootViewController = [[SYNOnBoardingViewController alloc] init];
-		
-		SYNOnBoardingOverlayViewController* onboardingOverlay = [[SYNOnBoardingOverlayViewController alloc] init];
-		[onboardingOverlay addToViewController:self.window.rootViewController];
 	} else {
 		self.window.rootViewController = [self createAndReturnRootViewController];
 	}
