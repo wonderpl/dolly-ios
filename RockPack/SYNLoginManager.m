@@ -211,7 +211,7 @@
         [[NSUserDefaults standardUserDefaults] setInteger:2 forKey: kUserDefaultsOtherPersonsProfile];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey: kUserDefaultsCreateChannelFirstTime];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey: kUserDefaultsYourProfileFirstTime];
-		[[NSUserDefaults standardUserDefaults] setInteger:2 forKey:kUserDefaultsFeedCount];
+		[[NSUserDefaults standardUserDefaults] setInteger:3 forKey:kUserDefaultsFeedCount];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey: kUserDefaultsShareFirstTime];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey: kUserDefaultsAddToCollectionFirstTime];
 
