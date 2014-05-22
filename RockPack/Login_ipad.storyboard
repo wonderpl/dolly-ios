@@ -437,7 +437,7 @@
                                     <constraint firstAttribute="height" constant="154" id="u0U-ta-2hd"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" image="ButtonUpload.png">
+                                <state key="normal" image="AvatarUpload.png">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -522,7 +522,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Kn-IA-NUS" userLabel="Label - Add photo label">
-                                <rect key="frame" x="91" y="254" width="38" height="18"/>
+                                <rect key="frame" x="91" y="218" width="38" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.59607843137254901" green="0.59607843137254901" blue="0.59607843137254901" alpha="1" colorSpace="calibratedRGB"/>
@@ -558,7 +558,7 @@
                             <constraint firstItem="Wme-3y-nyg" firstAttribute="leading" secondItem="uV0-QA-Zay" secondAttribute="leading" id="Gcx-oJ-UKj"/>
                             <constraint firstAttribute="centerX" secondItem="Wme-3y-nyg" secondAttribute="centerX" id="GuR-jS-2Jb"/>
                             <constraint firstItem="Wme-3y-nyg" firstAttribute="leading" secondItem="4Lq-mR-Smo" secondAttribute="trailing" constant="35" id="Hnh-xD-ArM"/>
-                            <constraint firstItem="8Kn-IA-NUS" firstAttribute="top" secondItem="4Lq-mR-Smo" secondAttribute="bottom" constant="18" id="I1O-7c-sh8"/>
+                            <constraint firstItem="8Kn-IA-NUS" firstAttribute="top" secondItem="4Lq-mR-Smo" secondAttribute="bottom" constant="-18" id="I1O-7c-sh8"/>
                             <constraint firstAttribute="centerX" secondItem="GvU-M3-vTi" secondAttribute="centerX" constant="270" id="IKf-NC-Goo"/>
                             <constraint firstItem="4Lq-mR-Smo" firstAttribute="top" secondItem="Fm5-ca-Fg9" secondAttribute="top" constant="82" id="KAQ-xI-ZdF"/>
                             <constraint firstItem="bzL-gs-cfb" firstAttribute="leading" secondItem="UZY-cA-Eit" secondAttribute="trailing" constant="12" id="Pay-O6-gsq"/>
@@ -1013,8 +1013,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="AvatarUpload.png" width="88" height="88"/>
         <image name="BackButtonApp.png" width="20" height="29"/>
-        <image name="ButtonUpload.png" width="96" height="96"/>
         <image name="DividerLogin.png" width="306" height="3"/>
         <image name="facebook-login-button.png" width="286" height="50"/>
         <image name="intro-beach.jpg" width="768" height="1024"/>
@@ -1035,6 +1035,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="a0x-hG-aBP"/>
+        <segue reference="7Bv-VN-bSo"/>
     </inferredMetricsTieBreakers>
 </document>
