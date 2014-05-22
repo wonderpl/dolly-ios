@@ -23,12 +23,12 @@ static const CGFloat OFFSET_DESCRIPTION_EDIT = 130.0f;
 @property (nonatomic, strong) SYNImagePickerController* imagePickerControllerAvatar;
 @property (nonatomic, strong) SYNImagePickerController* imagePickerControllerCoverphoto;
 @property (nonatomic, strong) UITapGestureRecognizer *tapToHideKeyoboard;
-@property (strong, nonatomic) IBOutlet UILabel *coverPhotoLabel;
-@property (strong, nonatomic) IBOutlet UILabel *avatarLabel;
 @property (strong, nonatomic) IBOutlet UIButton *cancelButton;
 @property (strong, nonatomic) IBOutlet UIButton *saveButton;
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *topConstraint;
 @property (nonatomic, strong) IBOutlet UINavigationBar *navigationBar;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *centreDescriptionConstraint;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *topProfileUploadButton;
 
 @end
 
@@ -54,16 +54,20 @@ static const CGFloat OFFSET_DESCRIPTION_EDIT = 130.0f;
 	self.descriptionTextView.attributedText = [[NSAttributedString alloc]
 											   initWithString:self.descriptionString
 											   attributes:descriptionAttributes];
-	
-    [[self.descriptionTextView layer] setBorderColor:[[UIColor colorWithRed:172.0/255.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f] CGColor]];
-
-    if (IS_RETINA) {
-        [[self.descriptionTextView layer] setBorderWidth:0.5];
-    } else {
-        [[self.descriptionTextView layer] setBorderWidth:1.0];
-    }
-	
+		
     [[self.descriptionTextView layer] setCornerRadius:0];
+    
+    
+    //TODO: dont use UIPlaceHolderTextView, find something better.
+    
+    if (IS_IPHONE) {
+        self.descriptionTextView.placeholder = @"                  Edit Description";
+    } else {
+        self.descriptionTextView.placeholder = @"                          Edit Description";
+    }
+    
+    [self.descriptionTextView setPlaceHolderLabelFont:[UIFont regularCustomFontOfSize : self.descriptionTextView.font.pointSize]];
+    
     self.descriptionTextView.delegate = self;
 
     // == Tap gesture do dismiss the keyboard
@@ -76,24 +80,12 @@ static const CGFloat OFFSET_DESCRIPTION_EDIT = 130.0f;
 	self.saveButton.titleLabel.font = [UIFont regularCustomFontOfSize : IS_IPHONE ? 15 : 17];
 	[self.saveButton setTitle:NSLocalizedString(@"save", @"save in edit mode") forState:UIControlStateNormal];
 	
-	self.coverPhotoLabel.text = NSLocalizedString(@"Change_cover_photo", nil);
-	self.avatarLabel.text = NSLocalizedString(@"Change_avatar", nil);
-	
-	[self.coverPhotoLabel setFont:[UIFont regularCustomFontOfSize:self.coverPhotoLabel.font.pointSize]];
-	[self.avatarLabel setFont:[UIFont regularCustomFontOfSize:self.avatarLabel.font.pointSize]];
-	
 	[self.navigationBar setBackgroundTransparent:YES];
-
 }
 
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
-    //we move the view up in iphone 4
-    if (!IS_IPHONE_5 && IS_IPHONE) {
-        [self.topConstraint setConstant:-28];
-    }
     
     [self.navigationBar setTranslucent:YES];
 	
@@ -329,9 +321,14 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock {
 	}
     if (UIDeviceOrientationIsPortrait(orientation)) {
 		self.topConstraint.constant = 233;
+        self.centreDescriptionConstraint.constant = 0;
+        self.topProfileUploadButton.constant = 211;
     } else {
 		self.topConstraint.constant = 120;
-	}
+        self.centreDescriptionConstraint.constant = 1;
+        self.topProfileUploadButton.constant = 208;
+        
+    }
     
 }
 

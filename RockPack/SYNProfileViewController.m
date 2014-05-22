@@ -344,7 +344,7 @@ static const CGFloat TransitionDuration = 0.5f;
 
 	[UIView animateWithDuration:0.3 animations:^{
 		if (!IS_IPHONE_5 && IS_IPHONE) {
-			[self setCollectionViewContentOffset:CGPointMake(0, 110) animated:NO];
+			[self setCollectionViewContentOffset:CGPointMake(0, 0) animated:NO];
 		} else {
 			[self setCollectionViewContentOffset:CGPointMake(0, 0) animated:NO];
 		}

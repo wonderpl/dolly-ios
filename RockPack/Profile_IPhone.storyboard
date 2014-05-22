@@ -87,13 +87,13 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="orx-PY-CL9" userLabel="Button - Upload Cover Image">
-                                <rect key="frame" x="112" y="102" width="96" height="96"/>
+                                <rect key="frame" x="127" y="102" width="66" height="66"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="96" id="fTJ-CD-13A"/>
-                                    <constraint firstAttribute="width" constant="96" id="rll-n4-Nsv"/>
+                                    <constraint firstAttribute="height" constant="66" id="fTJ-CD-13A"/>
+                                    <constraint firstAttribute="width" constant="66" id="rll-n4-Nsv"/>
                                 </constraints>
-                                <state key="normal" image="ButtonUpload.png">
+                                <state key="normal" image="CoverUpload.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -101,23 +101,23 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OXR-E2-PUn" userLabel="Button - Upload Avatar">
-                                <rect key="frame" x="112" y="231" width="96" height="96"/>
+                                <rect key="frame" x="116" y="229" width="88" height="96"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="96" id="0pf-Bb-s9Q"/>
-                                    <constraint firstAttribute="width" constant="96" id="boG-DI-Vhg"/>
+                                    <constraint firstAttribute="width" constant="88" id="boG-DI-Vhg"/>
                                 </constraints>
-                                <state key="normal" image="ButtonUpload.png">
+                                <state key="normal" image="AvatarUpload.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="avatarButtonTapped:" destination="fOd-gt-lke" eventType="touchUpInside" id="Ui1-EF-Uvq"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="9YD-ci-a6S" userLabel="Text View - Description">
-                                <rect key="frame" x="10" y="381" width="300" height="79"/>
+                            <textView clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="9YD-ci-a6S" userLabel="Text View - Description" customClass="UIPlaceHolderTextView">
+                                <rect key="frame" x="10" y="380" width="300" height="79"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" red="0.50980392159999999" green="0.50980392159999999" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="5rw-e8-AK4"/>
@@ -126,7 +126,7 @@
                                 <string key="text">Something about
                                     me...</string>
                                 <color key="textColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OmF-pf-1PU" userLabel="Cancel Button">
@@ -149,41 +149,20 @@
                                     <action selector="saveDescription:" destination="fOd-gt-lke" eventType="touchUpInside" id="V1x-fl-agZ"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v3x-Ob-9pm">
-                                <rect key="frame" x="139" y="192" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.46666666865348816" green="0.46666666865348816" blue="0.50980395078659058" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HTj-Ia-3yx">
-                                <rect key="frame" x="139" y="322" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.46666666865348816" green="0.46666666865348816" blue="0.50980395078659058" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <constraints>
                             <constraint firstItem="orx-PY-CL9" firstAttribute="centerX" secondItem="OXR-E2-PUn" secondAttribute="centerX" id="0QJ-Aw-iFq"/>
-                            <constraint firstItem="OXR-E2-PUn" firstAttribute="top" secondItem="orx-PY-CL9" secondAttribute="bottom" constant="33" id="2N7-dB-r9Y"/>
+                            <constraint firstItem="OXR-E2-PUn" firstAttribute="top" secondItem="orx-PY-CL9" secondAttribute="bottom" constant="61" id="2N7-dB-r9Y"/>
                             <constraint firstItem="orx-PY-CL9" firstAttribute="top" secondItem="F8N-LT-Ekd" secondAttribute="bottom" constant="82" id="LSj-ob-eFj"/>
-                            <constraint firstItem="v3x-Ob-9pm" firstAttribute="centerX" secondItem="orx-PY-CL9" secondAttribute="centerX" id="M3Z-IX-D7y"/>
-                            <constraint firstItem="HTj-Ia-3yx" firstAttribute="top" secondItem="OXR-E2-PUn" secondAttribute="bottom" constant="-5" id="NLb-Zu-RBw"/>
-                            <constraint firstItem="orx-PY-CL9" firstAttribute="leading" secondItem="fAf-o9-2xc" secondAttribute="leading" constant="112" id="NeH-EY-Z8f"/>
-                            <constraint firstItem="v3x-Ob-9pm" firstAttribute="top" secondItem="orx-PY-CL9" secondAttribute="bottom" constant="-6" id="XZO-S4-M3e"/>
-                            <constraint firstItem="9YD-ci-a6S" firstAttribute="top" secondItem="OXR-E2-PUn" secondAttribute="bottom" constant="54" id="igZ-AM-UZY"/>
-                            <constraint firstItem="OXR-E2-PUn" firstAttribute="centerY" secondItem="9YD-ci-a6S" secondAttribute="centerY" constant="-141.5" id="oOu-Ht-L30"/>
+                            <constraint firstItem="orx-PY-CL9" firstAttribute="leading" secondItem="fAf-o9-2xc" secondAttribute="leading" constant="127" id="NeH-EY-Z8f"/>
+                            <constraint firstItem="9YD-ci-a6S" firstAttribute="top" secondItem="OXR-E2-PUn" secondAttribute="bottom" constant="55" id="igZ-AM-UZY"/>
                             <constraint firstItem="OXR-E2-PUn" firstAttribute="centerX" secondItem="9YD-ci-a6S" secondAttribute="centerX" id="rbs-Ni-XcQ"/>
-                            <constraint firstItem="HTj-Ia-3yx" firstAttribute="centerX" secondItem="OXR-E2-PUn" secondAttribute="centerX" id="uGb-d6-sPX"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="v8M-xO-epg"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
-                        <outlet property="avatarLabel" destination="HTj-Ia-3yx" id="PKb-UE-W0u"/>
                         <outlet property="cancelButton" destination="OmF-pf-1PU" id="FMQ-SG-5OP"/>
-                        <outlet property="coverPhotoLabel" destination="v3x-Ob-9pm" id="2CL-LL-Oe5"/>
                         <outlet property="descriptionTextView" destination="9YD-ci-a6S" id="oky-m8-o1z"/>
                         <outlet property="saveButton" destination="8HZ-p2-yuD" id="uyQ-Cd-t3b"/>
                         <outlet property="topConstraint" destination="LSj-ob-eFj" id="IdP-Gd-ImT"/>
@@ -278,7 +257,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ButtonUpload.png" width="96" height="96"/>
+        <image name="AvatarUpload.png" width="88" height="88"/>
+        <image name="CoverUpload.png" width="66" height="66"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

@@ -673,6 +673,10 @@
 		F48C161A192B663B00107B32 /* TabActivityNotification~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = F48C1618192B663B00107B32 /* TabActivityNotification~iphone.png */; };
 		F48C161D192B665000107B32 /* TabActivityNotification~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F48C161B192B665000107B32 /* TabActivityNotification~ipad.png */; };
 		F48C161E192B665000107B32 /* TabActivityNotification@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F48C161C192B665000107B32 /* TabActivityNotification@2x~ipad.png */; };
+		F4C7E588192E3419006053DA /* CoverUpload@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4C7E584192E3419006053DA /* CoverUpload@2x.png */; };
+		F4C7E589192E3419006053DA /* AvatarUpload.png in Resources */ = {isa = PBXBuildFile; fileRef = F4C7E585192E3419006053DA /* AvatarUpload.png */; };
+		F4C7E58A192E3419006053DA /* AvatarUpload@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4C7E586192E3419006053DA /* AvatarUpload@2x.png */; };
+		F4C7E58B192E3419006053DA /* CoverUpload.png in Resources */ = {isa = PBXBuildFile; fileRef = F4C7E587192E3419006053DA /* CoverUpload.png */; };
 		F4F5062D192CAAD700993D0B /* SYNAddToChannelOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F5062C192CAAD700993D0B /* SYNAddToChannelOverlayViewController.m */; };
 		F4F5062F192CAAFA00993D0B /* SYNAddToChannelOverlayViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4F5062E192CAAFA00993D0B /* SYNAddToChannelOverlayViewController~iphone.xib */; };
 		F4F50631192CAB1D00993D0B /* SYNAddToChannelOverlayViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4F50630192CAB1D00993D0B /* SYNAddToChannelOverlayViewController~ipad.xib */; };
@@ -1635,6 +1639,10 @@
 		F48C1618192B663B00107B32 /* TabActivityNotification~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabActivityNotification~iphone.png"; sourceTree = "<group>"; };
 		F48C161B192B665000107B32 /* TabActivityNotification~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabActivityNotification~ipad.png"; sourceTree = "<group>"; };
 		F48C161C192B665000107B32 /* TabActivityNotification@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabActivityNotification@2x~ipad.png"; sourceTree = "<group>"; };
+		F4C7E584192E3419006053DA /* CoverUpload@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CoverUpload@2x.png"; sourceTree = "<group>"; };
+		F4C7E585192E3419006053DA /* AvatarUpload.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AvatarUpload.png; sourceTree = "<group>"; };
+		F4C7E586192E3419006053DA /* AvatarUpload@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AvatarUpload@2x.png"; sourceTree = "<group>"; };
+		F4C7E587192E3419006053DA /* CoverUpload.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoverUpload.png; sourceTree = "<group>"; };
 		F4F5062B192CAAD700993D0B /* SYNAddToChannelOverlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAddToChannelOverlayViewController.h; sourceTree = "<group>"; };
 		F4F5062C192CAAD700993D0B /* SYNAddToChannelOverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAddToChannelOverlayViewController.m; sourceTree = "<group>"; };
 		F4F5062E192CAAFA00993D0B /* SYNAddToChannelOverlayViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNAddToChannelOverlayViewController~iphone.xib"; sourceTree = "<group>"; };
@@ -1977,7 +1985,6 @@
 			isa = PBXGroup;
 			children = (
 				E985D36B18FED5A000D5A9E1 /* AddButton@2x.png */,
-				9959249419267B3B00CCAACF /* Onboarding */,
 				E98DCCC119237C720041DEB4 /* ScrubberBarFullScreen.png */,
 				E98DCCC219237C720041DEB4 /* ScrubberBarFullScreen@2x.png */,
 				E9ACC390191D1F4900ACC929 /* ShopMotionActionButton@2x.png */,
@@ -1997,6 +2004,7 @@
 				E91E3B2018C7292400F79020 /* ButtonVideoDeleteDefault@2x.png */,
 				4CE8AE5518A901560031CE1C /* BackButtonApp.png */,
 				4CE8AE5618A901560031CE1C /* BackButtonApp@2x.png */,
+				9959249419267B3B00CCAACF /* Onboarding */,
 				1F65D48F17EB3C8B004326A9 /* Images.xcassets */,
 				4C5E861F18B65A8A00D0E937 /* In Boarding */,
 				BED027B51834D4BF00636659 /* Options */,
@@ -3005,6 +3013,10 @@
 		BE03A69716F7691B00245314 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				F4C7E585192E3419006053DA /* AvatarUpload.png */,
+				F4C7E586192E3419006053DA /* AvatarUpload@2x.png */,
+				F4C7E587192E3419006053DA /* CoverUpload.png */,
+				F4C7E584192E3419006053DA /* CoverUpload@2x.png */,
 				F419A14F192A444200DBA621 /* profile-cover-gradient.png */,
 				4C72DD4B18FEBD00004AC132 /* downarrow.png */,
 				4C72DD4C18FEBD00004AC132 /* downarrow@2x.png */,
@@ -4090,6 +4102,7 @@
 				4C0B9571191283D8008D8036 /* SYNSearchVideoLargeCell.xib in Resources */,
 				E99B8D3E1892AD9500E08ABD /* ScrubberBarHD.png in Resources */,
 				E905A93B189ABBCB00FED785 /* SYNNotificationsTableViewCell~ipad.xib in Resources */,
+				F4C7E589192E3419006053DA /* AvatarUpload.png in Resources */,
 				9937CA3419228EFC002D3C23 /* intro-mountains-sea@2x~ipad.jpg in Resources */,
 				E9C1A05B18F8448E00CC3F3E /* SYNVideoActionsCell.xib in Resources */,
 				BE851B48183BE6BC00B8E8C6 /* ButtonUpload.png in Resources */,
@@ -4128,6 +4141,7 @@
 				F48C161A192B663B00107B32 /* TabActivityNotification~iphone.png in Resources */,
 				F46D8C44192CC1FF0048C486 /* SYNFeedOverlayLovingViewController~iphone.xib in Resources */,
 				4C22750D18F6D471009C5242 /* rightarrow.png in Resources */,
+				F4C7E58B192E3419006053DA /* CoverUpload.png in Resources */,
 				E9EE08DC18F80379000DC06A /* ProximaNova-Semibold.otf in Resources */,
 				1F51A69F1742A93B009907CA /* PlaceholderNotificationAvatar@2x.png in Resources */,
 				7D6D4F5C192A275C0084DC84 /* TabSearch@2x~ipad.png in Resources */,
@@ -4187,6 +4201,7 @@
 				99F300D3191BD7AF002C1D25 /* ShareMailButton.png in Resources */,
 				F4F5062F192CAAFA00993D0B /* SYNAddToChannelOverlayViewController~iphone.xib in Resources */,
 				993B1B5D191AA526008532D4 /* TabActivity~ipad.png in Resources */,
+				F4C7E58A192E3419006053DA /* AvatarUpload@2x.png in Resources */,
 				BE53DD801832850400D65793 /* SYNAddToChannelCell~iphone.xib in Resources */,
 				BE7D0302179D5624008053DC /* SYNFriendsViewController.xib in Resources */,
 				993B1ACD191A95FC008532D4 /* TabProfileSelected~iphone.png in Resources */,
@@ -4221,6 +4236,7 @@
 				9937CA2D19228EFC002D3C23 /* intro-church~iphone.jpg in Resources */,
 				BE06EEED17D759290028F2E3 /* RecentContactPlaceholder@2x.png in Resources */,
 				BE06EEF017D759390028F2E3 /* ABContactPlaceholder.png in Resources */,
+				F4C7E588192E3419006053DA /* CoverUpload@2x.png in Resources */,
 				BE06EEF117D759390028F2E3 /* ABContactPlaceholder@2x.png in Resources */,
 				BED027CD1834D4CC00636659 /* ButtonMoreFriends@2x.png in Resources */,
 				E91E3B2118C7292400F79020 /* ButtonVideoDeleteDefault.png in Resources */,
