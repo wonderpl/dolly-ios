@@ -74,10 +74,16 @@ static const CGFloat UpcomingVideosDividerHeight = 70.0;
 
 #pragma mark - Public
 
-- (void)addVideoAnnotation:(VideoAnnotation *)annotation {
+- (BOOL)addVideoAnnotation:(VideoAnnotation *)annotation {
+	if ([self.annotations containsObject:annotation]) {
+		return NO;
+	}
+	
 	BOOL isFirstAnnotation = ([self.annotations count] == 0);
 	
 	[self.annotations addObject:annotation];
+	
+	[self.collectionView setContentOffset:CGPointZero animated:YES];
 	
 	UIButton *button = self.videoActionsBar.shopButton;
 	[button setTitle:[NSString stringWithFormat:@"%@", @([self.annotations count])] forState:UIControlStateNormal];
@@ -103,6 +109,7 @@ static const CGFloat UpcomingVideosDividerHeight = 70.0;
 									  
 								  }];
 	}
+	return YES;
 }
 
 #pragma mark - Getters / Setters

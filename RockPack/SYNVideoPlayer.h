@@ -30,7 +30,7 @@ typedef NS_ENUM(NSInteger, SYNVideoPlayerState) {
 
 - (void)videoPlayerErrorOccurred:(NSString *)reason;
 
-- (void)videoPlayerAnnotationSelected:(VideoAnnotation *)annotation;
+- (void)videoPlayerAnnotationSelected:(VideoAnnotation *)annotation button:(UIButton *)button;
 
 @end
 

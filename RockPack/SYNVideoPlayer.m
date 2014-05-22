@@ -391,7 +391,7 @@ static CGFloat const ControlsFadeTimer = 5.0;
 }
 
 - (void)annotationButtonPressed:(SYNVideoAnnotationButton *)button {
-	[self.delegate videoPlayerAnnotationSelected:button.videoAnnotation];
+	[self.delegate videoPlayerAnnotationSelected:button.videoAnnotation button:button];
 }
 
 - (void)updateAnnotationButtonsForTime:(NSTimeInterval)time {

@@ -62,6 +62,9 @@
 
 @property (nonatomic, strong) VideoInstance *videoInstance;
 
+// Used for animation
+@property (nonatomic, weak) UIImageView *annotationImageView;
+
 @end
 
 
@@ -316,10 +319,42 @@
 														   }];
 }
 
-- (void)videoPlayerAnnotationSelected:(VideoAnnotation *)annotation {
+- (void)videoPlayerAnnotationSelected:(VideoAnnotation *)annotation button:(UIButton *)button {
+	BOOL didAdd = [self.videoInfoViewController addVideoAnnotation:annotation];
+	if (!didAdd) {
+		return;
+	}
+	
 	[[SYNTrackingManager sharedManager] trackShopMotionAnnotationPressForTitle:self.videoInstance.title];
 	
-	[self.videoInfoViewController addVideoAnnotation:annotation];
+	CGPoint buttonCenter = [self.view convertPoint:button.center fromView:button.superview];
+	
+	UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ShopMotionActionButton"]];
+	imageView.center = buttonCenter;
+	
+	self.annotationImageView = imageView;
+	
+	[self.view addSubview:imageView];
+	
+	CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+	UIBezierPath *path = [UIBezierPath bezierPath];
+	[path moveToPoint:imageView.center];
+	
+	CGRect videoPlayerFrame = [self.view convertRect:self.currentVideoPlayer.bounds fromView:self.currentVideoPlayer];
+	
+	CGPoint destinationPoint = CGPointMake(CGRectGetMaxX(videoPlayerFrame) - 100.0, CGRectGetMaxY(videoPlayerFrame));
+	[path addQuadCurveToPoint:destinationPoint controlPoint:CGPointMake(destinationPoint.x, imageView.center.y)];
+	
+	animation.path = [path CGPath];
+	animation.duration = 0.3;
+	animation.delegate = self;
+	animation.removedOnCompletion = YES;
+	
+	[imageView.layer addAnimation:animation forKey:nil];
+}
+
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
+	[self.annotationImageView removeFromSuperview];
 }
 
 #pragma mark - SYNVideoInfoViewControllerDelegate
