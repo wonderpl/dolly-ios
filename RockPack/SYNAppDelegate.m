@@ -145,10 +145,12 @@
     SYNOAuth2Credential *credential = [SYNOAuth2Credential credentialFromKeychainForService: [[NSBundle mainBundle] bundleIdentifier]
                                                                                     account: self.currentUser.uniqueId];
     
-	TFLog(@"Starting app in state: %d", application.applicationState);
-	TFLog(@"Protected data available: %d", application.protectedDataAvailable);
-	TFLog(@"Current username: %@", self.currentUser.username);
-	TFLog(@"Credential: %@", credential);
+	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+		TFLog(@"Starting app in state: %d", application.applicationState);
+		TFLog(@"Protected data available: %d", application.protectedDataAvailable);
+		TFLog(@"Current username: %@", self.currentUser.username);
+		TFLog(@"Credential: %@", credential);
+	});
 	
     if (self.currentUser && credential)
     {
@@ -174,11 +176,15 @@
     }
     else
     {
-		TFLog(@"Showing login view controller");
+		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+			TFLog(@"Showing login view controller");
+		});
 		
         if ((self.currentUser || credential) && application.protectedDataAvailable)
         {
-			TFLog(@"Logging the user out");
+			dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+				TFLog(@"Logging the user out");
+			});
             [self logout];
         }
         
