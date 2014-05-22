@@ -149,11 +149,14 @@ UISearchBarDelegate>
         self.textContainerView.frame = frame;
     }
     
-    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.searchBarContainer.frame byRoundingCorners:UIRectCornerTopLeft| UIRectCornerTopRight                                                         cornerRadii:CGSizeMake(10.0, 10.0)];
-    CAShapeLayer *maskLayer = [CAShapeLayer layer];
-    maskLayer.frame = self.searchBarContainer.bounds;
-    maskLayer.path = maskPath.CGPath;
-    self.searchBarContainer.layer.mask = maskLayer;
+    
+    if (IS_IPAD) {
+        UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.searchBarContainer.frame byRoundingCorners:UIRectCornerTopLeft| UIRectCornerTopRight                                                         cornerRadii:CGSizeMake(10.0, 10.0)];
+        CAShapeLayer *maskLayer = [CAShapeLayer layer];
+        maskLayer.frame = self.searchBarContainer.bounds;
+        maskLayer.path = maskPath.CGPath;
+        self.searchBarContainer.layer.mask = maskLayer;
+    }
 
     
     // Basic recognition
@@ -246,10 +249,10 @@ UISearchBarDelegate>
     
     if (![[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultsShareFirstTime]) {
         
-        SYNShareOverlayViewController *overlay = [[SYNShareOverlayViewController alloc] init];
-        [overlay addToViewController:self];
-        
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kUserDefaultsShareFirstTime];
+//        SYNShareOverlayViewController *overlay = [[SYNShareOverlayViewController alloc] init];
+//        [overlay addToViewController:self];
+//        
+//        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kUserDefaultsShareFirstTime];
     }
    
 }
