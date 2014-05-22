@@ -339,7 +339,9 @@
 
 - (void) logout
 {
-	TFLog(@"Logging out, call stack: %@", [NSThread callStackSymbols]);
+	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+		TFLog(@"Logging out, call stack: %@", [NSThread callStackSymbols]);
+	});
 	
     // As we are logging out, we need to unregister the current user (the new user will be re-registered on login below)
     [[UIApplication sharedApplication] unregisterForRemoteNotifications];
