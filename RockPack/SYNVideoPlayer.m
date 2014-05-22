@@ -106,7 +106,7 @@ static CGFloat const ControlsFadeTimer = 5.0;
 
 - (void)scrubberBarCurrentTimeWillChange {
 	// We don't want the controls to fade out while they're interacting with them
-	[self stopControlsTimer];
+	[self stopControlsFadeTimer];
 	
 	[self pause];
 }
@@ -306,7 +306,7 @@ static CGFloat const ControlsFadeTimer = 5.0;
 }
 
 - (void)fadeOutControls {
-	[self stopControlsTimer];
+	[self stopControlsFadeTimer];
 	self.controlsVisible = NO;
 	
 	[UIView animateWithDuration:0.3 animations:^{
@@ -314,7 +314,7 @@ static CGFloat const ControlsFadeTimer = 5.0;
 	}];
 }
 
-- (void)stopControlsTimer {
+- (void)stopControlsFadeTimer {
 	[self.controlsFadeTimer invalidate];
 	self.controlsFadeTimer = nil;
 }
