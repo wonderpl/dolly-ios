@@ -541,7 +541,7 @@
 	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"ACTIVE Protected data available: %d", application.protectedDataAvailable]];
 	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"ACTIVE Current username: (%@) %@", self.currentUser.uniqueId, self.currentUser.username]];
 	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"ACTIVE Credential: %@", credential]];
-	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"ACTIVE Current view controller: %@", NSStringFromClass(self.window.rootViewController)];
+	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"ACTIVE Current view controller: %@", NSStringFromClass([self.window.rootViewController class])]];
 	
 }
 
