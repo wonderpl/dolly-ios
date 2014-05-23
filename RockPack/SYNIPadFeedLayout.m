@@ -28,7 +28,6 @@ static const CGSize LandscapeSmallCellSize = { .width = 350.0, .height = 352.0};
 - (void)prepareLayout {
 	self.isPortrait = (CGRectGetWidth(self.collectionView.bounds) < CGRectGetHeight(self.collectionView.bounds));
 	
-	
 	NSInteger numberOfCells = [self.collectionView numberOfItemsInSection:0];
 	
 	NSInteger numberOfFullBlocks = (numberOfCells / 3);
@@ -108,7 +107,6 @@ static const CGSize LandscapeSmallCellSize = { .width = 350.0, .height = 352.0};
 - (CGRect)frameForCellAtIndexPath:(NSIndexPath *)indexPath {
 	NSInteger blockNumber = (indexPath.item / 3);
 	NSInteger blockOffset = (indexPath.item % 3);
-	
 	
 	if (self.isPortrait) {
 		NSInteger heightOffset = (blockOffset - 1);
