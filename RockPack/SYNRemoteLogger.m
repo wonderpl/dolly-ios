@@ -40,7 +40,7 @@ static NSString *const URLPrefix = @"http://dev.rockpack.com/log?message=%@";
 }
 
 - (void)log:(NSString *)message {
-	NSString *fullMessage = [NSString stringWithFormat:@"%@ - %@", [self.uuid UUIDString], message];
+	NSString *fullMessage = [NSString stringWithFormat:@"%@ (%f) - %@", [self.uuid UUIDString], [[NSDate date] timeIntervalSince1970], message];
 	
 	NSString *URLString = [NSString stringWithFormat:URLPrefix, [fullMessage urlEncodeUsingEncoding:NSUTF8StringEncoding]];
 	NSURL *URL = [NSURL URLWithString:URLString];
