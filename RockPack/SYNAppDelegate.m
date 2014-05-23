@@ -246,15 +246,15 @@
     }
     else
     {
-		[[SYNRemoteLogger sharedLogger] log:@"AA Showing login view controller"];
+		[[SYNRemoteLogger sharedLogger] log:@"AA Showing login view controller, not logging out"];
 		
-        if ((self.currentUser || credential) && application.protectedDataAvailable)
-        {
-			[[SYNRemoteLogger sharedLogger] log:@"AA Logging the user out"];
-			
-            [self logout];
-        }
-        
+//        if ((self.currentUser || credential) && application.protectedDataAvailable)
+//        {
+//			[[SYNRemoteLogger sharedLogger] log:@"AA Logging the user out"];
+//			
+//            [self logout];
+//        }
+//        
         self.window.rootViewController = [self createAndReturnLoginViewController];
     }
 }
@@ -533,6 +533,16 @@
     
     [self.oAuthNetworkEngine
      trackSessionWithMessage: message];
+	
+    SYNOAuth2Credential *credential = [SYNOAuth2Credential credentialFromKeychainForService: [[NSBundle mainBundle] bundleIdentifier]
+                                                                                    account: self.currentUser.uniqueId];
+	
+	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"ACTIVE Starting app in state: %d", application.applicationState]];
+	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"ACTIVE Protected data available: %d", application.protectedDataAvailable]];
+	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"ACTIVE Current username: (%@) %@", self.currentUser.uniqueId, self.currentUser.username]];
+	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"ACTIVE Credential: %@", credential]];
+	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"ACTIVE Current view controller: %@", NSStringFromClass(self.window.rootViewController)];
+	
 }
 
 
