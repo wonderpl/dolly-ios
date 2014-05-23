@@ -99,6 +99,8 @@
                                                       userInfo: @{kScrollingDirection:@(ScrollingDirectionUp)}];
 	
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData) name:kReloadFeed object:nil];
+	
+	[self reloadData];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -107,7 +109,7 @@
 	if (![self isBeingPresented]) {
 		self.model.delegate = self;
 	}
-    [self.feedCollectionView reloadData];
+	
 	self.shownInboarding = NO;
 }
 
@@ -115,8 +117,6 @@
 	[super viewDidAppear:animated];
 	
 	[[SYNTrackingManager sharedManager] trackFeedScreenView];
-	
-	[self reloadData];
 }
 
 - (void)scrollToTop:(UIGestureRecognizer *)gestureRecognizer {
@@ -199,7 +199,6 @@
 								 collectionView:(UICollectionView *)collectionView {
 	return nil;
 }
-
 
 - (SYNFeedVideoCell *)videoCellForIndexPath:(NSIndexPath *)indexPath
 							 collectionView:(UICollectionView *)collectionView {
