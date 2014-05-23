@@ -148,7 +148,7 @@
 	
 	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"Starting app in state: %d", application.applicationState]];
 	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"Protected data available: %d", application.protectedDataAvailable]];
-	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"Current username: %@", self.currentUser.username]];
+	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"Current username: (%@) %@", self.currentUser.uniqueId, self.currentUser.username]];
 	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"Credential: %@", credential]];
 	
     if (self.currentUser && credential)
@@ -217,7 +217,7 @@
 	
 	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"AA Starting app in state: %d", application.applicationState]];
 	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"AA Protected data available: %d", application.protectedDataAvailable]];
-	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"AA Current username: %@", self.currentUser.username]];
+	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"AA Current username: (%@) %@", self.currentUser.uniqueId, self.currentUser.username]];
 	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"AA Credential: %@", credential]];
 	
     if (self.currentUser && credential)
