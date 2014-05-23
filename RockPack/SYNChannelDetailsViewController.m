@@ -125,7 +125,8 @@
     
     if (IS_IPHONE) {
         
-        self.videoCollectionViewLayoutIPhone.sectionInset = UIEdgeInsetsMake(2, 2, 60, 2);
+        
+        self.videoCollectionViewLayoutIPhone.sectionInset = UIEdgeInsetsMake(2, 10, 60, 2);
     }
 	
 	if (IS_IPHONE) {

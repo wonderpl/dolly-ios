@@ -14,7 +14,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" id="mAJ-VY-ICQ">
-                        <rect key="frame" x="8" y="0.0" width="267" height="236"/>
+                        <rect key="frame" x="10" y="0.0" width="267" height="236"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ldw-z4-nP7" userLabel="Title">
@@ -59,7 +59,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <view contentMode="scaleToFill" id="eIq-JL-HA6" userLabel="ActionBar">
-                        <rect key="frame" x="17" y="242" width="252" height="22"/>
+                        <rect key="frame" x="18" y="242" width="252" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
