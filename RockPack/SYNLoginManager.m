@@ -196,36 +196,26 @@
     
     
     if (registrationCheck == YES) {
-        // == show on value == 2
-//        [[NSUserDefaults standardUserDefaults] setInteger:0 forKey: kUserDefaultsDiscoverVideoFirstTime];
-        
-        // == show on value == 1
-//        [[NSUserDefaults standardUserDefaults] setInteger:0 forKey: kUserDefaultsDiscoverUserFirstTime];
-        
-        
-        // == other user animation < = 2
-        // == inboarding description
-        [[NSUserDefaults standardUserDefaults] setInteger:0 forKey: kUserDefaultsOtherPersonsProfile];
-        
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey: kUserDefaultsCreateChannelFirstTime];
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey: kUserDefaultsYourProfileFirstTime];
-//        [[NSUserDefaults standardUserDefaults] setBool: NO forKey: kUserDefaultsFeedFirstTime];
+    
+        [[NSUserDefaults standardUserDefaults] setInteger:0 forKey: kUserDefaultsDiscoverUserFirstTime];
+		[[NSUserDefaults standardUserDefaults] setInteger:0 forKey: kUserDefaultsOtherPersonsProfile];
+		[[NSUserDefaults standardUserDefaults] setBool:NO forKey: kUserDefaultsCreateChannelFirstTime];
+		[[NSUserDefaults standardUserDefaults] setBool:NO forKey: kUserDefaultsYourProfileFirstTime];
+		[[NSUserDefaults standardUserDefaults] setInteger:0 forKey:kUserDefaultsFeedCount];
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey: kUserDefaultsShareFirstTime];
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey: kUserDefaultsAddToCollectionFirstTime];
 
     } else {
-        // == show on value == 2
-        [[NSUserDefaults standardUserDefaults] setInteger:3 forKey: kUserDefaultsDiscoverVideoFirstTime];
         
-        // == show on value == 1
         [[NSUserDefaults standardUserDefaults] setInteger:2 forKey: kUserDefaultsDiscoverUserFirstTime];
-
-        // == other user animation < = 2
-        // == inboarding description
         [[NSUserDefaults standardUserDefaults] setInteger:2 forKey: kUserDefaultsOtherPersonsProfile];
-        
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey: kUserDefaultsCreateChannelFirstTime];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey: kUserDefaultsYourProfileFirstTime];
-        [[NSUserDefaults standardUserDefaults] setBool: YES forKey: kUserDefaultsFeedFirstTime];
+		[[NSUserDefaults standardUserDefaults] setInteger:3 forKey:kUserDefaultsFeedCount];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey: kUserDefaultsShareFirstTime];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey: kUserDefaultsAddToCollectionFirstTime];
 
+    
     }
     
     _registrationCheck = registrationCheck;

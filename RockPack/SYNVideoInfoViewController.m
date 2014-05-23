@@ -36,7 +36,7 @@ static const CGFloat UpcomingVideosDividerHeight = 70.0;
 
 @property (nonatomic, strong, readonly) VideoInstance *currentVideoInstance;
 
-@property (nonatomic, strong) NSMutableArray *annotations;
+@property (nonatomic, strong) NSMutableOrderedSet *annotations;
 
 @property (nonatomic, weak) SYNVideoActionsBar *videoActionsBar;
 
@@ -52,7 +52,7 @@ static const CGFloat UpcomingVideosDividerHeight = 70.0;
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
-	self.annotations = [NSMutableArray array];
+	self.annotations = [NSMutableOrderedSet orderedSet];
 	self.descriptionHeight = 50;
 	
 	[self.collectionView registerNib:[SYNVideoDivider nib]
@@ -74,10 +74,16 @@ static const CGFloat UpcomingVideosDividerHeight = 70.0;
 
 #pragma mark - Public
 
-- (void)addVideoAnnotation:(VideoAnnotation *)annotation {
+- (BOOL)addVideoAnnotation:(VideoAnnotation *)annotation {
+	if ([self.annotations containsObject:annotation]) {
+		return NO;
+	}
+	
 	BOOL isFirstAnnotation = ([self.annotations count] == 0);
 	
 	[self.annotations addObject:annotation];
+	
+	[self.collectionView setContentOffset:CGPointZero animated:YES];
 	
 	UIButton *button = self.videoActionsBar.shopButton;
 	[button setTitle:[NSString stringWithFormat:@"%@", @([self.annotations count])] forState:UIControlStateNormal];
@@ -103,6 +109,7 @@ static const CGFloat UpcomingVideosDividerHeight = 70.0;
 									  
 								  }];
 	}
+	return YES;
 }
 
 #pragma mark - Getters / Setters
@@ -113,7 +120,7 @@ static const CGFloat UpcomingVideosDividerHeight = 70.0;
 	_selectedIndex = selectedIndex;
 	
 	if (selectedIndexChanged) {
-		self.annotations = [NSMutableArray array];
+		self.annotations = [NSMutableOrderedSet orderedSet];
 	}
 	
 	[self.collectionView reloadData];
@@ -197,7 +204,6 @@ static const CGFloat UpcomingVideosDividerHeight = 70.0;
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.section == [self upcomingVideosSectionIndex]) {
-		[[SYNTrackingManager sharedManager] trackUpcomingVideoSelectedForTitle:self.currentVideoInstance.title];
 		[self.delegate videoInfoViewController:self didSelectVideoAtIndex:self.selectedIndex + indexPath.row + 1];
 	}
 }

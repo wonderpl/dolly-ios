@@ -34,6 +34,7 @@
 #import "SYNAppearanceManager.h"
 #import "SYNFeedModel.h"
 #import "SYNVideoPlayerViewController.h"
+#import "SYNRemoteLogger.h"
 @import AVFoundation;
 
 @interface SYNAppDelegate () {
@@ -144,7 +145,12 @@
     // account shared between prod and dev, not they both have their own based on the bundle id
     SYNOAuth2Credential *credential = [SYNOAuth2Credential credentialFromKeychainForService: [[NSBundle mainBundle] bundleIdentifier]
                                                                                     account: self.currentUser.uniqueId];
-    
+	
+	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"Starting app in state: %d", application.applicationState]];
+	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"Protected data available: %d", application.protectedDataAvailable]];
+	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"Current username: %@", self.currentUser.username]];
+	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"Credential: %@", credential]];
+	
     if (self.currentUser && credential)
     {
 		[[SYNTrackingManager sharedManager] setAgeDimensionFromBirthDate:self.currentUser.dateOfBirth];
@@ -169,8 +175,12 @@
     }
     else
     {
-        if (self.currentUser || credential)
+		[[SYNRemoteLogger sharedLogger] log:@"Showing login view controller"];
+		
+        if ((self.currentUser || credential) && application.protectedDataAvailable)
         {
+			[[SYNRemoteLogger sharedLogger] log:@"Logging the user out"];
+			
             [self logout];
         }
         
@@ -195,6 +205,59 @@
     return YES;
 }
 
+- (void)applicationProtectedDataDidBecomeAvailable:(UIApplication *)application {
+	[[SYNRemoteLogger sharedLogger] log:@"Protected data now available"];
+	
+	// Don't use the currentCredentials method as this will assert if there is a vaild user,but no credentials, preventing completion of the logic below
+    // inlduding logout, which is the correct flow
+    // This should realistically never happen (except after swapping between dev and prod before the fix to the keychain account (before there was only one
+    // account shared between prod and dev, not they both have their own based on the bundle id
+    SYNOAuth2Credential *credential = [SYNOAuth2Credential credentialFromKeychainForService: [[NSBundle mainBundle] bundleIdentifier]
+                                                                                    account: self.currentUser.uniqueId];
+	
+	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"AA Starting app in state: %d", application.applicationState]];
+	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"AA Protected data available: %d", application.protectedDataAvailable]];
+	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"AA Current username: %@", self.currentUser.username]];
+	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"AA Credential: %@", credential]];
+	
+    if (self.currentUser && credential)
+    {
+		[[SYNRemoteLogger sharedLogger] log:@"Showing view controllers"];
+		
+		[[SYNTrackingManager sharedManager] setAgeDimensionFromBirthDate:self.currentUser.dateOfBirth];
+		[[SYNTrackingManager sharedManager] setGenderDimension:self.currentUser.genderValue];
+		
+        // If we have a user and a refresh token... //
+        if ([self.currentOAuth2Credentials hasExpired])
+        {
+            [self refreshExpiredTokenOnStartup];
+        }
+        else // we have an access token //
+        {
+            // set timer for auto refresh //
+            
+            [self setTokenExpiryTimer];
+            
+            [self refreshFacebookSession];
+            
+            self.window.rootViewController = [self createAndReturnRootViewController];
+            
+        }
+    }
+    else
+    {
+		[[SYNRemoteLogger sharedLogger] log:@"AA Showing login view controller"];
+		
+        if ((self.currentUser || credential) && application.protectedDataAvailable)
+        {
+			[[SYNRemoteLogger sharedLogger] log:@"AA Logging the user out"];
+			
+            [self logout];
+        }
+        
+        self.window.rootViewController = [self createAndReturnLoginViewController];
+    }
+}
 
 - (void) refreshFacebookSession
 {
@@ -326,6 +389,8 @@
 
 - (void) logout
 {
+	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"Logging out, call stack: %@", [NSThread callStackSymbols]]];
+	
     // As we are logging out, we need to unregister the current user (the new user will be re-registered on login below)
     [[UIApplication sharedApplication] unregisterForRemoteNotifications];
 	[[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalNever];
@@ -365,9 +430,6 @@
 	
 	if ([SYNLoginManager sharedManager].registrationCheck) {
 		self.window.rootViewController = [[SYNOnBoardingViewController alloc] init];
-		
-		SYNOnBoardingOverlayViewController* onboardingOverlay = [[SYNOnBoardingOverlayViewController alloc] init];
-		[onboardingOverlay addToViewController:self.window.rootViewController];
 	} else {
 		self.window.rootViewController = [self createAndReturnRootViewController];
 	}
@@ -1364,6 +1426,9 @@
 }
 
 - (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+	
+	[[SYNRemoteLogger sharedLogger] log:@"Performing fetch"];
+	
 	if (!self.currentOAuth2Credentials.userId) {
 		completionHandler(UIBackgroundFetchResultNoData);
 		return;
@@ -1386,7 +1451,10 @@
 		}
 		
 		// Wait a second to give the images a chance to download
-		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+			
+			[[SYNRemoteLogger sharedLogger] log:@"Completed fetch"];
+			
 			completionHandler(result);
 		});
 	}];

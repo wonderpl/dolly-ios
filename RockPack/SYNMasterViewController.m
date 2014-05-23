@@ -16,6 +16,7 @@
 #import "SYNPopoverable.h"
 #import "SYNContainerViewController.h"
 #import "SYNGenreManager.h"
+#import "SYNRemoteLogger.h"
 
 #define kBackgroundOverlayAlpha 0.5f
 
@@ -333,7 +334,7 @@
 
 - (void) accountSettingsLogout: (NSNotification*) notification
 {
-    
+	[[SYNRemoteLogger sharedLogger] log:@"Logging out via notification"];
     [appDelegate logout];
 }
 

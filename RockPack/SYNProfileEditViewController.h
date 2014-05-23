@@ -8,9 +8,10 @@
 
 #import "SYNAbstractViewController.h"
 #import "SYNProfileEditDelegate.h"
+#import "UIPlaceHolderTextView.h"
 
 @interface SYNProfileEditViewController : SYNAbstractViewController
-@property (strong, nonatomic) IBOutlet UITextView *descriptionTextView;
+@property (strong, nonatomic) IBOutlet UIPlaceHolderTextView *descriptionTextView;
 @property (strong, nonatomic) NSString *descriptionString;
 @property (nonatomic, weak) id<SYNProfileEditDelegate> delegate;
 

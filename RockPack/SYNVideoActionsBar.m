@@ -28,6 +28,7 @@
 - (void)awakeFromNib {
 	[super awakeFromNib];
 	
+	self.shopButton.titleLabel.textAlignment = NSTextAlignmentCenter;
 	self.shopButton.titleLabel.font = [UIFont regularCustomFontOfSize:self.shopButton.titleLabel.font.pointSize];
 }
 

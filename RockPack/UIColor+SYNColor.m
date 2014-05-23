@@ -210,6 +210,10 @@ return [UIColor colorWithRed: 136.0f / 255.0f
 }
 
 
++ (UIColor*)dollyRed {
+	return RGB(241.0, 55, 35);
+}
+
 + (UIColor *)defaultCategoryColor {
 	return WA(200, 1);
 }

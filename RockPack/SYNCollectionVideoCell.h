@@ -29,9 +29,10 @@
 @property (nonatomic, strong) IBOutlet UIImageView* imageView;
 @property (nonatomic, strong) IBOutlet UILabel* titleLabel;
 @property (nonatomic, strong) IBOutlet UIView *videoActionsContainer;
-
+@property (strong, nonatomic) IBOutlet UIImageView *removeVideoImage;
 @property (nonatomic, strong) UITapGestureRecognizer *tap;
-
+@property (nonatomic, assign) BOOL editable;
+@property (nonatomic, strong) IBOutlet UIView *view;
 @property (nonatomic, weak) id<SYNCollectionVideoCellDelegate> delegate;
 @property (nonatomic, weak) VideoInstance* videoInstance;
 

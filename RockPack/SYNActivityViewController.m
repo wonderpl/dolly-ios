@@ -43,7 +43,7 @@
         self.hasUnreadNotifications = NO;
         self.notificationCounter = 0;
         self.notifications = @[];
-		[self loadNotifications];
+		[self loadNotificationsWithcompletion:nil];
 		
 	[self addObserver:self
 			   forKeyPath:NSStringFromSelector(@selector(notificationCounter))
@@ -76,15 +76,16 @@
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	
-	[self loadNotifications];
-	[self markAllAsRead];
+	[self loadNotificationsWithcompletion:^{
+        [self markAllAsRead];
+    }];
 	
 	[[SYNTrackingManager sharedManager] trackActivityScreenView];
 }
 
 #pragma mark - Get Data
 
-- (void) loadNotifications
+- (void) loadNotificationsWithcompletion :(void (^)(void))callbackBlock
 {
     [appDelegate.oAuthNetworkEngine notificationsFromUserId: appDelegate.currentUser.uniqueId
                                           completionHandler: ^(id response) {
@@ -105,6 +106,10 @@
 											  }
 											  
 											  [self.tableView reloadData];
+                                             
+                                              if (callbackBlock) {
+                                                  callbackBlock();
+                                              }
                                               
                                           } errorHandler:^(id error) {
                                               DebugLog(@"Could not load notifications");
@@ -320,18 +325,14 @@
 
     if (self.hasUnreadNotifications)
         notification = nil;
-
-    [self markAsReadForNotification: notification];
     
-    SYNActivityTabButton *activityTab = appDelegate.masterViewController.activityTab;
-    activityTab.badageNumber = 0;
-
-
+    self.notificationCounter = 0;
+    [self markAsReadForNotification: notification];
 }
 
 - (void) markAsReadForNotification: (SYNNotification *) notification
 {
-    
+
     NSArray *array;
     if (notification) {
         array = @[@(notification.identifier)];
@@ -342,8 +343,7 @@
     [appDelegate.oAuthNetworkEngine markAsReadForNotificationIndexes:array
                                                           fromUserId:appDelegate.currentUser.uniqueId
                                                    completionHandler:^(id responce) {
-        
-                                                       
+                                                    
                                                        if(notification)
                                                        {
                                                            // Decrement the badge number (min zero)
@@ -368,6 +368,8 @@
                                                            
                                                        }
                                                        
+                                                       
+
                                                        [self.tableView reloadData];
         
                                                    } errorHandler:^(id error) {
@@ -391,7 +393,7 @@
 }
 
 - (void)applicationWillEnterForeground:(NSNotification *)notification {
-	[self loadNotifications];
+	[self loadNotificationsWithcompletion:nil];
 }
 #pragma mark - KVO
 
@@ -399,13 +401,13 @@
 	if ([keyPath isEqualToString:NSStringFromSelector(@selector(notificationCounter))]) {
 		SYNActivityTabButton *activityTab = appDelegate.masterViewController.activityTab;
 
-        activityTab.badageNumber = self.notificationCounter;
         
         if (self.notificationCounter > 0) {
             [activityTab setBackgroundImage:[UIImage imageNamed:@"TabActivityNotification"] forState:UIControlStateNormal];
         } else {
             [activityTab setBackgroundImage:[UIImage imageNamed:@"TabActivity"] forState:UIControlStateNormal];
-        }
+        }        
+        activityTab.badageNumber = self.notificationCounter;
 	}
 }
 

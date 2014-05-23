@@ -42,7 +42,7 @@
 #import "SYNCollectionVideoCell.h"
 #import "SYNAddToChannelViewController.h"
 
-#define kHeightChange 40.0f
+#define kHeightChange 30.0f
 #define FULL_NAME_LABEL_IPHONE 147.0f
 #define FULL_NAME_LABEL_IPAD_PORTRAIT 252.0f
 #define FULLNAMELABELIPADLANDSCAPE 258.0f
@@ -124,7 +124,9 @@
     }
     
     if (IS_IPHONE) {
-        self.videoCollectionViewLayoutIPhone.sectionInset = UIEdgeInsetsMake(2, 2, 2, 2);
+        
+        
+        self.videoCollectionViewLayoutIPhone.sectionInset = UIEdgeInsetsMake(2, 10, 60, 2);
     }
 	
 	if (IS_IPHONE) {
@@ -135,7 +137,7 @@
     if (IS_IPAD) {
         self.videoCollectionViewLayoutIPadEdit = [[LXReorderableCollectionViewFlowLayout alloc]init];
         self.videoCollectionViewLayoutIPadEdit.itemSize = CGSizeMake(295, 268-kHeightChange);
-        self.videoCollectionViewLayoutIPadEdit.sectionInset = UIEdgeInsetsMake(0, 35, 0, 35);
+        self.videoCollectionViewLayoutIPadEdit.sectionInset = UIEdgeInsetsMake(0, 35, 60, 35);
     }
     self.barBtnCancel = [[UIBarButtonItem alloc]initWithTitle:@"cancel"
                                                         style:UIBarButtonItemStyleBordered
@@ -148,12 +150,12 @@
                                                      action:@selector(saveTapped)];
     
     if (IS_IPHONE) {
-        self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsMake(470, 0, 0, 0);
+        self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsMake(470, 0, 60, 0);
         self.offsetValue = 470;
     }
     
     if (IS_IPAD) {
-        self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsMake(530, 0, 0, 0);
+        self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsMake(530, 0, 60, 0);
         self.offsetValue = 530;
     }
     
@@ -169,8 +171,15 @@
 - (void)viewWillAppear: (BOOL) animated {
     [super viewWillAppear: animated];
 	[self.txtViewDescription setPlaceHolderLabelFont:[UIFont regularCustomFontOfSize:self.txtViewDescription.font.pointSize]];
-	self.txtViewDescription.placeholder = @"Change collection details";
-	self.txtViewTitle.placeholder = @"Change collection titile";
+    if (IS_IPAD) {
+        self.txtViewDescription.placeholder = @"           Change collection details";
+        self.txtViewTitle.placeholder = @"Change collection title";
+    } else {
+        self.txtViewDescription.placeholder = @"       Change collection details";
+        self.txtViewTitle.placeholder = @"Change collection title";
+        
+    }
+    
     self.btnShowVideos.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     
     [self.videoThumbnailCollectionView reloadData];
@@ -346,7 +355,10 @@
     
     //should not have to do this, check.
     [self.btnDeleteChannel setBackgroundColor:[UIColor whiteColor]];
-    
+    self.btnDeleteChannel.layer.cornerRadius = self.btnDeleteChannel.frame.size.height * 0.5;
+    self.btnDeleteChannel.layer.borderColor = [[UIColor redColor] CGColor];
+    self.btnDeleteChannel.layer.borderWidth = 1.0f;
+
 }
 
 
@@ -693,16 +705,9 @@
     
 	VideoInstance *videoInstance = [self.model itemAtIndex:indexPath.item];
     
-    if (self.mode == kChannelDetailsModeEdit) {
-        videoThumbnailCell.deleteButton.hidden = NO;
-		videoThumbnailCell.videoActionsContainer.hidden = YES;
-    }
-    else
-    {
-        videoThumbnailCell.deleteButton.hidden = YES;
-		videoThumbnailCell.videoActionsContainer.hidden = NO;
-    }
     
+    BOOL editable = (self.mode == kChannelDetailsModeEdit);
+    [videoThumbnailCell setEditable:editable];
     [videoThumbnailCell setVideoInstance:videoInstance];
     [videoThumbnailCell setDelegate:self];
     
@@ -1060,9 +1065,9 @@
     for (SYNCollectionVideoCell* cell in self.videoThumbnailCollectionView.visibleCells)
     {
         
-        cell.deleteButton.hidden = NO;
         void (^animateEditMode)(void) = ^{
-            
+            [cell setEditable:YES];
+
             CGRect frame = cell.frame;
             
             cell.frame = frame;
@@ -1103,10 +1108,9 @@
     [self updateCollectionLayout];
     for (SYNCollectionVideoCell* cell in self.videoThumbnailCollectionView.visibleCells) {
         
-        cell.deleteButton.hidden = YES;
-        
         void (^animateProfileMode)(void) = ^{
             
+            [cell setEditable:NO];
             cell.deleteButton.alpha = 0.0f;
 			cell.videoActionsContainer.alpha = 1.0f;
 

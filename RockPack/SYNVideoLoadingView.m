@@ -13,8 +13,6 @@
 #import "UIImage+Blur.h"
 #import "SYNVideoThumbnailDownloader.h"
 
-static NSString *const LoadingMessage = @"YOUR VIDEO IS LOADING";
-
 @interface SYNVideoLoadingView ()
 
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView *activityIndicator;

@@ -22,7 +22,7 @@
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1TK-HE-31a" customClass="SYNProgressView">
-                    <rect key="frame" x="42" y="7" width="147" height="10"/>
+                    <rect key="frame" x="71" y="7" width="118" height="10"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     <constraints>
@@ -30,7 +30,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UPL-IY-mRy" customClass="UISlider">
-                    <rect key="frame" x="42" y="-6" width="147" height="34"/>
+                    <rect key="frame" x="71" y="-6" width="118" height="34"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="34" id="oQs-3a-YDo"/>
@@ -66,7 +66,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1aE-ZN-sKt">
-                    <rect key="frame" x="250" y="0.0" width="30" height="24"/>
+                    <rect key="frame" x="250" y="1" width="30" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="30" id="VsY-ac-H0S"/>
@@ -78,12 +78,22 @@
                         <action selector="fullscreenButtonPressed:" destination="1" eventType="touchUpInside" id="pFo-72-aXg"/>
                     </connections>
                 </button>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lyl-id-SIc" customClass="SYNTimestampLabel">
+                    <rect key="frame" x="38" y="4" width="25" height="15"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="0.47843137254901957" green="0.50196078431372548" blue="0.52156862745098043" alpha="0.38" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="centerY" secondItem="2HY-ng-bdK" secondAttribute="centerY" id="1uY-Kv-the"/>
                 <constraint firstAttribute="trailing" secondItem="Kmx-LH-wU8" secondAttribute="trailing" constant="4" id="A1f-Ar-Reh"/>
+                <constraint firstItem="Lyl-id-SIc" firstAttribute="leading" secondItem="2HY-ng-bdK" secondAttribute="trailing" id="BaX-HS-VFf"/>
                 <constraint firstAttribute="centerY" secondItem="1TK-HE-31a" secondAttribute="centerY" id="HcR-XS-nMI"/>
+                <constraint firstAttribute="centerY" secondItem="Lyl-id-SIc" secondAttribute="centerY" id="I5Z-tN-4PN"/>
+                <constraint firstItem="1TK-HE-31a" firstAttribute="leading" secondItem="Lyl-id-SIc" secondAttribute="trailing" constant="8" id="Jt3-2X-wbX"/>
                 <constraint firstItem="1aE-ZN-sKt" firstAttribute="leading" secondItem="GtO-iW-TPz" secondAttribute="trailing" id="SUA-x3-1Tz"/>
                 <constraint firstItem="2HY-ng-bdK" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="V9l-Ok-PU8"/>
                 <constraint firstItem="Kmx-LH-wU8" firstAttribute="leading" secondItem="1aE-ZN-sKt" secondAttribute="trailing" id="agd-oa-vG7"/>
@@ -96,7 +106,6 @@
                 <constraint firstAttribute="centerY" secondItem="hzL-mR-Ilh" secondAttribute="centerY" id="n5H-PA-szk"/>
                 <constraint firstAttribute="centerY" secondItem="Kmx-LH-wU8" secondAttribute="centerY" id="oAE-WV-mJz"/>
                 <constraint firstItem="GtO-iW-TPz" firstAttribute="leading" secondItem="hzL-mR-Ilh" secondAttribute="trailing" constant="4" id="rLc-XT-wPR"/>
-                <constraint firstItem="1TK-HE-31a" firstAttribute="leading" secondItem="2HY-ng-bdK" secondAttribute="trailing" constant="4" id="v2q-dp-Ntm"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
@@ -107,6 +116,7 @@
                 <outlet property="highDefinitionWidth" destination="jlD-jx-yCU" id="DlG-uf-G3d"/>
                 <outlet property="playPauseButton" destination="2HY-ng-bdK" id="VHc-Dp-nzo"/>
                 <outlet property="progressSlider" destination="UPL-IY-mRy" id="Ap2-P6-ftg"/>
+                <outlet property="timestampLabel" destination="Lyl-id-SIc" id="hSG-0J-ooy"/>
                 <outlet property="volumeView" destination="Kmx-LH-wU8" id="4LJ-vJ-lkM"/>
                 <outlet property="volumeViewTrailingSpace" destination="A1f-Ar-Reh" id="6Ce-gx-a5C"/>
             </connections>
@@ -114,7 +124,7 @@
     </objects>
     <resources>
         <image name="ButtonShuttleBarPlay.png" width="38" height="24"/>
-        <image name="ScrubberBarFullScreen.png" width="24" height="24"/>
+        <image name="ScrubberBarFullScreen.png" width="11" height="11"/>
         <image name="ScrubberBarHD.png" width="26" height="12"/>
     </resources>
 </document>

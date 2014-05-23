@@ -13,6 +13,8 @@
 
 @property (nonatomic, copy) NSArray *layoutAttributes;
 
+@property (nonatomic, assign) CGFloat maxHeight;
+
 @end
 
 @implementation SYNIPadOnBoardingLayout
@@ -89,7 +91,13 @@
 		[layoutAttributes addObject:sectionLayoutAttributes];
 	}
 	
+	self.maxHeight = currentY;
+	
 	self.layoutAttributes = layoutAttributes;
+}
+
+- (CGSize)collectionViewContentSize {
+	return CGSizeMake(CGRectGetWidth(self.collectionView.bounds), self.maxHeight);
 }
 
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect {

@@ -69,15 +69,6 @@ static CGFloat const ControlsFadeTimer = 5.0;
 
 #pragma mark - Overridden
 
-- (void)willMoveToSuperview:(UIView *)newSuperview {
-	[super willMoveToSuperview:newSuperview];
-	
-	if (!newSuperview) {
-		[self stopControlsTimer];
-		[self stopUpdatingProgress];
-	}
-}
-
 - (void)layoutSubviews {
 	[super layoutSubviews];
 	
@@ -106,7 +97,7 @@ static CGFloat const ControlsFadeTimer = 5.0;
 
 - (void)scrubberBarCurrentTimeWillChange {
 	// We don't want the controls to fade out while they're interacting with them
-	[self stopControlsTimer];
+	[self stopControlsFadeTimer];
 	
 	[self pause];
 }
@@ -210,12 +201,13 @@ static CGFloat const ControlsFadeTimer = 5.0;
 		[self addGestureRecognizer:self.maximiseMinimiseGestureRecognizer];
 		[self addGestureRecognizer:self.maximiseMinimisePinchGestureRecognizer];
 		
+		[self startUpdatingProgress];
+		
 		self.hasBeganPlaying = YES;
 	}
 	
 	self.state = SYNVideoPlayerStatePlaying;
 	
-	[self startUpdatingProgress];
 	self.scrubberBar.playing = YES;
 }
 
@@ -223,6 +215,14 @@ static CGFloat const ControlsFadeTimer = 5.0;
 	self.state = SYNVideoPlayerStatePaused;
 	
 	self.scrubberBar.playing = NO;
+}
+
+- (void)stop {
+	self.state = SYNVideoPlayerStateInitialised;
+	self.hasBeganPlaying = NO;
+	
+	[self stopControlsFadeTimer];
+	[self stopUpdatingProgress];
 }
 
 - (NSTimeInterval)duration {
@@ -306,7 +306,7 @@ static CGFloat const ControlsFadeTimer = 5.0;
 }
 
 - (void)fadeOutControls {
-	[self stopControlsTimer];
+	[self stopControlsFadeTimer];
 	self.controlsVisible = NO;
 	
 	[UIView animateWithDuration:0.3 animations:^{
@@ -314,7 +314,7 @@ static CGFloat const ControlsFadeTimer = 5.0;
 	}];
 }
 
-- (void)stopControlsTimer {
+- (void)stopControlsFadeTimer {
 	[self.controlsFadeTimer invalidate];
 	self.controlsFadeTimer = nil;
 }
@@ -391,7 +391,7 @@ static CGFloat const ControlsFadeTimer = 5.0;
 }
 
 - (void)annotationButtonPressed:(SYNVideoAnnotationButton *)button {
-	[self.delegate videoPlayerAnnotationSelected:button.videoAnnotation];
+	[self.delegate videoPlayerAnnotationSelected:button.videoAnnotation button:button];
 }
 
 - (void)updateAnnotationButtonsForTime:(NSTimeInterval)time {

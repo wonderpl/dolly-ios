@@ -73,6 +73,7 @@ typedef void (^SearchResultCompleteBlock)(int);
 @property (nonatomic, strong) SYNVideoPlayerAnimator *videoPlayerAnimator;
 
 @property (nonatomic, assign) SYNSearchType searchType;
+@property (nonatomic, assign) BOOL shownOverlay;
 
 @end
 
@@ -211,15 +212,14 @@ typedef void (^SearchResultCompleteBlock)(int);
 	}
     
     [self.usersCollectionView.collectionViewLayout invalidateLayout];
-    
-    if (self.searchResultsShowing == SearchResultsShowingVideos) {
-        [self showVideoOverlay];
-    } else {
+    self.shownOverlay = NO;
+    if (self.searchResultsShowing == SearchResultsShowingUsers) {
         [self showUserOverLay];
     }
     // == So the unfollow/follow button gets updated 
     [self.usersCollectionView reloadData];
     [self.videosCollectionView reloadData];
+    
 }
 
 -(SYNPopupMessageView*) displayPopupMessage:(NSString *)messageKey withLoader:(BOOL)isLoader
@@ -335,7 +335,7 @@ typedef void (^SearchResultCompleteBlock)(int);
                                                         completionHandler:^(int value) {
                                                             self.userSearchCompleteBlock(value);
                                                             [self showUserOverLay];
-                                                        }];
+                   }];
 }
 
 - (void) searchForTerm: (NSString *) newSearchTerm
@@ -394,7 +394,6 @@ typedef void (^SearchResultCompleteBlock)(int);
                                                                        inRange: self.dataRequestRange
                                                                     onComplete:^(int value) {
                                                                         self.videoSearchCompleteBlock(value);
-                                                                        [self showVideoOverlay];
                                                                     }];
     
     self.userSearchOperation = [appDelegate.networkEngine searchUsersForTerm: _currentSearchTerm
@@ -747,14 +746,10 @@ referenceSizeForFooterInSection: (NSInteger) section
     if (self.videosTabButton == sender)
     {
         self.searchResultsShowing = SearchResultsShowingVideos;
-        
-        [self showVideoOverlay];
 
     }
     else if (self.usersTabButton == sender)
-    {
-        
-        [self showUserOverLay];
+    {                                                            [self showUserOverLay];
 
         self.searchResultsShowing = SearchResultsShowingUsers;
     }
@@ -848,33 +843,24 @@ referenceSizeForFooterInSection: (NSInteger) section
 
 
 -(void) showUserOverLay {
+    
     float value = [[NSUserDefaults standardUserDefaults] integerForKey: kUserDefaultsDiscoverUserFirstTime];
-    if (self.usersArray.count>0 && value<2) {
+    if (self.usersArray.count>0 && self.shownOverlay == NO && value<3) {
         // display overlay only on the second time they view the highlights overlay
         
-        if (value==1)
-        {
-            [self.usersCollectionView setContentOffset:CGPointZero];
+        if ([[SYNActivityManager sharedInstance] userFollowingCount] > 6) {
+            
+            [[NSUserDefaults standardUserDefaults] setInteger:3 forKey:kUserDefaultsDiscoverUserFirstTime];
+            return;
+        }
+        
+        [self.usersCollectionView setContentOffset:CGPointZero];
             SYNDiscoverOverlayHighlightsViewController* overlay = [[SYNDiscoverOverlayHighlightsViewController alloc] init];
             [overlay addToViewController:appDelegate.masterViewController];
-        }
+        
         value+=1;
         [[NSUserDefaults standardUserDefaults] setInteger:value forKey:kUserDefaultsDiscoverUserFirstTime];
-    }
-}
-
-- (void) showVideoOverlay {
-    float value = [[NSUserDefaults standardUserDefaults] integerForKey: kUserDefaultsDiscoverVideoFirstTime];
-    if (self.videosArray.count>0 && value<3) {
-        // display Video overlay only on the third time they view the highlights overlay
-        if (value==2)
-        {
-            [self.videosCollectionView setContentOffset:CGPointZero];
-            SYNDiscoverOverlayVideoViewController* overlay = [[SYNDiscoverOverlayVideoViewController alloc] init];
-            [overlay addToViewController:appDelegate.masterViewController];
-        }
-        value+=1;
-        [[NSUserDefaults standardUserDefaults] setInteger:value forKey:kUserDefaultsDiscoverVideoFirstTime];
+        self.shownOverlay = YES;
     }
 }
 

@@ -121,10 +121,10 @@
                     </connections>
                 </button>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hRf-ua-zJv">
-                    <rect key="frame" x="24" y="359" width="274" height="30"/>
+                    <rect key="frame" x="121" y="372" width="80" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                    <state key="normal" title="delete">
+                    <state key="normal" title="Delete">
                         <color key="titleColor" red="0.82352941176470584" green="0.25882352941176467" blue="0.16470588235294117" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -144,7 +144,7 @@
                     </connections>
                 </textView>
                 <label hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bdE-6E-xRu" userLabel="Label - NoVideos">
-                    <rect key="frame" x="4" y="506" width="313" height="21"/>
+                    <rect key="frame" x="4" y="489" width="313" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>

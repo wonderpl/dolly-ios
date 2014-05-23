@@ -10,6 +10,7 @@
 #import "SYNProgressView.h"
 #import "UIFont+SYNFont.h"
 #import "SYNTimestampView.h"
+#import "SYNTimestampLabel.h"
 #import "NSString+Timecode.h"
 @import MediaPlayer;
 
@@ -18,6 +19,7 @@
 @property (nonatomic, strong) IBOutlet UIButton *playPauseButton;
 @property (nonatomic, strong) IBOutlet UIButton *fullscreenButton;
 
+@property (nonatomic, strong) IBOutlet SYNTimestampLabel *timestampLabel;
 @property (nonatomic, strong) IBOutlet UILabel *durationLabel;
 
 @property (nonatomic, strong) IBOutlet SYNProgressView *bufferingProgressView;
@@ -32,8 +34,6 @@
 @property (nonatomic, strong) CALayer *topLineLayer;
 
 @property (nonatomic, assign) BOOL changingCurrentTime;
-
-@property (nonatomic, strong) SYNTimestampView *timestampView;
 
 @end
 
@@ -57,6 +57,7 @@
 	[self updateHighDefinitionDisplay];
 	[self updateVolumeViewDisplay];
 	
+	self.timestampLabel.font = [UIFont regularCustomFontOfSize:self.timestampLabel.font.pointSize];
 	self.durationLabel.font = [UIFont regularCustomFontOfSize:self.durationLabel.font.pointSize];
 	
 	self.volumeView.showsVolumeSlider = NO;
@@ -95,13 +96,17 @@
 - (void)setCurrentTime:(NSTimeInterval)currentTime {
 	_currentTime = currentTime;
 	
+	self.timestampLabel.text = [NSString timecodeStringFromSeconds:currentTime];
 	self.progressSlider.value = currentTime / self.duration;
 }
 
 - (void)setDuration:(NSTimeInterval)duration {
-	_duration = duration;
-	
-	self.durationLabel.text = [NSString timecodeStringFromSeconds:duration];
+	if (_duration != duration) {
+		_duration = duration;
+		
+		self.timestampLabel.maxTimestamp = duration;
+		self.durationLabel.text = [NSString timecodeStringFromSeconds:duration];
+	}
 }
 
 - (void)setPlaying:(BOOL)playing {
@@ -141,12 +146,6 @@
 }
 
 - (IBAction)sliderTouchDown:(UISlider *)slider {
-	SYNTimestampView *timestampView = [SYNTimestampView viewWithMaxDuration:self.duration];
-	[self addSubview:timestampView];
-	self.timestampView = timestampView;
-	
-	[self updateTimestamp];
-	
 	[self.delegate scrubberBarCurrentTimeWillChange];
 }
 
@@ -154,15 +153,10 @@
 	float value = slider.value;
 	self.currentTime = self.duration * value;
 	
-	[self updateTimestamp];
-	
 	[self.delegate scrubberBarCurrentTimeChanged:self.currentTime];
 }
 
 - (IBAction)sliderTouchUp:(UISlider *)slider {
-	[self.timestampView removeFromSuperview];
-	self.timestampView = nil;
-	
 	[self.delegate scrubberBarCurrentTimeDidChange];
 }
 
@@ -173,14 +167,6 @@
 }
 
 #pragma mark - Private
-
-- (void)updateTimestamp {
-	self.timestampView.timestamp = self.currentTime;
-	
-	CGFloat sliderValue = self.progressSlider.value;
-	CGFloat xPosition = CGRectGetMinX(self.progressSlider.frame) + (CGRectGetWidth(self.progressSlider.frame) - 14) * sliderValue;
-	self.timestampView.center = CGPointMake(xPosition, -(5 + (CGRectGetHeight(self.frame) / 2.0)));
-}
 
 - (void)updateHighDefinitionDisplay {
 	static NSNumber *highDefinitionWidth = nil;

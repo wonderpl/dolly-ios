@@ -76,10 +76,6 @@
 
 	self.addPhotoLabel.font = [UIFont lightCustomFontOfSize:self.addPhotoLabel.font.pointSize];
 	
-    self.uploadPhotoButton.layer.borderColor = [UIColor colorWithWhite:167.0f/255.0f alpha:1.0f].CGColor;
-    self.uploadPhotoButton.layer.borderWidth = 1.0f;
-    self.uploadPhotoButton.layer.cornerRadius = self.uploadPhotoButton.frame.size.width * 0.5f;
-    self.uploadPhotoButton.clipsToBounds = YES;
     [self.uploadPhotoButton.imageView setContentMode: UIViewContentModeScaleAspectFill];
 	[self updateDateOfBirthFieldsForLocale];
     

@@ -12,6 +12,7 @@
 #import "SYNAppDelegate.h"
 #import "User.h"
 #import "SYNTrackingManager.h"
+#import "SYNRemoteLogger.h"
 
 @interface SYNAbstractNetworkEngine ()<UIAlertViewDelegate>
 {
@@ -119,6 +120,8 @@
              NSString *reason = responseDictionary[@"error"];
              if([reason isEqualToString:@"invalid_token"])
              {
+				 [[SYNRemoteLogger sharedLogger] log:@"Invalid token, logging user out"];
+				 
                 //  log the user out
                 [[NSNotificationCenter defaultCenter] postNotificationName: kAccountSettingsLogout
                                                                         object: nil];
@@ -156,6 +159,8 @@
                                    || [reason isEqualToString: @"unsupported_grant_type"]
                                    || [reason isEqualToString:@"invalid_token"])
                                {
+								   [[SYNRemoteLogger sharedLogger] log:@"API call failed, logging out"];
+								   
                                    // Just log the user out
                                    [[NSNotificationCenter defaultCenter] postNotificationName: kAccountSettingsLogout
                                                                                        object: nil];
@@ -212,6 +217,8 @@
                                                          
                                                          if ([errorString isEqualToString: @"invalid_grant"] || [errorString isEqualToString: kUserIdInconsistencyError] )
                                                          {
+															 [[SYNRemoteLogger sharedLogger] log:@"Invalid grant, logging out"];
+															 
                                                              [[NSNotificationCenter defaultCenter] postNotificationName: kAccountSettingsLogout
                                                                                                                  object: nil];
                                                          }

@@ -48,12 +48,12 @@
                     </connections>
                 </collectionView>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="yla-tM-GQ1">
-                    <rect key="frame" x="198" y="414" width="274" height="30"/>
+                    <rect key="frame" x="295" y="462" width="80" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
                     <color key="backgroundColor" red="0.98823529409999999" green="0.98823529409999999" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="tintColor" red="0.46274509800000002" green="0.55294117649999996" blue="0.69019607839999997" alpha="1" colorSpace="calibratedRGB"/>
-                    <state key="normal" title="delete">
+                    <state key="normal" title="Delete">
                         <color key="titleColor" red="0.82352941176470584" green="0.25882352941176467" blue="0.16470588235294117" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" red="0.98823529409999999" green="0.98823529409999999" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                     </state>

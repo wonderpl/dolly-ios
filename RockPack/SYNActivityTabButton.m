@@ -14,7 +14,6 @@
 @implementation SYNActivityTabButton
 
 - (void)awakeFromNib {
-
     
     if (IS_IPAD) {
         [self setTitleEdgeInsets:UIEdgeInsetsMake(0, 7, 24, 0)];
@@ -27,12 +26,13 @@
 }
 
 - (void) setBadageNumber:(int)badageNumber {
-    NSString *strValue = [NSString stringWithFormat:@"%d", badageNumber];
     
+    NSString *strValue = [NSString stringWithFormat:@"%d", badageNumber];
     if (badageNumber > 0) {
         [super setTitle:strValue forState:UIControlStateNormal];
     } else if (badageNumber == 0) {
         [super setTitle:@"" forState:UIControlStateNormal];
+        [super setTitle:@"" forState:UIControlStateSelected];
     }
 }
 

@@ -34,6 +34,7 @@
 #import "SYNVideoInfoViewController.h"
 @import AVFoundation;
 @import MediaPlayer;
+@import MessageUI;
 
 @interface SYNVideoPlayerViewController () <UIViewControllerTransitioningDelegate, UIPopoverControllerDelegate, UIScrollViewDelegate, SYNVideoPlayerDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SYNVideoInfoViewControllerDelegate>
 
@@ -60,6 +61,9 @@
 @property (nonatomic, strong) SYNVideoInfoViewController *videoInfoViewController;
 
 @property (nonatomic, strong) VideoInstance *videoInstance;
+
+// Used for animation
+@property (nonatomic, weak) UIImageView *annotationImageView;
 
 @end
 
@@ -169,8 +173,11 @@
 	AVAudioSession *audioSession = [AVAudioSession sharedInstance];
 	[audioSession setActive:NO withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation error:nil];
 	
-	// If we're showing another view controller which isn't the full screen one then we want to pause the video
-	if (![self.presentedViewController isKindOfClass:[SYNFullScreenVideoViewController class]]) {
+	BOOL isShowingMail = [self.presentedViewController isKindOfClass:[MFMailComposeViewController class]];
+	BOOL isShowingFullScreen = [self.presentedViewController isKindOfClass:[SYNFullScreenVideoViewController class]];
+	
+	// If we're showing another view controller which isn't full screen or mail then we want to pause the video
+	if (!isShowingFullScreen && !isShowingMail) {
 		[self.currentVideoPlayer pause];
 	}
 }
@@ -312,10 +319,42 @@
 														   }];
 }
 
-- (void)videoPlayerAnnotationSelected:(VideoAnnotation *)annotation {
+- (void)videoPlayerAnnotationSelected:(VideoAnnotation *)annotation button:(UIButton *)button {
+	BOOL didAdd = [self.videoInfoViewController addVideoAnnotation:annotation];
+	if (!didAdd) {
+		return;
+	}
+	
 	[[SYNTrackingManager sharedManager] trackShopMotionAnnotationPressForTitle:self.videoInstance.title];
 	
-	[self.videoInfoViewController addVideoAnnotation:annotation];
+	CGPoint buttonCenter = [self.view convertPoint:button.center fromView:button.superview];
+	
+	UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ShopMotionActionButton"]];
+	imageView.center = buttonCenter;
+	
+	self.annotationImageView = imageView;
+	
+	[self.view addSubview:imageView];
+	
+	CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+	UIBezierPath *path = [UIBezierPath bezierPath];
+	[path moveToPoint:imageView.center];
+	
+	CGRect videoPlayerFrame = [self.view convertRect:self.currentVideoPlayer.bounds fromView:self.currentVideoPlayer];
+	
+	CGPoint destinationPoint = CGPointMake(CGRectGetMaxX(videoPlayerFrame) - 100.0, CGRectGetMaxY(videoPlayerFrame));
+	[path addQuadCurveToPoint:destinationPoint controlPoint:CGPointMake(destinationPoint.x, imageView.center.y)];
+	
+	animation.path = [path CGPath];
+	animation.duration = 0.3;
+	animation.delegate = self;
+	animation.removedOnCompletion = YES;
+	
+	[imageView.layer addAnimation:animation forKey:nil];
+}
+
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
+	[self.annotationImageView removeFromSuperview];
 }
 
 #pragma mark - SYNVideoInfoViewControllerDelegate
@@ -332,6 +371,9 @@
 }
 
 - (void)videoInfoViewController:(SYNVideoInfoViewController *)viewController didSelectVideoAtIndex:(NSInteger)index {
+	VideoInstance *videoInstance = [self.model itemAtIndex:index];
+	[[SYNTrackingManager sharedManager] trackUpcomingVideoSelectedForTitle:videoInstance.title];
+
 	self.selectedIndex = index;
 }
 
@@ -360,7 +402,7 @@
 #pragma mark - Private
 
 - (void)playCurrentVideo {
-	[self.currentVideoPlayer pause];
+	[self.currentVideoPlayer stop];
 	
 	NSIndexPath *indexPath = [NSIndexPath indexPathForItem:self.selectedIndex inSection:0];
 	SYNVideoPlayerCell *cell = (SYNVideoPlayerCell *)[self.videosCollectionView cellForItemAtIndexPath:indexPath];

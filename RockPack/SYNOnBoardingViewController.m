@@ -367,6 +367,12 @@
     
 }
 
+- (BOOL)shouldAutorotate {
+    if (IS_IPHONE) {
+        return NO;
+    }
+    return YES;
+}
 
 
 @end

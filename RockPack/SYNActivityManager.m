@@ -251,4 +251,8 @@
     NSLog(@"%@", self.channelSubscriptions);
 }
 
+-(NSUInteger) userFollowingCount {
+    return [self.userSubscriptons count];
+}
+
 @end
