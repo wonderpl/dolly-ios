@@ -115,6 +115,12 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
     [self.youTubeWebView stringByEvaluatingJavaScriptFromString:@"player.pauseVideo();"];
 }
 
+- (void)stop {
+	[super stop];
+	
+	[self.youTubeWebView stringByEvaluatingJavaScriptFromString:@"player.stopVideo()"];
+}
+
 - (NSTimeInterval)duration {
 	return [[self.youTubeWebView stringByEvaluatingJavaScriptFromString: @"player.getDuration();"] doubleValue];
 }

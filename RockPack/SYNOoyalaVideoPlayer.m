@@ -83,6 +83,12 @@ static NSString * const PlayerDomain = @"www.ooyala.com";
 	[self.ooyalaPlayer pause];
 }
 
+- (void)stop {
+	[super stop];
+	
+	[self.ooyalaPlayer pause];
+}
+
 - (void)setCurrentTime:(NSTimeInterval)currentTime {
 	[super setCurrentTime:currentTime];
 	
