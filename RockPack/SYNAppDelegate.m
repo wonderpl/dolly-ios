@@ -34,6 +34,7 @@
 #import "SYNAppearanceManager.h"
 #import "SYNFeedModel.h"
 #import "SYNVideoPlayerViewController.h"
+#import "SYNRemoteLogger.h"
 @import AVFoundation;
 
 @interface SYNAppDelegate () {
@@ -144,13 +145,11 @@
     // account shared between prod and dev, not they both have their own based on the bundle id
     SYNOAuth2Credential *credential = [SYNOAuth2Credential credentialFromKeychainForService: [[NSBundle mainBundle] bundleIdentifier]
                                                                                     account: self.currentUser.uniqueId];
-    
-	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-		TFLog(@"Starting app in state: %d", application.applicationState);
-		TFLog(@"Protected data available: %d", application.protectedDataAvailable);
-		TFLog(@"Current username: %@", self.currentUser.username);
-		TFLog(@"Credential: %@", credential);
-	});
+	
+	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"Starting app in state: %d", application.applicationState]];
+	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"Protected data available: %d", application.protectedDataAvailable]];
+	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"Current username: %@", self.currentUser.username]];
+	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"Credential: %@", credential]];
 	
     if (self.currentUser && credential)
     {
@@ -176,15 +175,12 @@
     }
     else
     {
-		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-			TFLog(@"Showing login view controller");
-		});
+		[[SYNRemoteLogger sharedLogger] log:@"Showing login view controller"];
 		
         if ((self.currentUser || credential) && application.protectedDataAvailable)
         {
-			dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-				TFLog(@"Logging the user out");
-			});
+			[[SYNRemoteLogger sharedLogger] log:@"Logging the user out"];
+			
             [self logout];
         }
         
@@ -339,9 +335,7 @@
 
 - (void) logout
 {
-	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-		TFLog(@"Logging out, call stack: %@", [NSThread callStackSymbols]);
-	});
+	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"Logging out, call stack: %@", [NSThread callStackSymbols]]];
 	
     // As we are logging out, we need to unregister the current user (the new user will be re-registered on login below)
     [[UIApplication sharedApplication] unregisterForRemoteNotifications];
@@ -1379,9 +1373,7 @@
 
 - (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
 	
-	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-		TFLog(@"PERFORMING FETCH");
-	});
+	[[SYNRemoteLogger sharedLogger] log:@"Performing fetch"];
 	
 	if (!self.currentOAuth2Credentials.userId) {
 		completionHandler(UIBackgroundFetchResultNoData);
@@ -1406,7 +1398,9 @@
 		
 		// Wait a second to give the images a chance to download
 		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-			NSLog(@"COMPLETED FETCH");
+			
+			[[SYNRemoteLogger sharedLogger] log:@"Completed fetch"];
+			
 			completionHandler(result);
 		});
 	}];

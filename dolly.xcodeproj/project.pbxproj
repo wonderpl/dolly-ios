@@ -608,6 +608,8 @@
 		E9CE79E21886B20400023A86 /* SYNiPadLoginToForgotPasswordAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CE79E11886B20400023A86 /* SYNiPadLoginToForgotPasswordAnimator.m */; };
 		E9CE7A2D1887057500023A86 /* SYNiPadLoginToSignupAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CE7A2C1887057500023A86 /* SYNiPadLoginToSignupAnimator.m */; };
 		E9CE7A301887161B00023A86 /* SYNiPadIntroToSignupAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CE7A2F1887161B00023A86 /* SYNiPadIntroToSignupAnimator.m */; };
+		E9CFF826192F4F7A000C86E9 /* SYNRemoteLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CFF825192F4F7A000C86E9 /* SYNRemoteLogger.m */; };
+		E9CFF82A192F5BAB000C86E9 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = E9CFF829192F5BAB000C86E9 /* NSString+URLEncoding.m */; };
 		E9D2E44D192667B80064F1A6 /* SYNIPadOnBoardingLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D2E44C192667B80064F1A6 /* SYNIPadOnBoardingLayout.m */; };
 		E9D2E44F192670FC0064F1A6 /* SYNIPadOnBoardingLayoutSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D2E44E192670FC0064F1A6 /* SYNIPadOnBoardingLayoutSpec.m */; };
 		E9D8E5A418995F1800EB1CD5 /* SYNNotificationsTableViewCell~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9D8E5A318995F1800EB1CD5 /* SYNNotificationsTableViewCell~iphone.xib */; };
@@ -1546,6 +1548,10 @@
 		E9CE7A2C1887057500023A86 /* SYNiPadLoginToSignupAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNiPadLoginToSignupAnimator.m; sourceTree = "<group>"; };
 		E9CE7A2E1887161B00023A86 /* SYNiPadIntroToSignupAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNiPadIntroToSignupAnimator.h; sourceTree = "<group>"; };
 		E9CE7A2F1887161B00023A86 /* SYNiPadIntroToSignupAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNiPadIntroToSignupAnimator.m; sourceTree = "<group>"; };
+		E9CFF824192F4F7A000C86E9 /* SYNRemoteLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNRemoteLogger.h; sourceTree = "<group>"; };
+		E9CFF825192F4F7A000C86E9 /* SYNRemoteLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNRemoteLogger.m; sourceTree = "<group>"; };
+		E9CFF828192F5BAB000C86E9 /* NSString+URLEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLEncoding.h"; sourceTree = "<group>"; };
+		E9CFF829192F5BAB000C86E9 /* NSString+URLEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLEncoding.m"; sourceTree = "<group>"; };
 		E9D2E44B192667B80064F1A6 /* SYNIPadOnBoardingLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNIPadOnBoardingLayout.h; sourceTree = "<group>"; };
 		E9D2E44C192667B80064F1A6 /* SYNIPadOnBoardingLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNIPadOnBoardingLayout.m; sourceTree = "<group>"; };
 		E9D2E44E192670FC0064F1A6 /* SYNIPadOnBoardingLayoutSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNIPadOnBoardingLayoutSpec.m; sourceTree = "<group>"; };
@@ -2138,6 +2144,7 @@
 				E947097E18D84BBB000174A7 /* SYNNetworkTypes.h */,
 				E985C8AF18EC4B8E00356272 /* SYNVideoThumbnailDownloader.h */,
 				E985C8B018EC4B8E00356272 /* SYNVideoThumbnailDownloader.m */,
+				E9CFF827192F5B93000C86E9 /* Remote Logger */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -3717,6 +3724,17 @@
 			name = Animators;
 			sourceTree = "<group>";
 		};
+		E9CFF827192F5B93000C86E9 /* Remote Logger */ = {
+			isa = PBXGroup;
+			children = (
+				E9CFF824192F4F7A000C86E9 /* SYNRemoteLogger.h */,
+				E9CFF825192F4F7A000C86E9 /* SYNRemoteLogger.m */,
+				E9CFF828192F5BAB000C86E9 /* NSString+URLEncoding.h */,
+				E9CFF829192F5BAB000C86E9 /* NSString+URLEncoding.m */,
+			);
+			name = "Remote Logger";
+			sourceTree = "<group>";
+		};
 		E9E1E27918561BFF0051E312 /* Paging Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -4376,6 +4394,7 @@
 				01E427E21664DF21009B941F /* Video.m in Sources */,
 				4CCAD0B518D7530600EC0F03 /* SYNProfileSubscriptionModel.m in Sources */,
 				01E427E51664DF21009B941F /* Channel.m in Sources */,
+				E9CFF82A192F5BAB000C86E9 /* NSString+URLEncoding.m in Sources */,
 				E92837B2189C0BE9005D5108 /* SYNFacebookButton.m in Sources */,
 				4C9B519E18D72B5100A3AB0D /* SYNIPadCreateChannelLayout.m in Sources */,
 				01E427F01664EE52009B941F /* _Channel.m in Sources */,
@@ -4586,6 +4605,7 @@
 				BE7D035F17A1440A008053DC /* FeedItem.m in Sources */,
 				BE57C01F1843588A00C6444A /* SYNOnBoardingViewController.m in Sources */,
 				BE7D036217A14417008053DC /* _FeedItem.m in Sources */,
+				E9CFF826192F4F7A000C86E9 /* SYNRemoteLogger.m in Sources */,
 				4C6FD75018EC215F0068FF84 /* SYNDiscoverSectionHeaderView.m in Sources */,
 				BEB31382181ECAEA00FAF98A /* SYNSearchResultsCell.m in Sources */,
 				E94BEFAC18C9F19A00762651 /* Recommendation.m in Sources */,
