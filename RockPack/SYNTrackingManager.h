@@ -60,6 +60,9 @@ typedef NS_ENUM(NSInteger, kNotificationObjectType);
 - (void)trackShareFriendSearch;
 - (void)trackShareFriendSearchSelect:(NSString *)origin;
 
+- (void)trackVideoOriginatorPressed:(NSString *)name;
+- (void)trackVideoAddedByPressed:(NSString *)name;
+
 - (void)trackCollectionEdited:(NSString *)name;
 
 - (void)trackVideoLoadTime:(NSTimeInterval)loadTime;

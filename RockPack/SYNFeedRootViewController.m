@@ -295,6 +295,7 @@
 - (void)videoCellAvatarPressed:(SYNFeedVideoCell *)cell {
 	VideoInstance *videoInstance = cell.videoInstance;
 	
+	[[SYNTrackingManager sharedManager] trackVideoOriginatorPressed:videoInstance.originator.displayName];
 	[self viewProfileDetails:videoInstance.originator];
 }
 
@@ -345,6 +346,7 @@
 - (void)videoCell:(SYNFeedVideoCell *)cell addedByPressed:(UIButton *)button {
 	VideoInstance *videoInstance = cell.videoInstance;
 	
+	[[SYNTrackingManager sharedManager] trackVideoAddedByPressed:videoInstance.channel.channelOwner.displayName];
 	[self viewProfileDetails:videoInstance.channel.channelOwner];
 }
 
