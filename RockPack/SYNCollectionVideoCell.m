@@ -12,9 +12,11 @@
 #import "NSString+Timecode.h"
 #import <UIImageView+WebCache.h>
 #import "SYNVideoActionsBar.h"
+#import "UIColor+SYNColor.h"
 
 @interface SYNCollectionVideoCell () <SYNVideoActionsBarDelegate>
 @property (nonatomic, strong) SYNVideoActionsBar *actionsBar;
+@property (strong, nonatomic) IBOutlet UIView *containerView;
 
 
 @end
@@ -23,14 +25,13 @@
 
 - (void)awakeFromNib{
     [super awakeFromNib];
+    
 	self.actionsBar.frame = self.videoActionsContainer.bounds;
 	[self.videoActionsContainer addSubview:self.actionsBar];
-	
 	self.titleLabel.font = [UIFont boldCustomFontOfSize:self.titleLabel.font.pointSize];
 	self.durationLabel.font = [UIFont regularCustomFontOfSize:self.durationLabel.font.pointSize];
-	
-	self.imageView.layer.borderColor = [[UIColor colorWithWhite:0 alpha:0.05] CGColor];
-	self.imageView.layer.borderWidth = 1.0;
+    self.tap = [[UITapGestureRecognizer alloc] initWithTarget: self
+                                                       action: @selector(showVideo)];
 
 }
 
@@ -69,8 +70,6 @@
 
 - (void)setUpVideoTap {
     // Tap for showing video
-    self.tap = [[UITapGestureRecognizer alloc] initWithTarget: self
-                                                       action: @selector(showVideo)];
     [self.imageView addGestureRecognizer: self.tap];
 
 }
@@ -102,5 +101,28 @@
     [self.delegate showVideoForCell:self];
 }
 
+- (void)setEditable:(BOOL)editable {
+    _editable = editable;
+    
+    if (editable) {
+        self.deleteButton.hidden = NO;
+        self.removeVideoImage.hidden = NO;
+		self.videoActionsContainer.hidden = YES;
+        self.containerView.layer.borderColor = [[UIColor dollyRed] CGColor];
+        self.containerView.layer.borderWidth = 1.0;
+        self.containerView.layer.cornerRadius = 10;
+        [self.imageView removeGestureRecognizer:self.tap];
+        
+    } else {
+        self.deleteButton.hidden = YES;
+        self.removeVideoImage.hidden = YES;
+		self.videoActionsContainer.hidden = NO;
+        self.containerView.layer.borderColor = [[UIColor whiteColor] CGColor];
+        self.containerView.layer.borderWidth = 1.0;
+        self.containerView.layer.cornerRadius = 0;
+        [self.imageView addGestureRecognizer:self.tap];
+        
+	}
+}
 
 @end

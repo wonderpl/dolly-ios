@@ -679,6 +679,8 @@
 		F4C7E589192E3419006053DA /* AvatarUpload.png in Resources */ = {isa = PBXBuildFile; fileRef = F4C7E585192E3419006053DA /* AvatarUpload.png */; };
 		F4C7E58A192E3419006053DA /* AvatarUpload@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4C7E586192E3419006053DA /* AvatarUpload@2x.png */; };
 		F4C7E58B192E3419006053DA /* CoverUpload.png in Resources */ = {isa = PBXBuildFile; fileRef = F4C7E587192E3419006053DA /* CoverUpload.png */; };
+		F4C7E58F192F59F6006053DA /* RemoveVideo.png in Resources */ = {isa = PBXBuildFile; fileRef = F4C7E58D192F59F6006053DA /* RemoveVideo.png */; };
+		F4C7E590192F59F6006053DA /* RemoveVideo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4C7E58E192F59F6006053DA /* RemoveVideo@2x.png */; };
 		F4F5062D192CAAD700993D0B /* SYNAddToChannelOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F5062C192CAAD700993D0B /* SYNAddToChannelOverlayViewController.m */; };
 		F4F5062F192CAAFA00993D0B /* SYNAddToChannelOverlayViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4F5062E192CAAFA00993D0B /* SYNAddToChannelOverlayViewController~iphone.xib */; };
 		F4F50631192CAB1D00993D0B /* SYNAddToChannelOverlayViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4F50630192CAB1D00993D0B /* SYNAddToChannelOverlayViewController~ipad.xib */; };
@@ -1649,6 +1651,8 @@
 		F4C7E585192E3419006053DA /* AvatarUpload.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AvatarUpload.png; sourceTree = "<group>"; };
 		F4C7E586192E3419006053DA /* AvatarUpload@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AvatarUpload@2x.png"; sourceTree = "<group>"; };
 		F4C7E587192E3419006053DA /* CoverUpload.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoverUpload.png; sourceTree = "<group>"; };
+		F4C7E58D192F59F6006053DA /* RemoveVideo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RemoveVideo.png; sourceTree = "<group>"; };
+		F4C7E58E192F59F6006053DA /* RemoveVideo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RemoveVideo@2x.png"; sourceTree = "<group>"; };
 		F4F5062B192CAAD700993D0B /* SYNAddToChannelOverlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAddToChannelOverlayViewController.h; sourceTree = "<group>"; };
 		F4F5062C192CAAD700993D0B /* SYNAddToChannelOverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAddToChannelOverlayViewController.m; sourceTree = "<group>"; };
 		F4F5062E192CAAFA00993D0B /* SYNAddToChannelOverlayViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNAddToChannelOverlayViewController~iphone.xib"; sourceTree = "<group>"; };
@@ -2004,12 +2008,11 @@
 				E985D36218FED44600D5A9E1 /* FavouriteButtonSelected.png */,
 				E985D36318FED44600D5A9E1 /* FavouriteButton@2x.png */,
 				E985D36418FED44600D5A9E1 /* FavouriteButton.png */,
-				4C22750F18F6E12F009C5242 /* Search */,
-				4C22750A18F6D464009C5242 /* Discover */,
-				E91E3B1F18C7292400F79020 /* ButtonVideoDeleteDefault.png */,
-				E91E3B2018C7292400F79020 /* ButtonVideoDeleteDefault@2x.png */,
 				4CE8AE5518A901560031CE1C /* BackButtonApp.png */,
 				4CE8AE5618A901560031CE1C /* BackButtonApp@2x.png */,
+				4C22750F18F6E12F009C5242 /* Search */,
+				4C22750A18F6D464009C5242 /* Discover */,
+				F4C7E58C192F59D7006053DA /* Channel details */,
 				9959249419267B3B00CCAACF /* Onboarding */,
 				1F65D48F17EB3C8B004326A9 /* Images.xcassets */,
 				4C5E861F18B65A8A00D0E937 /* In Boarding */,
@@ -3777,6 +3780,17 @@
 			name = Share;
 			sourceTree = "<group>";
 		};
+		F4C7E58C192F59D7006053DA /* Channel details */ = {
+			isa = PBXGroup;
+			children = (
+				F4C7E58D192F59F6006053DA /* RemoveVideo.png */,
+				F4C7E58E192F59F6006053DA /* RemoveVideo@2x.png */,
+				E91E3B1F18C7292400F79020 /* ButtonVideoDeleteDefault.png */,
+				E91E3B2018C7292400F79020 /* ButtonVideoDeleteDefault@2x.png */,
+			);
+			name = "Channel details";
+			sourceTree = "<group>";
+		};
 		F4F5062A192CAAA600993D0B /* New Collection */ = {
 			isa = PBXGroup;
 			children = (
@@ -3961,6 +3975,7 @@
 				BE21EE9F16FA28680067223B /* IconUsername.png in Resources */,
 				BE21EEA016FA28680067223B /* IconUsername@2x.png in Resources */,
 				E9FDCDA1188D92EF00C31CC1 /* ForwardButton@2x.png in Resources */,
+				F4C7E590192F59F6006053DA /* RemoveVideo@2x.png in Resources */,
 				BED027CE1834D4CC00636659 /* ButtonMoreHelp.png in Resources */,
 				BE57C02A1843608500C6444A /* SYNOnBoardingCell~iphone.xib in Resources */,
 				BEB31366181AB81600FAF98A /* IconVideoAddDefault@2x.png in Resources */,
@@ -3992,6 +4007,7 @@
 				993B1AC4191A95CF008532D4 /* TabFeedSelected@2x~iphone.png in Resources */,
 				0EE380AD182D4DFC001297C7 /* SYNChannelCreateNewCell~iphone.xib in Resources */,
 				1F458B0417E1C4E6003C14AC /* AppIcon60x60.png in Resources */,
+				F4C7E58F192F59F6006053DA /* RemoveVideo.png in Resources */,
 				4C102A3C1896D80E00C367E8 /* IconWonderAbout.png in Resources */,
 				9959249819267B4C00CCAACF /* continue-button@2x.png in Resources */,
 				E9FDCD98188D902A00C31CC1 /* WebView.storyboard in Resources */,

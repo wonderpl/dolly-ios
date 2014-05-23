@@ -32,8 +32,10 @@
 + (UIColor *) dollyTabColorSelectedBackground;
 + (UIColor *) dollyTabColorSelectedText;
 + (UIColor *) dollyMoodColor;
-+ (UIColor*) dollyGreen;
-+ (UIColor*) dollyBlue;
++ (UIColor *) dollyGreen;
++ (UIColor *) dollyBlue;
++ (UIColor *) dollyRed;
+
 + (UIColor *) dollySearchBarColor;
 
 + (UIColor *) dollyButtonGreenColor;
