@@ -247,7 +247,6 @@
 - (void)reloadDataAndSwitchToFeed:(BOOL)shouldSwitch {
 	[self.model reloadInitialPageWithCompletionHandler:^(BOOL success, BOOL hasChanged) {
 		if (shouldSwitch && hasChanged) {
-			self.feedCollectionView.contentOffset = CGPointMake(0, -self.feedCollectionView.contentInset.top);
 			[appDelegate.navigationManager switchToFeed];
 		}
 	}];
