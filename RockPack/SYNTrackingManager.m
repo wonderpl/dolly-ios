@@ -122,6 +122,14 @@ static const NSInteger TrackingDimensionConnection = 6;
 	[self trackEventWithCategory:GoalCategory action:@"userRegistration" label:origin value:nil];
 }
 
+- (void)trackVideoOriginatorPressed:(NSString *)name {
+	[self trackEventWithCategory:UIActionCategory action:@"OrigAvatarClick" label:name value:nil];
+}
+
+- (void)trackVideoAddedByPressed:(NSString *)name {
+	[self trackEventWithCategory:UIActionCategory action:@"AddedPersonClick" label:name value:nil];
+}
+
 - (void)trackShareEmailEnteredIsNew:(BOOL)isNew {
 	NSString *label = (isNew ? @"New" : @"fromFB");
 	[self trackEventWithCategory:UIActionCategory action:@"provideEmailtoShare" label:label value:nil];

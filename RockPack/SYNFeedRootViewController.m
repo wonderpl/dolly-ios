@@ -247,7 +247,6 @@
 - (void)reloadDataAndSwitchToFeed:(BOOL)shouldSwitch {
 	[self.model reloadInitialPageWithCompletionHandler:^(BOOL success, BOOL hasChanged) {
 		if (shouldSwitch && hasChanged) {
-			self.feedCollectionView.contentOffset = CGPointMake(0, -self.feedCollectionView.contentInset.top);
 			[appDelegate.navigationManager switchToFeed];
 		}
 	}];
@@ -296,6 +295,7 @@
 - (void)videoCellAvatarPressed:(SYNFeedVideoCell *)cell {
 	VideoInstance *videoInstance = cell.videoInstance;
 	
+	[[SYNTrackingManager sharedManager] trackVideoOriginatorPressed:videoInstance.originator.displayName];
 	[self viewProfileDetails:videoInstance.originator];
 }
 
@@ -346,6 +346,7 @@
 - (void)videoCell:(SYNFeedVideoCell *)cell addedByPressed:(UIButton *)button {
 	VideoInstance *videoInstance = cell.videoInstance;
 	
+	[[SYNTrackingManager sharedManager] trackVideoAddedByPressed:videoInstance.channel.channelOwner.displayName];
 	[self viewProfileDetails:videoInstance.channel.channelOwner];
 }
 

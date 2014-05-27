@@ -218,6 +218,10 @@
 }
 
 - (void)setSelectedIndex:(NSInteger)selectedIndex {
+
+    if (_selectedIndex == selectedIndex) {
+        return;
+    }
 	_selectedIndex = selectedIndex;
 	
 	NSIndexPath *indexPath = [NSIndexPath indexPathForItem:self.selectedIndex inSection:0];

@@ -124,19 +124,19 @@
     }
     
     if (IS_IPHONE) {
-        
-        
-        self.videoCollectionViewLayoutIPhone.sectionInset = UIEdgeInsetsMake(2, 10, 60, 2);
+        self.videoCollectionViewLayoutIPhone.sectionInset = UIEdgeInsetsMake(2, 5, 60, 2);
     }
 	
 	if (IS_IPHONE) {
         self.videoCollectionViewLayoutIPhoneEdit = [[LXReorderableCollectionViewFlowLayout alloc]init];
-        self.videoCollectionViewLayoutIPhoneEdit.itemSize = CGSizeMake(295,268-kHeightChange);
+        self.videoCollectionViewLayoutIPhoneEdit.itemSize = CGSizeMake(282,289-kHeightChange);
+        self.videoCollectionViewLayoutIPhoneEdit.sectionInset = UIEdgeInsetsMake(2, 12, 60, 2);
+
     }
     
     if (IS_IPAD) {
         self.videoCollectionViewLayoutIPadEdit = [[LXReorderableCollectionViewFlowLayout alloc]init];
-        self.videoCollectionViewLayoutIPadEdit.itemSize = CGSizeMake(295, 268-kHeightChange);
+        self.videoCollectionViewLayoutIPadEdit.itemSize = CGSizeMake(282, 289-kHeightChange);
         self.videoCollectionViewLayoutIPadEdit.sectionInset = UIEdgeInsetsMake(0, 35, 60, 35);
     }
     self.barBtnCancel = [[UIBarButtonItem alloc]initWithTitle:@"cancel"
@@ -772,8 +772,8 @@
         }
         else
         {
-            self.videoCollectionViewLayoutIPadEdit.sectionInset = UIEdgeInsetsMake(0, 10, 0, 10);
-            self.videoCollectionViewLayoutIPad.sectionInset = UIEdgeInsetsMake(0, 10, 0, 10);
+            self.videoCollectionViewLayoutIPadEdit.sectionInset = UIEdgeInsetsMake(0, 20, 0, 20);
+            self.videoCollectionViewLayoutIPad.sectionInset = UIEdgeInsetsMake(0, 20, 0, 20);
         }
     }
 }

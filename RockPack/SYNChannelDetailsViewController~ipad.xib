@@ -36,7 +36,7 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="mQJ-GE-Ivs">
-                        <size key="itemSize" width="295" height="268"/>
+                        <size key="itemSize" width="282" height="310"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                         <inset key="sectionInset" minX="35" minY="0.0" maxX="35" maxY="0.0"/>
@@ -48,12 +48,12 @@
                     </connections>
                 </collectionView>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="yla-tM-GQ1">
-                    <rect key="frame" x="295" y="462" width="80" height="32"/>
+                    <rect key="frame" x="255" y="462" width="160" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
                     <color key="backgroundColor" red="0.98823529409999999" green="0.98823529409999999" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="tintColor" red="0.46274509800000002" green="0.55294117649999996" blue="0.69019607839999997" alpha="1" colorSpace="calibratedRGB"/>
-                    <state key="normal" title="Delete">
+                    <state key="normal" title="Delete this collection">
                         <color key="titleColor" red="0.82352941176470584" green="0.25882352941176467" blue="0.16470588235294117" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" red="0.98823529409999999" green="0.98823529409999999" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                     </state>

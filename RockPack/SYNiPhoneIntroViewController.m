@@ -23,6 +23,7 @@
 #define DEGREES_RADIANS(angle) ((angle) / 180.0 * M_PI)
 
 static const CGFloat TransitionPause = 1.0f;
+static const CGFloat CloudTiming = 1.2f;
 
 
 @interface SYNiPhoneIntroViewController () <UINavigationControllerDelegate, UIViewControllerTransitioningDelegate>
@@ -53,6 +54,15 @@ static const CGFloat TransitionPause = 1.0f;
 @property (strong, nonatomic) IBOutlet UILabel *messageView5;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *buttonContainerViewTopConstraint;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *messageContainerViewTopConstraint;
+@property (strong, nonatomic) IBOutlet UILabel *culture;
+@property (strong, nonatomic) IBOutlet UILabel *mind;
+@property (strong, nonatomic) IBOutlet UILabel *tech;
+@property (strong, nonatomic) IBOutlet UILabel *food;
+@property (strong, nonatomic) IBOutlet UILabel *news;
+@property (strong, nonatomic) IBOutlet UILabel *wellness;
+@property (strong, nonatomic) IBOutlet UILabel *fashion;
+@property (strong, nonatomic) IBOutlet UILabel *film;
+@property (strong, nonatomic) IBOutlet UILabel *learnFrom;
 
 @end
 
@@ -85,6 +95,17 @@ static const CGFloat TransitionPause = 1.0f;
     [self.messageView3 setFont:[UIFont regularCustomFontOfSize:24]];
     [self.messageView4 setFont:[UIFont regularCustomFontOfSize:24]];
     [self.messageView5 setFont:[UIFont regularCustomFontOfSize:24]];
+    
+    
+    [self.culture setFont:[UIFont regularCustomFontOfSize:24]];
+    [self.mind setFont:[UIFont regularCustomFontOfSize:24]];
+    [self.tech setFont:[UIFont regularCustomFontOfSize:24]];
+    [self.food setFont:[UIFont regularCustomFontOfSize:24]];
+    [self.news setFont:[UIFont regularCustomFontOfSize:24]];
+    [self.wellness setFont:[UIFont regularCustomFontOfSize:24]];
+    [self.fashion setFont:[UIFont regularCustomFontOfSize:24]];
+    [self.film setFont:[UIFont regularCustomFontOfSize:24]];
+    [self.learnFrom setFont:[UIFont regularCustomFontOfSize:24]];
 
     
     [self.signupButton setTitle:@"Sign up" forState:UIControlStateNormal];
@@ -105,6 +126,22 @@ static const CGFloat TransitionPause = 1.0f;
     [self.facebookButton setTitle:@"Log in with Facebook" forState:UIControlStateNormal];
     [self.loginButton setTitle:@"Log in" forState:UIControlStateNormal];
     
+    double delayInSecondChurch = 3.0;
+
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSecondChurch * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        CGRect frame = self.backgroundChurch.frame;
+        
+        frame.size = CGSizeMake(frame.size.width*2, frame.size.height*2);
+        frame.origin = CGPointMake(-frame.size.width/4, -frame.size.height/3);
+        
+        [UIView animateWithDuration:10.0 animations:^{
+            self.backgroundChurch.frame = frame;
+            self.backgroundChurch.alpha = 0.0;
+
+        }];
+        
+    });
     double delayInSeconds = 1.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
@@ -162,26 +199,25 @@ static const CGFloat TransitionPause = 1.0f;
             } completion: getNextAnimation()];
         }];
         
-        
-        
-
         [animationBlocks addObject:^(BOOL finished){;
-//            CGRect frame = self.messageView.frame;
-//            frame.origin.y -= 30;
-//            self.messageView.frame = frame;
-//            self.messageView.alpha = 1.0;
-
-            [UIView animateWithDuration:0.5 animations:^{
-//                CGRect frame = self.messageView.frame;
-//                frame.origin.y += 30;
-//                self.messageView.frame = frame;
+            [UIView animateWithDuration:0.7 animations:^{
                 self.messageView.alpha = 1.0;
             } completion: getNextAnimation()];
         }];
         
-
+        [animationBlocks addObject:^(BOOL finished){;
+            [UIView animateWithDuration:1.0 animations:^{
+                self.messageView.alpha = 1.0;
+            } completion: getNextAnimation()];
+        }];
 
         [animationBlocks addObject:^(BOOL finished){;
+            
+            [UIView animateWithDuration:CloudTiming delay:1.8 options:UIViewAnimationCurveEaseInOut animations:^{
+                self.culture.alpha = 1.0;
+            } completion:getNextAnimation()];
+            
+            
             [UIView animateWithDuration:1.5 delay:TransitionPause options:UIViewAnimationCurveEaseInOut animations:^{
                 CGRect frame = self.backgroundFood.frame;
                 
@@ -190,96 +226,229 @@ static const CGFloat TransitionPause = 1.0f;
                 
                 self.backgroundFood.frame = frame;
                 self.backgroundFood.alpha = 0.0;
-
                 self.messageView.alpha = 0.0;
-                
-                self.messageView2.transform = CGAffineTransformMakeTranslation(0, 120);
-				self.messageView2.alpha = 1.0;
 
             } completion:getNextAnimation()];
         }];
         
+        
         [animationBlocks addObject:^(BOOL finished){;
             
-            [UIView animateWithDuration:TransitionPause animations:^{
+            [UIView animateWithDuration:CloudTiming animations:^{
+                self.mind.alpha = 1.0;
             } completion: getNextAnimation()];
         }];
+
+        [animationBlocks addObject:^(BOOL finished){;
+            [UIView animateWithDuration:CloudTiming animations:^{
+                self.tech.alpha = 1.0;
+            } completion: getNextAnimation()];
+        }];
+
+        [animationBlocks addObject:^(BOOL finished){;
+            [UIView animateWithDuration:CloudTiming animations:^{
+                self.culture.alpha = 0.0;
+            } completion: getNextAnimation()];
+            
+            [UIView animateWithDuration:CloudTiming delay:0.15 options:UIViewAnimationCurveEaseIn animations:^{
+                self.food.alpha = 1.0;
+                
+            } completion:nil];
         
+        }];
+
+        
+        [animationBlocks addObject:^(BOOL finished){;
+            
+            [UIView animateWithDuration:CloudTiming animations:^{
+                self.mind.alpha = 0.0;
+            } completion: getNextAnimation()];
+            
+            
+            [UIView animateWithDuration:CloudTiming delay:0.20 options:UIViewAnimationCurveEaseIn animations:^{
+                self.news.alpha = 1.0;
+                
+            } completion:nil];
+            
+        }];
 
         [animationBlocks addObject:^(BOOL finished){;
             
-            CGRect frame = self.backgroundChurch.frame;
-            frame.origin.x -= self.backgroundChurch.frame.size.width/2;
-            frame.origin.y -= self.backgroundChurch.frame.size.height/2;
-            
-            self.backgroundChurch.frame = frame;
-                        
-            self.logoImageView.translatesAutoresizingMaskIntoConstraints = YES;
-            self.subtitleLabel.translatesAutoresizingMaskIntoConstraints = YES;
-            self.backgroundChurch.translatesAutoresizingMaskIntoConstraints = YES;
-            self.messageView2.translatesAutoresizingMaskIntoConstraints = YES;
+//            [UIView animateWithDuration:CloudTiming delay:1.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+//            } completion:nil];
 
-            self.backgroundChurch.layer.anchorPoint = CGPointMake(0, 0);
+            [UIView animateWithDuration:CloudTiming animations:^{
+                self.tech.alpha = 0.0;
+                self.wellness.alpha = 1.0;
+
+            } completion: getNextAnimation()];
             
-            [UIView animateWithDuration:1.0 delay:1.5 options:UIViewAnimationCurveEaseInOut animations:^{
-                self.backgroundChurch.transform = CGAffineTransformMakeRotation(DEGREES_RADIANS(45));
-                self.backgroundChurch.alpha = 0.0;
+        }];
+
+        
+        [animationBlocks addObject:^(BOOL finished){;
+            
+            [UIView animateWithDuration:CloudTiming animations:^{
+                self.food.alpha = 0.0;
+            } completion: getNextAnimation()];
+            
+            
+            [UIView animateWithDuration:CloudTiming delay:0.05 options:UIViewAnimationOptionCurveEaseIn animations:^{
+                self.fashion.alpha = 1.0;
                 
-                self.messageView2.alpha = 0.0;
-                self.messageView3.alpha = 1.0;
-                
+            } completion:nil];
+            
+        }];
+        
+        [animationBlocks addObject:^(BOOL finished){;
+            [UIView animateWithDuration:1.5 delay:0.5 options:UIViewAnimationCurveLinear animations:^{
+                self.wellness.alpha = 0.0;
+            } completion:nil];
+            
+            [UIView animateWithDuration:1.5 delay:1.0 options:UIViewAnimationCurveLinear animations:^{
+                self.learnFrom.alpha = 1.0;
             } completion:getNextAnimation()];
             
         }];
-        
 
         [animationBlocks addObject:^(BOOL finished){;
-            [UIView animateWithDuration:0.4 animations:^{
-                self.messageView3.alpha = 1.0;
-            } completion: getNextAnimation()];
+	
+            [UIView animateWithDuration:CloudTiming delay:0.7 options:UIViewAnimationCurveEaseIn animations:^{
+            	self.news.alpha = 0.0;
+            } completion:getNextAnimation()];
         }];
 
+
         [animationBlocks addObject:^(BOOL finished){;
             
-            
-            [UIView animateWithDuration:1.5 delay:2.0 options:UIViewAnimationCurveEaseInOut animations:^{
-                CGRect frame = self.messageView3.frame;
-                
-                frame.origin.x -= 30;
-                self.messageView3.frame = frame;
-                self.messageView3.alpha = 0.0;
-                frame = self.backgroundBeach.frame;
-                frame.origin.x -= 30;
-                self.backgroundBeach.frame = frame;
+            [UIView animateWithDuration:CloudTiming delay:0.2 options:UIViewAnimationCurveEaseIn animations:^{
+            	self.film.alpha = 0.0;
+            } completion:getNextAnimation()];
+        }];
+
+        
+        [animationBlocks addObject:^(BOOL finished){;
+
+            [UIView animateKeyframesWithDuration:2.0 delay:0.5 options:UIViewKeyframeAnimationOptionCalculationModeLinear animations:^{
+                self.learnFrom.alpha = 0.0;
                 self.backgroundBeach.alpha = 0.0;
-                self.messageView4.alpha = 1.0;
 
+            } completion:getNextAnimation ()];
+        }];
+
+        [animationBlocks addObject:^(BOOL finished){;
+        	[UIView animateWithDuration:1.5 animations:^{
+                self.learnFrom.alpha = 0.0;
+                self.messageView4.alpha = 1.0;
+            } completion:getNextAnimation()];
+        }];
+
+        [animationBlocks addObject:^(BOOL finished){;
+            
+            [UIView animateWithDuration:2.5 animations:^{
+                self.messageView4.alpha = 1.0;
+            } completion:getNextAnimation()];
+
+        }];
+
+        [animationBlocks addObject:^(BOOL finished){;
+            [UIView animateKeyframesWithDuration:1.0 delay:1.0 options:UIViewKeyframeAnimationOptionLayoutSubviews animations:^{
+                self.messageView4.alpha = 0.0;
+            } completion:getNextAnimation()];
+        }];
+
+        [animationBlocks addObject:^(BOOL finished){;
+            [UIView animateKeyframesWithDuration:2.0 delay:3.0 options:UIViewKeyframeAnimationOptionLayoutSubviews animations:^{
+                
+                self.messageView5.alpha = 1.0;
             } completion:getNextAnimation()];
             
         }];
+//
+//
+//        [UIView animateWithDuration:1.5 delay:TransitionPause options:UIViewAnimationCurveEaseInOut animations:^{
+//            CGRect frame = self.backgroundBeach.frame;
+//            
+//            frame.size = CGSizeMake(frame.size.width*2, frame.size.height*2);
+//            frame.origin = CGPointMake(-frame.size.width/3, -frame.size.height/3);
+//            
+//            self.backgroundBeach.frame = frame;
+//            self.backgroundBeach.alpha = 0.0;
+//            
+//        } completion:getNextAnimation()];
 
         
-        [animationBlocks addObject:^(BOOL finished){;
-
-            self.backgroundMountain.translatesAutoresizingMaskIntoConstraints = YES;
-            self.backgroundMountain.layer.anchorPoint = CGPointMake(1.0, 0.0);
-            
-            CGRect frame = self.backgroundMountain.frame;
-            frame.origin.x += self.backgroundMountain.frame.size.width/2;
-            frame.origin.y -= self.backgroundMountain.frame.size.height/2;
-            
-            self.backgroundMountain.frame = frame;
-            
-            [UIView animateWithDuration:1.5 delay:2.0 options:UIViewAnimationCurveEaseInOut animations:^{
-                
-                self.backgroundMountain.layer.transform = CATransform3DMakeRotation(M_PI/2, 0.0, 1.0, 0.0);
-                self.backgroundMountain.alpha = 0.0;
-                self.messageView4.alpha = 0.0;
-                self.messageView5.alpha = 1.0;
-                
-            } completion:getNextAnimation()];
-            
-        }];
+//        [animationBlocks addObject:^(BOOL finished){;
+//            
+//            CGRect frame = self.backgroundChurch.frame;
+//            frame.origin.x -= self.backgroundChurch.frame.size.width/2;
+//            frame.origin.y -= self.backgroundChurch.frame.size.height/2;
+//            
+//            self.backgroundChurch.frame = frame;
+//                        
+//            self.logoImageView.translatesAutoresizingMaskIntoConstraints = YES;
+//            self.subtitleLabel.translatesAutoresizingMaskIntoConstraints = YES;
+//            self.backgroundChurch.translatesAutoresizingMaskIntoConstraints = YES;
+//            self.messageView2.translatesAutoresizingMaskIntoConstraints = YES;
+//            
+//            [UIView animateWithDuration:1.0 delay:1.5 options:UIViewAnimationCurveEaseInOut animations:^{
+//                self.backgroundChurch.alpha = 0.0;
+//                
+//                self.messageView2.alpha = 0.0;
+//                self.messageView3.alpha = 1.0;
+//                
+//            } completion:getNextAnimation()];
+//            
+//        }];
+//        
+//
+//        [animationBlocks addObject:^(BOOL finished){;
+//            [UIView animateWithDuration:0.4 animations:^{
+//                self.messageView3.alpha = 1.0;
+//            } completion: getNextAnimation()];
+//        }];
+//
+//        [animationBlocks addObject:^(BOOL finished){;
+//            
+//            
+//            [UIView animateWithDuration:1.5 delay:2.0 options:UIViewAnimationCurveEaseInOut animations:^{
+//                CGRect frame = self.messageView3.frame;
+//                
+//                frame.origin.x -= 30;
+//                self.messageView3.frame = frame;
+//                self.messageView3.alpha = 0.0;
+//                frame = self.backgroundBeach.frame;
+//                frame.origin.x -= 30;
+//                self.backgroundBeach.frame = frame;
+//                self.backgroundBeach.alpha = 0.0;
+//                self.messageView4.alpha = 1.0;
+//
+//            } completion:getNextAnimation()];
+//            
+//        }];
+//
+//        
+//        [animationBlocks addObject:^(BOOL finished){;
+//
+//            self.backgroundMountain.translatesAutoresizingMaskIntoConstraints = YES;
+//            self.backgroundMountain.layer.anchorPoint = CGPointMake(1.0, 0.0);
+//            
+//            CGRect frame = self.backgroundMountain.frame;
+//            frame.origin.x += self.backgroundMountain.frame.size.width/2;
+//            frame.origin.y -= self.backgroundMountain.frame.size.height/2;
+//            
+//            self.backgroundMountain.frame = frame;
+//            
+//            [UIView animateWithDuration:1.5 delay:2.0 options:UIViewAnimationCurveEaseInOut animations:^{
+//                
+//                self.backgroundMountain.layer.transform = CATransform3DMakeRotation(M_PI/2, 0.0, 1.0, 0.0);
+//                self.backgroundMountain.alpha = 0.0;
+//                self.messageView4.alpha = 0.0;
+//                self.messageView5.alpha = 1.0;
+//                
+//            } completion:getNextAnimation()];
+//            
+//        }];
         
         getNextAnimation()(YES);
 
