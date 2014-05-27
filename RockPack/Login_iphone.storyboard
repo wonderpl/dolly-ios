@@ -35,16 +35,6 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UbF-fW-UKk">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="intro-mountains-sea.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="XXu-tc-dRt" userLabel="Background Mountains">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                </subviews>
-                            </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="intro-beach.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Jtl-qN-Qh5" userLabel="Background Beach">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -86,7 +76,7 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Watch the experts at work and learn the tricks of the trade" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="282" translatesAutoresizingMaskIntoConstraints="NO" id="ZIA-gD-3Ba" userLabel="Message Label 4">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Watch, collect and share only the very best videos" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="282" translatesAutoresizingMaskIntoConstraints="NO" id="ZIA-gD-3Ba" userLabel="Message Label 4">
                                         <rect key="frame" x="19" y="151" width="282" height="103"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -96,6 +86,71 @@
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Fill your life with Wonder" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="220" translatesAutoresizingMaskIntoConstraints="NO" id="nau-3q-OCY" userLabel="Message Label 5">
                                         <rect key="frame" x="50" y="165" width="220" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Culture" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OG3-DB-CQl">
+                                        <rect key="frame" x="50.5" y="133" width="150" height="29"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="The Mind" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DVN-OK-Dh1">
+                                        <rect key="frame" x="145.5" y="162" width="150" height="29"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Technology" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gzm-uT-pPM">
+                                        <rect key="frame" x="35.5" y="184" width="170" height="29"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Food" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PJh-2s-G6U">
+                                        <rect key="frame" x="35" y="212" width="170" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="News" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tcs-QW-rdS">
+                                        <rect key="frame" x="152.5" y="239" width="170" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Wellness" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bLm-U4-ZBK">
+                                        <rect key="frame" x="139.5" y="199" width="170" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Fashion" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="25s-BL-ITy">
+                                        <rect key="frame" x="23" y="199" width="170" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Film" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XK8-4X-PCV">
+                                        <rect key="frame" x="46" y="245" width="170" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="171" translatesAutoresizingMaskIntoConstraints="NO" id="18i-53-lPx">
+                                        <rect key="frame" x="75" y="186" width="171" height="67"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <string key="text">Learn from the
+experts</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -205,11 +260,15 @@
                         <outlet property="backgroundChurch" destination="YcJ-Ue-azk" id="SMf-Nn-HUj"/>
                         <outlet property="backgroundFood" destination="lWj-r5-SBz" id="Kie-nt-Mkg"/>
                         <outlet property="backgroundHome" destination="giy-AA-jvr" id="VGa-P9-5bq"/>
-                        <outlet property="backgroundMountain" destination="XXu-tc-dRt" id="QNj-EN-bDS"/>
                         <outlet property="buttonContainerViewTopConstraint" destination="z5F-LN-xUL" id="89M-KP-wfk"/>
                         <outlet property="containerView" destination="LER-5Z-EXM" id="rFR-0k-A22"/>
+                        <outlet property="culture" destination="OG3-DB-CQl" id="ZA6-B7-C8Q"/>
                         <outlet property="facebookButton" destination="pbj-Ru-j0Q" id="hM0-jU-0Of"/>
+                        <outlet property="fashion" destination="XK8-4X-PCV" id="1D7-n8-63z"/>
+                        <outlet property="film" destination="XK8-4X-PCV" id="ITX-Jd-uNG"/>
+                        <outlet property="food" destination="PJh-2s-G6U" id="dB3-RK-MAm"/>
                         <outlet property="haveAnAccountLabel" destination="faK-MG-3vf" id="dKC-qz-6M3"/>
+                        <outlet property="learnFrom" destination="18i-53-lPx" id="EHX-UT-PVi"/>
                         <outlet property="loginButton" destination="m39-9A-UIQ" id="ViL-sr-bFS"/>
                         <outlet property="logoImageView" destination="dHb-gc-rUo" id="kqE-Au-ddm"/>
                         <outlet property="messageContainerViewTopConstraint" destination="Ok9-W6-a2A" id="1Xp-4R-ZBH"/>
@@ -218,9 +277,13 @@
                         <outlet property="messageView3" destination="0YZ-dA-Wog" id="gj6-i4-Y2v"/>
                         <outlet property="messageView4" destination="ZIA-gD-3Ba" id="IjD-d5-Itx"/>
                         <outlet property="messageView5" destination="nau-3q-OCY" id="6Lb-y7-YYB"/>
+                        <outlet property="mind" destination="DVN-OK-Dh1" id="YFU-S3-ePO"/>
+                        <outlet property="news" destination="tcs-QW-rdS" id="ZSy-uE-r6K"/>
                         <outlet property="orText" destination="JEF-6W-0IF" id="bL7-Ss-fCr"/>
                         <outlet property="orView" destination="wd1-cl-xBG" id="VCU-GP-s7W"/>
                         <outlet property="signupButton" destination="H6u-lu-1jq" id="Ihy-6i-i1A"/>
+                        <outlet property="tech" destination="Gzm-uT-pPM" id="a5n-Oj-nti"/>
+                        <outlet property="wellness" destination="bLm-U4-ZBK" id="k51-4h-MOY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hXm-bs-rTw" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -939,7 +1002,6 @@
         <image name="intro-church.jpg" width="640" height="1136"/>
         <image name="intro-food.jpg" width="640" height="1136"/>
         <image name="intro-home.jpg" width="640" height="1136"/>
-        <image name="intro-mountains-sea.jpg" width="640" height="1136"/>
         <image name="left-separator.png" width="70" height="1"/>
         <image name="login-button.png" width="286" height="50"/>
         <image name="right-separator.png" width="70" height="1"/>
