@@ -69,7 +69,6 @@
 }
 
 - (void)setUpVideoTap {
-    // Tap for showing video
     [self.imageView addGestureRecognizer: self.tap];
 
 }
