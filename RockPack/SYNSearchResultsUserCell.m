@@ -28,7 +28,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (strong, nonatomic) UIAlertView *followAllAlertView;
 @property (strong, nonatomic) IBOutlet UIImageView *coverImage;
-@property (strong, nonatomic) UIButton* alertViewButton;
 @property (strong, nonatomic) IBOutlet UIView *gradientMask;
 
 @end
@@ -188,56 +187,7 @@
 }
 
 - (void)followButtonPressed:(UIButton *)button {
-    
-    self.followAllAlertView = [[UIAlertView alloc]initWithTitle:@"Follow All?" message:nil delegate:self cancelButtonTitle:[self noButtonTitle] otherButtonTitles:[self yesButtonTitle], nil];
-    
-    NSString *message;
-    
-    if (self.channelOwner.subscribedByUserValue) {
-        self.followAllAlertView.title = @"Unfollow All?";
-        message = @"Are you sure you want to unfollow all";
-        message =  [message stringByAppendingString:@" "];
-        message =  [message stringByAppendingString:self.channelOwner.displayName];
-        
-        
-        message =  [message stringByAppendingString:@"'s collections"];
-        
-    } else {
-        self.followAllAlertView.title = @"Follow All?";
-        message = @"Are you sure you want to follow all";
-        message =  [message stringByAppendingString:@" "];
-        message =  [message stringByAppendingString:self.channelOwner.displayName];
-        message =  [message stringByAppendingString:@"'s collections"];
-        
-    }
-    
-    
-    self.alertViewButton = button;
-    [self.followAllAlertView setMessage:message];
-    [self.followAllAlertView show];
-
+    [self.delegate followControlPressed:button withChannelOwner:self.channelOwner completion:nil];
 }
-
-
-- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    NSString *buttonTitle = [alertView buttonTitleAtIndex:buttonIndex];
-
-    if (alertView == self.followAllAlertView && [buttonTitle isEqualToString:[self yesButtonTitle]])
-    {
-        [self.delegate followControlPressed:self.alertViewButton withChannelOwner:self.channelOwner completion:^{
-			
-		}];
-    }
-}
-
-- (NSString *) yesButtonTitle{
-    return NSLocalizedString(@"Yes", @"Yes to following/unfollowing a user");
-}
-- (NSString *) noButtonTitle{
-    return NSLocalizedString(@"Cancel", @"cancel following/unfollowing a user");
-}
-
-
 
 @end

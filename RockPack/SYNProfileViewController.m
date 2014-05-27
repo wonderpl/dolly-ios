@@ -28,7 +28,6 @@ static const CGFloat TransitionDuration = 0.5f;
 @property (nonatomic, strong) SYNProfileChannelViewController *channelCollectionViewController;
 @property (nonatomic, strong) IBOutlet UIView *channelContainer;
 @property (nonatomic, strong) IBOutlet UIView *followingContainer;
-@property (nonatomic, strong) UIAlertView *followAllAlertView;
 @property (nonatomic, strong) SYNSocialButton *followAllButton;
 @property (nonatomic, assign) BOOL isUserProfile;
 @property (nonatomic, assign) BOOL creatingChannel;
@@ -373,21 +372,9 @@ static const CGFloat TransitionDuration = 0.5f;
 
 - (void) followUserButtonTapped:(SYNSocialButton*)sender {
     
-	[[[UIAlertView alloc]initWithTitle:@"Follow All?" message:nil delegate:self cancelButtonTitle:NSLocalizedString(@"No", @"No to alert view") otherButtonTitles:NSLocalizedString(@"Yes", @"Yes to alert view"), nil] show];
-    self.followAllButton = sender;
-}
-
-#pragma mark - Alertview delegates
-
-- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-	[[SYNTrackingManager sharedManager] trackUserCollectionsFollowFromScreenName:[self trackingScreenName]];
-    
-    if (buttonIndex == 1) {
-		[self followControlPressed:self.followAllButton withChannelOwner:self.channelOwner completion:^{
-			[self reloadCollectionViews];
-		}];
-		
-    }
+    [self followControlPressed:sender withChannelOwner:self.channelOwner completion:^{
+        [self reloadCollectionViews];
+    }];
 }
 
 #pragma mark - SYNProfileEditDelegate
