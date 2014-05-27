@@ -147,6 +147,13 @@ UISearchBarDelegate>
         CGRect frame = self.textContainerView.frame;
         frame.origin.x -= 49;
         self.textContainerView.frame = frame;
+        
+        frame = self.messageLabel.frame;
+        frame.size.width = 320;
+        frame.origin.x += 29;
+        
+        self.messageLabel.frame = frame;
+        
     }
     
     
