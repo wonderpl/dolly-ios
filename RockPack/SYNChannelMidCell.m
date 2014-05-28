@@ -76,7 +76,6 @@
     } else {
         [self.descriptionLabel setFont:[UIFont lightCustomFontOfSize:14]];
         [self.followerCountLabel setFont:[UIFont regularCustomFontOfSize:self.followerCountLabel.font.pointSize]];
-        [self.videoCountLabel setFont:[UIFont regularCustomFontOfSize:14]];
     }
 	
 	self.descriptionLabel.backgroundColor = [UIColor colorWithRed:242.0f/255.0f green:242.0f/255.0f blue:242.0f/255.0f alpha:1.0f];
@@ -93,7 +92,6 @@
 }
 
 - (void)prepareForReuse {
-    self.videoCountLabel.text = @"";
     self.videoTitleLabel.text = @"";
     self.followerCountLabel.text = @"";
     self.descriptionLabel.text = @"";
@@ -191,8 +189,7 @@
 }
 
 - (IBAction)followChannel:(id)sender {
-	
-	[self.viewControllerDelegate followButtonTapped:self];
+    [self.viewControllerDelegate followButtonTapped:self];
 }
 
 - (void)setBorder {
@@ -414,6 +411,10 @@
 
 -(void)setSelected:(BOOL)selected
 {
+    
+    if (_selected == selected) {
+        return;
+    }
     _selected = selected;
 	
     
@@ -421,24 +422,20 @@
         return;
     }
     if (selected) {
-		[UIView animateWithDuration:0.2 animations:^{
 			self.videoTitleLabel.textColor = [UIColor whiteColor];
 			self.followerCountLabel.textColor = [UIColor whiteColor];
             self.containerView.backgroundColor = [UIColor dollyBlue];
-            
-		}];
     } else {
-		[UIView animateWithDuration:0.2 animations:^{
 			self.videoTitleLabel.textColor = [UIColor blackColor];
 			self.followerCountLabel.textColor = [UIColor colorWithRed: 175.0f / 255.0f
                                                                 green: 175.0f / 255.0f
                                                                  blue: 181.0f / 255.0f
                                                                 alpha: 1.0f];
 			self.containerView.backgroundColor = [UIColor whiteColor];
-		}];
     }
     
 }
+
 -(BOOL)isSelected
 {
     return _selected;

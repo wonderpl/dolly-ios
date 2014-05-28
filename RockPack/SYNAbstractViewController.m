@@ -614,7 +614,27 @@
 	if (isCurrentUser) {
 		return;
 	}
-	
+    
+    //TODO:maybe change to keyframeanimation so it doesnt look as messy
+    
+    float totalAnimationTime = 0.3;
+    
+    [UIView animateWithDuration:totalAnimationTime*0.15 animations:^{
+        button.transform = CGAffineTransformMakeScale(1.4, 1.0);
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:totalAnimationTime*0.25 animations:^{
+            button.transform = CGAffineTransformMakeScale(0.9, 1.0);
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:totalAnimationTime*.35 animations:^{
+                button.transform = CGAffineTransformMakeScale(1.08, 1.0);
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:totalAnimationTime*.25 animations:^{
+                    button.transform = CGAffineTransformMakeScale(1.00, 1.0);
+                }];
+            }];
+        }];
+    }];
+
 	[[SYNTrackingManager sharedManager] trackUserCollectionsFollowFromScreenName:[self trackingScreenName]];
 	
 	button.enabled = NO;
@@ -666,6 +686,24 @@
 
 - (void)followButtonPressed:(UIButton *)button withChannel:(Channel *)channel completion :(void (^)(void))callbackBlock {
     
+    float totalAnimationTime = 0.3;
+
+    [UIView animateWithDuration:totalAnimationTime*0.15 animations:^{
+        button.transform = CGAffineTransformMakeScale(1.4, 1.0);
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:totalAnimationTime*0.25 animations:^{
+            button.transform = CGAffineTransformMakeScale(0.9, 1.0);
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:totalAnimationTime*.35 animations:^{
+                button.transform = CGAffineTransformMakeScale(1.08, 1.0);
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:totalAnimationTime*.25 animations:^{
+                    button.transform = CGAffineTransformMakeScale(1.00, 1.0);
+                }];
+            }];
+        }];
+    }];
+
     [[SYNTrackingManager sharedManager] trackCollectionFollowFromScreenName:[self trackingScreenName]];
     
 	if ([[SYNActivityManager sharedInstance]isSubscribedToChannelId:channel.uniqueId]) {

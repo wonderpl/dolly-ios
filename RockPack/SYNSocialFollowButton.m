@@ -28,16 +28,25 @@
     
     if(selected) {
         self.layer.borderColor = [self.selectedBorderColor CGColor];
+        self.backgroundColor = [UIColor dollyGreen];
         [self setTitle:NSLocalizedString(@"unfollow", nil)];
 		self.titleLabel.font = self.selectedFont;
+        
+        [self setTitleColor: self.selectedColor
+				   forState: UIControlStateNormal];
+
 		[self setTitleColor: self.selectedColor
 				   forState: UIControlStateSelected];
     } else {
         self.layer.borderColor = [self.defaultBorderColor CGColor];
+        self.backgroundColor = [UIColor clearColor];
         [self setTitle:NSLocalizedString(@"follow", nil)];
 		self.titleLabel.font = self.defaultFont;
 		[self setTitleColor: self.defaultColor
 				   forState: UIControlStateNormal];
+        [self setTitleColor: self.defaultColor
+				   forState: UIControlStateSelected];
+
     }
 }
 

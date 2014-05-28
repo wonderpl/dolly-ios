@@ -41,10 +41,8 @@ typedef enum {
 @property (nonatomic) BOOL deletableCell;
 @property (nonatomic, assign) BOOL showsDescriptionOnSwipe;
 
-@property (strong, nonatomic) IBOutlet UILabel *videoCountLabel;
 @property (strong, nonatomic) IBOutlet UILabel *videoTitleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *followerCountLabel;
-@property (strong, nonatomic) IBOutlet UIView *bottomBarView;
 @property (strong, nonatomic) IBOutlet UIView *view;
 @property (nonatomic) ChannelMidCellState state;
 @property (assign, nonatomic) BOOL isFromProfile;

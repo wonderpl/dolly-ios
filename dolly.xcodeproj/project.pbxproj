@@ -3548,9 +3548,9 @@
 				BEB31372181AC6DB00FAF98A /* SYNSocialAddButton.h */,
 				BEB31373181AC6DB00FAF98A /* SYNSocialAddButton.m */,
 				BEE01B58184F5868000CF681 /* SYNSocialFollowButton.h */,
+				BEE01B59184F5868000CF681 /* SYNSocialFollowButton.m */,
 				4C72DD4818FD96E6004AC132 /* SYNFollowChannelButton.h */,
 				4C72DD4918FD96E6004AC132 /* SYNFollowChannelButton.m */,
-				BEE01B59184F5868000CF681 /* SYNSocialFollowButton.m */,
 				0ECBED38187C66F900F28EB2 /* SYNFollowUserButton.h */,
 				0ECBED39187C66F900F28EB2 /* SYNFollowUserButton.m */,
 			);

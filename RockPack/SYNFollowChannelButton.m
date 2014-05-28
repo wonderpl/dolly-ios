@@ -20,7 +20,7 @@
 }
 
 - (UIColor*) selectedColor {
-	return [UIColor blackColor];
+	return [UIColor whiteColor];
 }
 
 - (UIColor*) defaultColor {
@@ -36,7 +36,7 @@
 }
 
 - (UIColor*) selectedBorderColor {
-	return [UIColor blackColor];
+	return [UIColor dollyGreen];
 }
 
 - (UIColor*) defaultBorderColor {

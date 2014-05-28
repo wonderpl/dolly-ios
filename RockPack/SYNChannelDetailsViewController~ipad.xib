@@ -150,7 +150,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="eEI-cj-XRs" userLabel="Button - Share" customClass="SYNSocialButton">
-                            <rect key="frame" x="99" y="8" width="50" height="50"/>
+                            <rect key="frame" x="108" y="8" width="32" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <state key="normal" image="ShareButton.png">

@@ -37,7 +37,7 @@
 }
 
 - (UIColor*) selectedBorderColor {
-	return [UIColor colorWithWhite:1.0 alpha:0.7];
+	return [UIColor dollyGreen];
 }
 
 - (UIColor*) defaultBorderColor {
