@@ -58,6 +58,8 @@
 
 @property (nonatomic, strong) IBOutlet UICollectionView *videosCollectionView;
 
+@property (nonatomic, strong) SYNFullScreenVideoViewController *fullscreenViewController;
+
 @property (nonatomic, strong) SYNVideoInfoViewController *videoInfoViewController;
 
 @property (nonatomic, strong) VideoInstance *videoInstance;
@@ -192,7 +194,6 @@
 		viewController.model = self.model;
 		viewController.selectedIndex = self.selectedIndex;
 		viewController.delegate = self;
-		
 		self.videoInfoViewController = viewController;
 	}
 }
@@ -324,33 +325,42 @@
 }
 
 - (void)videoPlayerAnnotationSelected:(VideoAnnotation *)annotation button:(UIButton *)button {
-	BOOL didAdd = [self.videoInfoViewController addVideoAnnotation:annotation];
+    
+    BOOL didAdd = [self.videoInfoViewController addVideoAnnotation:annotation];
 	if (!didAdd) {
 		return;
 	}
 	
-	[[SYNTrackingManager sharedManager] trackShopMotionAnnotationPressForTitle:self.videoInstance.title];
+    [[SYNTrackingManager sharedManager] trackShopMotionAnnotationPressForTitle:self.videoInstance.title];
 	
-	CGPoint buttonCenter = [self.view convertPoint:button.center fromView:button.superview];
+    
+	UIView *containerView = self.currentVideoPlayer.maximised ? self.fullscreenViewController.view : self.view;
+    
+	CGPoint buttonCenter = [containerView convertPoint:button.center fromView:button.superview];
 	
 	UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ShopMotionActionButton"]];
+    
 	imageView.center = buttonCenter;
-	
 	self.annotationImageView = imageView;
-	
-	[self.view addSubview:imageView];
-	
-	CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+
+    
+    if (self.currentVideoPlayer.maximised) {
+        [self.fullscreenViewController.view addSubview:imageView];
+    } else {
+        [self.view addSubview:imageView];
+    }
+    
+    CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
 	UIBezierPath *path = [UIBezierPath bezierPath];
 	[path moveToPoint:imageView.center];
 	
-	CGRect videoPlayerFrame = [self.view convertRect:self.currentVideoPlayer.bounds fromView:self.currentVideoPlayer];
+	CGRect videoPlayerFrame = [containerView convertRect:self.currentVideoPlayer.bounds fromView:self.currentVideoPlayer];
 	
 	CGPoint destinationPoint = CGPointMake(CGRectGetMaxX(videoPlayerFrame) - 100.0, CGRectGetMaxY(videoPlayerFrame));
 	[path addQuadCurveToPoint:destinationPoint controlPoint:CGPointMake(destinationPoint.x, imageView.center.y)];
 	
 	animation.path = [path CGPath];
-	animation.duration = 0.3;
+	animation.duration = 1.3;
 	animation.delegate = self;
 	animation.removedOnCompletion = YES;
 	
@@ -418,11 +428,11 @@
 }
 
 - (void)maximiseVideoPlayer {
-	SYNFullScreenVideoViewController *viewController = [[SYNFullScreenVideoViewController alloc] init];
-	viewController.videoPlayerViewController = self;
-	viewController.transitioningDelegate = self;
+	self.fullscreenViewController = [[SYNFullScreenVideoViewController alloc] init];
+	self.fullscreenViewController.videoPlayerViewController = self;
+	self.fullscreenViewController.transitioningDelegate = self;
 	
-	[self presentViewController:viewController animated:YES completion:nil];
+	[self presentViewController:self.fullscreenViewController animated:YES completion:nil];
 }
 
 - (void)minimiseVideoPlayer {
