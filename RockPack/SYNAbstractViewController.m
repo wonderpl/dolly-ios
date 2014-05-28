@@ -617,24 +617,7 @@
     
     //TODO:maybe change to keyframeanimation so it doesnt look as messy
     
-    float totalAnimationTime = 0.3;
-    
-    [UIView animateWithDuration:totalAnimationTime*0.15 animations:^{
-        button.transform = CGAffineTransformMakeScale(1.4, 1.0);
-    } completion:^(BOOL finished) {
-        [UIView animateWithDuration:totalAnimationTime*0.25 animations:^{
-            button.transform = CGAffineTransformMakeScale(0.9, 1.0);
-        } completion:^(BOOL finished) {
-            [UIView animateWithDuration:totalAnimationTime*.35 animations:^{
-                button.transform = CGAffineTransformMakeScale(1.08, 1.0);
-            } completion:^(BOOL finished) {
-                [UIView animateWithDuration:totalAnimationTime*.25 animations:^{
-                    button.transform = CGAffineTransformMakeScale(1.00, 1.0);
-                }];
-            }];
-        }];
-    }];
-
+   
 	[[SYNTrackingManager sharedManager] trackUserCollectionsFollowFromScreenName:[self trackingScreenName]];
 	
 	button.enabled = NO;
@@ -661,7 +644,30 @@
 												 [button invalidateIntrinsicContentSize];
 											 }];
 	} else {
-		
+        float totalAnimationTime = 0.35;
+        
+        [UIView animateWithDuration:totalAnimationTime*0.15 animations:^{
+            
+            button.transform = CGAffineTransformMakeScale(1.18, 1.0);
+        } completion:^(BOOL finished) {
+            
+            [UIView animateWithDuration:totalAnimationTime*0.25 animations:^{
+                
+                button.transform = CGAffineTransformMakeScale(0.68, 1.0);
+                
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:totalAnimationTime*.35 animations:^{
+                    button.transform = CGAffineTransformMakeScale(1.04, 1.0);
+                } completion:^(BOOL finished) {
+                    [UIView animateWithDuration:totalAnimationTime*.25 animations:^{
+                        
+                        button.transform = CGAffineTransformMakeScale(1.00, 1.0);
+                        
+                    }];
+                }];
+            }];
+        }];
+
         [[SYNActivityManager sharedInstance] subscribeToUser:channelOwner
 										   completionHandler: ^(id responce) {
 											   
