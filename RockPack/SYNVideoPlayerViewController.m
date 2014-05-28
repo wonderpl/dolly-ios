@@ -338,12 +338,11 @@
     
 	CGPoint buttonCenter = [containerView convertPoint:button.center fromView:button.superview];
 	
-	UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ShopMotionActionButton"]];
+	UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ShopMotionBagItem"]];
     
 	imageView.center = buttonCenter;
 	self.annotationImageView = imageView;
 
-    
     if (self.currentVideoPlayer.maximised) {
         [self.fullscreenViewController.view addSubview:imageView];
     } else {

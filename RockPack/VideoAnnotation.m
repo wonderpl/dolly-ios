@@ -31,8 +31,8 @@
 }
 
 - (CGRect)frameForAnnotationInRect:(CGRect)rect {
-	return CGRectMake(self.originXValue * CGRectGetWidth(rect),
-					  self.originYValue * CGRectGetHeight(rect),
+	return CGRectMake(self.originXValue * CGRectGetWidth(rect) - self.widthValue * CGRectGetWidth(rect)/2,
+					  self.originYValue * CGRectGetHeight(rect) - self.heightValue * CGRectGetHeight(rect)/2,
 					  self.widthValue * CGRectGetWidth(rect),
 					  self.heightValue * CGRectGetHeight(rect));
 }

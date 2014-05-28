@@ -86,28 +86,42 @@ static const CGFloat UpcomingVideosDividerHeight = 70.0;
 	[self.collectionView setContentOffset:CGPointZero animated:YES];
 	
 	UIButton *button = self.videoActionsBar.shopButton;
-	[button setTitle:[NSString stringWithFormat:@"%@", @([self.annotations count])] forState:UIControlStateNormal];
+    [button setTitle:[NSString stringWithFormat:@"       %@", @([self.annotations count])] forState:UIControlStateNormal];
 
 	if (isFirstAnnotation) {
 		button.hidden = NO;
-		button.transform = CGAffineTransformMakeScale(0.0, 0.0);
-		
-		[UIView animateKeyframesWithDuration:0.3
-									   delay:0
-									 options:0
-								  animations:^{
-									  
-									  [UIView addKeyframeWithRelativeStartTime:0.0 relativeDuration:0.8 animations:^{
-										  button.transform = CGAffineTransformMakeScale(1.5, 1.5);
-									  }];
-									  
-									  [UIView addKeyframeWithRelativeStartTime:0.8 relativeDuration:1.0 animations:^{
-										  button.transform = CGAffineTransformMakeScale(1.0, 1.0);
-									  }];
-									  
-								  } completion:^(BOOL finished) {
-									  
-								  }];
+        NSMutableArray *images = [[NSMutableArray alloc] init];
+        
+        NSString *shopMoitonString = @"ShopMotion";
+        float numberOfFrames = 15;
+    
+    for (int i = 0; i < 21; i++) {
+        [images addObject:[UIImage imageNamed: [NSString stringWithFormat:@"%@%d", shopMoitonString, 0]]];
+    }
+
+        for (int i = 0; i < numberOfFrames; i++) {
+            [images addObject:[UIImage imageNamed: [NSString stringWithFormat:@"%@%d", shopMoitonString, i]]];
+        }
+        
+        button.hidden = NO;
+
+        
+        float totalAnimationTime = 1.45;
+        UIImageView *animationImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10.5, 5.5, 21, 25)];
+        animationImageView.animationImages = images;
+        animationImageView.animationDuration = totalAnimationTime;
+
+
+            [button addSubview:animationImageView];
+            [animationImageView startAnimating];
+    
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.45 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [animationImageView removeFromSuperview];
+            [button setImage:[UIImage imageNamed:@"ShopMotion0"] forState:UIControlStateNormal];
+            
+            [button setTitle:[NSString stringWithFormat:@"%@", @([self.annotations count])] forState:UIControlStateNormal];
+
+        });
 	}
 	return YES;
 }
