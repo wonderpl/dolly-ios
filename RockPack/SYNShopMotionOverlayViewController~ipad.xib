@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNShopMotionOverlayViewController">
             <connections>
+                <outlet property="labelTapIcon" destination="dgb-aU-w4g" id="fK4-Ol-e0Q"/>
+                <outlet property="labelTapping" destination="LLt-OM-8Fs" id="wJx-WJ-gMS"/>
+                <outlet property="labelThisVideo" destination="jAO-xH-sgN" id="4JG-nw-sAJ"/>
+                <outlet property="labelWillAppear" destination="jzV-Nn-0Km" id="2AV-Ep-vfE"/>
                 <outlet property="shopMotionImage" destination="ktM-eK-CbR" id="aXG-jW-PDe"/>
                 <outlet property="tabButtonHorizontalConstant" destination="Jmv-7e-evh" id="Vqy-SP-JYr"/>
                 <outlet property="tabButtonVerticalConstant" destination="PAF-Ab-Roc" id="mlk-lt-RWL"/>
                 <outlet property="tabImage" destination="mQA-TY-V2m" id="3qX-Mn-2Tz"/>
-                <outlet property="textLabel" destination="ggs-Sc-zXQ" id="BWm-DA-x5D"/>
-                <outlet property="titleLabel" destination="ggs-Sc-zXQ" id="qD1-XM-BbW"/>
+                <outlet property="theMotion" destination="fYh-RZ-MtN" id="zQV-yj-Tle"/>
                 <outlet property="view" destination="iN0-l3-epB" id="b1x-n2-IJh"/>
             </connections>
         </placeholder>
@@ -20,17 +23,6 @@
             <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ggs-Sc-zXQ">
-                    <rect key="frame" x="215" y="344" width="338" height="173"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="338" id="OzA-jI-T5G"/>
-                        <constraint firstAttribute="height" constant="173" id="rtR-h3-rRG"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="InboardingShopMotionActionButton.png" translatesAutoresizingMaskIntoConstraints="NO" id="mQA-TY-V2m">
                     <rect key="frame" x="354" y="281" width="60" height="61"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -43,15 +35,78 @@
                     <rect key="frame" x="656" y="584" width="21" height="25"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This video is Shop Motion enabled" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="295" translatesAutoresizingMaskIntoConstraints="NO" id="jAO-xH-sgN">
+                    <rect key="frame" x="82" y="263" width="295" height="41"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="295" id="6n3-N0-qYg"/>
+                        <constraint firstAttribute="height" constant="41" id="G0p-be-ekf"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="will appear next to any item you can buy" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="347" translatesAutoresizingMaskIntoConstraints="NO" id="jzV-Nn-0Km">
+                    <rect key="frame" x="421" y="292" width="347" height="41"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="347" id="OlM-u7-xiE"/>
+                        <constraint firstAttribute="height" constant="41" id="xAq-Vd-hYE"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap the icon once and the item will go into your shopping bag" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="492" translatesAutoresizingMaskIntoConstraints="NO" id="dgb-aU-w4g">
+                    <rect key="frame" x="173" y="451" width="492" height="41"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="492" id="7lj-7e-crl"/>
+                        <constraint firstAttribute="height" constant="41" id="Sxo-hT-s4c"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tapping the shopping bag will take you to the website to complete your purchase" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="626" translatesAutoresizingMaskIntoConstraints="NO" id="LLt-OM-8Fs">
+                    <rect key="frame" x="64" y="617" width="626" height="61"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="61" id="Utd-ee-rpp"/>
+                        <constraint firstAttribute="width" constant="626" id="aRz-sY-Ayj"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The shop motion icon" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fYh-RZ-MtN">
+                    <rect key="frame" x="181" y="301" width="179" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="179" id="bqp-fk-ZuJ"/>
+                        <constraint firstAttribute="height" constant="21" id="ygH-6J-sVl"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="centerY" secondItem="mQA-TY-V2m" secondAttribute="centerY" constant="200.5" id="3T5-hP-Hi5"/>
                 <constraint firstAttribute="centerX" secondItem="mQA-TY-V2m" secondAttribute="centerX" id="72c-JO-age"/>
-                <constraint firstItem="ggs-Sc-zXQ" firstAttribute="top" secondItem="mQA-TY-V2m" secondAttribute="bottom" constant="2" id="C5s-bk-eka"/>
+                <constraint firstItem="jzV-Nn-0Km" firstAttribute="leading" secondItem="mQA-TY-V2m" secondAttribute="trailing" constant="7" id="8AZ-Gh-Kio"/>
+                <constraint firstItem="mQA-TY-V2m" firstAttribute="top" secondItem="jAO-xH-sgN" secondAttribute="bottom" constant="-23" id="9pg-9D-V6h"/>
+                <constraint firstItem="LLt-OM-8Fs" firstAttribute="top" secondItem="mQA-TY-V2m" secondAttribute="bottom" constant="275" id="9xb-et-pDh"/>
+                <constraint firstItem="dgb-aU-w4g" firstAttribute="leading" secondItem="mQA-TY-V2m" secondAttribute="trailing" constant="-241" id="AAX-fn-Zhn"/>
                 <constraint firstAttribute="trailing" secondItem="ktM-eK-CbR" secondAttribute="trailing" constant="91" id="Jmv-7e-evh"/>
                 <constraint firstItem="ktM-eK-CbR" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="584" id="PAF-Ab-Roc"/>
-                <constraint firstItem="ggs-Sc-zXQ" firstAttribute="leading" secondItem="mQA-TY-V2m" secondAttribute="trailing" constant="-199" id="VJ6-PJ-I4u"/>
+                <constraint firstItem="mQA-TY-V2m" firstAttribute="leading" secondItem="fYh-RZ-MtN" secondAttribute="trailing" constant="-6" id="YrS-R9-usW"/>
+                <constraint firstItem="jzV-Nn-0Km" firstAttribute="top" secondItem="mQA-TY-V2m" secondAttribute="bottom" constant="-50" id="cTK-8j-AcC"/>
+                <constraint firstItem="fYh-RZ-MtN" firstAttribute="top" secondItem="mQA-TY-V2m" secondAttribute="bottom" constant="-41" id="l0L-Hi-tgc"/>
+                <constraint firstItem="mQA-TY-V2m" firstAttribute="leading" secondItem="jAO-xH-sgN" secondAttribute="trailing" constant="-23" id="spe-N1-B2x"/>
+                <constraint firstItem="dgb-aU-w4g" firstAttribute="top" secondItem="mQA-TY-V2m" secondAttribute="bottom" constant="109" id="wJV-rZ-3ig"/>
+                <constraint firstItem="mQA-TY-V2m" firstAttribute="leading" secondItem="LLt-OM-8Fs" secondAttribute="trailing" constant="-336" id="zoL-5P-1zH"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
         </view>
