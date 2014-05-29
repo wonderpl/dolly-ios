@@ -86,7 +86,6 @@ static const CGFloat UpcomingVideosDividerHeight = 40.0;
 	[self.collectionView setContentOffset:CGPointZero animated:YES];
 	
 	UIButton *button = self.videoActionsBar.shopButton;
-    [button setTitle:[NSString stringWithFormat:@"       %@", @([self.annotations count])] forState:UIControlStateNormal];
     [button setBackgroundImage: [UIImage new] forState:UIControlStateNormal];
 
 	if (isFirstAnnotation) {
@@ -358,9 +357,6 @@ static const CGFloat UpcomingVideosDividerHeight = 40.0;
 
 - (void)webViewCellContentLoaded:(SYNWebViewCell *)cell {
     
-    
-    NSLog(@"content height  ::::: %f", cell.contentHeight);
-
 	self.descriptionHeight = cell.contentHeight;
 	[self.collectionView.collectionViewLayout invalidateLayout];
 }
