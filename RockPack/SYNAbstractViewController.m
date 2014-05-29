@@ -644,30 +644,10 @@
 												 [button invalidateIntrinsicContentSize];
 											 }];
 	} else {
-        float totalAnimationTime = 0.35;
-        
-        [UIView animateWithDuration:totalAnimationTime*0.15 animations:^{
-            
-            button.transform = CGAffineTransformMakeScale(1.18, 1.0);
-        } completion:^(BOOL finished) {
-            
-            [UIView animateWithDuration:totalAnimationTime*0.25 animations:^{
-                
-                button.transform = CGAffineTransformMakeScale(0.68, 1.0);
-                
-            } completion:^(BOOL finished) {
-                [UIView animateWithDuration:totalAnimationTime*.35 animations:^{
-                    button.transform = CGAffineTransformMakeScale(1.04, 1.0);
-                } completion:^(BOOL finished) {
-                    [UIView animateWithDuration:totalAnimationTime*.25 animations:^{
-                        
-                        button.transform = CGAffineTransformMakeScale(1.00, 1.0);
-                        
-                    }];
-                }];
-            }];
-        }];
 
+        
+        [self followButtonAnimation:button];
+        
         [[SYNActivityManager sharedInstance] subscribeToUser:channelOwner
 										   completionHandler: ^(id responce) {
 											   
@@ -692,23 +672,7 @@
 
 - (void)followButtonPressed:(UIButton *)button withChannel:(Channel *)channel completion :(void (^)(void))callbackBlock {
     
-    float totalAnimationTime = 0.3;
-
-    [UIView animateWithDuration:totalAnimationTime*0.15 animations:^{
-        button.transform = CGAffineTransformMakeScale(1.4, 1.0);
-    } completion:^(BOOL finished) {
-        [UIView animateWithDuration:totalAnimationTime*0.25 animations:^{
-            button.transform = CGAffineTransformMakeScale(0.9, 1.0);
-        } completion:^(BOOL finished) {
-            [UIView animateWithDuration:totalAnimationTime*.35 animations:^{
-                button.transform = CGAffineTransformMakeScale(1.08, 1.0);
-            } completion:^(BOOL finished) {
-                [UIView animateWithDuration:totalAnimationTime*.25 animations:^{
-                    button.transform = CGAffineTransformMakeScale(1.00, 1.0);
-                }];
-            }];
-        }];
-    }];
+    
 
     [[SYNTrackingManager sharedManager] trackCollectionFollowFromScreenName:[self trackingScreenName]];
     
@@ -729,6 +693,9 @@
                                                     button.enabled = YES;
                                                 }];
 	} else {
+        
+        [self followButtonAnimation:button];
+
         [[SYNActivityManager sharedInstance] subscribeToChannel: channel
 											  completionHandler: ^(NSDictionary *responseDictionary) {
 												  [[SYNTrackingManager sharedManager] trackCollectionFollowCompleted];
@@ -748,6 +715,45 @@
 
 }
 
+
+
+- (void) followButtonAnimation :(UIButton *) button {
+    
+    float totalAnimationTime = 0.35;
+
+    CABasicAnimation* first = [CABasicAnimation animationWithKeyPath:@"transform"];
+    first.autoreverses = YES;
+    first.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.2, 1, 1)];
+    [first setDuration:totalAnimationTime*0.15];
+    [first setBeginTime:0];
+    
+    CABasicAnimation* second = [CABasicAnimation animationWithKeyPath:@"transform"];
+    second.autoreverses = YES;
+    [second setDuration:totalAnimationTime*0.16];
+    [second setBeginTime:totalAnimationTime*0.25];
+    
+    second.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(0.9, 1, 1)];
+    
+    CABasicAnimation* third = [CABasicAnimation animationWithKeyPath:@"transform"];
+    third.autoreverses = YES;
+    [third setDuration:totalAnimationTime*0.35];
+    [third setBeginTime:totalAnimationTime*0.4];
+    third.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.08, 1, 1)];
+    
+    
+    CABasicAnimation* forth = [CABasicAnimation animationWithKeyPath:@"transform"];
+    forth.autoreverses = YES;
+    [forth setDuration:totalAnimationTime*0.25];
+    [forth setBeginTime:totalAnimationTime*0.75];
+    forth.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(1, 1, 1)];
+    
+    CAAnimationGroup *group = [CAAnimationGroup animation];
+    [group setDuration:totalAnimationTime];
+    [group setAnimations:[NSArray arrayWithObjects:first, second, third,  nil]];
+    
+    [button.layer addAnimation:group forKey:nil];
+    
+}
 
 #pragma mark - UIViewControllerTransitioningDelegate
 
