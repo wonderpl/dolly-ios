@@ -292,10 +292,7 @@
 }
 
 - (void)videoPlayerVideoViewed {
-    
-    NSLog(@"self.videoInstance.uniqueId : %@", self.videoInstance);
-    
-    
+
 	[appDelegate.oAuthNetworkEngine recordActivityForUserId:appDelegate.currentOAuth2Credentials.userId
 													 action:@"view"
 											videoInstanceId:self.videoInstance.uniqueId
