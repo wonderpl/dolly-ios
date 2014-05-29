@@ -907,7 +907,7 @@
     }
     else
     {
-        AssertOrLog(@"One or more of the required parameters is nil");
+        AssertOrLog(@"manageChannelForUserId : One or more of the required parameters is nil");
     }
     
     apiString = [NSString stringWithFormat: @"%@?locale=%@", apiString, self.localeString];
@@ -1233,6 +1233,11 @@
     
     NSDictionary *params = nil;
     
+    
+    NSLog(@"action %@", action);
+
+    NSLog(@"videoInstanceId %@", videoInstanceId);
+
     if (action && videoInstanceId)
     {
     params = @{@"action" : action,
@@ -1240,8 +1245,10 @@
     }
     else
     {
-        AssertOrLog(@"One or more of the required parameters is nil");
+        AssertOrLog(@"recordActivityForUserId : One or more of the required parameters is nil");
     }
+    
+    
 
     SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject*)[self operationWithPath: apiString
                                                                                                        params: params
@@ -1306,7 +1313,7 @@
     }
     else
     {
-        AssertOrLog(@"One or more of the required parameters is nil");
+        AssertOrLog(@"subscribeAllForUserId : One or more of the required parameters is nil");
     }
     
     SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject*)[self operationWithPath: apiString
@@ -1345,7 +1352,7 @@
     }
     else
     {
-        AssertOrLog(@"One or more of the required parameters is nil");
+        AssertOrLog(@"unsubscribeAllForUserId : One or more of the required parameters is nil");
     }
     
     SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject*)[self operationWithPath: apiString
@@ -1445,7 +1452,7 @@
     }
     else
     {
-        AssertOrLog(@"One or more of the required parameters is nil");
+        AssertOrLog(@"channelSubscribeForUserId : One or more of the required parameters is nil");
     }
 
     
@@ -1490,7 +1497,7 @@
     }
     else
     {
-        AssertOrLog(@"One or more of the required parameters is nil");
+        AssertOrLog(@"channelUnsubscribeForUserId : One or more of the required parameters is nil");
     }
     
     
@@ -1659,7 +1666,7 @@
     }
     else
     {
-        AssertOrLog(@"One or more of the required parameters is nil");
+        AssertOrLog(@"shareLinkWithObjectType : One or more of the required parameters is nil");
     }
 
     
@@ -1742,7 +1749,7 @@
     }
     else
     {
-        AssertOrLog(@"One or more of the required parameters is nil");
+        AssertOrLog(@"reportConcernForUserId : One or more of the required parameters is nil");
     }
     
     SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject*)[self operationWithPath: apiString
@@ -1777,7 +1784,7 @@
     }
     else
     {
-        AssertOrLog(@"One or more of the required parameters is nil");
+        AssertOrLog(@"reportPlayerErrorForVideoInstanceId : One or more of the required parameters is nil");
     }
 
     SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject*)[self operationWithPath: apiString
