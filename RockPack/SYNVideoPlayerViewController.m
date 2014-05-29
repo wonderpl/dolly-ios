@@ -442,11 +442,12 @@
 
 - (void)updateVideoInstanceDetails:(VideoInstance *)videoInstance {
 	NSURL *avatarURL = [NSURL URLWithString:videoInstance.originator.thumbnailURL];
+
 	[self.avatarButton setImageWithURL:avatarURL
 							  forState:UIControlStateNormal
 					  placeholderImage:[UIImage imageNamed:@"PlaceholderAvatarProfile"]
 							   options:SDWebImageRetryFailed];
-	
+    
 	[self.videoTitleLabel setText:videoInstance.title animated:YES];
 	
 	self.followingButton.selected = [[SYNActivityManager sharedInstance] isSubscribedToUserId:videoInstance.originator.uniqueId];
@@ -491,7 +492,7 @@
     }
     
     if (![[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultsShopMotionFirstTime]) {
-        
+    
                 SYNShopMotionOverlayViewController *overlay = [[SYNShopMotionOverlayViewController alloc] init];
                 [overlay addToViewController:self];
         

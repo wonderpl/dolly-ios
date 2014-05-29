@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vaj-tD-bEt">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vaj-tD-bEt">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -45,18 +45,6 @@
                                 <connections>
                                     <action selector="followButtonPressed:" destination="vaj-tD-bEt" eventType="touchUpInside" id="rzh-Ht-Cmx"/>
                                 </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1nv-tp-TGt" customClass="SYNAvatarButton">
-                                <rect key="frame" x="136" y="34" width="48" height="48"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="48" id="Yh5-OY-qLy"/>
-                                    <constraint firstAttribute="width" constant="48" id="cVV-V3-1gl"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="290" translatesAutoresizingMaskIntoConstraints="NO" id="nVh-CQ-apC">
                                 <rect key="frame" x="15" y="113" width="290" height="22"/>
@@ -116,6 +104,19 @@
                                     <segue destination="O3J-kb-ejs" kind="embed" identifier="VideoInfo" id="h6g-Ln-LG9"/>
                                 </connections>
                             </containerView>
+                            <button clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LMk-aL-SHN" userLabel="Button - Avatar" customClass="SYNAvatarButton">
+                                <rect key="frame" x="136.5" y="34" width="48" height="48"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="6HC-y4-0ph"/>
+                                    <constraint firstAttribute="width" constant="48" id="P0O-X5-DbB"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -128,15 +129,15 @@
                             <constraint firstItem="3Yv-dB-EFS" firstAttribute="top" secondItem="nVh-CQ-apC" secondAttribute="bottom" constant="13" id="WJB-XT-OLz"/>
                             <constraint firstItem="IbH-kt-YGA" firstAttribute="top" secondItem="3Yv-dB-EFS" secondAttribute="bottom" id="Wle-kp-b31"/>
                             <constraint firstAttribute="centerX" secondItem="nVh-CQ-apC" secondAttribute="centerX" id="ZrG-vM-ka4"/>
-                            <constraint firstItem="1nv-tp-TGt" firstAttribute="top" secondItem="6RR-tE-wLX" secondAttribute="bottom" constant="14" id="i0U-gT-oaS"/>
-                            <constraint firstAttribute="centerX" secondItem="1nv-tp-TGt" secondAttribute="centerX" id="iES-Og-Jjv"/>
+                            <constraint firstAttribute="centerY" secondItem="LMk-aL-SHN" secondAttribute="centerY" constant="226" id="hof-n4-8r4"/>
+                            <constraint firstAttribute="centerX" secondItem="LMk-aL-SHN" secondAttribute="centerX" constant="-0.5" id="jVQ-i6-YUT"/>
                             <constraint firstItem="3Yv-dB-EFS" firstAttribute="top" secondItem="6RR-tE-wLX" secondAttribute="bottom" constant="128" id="juO-7q-pTI"/>
                             <constraint firstAttribute="trailing" secondItem="IbH-kt-YGA" secondAttribute="trailing" id="t0T-V1-sN1"/>
                             <constraint firstItem="5NX-qs-qYn" firstAttribute="top" secondItem="6RR-tE-wLX" secondAttribute="bottom" constant="14" id="uHl-th-RMd"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="avatarButton" destination="1nv-tp-TGt" id="wcc-0Y-xDv"/>
+                        <outlet property="avatarButton" destination="LMk-aL-SHN" id="WpY-Fz-3ED"/>
                         <outlet property="followingButton" destination="XvK-bX-B3j" id="Ol8-cQ-PyX"/>
                         <outlet property="videoPlayerContainerView" destination="3Yv-dB-EFS" id="gfu-Oi-KGb"/>
                         <outlet property="videoTitleLabel" destination="nVh-CQ-apC" id="env-DE-dXb"/>
