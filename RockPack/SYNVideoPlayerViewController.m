@@ -488,19 +488,14 @@
     if (!hasAnnotations) {
         return;
     }
-    NSLog(@"Inboarding .....");
     
-    NSLog(@"%lu", (unsigned long)[videoInstance.video.videoAnnotations count]);
-    
-#warning heerere
-    
-//    if (![[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultsShopMotionFirstTime]) {
-//        
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultsShopMotionFirstTime]) {
+        
                 SYNShopMotionOverlayViewController *overlay = [[SYNShopMotionOverlayViewController alloc] init];
                 [overlay addToViewController:self];
         
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kUserDefaultsShopMotionFirstTime];
-//    }
+    }
 
 }
 
