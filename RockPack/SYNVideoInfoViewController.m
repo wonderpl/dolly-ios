@@ -24,9 +24,9 @@
 #import "SYNVideoActionsBar.h"
 #import <SDWebImageManager.h>
 
-static const CGFloat ActionCellHeight = 70.0;
+static const CGFloat ActionCellHeight = 50.0;
 static const CGFloat ClickToMoreCellHeight = 60.0;
-static const CGFloat UpcomingVideosDividerHeight = 70.0;
+static const CGFloat UpcomingVideosDividerHeight = 40.0;
 
 @interface SYNVideoInfoViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIViewControllerTransitioningDelegate, SYNWebViewCellDelegate, SYNVideoActionsBarDelegate, SYNVideoClickToMoreCellDelegate>
 
@@ -152,7 +152,15 @@ static const CGFloat UpcomingVideosDividerHeight = 70.0;
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
 	BOOL hasDescription = ([self descriptionSectionIndex] != NSNotFound);
-	return (hasDescription ? 4 : 3);
+    BOOL hasClicktoMore = ([self clickToMoreSectionIndex] != NSNotFound);
+    
+    float numberOfSectons = (hasDescription ? 4 : 3);
+    
+    if (!hasClicktoMore) {
+        numberOfSectons--;
+    }
+    
+	return numberOfSectons;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -349,8 +357,11 @@ static const CGFloat UpcomingVideosDividerHeight = 70.0;
 #pragma mark - SYNWebViewCellDelegate
 
 - (void)webViewCellContentLoaded:(SYNWebViewCell *)cell {
+    
+    
+    NSLog(@"content height  ::::: %f", cell.contentHeight);
+
 	self.descriptionHeight = cell.contentHeight;
-	
 	[self.collectionView.collectionViewLayout invalidateLayout];
 }
 
@@ -365,7 +376,8 @@ static const CGFloat UpcomingVideosDividerHeight = 70.0;
 }
 
 - (NSInteger)clickToMoreSectionIndex {
-	return 1;
+    BOOL hasClickToMore = ![self.currentVideoInstance.video.linkTitle isEqualToString:@""];
+	return hasClickToMore ? 1 : NSNotFound;
 }
 
 - (NSInteger)descriptionSectionIndex {
@@ -374,7 +386,15 @@ static const CGFloat UpcomingVideosDividerHeight = 70.0;
 
 - (NSInteger)upcomingVideosSectionIndex {
 	BOOL hasDescription = ([self descriptionSectionIndex] != NSNotFound);
-	return (hasDescription ? 3 : 2);
+    BOOL hasClickToMore = ([self clickToMoreSectionIndex] != NSNotFound);
+    
+    float index = (hasDescription ? 3 : 2);
+    
+    if (!hasClickToMore) {
+        index --;
+    }
+    
+	return index;
 }
 
 @end

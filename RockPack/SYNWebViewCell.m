@@ -31,7 +31,17 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 }
 
 - (CGFloat)contentHeight {
-	return self.webView.scrollView.contentSize.height;
+    
+    //Hack to get the content size accurate
+    //The contentsize never decreased based on content, as it increased it would keep the larger value and never go down.
+    //Other hack would have been to re init the webview.
+    CGRect frame = self.webView.frame;
+    frame.size.height = 10;
+    self.webView.frame = frame;
+    frame.size.height = self.webView.scrollView.contentSize.height;
+    self.webView.frame = frame;
+
+	return self.webView.frame.size.height;
 }
 
 - (void)setContentHTML:(NSString *)contentHTML {
@@ -39,8 +49,7 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 	
 	NSURL *templateURL = [[NSBundle mainBundle] URLForResource:HTMLTemplateFilename withExtension:@"html"];
 	NSString *templateString = [NSString stringWithContentsOfURL:templateURL encoding:NSUTF8StringEncoding error:nil];
-	NSString *HTMLString = [templateString stringByReplacingOccurrencesOfString:@"%{DESCRIPTION}" withString:contentHTML];
-	
+	NSString *HTMLString = [templateString stringByReplacingOccurrencesOfString:@"%{DESCRIPTION}" withString:contentHTML];	
 	[self.webView loadHTMLString:HTMLString baseURL:nil];
 }
 
