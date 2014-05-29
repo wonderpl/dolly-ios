@@ -222,9 +222,6 @@
 
 - (void)setSelectedIndex:(NSInteger)selectedIndex {
 
-    if (_selectedIndex == selectedIndex) {
-        return;
-    }
 	_selectedIndex = selectedIndex;
 	
 	NSIndexPath *indexPath = [NSIndexPath indexPathForItem:self.selectedIndex inSection:0];
@@ -256,7 +253,6 @@
 		
 		SYNVideoPlayer *videoPlayer = [SYNVideoPlayer playerForVideoInstance:videoInstance];
 		videoPlayer.delegate = self;
-        self.videoInstance = videoInstance;
 		cell.videoPlayer = videoPlayer;
 	}
 	
