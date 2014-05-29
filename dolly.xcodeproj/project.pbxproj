@@ -263,6 +263,8 @@
 		4CF39EF418CDF4420077CDF0 /* SYNProfileSubscriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF39EF318CDF4420077CDF0 /* SYNProfileSubscriptionViewController.m */; };
 		4CF454E119113BCE0078473B /* searchbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CF454DF19113BCE0078473B /* searchbar.png */; };
 		4CF454E219113BCE0078473B /* searchbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CF454E019113BCE0078473B /* searchbar@2x.png */; };
+		7D034BB1193793EA00E4CBD1 /* InboardingShopMotionActionButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D034BAF193793EA00E4CBD1 /* InboardingShopMotionActionButton.png */; };
+		7D034BB2193793EA00E4CBD1 /* InboardingShopMotionActionButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D034BB0193793EA00E4CBD1 /* InboardingShopMotionActionButton@2x.png */; };
 		7D6A477119362E9800B998EA /* ShopMotionButtonActive.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D6A476F19362E9800B998EA /* ShopMotionButtonActive.png */; };
 		7D6A477219362E9800B998EA /* ShopMotionButtonActive@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D6A477019362E9800B998EA /* ShopMotionButtonActive@2x.png */; };
 		7D6D4F5A192A275C0084DC84 /* TabProfile@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D6D4F56192A275C0084DC84 /* TabProfile@2x~ipad.png */; };
@@ -1105,6 +1107,8 @@
 		4CF39EF318CDF4420077CDF0 /* SYNProfileSubscriptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNProfileSubscriptionViewController.m; sourceTree = "<group>"; };
 		4CF454DF19113BCE0078473B /* searchbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchbar.png; sourceTree = "<group>"; };
 		4CF454E019113BCE0078473B /* searchbar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchbar@2x.png"; sourceTree = "<group>"; };
+		7D034BAF193793EA00E4CBD1 /* InboardingShopMotionActionButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InboardingShopMotionActionButton.png; sourceTree = "<group>"; };
+		7D034BB0193793EA00E4CBD1 /* InboardingShopMotionActionButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "InboardingShopMotionActionButton@2x.png"; sourceTree = "<group>"; };
 		7D6A476F19362E9800B998EA /* ShopMotionButtonActive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ShopMotionButtonActive.png; sourceTree = "<group>"; };
 		7D6A477019362E9800B998EA /* ShopMotionButtonActive@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ShopMotionButtonActive@2x.png"; sourceTree = "<group>"; };
 		7D6D4F56192A275C0084DC84 /* TabProfile@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabProfile@2x~ipad.png"; sourceTree = "<group>"; };
@@ -3005,6 +3009,8 @@
 		4C5E861F18B65A8A00D0E937 /* In Boarding */ = {
 			isa = PBXGroup;
 			children = (
+				7D034BAF193793EA00E4CBD1 /* InboardingShopMotionActionButton.png */,
+				7D034BB0193793EA00E4CBD1 /* InboardingShopMotionActionButton@2x.png */,
 				F478E81E19378BD70015BF38 /* InboardingShopMotion.png */,
 				F478E81F19378BD70015BF38 /* InboardingShopMotion@2x.png */,
 				F46D8C5B192CF5E10048C486 /* InboardingSearchBox~ipad.png */,
@@ -4217,6 +4223,7 @@
 				1F458B2E17E1CE8E003C14AC /* AppIcon-Dev-76x76.png in Resources */,
 				4C5E860118B630A000D0E937 /* SYNOnBoardingOverlayViewController.xib in Resources */,
 				BED027D71834F3B500636659 /* SYNAccountSettingsViewController~iphone.xib in Resources */,
+				7D034BB2193793EA00E4CBD1 /* InboardingShopMotionActionButton@2x.png in Resources */,
 				F46D8C5E192CF5E10048C486 /* InboardingSearchBox@2x~ipad.png in Resources */,
 				BED027CC1834D4CC00636659 /* ButtonMoreFriends.png in Resources */,
 				4C102A3D1896D80E00C367E8 /* IconWonderAbout@2x.png in Resources */,
@@ -4238,6 +4245,7 @@
 				38A200AD1731607F00FB9F57 /* IconEmail~iphone.png in Resources */,
 				38A200AE1731607F00FB9F57 /* IconFullname@2x~iphone.png in Resources */,
 				4C22750E18F6D471009C5242 /* rightarrow@2x.png in Resources */,
+				7D034BB1193793EA00E4CBD1 /* InboardingShopMotionActionButton.png in Resources */,
 				38A200AF1731607F00FB9F57 /* IconFullname~iphone.png in Resources */,
 				38A200B01731607F00FB9F57 /* IconGender@2x~iphone.png in Resources */,
 				38A200B11731607F00FB9F57 /* IconGender~iphone.png in Resources */,
