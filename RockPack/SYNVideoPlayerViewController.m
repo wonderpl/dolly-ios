@@ -256,7 +256,7 @@
 		
 		SYNVideoPlayer *videoPlayer = [SYNVideoPlayer playerForVideoInstance:videoInstance];
 		videoPlayer.delegate = self;
-		
+        self.videoInstance = videoInstance;
 		cell.videoPlayer = videoPlayer;
 	}
 	
@@ -292,6 +292,10 @@
 }
 
 - (void)videoPlayerVideoViewed {
+    
+    NSLog(@"self.videoInstance.uniqueId : %@", self.videoInstance);
+    
+    
 	[appDelegate.oAuthNetworkEngine recordActivityForUserId:appDelegate.currentOAuth2Credentials.userId
 													 action:@"view"
 											videoInstanceId:self.videoInstance.uniqueId
