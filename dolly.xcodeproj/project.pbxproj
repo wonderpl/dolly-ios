@@ -676,6 +676,8 @@
 		F46D8C5A192CE7750048C486 /* SYNShareOverlayViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = F46D8C59192CE7750048C486 /* SYNShareOverlayViewController~iphone.xib */; };
 		F46D8C5D192CF5E10048C486 /* InboardingSearchBox~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F46D8C5B192CF5E10048C486 /* InboardingSearchBox~ipad.png */; };
 		F46D8C5E192CF5E10048C486 /* InboardingSearchBox@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F46D8C5C192CF5E10048C486 /* InboardingSearchBox@2x~ipad.png */; };
+		F478E82019378BD70015BF38 /* InboardingShopMotion.png in Resources */ = {isa = PBXBuildFile; fileRef = F478E81E19378BD70015BF38 /* InboardingShopMotion.png */; };
+		F478E82119378BD70015BF38 /* InboardingShopMotion@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F478E81F19378BD70015BF38 /* InboardingShopMotion@2x.png */; };
 		F48C1619192B663B00107B32 /* TabActivityNotification@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = F48C1617192B663B00107B32 /* TabActivityNotification@2x~iphone.png */; };
 		F48C161A192B663B00107B32 /* TabActivityNotification~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = F48C1618192B663B00107B32 /* TabActivityNotification~iphone.png */; };
 		F48C161D192B665000107B32 /* TabActivityNotification~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F48C161B192B665000107B32 /* TabActivityNotification~ipad.png */; };
@@ -1686,6 +1688,8 @@
 		F46D8C59192CE7750048C486 /* SYNShareOverlayViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNShareOverlayViewController~iphone.xib"; sourceTree = "<group>"; };
 		F46D8C5B192CF5E10048C486 /* InboardingSearchBox~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "InboardingSearchBox~ipad.png"; sourceTree = "<group>"; };
 		F46D8C5C192CF5E10048C486 /* InboardingSearchBox@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "InboardingSearchBox@2x~ipad.png"; sourceTree = "<group>"; };
+		F478E81E19378BD70015BF38 /* InboardingShopMotion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InboardingShopMotion.png; sourceTree = "<group>"; };
+		F478E81F19378BD70015BF38 /* InboardingShopMotion@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "InboardingShopMotion@2x.png"; sourceTree = "<group>"; };
 		F48C1617192B663B00107B32 /* TabActivityNotification@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabActivityNotification@2x~iphone.png"; sourceTree = "<group>"; };
 		F48C1618192B663B00107B32 /* TabActivityNotification~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabActivityNotification~iphone.png"; sourceTree = "<group>"; };
 		F48C161B192B665000107B32 /* TabActivityNotification~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabActivityNotification~ipad.png"; sourceTree = "<group>"; };
@@ -3001,6 +3005,8 @@
 		4C5E861F18B65A8A00D0E937 /* In Boarding */ = {
 			isa = PBXGroup;
 			children = (
+				F478E81E19378BD70015BF38 /* InboardingShopMotion.png */,
+				F478E81F19378BD70015BF38 /* InboardingShopMotion@2x.png */,
 				F46D8C5B192CF5E10048C486 /* InboardingSearchBox~ipad.png */,
 				F46D8C5C192CF5E10048C486 /* InboardingSearchBox@2x~ipad.png */,
 				F46D8C47192CC6A00048C486 /* inboardingSearchBox@2x~iphone.png */,
@@ -4098,6 +4104,7 @@
 				BE21EE9816FA28680067223B /* IconEmail@2x.png in Resources */,
 				BE21EE9916FA28680067223B /* IconFullname.png in Resources */,
 				BE21EE9A16FA28680067223B /* IconFullname@2x.png in Resources */,
+				F478E82019378BD70015BF38 /* InboardingShopMotion.png in Resources */,
 				99F300D1191BD7AF002C1D25 /* ShareFacebookButton.png in Resources */,
 				BE21EE9B16FA28680067223B /* IconGender.png in Resources */,
 				BE21EE9C16FA28680067223B /* IconGender@2x.png in Resources */,
@@ -4276,6 +4283,7 @@
 				993B1ADC191A962F008532D4 /* TabActivitySelected@2x~iphone.png in Resources */,
 				4C03237E18AE6FBD00E168EF /* SYNFriendCell.xib in Resources */,
 				4C03237C18AE6F9E00E168EF /* SYNFriendCell~iphone.xib in Resources */,
+				F478E82119378BD70015BF38 /* InboardingShopMotion@2x.png in Resources */,
 				0EF07868181EAE8300667417 /* ButtonMore@2x.png in Resources */,
 				1F458B2517E1CE8E003C14AC /* AppIcon-Dev-40x40@2x.png in Resources */,
 				BE57C022184358BA00C6444A /* SYNOnBoardingViewController~iphone.xib in Resources */,

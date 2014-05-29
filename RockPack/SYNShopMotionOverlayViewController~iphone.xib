@@ -26,8 +26,8 @@
                     <rect key="frame" x="124" y="126" width="73" height="80"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EyG-wa-kUk">
-                    <rect key="frame" x="217" y="344" width="76" height="96"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="InboardingShopMotion.png" translatesAutoresizingMaskIntoConstraints="NO" id="EyG-wa-kUk">
+                    <rect key="frame" x="209" y="338" width="21" height="25"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
             </subviews>
@@ -37,6 +37,7 @@
         </view>
     </objects>
     <resources>
+        <image name="InboardingShopMotion.png" width="21" height="25"/>
         <image name="ShopMotionActionButton.png" width="87" height="87"/>
     </resources>
 </document>

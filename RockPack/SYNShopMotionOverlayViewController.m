@@ -10,6 +10,12 @@
 
 @interface SYNShopMotionOverlayViewController ()
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
+@property (strong, nonatomic) IBOutlet UILabel *textLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *tabImage;
+@property (strong, nonatomic) IBOutlet UIImageView *shopMotionImage;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *tabButtonHorizontal;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *tabButtonHorizontalConstant;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *tabButtonVerticalConstant;
 
 @end
 
@@ -36,15 +42,23 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (void)viewWillLayoutSubviews
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    [super viewWillLayoutSubviews];
+    if (IS_IPAD) {
+        
+        if (UIDeviceOrientationIsLandscape([SYNDeviceManager.sharedInstance orientation])) {
+        
+            [self.tabButtonHorizontalConstant setConstant:221];
+			[self.tabButtonVerticalConstant setConstant:584];
+            
+        } else {
+            [self.tabButtonHorizontalConstant setConstant:91];
+			[self.tabButtonVerticalConstant setConstant:584];
+        }
+    }
 }
-*/
+
+
 
 @end

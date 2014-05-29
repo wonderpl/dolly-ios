@@ -6,6 +6,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNShopMotionOverlayViewController">
             <connections>
+                <outlet property="shopMotionImage" destination="ktM-eK-CbR" id="aXG-jW-PDe"/>
+                <outlet property="tabButtonHorizontalConstant" destination="Jmv-7e-evh" id="Vqy-SP-JYr"/>
+                <outlet property="tabButtonVerticalConstant" destination="PAF-Ab-Roc" id="mlk-lt-RWL"/>
+                <outlet property="tabImage" destination="mQA-TY-V2m" id="3qX-Mn-2Tz"/>
+                <outlet property="textLabel" destination="ggs-Sc-zXQ" id="BWm-DA-x5D"/>
                 <outlet property="titleLabel" destination="ggs-Sc-zXQ" id="qD1-XM-BbW"/>
                 <outlet property="view" destination="iN0-l3-epB" id="b1x-n2-IJh"/>
             </connections>
@@ -15,23 +20,44 @@
             <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ggs-Sc-zXQ">
-                    <rect key="frame" x="327" y="400" width="180" height="141"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ggs-Sc-zXQ">
+                    <rect key="frame" x="215" y="344" width="338" height="173"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="338" id="OzA-jI-T5G"/>
+                        <constraint firstAttribute="height" constant="173" id="rtR-h3-rRG"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ShopMotionActionButton.png" translatesAutoresizingMaskIntoConstraints="NO" id="mQA-TY-V2m">
-                    <rect key="frame" x="361" y="316" width="60" height="61"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ShopMotionActionButton.png" translatesAutoresizingMaskIntoConstraints="NO" id="mQA-TY-V2m">
+                    <rect key="frame" x="354" y="281" width="60" height="61"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="THn-Y7-SbG"/>
+                        <constraint firstAttribute="height" constant="61" id="lqM-Y5-hLg"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="InboardingShopMotion.png" translatesAutoresizingMaskIntoConstraints="NO" id="ktM-eK-CbR">
+                    <rect key="frame" x="656" y="584" width="21" height="25"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="centerY" secondItem="mQA-TY-V2m" secondAttribute="centerY" constant="200.5" id="3T5-hP-Hi5"/>
+                <constraint firstAttribute="centerX" secondItem="mQA-TY-V2m" secondAttribute="centerX" id="72c-JO-age"/>
+                <constraint firstItem="ggs-Sc-zXQ" firstAttribute="top" secondItem="mQA-TY-V2m" secondAttribute="bottom" constant="2" id="C5s-bk-eka"/>
+                <constraint firstAttribute="trailing" secondItem="ktM-eK-CbR" secondAttribute="trailing" constant="91" id="Jmv-7e-evh"/>
+                <constraint firstItem="ktM-eK-CbR" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="584" id="PAF-Ab-Roc"/>
+                <constraint firstItem="ggs-Sc-zXQ" firstAttribute="leading" secondItem="mQA-TY-V2m" secondAttribute="trailing" constant="-199" id="VJ6-PJ-I4u"/>
+            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
         </view>
     </objects>
     <resources>
+        <image name="InboardingShopMotion.png" width="21" height="25"/>
         <image name="ShopMotionActionButton.png" width="87" height="87"/>
     </resources>
 </document>
