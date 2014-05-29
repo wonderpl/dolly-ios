@@ -32,6 +32,8 @@
 #import "SYNVideoPlayerCell.h"
 #import "VideoAnnotation.h"
 #import "SYNVideoInfoViewController.h"
+#import "SYNShopMotionOverlayViewController.h"
+
 @import AVFoundation;
 @import MediaPlayer;
 @import MessageUI;
@@ -386,7 +388,6 @@
 - (void)videoInfoViewController:(SYNVideoInfoViewController *)viewController didSelectVideoAtIndex:(NSInteger)index {
 	VideoInstance *videoInstance = [self.model itemAtIndex:index];
 	[[SYNTrackingManager sharedManager] trackUpcomingVideoSelectedForTitle:videoInstance.title];
-
 	self.selectedIndex = index;
 }
 
@@ -449,6 +450,7 @@
 	
 	self.followingButton.selected = [[SYNActivityManager sharedInstance] isSubscribedToUserId:videoInstance.originator.uniqueId];
 	[self.followingButton invalidateIntrinsicContentSize];
+    [self showInboarding:videoInstance];
 }
 
 - (BOOL)handleRotationToOrientation:(UIDeviceOrientation)orientation {
@@ -477,6 +479,29 @@
 	} else {
 		self.hasTrackedAirPlayUse = NO;
 	}
+}
+
+- (void) showInboarding :(VideoInstance*) videoInstance {
+    
+    BOOL hasAnnotations = [videoInstance.video.videoAnnotations count] > 0;
+    
+    if (!hasAnnotations) {
+        return;
+    }
+    NSLog(@"Inboarding .....");
+    
+    NSLog(@"%lu", (unsigned long)[videoInstance.video.videoAnnotations count]);
+    
+#warning heerere
+    
+//    if (![[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultsShopMotionFirstTime]) {
+//        
+                SYNShopMotionOverlayViewController *overlay = [[SYNShopMotionOverlayViewController alloc] init];
+                [overlay addToViewController:self];
+        
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kUserDefaultsShopMotionFirstTime];
+//    }
+
 }
 
 #pragma mark - UIScrollViewDelegate

@@ -269,6 +269,7 @@ static NSString* kPopularGenreUniqueId = @"1979";
 #define kUserDefaultsFeedCount @"UD_Feed_Count"
 #define kUserDefaultsShareFirstTime @"UD_Share_First_Time"
 #define kUserDefaultsAddToCollectionFirstTime @"UD_Add_To_Collection_First_Time"
+#define kUserDefaultsShopMotionFirstTime @"UD_Shop_Motion_First_Time"
 
 
 
