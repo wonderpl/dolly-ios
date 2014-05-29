@@ -1232,11 +1232,6 @@
     apiString = [NSString stringWithFormat: @"%@?locale=%@", apiString, self.localeString];
     
     NSDictionary *params = nil;
-    
-    
-    NSLog(@"action %@", action);
-
-    NSLog(@"videoInstanceId %@", videoInstanceId);
 
     if (action && videoInstanceId)
     {
