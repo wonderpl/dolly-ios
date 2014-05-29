@@ -63,6 +63,7 @@ static const CGFloat CloudTiming = 1.2f;
 @property (strong, nonatomic) IBOutlet UILabel *fashion;
 @property (strong, nonatomic) IBOutlet UILabel *film;
 @property (strong, nonatomic) IBOutlet UILabel *learnFrom;
+@property (strong, nonatomic) IBOutlet UILabel *experts;
 
 @end
 
@@ -105,7 +106,9 @@ static const CGFloat CloudTiming = 1.2f;
     [self.wellness setFont:[UIFont regularCustomFontOfSize:24]];
     [self.fashion setFont:[UIFont regularCustomFontOfSize:24]];
     [self.film setFont:[UIFont regularCustomFontOfSize:24]];
-    [self.learnFrom setFont:[UIFont regularCustomFontOfSize:24]];
+    [self.learnFrom setFont:[UIFont regularCustomFontOfSize:26]];
+    [self.experts setFont:[UIFont regularCustomFontOfSize:24]];
+
 
     
     [self.signupButton setTitle:@"Sign up" forState:UIControlStateNormal];
@@ -315,6 +318,7 @@ static const CGFloat CloudTiming = 1.2f;
 	
             [UIView animateWithDuration:CloudTiming delay:0.7 options:UIViewAnimationCurveEaseIn animations:^{
             	self.news.alpha = 0.0;
+
             } completion:getNextAnimation()];
         }];
 
@@ -322,6 +326,8 @@ static const CGFloat CloudTiming = 1.2f;
         [animationBlocks addObject:^(BOOL finished){;
             
             [UIView animateWithDuration:CloudTiming delay:0.2 options:UIViewAnimationCurveEaseIn animations:^{
+                self.experts.alpha = 1.0;
+
             	self.film.alpha = 0.0;
             } completion:getNextAnimation()];
         }];
@@ -338,14 +344,15 @@ static const CGFloat CloudTiming = 1.2f;
 
         [animationBlocks addObject:^(BOOL finished){;
         	[UIView animateWithDuration:1.5 animations:^{
-                self.learnFrom.alpha = 0.0;
-                self.messageView4.alpha = 1.0;
+                self.experts.alpha = 0.0;
             } completion:getNextAnimation()];
         }];
 
+
+        
         [animationBlocks addObject:^(BOOL finished){;
             
-            [UIView animateWithDuration:2.5 animations:^{
+            [UIView animateKeyframesWithDuration:2.0 delay:1.0 options:UIViewKeyframeAnimationOptionLayoutSubviews animations:^{
                 self.messageView4.alpha = 1.0;
             } completion:getNextAnimation()];
 
