@@ -55,16 +55,16 @@
                     </connections>
                 </button>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pXu-bh-Z99">
-                    <rect key="frame" x="180" y="0.0" width="40" height="40"/>
+                    <rect key="frame" x="188" y="5" width="21" height="25"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="40" id="FAT-NS-4vK"/>
-                        <constraint firstAttribute="height" constant="40" id="YeT-WF-KV5"/>
+                        <constraint firstAttribute="width" constant="21" id="FAT-NS-4vK"/>
+                        <constraint firstAttribute="height" constant="25" id="YeT-WF-KV5"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                     <inset key="titleEdgeInsets" minX="-20" minY="4" maxX="0.0" maxY="0.0"/>
                     <inset key="imageEdgeInsets" minX="6" minY="-4" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="0">
+                    <state key="normal" title="       0" backgroundImage="ShopMotionButton.png">
                         <color key="titleColor" red="0.46666666666666667" green="0.46666666666666667" blue="0.50980392156862742" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -73,7 +73,7 @@
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ixh-ks-J92" userLabel="Favourited By Container">
-                    <rect key="frame" x="44" y="8" width="128" height="24"/>
+                    <rect key="frame" x="44" y="8" width="125" height="24"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     <constraints>
@@ -83,13 +83,13 @@
             </subviews>
             <constraints>
                 <constraint firstItem="H5R-DI-TgM" firstAttribute="leading" secondItem="RuC-0K-OOM" secondAttribute="leading" id="9rb-kp-IZc"/>
-                <constraint firstAttribute="centerY" secondItem="pXu-bh-Z99" secondAttribute="centerY" id="K1L-o6-O1o"/>
-                <constraint firstItem="gvq-tZ-yxZ" firstAttribute="leading" secondItem="pXu-bh-Z99" secondAttribute="trailing" id="RWm-Ye-tqe"/>
+                <constraint firstAttribute="centerY" secondItem="pXu-bh-Z99" secondAttribute="centerY" constant="3" id="K1L-o6-O1o"/>
+                <constraint firstItem="gvq-tZ-yxZ" firstAttribute="leading" secondItem="pXu-bh-Z99" secondAttribute="trailing" constant="11" id="RWm-Ye-tqe"/>
                 <constraint firstItem="Zsz-gD-1Fi" firstAttribute="leading" secondItem="gvq-tZ-yxZ" secondAttribute="trailing" id="V0D-gJ-pPP"/>
                 <constraint firstItem="Ixh-ks-J92" firstAttribute="leading" secondItem="H5R-DI-TgM" secondAttribute="trailing" constant="4" id="aEb-vA-WPh"/>
                 <constraint firstAttribute="centerY" secondItem="gvq-tZ-yxZ" secondAttribute="centerY" id="dDz-FF-wOa"/>
                 <constraint firstAttribute="centerY" secondItem="Zsz-gD-1Fi" secondAttribute="centerY" id="iD5-Fd-Myo"/>
-                <constraint firstItem="pXu-bh-Z99" firstAttribute="leading" secondItem="Ixh-ks-J92" secondAttribute="trailing" constant="8" id="mBX-gS-4x6"/>
+                <constraint firstItem="pXu-bh-Z99" firstAttribute="leading" secondItem="Ixh-ks-J92" secondAttribute="trailing" constant="19" id="mBX-gS-4x6"/>
                 <constraint firstAttribute="centerY" secondItem="H5R-DI-TgM" secondAttribute="centerY" id="ql9-oP-LiQ"/>
                 <constraint firstAttribute="centerY" secondItem="Ixh-ks-J92" secondAttribute="centerY" id="vN2-Jq-grm"/>
                 <constraint firstAttribute="trailing" secondItem="Zsz-gD-1Fi" secondAttribute="trailing" id="xGv-rq-Cwi"/>
@@ -107,5 +107,6 @@
         <image name="FavouriteButton.png" width="24" height="22"/>
         <image name="FavouriteButtonSelected.png" width="24" height="22"/>
         <image name="ShareButton.png" width="19" height="27"/>
+        <image name="ShopMotionButton.png" width="21" height="25"/>
     </resources>
 </document>

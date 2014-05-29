@@ -87,40 +87,40 @@ static const CGFloat UpcomingVideosDividerHeight = 70.0;
 	
 	UIButton *button = self.videoActionsBar.shopButton;
     [button setTitle:[NSString stringWithFormat:@"       %@", @([self.annotations count])] forState:UIControlStateNormal];
+    [button setBackgroundImage: [UIImage new] forState:UIControlStateNormal];
 
 	if (isFirstAnnotation) {
-		button.hidden = NO;
         NSMutableArray *images = [[NSMutableArray alloc] init];
         
         NSString *shopMoitonString = @"ShopMotion";
         float numberOfFrames = 15;
-    
-    for (int i = 0; i < 21; i++) {
-        [images addObject:[UIImage imageNamed: [NSString stringWithFormat:@"%@%d", shopMoitonString, 0]]];
-    }
-
+        
+        for (int i = 0; i < 21; i++) {
+            [images addObject:[UIImage imageNamed: [NSString stringWithFormat:@"%@%d", shopMoitonString, 0]]];
+        }
+        
         for (int i = 0; i < numberOfFrames; i++) {
             [images addObject:[UIImage imageNamed: [NSString stringWithFormat:@"%@%d", shopMoitonString, i]]];
         }
         
         button.hidden = NO;
-
+        
         
         float totalAnimationTime = 1.45;
-        UIImageView *animationImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10.5, 5.5, 21, 25)];
+        UIImageView *animationImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 21, 25)];
         animationImageView.animationImages = images;
         animationImageView.animationDuration = totalAnimationTime;
-
-
-            [button addSubview:animationImageView];
-            [animationImageView startAnimating];
-    
+        
+        
+        [button addSubview:animationImageView];
+        [animationImageView startAnimating];
+        
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.45 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [animationImageView removeFromSuperview];
-            [button setImage:[UIImage imageNamed:@"ShopMotion0"] forState:UIControlStateNormal];
+            [button setBackgroundImage: [UIImage imageNamed:@"ShopMotionButton"] forState:UIControlStateNormal];
             
-            [button setTitle:[NSString stringWithFormat:@"%@", @([self.annotations count])] forState:UIControlStateNormal];
-
+            [button setTitle:[NSString stringWithFormat:@"       %@", @([self.annotations count])] forState:UIControlStateNormal];
+            
         });
 	}
 	return YES;
@@ -171,7 +171,10 @@ static const CGFloat UpcomingVideosDividerHeight = 70.0;
 		cell.actionsBar.favouritedBy = [self.currentVideoInstance.starrers array];
 		cell.actionsBar.favouriteButton.selected = self.currentVideoInstance.starredByUserValue;
 		cell.actionsBar.delegate = self;
-		cell.actionsBar.shopButton.hidden = ([self.annotations count] == 0);
+        
+        BOOL isShopMotionVideo = [self.currentVideoInstance.video.videoAnnotations count] != 0;
+        
+		cell.actionsBar.shopButton.hidden = !isShopMotionVideo;
 		
 		self.videoActionsBar = cell.actionsBar;
 		
