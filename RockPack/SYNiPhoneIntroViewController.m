@@ -203,25 +203,27 @@ static const CGFloat CloudTiming = 1.2f;
         }];
         
         [animationBlocks addObject:^(BOOL finished){;
-            [UIView animateWithDuration:0.7 animations:^{
+            [UIView animateWithDuration:2.0 animations:^{
                 self.messageView.alpha = 1.0;
             } completion: getNextAnimation()];
-        }];
-        
-        [animationBlocks addObject:^(BOOL finished){;
-            [UIView animateWithDuration:1.0 animations:^{
-                self.messageView.alpha = 1.0;
-            } completion: getNextAnimation()];
+            [UIView animateWithDuration:4.0 animations:^{
+                
+                self.messageView.transform = CGAffineTransformMakeScale(1.15, 1.15);
+                
+            } completion: nil];
+
         }];
 
+        
         [animationBlocks addObject:^(BOOL finished){;
             
             [UIView animateWithDuration:CloudTiming delay:1.8 options:UIViewAnimationCurveEaseInOut animations:^{
                 self.culture.alpha = 1.0;
-            } completion:getNextAnimation()];
+                
+                
+            } completion:nil];
             
-            
-            [UIView animateWithDuration:1.5 delay:TransitionPause options:UIViewAnimationCurveEaseInOut animations:^{
+            [UIView animateWithDuration:1.5 delay:0.5 options:UIViewAnimationCurveEaseInOut animations:^{
                 CGRect frame = self.backgroundFood.frame;
                 
                 frame.size = CGSizeMake(frame.size.width*2, frame.size.height*2);
@@ -229,6 +231,8 @@ static const CGFloat CloudTiming = 1.2f;
                 
                 self.backgroundFood.frame = frame;
                 self.backgroundFood.alpha = 0.0;
+                
+                
                 self.messageView.alpha = 0.0;
 
             } completion:getNextAnimation()];
@@ -237,13 +241,13 @@ static const CGFloat CloudTiming = 1.2f;
         
         [animationBlocks addObject:^(BOOL finished){;
             
-            [UIView animateWithDuration:CloudTiming animations:^{
+            [UIView animateWithDuration:1.3 animations:^{
                 self.mind.alpha = 1.0;
             } completion: getNextAnimation()];
         }];
 
         [animationBlocks addObject:^(BOOL finished){;
-            [UIView animateWithDuration:CloudTiming animations:^{
+            [UIView animateWithDuration:1.9 animations:^{
                 self.tech.alpha = 1.0;
             } completion: getNextAnimation()];
         }];
@@ -263,22 +267,21 @@ static const CGFloat CloudTiming = 1.2f;
         
         [animationBlocks addObject:^(BOOL finished){;
             
-            [UIView animateWithDuration:CloudTiming animations:^{
+            [UIView animateWithDuration:0.7 animations:^{
                 self.mind.alpha = 0.0;
-            } completion: getNextAnimation()];
+            } completion: nil];
             
-            
-            [UIView animateWithDuration:CloudTiming delay:0.20 options:UIViewAnimationCurveEaseIn animations:^{
+            [UIView animateWithDuration:0.5 delay:0.4 options:UIViewAnimationCurveEaseIn animations:^{
                 self.news.alpha = 1.0;
                 
-            } completion:nil];
+            } completion:getNextAnimation()];
             
         }];
 
         [animationBlocks addObject:^(BOOL finished){;
             
-//            [UIView animateWithDuration:CloudTiming delay:1.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-//            } completion:nil];
+            [UIView animateWithDuration:0.5 delay:0.1 options:UIViewAnimationOptionCurveEaseIn animations:^{
+            } completion:nil];
 
             [UIView animateWithDuration:CloudTiming animations:^{
                 self.tech.alpha = 0.0;
@@ -304,162 +307,67 @@ static const CGFloat CloudTiming = 1.2f;
         }];
         
         [animationBlocks addObject:^(BOOL finished){;
-            [UIView animateWithDuration:1.5 delay:0.5 options:UIViewAnimationCurveLinear animations:^{
+            [UIView animateWithDuration:1.0 delay:0.5 options:UIViewAnimationCurveLinear animations:^{
                 self.wellness.alpha = 0.0;
             } completion:nil];
             
-            [UIView animateWithDuration:1.5 delay:1.0 options:UIViewAnimationCurveLinear animations:^{
+            [UIView animateWithDuration:1.5 delay:0.25 options:UIViewAnimationCurveLinear animations:^{
                 self.learnFrom.alpha = 1.0;
             } completion:getNextAnimation()];
             
         }];
 
         [animationBlocks addObject:^(BOOL finished){;
-	
-            [UIView animateWithDuration:CloudTiming delay:0.7 options:UIViewAnimationCurveEaseIn animations:^{
-            	self.news.alpha = 0.0;
 
-            } completion:getNextAnimation()];
-        }];
-
-
-        [animationBlocks addObject:^(BOOL finished){;
             
-            [UIView animateWithDuration:CloudTiming delay:0.2 options:UIViewAnimationCurveEaseIn animations:^{
+            [UIView animateWithDuration:0.5 delay:0.8 options:UIViewAnimationCurveEaseIn animations:^{
+                
+            	self.film.alpha = 0.0;
+            } completion:nil];
+
+            
+            [UIView animateWithDuration:0.8 delay:0.2 options:UIViewAnimationCurveEaseIn animations:^{
+            	self.news.alpha = 0.0;
                 self.experts.alpha = 1.0;
 
-            	self.film.alpha = 0.0;
             } completion:getNextAnimation()];
         }];
-
         
         [animationBlocks addObject:^(BOOL finished){;
 
-            [UIView animateKeyframesWithDuration:2.0 delay:0.5 options:UIViewKeyframeAnimationOptionCalculationModeLinear animations:^{
+            [UIView animateKeyframesWithDuration:1.3 delay:1.0 options:UIViewKeyframeAnimationOptionCalculationModeLinear animations:^{
                 self.learnFrom.alpha = 0.0;
                 self.backgroundBeach.alpha = 0.0;
+                self.experts.alpha = 0.0;
 
             } completion:getNextAnimation ()];
         }];
 
-        [animationBlocks addObject:^(BOOL finished){;
-        	[UIView animateWithDuration:1.5 animations:^{
-                self.experts.alpha = 0.0;
-            } completion:getNextAnimation()];
-        }];
-
-
         
         [animationBlocks addObject:^(BOOL finished){;
             
-            [UIView animateKeyframesWithDuration:2.0 delay:1.0 options:UIViewKeyframeAnimationOptionLayoutSubviews animations:^{
+            [UIView animateKeyframesWithDuration:1.0 delay:0.2 options:UIViewKeyframeAnimationOptionLayoutSubviews animations:^{
                 self.messageView4.alpha = 1.0;
             } completion:getNextAnimation()];
-
+            
         }];
 
+
         [animationBlocks addObject:^(BOOL finished){;
-            [UIView animateKeyframesWithDuration:1.0 delay:1.0 options:UIViewKeyframeAnimationOptionLayoutSubviews animations:^{
+            
+            [UIView animateKeyframesWithDuration:1.0 delay:1.4 options:UIViewKeyframeAnimationOptionLayoutSubviews animations:^{
                 self.messageView4.alpha = 0.0;
-            } completion:getNextAnimation()];
-        }];
-
-        [animationBlocks addObject:^(BOOL finished){;
-            [UIView animateKeyframesWithDuration:2.0 delay:3.0 options:UIViewKeyframeAnimationOptionLayoutSubviews animations:^{
-                
-                self.messageView5.alpha = 1.0;
             } completion:getNextAnimation()];
             
         }];
-//
-//
-//        [UIView animateWithDuration:1.5 delay:TransitionPause options:UIViewAnimationCurveEaseInOut animations:^{
-//            CGRect frame = self.backgroundBeach.frame;
-//            
-//            frame.size = CGSizeMake(frame.size.width*2, frame.size.height*2);
-//            frame.origin = CGPointMake(-frame.size.width/3, -frame.size.height/3);
-//            
-//            self.backgroundBeach.frame = frame;
-//            self.backgroundBeach.alpha = 0.0;
-//            
-//        } completion:getNextAnimation()];
 
-        
-//        [animationBlocks addObject:^(BOOL finished){;
-//            
-//            CGRect frame = self.backgroundChurch.frame;
-//            frame.origin.x -= self.backgroundChurch.frame.size.width/2;
-//            frame.origin.y -= self.backgroundChurch.frame.size.height/2;
-//            
-//            self.backgroundChurch.frame = frame;
-//                        
-//            self.logoImageView.translatesAutoresizingMaskIntoConstraints = YES;
-//            self.subtitleLabel.translatesAutoresizingMaskIntoConstraints = YES;
-//            self.backgroundChurch.translatesAutoresizingMaskIntoConstraints = YES;
-//            self.messageView2.translatesAutoresizingMaskIntoConstraints = YES;
-//            
-//            [UIView animateWithDuration:1.0 delay:1.5 options:UIViewAnimationCurveEaseInOut animations:^{
-//                self.backgroundChurch.alpha = 0.0;
-//                
-//                self.messageView2.alpha = 0.0;
-//                self.messageView3.alpha = 1.0;
-//                
-//            } completion:getNextAnimation()];
-//            
-//        }];
-//        
-//
-//        [animationBlocks addObject:^(BOOL finished){;
-//            [UIView animateWithDuration:0.4 animations:^{
-//                self.messageView3.alpha = 1.0;
-//            } completion: getNextAnimation()];
-//        }];
-//
-//        [animationBlocks addObject:^(BOOL finished){;
-//            
-//            
-//            [UIView animateWithDuration:1.5 delay:2.0 options:UIViewAnimationCurveEaseInOut animations:^{
-//                CGRect frame = self.messageView3.frame;
-//                
-//                frame.origin.x -= 30;
-//                self.messageView3.frame = frame;
-//                self.messageView3.alpha = 0.0;
-//                frame = self.backgroundBeach.frame;
-//                frame.origin.x -= 30;
-//                self.backgroundBeach.frame = frame;
-//                self.backgroundBeach.alpha = 0.0;
-//                self.messageView4.alpha = 1.0;
-//
-//            } completion:getNextAnimation()];
-//            
-//        }];
-//
-//        
-//        [animationBlocks addObject:^(BOOL finished){;
-//
-//            self.backgroundMountain.translatesAutoresizingMaskIntoConstraints = YES;
-//            self.backgroundMountain.layer.anchorPoint = CGPointMake(1.0, 0.0);
-//            
-//            CGRect frame = self.backgroundMountain.frame;
-//            frame.origin.x += self.backgroundMountain.frame.size.width/2;
-//            frame.origin.y -= self.backgroundMountain.frame.size.height/2;
-//            
-//            self.backgroundMountain.frame = frame;
-//            
-//            [UIView animateWithDuration:1.5 delay:2.0 options:UIViewAnimationCurveEaseInOut animations:^{
-//                
-//                self.backgroundMountain.layer.transform = CATransform3DMakeRotation(M_PI/2, 0.0, 1.0, 0.0);
-//                self.backgroundMountain.alpha = 0.0;
-//                self.messageView4.alpha = 0.0;
-//                self.messageView5.alpha = 1.0;
-//                
-//            } completion:getNextAnimation()];
-//            
-//        }];
+        [animationBlocks addObject:^(BOOL finished){;
+            [UIView animateKeyframesWithDuration:2.0 delay:0.0 options:UIViewKeyframeAnimationOptionLayoutSubviews animations:^{
+                self.messageView5.alpha = 1.0;
+            } completion:getNextAnimation()];
+        }];
         
         getNextAnimation()(YES);
-
-    
     
     });
 
