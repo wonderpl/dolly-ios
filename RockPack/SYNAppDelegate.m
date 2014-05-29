@@ -146,10 +146,14 @@
     SYNOAuth2Credential *credential = [SYNOAuth2Credential credentialFromKeychainForService: [[NSBundle mainBundle] bundleIdentifier]
                                                                                     account: self.currentUser.uniqueId];
 	
-	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"Starting app in state: %d", application.applicationState]];
-	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"Protected data available: %d", application.protectedDataAvailable]];
-	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"Current username: (%@) %@", self.currentUser.uniqueId, self.currentUser.username]];
-	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"Credential: %@", credential]];
+	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"didFinishLaunchingWithOptions: Starting app in state: %d",
+                                         application.applicationState]];
+	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"didFinishLaunchingWithOptions: Protected data available: %d",
+                                         application.protectedDataAvailable]];
+	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"didFinishLaunchingWithOptions: Current username: (%@) %@",
+                                         self.currentUser.uniqueId, self.currentUser.username]];
+	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"didFinishLaunchingWithOptions: Credential: %@",
+                                         credential]];
 	
     if (self.currentUser && credential)
     {
@@ -159,6 +163,7 @@
         // If we have a user and a refresh token... //
         if ([self.currentOAuth2Credentials hasExpired])
         {
+			[[SYNRemoteLogger sharedLogger] log:@"didFinishLaunchingWithOptions: Token refresh"];
             [self refreshExpiredTokenOnStartup];
         }
         else // we have an access token //
@@ -171,20 +176,23 @@
             
             self.window.rootViewController = [self createAndReturnRootViewController];
             
+			[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"didFinishLaunchingWithOptions: Controller with credentials: %@",
+                                                 NSStringFromClass([self.window.rootViewController class])]];
         }
     }
     else
     {
-		[[SYNRemoteLogger sharedLogger] log:@"Showing login view controller"];
-		
         if ((self.currentUser || credential) && application.protectedDataAvailable)
         {
-			[[SYNRemoteLogger sharedLogger] log:@"Logging the user out"];
+			[[SYNRemoteLogger sharedLogger] log:@"didFinishLaunchingWithOptions: Logging the user out"];
 			
             [self logout];
         }
         
         self.window.rootViewController = [self createAndReturnLoginViewController];
+
+        [[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"didFinishLaunchingWithOptions: Controller without credentials: %@",
+                                             NSStringFromClass([self.window.rootViewController class])]];
     }
     
 #ifdef ENABLE_USER_RATINGS
@@ -206,8 +214,6 @@
 }
 
 - (void)applicationProtectedDataDidBecomeAvailable:(UIApplication *)application {
-	[[SYNRemoteLogger sharedLogger] log:@"Protected data now available"];
-	
 	// Don't use the currentCredentials method as this will assert if there is a vaild user,but no credentials, preventing completion of the logic below
     // inlduding logout, which is the correct flow
     // This should realistically never happen (except after swapping between dev and prod before the fix to the keychain account (before there was only one
@@ -215,21 +221,20 @@
     SYNOAuth2Credential *credential = [SYNOAuth2Credential credentialFromKeychainForService: [[NSBundle mainBundle] bundleIdentifier]
                                                                                     account: self.currentUser.uniqueId];
 	
-	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"AA Starting app in state: %d", application.applicationState]];
-	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"AA Protected data available: %d", application.protectedDataAvailable]];
-	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"AA Current username: (%@) %@", self.currentUser.uniqueId, self.currentUser.username]];
-	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"AA Credential: %@", credential]];
+	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"applicationProtectedDataDidBecomeAvailable: Starting app in state: %d", application.applicationState]];
+	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"applicationProtectedDataDidBecomeAvailable: Protected data available: %d", application.protectedDataAvailable]];
+	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"applicationProtectedDataDidBecomeAvailable: Current username: (%@) %@", self.currentUser.uniqueId, self.currentUser.username]];
+	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"applicationProtectedDataDidBecomeAvailable: Credential: %@", credential]];
 	
     if (self.currentUser && credential)
     {
-		[[SYNRemoteLogger sharedLogger] log:@"Showing view controllers"];
-		
 		[[SYNTrackingManager sharedManager] setAgeDimensionFromBirthDate:self.currentUser.dateOfBirth];
 		[[SYNTrackingManager sharedManager] setGenderDimension:self.currentUser.genderValue];
 		
         // If we have a user and a refresh token... //
         if ([self.currentOAuth2Credentials hasExpired])
         {
+			[[SYNRemoteLogger sharedLogger] log:@"applicationProtectedDataDidBecomeAvailable: Token refresh"];
             [self refreshExpiredTokenOnStartup];
         }
         else // we have an access token //
@@ -242,12 +247,12 @@
             
             self.window.rootViewController = [self createAndReturnRootViewController];
             
+			[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"applicationProtectedDataDidBecomeAvailable: Controller with credentials: %@",
+                                                 NSStringFromClass([self.window.rootViewController class])]];
         }
     }
     else
     {
-		[[SYNRemoteLogger sharedLogger] log:@"AA Showing login view controller, not logging out"];
-		
 //        if ((self.currentUser || credential) && application.protectedDataAvailable)
 //        {
 //			[[SYNRemoteLogger sharedLogger] log:@"AA Logging the user out"];
@@ -256,6 +261,8 @@
 //        }
 //        
         self.window.rootViewController = [self createAndReturnLoginViewController];
+        [[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"applicationProtectedDataDidBecomeAvailable: Controller without credentials: %@",
+                                             NSStringFromClass([self.window.rootViewController class])]];
     }
 }
 
@@ -537,11 +544,16 @@
     SYNOAuth2Credential *credential = [SYNOAuth2Credential credentialFromKeychainForService: [[NSBundle mainBundle] bundleIdentifier]
                                                                                     account: self.currentUser.uniqueId];
 	
-	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"ACTIVE Starting app in state: %d", application.applicationState]];
-	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"ACTIVE Protected data available: %d", application.protectedDataAvailable]];
-	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"ACTIVE Current username: (%@) %@", self.currentUser.uniqueId, self.currentUser.username]];
-	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"ACTIVE Credential: %@", credential]];
-	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"ACTIVE Current view controller: %@", NSStringFromClass([self.window.rootViewController class])]];
+	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"applicationDidBecomeActive: Starting app in state: %d",
+                                         application.applicationState]];
+	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"applicationDidBecomeActive: Protected data available: %d",
+                                         application.protectedDataAvailable]];
+	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"applicationDidBecomeActive: Current username: (%@) %@",
+                                         self.currentUser.uniqueId, self.currentUser.username]];
+	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"applicationDidBecomeActive: Credential: %@",
+                                         credential]];
+	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"applicationDidBecomeActive: Current view controller: %@",
+                                         NSStringFromClass([self.window.rootViewController class])]];
 	
 }
 
@@ -1437,8 +1449,9 @@
 
 - (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
 	
-	[[SYNRemoteLogger sharedLogger] log:@"Performing fetch"];
-	
+    [[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"performFetchWithCompletionHandler: start: %@",
+                                         self.currentOAuth2Credentials.userId]];
+
 	if (!self.currentOAuth2Credentials.userId) {
 		completionHandler(UIBackgroundFetchResultNoData);
 		return;
@@ -1460,10 +1473,14 @@
 			[self.navigationManager switchToFeed];
 		}
 		
+        [[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"performFetchWithCompletionHandler: end: %d %d",
+                                             success, hasChanged]];
+
 		// Wait a second to give the images a chance to download
 		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 			
-			[[SYNRemoteLogger sharedLogger] log:@"Completed fetch"];
+            [[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"performFetchWithCompletionHandler: callback: %lu",
+                                                 result]];
 			
 			completionHandler(result);
 		});

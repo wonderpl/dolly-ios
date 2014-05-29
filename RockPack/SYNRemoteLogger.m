@@ -15,7 +15,7 @@ static NSString *const URLPrefix = @"http://dev.rockpack.com/log?message=%@";
 
 @property (nonatomic, strong) NSURLSession *session;
 
-@property (nonatomic, strong) NSUUID *uuid;
+@property (nonatomic, strong) NSString *uuid;
 
 @end
 
@@ -33,14 +33,13 @@ static NSString *const URLPrefix = @"http://dev.rockpack.com/log?message=%@";
 - (id)init {
 	if (self = [super init]) {
 		self.session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]];
-		
-		self.uuid = [NSUUID UUID];
+		self.uuid = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
 	}
 	return self;
 }
 
 - (void)log:(NSString *)message {
-	NSString *fullMessage = [NSString stringWithFormat:@"%@ (%f) - %@", [self.uuid UUIDString], [[NSDate date] timeIntervalSince1970], message];
+	NSString *fullMessage = [NSString stringWithFormat:@"%@ (%f) - %@", self.uuid, [[NSDate date] timeIntervalSince1970], message];
 	
 	NSString *URLString = [NSString stringWithFormat:URLPrefix, [fullMessage urlEncodeUsingEncoding:NSUTF8StringEncoding]];
 	NSURL *URL = [NSURL URLWithString:URLString];
