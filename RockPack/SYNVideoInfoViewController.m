@@ -350,7 +350,11 @@ static const CGFloat UpcomingVideosDividerHeight = 40.0;
 	NSURL *linkURL = [NSURL URLWithString:video.linkURL];
 	
 	UIViewController *viewController = [SYNWebViewController webViewControllerForURL:linkURL withTrackingName:@"Click to more"];
+
 	[self presentViewController:viewController animated:YES completion:nil];
+
+    [[SYNTrackingManager sharedManager] trackClickToMoreWithTitle:self.currentVideoInstance.title
+                                                              URL:video.linkURL];
 }
 
 #pragma mark - SYNWebViewCellDelegate

@@ -12,6 +12,7 @@
 #import <GAI.h>
 #import <GAIFields.h>
 #import <GAIDictionaryBuilder.h>
+#import <FacebookSDK/FacebookSDK.h>
 #import <Reachability.h>
 @import CoreTelephony;
 
@@ -83,6 +84,9 @@ static const NSInteger TrackingDimensionConnection = 6;
 - (void)trackClickToMoreWithTitle:(NSString *)title URL:(NSString *)URL {
 	NSString *label = [NSString stringWithFormat:@"%@ - %@", title, URL];
 	[self trackEventWithCategory:UIActionCategory action:@"videoClickToMoreClick" label:label value:nil];
+    [FBAppEvents logEvent:FBAppEventNameInitiatedCheckout
+               parameters:@{FBAppEventParameterNameContentType: @"more",
+                            FBAppEventParameterNameContentID: label}];
 }
 
 - (void)trackVideoAddFromScreenName:(NSString *)screenName {
@@ -120,6 +124,8 @@ static const NSInteger TrackingDimensionConnection = 6;
 
 - (void)trackUserRegistrationFromOrigin:(NSString *)origin {
 	[self trackEventWithCategory:GoalCategory action:@"userRegistration" label:origin value:nil];
+    [FBAppEvents logEvent:FBAppEventNameCompletedRegistration
+               parameters:@{FBAppEventParameterNameRegistrationMethod: origin}];
 }
 
 - (void)trackVideoOriginatorPressed:(NSString *)name {
@@ -197,9 +203,13 @@ static const NSInteger TrackingDimensionConnection = 6;
 - (void)trackShopMotionAnnotationPressForTitle:(NSString *)title {
 	[self trackEventWithCategory:UIActionCategory action:@"videoTouchPointClick" label:title value:nil];
 }
+
 - (void)trackShopMotionBagPressForTitle:(NSString *)title URL:(NSURL *)URL {
 	NSString *label = [NSString stringWithFormat:@"%@ - %@", title, URL];
 	[self trackEventWithCategory:UIActionCategory action:@"videoShopMotionBagClick" label:label value:nil];
+    [FBAppEvents logEvent:FBAppEventNameInitiatedCheckout
+               parameters:@{FBAppEventParameterNameContentType: @"bag",
+                            FBAppEventParameterNameContentID: label}];
 }
 
 - (void)trackVideoMaximiseViaRotation {
@@ -425,6 +435,10 @@ static const NSInteger TrackingDimensionConnection = 6;
 	[self trackEventWithCategory:GoalCategory action:@"videoViewed" label:videoId value:@(percentageViewed)];
     
 	[self trackEventWithCategory:GoalCategory action:@"videoViewedDuration" label:videoId value:@((int)currentTime)];
+
+    [FBAppEvents logEvent:FBAppEventNameViewedContent
+               parameters:@{FBAppEventParameterNameContentType: @"video",
+                            FBAppEventParameterNameContentID: videoId}];
 }
 
 - (void)trackNetworkErrorCode:(NSInteger)code forURL:(NSString *)url {
