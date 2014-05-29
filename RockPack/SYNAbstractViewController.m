@@ -615,9 +615,6 @@
 		return;
 	}
     
-    //TODO:maybe change to keyframeanimation so it doesnt look as messy
-    
-   
 	[[SYNTrackingManager sharedManager] trackUserCollectionsFollowFromScreenName:[self trackingScreenName]];
 	
 	button.enabled = NO;
@@ -647,11 +644,11 @@
 
         
         [self followButtonAnimation:button];
-        
+        button.selected = YES;
+
         [[SYNActivityManager sharedInstance] subscribeToUser:channelOwner
 										   completionHandler: ^(id responce) {
 											   
-											   button.selected = YES;
 											   button.enabled = YES;
 											   
 											   [[NSNotificationCenter defaultCenter] postNotificationName:kReloadFeed object:self userInfo:nil];
@@ -663,7 +660,8 @@
                                                
 										   } errorHandler: ^(id error) {
 											   button.enabled = YES;
-                                               
+                                               button.selected = NO;
+
 											   [button invalidateIntrinsicContentSize];
 										   }];
 
@@ -694,13 +692,18 @@
                                                 }];
 	} else {
         
+        
+        // Automatticcaly set the button to selected so we dont wait for a server response,
+		// We're assuming the response will be good. On a error it will get unselected, It will
+        //Also fix itself using the data in the activity manager
+        
         [self followButtonAnimation:button];
+        button.selected = YES;
 
         [[SYNActivityManager sharedInstance] subscribeToChannel: channel
 											  completionHandler: ^(NSDictionary *responseDictionary) {
 												  [[SYNTrackingManager sharedManager] trackCollectionFollowCompleted];
 												  
-                                                  button.selected = YES;
                                                   button.enabled = YES;
                                                   [[NSNotificationCenter defaultCenter] postNotificationName:kReloadFeed object:self userInfo:nil];
                                                   
@@ -710,6 +713,8 @@
 
                                               } errorHandler: ^(NSDictionary *errorDictionary) {
                                                   button.enabled = YES;
+                                                  button.selected = NO;
+
                                               }];
 	}
 
