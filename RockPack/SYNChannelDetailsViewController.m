@@ -131,7 +131,7 @@
 	if (IS_IPHONE) {
         self.videoCollectionViewLayoutIPhoneEdit = [[LXReorderableCollectionViewFlowLayout alloc]init];
         self.videoCollectionViewLayoutIPhoneEdit.itemSize = CGSizeMake(282,289-kHeightChange);
-        self.videoCollectionViewLayoutIPhoneEdit.sectionInset = UIEdgeInsetsMake(2, 12, 60, 2);
+        self.videoCollectionViewLayoutIPhoneEdit.sectionInset = UIEdgeInsetsMake(2, 5, 60, 2);
 
     }
     

@@ -62,11 +62,11 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <view contentMode="scaleToFill" id="g3c-GE-eJE" userLabel="View - Circle Buttons">
-                    <rect key="frame" x="59" y="363" width="203" height="50"/>
+                    <rect key="frame" x="86" y="363" width="125" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ftS-iK-V3y" customClass="SYNSocialButton">
-                            <rect key="frame" x="121" y="0.0" width="31" height="50"/>
+                            <rect key="frame" x="94" y="0.0" width="31" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -79,7 +79,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="9Qs-XU-n5I" userLabel="Button - Edit" customClass="SYNSocialButton">
-                            <rect key="frame" x="27" y="9" width="80" height="32"/>
+                            <rect key="frame" x="0.0" y="9" width="80" height="32"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -92,7 +92,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="P7D-vs-dmA" customClass="SYNFollowChannelButton">
-                            <rect key="frame" x="27" y="9" width="80" height="32"/>
+                            <rect key="frame" x="0.0" y="9" width="80" height="32"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -169,11 +169,11 @@
                     <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </label>
                 <view contentMode="scaleToFill" id="fij-tg-loq" userLabel="View - Follow and Video Container">
-                    <rect key="frame" x="0.0" y="314" width="320" height="29"/>
+                    <rect key="frame" x="40" y="314" width="240" height="29"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="sVX-iR-Htf" userLabel="Button - Followers button">
-                            <rect key="frame" x="0.0" y="0.0" width="145" height="29"/>
+                            <rect key="frame" x="6" y="0.0" width="99" height="29"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <state key="normal">
@@ -184,12 +184,12 @@
                             </connections>
                         </button>
                         <view contentMode="scaleToFill" id="0Cs-sl-Vwi" userLabel="View - Seperator">
-                            <rect key="frame" x="159" y="4" width="1" height="16"/>
+                            <rect key="frame" x="119" y="4" width="1" height="16"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.59607845544815063" green="0.59607845544815063" blue="0.59607845544815063" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
                         <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mBD-Na-Al8" userLabel="Button - Followers button">
-                            <rect key="frame" x="177" y="0.0" width="145" height="29"/>
+                            <rect key="frame" x="137" y="0.0" width="91" height="29"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <state key="normal">
