@@ -5,6 +5,7 @@
 #import "SYNActivityManager.h"
 #import "SYNAppDelegate.h"
 #import "NSString+Utils.h"
+#import "VideoInstance.h"
 
 @implementation ChannelOwner
 
@@ -157,9 +158,9 @@
     
     self.position = [dictionary objectForKey: @"position"
                                  withDefault: @0];
-    
-    self.subscriptionCount = [dictionary objectForKey:@"subscription_count"
-                                          withDefault:@0];
+// we do not use this value anymore !
+//    self.subscriptionCount = [dictionary objectForKey:@"subscription_count"
+//                                          withDefault:@0];
     
     self.subscribersCount =[dictionary objectForKey:@"subscriber_count"
                                         withDefault:@0];
@@ -213,8 +214,8 @@
     self.position = [dictionary objectForKey: @"position"
                                  withDefault: @0];
     
-    self.subscriptionCount = [dictionary objectForKey:@"subscription_count"
-                                          withDefault:@0];
+//    self.subscriptionCount = [dictionary objectForKey:@"subscription_count"
+//                                          withDefault:@0];
     
     self.subscribersCount =[dictionary objectForKey:@"subscriber_count"
                                         withDefault:@0];
@@ -575,4 +576,60 @@
 		[self.userSubscriptionsSet addObject:channelOwner];
 	}
 }
+
+- (void) setVideoInstancesFromDictionary : (NSDictionary *) videosDictionary {
+    
+    NSDictionary *itemDict = videosDictionary[@"videos"];
+    if (!itemDict || ![itemDict isKindOfClass: [NSDictionary class]])
+    {
+        return;
+    }
+    
+    NSArray *items = [itemDict objectForKey:@"items"];
+    
+
+    // Reset the set
+    [self.videoInstancesSet removeAllObjects];
+	
+    for (NSDictionary *videoInstanceDictionary in items) {
+		
+		VideoInstance *videoInstance = [VideoInstance instanceFromDictionary:videoInstanceDictionary usingManagedObjectContext:self.managedObjectContext];
+		
+		[self.videoInstancesSet addObject:videoInstance];
+	}
+
+}
+
+- (void) addVideoInstancesFromDictionary : (NSDictionary *) videosDictionary {
+    NSDictionary *itemDict = videosDictionary[@"videos"];
+    if (!itemDict || ![itemDict isKindOfClass: [NSDictionary class]])
+    {
+        return;
+    }
+    
+    NSArray *items = [itemDict objectForKey:@"items"];
+    
+    
+	NSMutableDictionary *videoInstanceByKeyDictionary = [[NSMutableDictionary alloc] initWithCapacity: self.videoInstances.count];
+	
+    for (ChannelOwner *su in self.subscriptions)
+    {
+        videoInstanceByKeyDictionary[su.uniqueId] = su;
+    }
+	
+    for (NSDictionary *videoInstanceDictionary in items) {
+		
+		VideoInstance *videoInstance = videoInstanceByKeyDictionary[videoInstanceDictionary[@"id"]];
+		
+        if (videoInstance) {
+			[self.videoInstancesSet removeObject:videoInstance];
+		}
+		
+		videoInstance = [VideoInstance instanceFromDictionary:videoInstanceDictionary usingManagedObjectContext:self.managedObjectContext];
+		
+		[self.videoInstancesSet addObject:videoInstance];
+	}
+    
+}
+
 @end

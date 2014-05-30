@@ -29,4 +29,8 @@
 - (void) addChannelsFromDictionary : (NSDictionary *) channelsDictionary;
 - (void) addSubscriptionsFromDictionary : (NSDictionary *) subscriptionsDictionary;
 
+- (void) setVideoInstancesFromDictionary : (NSDictionary *) videosDictionary;
+
+- (void) addVideoInstancesFromDictionary : (NSDictionary *) videosDictionary;
+
 @end

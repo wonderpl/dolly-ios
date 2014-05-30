@@ -681,6 +681,8 @@
 		F478E82019378BD70015BF38 /* InboardingShopMotion.png in Resources */ = {isa = PBXBuildFile; fileRef = F478E81E19378BD70015BF38 /* InboardingShopMotion.png */; };
 		F478E82119378BD70015BF38 /* InboardingShopMotion@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F478E81F19378BD70015BF38 /* InboardingShopMotion@2x.png */; };
 		F478E824193890CE0015BF38 /* SYNLoginNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F478E823193890CE0015BF38 /* SYNLoginNavigationController.m */; };
+		F478E827193897160015BF38 /* SYNProfileVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F478E826193897160015BF38 /* SYNProfileVideoViewController.m */; };
+		F478E82A1938BD020015BF38 /* SYNProfileVideoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F478E8291938BD020015BF38 /* SYNProfileVideoModel.m */; };
 		F48C1619192B663B00107B32 /* TabActivityNotification@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = F48C1617192B663B00107B32 /* TabActivityNotification@2x~iphone.png */; };
 		F48C161A192B663B00107B32 /* TabActivityNotification~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = F48C1618192B663B00107B32 /* TabActivityNotification~iphone.png */; };
 		F48C161D192B665000107B32 /* TabActivityNotification~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F48C161B192B665000107B32 /* TabActivityNotification~ipad.png */; };
@@ -1697,6 +1699,10 @@
 		F478E81F19378BD70015BF38 /* InboardingShopMotion@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "InboardingShopMotion@2x.png"; sourceTree = "<group>"; };
 		F478E822193890CE0015BF38 /* SYNLoginNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNLoginNavigationController.h; sourceTree = "<group>"; };
 		F478E823193890CE0015BF38 /* SYNLoginNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNLoginNavigationController.m; sourceTree = "<group>"; };
+		F478E825193897160015BF38 /* SYNProfileVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNProfileVideoViewController.h; sourceTree = "<group>"; };
+		F478E826193897160015BF38 /* SYNProfileVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNProfileVideoViewController.m; sourceTree = "<group>"; };
+		F478E8281938BD020015BF38 /* SYNProfileVideoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNProfileVideoModel.h; sourceTree = "<group>"; };
+		F478E8291938BD020015BF38 /* SYNProfileVideoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNProfileVideoModel.m; sourceTree = "<group>"; };
 		F48C1617192B663B00107B32 /* TabActivityNotification@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabActivityNotification@2x~iphone.png"; sourceTree = "<group>"; };
 		F48C1618192B663B00107B32 /* TabActivityNotification~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabActivityNotification~iphone.png"; sourceTree = "<group>"; };
 		F48C161B192B665000107B32 /* TabActivityNotification~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabActivityNotification~ipad.png"; sourceTree = "<group>"; };
@@ -2292,6 +2298,8 @@
 			children = (
 				4CE0B4BF18CE258A009859CB /* SYNProfileHeader.h */,
 				4CE0B4C018CE258A009859CB /* SYNProfileHeader.m */,
+				F478E825193897160015BF38 /* SYNProfileVideoViewController.h */,
+				F478E826193897160015BF38 /* SYNProfileVideoViewController.m */,
 				4CE0B4C218CE25E6009859CB /* SYNProfileHeader~iphone.xib */,
 				4C9B519A18D721D600A3AB0D /* SYNProfileHeader~ipad.xib */,
 				4CF39EEC18CDD5850077CDF0 /* SYNProfileViewController.h */,
@@ -3850,6 +3858,8 @@
 				4CCAD0B118D7520F00EC0F03 /* SYNProfileChannelModel.m */,
 				4CCAD0B318D7530600EC0F03 /* SYNProfileSubscriptionModel.h */,
 				4CCAD0B418D7530600EC0F03 /* SYNProfileSubscriptionModel.m */,
+				F478E8281938BD020015BF38 /* SYNProfileVideoModel.h */,
+				F478E8291938BD020015BF38 /* SYNProfileVideoModel.m */,
 			);
 			name = "Paging Models";
 			sourceTree = "<group>";
@@ -4612,6 +4622,7 @@
 				E92835DF18D9B78F00F7DA27 /* SYNAppearanceManager.m in Sources */,
 				E90506A618E05FD800E0910E /* UIDevice+Helpers.m in Sources */,
 				BEE01B7318521DCF000CF681 /* Comment.m in Sources */,
+				F478E82A1938BD020015BF38 /* SYNProfileVideoModel.m in Sources */,
 				0199F13B16721A4500E479C6 /* SYNFeedRootViewController.m in Sources */,
 				01946B911683335400354601 /* _ChannelOwner.m in Sources */,
 				E9CDFFB819090EC900A95B90 /* SYNIPadFeedRootViewController.m in Sources */,
@@ -4787,6 +4798,7 @@
 				0E0062E1188EBBCB00429C79 /* SYNOnBoardingSectionHeader.m in Sources */,
 				E9E1E28518561CA30051E312 /* SYNTapDismissView.m in Sources */,
 				E914BED7183CF018001616D3 /* SYNFullScreenVideoViewController.m in Sources */,
+				F478E827193897160015BF38 /* SYNProfileVideoViewController.m in Sources */,
 				E9CE7A301887161B00023A86 /* SYNiPadIntroToSignupAnimator.m in Sources */,
 				4C5C390718EF09E6007250EE /* UIPlaceHolderTextView.m in Sources */,
 				E93E10E31835116D00A62F64 /* SYNVideoPlayer.m in Sources */,

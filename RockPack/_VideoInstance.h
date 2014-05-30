@@ -16,6 +16,7 @@ extern const struct VideoInstanceRelationships {
 	__unsafe_unretained NSString *originator;
 	__unsafe_unretained NSString *starrers;
 	__unsafe_unretained NSString *video;
+	__unsafe_unretained NSString *videoOwner;
 } VideoInstanceRelationships;
 
 extern const struct VideoInstanceFetchedProperties {
@@ -25,6 +26,7 @@ extern const struct VideoInstanceFetchedProperties {
 @class ChannelOwner;
 @class ChannelOwner;
 @class Video;
+@class ChannelOwner;
 
 
 
@@ -116,6 +118,13 @@ extern const struct VideoInstanceFetchedProperties {
 
 
 
+@property (nonatomic, strong) ChannelOwner *videoOwner;
+
+//- (BOOL)validateVideoOwner:(id*)value_ error:(NSError**)error_;
+
+
+
+
 
 @end
 
@@ -176,6 +185,11 @@ extern const struct VideoInstanceFetchedProperties {
 
 - (Video*)primitiveVideo;
 - (void)setPrimitiveVideo:(Video*)value;
+
+
+
+- (ChannelOwner*)primitiveVideoOwner;
+- (void)setPrimitiveVideoOwner:(ChannelOwner*)value;
 
 
 @end

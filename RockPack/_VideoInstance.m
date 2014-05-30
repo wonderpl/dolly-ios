@@ -15,6 +15,7 @@ const struct VideoInstanceRelationships VideoInstanceRelationships = {
 	.originator = @"originator",
 	.starrers = @"starrers",
 	.video = @"video",
+	.videoOwner = @"videoOwner",
 };
 
 const struct VideoInstanceFetchedProperties VideoInstanceFetchedProperties = {
@@ -127,6 +128,10 @@ const struct VideoInstanceFetchedProperties VideoInstanceFetchedProperties = {
 	
 
 @dynamic video;
+
+	
+
+@dynamic videoOwner;
 
 	
 

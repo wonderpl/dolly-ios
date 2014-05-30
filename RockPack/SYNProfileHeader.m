@@ -42,7 +42,7 @@
 -(void) awakeFromNib {
     [super awakeFromNib];
     [self setUpViews];
-	self.collectionsTab.selected = YES;
+	self.followingsTab.selected = YES;
 
 }
 
@@ -76,10 +76,11 @@
 	[self.collectionsTab setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Collections", nil), self.channelOwner.totalVideosValueChannelValue] forState:UIControlStateNormal];
 	[self.collectionsTab setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Collections", nil), self.channelOwner.totalVideosValueChannelValue] forState:UIControlStateSelected];
 
+
 	
-    [self.followingsTab setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Following", nil), self.channelOwner.subscriptionCountValue] forState:UIControlStateNormal];
+    [self.followingsTab setTitle:[NSString stringWithFormat:@"%@ (%lld)", @"Videos", self.channelOwner.totalVideosValue] forState:UIControlStateNormal];
 	
-	[self.followingsTab setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Following", nil), self.channelOwner.subscriptionCountValue] forState:UIControlStateSelected];
+	[self.followingsTab setTitle:[NSString stringWithFormat:@"%@ (%lld)", @"Videos", self.channelOwner.totalVideosValue] forState:UIControlStateSelected];
 }
 
 -(void) setProfileImage : (NSString*) thumbnailURL
@@ -136,11 +137,14 @@
 								 };
 	
 	
-	self.aboutMeTextView.attributedText = [[NSAttributedString alloc]
-										   initWithString:string
-										   attributes:attributes];
 	
     [[self.aboutMeTextView layer] setBorderColor:[[UIColor colorWithRed:172.0/255.0f green:172.0/255.0f blue:172.0/255.0f alpha:1.0f] CGColor]];
+
+    if (string) {
+        self.aboutMeTextView.attributedText = [[NSAttributedString alloc]
+                                               initWithString:string
+                                               attributes:attributes];
+    }
 
 }
 

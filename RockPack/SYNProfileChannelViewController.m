@@ -78,33 +78,24 @@ static const CGFloat FULLNAMELABELIPADLANDSCAPE = 412.0f;
 	if (IS_IPAD) {
         [self updateLayoutForOrientation: [[SYNDeviceManager sharedInstance] orientation]];
     }
-
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    
 	[super viewDidAppear:YES];
 	[UIView animateWithDuration:2.0 animations:^{
 		[self showInboardingAnimationDescription];
 	}];
 }
 
-
-
 - (void)registerNibs {
-    
+
     [self.cv registerNib: [SYNChannelCreateNewCell nib]
 	forCellWithReuseIdentifier: [SYNChannelCreateNewCell reuseIdentifier]];
-    
-    
     [self.cv registerNib: [SYNChannelMidCell nib]
 forCellWithReuseIdentifier: [SYNChannelMidCell reuseIdentifier]];
-    
-    
     [self.cv registerNib: [SYNProfileHeader nib]
 forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
      withReuseIdentifier:[SYNProfileHeader reuseIdentifier]];
-    
     [self.cv registerNib:[SYNChannelFooterMoreView nib]
 forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
      withReuseIdentifier:[SYNChannelFooterMoreView reuseIdentifier]];
@@ -155,7 +146,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     if (self.cv.contentOffset.y >= 750) {
         return;
     }
-    
+
     if (self.cv.contentOffset.y<=0) {
         [self.headerView.coverImage setContentMode:UIViewContentModeScaleAspectFill];
         [self.headerView.coverImageTop setConstant:self.cv.contentOffset.y];
@@ -864,5 +855,6 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 - (NSString*)trackingScreenName {
 	return @"Profile";
 }
+
 
 @end

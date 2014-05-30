@@ -281,6 +281,10 @@ typedef void (^SYNOAuth2RefreshCompletionBlock)(NSError *error);
                completionHandler: (MKNKUserSuccessBlock) completionBlock
                     errorHandler: (MKNKUserErrorBlock) errorBlock;
 
+- (void) videosForUserId: (NSString *) userId
+                 inRange: (NSRange) range
+       completionHandler: (MKNKUserSuccessBlock) completionBlock
+            errorHandler: (MKNKUserErrorBlock) errorBlock;
 
 #pragma mark - External Accounts
 

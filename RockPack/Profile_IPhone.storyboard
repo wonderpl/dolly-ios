@@ -44,11 +44,11 @@
                                 </connections>
                             </containerView>
                             <containerView clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cg4-nX-yuY" userLabel="Container View - Subscription collection">
-                                <rect key="frame" x="322" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <connections>
-                                    <segue destination="7MQ-tg-A3e" kind="embed" identifier="subscriptionSegue" id="NZs-R6-aDL"/>
+                                    <segue destination="znN-TK-yTI" kind="embed" identifier="videoSegue" id="HKd-NB-JQg"/>
                                 </connections>
                             </containerView>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pzi-ZY-Ilw">
@@ -65,7 +65,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="channelContainer" destination="J0S-SW-YFq" id="F4C-ze-j1v"/>
-                        <outlet property="followingContainer" destination="cg4-nX-yuY" id="8mH-sf-6pP"/>
+                        <outlet property="followingContainer" destination="cg4-nX-yuY" id="vMn-Vg-SXF"/>
                         <outlet property="navigationBar" destination="pzi-ZY-Ilw" id="fAc-ge-9s6"/>
                         <outlet property="titleView" destination="ebz-s3-uMk" id="7gK-Qc-LLD"/>
                     </connections>
@@ -127,7 +127,7 @@
                                     me...</string>
                                 <color key="textColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="YES" returnKeyType="done"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OmF-pf-1PU" userLabel="Cancel Button">
                                 <rect key="frame" x="5" y="24" width="60" height="30"/>
@@ -172,6 +172,45 @@
             </objects>
             <point key="canvasLocation" x="757" y="60"/>
         </scene>
+        <!--Profile Video View Controller-->
+        <scene sceneID="xg7-qm-uLu">
+            <objects>
+                <viewController id="znN-TK-yTI" customClass="SYNProfileVideoViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="tVx-Ca-bWy"/>
+                        <viewControllerLayoutGuide type="bottom" id="3m4-l0-Pwr"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dvO-MT-SDR">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="67v-8T-SKA">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="mF3-Qu-Dqd">
+                                    <size key="itemSize" width="282" height="310"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="znN-TK-yTI" id="zP3-9g-8kF"/>
+                                    <outlet property="delegate" destination="znN-TK-yTI" id="jJf-Mz-di2"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="cv" destination="67v-8T-SKA" id="egC-aJ-Jvd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LDf-Gt-Jht" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="408" y="118"/>
+        </scene>
         <!--Profile Subscription View Controller-->
         <scene sceneID="mXW-wE-p9u">
             <objects>
@@ -181,11 +220,11 @@
                         <viewControllerLayoutGuide type="bottom" id="AxU-OE-e9C"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Epk-Ib-K9H">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="R4W-Yk-ZYk">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="aq5-IK-3Om">

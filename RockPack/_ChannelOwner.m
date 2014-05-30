@@ -13,6 +13,7 @@ const struct ChannelOwnerAttributes ChannelOwnerAttributes = {
 	.subscribersCount = @"subscribersCount",
 	.subscriptionCount = @"subscriptionCount",
 	.thumbnailURL = @"thumbnailURL",
+	.totalVideos = @"totalVideos",
 	.totalVideosValueChannel = @"totalVideosValueChannel",
 	.totalVideosValueSubscriptions = @"totalVideosValueSubscriptions",
 	.username = @"username",
@@ -24,6 +25,7 @@ const struct ChannelOwnerRelationships ChannelOwnerRelationships = {
 	.starred = @"starred",
 	.subscriptions = @"subscriptions",
 	.userSubscriptions = @"userSubscriptions",
+	.videoInstances = @"videoInstances",
 };
 
 const struct ChannelOwnerFetchedProperties ChannelOwnerFetchedProperties = {
@@ -77,6 +79,11 @@ const struct ChannelOwnerFetchedProperties ChannelOwnerFetchedProperties = {
 	}
 	if ([key isEqualToString:@"subscriptionCountValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"subscriptionCount"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
+	if ([key isEqualToString:@"totalVideosValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"totalVideos"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 		return keyPaths;
 	}
@@ -255,6 +262,32 @@ const struct ChannelOwnerFetchedProperties ChannelOwnerFetchedProperties = {
 
 
 
+@dynamic totalVideos;
+
+
+
+- (int64_t)totalVideosValue {
+	NSNumber *result = [self totalVideos];
+	return [result longLongValue];
+}
+
+- (void)setTotalVideosValue:(int64_t)value_ {
+	[self setTotalVideos:[NSNumber numberWithLongLong:value_]];
+}
+
+- (int64_t)primitiveTotalVideosValue {
+	NSNumber *result = [self primitiveTotalVideos];
+	return [result longLongValue];
+}
+
+- (void)setPrimitiveTotalVideosValue:(int64_t)value_ {
+	[self setPrimitiveTotalVideos:[NSNumber numberWithLongLong:value_]];
+}
+
+
+
+
+
 @dynamic totalVideosValueChannel;
 
 
@@ -375,6 +408,19 @@ const struct ChannelOwnerFetchedProperties ChannelOwnerFetchedProperties = {
 	NSMutableOrderedSet *result = (NSMutableOrderedSet*)[self mutableOrderedSetValueForKey:@"userSubscriptions"];
   
 	[self didAccessValueForKey:@"userSubscriptions"];
+	return result;
+}
+	
+
+@dynamic videoInstances;
+
+	
+- (NSMutableOrderedSet*)videoInstancesSet {
+	[self willAccessValueForKey:@"videoInstances"];
+  
+	NSMutableOrderedSet *result = (NSMutableOrderedSet*)[self mutableOrderedSetValueForKey:@"videoInstances"];
+  
+	[self didAccessValueForKey:@"videoInstances"];
 	return result;
 }
 	

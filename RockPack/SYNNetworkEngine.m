@@ -711,6 +711,33 @@
     [self enqueueOperation: networkOperation];
 }
 
+- (void) videosForUserId: (NSString *) userId
+                 inRange: (NSRange) range
+       completionHandler: (MKNKUserSuccessBlock) completionBlock
+            errorHandler: (MKNKUserErrorBlock) errorBlock
+{
+    NSDictionary *apiSubstitutionDictionary = @{@"USERID" : userId};
+    NSString *apiString = [kAPIGetUserVideos stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
+    
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    
+    parameters[@"start"] = @(range.location);
+    parameters[@"size"] = @(range.length);
+    
+    SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject*)[self operationWithPath: apiString
+                                                                                                       params: parameters
+                                                                                                   httpMethod: @"GET"
+                                                                                                          ssl: NO];
+    [self addCommonHandlerToNetworkOperation: networkOperation
+                           completionHandler: completionBlock
+                                errorHandler: errorBlock];
+    
+    
+    
+    [self enqueueOperation: networkOperation];
+    
+}
+
 
 #pragma mark - Video player HTML update
 

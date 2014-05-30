@@ -7,7 +7,6 @@
 //
 
 #import "SYNProfileViewController.h"
-#import "SYNProfileSubscriptionViewController.h"
 #import "SYNProfileChannelViewController.h"
 #import "SYNActivityManager.h"
 #import "UIFont+SYNFont.h"
@@ -19,23 +18,25 @@
 #import "SYNTrackingManager.h"
 #import "SYNProfileHeader.h"
 #import "SYNSocialButton.h"
+#import "SYNProfileVideoViewController.h"
 
 static const CGFloat TransitionDuration = 0.5f;
 
 @interface SYNProfileViewController () <UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning, SYNProfileNavigationBarDelegate>
 
-@property (nonatomic, strong) SYNProfileSubscriptionViewController *subscriptionCollectionViewController;
-@property (nonatomic, strong) SYNProfileChannelViewController *channelCollectionViewController;
-@property (nonatomic, strong) IBOutlet UIView *channelContainer;
-@property (nonatomic, strong) IBOutlet UIView *followingContainer;
-@property (nonatomic, strong) SYNSocialButton *followAllButton;
-@property (nonatomic, assign) BOOL isUserProfile;
-@property (nonatomic, assign) BOOL creatingChannel;
-@property (nonatomic, assign) BOOL isChannelsCollectionViewShowing;
+
+@property (strong, nonatomic) SYNProfileVideoViewController *videoCollectionViewController;
+@property (strong, nonatomic) SYNProfileChannelViewController *channelCollectionViewController;
+@property (strong, nonatomic) IBOutlet UIView *channelContainer;
+@property (strong, nonatomic) IBOutlet UIView *followingContainer;
+@property (strong, nonatomic) SYNSocialButton *followAllButton;
+@property (assign, nonatomic) BOOL isUserProfile;
+@property (assign, nonatomic) BOOL creatingChannel;
+@property (assign, nonatomic) BOOL isChannelsCollectionViewShowing;
 
 @property (strong, nonatomic) IBOutlet UINavigationItem *titleView;
 
-@property (nonatomic, strong) IBOutlet UINavigationBar *navigationBar;
+@property (strong, nonatomic) IBOutlet UINavigationBar *navigationBar;
 
 @end
 
@@ -67,11 +68,8 @@ static const CGFloat TransitionDuration = 0.5f;
 - (void)viewDidLoad {
     [super viewDidLoad];
 	self.isChannelsCollectionViewShowing = YES;
-	[self.subscriptionCollectionViewController coverPhotoAnimation];
+	[self.videoCollectionViewController coverPhotoAnimation];
     [self.channelCollectionViewController coverPhotoAnimation];
-	
-
-	
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -91,9 +89,12 @@ static const CGFloat TransitionDuration = 0.5f;
 	
     [self.navigationBar setBarTintColor:[UIColor whiteColor]];
 	self.navigationBar.hidden = YES;
+    
+    
 	[self updateProfileData];
 	
 	self.navigationItem.title = @"";
+    
 
 }
 
@@ -101,6 +102,7 @@ static const CGFloat TransitionDuration = 0.5f;
 	[super viewWillDisappear:animated];
 	
 	self.navigationBar.hidden = NO;
+    
 	[self.navigationController.navigationBar setBackgroundTransparent:NO];
 }
 
@@ -115,12 +117,14 @@ static const CGFloat TransitionDuration = 0.5f;
 		channelCollectionViewController.delegate = self;
 		
         self.channelCollectionViewController = channelCollectionViewController;
-    } else if ([segueName isEqualToString: @"subscriptionSegue"]){
-        SYNProfileSubscriptionViewController * subscriptionCollectionViewController =[segue destinationViewController];
-        subscriptionCollectionViewController.channelOwner = self.channelOwner;
-        subscriptionCollectionViewController.isUserProfile = self.isUserProfile;
-		subscriptionCollectionViewController.delegate = self;
-        self.subscriptionCollectionViewController = subscriptionCollectionViewController;
+    } else if ([segueName isEqualToString: @"videoSegue"]){
+        
+        SYNProfileVideoViewController * videoCollectionViewController =[segue destinationViewController];
+        videoCollectionViewController.channelOwner = self.channelOwner;
+        videoCollectionViewController.isUserProfile = self.isUserProfile;
+		videoCollectionViewController.delegate = self;
+        self.videoCollectionViewController = videoCollectionViewController;
+    
     }
 }
 
@@ -225,64 +229,64 @@ static const CGFloat TransitionDuration = 0.5f;
 - (void) collectionsTabTapped {
 
 	
-	if (self.isChannelsCollectionViewShowing) {
-		return;
-	}
+//	if (self.isChannelsCollectionViewShowing) {
+//		return;
+//	}
 	self.isChannelsCollectionViewShowing = YES;
     self.channelCollectionViewController.headerView.collectionsTab.selected = YES;
     self.channelCollectionViewController.headerView.followingsTab.selected = NO;
 
-    CGPoint offSet = self.subscriptionCollectionViewController.cv.contentOffset;
+    CGPoint offSet = self.videoCollectionViewController.cv.contentOffset;
     
     [self.channelCollectionViewController.cv setContentOffset:offSet];
 
-    [self.subscriptionCollectionViewController coverPhotoAnimation];
+    [self.videoCollectionViewController coverPhotoAnimation];
     [self.channelCollectionViewController coverPhotoAnimation];
     [self.channelCollectionViewController.headerView layoutIfNeeded];
-    [self.subscriptionCollectionViewController.headerView layoutIfNeeded];
+    [self.videoCollectionViewController.headerView layoutIfNeeded];
 
-    if (IS_IPHONE) {
-		int headerSize = self.isUserProfile ? 523 : 523;
-		
-		CGRect toFrame = self.view.frame;
-		toFrame.origin.x = 0;
-				
-		CGRect fromFrame = self.view.frame;
-		fromFrame.origin.x = 320;
-
-		self.channelCollectionViewController.view.frame = CGRectMake(-320, 0, 320, headerSize);
-		self.channelCollectionViewController.headerView.frame = CGRectMake(320, 0, 320, headerSize);
-		
-		[self transitionFromViewController:self.subscriptionCollectionViewController toViewController:self.channelCollectionViewController duration:0.35 options:UIViewAnimationCurveEaseInOut animations:^{
-			
-			[self.view bringSubviewToFront:self.followingContainer];
-
-			self.channelCollectionViewController.view.frame = toFrame;
-			self.subscriptionCollectionViewController.view.frame = fromFrame;
-			self.subscriptionCollectionViewController.headerView.frame = CGRectMake(-320, 0, 320, headerSize);
-			self.channelCollectionViewController.headerView.frame = CGRectMake(0, 0, 320, headerSize);
-						
-		} completion:nil];
-		
-	} else {
+//    if (IS_IPHONE) {
+//		int headerSize = self.isUserProfile ? 523 : 523;
+//		
+//		CGRect toFrame = self.view.frame;
+//		toFrame.origin.x = 0;
+//				
+//		CGRect fromFrame = self.view.frame;
+//		fromFrame.origin.x = 320;
+//
+//		self.channelCollectionViewController.view.frame = CGRectMake(-320, 0, 320, headerSize);
+//		self.channelCollectionViewController.headerView.frame = CGRectMake(320, 0, 320, headerSize);
+//		
+//		[self transitionFromViewController:self.subscriptionCollectionViewController toViewController:self.channelCollectionViewController duration:0.35 options:UIViewAnimationCurveEaseInOut animations:^{
+//			
+//			[self.view bringSubviewToFront:self.followingContainer];
+//
+//			self.channelCollectionViewController.view.frame = toFrame;
+//			self.subscriptionCollectionViewController.view.frame = fromFrame;
+//			self.subscriptionCollectionViewController.headerView.frame = CGRectMake(-320, 0, 320, headerSize);
+//			self.channelCollectionViewController.headerView.frame = CGRectMake(0, 0, 320, headerSize);
+//						
+//		} completion:nil];
+//		
+//	} else {
 		self.channelContainer.hidden = NO;
 		self.followingContainer.hidden = YES;
 
-	}
-	
+//	}
+
 	[self.channelCollectionViewController.model reloadInitialPage];
 }
 
 - (void) followingsTabTapped {
     
-	if (!self.isChannelsCollectionViewShowing) {
-		return;
-	}
+//	if (!self.isChannelsCollectionViewShowing) {
+//		return;
+//	}
 	
-	self.subscriptionCollectionViewController.headerView.followingsTab.selected = YES;
-	self.subscriptionCollectionViewController.headerView.collectionsTab.selected = NO;
+	self.videoCollectionViewController.headerView.followingsTab.selected = YES;
+	self.videoCollectionViewController.headerView.collectionsTab.selected = NO;
 
-	self.isChannelsCollectionViewShowing = NO;
+//	self.isChannelsCollectionViewShowing = NO;
 	if ([self.channelOwner.uniqueId isEqualToString:appDelegate.currentUser.uniqueId]) {
 		[[SYNTrackingManager sharedManager] trackOwnProfileFollowingScreenView];
 	} else {
@@ -290,45 +294,45 @@ static const CGFloat TransitionDuration = 0.5f;
 	}
 
     CGPoint offSet = self.channelCollectionViewController.cv.contentOffset;
-	[self.subscriptionCollectionViewController.cv setContentOffset:offSet];
+	[self.videoCollectionViewController.cv setContentOffset:offSet];
 
-    [self.subscriptionCollectionViewController coverPhotoAnimation];
+    [self.videoCollectionViewController coverPhotoAnimation];
     [self.channelCollectionViewController coverPhotoAnimation];
-    [self.subscriptionCollectionViewController.headerView layoutIfNeeded];
+    [self.videoCollectionViewController.headerView layoutIfNeeded];
     [self.channelCollectionViewController.headerView layoutIfNeeded];
     
 	
 	if (IS_IPHONE) {
-		CGRect toFrame = self.view.frame;
-		toFrame.origin.x = 0;
-		
-		CGRect fromFrame = self.view.frame;
-		fromFrame.origin.x = -320;
-		
-		
-		int headerSize = self.isUserProfile ? 523 : 523;
-		
-		self.subscriptionCollectionViewController.view.frame = CGRectMake(320, 0, 320, headerSize);
-		self.subscriptionCollectionViewController.headerView.frame = CGRectMake(-320, 0, 320, headerSize);
-				
-		[self transitionFromViewController:self.channelCollectionViewController toViewController:self.subscriptionCollectionViewController duration:0.35 options:UIViewAnimationCurveEaseInOut animations:^{
-			[self.view bringSubviewToFront:self.channelContainer];
-
-			self.subscriptionCollectionViewController.view.frame = toFrame;
-			self.subscriptionCollectionViewController.headerView.frame = CGRectMake(0, 0, 320, headerSize);
-			
-			
-			self.channelCollectionViewController.view.frame = fromFrame;
-			self.channelCollectionViewController.headerView.frame = CGRectMake(320, 0, 320, headerSize);
-			
-		} completion:nil];
-
-	} else {
+//		CGRect toFrame = self.view.frame;
+//		toFrame.origin.x = 0;
+//		
+//		CGRect fromFrame = self.view.frame;
+//		fromFrame.origin.x = -320;
+//		
+//		
+//		int headerSize = self.isUserProfile ? 523 : 523;
+//		
+//		self.videoCollectionViewController.view.frame = CGRectMake(320, 0, 320, headerSize);
+//		self.videoCollectionViewController.headerView.frame = CGRectMake(-320, 0, 320, headerSize);
+//				
+//		[self transitionFromViewController:self.channelCollectionViewController toViewController:self.videoCollectionViewController duration:0.35 options:UIViewAnimationCurveEaseInOut animations:^{
+//			[self.view bringSubviewToFront:self.channelContainer];
+//
+//			self.videoCollectionViewController.view.frame = toFrame;
+//			self.videoCollectionViewController.headerView.frame = CGRectMake(0, 0, 320, headerSize);
+//			
+//			
+//			self.channelCollectionViewController.view.frame = fromFrame;
+//			self.channelCollectionViewController.headerView.frame = CGRectMake(320, 0, 320, headerSize);
+//			
+//		} completion:nil];
+//
+//	} else {
 		self.followingContainer.hidden = NO;
 		self.channelContainer.hidden = YES;
 	}
 	
-	[self.subscriptionCollectionViewController.model reloadInitialPage];
+//	[self.subscriptionCollectionViewController.model reloadInitialPage];
 }
 
 - (void)editButtonTapped {
@@ -381,7 +385,7 @@ static const CGFloat TransitionDuration = 0.5f;
 
 - (void) setCollectionViewContentOffset:(CGPoint)contentOffset animated:(BOOL) animated{
     [self.channelCollectionViewController.cv setContentOffset:contentOffset animated:animated];
-    [self.subscriptionCollectionViewController.cv setContentOffset:contentOffset animated:animated];
+    [self.videoCollectionViewController.cv setContentOffset:contentOffset animated:animated];
 }
 
 - (void) updateCoverImage: (NSString*) urlString {
@@ -390,19 +394,19 @@ static const CGFloat TransitionDuration = 0.5f;
     self.channelOwner.coverPhotoURL = urlString;
     
     [self.channelCollectionViewController.headerView setCoverphotoImage:urlString];
-    [self.subscriptionCollectionViewController.headerView setCoverphotoImage:urlString];
+//    [self.subscriptionCollectionViewController.headerView setCoverphotoImage:urlString];
 }
 
 - (void) updateAvatarImage: (NSString*) urlString {
 	[[SYNTrackingManager sharedManager] trackAvatarUploadFromScreen:[self trackingScreenName]];
 
     [self.channelCollectionViewController.headerView setProfileImage:urlString];
-    [self.subscriptionCollectionViewController.headerView setProfileImage:urlString];
+//    [self.subscriptionCollectionViewController.headerView setProfileImage:urlString];
 }
 
 - (void) updateUserDescription: (NSString*) descriptionString {
     
-    [self.subscriptionCollectionViewController.headerView setDescriptionText:descriptionString];
+//    [self.subscriptionCollectionViewController.headerView setDescriptionText:descriptionString];
     [self.channelCollectionViewController.headerView setDescriptionText:descriptionString];
 }
 
@@ -461,10 +465,10 @@ static const CGFloat TransitionDuration = 0.5f;
 
 - (void) reloadCollectionViews {
     [self.channelCollectionViewController.cv.collectionViewLayout invalidateLayout];
-    [self.subscriptionCollectionViewController.cv.collectionViewLayout invalidateLayout];
+//    [self.subscriptionCollectionViewController.cv.collectionViewLayout invalidateLayout];
 	
 	[self.channelCollectionViewController.cv reloadData];
-    [self.subscriptionCollectionViewController.cv reloadData];
+//    [self.subscriptionCollectionViewController.cv reloadData];
 
 }
 
@@ -487,7 +491,7 @@ static const CGFloat TransitionDuration = 0.5f;
 - (void) updateProfileData {
     
     if (self.isChannelsCollectionViewShowing) {
-		
+
 
 		[appDelegate.oAuthNetworkEngine userDataForUser: ((User *) self.channelOwner)
 										   onCompletion: ^(id dictionary) {
@@ -496,25 +500,24 @@ static const CGFloat TransitionDuration = 0.5f;
 											   {
 												   [self.channelOwner setAttributesFromDictionary: dictionary
 																			  ignoringObjectTypes: kIgnoreNothing];
-
-												   
-												   [appDelegate.oAuthNetworkEngine subscriptionsForUserId: self.channelOwner.uniqueId
-																								  inRange: NSMakeRange(0, 0)
-																						completionHandler:^(id response) {
-																							
-																							
-																							if ([response isKindOfClass:[NSDictionary class]]) {
-																								self.channelOwner.subscriptionCountValue = [response[@"users"][@"total"] intValue];
-																							}
-																							
-																							[self.channelCollectionViewController.cv reloadData];
-																							
-																						} errorHandler: nil];
-
 											   }
+                                               
+                                               [self.videoCollectionViewController.model loadNextPageWithCompletionHandler:^(BOOL success, BOOL hasChanged) {
+                                                   [self.videoCollectionViewController.headerView setSegmentedControllerText];
+                                                   if (success) {
+                                                    	[self.videoCollectionViewController.cv reloadData];
+                                                
+                                                   }
+                                               }];
+
 										   } onError: nil];
 	} else {
-		[self.subscriptionCollectionViewController.model reloadInitialPage];
+        [self.videoCollectionViewController.model loadNextPageWithCompletionHandler:^(BOOL success, BOOL hasChanged) {
+            
+            if (success) {
+                [self.videoCollectionViewController.cv reloadData];
+            }
+        }];
 	}
 	
 }

@@ -1364,8 +1364,31 @@
     [self enqueueSignedOperation: networkOperation];
 }
 
+- (void) videosForUserId: (NSString *) userId
+                 inRange: (NSRange) range
+       completionHandler: (MKNKUserSuccessBlock) completionBlock
+            errorHandler: (MKNKUserErrorBlock) errorBlock
+{
+    NSDictionary *apiSubstitutionDictionary = @{@"USERID" : userId};
+    
+    NSString *apiString = [kAPIGetUserVideos stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    
+    params[@"start"] = @(range.location);
+    params[@"size"] = @(range.length);
+    
+    SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject*)[self operationWithPath: apiString
+                                                                                                       params: params
+                                                                                                   httpMethod: @"GET"
+                                                                                                          ssl: YES];
+    [self addCommonHandlerToNetworkOperation: networkOperation
+                           completionHandler: completionBlock
+                                errorHandler: errorBlock];
+    
+    [self enqueueSignedOperation: networkOperation];
+}
 
-//just added ...
 - (void) userChannelsForUserId: (NSString *) userId
                             credential: (SYNOAuth2Credential*)credential
                                  start: (unsigned int) start
@@ -2220,4 +2243,8 @@
     
     [self enqueueSignedOperation: networkOperation withForceReload:forceReload];
 }
+
+
+
+
 @end

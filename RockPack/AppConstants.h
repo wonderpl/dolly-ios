@@ -83,6 +83,7 @@ typedef enum : NSInteger {
 #define kAPIChangeuserPassword      @"/ws/USERID/password/"                     /* PUT */
 #define kAPIChangeUserFields        @"/ws/USERID/ATTRIBUTE/"
 #define kAPIGetUserNotifications    @"/ws/USERID/notifications/"                /* GET */
+#define kAPIGetUserVideos        	@"/ws/USERID/videos/"						/* GET */
 
 // Avatar
 #define kAPIUpdateAvatar           @"/ws/USERID/avatar/"                        /* PUT */

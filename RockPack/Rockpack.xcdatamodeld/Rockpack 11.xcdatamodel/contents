@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="12F45" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13C64" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="AbstractCommon" representedClassName="AbstractCommon" isAbstract="YES" syncable="YES">
         <attribute name="markedForDeletion" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="uniqueId" optional="YES" attributeType="String" syncable="YES"/>
@@ -39,6 +39,7 @@
         <attribute name="subscribersCount" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="subscriptionCount" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="thumbnailURL" optional="YES" attributeType="String" defaultValueString="http://" syncable="YES"/>
+        <attribute name="totalVideos" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="totalVideosValueChannel" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="totalVideosValueSubscriptions" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
@@ -47,6 +48,7 @@
         <relationship name="starred" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="VideoInstance" inverseName="starrers" inverseEntity="VideoInstance" syncable="YES"/>
         <relationship name="subscriptions" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Channel" inverseName="subscribers" inverseEntity="Channel" syncable="YES"/>
         <relationship name="userSubscriptions" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="ChannelOwner" inverseName="userSubscriptions" inverseEntity="ChannelOwner" syncable="YES"/>
+        <relationship name="videoInstances" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="VideoInstance" inverseName="videoOwner" inverseEntity="VideoInstance" syncable="YES"/>
     </entity>
     <entity name="Comment" representedClassName="Comment" parentEntity="AbstractCommon" syncable="YES">
         <attribute name="commentText" optional="YES" attributeType="String" syncable="YES"/>
@@ -151,11 +153,12 @@
         <relationship name="originator" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChannelOwner" inverseName="originatedVideos" inverseEntity="ChannelOwner" syncable="YES"/>
         <relationship name="starrers" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="ChannelOwner" inverseName="starred" inverseEntity="ChannelOwner" syncable="YES"/>
         <relationship name="video" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Video" inverseName="videoInstances" inverseEntity="Video" syncable="YES"/>
+        <relationship name="videoOwner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChannelOwner" inverseName="videoInstances" inverseEntity="ChannelOwner" syncable="YES"/>
     </entity>
     <elements>
         <element name="AbstractCommon" positionX="0" positionY="0" width="128" height="90"/>
         <element name="Channel" positionX="0" positionY="0" width="128" height="300"/>
-        <element name="ChannelOwner" positionX="0" positionY="0" width="128" height="283"/>
+        <element name="ChannelOwner" positionX="0" positionY="0" width="128" height="330"/>
         <element name="Comment" positionX="0" positionY="0" width="128" height="180"/>
         <element name="ExternalAccount" positionX="0" positionY="0" width="128" height="180"/>
         <element name="FeedItem" positionX="0" positionY="0" width="128" height="118"/>
@@ -166,6 +169,6 @@
         <element name="User" positionX="0" positionY="0" width="128" height="195"/>
         <element name="Video" positionX="0" positionY="0" width="128" height="253"/>
         <element name="VideoAnnotation" positionX="9" positionY="135" width="128" height="165"/>
-        <element name="VideoInstance" positionX="0" positionY="0" width="128" height="165"/>
+        <element name="VideoInstance" positionX="0" positionY="0" width="128" height="178"/>
     </elements>
 </model>

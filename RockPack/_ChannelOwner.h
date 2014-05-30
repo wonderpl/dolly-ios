@@ -14,6 +14,7 @@ extern const struct ChannelOwnerAttributes {
 	__unsafe_unretained NSString *subscribersCount;
 	__unsafe_unretained NSString *subscriptionCount;
 	__unsafe_unretained NSString *thumbnailURL;
+	__unsafe_unretained NSString *totalVideos;
 	__unsafe_unretained NSString *totalVideosValueChannel;
 	__unsafe_unretained NSString *totalVideosValueSubscriptions;
 	__unsafe_unretained NSString *username;
@@ -25,6 +26,7 @@ extern const struct ChannelOwnerRelationships {
 	__unsafe_unretained NSString *starred;
 	__unsafe_unretained NSString *subscriptions;
 	__unsafe_unretained NSString *userSubscriptions;
+	__unsafe_unretained NSString *videoInstances;
 } ChannelOwnerRelationships;
 
 extern const struct ChannelOwnerFetchedProperties {
@@ -35,6 +37,8 @@ extern const struct ChannelOwnerFetchedProperties {
 @class VideoInstance;
 @class Channel;
 @class ChannelOwner;
+@class VideoInstance;
+
 
 
 
@@ -172,6 +176,20 @@ extern const struct ChannelOwnerFetchedProperties {
 
 
 
+@property (nonatomic, strong) NSNumber* totalVideos;
+
+
+
+@property int64_t totalVideosValue;
+- (int64_t)totalVideosValue;
+- (void)setTotalVideosValue:(int64_t)value_;
+
+//- (BOOL)validateTotalVideos:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
 @property (nonatomic, strong) NSNumber* totalVideosValueChannel;
 
 
@@ -245,6 +263,13 @@ extern const struct ChannelOwnerFetchedProperties {
 
 
 
+@property (nonatomic, strong) NSOrderedSet *videoInstances;
+
+- (NSMutableOrderedSet*)videoInstancesSet;
+
+
+
+
 
 @end
 
@@ -274,6 +299,11 @@ extern const struct ChannelOwnerFetchedProperties {
 - (void)removeUserSubscriptions:(NSOrderedSet*)value_;
 - (void)addUserSubscriptionsObject:(ChannelOwner*)value_;
 - (void)removeUserSubscriptionsObject:(ChannelOwner*)value_;
+
+- (void)addVideoInstances:(NSOrderedSet*)value_;
+- (void)removeVideoInstances:(NSOrderedSet*)value_;
+- (void)addVideoInstancesObject:(VideoInstance*)value_;
+- (void)removeVideoInstancesObject:(VideoInstance*)value_;
 
 @end
 
@@ -349,6 +379,15 @@ extern const struct ChannelOwnerFetchedProperties {
 
 
 
+- (NSNumber*)primitiveTotalVideos;
+- (void)setPrimitiveTotalVideos:(NSNumber*)value;
+
+- (int64_t)primitiveTotalVideosValue;
+- (void)setPrimitiveTotalVideosValue:(int64_t)value_;
+
+
+
+
 - (NSNumber*)primitiveTotalVideosValueChannel;
 - (void)setPrimitiveTotalVideosValueChannel:(NSNumber*)value;
 
@@ -396,6 +435,11 @@ extern const struct ChannelOwnerFetchedProperties {
 
 - (NSMutableOrderedSet*)primitiveUserSubscriptions;
 - (void)setPrimitiveUserSubscriptions:(NSMutableOrderedSet*)value;
+
+
+
+- (NSMutableOrderedSet*)primitiveVideoInstances;
+- (void)setPrimitiveVideoInstances:(NSMutableOrderedSet*)value;
 
 
 @end

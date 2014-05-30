@@ -217,13 +217,14 @@
             // the method addStarrersObject has been overriden so as to copy the CO, do not use unless in need of a copy
             // ex. when passing the currentUser to the video instance
             
-            
+
             [self.starrersSet addObject:starringChannelOwner];
             
         }
         
     }
     
+    self.starredByUserValue = [[SYNActivityManager sharedInstance] isRecentlyStarred:self.uniqueId];
 }
 
 + (NSDictionary *)existingVideoInstancesWithIds:(NSArray *)videoInstanceIds
