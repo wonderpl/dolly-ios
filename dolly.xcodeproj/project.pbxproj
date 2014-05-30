@@ -680,6 +680,7 @@
 		F46D8C5E192CF5E10048C486 /* InboardingSearchBox@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F46D8C5C192CF5E10048C486 /* InboardingSearchBox@2x~ipad.png */; };
 		F478E82019378BD70015BF38 /* InboardingShopMotion.png in Resources */ = {isa = PBXBuildFile; fileRef = F478E81E19378BD70015BF38 /* InboardingShopMotion.png */; };
 		F478E82119378BD70015BF38 /* InboardingShopMotion@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F478E81F19378BD70015BF38 /* InboardingShopMotion@2x.png */; };
+		F478E824193890CE0015BF38 /* SYNLoginNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F478E823193890CE0015BF38 /* SYNLoginNavigationController.m */; };
 		F48C1619192B663B00107B32 /* TabActivityNotification@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = F48C1617192B663B00107B32 /* TabActivityNotification@2x~iphone.png */; };
 		F48C161A192B663B00107B32 /* TabActivityNotification~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = F48C1618192B663B00107B32 /* TabActivityNotification~iphone.png */; };
 		F48C161D192B665000107B32 /* TabActivityNotification~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F48C161B192B665000107B32 /* TabActivityNotification~ipad.png */; };
@@ -1694,6 +1695,8 @@
 		F46D8C5C192CF5E10048C486 /* InboardingSearchBox@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "InboardingSearchBox@2x~ipad.png"; sourceTree = "<group>"; };
 		F478E81E19378BD70015BF38 /* InboardingShopMotion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InboardingShopMotion.png; sourceTree = "<group>"; };
 		F478E81F19378BD70015BF38 /* InboardingShopMotion@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "InboardingShopMotion@2x.png"; sourceTree = "<group>"; };
+		F478E822193890CE0015BF38 /* SYNLoginNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNLoginNavigationController.h; sourceTree = "<group>"; };
+		F478E823193890CE0015BF38 /* SYNLoginNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNLoginNavigationController.m; sourceTree = "<group>"; };
 		F48C1617192B663B00107B32 /* TabActivityNotification@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabActivityNotification@2x~iphone.png"; sourceTree = "<group>"; };
 		F48C1618192B663B00107B32 /* TabActivityNotification~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabActivityNotification~iphone.png"; sourceTree = "<group>"; };
 		F48C161B192B665000107B32 /* TabActivityNotification~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabActivityNotification~ipad.png"; sourceTree = "<group>"; };
@@ -3253,6 +3256,8 @@
 				E905A944189BCD1500FED785 /* SYNSignupViewController.m */,
 				E92837B0189C0BE9005D5108 /* SYNFacebookButton.h */,
 				E92837B1189C0BE9005D5108 /* SYNFacebookButton.m */,
+				F478E822193890CE0015BF38 /* SYNLoginNavigationController.h */,
+				F478E823193890CE0015BF38 /* SYNLoginNavigationController.m */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -4744,6 +4749,7 @@
 				011C1678173003E800CF50B9 /* OWActivityView.m in Sources */,
 				011C167A173003E800CF50B9 /* OWActivityViewController.m in Sources */,
 				011C167B173003E800CF50B9 /* OWCopyActivity.m in Sources */,
+				F478E824193890CE0015BF38 /* SYNLoginNavigationController.m in Sources */,
 				011C167C173003E800CF50B9 /* OWFacebookActivity.m in Sources */,
 				BEC39C1B184E360F00DA8089 /* SYNOnBoardingFooter.m in Sources */,
 				011C167D173003E800CF50B9 /* OWMailActivity.m in Sources */,

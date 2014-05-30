@@ -615,10 +615,10 @@
             </objects>
             <point key="canvasLocation" x="971" y="382"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Login Navigation Controller-->
         <scene sceneID="Pmd-hO-KJc">
             <objects>
-                <navigationController definesPresentationContext="YES" navigationBarHidden="YES" id="faf-aZ-ZOn" sceneMemberID="viewController">
+                <navigationController definesPresentationContext="YES" navigationBarHidden="YES" id="faf-aZ-ZOn" customClass="SYNLoginNavigationController" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="OLa-T3-rXI">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

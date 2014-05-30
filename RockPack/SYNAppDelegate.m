@@ -176,8 +176,15 @@
             
             self.window.rootViewController = [self createAndReturnRootViewController];
             
-			[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"didFinishLaunchingWithOptions: Controller with credentials: %@",
-                                                 NSStringFromClass([self.window.rootViewController class])]];
+            
+            if ([self.window.rootViewController isKindOfClass:[SYNMasterViewController class]]) {
+                [[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"didFinishLaunchingWithOptions: Controller with credentials: %@",
+                                                     self.masterViewController.showingViewController]];
+            } else {
+                [[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"didFinishLaunchingWithOptions: Controller with credentials: %@",
+                                                     NSStringFromClass([self.window.rootViewController class])]];
+            }
+
         }
     }
     else
@@ -192,9 +199,14 @@
         if (application.applicationState != UIApplicationStateBackground) {
             self.window.rootViewController = [self createAndReturnLoginViewController];
         }
-
-        [[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"didFinishLaunchingWithOptions: Controller without credentials: %@",
-                                             NSStringFromClass([self.window.rootViewController class])]];
+        
+        if ([self.window.rootViewController isKindOfClass:[SYNMasterViewController class]]) {
+            [[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"didFinishLaunchingWithOptions: Controller without credentials: %@",
+                                                 self.masterViewController.showingViewController]];
+        } else {
+            [[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"didFinishLaunchingWithOptions: Controller without credentials: %@",
+                                                 NSStringFromClass([self.window.rootViewController class])]];
+        }
     }
     
 #ifdef ENABLE_USER_RATINGS
@@ -249,8 +261,14 @@
             
             self.window.rootViewController = [self createAndReturnRootViewController];
             
-			[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"applicationProtectedDataDidBecomeAvailable: Controller with credentials: %@",
-                                                 NSStringFromClass([self.window.rootViewController class])]];
+            if ([self.window.rootViewController isKindOfClass:[SYNMasterViewController class]]) {
+                [[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"applicationProtectedDataDidBecomeAvailable: Controller with credentials: %@",
+                                                     self.masterViewController.showingViewController]];
+            } else {
+                [[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"applicationProtectedDataDidBecomeAvailable: Controller with credentials: %@",
+                                                     NSStringFromClass([self.window.rootViewController class])]];
+            }
+
         }
     }
     else
@@ -263,8 +281,15 @@
 //        }
 //        
         self.window.rootViewController = [self createAndReturnLoginViewController];
-        [[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"applicationProtectedDataDidBecomeAvailable: Controller without credentials: %@",
-                                             NSStringFromClass([self.window.rootViewController class])]];
+        
+        if ([self.window.rootViewController isKindOfClass:[SYNMasterViewController class]]) {
+            [[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"applicationProtectedDataDidBecomeAvailable: Controller without credentials: %@",
+                                                 self.masterViewController.showingViewController]];
+        } else {
+            [[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"applicationProtectedDataDidBecomeAvailable: Controller without credentials: %@",
+                                                 NSStringFromClass([self.window.rootViewController class])]];
+        }
+
     }
 }
 
@@ -554,9 +579,15 @@
                                          self.currentUser.uniqueId, self.currentUser.username]];
 	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"applicationDidBecomeActive: Credential: %@",
                                          credential]];
-	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"applicationDidBecomeActive: Current view controller: %@",
-                                         NSStringFromClass([self.window.rootViewController class])]];
-	
+    
+    if ([self.window.rootViewController isKindOfClass:[SYNMasterViewController class]]) {
+	    [[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"applicationDidBecomeActive: Current view controller: %@",
+                                             self.masterViewController.showingViewController]];
+    } else {
+        [[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"applicationDidBecomeActive: Current view controller: %@",
+                                             NSStringFromClass([self.window.rootViewController class])]];
+    }
+
 }
 
 

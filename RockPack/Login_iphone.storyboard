@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
+        <!--Login Navigation Controller-->
         <scene sceneID="dFs-KT-Uy3">
             <objects>
-                <navigationController definesPresentationContext="YES" navigationBarHidden="YES" id="h6T-H1-ExR" sceneMemberID="viewController">
+                <navigationController definesPresentationContext="YES" navigationBarHidden="YES" id="h6T-H1-ExR" customClass="SYNLoginNavigationController" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="mGQ-7A-UGv">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
