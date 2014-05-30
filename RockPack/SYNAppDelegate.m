@@ -500,6 +500,9 @@
 
 - (void) applicationWillEnterForeground: (UIApplication *) application
 {
+    [[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"applicationWillEnterForeground: %@, %@",
+                                         self.loginViewController, self.currentOAuth2Credentials]];
+
     if (self.loginViewController)
     {
 //        // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
@@ -520,6 +523,7 @@
         
             if (refreshTimeout < kOAuthTokenExpiryMargin)
             {
+                [[SYNRemoteLogger sharedLogger] log:@"applicationWillEnterForeground: refresh"];
                 [self refreshExpiredToken];
             }
             else
@@ -1159,6 +1163,11 @@
 // Used to force a refresh of the credentials
 - (void) resetCurrentOAuth2Credentials
 {
+	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"resetCurrentOAuth2Credentials: %@", [NSThread callStackSymbols]]];
+	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"didFinishLaunchingWithOptions: App state: %d",
+                                         [UIApplication sharedApplication].applicationState]];
+	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"didFinishLaunchingWithOptions: Protected data available: %d",
+                                         [UIApplication sharedApplication].protectedDataAvailable]];
     _currentOAuth2Credentials = nil;
 }
 
@@ -1480,44 +1489,64 @@
     return success;
 }
 
-- (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
-	
-    [[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"performFetchWithCompletionHandler: start: %@",
-                                         self.currentOAuth2Credentials.userId]];
+- (void) updateFeedWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+{
+    [[SYNFeedModel sharedModel] reloadInitialPageWithCompletionHandler:^(BOOL success, BOOL hasChanged) {
+        UIBackgroundFetchResult result;
+        if (success) {
+            if (hasChanged) {
+                [self.navigationManager switchToFeed];
+                result = UIBackgroundFetchResultNewData;
+            } else {
+                result = UIBackgroundFetchResultNoData;
+            }
+        } else {
+            result = UIBackgroundFetchResultFailed;
+        }
 
-	if (!self.currentOAuth2Credentials.userId) {
-		completionHandler(UIBackgroundFetchResultNoData);
-		return;
-	}
-	
-	[[SYNFeedModel sharedModel] reloadInitialPageWithCompletionHandler:^(BOOL success, BOOL hasChanged) {
-		UIBackgroundFetchResult result;
-		if (success) {
-			if (hasChanged) {
-				result = UIBackgroundFetchResultNewData;
-			} else {
-				result = UIBackgroundFetchResultNoData;
-			}
-		} else {
-			result = UIBackgroundFetchResultFailed;
-		}
-		
-		if (hasChanged) {
-			[self.navigationManager switchToFeed];
-		}
-		
-        [[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"performFetchWithCompletionHandler: end: %d %d",
+        [[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"updateFeedWithCompletionHandler: end: %d %d",
                                              success, hasChanged]];
 
-		// Wait a second to give the images a chance to download
-		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-			
-            [[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"performFetchWithCompletionHandler: callback: %lu",
+        // Wait a second to give the images a chance to download
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"updateFeedWithCompletionHandler: callback: %lu",
                                                  result]];
-			
-			completionHandler(result);
-		});
-	}];
+            completionHandler(result);
+        });
+    }];
+}
+
+- (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+{
+
+    [[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"performFetchWithCompletionHandler: start: %@",
+                                         self.currentOAuth2Credentials]];
+
+    if (self.currentOAuth2Credentials) {
+        NSTimeInterval refreshTimeout = [self.currentOAuth2Credentials.expirationDate timeIntervalSinceNow];
+        if (refreshTimeout >= kOAuthTokenExpiryMargin)
+        {
+            [[SYNRemoteLogger sharedLogger] log:@"performFetchWithCompletionHandler: valid token"];
+            [self updateFeedWithCompletionHandler:completionHandler];
+        }
+        else
+        {
+            // refresh expired token
+            [self.oAuthNetworkEngine
+             refreshOAuthTokenWithCompletionHandler: ^(id response) {
+                [[SYNRemoteLogger sharedLogger] log:@"performFetchWithCompletionHandler: refresh success"];
+                [self updateFeedWithCompletionHandler:completionHandler];
+             }
+             errorHandler: ^(id response) {
+                 [[SYNRemoteLogger sharedLogger] log:@"performFetchWithCompletionHandler: refresh error"];
+                 completionHandler(UIBackgroundFetchResultFailed);
+             }];
+        }
+    }
+    else
+    {
+        completionHandler(UIBackgroundFetchResultNoData);
+    }
 }
 
 
