@@ -259,7 +259,7 @@ withCompletionHandler: (MKNKBasicSuccessBlock) successBlock {
         if (IS_IPHONE ) {
 			//TODO: make these values not hard coded
             if (IS_IPHONE_5) {
-                [self.topConstraint setConstant:-50];
+                [self.topConstraint setConstant:-48];
             } else {
                 [self.topConstraint setConstant:-140];
             }
