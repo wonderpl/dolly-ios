@@ -189,7 +189,9 @@
             [self logout];
         }
         
-        self.window.rootViewController = [self createAndReturnLoginViewController];
+        if (application.applicationState != UIApplicationStateBackground) {
+            self.window.rootViewController = [self createAndReturnLoginViewController];
+        }
 
         [[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"didFinishLaunchingWithOptions: Controller without credentials: %@",
                                              NSStringFromClass([self.window.rootViewController class])]];
