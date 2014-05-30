@@ -227,72 +227,6 @@
     return YES;
 }
 
-- (void)applicationProtectedDataDidBecomeAvailable:(UIApplication *)application {
-	// Don't use the currentCredentials method as this will assert if there is a vaild user,but no credentials, preventing completion of the logic below
-    // inlduding logout, which is the correct flow
-    // This should realistically never happen (except after swapping between dev and prod before the fix to the keychain account (before there was only one
-    // account shared between prod and dev, not they both have their own based on the bundle id
-    SYNOAuth2Credential *credential = [SYNOAuth2Credential credentialFromKeychainForService: [[NSBundle mainBundle] bundleIdentifier]
-                                                                                    account: self.currentUser.uniqueId];
-	
-	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"applicationProtectedDataDidBecomeAvailable: Starting app in state: %d", application.applicationState]];
-	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"applicationProtectedDataDidBecomeAvailable: Protected data available: %d", application.protectedDataAvailable]];
-	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"applicationProtectedDataDidBecomeAvailable: Current username: (%@) %@", self.currentUser.uniqueId, self.currentUser.username]];
-	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"applicationProtectedDataDidBecomeAvailable: Credential: %@", credential]];
-	
-    if (self.currentUser && credential)
-    {
-		[[SYNTrackingManager sharedManager] setAgeDimensionFromBirthDate:self.currentUser.dateOfBirth];
-		[[SYNTrackingManager sharedManager] setGenderDimension:self.currentUser.genderValue];
-		
-        // If we have a user and a refresh token... //
-        if ([self.currentOAuth2Credentials hasExpired])
-        {
-			[[SYNRemoteLogger sharedLogger] log:@"applicationProtectedDataDidBecomeAvailable: Token refresh"];
-            [self refreshExpiredTokenOnStartup];
-        }
-        else // we have an access token //
-        {
-            // set timer for auto refresh //
-            
-            [self setTokenExpiryTimer];
-            
-            [self refreshFacebookSession];
-            
-            self.window.rootViewController = [self createAndReturnRootViewController];
-            
-            if ([self.window.rootViewController isKindOfClass:[SYNMasterViewController class]]) {
-                [[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"applicationProtectedDataDidBecomeAvailable: Controller with credentials: %@",
-                                                     self.masterViewController.showingViewController]];
-            } else {
-                [[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"applicationProtectedDataDidBecomeAvailable: Controller with credentials: %@",
-                                                     NSStringFromClass([self.window.rootViewController class])]];
-            }
-
-        }
-    }
-    else
-    {
-//        if ((self.currentUser || credential) && application.protectedDataAvailable)
-//        {
-//			[[SYNRemoteLogger sharedLogger] log:@"AA Logging the user out"];
-//			
-//            [self logout];
-//        }
-//        
-        self.window.rootViewController = [self createAndReturnLoginViewController];
-        
-        if ([self.window.rootViewController isKindOfClass:[SYNMasterViewController class]]) {
-            [[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"applicationProtectedDataDidBecomeAvailable: Controller without credentials: %@",
-                                                 self.masterViewController.showingViewController]];
-        } else {
-            [[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"applicationProtectedDataDidBecomeAvailable: Controller without credentials: %@",
-                                                 NSStringFromClass([self.window.rootViewController class])]];
-        }
-
-    }
-}
-
 - (void) refreshFacebookSession
 {
     // link to facebook
@@ -1164,9 +1098,9 @@
 - (void) resetCurrentOAuth2Credentials
 {
 	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"resetCurrentOAuth2Credentials: %@", [NSThread callStackSymbols]]];
-	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"didFinishLaunchingWithOptions: App state: %d",
+	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"resetCurrentOAuth2Credentials: App state: %d",
                                          [UIApplication sharedApplication].applicationState]];
-	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"didFinishLaunchingWithOptions: Protected data available: %d",
+	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"resetCurrentOAuth2Credentials: Protected data available: %d",
                                          [UIApplication sharedApplication].protectedDataAvailable]];
     _currentOAuth2Credentials = nil;
 }

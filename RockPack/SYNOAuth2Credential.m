@@ -10,6 +10,7 @@
 #import "SSKeychain.h"
 #import "AppConstants.h"
 #import "SYNAppDelegate.h"
+#import "SYNRemoteLogger.h"
 
 @interface SYNOAuth2Credential ()
 
@@ -119,16 +120,21 @@
                          account: (NSString *) account
 {
     NSData *credentialData = [NSKeyedArchiver archivedDataWithRootObject: self];
-    
-    [SSKeychain setPasswordData: credentialData
-                     forService: service
-                        account: account];
-    
-    SYNAppDelegate* appDelegate = UIApplication.sharedApplication.delegate;
-    
-    // Invalidate any cached credentials we may have
-    [appDelegate resetCurrentOAuth2Credentials];
-    [appDelegate setTokenExpiryTimer];
+
+    if ([SSKeychain setPasswordData: credentialData
+                         forService: service
+                            account: account])
+    {
+        [[SYNRemoteLogger sharedLogger] log:@"saveToKeychainForService: success"];
+        // Invalidate any cached credentials we may have
+        SYNAppDelegate* appDelegate = UIApplication.sharedApplication.delegate;
+        [appDelegate resetCurrentOAuth2Credentials];
+        [appDelegate setTokenExpiryTimer];
+    }
+    else
+    {
+        [[SYNRemoteLogger sharedLogger] log:@"saveToKeychainForService: failed"];
+    }
 }
 
 - (void) removeFromKeychainForService: (NSString *) service
