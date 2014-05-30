@@ -8,6 +8,7 @@
 
 #import "SYNPagingModel.h"
 #import "SYNPagingModel+Protected.h"
+#import "SYNRemoteLogger.h"
 
 static const NSInteger DefaultBatchSize = 40;
 
@@ -73,6 +74,9 @@ static const NSInteger DefaultBatchSize = 40;
 }
 
 - (void)loadNextPageWithCompletionHandler:(SYNPagingModelCompletionBlock)completion {
+    [[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"loadNextPageWithCompletionHandler: %hhd",
+                                         self.loading]];
+
 	if (self.loading) {
 		if (completion) {
 			[self.completionBlocks addObject:[completion copy]];
@@ -88,15 +92,18 @@ static const NSInteger DefaultBatchSize = 40;
 	
 	[self loadItemsForRange:range successBlock:^(NSArray *results, NSInteger totalItemCount) {
 		BOOL hasChanged = ![results isEqualToArray:self.loadedItems];
-		
+
+        [[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"loadNextPageWithCompletionHandler: success: %hhd",
+                                             hasChanged]];
+
 		self.loadedItems = results;
 		self.loadedRange = range;
 		self.totalItemCount = totalItemCount;
 		
 		self.loading = NO;
 		
-		for (SYNPagingModelCompletionBlock completion in self.completionBlocks) {
-			completion(YES, hasChanged);
+		for (SYNPagingModelCompletionBlock completionBlock in self.completionBlocks) {
+			completionBlock(YES, hasChanged);
 		}
 		self.completionBlocks = [NSMutableArray array];
 		if (completion) {
@@ -105,10 +112,12 @@ static const NSInteger DefaultBatchSize = 40;
 		
 		[self.delegate pagingModelDataUpdated:self];
 	} errorBlock:^{
+        [[SYNRemoteLogger sharedLogger] log:@"loadNextPageWithCompletionHandler: error"];
+
 		self.loading = NO;
 		
-		for (SYNPagingModelCompletionBlock completion in self.completionBlocks) {
-			completion(NO, NO);
+		for (SYNPagingModelCompletionBlock completionBlock in self.completionBlocks) {
+			completionBlock(NO, NO);
 		}
 		self.completionBlocks = [NSMutableArray array];
 		if (completion) {
