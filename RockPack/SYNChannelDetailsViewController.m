@@ -108,6 +108,7 @@
         self.mode = mode;
         self.channel = channel;
 		self.model = [SYNChannelVideosModel modelWithChannel:channel];
+        self.model.delegate = self;
     }
     
     return self;
@@ -676,6 +677,7 @@
 		}
         
         self.model = [SYNChannelVideosModel modelWithChannel:self.channel];
+        self.model.delegate = self;
         [self.videoThumbnailCollectionView reloadData];
 
 	});
@@ -840,6 +842,8 @@
     }];
     
     self.model = [SYNChannelVideosModel modelWithChannel:self.channel];
+    self.model.delegate = self;
+    
     [self.videoThumbnailCollectionView reloadData];
 }
 
@@ -1233,6 +1237,7 @@
 						 
 						 self.channel.totalVideosValueValue--;
                          self.model = [SYNChannelVideosModel modelWithChannel:self.channel];
+                         self.model.delegate = self;
                         [self.videoThumbnailCollectionView reloadData];
                      }];
 }

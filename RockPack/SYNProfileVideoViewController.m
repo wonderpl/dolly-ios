@@ -15,13 +15,15 @@
 #import "SYNAddToChannelViewController.h"
 #import "SYNVideoPlayerViewController.h"
 #import "SYNVideoPlayerAnimator.h"
+#import "UINavigationBar+Appearance.h"
 
 static const CGFloat PARALLAX_SCROLL_VALUE = 2.0f;
 
-@interface SYNProfileVideoViewController () <UIViewControllerTransitioningDelegate, SYNCollectionVideoCellDelegate,SYNVideoPlayerAnimatorDelegate>
+@interface SYNProfileVideoViewController () <UIViewControllerTransitioningDelegate, SYNCollectionVideoCellDelegate,SYNVideoPlayerAnimatorDelegate, SYNPagingModelDelegate>
 @property (nonatomic, strong) SYNProfileHeader* headerView;
 @property (nonatomic, strong) SYNProfileVideoModel *model;
 @property (nonatomic, strong) SYNVideoPlayerAnimator *videoPlayerAnimator;
+@property (strong, nonatomic) IBOutlet UICollectionViewFlowLayout *defaultLayout;
 
 @end
 
@@ -50,6 +52,14 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
      withReuseIdentifier:[SYNProfileHeader reuseIdentifier]];
 
+    if (IS_IPAD) {
+        [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
+        [self.navigationController.navigationBar setBackgroundTransparent:YES];
+        self.navigationController.navigationBarHidden = YES;
+    }
+    
+    self.model.delegate = self;
+
 }
 
 
@@ -67,8 +77,16 @@ forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
 
 - (void)coverPhotoAnimation {
     
-    if (self.cv.contentOffset.y >= 750) {
-        return;
+    if (IS_IPHONE) {
+        if (self.cv.contentOffset.y >= 570) {
+            return;
+        }
+    }
+    
+    if (IS_IPAD) {
+        if (self.cv.contentOffset.y >= 750) {
+            return;
+        }
     }
     
     if (self.cv.contentOffset.y<=0) {
@@ -239,7 +257,6 @@ forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
 	
 	self.videoPlayerAnimator = animator;
 	viewController.transitioningDelegate = animator;
-	
 	[self presentViewController:viewController animated:YES completion:nil];
     
 }
@@ -250,5 +267,45 @@ forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
 	return (SYNCollectionVideoCell *)[self.cv cellForItemAtIndexPath:indexPath];
 }
 
+
+#pragma mark - orientation change 
+
+- (void) willAnimateRotationToInterfaceOrientation: (UIInterfaceOrientation) toInterfaceOrientation
+                                          duration: (NSTimeInterval) duration
+{
+    if (IS_IPAD) {
+        [self updateLayoutForOrientation: toInterfaceOrientation];
+    }
+}
+
+
+- (void) updateLayoutForOrientation: (UIDeviceOrientation) orientation
+{
+    if (IS_IPAD) {
+        if (UIDeviceOrientationIsPortrait(orientation))
+        {
+            self.defaultLayout.sectionInset = UIEdgeInsetsMake(0, 36, 70, 36);
+        }
+        else
+        {
+            self.defaultLayout.sectionInset = UIEdgeInsetsMake(0, 20, 70, 20);
+        }
+        
+        [self.cv.collectionViewLayout invalidateLayout];
+    }
+}
+
+#pragma mark - SYNPagingModelDelegate
+
+- (void)pagingModelDataUpdated:(SYNPagingModel *)pagingModel {
+    
+    
+    
+    [self.cv reloadData];
+}
+
+- (void)pagingModelErrorOccurred:(SYNPagingModel *)pagingModel {
+	
+}
 
 @end

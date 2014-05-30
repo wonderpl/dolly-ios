@@ -67,15 +67,14 @@ static const CGFloat TransitionDuration = 0.5f;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	self.isChannelsCollectionViewShowing = YES;
 	[self.videoCollectionViewController coverPhotoAnimation];
     [self.channelCollectionViewController coverPhotoAnimation];
+    self.channelContainer.hidden = YES;
 }
 
 - (void) viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	[SYNActivityManager.sharedInstance updateActivityForCurrentUserWithReset:NO];
-
 	if (self.isUserProfile) {
 		[[SYNTrackingManager sharedManager] trackOwnProfileScreenView];
     } else {
@@ -86,23 +85,14 @@ static const CGFloat TransitionDuration = 0.5f;
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 	[self.navigationController.navigationBar setBackgroundTransparent:YES];
-	
     [self.navigationBar setBarTintColor:[UIColor whiteColor]];
 	self.navigationBar.hidden = YES;
-    
-    
 	[self updateProfileData];
-	
 	self.navigationItem.title = @"";
-    
-
 }
 
-- (void) viewWillDisappear:(BOOL)animated {
-	[super viewWillDisappear:animated];
-	
-	self.navigationBar.hidden = NO;
-    
+- (void) viewDidDisappear:(BOOL)animated {
+    self.navigationBar.hidden = NO;
 	[self.navigationController.navigationBar setBackgroundTransparent:NO];
 }
 
@@ -168,8 +158,6 @@ static const CGFloat TransitionDuration = 0.5f;
                                                if (channelOwnerFromId) {
                                                    [channelOwnerFromId setAttributesFromDictionary: dictionary
                                                                                ignoringObjectTypes: kIgnoreVideoInstanceObjects | kIgnoreChannelOwnerObject];
-                                                   
-                                                   
                                                    _channelOwner = channelOwnerFromId;
                                                    [weakSelf reloadCollectionViews];
                                                } else {
@@ -229,10 +217,9 @@ static const CGFloat TransitionDuration = 0.5f;
 - (void) collectionsTabTapped {
 
 	
-//	if (self.isChannelsCollectionViewShowing) {
-//		return;
-//	}
-	self.isChannelsCollectionViewShowing = YES;
+	if (self.isChannelsCollectionViewShowing) {
+		return;
+	}
     self.channelCollectionViewController.headerView.collectionsTab.selected = YES;
     self.channelCollectionViewController.headerView.followingsTab.selected = NO;
 
@@ -279,14 +266,13 @@ static const CGFloat TransitionDuration = 0.5f;
 
 - (void) followingsTabTapped {
     
-//	if (!self.isChannelsCollectionViewShowing) {
-//		return;
-//	}
+	if (!self.isChannelsCollectionViewShowing) {
+		return;
+	}
 	
 	self.videoCollectionViewController.headerView.followingsTab.selected = YES;
 	self.videoCollectionViewController.headerView.collectionsTab.selected = NO;
 
-//	self.isChannelsCollectionViewShowing = NO;
 	if ([self.channelOwner.uniqueId isEqualToString:appDelegate.currentUser.uniqueId]) {
 		[[SYNTrackingManager sharedManager] trackOwnProfileFollowingScreenView];
 	} else {
@@ -302,7 +288,7 @@ static const CGFloat TransitionDuration = 0.5f;
     [self.channelCollectionViewController.headerView layoutIfNeeded];
     
 	
-	if (IS_IPHONE) {
+//	if (IS_IPHONE) {
 //		CGRect toFrame = self.view.frame;
 //		toFrame.origin.x = 0;
 //		
@@ -330,7 +316,7 @@ static const CGFloat TransitionDuration = 0.5f;
 //	} else {
 		self.followingContainer.hidden = NO;
 		self.channelContainer.hidden = YES;
-	}
+//	}
 	
 //	[self.subscriptionCollectionViewController.model reloadInitialPage];
 }
@@ -520,5 +506,10 @@ static const CGFloat TransitionDuration = 0.5f;
         }];
 	}
 	
+}
+
+
+- (BOOL) isChannelsCollectionViewShowing {
+    return !self.channelContainer.hidden;
 }
 @end

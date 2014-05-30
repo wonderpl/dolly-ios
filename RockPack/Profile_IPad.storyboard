@@ -33,20 +33,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="671" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E1x-4v-mwg" userLabel="Container View - subscriptions">
-                                <rect key="frame" x="0.0" y="0.0" width="671" height="1024"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <connections>
-                                    <segue destination="YBF-QV-ylu" kind="embed" identifier="subscriptionSegue" id="qHm-CU-GHg"/>
-                                </connections>
-                            </containerView>
                             <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eOZ-T0-zgS" userLabel="Container View - channels">
                                 <rect key="frame" x="0.0" y="0.0" width="671" height="1024"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <connections>
                                     <segue destination="tc3-ZG-m6W" kind="embed" identifier="channelSegue" id="yTi-I1-UZj"/>
+                                </connections>
+                            </containerView>
+                            <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E1x-4v-mwg" userLabel="Container View - subscriptions">
+                                <rect key="frame" x="0.0" y="0.0" width="671" height="1024"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <connections>
+                                    <segue destination="YBF-QV-ylu" kind="embed" identifier="videoSegue" id="HZu-Fr-ATz"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -250,10 +250,10 @@
             </objects>
             <point key="canvasLocation" x="1429" y="-448"/>
         </scene>
-        <!--Profile Subscription View Controller-->
+        <!--Profile Video View Controller-->
         <scene sceneID="RXV-2W-M2T">
             <objects>
-                <viewController storyboardIdentifier="SYNProfileSubscriptionViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="YBF-QV-ylu" customClass="SYNProfileSubscriptionViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="YBF-QV-ylu" customClass="SYNProfileVideoViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="OGi-q6-ASC"/>
                         <viewControllerLayoutGuide type="bottom" id="FlY-yQ-W6G"/>
@@ -267,36 +267,17 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="4" minimumInteritemSpacing="0.0" id="PTQ-Cn-Igk">
-                                    <size key="itemSize" width="280" height="100"/>
-                                    <size key="headerReferenceSize" width="671" height="701"/>
+                                    <size key="itemSize" width="280" height="310"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells/>
-                                <collectionReusableView key="sectionHeaderView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SYNProfileHeader" id="QSC-Yk-1NQ" customClass="SYNProfileHeader">
-                                    <rect key="frame" x="0.0" y="0.0" width="671" height="701"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                </collectionReusableView>
                                 <connections>
-                                    <outlet property="dataSource" destination="YBF-QV-ylu" id="xow-n2-wWc"/>
-                                    <outlet property="delegate" destination="YBF-QV-ylu" id="o4A-nT-LJY"/>
+                                    <outlet property="dataSource" destination="YBF-QV-ylu" id="A6C-rY-DiG"/>
+                                    <outlet property="delegate" destination="YBF-QV-ylu" id="pKe-d6-cbM"/>
                                 </connections>
                             </collectionView>
-                            <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x14-kE-VRt" userLabel="fake navigation bar">
-                                <rect key="frame" x="0.0" y="0.0" width="671" height="64"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NC2-yn-BIH" userLabel="title">
-                                        <rect key="frame" x="0.0" y="14" width="671" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -310,16 +291,85 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="671" height="1024"/>
                     <connections>
-                        <outlet property="cv" destination="Bn4-nv-AbE" id="Yvy-Rp-xue"/>
-                        <outlet property="defaultLayout" destination="PTQ-Cn-Igk" id="6WH-m9-A9m"/>
-                        <outlet property="fakeNavigationBar" destination="x14-kE-VRt" id="KqO-RT-OXe"/>
-                        <outlet property="fakeNavigationBarTitle" destination="NC2-yn-BIH" id="T56-Jr-i8L"/>
+                        <outlet property="cv" destination="Bn4-nv-AbE" id="1py-WH-vcv"/>
+                        <outlet property="defaultLayout" destination="PTQ-Cn-Igk" id="97U-wM-dWr"/>
                         <outlet property="view" destination="0zr-8O-Gd0" id="KwQ-5D-NyI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hVW-hE-1yH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1133" y="1096"/>
+        </scene>
+        <!--Profile Subscription View Controller-->
+        <scene sceneID="Rby-IS-fZ4">
+            <objects>
+                <viewController storyboardIdentifier="SYNProfileSubscriptionViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="EC2-2r-2DS" customClass="SYNProfileSubscriptionViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="yRO-Im-WoL"/>
+                        <viewControllerLayoutGuide type="bottom" id="Es9-bt-VzS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="vGI-HL-1Jr">
+                        <rect key="frame" x="0.0" y="0.0" width="671" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView autoresizesSubviews="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Q08-Lf-kpC">
+                                <rect key="frame" x="0.0" y="0.0" width="671" height="1024"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="4" minimumInteritemSpacing="0.0" id="nq7-n6-TWT">
+                                    <size key="itemSize" width="280" height="100"/>
+                                    <size key="headerReferenceSize" width="671" height="701"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SYNProfileHeader" id="g6W-8L-iM6" customClass="SYNProfileHeader">
+                                    <rect key="frame" x="0.0" y="0.0" width="671" height="701"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </collectionReusableView>
+                                <connections>
+                                    <outlet property="dataSource" destination="EC2-2r-2DS" id="cI3-ef-7It"/>
+                                    <outlet property="delegate" destination="EC2-2r-2DS" id="vle-PF-Yu2"/>
+                                </connections>
+                            </collectionView>
+                            <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bNu-Ei-zfZ" userLabel="fake navigation bar">
+                                <rect key="frame" x="0.0" y="0.0" width="671" height="64"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uyq-T7-RbJ" userLabel="title">
+                                        <rect key="frame" x="0.0" y="14" width="671" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="Q08-Lf-kpC" secondAttribute="width" id="F7o-jo-D9T"/>
+                            <constraint firstAttribute="centerY" secondItem="Q08-Lf-kpC" secondAttribute="centerY" id="H00-Lk-b72"/>
+                            <constraint firstAttribute="height" secondItem="Q08-Lf-kpC" secondAttribute="height" id="aCV-Kt-dQ6"/>
+                            <constraint firstAttribute="centerX" secondItem="Q08-Lf-kpC" secondAttribute="centerX" id="bbc-9A-1De"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="671" height="1024"/>
+                    <connections>
+                        <outlet property="cv" destination="Q08-Lf-kpC" id="jSF-we-CGa"/>
+                        <outlet property="defaultLayout" destination="nq7-n6-TWT" id="RyH-Ca-d1M"/>
+                        <outlet property="fakeNavigationBar" destination="bNu-Ei-zfZ" id="yXJ-Lm-hTo"/>
+                        <outlet property="fakeNavigationBarTitle" destination="Uyq-T7-RbJ" id="46G-g1-ZsV"/>
+                        <outlet property="view" destination="vGI-HL-1Jr" id="pqj-R4-YSv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RIC-x6-78l" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2101" y="864"/>
         </scene>
     </scenes>
     <resources>

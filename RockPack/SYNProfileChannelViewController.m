@@ -143,8 +143,17 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 
 - (void)coverPhotoAnimation {
     
-    if (self.cv.contentOffset.y >= 750) {
-        return;
+    //TODO: create defines for header sizes instead of hard coding.
+    if (IS_IPHONE) {
+        if (self.cv.contentOffset.y >= 570) {
+            return;
+        }
+    }
+    
+    if (IS_IPAD) {
+        if (self.cv.contentOffset.y >= 750) {
+            return;
+        }
     }
 
     if (self.cv.contentOffset.y<=0) {
