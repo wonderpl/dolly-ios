@@ -198,6 +198,7 @@
 
 }
 
+
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
     
@@ -212,6 +213,9 @@
 		[[SYNTrackingManager sharedManager] setChannelRelationDimension:subscriptionStatus];
 		[[SYNTrackingManager sharedManager] trackOtherUserCollectionScreenView];
 	}
+    
+    [self.navigationController.navigationBar setBackgroundTransparent:YES];
+
 }
 
 - (void)viewWillDisappear: (BOOL) animated {

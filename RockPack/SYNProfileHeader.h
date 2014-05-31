@@ -24,8 +24,9 @@
 @property (nonatomic, weak) id<SYNProfileHeaderDelegate> delegate;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *segmentedController;
 
-@property (strong, nonatomic) IBOutlet UIButton *collectionsTab;
-@property (strong, nonatomic) IBOutlet UIButton *followingsTab;
+
+@property (strong, nonatomic) IBOutlet UIButton *secondTab;
+@property (strong, nonatomic) IBOutlet UIButton *firstTab;
 
 
 - (void)setCoverphotoImage: (NSString*) thumbnailURL;

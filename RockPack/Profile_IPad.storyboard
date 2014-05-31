@@ -33,7 +33,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="671" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eOZ-T0-zgS" userLabel="Container View - channels">
+                            <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eOZ-T0-zgS" userLabel="Channels View">
                                 <rect key="frame" x="0.0" y="0.0" width="671" height="1024"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -41,12 +41,20 @@
                                     <segue destination="tc3-ZG-m6W" kind="embed" identifier="channelSegue" id="yTi-I1-UZj"/>
                                 </connections>
                             </containerView>
-                            <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E1x-4v-mwg" userLabel="Container View - subscriptions">
+                            <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E1x-4v-mwg" userLabel="Videos View">
                                 <rect key="frame" x="0.0" y="0.0" width="671" height="1024"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <connections>
                                     <segue destination="YBF-QV-ylu" kind="embed" identifier="videoSegue" id="HZu-Fr-ATz"/>
+                                </connections>
+                            </containerView>
+                            <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CEz-B1-tXd" userLabel="Following view">
+                                <rect key="frame" x="0.0" y="-64" width="671" height="1088"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <connections>
+                                    <segue destination="EC2-2r-2DS" kind="embed" identifier="subscriptionSegue" id="hEk-0R-bXp"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -55,9 +63,13 @@
                             <constraint firstItem="eOZ-T0-zgS" firstAttribute="trailing" secondItem="E1x-4v-mwg" secondAttribute="trailing" id="2l0-gy-bp4"/>
                             <constraint firstItem="E1x-4v-mwg" firstAttribute="bottom" secondItem="eOZ-T0-zgS" secondAttribute="bottom" id="4By-jE-OLb"/>
                             <constraint firstAttribute="bottom" secondItem="E1x-4v-mwg" secondAttribute="bottom" id="8oZ-rO-4GH"/>
+                            <constraint firstItem="CEz-B1-tXd" firstAttribute="top" secondItem="Vnk-zh-Vuh" secondAttribute="bottom" constant="-64" id="GrN-cP-Dej"/>
                             <constraint firstAttribute="trailing" secondItem="E1x-4v-mwg" secondAttribute="trailing" id="KPz-S9-xxl"/>
                             <constraint firstItem="eOZ-T0-zgS" firstAttribute="leading" secondItem="E1x-4v-mwg" secondAttribute="leading" id="No2-uE-xiM"/>
                             <constraint firstItem="E1x-4v-mwg" firstAttribute="top" secondItem="Zqe-H7-ZBI" secondAttribute="top" id="PVi-oH-vDO"/>
+                            <constraint firstItem="7hN-kg-5OC" firstAttribute="top" secondItem="CEz-B1-tXd" secondAttribute="bottom" id="Tej-45-cqZ"/>
+                            <constraint firstItem="CEz-B1-tXd" firstAttribute="leading" secondItem="Zqe-H7-ZBI" secondAttribute="leading" id="fnK-Vk-gSc"/>
+                            <constraint firstAttribute="trailing" secondItem="CEz-B1-tXd" secondAttribute="trailing" id="mBp-gX-fAf"/>
                             <constraint firstItem="E1x-4v-mwg" firstAttribute="leading" secondItem="Zqe-H7-ZBI" secondAttribute="leading" id="ohA-Xa-EhI"/>
                             <constraint firstItem="eOZ-T0-zgS" firstAttribute="top" secondItem="E1x-4v-mwg" secondAttribute="top" id="okO-8P-YDX"/>
                         </constraints>
@@ -69,7 +81,8 @@
                     <size key="freeformSize" width="671" height="1024"/>
                     <connections>
                         <outlet property="channelContainer" destination="eOZ-T0-zgS" id="sjP-yM-mVN"/>
-                        <outlet property="followingContainer" destination="E1x-4v-mwg" id="kTG-BU-lVr"/>
+                        <outlet property="followingContainer" destination="CEz-B1-tXd" id="mLE-yG-xuw"/>
+                        <outlet property="videosContainer" destination="E1x-4v-mwg" id="NEv-Nk-EfN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eum-gn-2vm" userLabel="First Responder" sceneMemberID="firstResponder"/>

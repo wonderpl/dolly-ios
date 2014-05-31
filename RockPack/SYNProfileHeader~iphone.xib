@@ -187,15 +187,15 @@
                 <outlet property="aboutMeTextView" destination="Pnq-Al-e0n" id="VW9-ZT-aPf"/>
                 <outlet property="avatarBorder" destination="zuH-da-sGu" id="flh-1o-c2V"/>
                 <outlet property="avatarButton" destination="Wzg-oF-9q5" id="GEt-Xv-mWG"/>
-                <outlet property="collectionsTab" destination="ZcY-bz-9ib" id="5sF-kc-VAv"/>
                 <outlet property="coverImage" destination="WTJ-1k-eNv" id="RAx-PU-VBY"/>
                 <outlet property="coverImageBottom" destination="Gad-sf-cIj" id="uYk-KF-VGZ"/>
                 <outlet property="coverImageTop" destination="1ut-Pa-fNu" id="Aca-Ot-maw"/>
+                <outlet property="firstTab" destination="0Ua-76-NhD" id="bKC-vT-mMt"/>
                 <outlet property="followAllButton" destination="qG4-1X-MoW" id="iiV-GK-36b"/>
                 <outlet property="followersCountLabel" destination="3x0-8E-Inl" id="2u3-cf-dop"/>
-                <outlet property="followingsTab" destination="0Ua-76-NhD" id="wIC-03-UVv"/>
                 <outlet property="fullNameLabel" destination="0i5-fa-0Qz" id="jxT-KC-7Ks"/>
                 <outlet property="moreButton" destination="FyE-Km-Hdh" id="th8-PU-VDY"/>
+                <outlet property="secondTab" destination="ZcY-bz-9ib" id="TgW-Bs-FhY"/>
                 <outlet property="segmentedBorder" destination="yIa-oO-mGN" id="OLu-KY-gQ1"/>
                 <outlet property="userNameLabel" destination="SPE-qM-wrN" id="vbO-Ip-nyo"/>
             </connections>

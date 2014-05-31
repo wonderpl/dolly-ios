@@ -213,8 +213,8 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
                                                                withReuseIdentifier: [SYNProfileHeader reuseIdentifier]
                                                                       forIndexPath: indexPath];
         self.headerView = ((SYNProfileHeader*)supplementaryView);
-        self.headerView.channelOwner = self.channelOwner;
         self.headerView.isUserProfile = self.isUserProfile;
+        self.headerView.channelOwner = self.channelOwner;
         self.headerView.delegate = (SYNProfileViewController*)self.parentViewController;
 
 		supplementaryView = self.headerView;

@@ -13,6 +13,7 @@
 
 @protocol SYNProfileHeaderDelegate <NSObject>
 
+- (void) videosTabTapped;
 - (void) followingsTabTapped;
 - (void) collectionsTabTapped;
 - (void) editButtonTapped;

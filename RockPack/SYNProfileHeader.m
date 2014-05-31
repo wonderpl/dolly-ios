@@ -42,7 +42,7 @@
 -(void) awakeFromNib {
     [super awakeFromNib];
     [self setUpViews];
-	self.followingsTab.selected = YES;
+	self.firstTab.selected = YES;
 
 }
 
@@ -73,14 +73,25 @@
 
 - (void)setSegmentedControllerText {
 
-	[self.collectionsTab setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Collections", nil), self.channelOwner.totalVideosValueChannelValue] forState:UIControlStateNormal];
-	[self.collectionsTab setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Collections", nil), self.channelOwner.totalVideosValueChannelValue] forState:UIControlStateSelected];
+    
+    if (self.isUserProfile) {
+        [self.firstTab setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Collections", nil), self.channelOwner.totalVideosValueChannelValue] forState:UIControlStateNormal];
+        [self.firstTab setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Collections", nil), self.channelOwner.totalVideosValueChannelValue] forState:UIControlStateSelected];
+        
+        [self.secondTab setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Following", nil), self.channelOwner.subscriptionCountValue] forState:UIControlStateNormal];
+        
+        [self.secondTab setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Following", nil), self.channelOwner.subscriptionCountValue] forState:UIControlStateSelected];
+ 
+    } else {
+        [self.secondTab setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Collections", nil), self.channelOwner.totalVideosValueChannelValue] forState:UIControlStateNormal];
+        [self.secondTab setTitle:[NSString stringWithFormat:@"%@ (%lld)", NSLocalizedString(@"Collections", nil), self.channelOwner.totalVideosValueChannelValue] forState:UIControlStateSelected];
+        
+        
+        [self.firstTab setTitle:[NSString stringWithFormat:@"%@ (%lld)", @"Videos", self.channelOwner.totalVideosValue] forState:UIControlStateNormal];
+        
+        [self.firstTab setTitle:[NSString stringWithFormat:@"%@ (%lld)", @"Videos", self.channelOwner.totalVideosValue] forState:UIControlStateSelected];
 
-
-	
-    [self.followingsTab setTitle:[NSString stringWithFormat:@"%@ (%lld)", @"Videos", self.channelOwner.totalVideosValue] forState:UIControlStateNormal];
-	
-	[self.followingsTab setTitle:[NSString stringWithFormat:@"%@ (%lld)", @"Videos", self.channelOwner.totalVideosValue] forState:UIControlStateSelected];
+    }
 }
 
 -(void) setProfileImage : (NSString*) thumbnailURL
@@ -179,8 +190,8 @@
 															   blue: 219.0f / 255.0f
 															  alpha: 1.0f] CGColor];
 	
-	[self.followingsTab.titleLabel setFont:[UIFont lightCustomFontOfSize:self.followingsTab.titleLabel.font.pointSize]];
-	[self.collectionsTab.titleLabel setFont:[UIFont lightCustomFontOfSize:self.collectionsTab.titleLabel.font.pointSize]];
+	[self.firstTab.titleLabel setFont:[UIFont lightCustomFontOfSize:self.firstTab.titleLabel.font.pointSize]];
+	[self.secondTab.titleLabel setFont:[UIFont lightCustomFontOfSize:self.secondTab.titleLabel.font.pointSize]];
 }
 
 -(void) setFollowersCountLabel {
@@ -207,6 +218,7 @@
         self.avatarButton.userInteractionEnabled = YES;
         self.moreButton.hidden = NO;
         self.userNameLabel.hidden = YES;
+        
     } else {
         self.followAllButton.hidden = NO;
         self.moreButton.hidden = YES;
@@ -227,19 +239,27 @@
 
 - (IBAction)segmentedControllerTapped:(id)sender {
     
-    if (sender == self.collectionsTab) {
-		self.collectionsTab.selected = YES;
-		self.followingsTab.selected = NO;
+    if (sender == self.secondTab) {
+		self.secondTab.selected = YES;
+		self.firstTab.selected = NO;
 
-		[self.delegate collectionsTabTapped];
+        if (self.isUserProfile) {
+            [self.delegate followingsTabTapped];
+  
+        } else {
+            [self.delegate collectionsTabTapped];
+        }
 		
-    } else if (sender == self.followingsTab) {
+    } else if (sender == self.firstTab) {
 		
-		self.followingsTab.selected = YES;
-		self.collectionsTab.selected = NO;
+		self.firstTab.selected = YES;
+		self.secondTab.selected = NO;
 
-        [self.delegate followingsTabTapped];
-    
+        if (self.isUserProfile) {
+            [self.delegate collectionsTabTapped];
+        } else {
+            [self.delegate videosTabTapped];
+        }
 	}
 }
 

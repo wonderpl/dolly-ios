@@ -191,15 +191,15 @@
                 <outlet property="aboutMeTextView" destination="ZGW-qb-DqS" id="ENw-9J-aob"/>
                 <outlet property="avatarBorder" destination="Ote-bm-uEO" id="02n-Om-PrS"/>
                 <outlet property="avatarButton" destination="rAj-tb-ncC" id="Y17-6L-ans"/>
-                <outlet property="collectionsTab" destination="xv1-gJ-wI9" id="QNg-0z-bpe"/>
                 <outlet property="coverImage" destination="9PC-4a-87q" id="ZcF-Lp-plG"/>
                 <outlet property="coverImageTop" destination="S7f-yg-ibX" id="vhO-AO-upr"/>
                 <outlet property="descriptionTopConstraint" destination="kVs-Rh-abK" id="PVq-v4-qLy"/>
+                <outlet property="firstTab" destination="h3U-cl-bJm" id="Oaf-el-UvA"/>
                 <outlet property="followAllButton" destination="7YV-aZ-EKa" id="hni-tV-mSP"/>
                 <outlet property="followersCountLabel" destination="88l-sj-JDE" id="vVn-DE-icw"/>
-                <outlet property="followingsTab" destination="h3U-cl-bJm" id="DVz-km-PU4"/>
                 <outlet property="fullNameLabel" destination="OCZ-qA-mlf" id="aw3-Ey-yNI"/>
                 <outlet property="moreButton" destination="r8W-Sv-btW" id="RUW-VI-5xt"/>
+                <outlet property="secondTab" destination="xv1-gJ-wI9" id="E3M-KP-dqK"/>
                 <outlet property="segmentedBorder" destination="WvX-Ve-VTK" id="6lF-nM-kum"/>
                 <outlet property="segmentedController" destination="uRX-vv-NrM" id="VaX-Zz-3TO"/>
                 <outlet property="userNameLabel" destination="cha-pJ-bzu" id="w5g-il-Cbx"/>

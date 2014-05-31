@@ -7,7 +7,6 @@
 //
 
 #import "SYNProfileViewController.h"
-#import "SYNProfileChannelViewController.h"
 #import "SYNActivityManager.h"
 #import "UIFont+SYNFont.h"
 #import "UINavigationBar+Appearance.h"
@@ -19,24 +18,22 @@
 #import "SYNProfileHeader.h"
 #import "SYNSocialButton.h"
 #import "SYNProfileVideoViewController.h"
+#import "SYNProfileChannelViewController.h"
+#import "SYNProfileSubscriptionViewController.h"
 
 static const CGFloat TransitionDuration = 0.5f;
 
 @interface SYNProfileViewController () <UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning, SYNProfileNavigationBarDelegate>
 
-
+@property (nonatomic, strong) SYNProfileSubscriptionViewController *subscriptionCollectionViewController;
 @property (strong, nonatomic) SYNProfileVideoViewController *videoCollectionViewController;
 @property (strong, nonatomic) SYNProfileChannelViewController *channelCollectionViewController;
 @property (strong, nonatomic) IBOutlet UIView *channelContainer;
+@property (strong, nonatomic) IBOutlet UIView *videosContainer;
 @property (strong, nonatomic) IBOutlet UIView *followingContainer;
-@property (strong, nonatomic) SYNSocialButton *followAllButton;
-@property (assign, nonatomic) BOOL isUserProfile;
-@property (assign, nonatomic) BOOL creatingChannel;
-@property (assign, nonatomic) BOOL isChannelsCollectionViewShowing;
-
 @property (strong, nonatomic) IBOutlet UINavigationItem *titleView;
-
 @property (strong, nonatomic) IBOutlet UINavigationBar *navigationBar;
+@property (assign, nonatomic) BOOL isUserProfile;
 
 @end
 
@@ -44,24 +41,21 @@ static const CGFloat TransitionDuration = 0.5f;
 
 + (UINavigationController *)navigationControllerWithChannelOwner:(ChannelOwner*) channelOwner {
 	NSString *filename = IS_IPAD ? @"Profile_IPad" : @"Profile_IPhone";
-	
-	UINavigationController *navigationController = [[UIStoryboard storyboardWithName:filename bundle:nil] instantiateInitialViewController];
-	
+    
+    UINavigationController *navigationController = [[UIStoryboard storyboardWithName:filename bundle:nil] instantiateInitialViewController];
 	SYNProfileViewController *profileVC = ((SYNProfileViewController*)navigationController.topViewController);
 	profileVC.channelOwner = channelOwner;
-	
+    
 	return navigationController;
 }
 
 + (UIViewController *)viewControllerWithChannelOwner:(ChannelOwner*) channelOwner {
 	NSString *filename = IS_IPAD ? @"Profile_IPad" : @"Profile_IPhone";
 	
-	SYNProfileViewController *profileVC = [[UIStoryboard storyboardWithName:filename bundle:nil] instantiateViewControllerWithIdentifier:@"SYNProfileViewController"];
-	
+    SYNProfileViewController *profileVC = [[UIStoryboard storyboardWithName:filename bundle:nil] instantiateViewControllerWithIdentifier:@"SYNProfileViewController"];
 	profileVC.channelOwner = channelOwner;
 	
-	
-	return profileVC;
+    return profileVC;
 }
 
 
@@ -69,7 +63,16 @@ static const CGFloat TransitionDuration = 0.5f;
     [super viewDidLoad];
 	[self.videoCollectionViewController coverPhotoAnimation];
     [self.channelCollectionViewController coverPhotoAnimation];
-    self.channelContainer.hidden = YES;
+    
+    if (self.isUserProfile) {
+        self.followingContainer.hidden = YES;
+        self.videosContainer.hidden = YES;
+        self.channelContainer.hidden = NO;
+    } else {
+        self.videosContainer.hidden = NO;
+        self.channelContainer.hidden = YES;
+        self.followingContainer.hidden = YES;
+    }
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -93,9 +96,13 @@ static const CGFloat TransitionDuration = 0.5f;
 
 - (void) viewDidDisappear:(BOOL)animated {
     self.navigationBar.hidden = NO;
-	[self.navigationController.navigationBar setBackgroundTransparent:NO];
 }
 
+- (void) viewWillDisappear:(BOOL)animated {
+    if (IS_IPHONE) {
+        [self.navigationController.navigationBar setBackgroundTransparent:NO];
+    }
+}
 #pragma mark - segue
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -105,17 +112,22 @@ static const CGFloat TransitionDuration = 0.5f;
         channelCollectionViewController.channelOwner = self.channelOwner;
         channelCollectionViewController.isUserProfile = self.isUserProfile;
 		channelCollectionViewController.delegate = self;
-		
         self.channelCollectionViewController = channelCollectionViewController;
     } else if ([segueName isEqualToString: @"videoSegue"]){
-        
         SYNProfileVideoViewController * videoCollectionViewController =[segue destinationViewController];
         videoCollectionViewController.channelOwner = self.channelOwner;
         videoCollectionViewController.isUserProfile = self.isUserProfile;
 		videoCollectionViewController.delegate = self;
         self.videoCollectionViewController = videoCollectionViewController;
     
+    }  else if ([segueName isEqualToString: @"subscriptionSegue"]){
+        SYNProfileSubscriptionViewController * subscriptionCollectionViewController =[segue destinationViewController];
+        subscriptionCollectionViewController.channelOwner = self.channelOwner;
+        subscriptionCollectionViewController.isUserProfile = self.isUserProfile;
+		subscriptionCollectionViewController.delegate = self;
+        self.subscriptionCollectionViewController = subscriptionCollectionViewController;
     }
+
 }
 
 - (void) setChannelOwner: (ChannelOwner *) user {
@@ -130,12 +142,19 @@ static const CGFloat TransitionDuration = 0.5f;
     }
     
     BOOL channelOwnerIsUser = (BOOL)[user.uniqueId isEqualToString: appDelegate.currentUser.uniqueId];
-    
     // is a User has been passsed dont copy him OR his channels as there can be only one.
     if (!channelOwnerIsUser && user.uniqueId) {
+        IgnoringObjects flags = kIgnoreChannelOwnerObject | kIgnoreVideoInstanceObjects; // these flags are passed to the Channels
         
-        [self singleChannelOwnerCheck:user];
-        // The ChannelOwner is the User!
+        _channelOwner = [ChannelOwner instanceFromChannelOwner: user
+                                                     andViewId: self.viewId
+                                     usingManagedObjectContext: user.managedObjectContext
+                                           ignoringObjectTypes: flags];
+        
+        if (_channelOwner) {
+            [_channelOwner.managedObjectContext save: nil];
+        }
+        
     } else {
         _channelOwner = user;
     }
@@ -143,7 +162,6 @@ static const CGFloat TransitionDuration = 0.5f;
     // if a user has been passed or found, monitor
     if (_channelOwner) {
         self.isUserProfile = channelOwnerIsUser;
-        
         NSManagedObjectID *channelOwnerObjectId = _channelOwner.objectID;
         NSManagedObjectContext *channelOwnerObjectMOC = _channelOwner.managedObjectContext;
         
@@ -168,6 +186,7 @@ static const CGFloat TransitionDuration = 0.5f;
     
     self.channelOwner.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribedToUserId:self.channelOwner.uniqueId];
 }
+
 
 - (void) singleChannelOwnerCheck: (ChannelOwner*) user {
     
@@ -216,17 +235,31 @@ static const CGFloat TransitionDuration = 0.5f;
 
 - (void) collectionsTabTapped {
 
+    
+    if (self.isUserProfile) {
+        self.channelCollectionViewController.headerView.secondTab.selected = NO;
+        self.channelCollectionViewController.headerView.firstTab.selected = YES;
+
+    } else {
+        self.channelCollectionViewController.headerView.secondTab.selected = YES;
+        self.channelCollectionViewController.headerView.firstTab.selected = NO;
+
+    }
+    
 	
 	if (self.isChannelsCollectionViewShowing) {
 		return;
 	}
-    self.channelCollectionViewController.headerView.collectionsTab.selected = YES;
-    self.channelCollectionViewController.headerView.followingsTab.selected = NO;
 
-    CGPoint offSet = self.videoCollectionViewController.cv.contentOffset;
+    CGPoint offSet;
     
-    [self.channelCollectionViewController.cv setContentOffset:offSet];
-
+    if (self.isUserProfile) {
+        offSet = self.subscriptionCollectionViewController.cv.contentOffset;
+    } else {
+        offSet = self.videoCollectionViewController.cv.contentOffset;
+    }
+    
+	[self alignOffSet:offSet];
     [self.videoCollectionViewController coverPhotoAnimation];
     [self.channelCollectionViewController coverPhotoAnimation];
     [self.channelCollectionViewController.headerView layoutIfNeeded];
@@ -257,35 +290,57 @@ static const CGFloat TransitionDuration = 0.5f;
 //		
 //	} else {
 		self.channelContainer.hidden = NO;
-		self.followingContainer.hidden = YES;
-
+		self.videosContainer.hidden = YES;
+	    self.followingContainer.hidden = YES;
 //	}
 
 	[self.channelCollectionViewController.model reloadInitialPage];
 }
 
+
+- (void) alignOffSet: (CGPoint) offset {
+    [self.subscriptionCollectionViewController.cv setContentOffset:offset];
+	[self.videoCollectionViewController.cv setContentOffset:offset];
+    [self.channelCollectionViewController.cv setContentOffset:offset];
+    
+    [self.videoCollectionViewController coverPhotoAnimation];
+    [self.channelCollectionViewController coverPhotoAnimation];
+    [self.subscriptionCollectionViewController coverPhotoAnimation];
+    
+    [self.videoCollectionViewController.headerView layoutIfNeeded];
+    [self.channelCollectionViewController.headerView layoutIfNeeded];
+    [self.subscriptionCollectionViewController.headerView layoutIfNeeded];
+
+}
+
 - (void) followingsTabTapped {
     
-	if (!self.isChannelsCollectionViewShowing) {
+	if (!self.followingContainer.hidden) {
 		return;
 	}
 	
-	self.videoCollectionViewController.headerView.followingsTab.selected = YES;
-	self.videoCollectionViewController.headerView.collectionsTab.selected = NO;
+    
+    if (self.isUserProfile) {
+		self.subscriptionCollectionViewController.headerView.firstTab.selected = NO;
+		self.subscriptionCollectionViewController.headerView.secondTab.selected = YES;
+    } else {
+        self.videoCollectionViewController.headerView.firstTab.selected = YES;
+        self.videoCollectionViewController.headerView.secondTab.selected = NO;
+    }
 
-	if ([self.channelOwner.uniqueId isEqualToString:appDelegate.currentUser.uniqueId]) {
-		[[SYNTrackingManager sharedManager] trackOwnProfileFollowingScreenView];
-	} else {
-		[[SYNTrackingManager sharedManager] trackOtherUserCollectionFollowingScreenView];
-	}
+    //TODO: fix tracking
+//	if ([self.channelOwner.uniqueId isEqualToString:appDelegate.currentUser.uniqueId]) {
+//		[[SYNTrackingManager sharedManager] trackOwnProfileFollowingScreenView];
+//	} else {
+//		[[SYNTrackingManager sharedManager] trackOtherUserCollectionFollowingScreenView];
+//	}
 
     CGPoint offSet = self.channelCollectionViewController.cv.contentOffset;
-	[self.videoCollectionViewController.cv setContentOffset:offSet];
 
-    [self.videoCollectionViewController coverPhotoAnimation];
-    [self.channelCollectionViewController coverPhotoAnimation];
-    [self.videoCollectionViewController.headerView layoutIfNeeded];
-    [self.channelCollectionViewController.headerView layoutIfNeeded];
+    
+    
+	[self alignOffSet:offSet];
+    
     
 	
 //	if (IS_IPHONE) {
@@ -314,12 +369,81 @@ static const CGFloat TransitionDuration = 0.5f;
 //		} completion:nil];
 //
 //	} else {
-		self.followingContainer.hidden = NO;
+		self.videosContainer.hidden = YES;
 		self.channelContainer.hidden = YES;
+        self.followingContainer.hidden = NO;
 //	}
 	
 //	[self.subscriptionCollectionViewController.model reloadInitialPage];
 }
+
+
+- (void) videosTabTapped {
+    
+	if (!self.videosContainer.hidden) {
+		return;
+	}
+	
+    
+    if (self.isUserProfile) {
+        
+    } else {
+        self.videoCollectionViewController.headerView.firstTab.selected = YES;
+        self.videoCollectionViewController.headerView.secondTab.selected = NO;
+    }
+    
+    //TODO: fix tracking
+    //	if ([self.channelOwner.uniqueId isEqualToString:appDelegate.currentUser.uniqueId]) {
+    //		[[SYNTrackingManager sharedManager] trackOwnProfileFollowingScreenView];
+    //	} else {
+    //		[[SYNTrackingManager sharedManager] trackOtherUserCollectionFollowingScreenView];
+    //	}
+    
+    CGPoint offSet = self.channelCollectionViewController.cv.contentOffset;
+
+    
+    
+	[self alignOffSet:offSet];
+    
+    [self.videoCollectionViewController coverPhotoAnimation];
+    [self.channelCollectionViewController coverPhotoAnimation];
+    [self.videoCollectionViewController.headerView layoutIfNeeded];
+    [self.channelCollectionViewController.headerView layoutIfNeeded];
+    
+	
+    //	if (IS_IPHONE) {
+    //		CGRect toFrame = self.view.frame;
+    //		toFrame.origin.x = 0;
+    //
+    //		CGRect fromFrame = self.view.frame;
+    //		fromFrame.origin.x = -320;
+    //
+    //
+    //		int headerSize = self.isUserProfile ? 523 : 523;
+    //
+    //		self.videoCollectionViewController.view.frame = CGRectMake(320, 0, 320, headerSize);
+    //		self.videoCollectionViewController.headerView.frame = CGRectMake(-320, 0, 320, headerSize);
+    //
+    //		[self transitionFromViewController:self.channelCollectionViewController toViewController:self.videoCollectionViewController duration:0.35 options:UIViewAnimationCurveEaseInOut animations:^{
+    //			[self.view bringSubviewToFront:self.channelContainer];
+    //
+    //			self.videoCollectionViewController.view.frame = toFrame;
+    //			self.videoCollectionViewController.headerView.frame = CGRectMake(0, 0, 320, headerSize);
+    //
+    //
+    //			self.channelCollectionViewController.view.frame = fromFrame;
+    //			self.channelCollectionViewController.headerView.frame = CGRectMake(320, 0, 320, headerSize);
+    //
+    //		} completion:nil];
+    //
+    //	} else {
+    self.videosContainer.hidden = NO;
+    self.channelContainer.hidden = YES;
+    //	}
+	
+    //	[self.subscriptionCollectionViewController.model reloadInitialPage];
+}
+
 
 - (void)editButtonTapped {
     
@@ -374,26 +498,27 @@ static const CGFloat TransitionDuration = 0.5f;
     [self.videoCollectionViewController.cv setContentOffset:contentOffset animated:animated];
 }
 
+//TODO: only update the showing header
+
 - (void) updateCoverImage: (NSString*) urlString {
 	[[SYNTrackingManager sharedManager] trackCoverPhotoUpload];
-
     self.channelOwner.coverPhotoURL = urlString;
-    
     [self.channelCollectionViewController.headerView setCoverphotoImage:urlString];
-//    [self.subscriptionCollectionViewController.headerView setCoverphotoImage:urlString];
+	[self.videoCollectionViewController.headerView setCoverphotoImage:urlString];
+	[self.subscriptionCollectionViewController.headerView setCoverphotoImage:urlString];
 }
 
 - (void) updateAvatarImage: (NSString*) urlString {
 	[[SYNTrackingManager sharedManager] trackAvatarUploadFromScreen:[self trackingScreenName]];
-
     [self.channelCollectionViewController.headerView setProfileImage:urlString];
-//    [self.subscriptionCollectionViewController.headerView setProfileImage:urlString];
+	[self.subscriptionCollectionViewController.headerView setProfileImage:urlString];
+	[self.videoCollectionViewController.headerView setProfileImage:urlString];
 }
 
 - (void) updateUserDescription: (NSString*) descriptionString {
-    
-//    [self.subscriptionCollectionViewController.headerView setDescriptionText:descriptionString];
+    [self.subscriptionCollectionViewController.headerView setDescriptionText:descriptionString];
     [self.channelCollectionViewController.headerView setDescriptionText:descriptionString];
+    [self.videoCollectionViewController.headerView setDescriptionText:descriptionString];
 }
 
 
@@ -436,7 +561,6 @@ static const CGFloat TransitionDuration = 0.5f;
             [transitionContext completeTransition:YES];
         }];
     } else {
-
         [UIView animateWithDuration:0.5 animations:^{
             toVC.view.alpha = 1.0f;
             fromView.alpha = 0.0f;
@@ -451,11 +575,12 @@ static const CGFloat TransitionDuration = 0.5f;
 
 - (void) reloadCollectionViews {
     [self.channelCollectionViewController.cv.collectionViewLayout invalidateLayout];
-//    [self.subscriptionCollectionViewController.cv.collectionViewLayout invalidateLayout];
-	
+    [self.subscriptionCollectionViewController.cv.collectionViewLayout invalidateLayout];
+	[self.videoCollectionViewController.cv.collectionViewLayout invalidateLayout];
+    
 	[self.channelCollectionViewController.cv reloadData];
-//    [self.subscriptionCollectionViewController.cv reloadData];
-
+    [self.subscriptionCollectionViewController.cv reloadData];
+	[self.videoCollectionViewController.cv reloadData];
 }
 
 - (NSString *)trackingScreenName {
@@ -465,8 +590,7 @@ static const CGFloat TransitionDuration = 0.5f;
 #pragma mark - SYNProfileNavigationBarDelegate
 
 - (void) hideNavigationBar {
-	
-//	self.navigationBar.hidden = YES;
+    //	self.navigationBar.hidden = YES;
 }
 
 - (void) showNavigationBar {
@@ -476,40 +600,68 @@ static const CGFloat TransitionDuration = 0.5f;
 
 - (void) updateProfileData {
     
-    if (self.isChannelsCollectionViewShowing) {
-
-
-		[appDelegate.oAuthNetworkEngine userDataForUser: ((User *) self.channelOwner)
-										   onCompletion: ^(id dictionary) {
-											   
-											   if (self.channelOwner)
-											   {
-												   [self.channelOwner setAttributesFromDictionary: dictionary
-																			  ignoringObjectTypes: kIgnoreNothing];
-											   }
-                                               
-                                               [self.videoCollectionViewController.model loadNextPageWithCompletionHandler:^(BOOL success, BOOL hasChanged) {
-                                                   [self.videoCollectionViewController.headerView setSegmentedControllerText];
-                                                   if (success) {
-                                                    	[self.videoCollectionViewController.cv reloadData];
-                                                
+    if (self.isUserProfile) {
+        if (self.isChannelsCollectionViewShowing) {
+            [appDelegate.oAuthNetworkEngine userDataForUser: ((User *) self.channelOwner)
+                                               onCompletion: ^(id dictionary) {
+                                                   
+                                                   if (self.channelOwner)
+                                                   {
+                                                       [self.channelOwner setAttributesFromDictionary: dictionary
+                                                                                  ignoringObjectTypes: kIgnoreNothing];
                                                    }
-                                               }];
-
-										   } onError: nil];
-	} else {
-        [self.videoCollectionViewController.model loadNextPageWithCompletionHandler:^(BOOL success, BOOL hasChanged) {
+                                                   
+                                                   [self.subscriptionCollectionViewController.model loadNextPageWithCompletionHandler:^(BOOL success, BOOL hasChanged) {
+                                                       [self.subscriptionCollectionViewController.headerView setSegmentedControllerText];
+                                                       if (success) {
+                                                           [self.subscriptionCollectionViewController.cv reloadData];
+                                                           [self.channelCollectionViewController.cv reloadData];
+                                                       }
+                                                   }];
+                                               } onError: nil];
+        } else {
             
-            if (success) {
-                [self.videoCollectionViewController.cv reloadData];
-            }
-        }];
-	}
-	
+            [self.subscriptionCollectionViewController.model loadNextPageWithCompletionHandler:^(BOOL success, BOOL hasChanged) {
+                [self.subscriptionCollectionViewController.cv reloadData];
+               	[self.channelCollectionViewController.cv reloadData];
+            }];
+        }
+    
+    } else {
+        
+        if ([self isVideosCollectionViewShowing]) {
+            [self.videoCollectionViewController.model loadNextPageWithCompletionHandler:^(BOOL success, BOOL hasChanged) {
+                if (success) {
+                    [self.videoCollectionViewController.cv reloadData];
+                    [self.channelCollectionViewController.cv reloadData];
+                }
+            }];
+        } else {
+            [self.subscriptionCollectionViewController.model loadNextPageWithCompletionHandler:^(BOOL success, BOOL hasChanged) {
+                [self.subscriptionCollectionViewController.cv reloadData];
+               	[self.videoCollectionViewController.cv reloadData];
+            }];
+        }
+        
+    }
+    
+    
 }
 
+- (BOOL) isUserProfile {
+    return [self.channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId];
+}
 
 - (BOOL) isChannelsCollectionViewShowing {
     return !self.channelContainer.hidden;
 }
+
+- (BOOL) isVideosCollectionViewShowing {
+    return !self.videosContainer.hidden;
+}
+
+- (BOOL) isFollowingsCollectionViewShowing {
+    return !self.followingContainer.hidden;
+}
+
 @end
