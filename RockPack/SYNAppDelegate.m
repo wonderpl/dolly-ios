@@ -139,10 +139,6 @@
 	[[SYNTrackingManager sharedManager] setup];
 	[[SYNTrackingManager sharedManager] setLocaleDimension:[NSLocale currentLocale]];
     
-    // Don't use the currentCredentials method as this will assert if there is a vaild user,but no credentials, preventing completion of the logic below
-    // inlduding logout, which is the correct flow
-    // This should realistically never happen (except after swapping between dev and prod before the fix to the keychain account (before there was only one
-    // account shared between prod and dev, not they both have their own based on the bundle id
     SYNOAuth2Credential *credential = [SYNOAuth2Credential credentialFromKeychainForService: [[NSBundle mainBundle] bundleIdentifier]
                                                                                     account: self.currentUser.uniqueId];
 	
@@ -152,10 +148,12 @@
                                          application.protectedDataAvailable]];
 	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"didFinishLaunchingWithOptions: Current username: (%@) %@",
                                          self.currentUser.uniqueId, self.currentUser.username]];
-	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"didFinishLaunchingWithOptions: Credential: %@",
+	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"didFinishLaunchingWithOptions: Credentials from keychain: %@",
                                          credential]];
+	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"didFinishLaunchingWithOptions: Current credentials: %@",
+                                         self.currentOAuth2Credentials]];
 	
-    if (self.currentUser && credential)
+    if (self.currentUser && self.currentOAuth2Credentials)
     {
 		[[SYNTrackingManager sharedManager] setAgeDimensionFromBirthDate:self.currentUser.dateOfBirth];
 		[[SYNTrackingManager sharedManager] setGenderDimension:self.currentUser.genderValue];
@@ -189,7 +187,7 @@
     }
     else
     {
-        if ((self.currentUser || credential) && application.protectedDataAvailable)
+        if ((self.currentUser || self.currentOAuth2Credentials) && application.protectedDataAvailable)
         {
 			[[SYNRemoteLogger sharedLogger] log:@"didFinishLaunchingWithOptions: Logging the user out"];
 			
@@ -515,8 +513,10 @@
                                          application.protectedDataAvailable]];
 	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"applicationDidBecomeActive: Current username: (%@) %@",
                                          self.currentUser.uniqueId, self.currentUser.username]];
-	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"applicationDidBecomeActive: Credential: %@",
+	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"applicationDidBecomeActive: Credentials from keychain: %@",
                                          credential]];
+	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"applicationDidBecomeActive: Current credentials: %@",
+                                         self.currentOAuth2Credentials]];
     
     if ([self.window.rootViewController isKindOfClass:[SYNMasterViewController class]]) {
 	    [[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"applicationDidBecomeActive: Current view controller: %@",

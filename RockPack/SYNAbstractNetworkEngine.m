@@ -159,8 +159,8 @@
                                    || [reason isEqualToString: @"unsupported_grant_type"]
                                    || [reason isEqualToString:@"invalid_token"])
                                {
-								   [[SYNRemoteLogger sharedLogger] log:@"API call failed, logging out"];
-								   
+								   [[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"API call failed: %@", reason]];
+
                                    // Just log the user out
                                    [[NSNotificationCenter defaultCenter] postNotificationName: kAccountSettingsLogout
                                                                                        object: nil];
