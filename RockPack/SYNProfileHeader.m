@@ -20,19 +20,15 @@
 @interface SYNProfileHeader ()
 
 @property (nonatomic, strong) IBOutlet UIButton *avatarButton;
-
 @property (nonatomic, strong) IBOutlet UIImageView *coverImage;
 @property (nonatomic, strong) IBOutlet UILabel *fullNameLabel;
 @property (nonatomic, strong) IBOutlet UILabel *userNameLabel;
 @property (nonatomic, strong) IBOutlet UITextView *aboutMeTextView;
-@property (nonatomic, strong) IBOutlet UIView *segmentedControlsView;
 @property (nonatomic, strong) IBOutlet UIButton *moreButton;
 @property (nonatomic, strong) IBOutlet SYNFollowUserButton *followAllButton;
 @property (nonatomic, strong) IBOutlet UILabel *followersCountLabel;
 @property (strong, nonatomic) IBOutlet UIView *avatarBorder;
-
 @property (strong, nonatomic) IBOutlet UIView *segmentedBorder;
-
 
 @end
 
@@ -43,7 +39,6 @@
     [super awakeFromNib];
     [self setUpViews];
 	self.firstTab.selected = YES;
-
 }
 
 
@@ -59,12 +54,9 @@
     self.fullNameLabel.text = channelOwner.displayName;
     
 	[self setSegmentedControllerText];
-	
     [self.segmentedController layoutIfNeeded];
-
     self.aboutMeTextView.text = channelOwner.channelOwnerDescription;
     [self.followAllButton setSelected:[[SYNActivityManager sharedInstance] isSubscribedToUserId:self.channelOwner.uniqueId]];
-    
 	[self setDescriptionText:channelOwner.channelOwnerDescription];
     [self setUpViews];
     [self setFollowersCountLabel];
@@ -201,10 +193,7 @@
     }
     else {
         tmpString = [[NSString alloc] initWithFormat:@"%lld %@", self.channelOwner.subscribersCountValue, NSLocalizedString(@"followers", "followers count in profile")];
-
-    
 		tmpString = [[NSString alloc] initWithFormat:@"%lld %@", self.channelOwner.subscribersCountValue, NSLocalizedString(@"followers", "followers count in profile")];
-
 	}
     
     [self.followersCountLabel setText:tmpString];

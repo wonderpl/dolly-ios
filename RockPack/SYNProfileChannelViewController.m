@@ -19,6 +19,7 @@
 #import "UICollectionReusableView+Helpers.h"
 #import "SYNChannelFooterMoreView.h"
 #import "UINavigationBar+Appearance.h"
+#import "SYNActivityManager.h"
 
 static const CGFloat PARALLAX_SCROLL_VALUE = 2.0f;
 static const CGFloat ALPHA_IN_EDIT = 0.2f;
@@ -701,8 +702,14 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 - (void) followButtonTapped:(SYNChannelMidCell *)cell {
     
     [self followButtonPressed:cell.followButton withChannel:cell.channel completion:^{
-        
-	//hack to delay to allow for the animation as reloading stops it.
+
+        if ([[SYNActivityManager sharedInstance] isSubscribedToChannelId :cell.channel.uniqueId]) {
+        	cell.channel.subscribersCountValue ++;
+        } else {
+        	cell.channel.subscribersCountValue --;
+        }
+
+        //hack to delay to allow for the animation as reloading stops it.
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.32 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self.cv reloadData];
         });
