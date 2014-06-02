@@ -381,7 +381,12 @@ static const CGFloat UpcomingVideosDividerHeight = 40.0;
 }
 
 - (NSInteger)descriptionSectionIndex {
-	return ([self.currentVideoInstance.video.videoDescription length] ? 2 : NSNotFound);
+    if ([self.currentVideoInstance.video.videoDescription length]) {
+        int previousIndex = [self clickToMoreSectionIndex];
+        return previousIndex != NSNotFound ? previousIndex + 1 : 1;
+    } else {
+        return NSNotFound;
+    }
 }
 
 - (NSInteger)upcomingVideosSectionIndex {
