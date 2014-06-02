@@ -48,7 +48,7 @@
         <relationship name="starred" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="VideoInstance" inverseName="starrers" inverseEntity="VideoInstance" syncable="YES"/>
         <relationship name="subscriptions" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Channel" inverseName="subscribers" inverseEntity="Channel" syncable="YES"/>
         <relationship name="userSubscriptions" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="ChannelOwner" inverseName="userSubscriptions" inverseEntity="ChannelOwner" syncable="YES"/>
-        <relationship name="videoInstances" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="VideoInstance" inverseName="videoOwner" inverseEntity="VideoInstance" syncable="YES"/>
+        <relationship name="userVideoInstances" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="VideoInstance" inverseName="videoOwner" inverseEntity="VideoInstance" syncable="YES"/>
     </entity>
     <entity name="Comment" representedClassName="Comment" parentEntity="AbstractCommon" syncable="YES">
         <attribute name="commentText" optional="YES" attributeType="String" syncable="YES"/>
@@ -153,12 +153,12 @@
         <relationship name="originator" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChannelOwner" inverseName="originatedVideos" inverseEntity="ChannelOwner" syncable="YES"/>
         <relationship name="starrers" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="ChannelOwner" inverseName="starred" inverseEntity="ChannelOwner" syncable="YES"/>
         <relationship name="video" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Video" inverseName="videoInstances" inverseEntity="Video" syncable="YES"/>
-        <relationship name="videoOwner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChannelOwner" inverseName="videoInstances" inverseEntity="ChannelOwner" syncable="YES"/>
+        <relationship name="videoOwner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChannelOwner" inverseName="userVideoInstances" inverseEntity="ChannelOwner" syncable="YES"/>
     </entity>
     <elements>
         <element name="AbstractCommon" positionX="0" positionY="0" width="128" height="90"/>
         <element name="Channel" positionX="0" positionY="0" width="128" height="300"/>
-        <element name="ChannelOwner" positionX="0" positionY="0" width="128" height="330"/>
+        <element name="ChannelOwner" positionX="0" positionY="0" width="128" height="328"/>
         <element name="Comment" positionX="0" positionY="0" width="128" height="180"/>
         <element name="ExternalAccount" positionX="0" positionY="0" width="128" height="180"/>
         <element name="FeedItem" positionX="0" positionY="0" width="128" height="118"/>

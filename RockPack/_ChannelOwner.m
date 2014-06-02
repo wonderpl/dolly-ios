@@ -25,7 +25,7 @@ const struct ChannelOwnerRelationships ChannelOwnerRelationships = {
 	.starred = @"starred",
 	.subscriptions = @"subscriptions",
 	.userSubscriptions = @"userSubscriptions",
-	.videoInstances = @"videoInstances",
+	.userVideoInstances = @"userVideoInstances",
 };
 
 const struct ChannelOwnerFetchedProperties ChannelOwnerFetchedProperties = {
@@ -412,15 +412,15 @@ const struct ChannelOwnerFetchedProperties ChannelOwnerFetchedProperties = {
 }
 	
 
-@dynamic videoInstances;
+@dynamic userVideoInstances;
 
 	
-- (NSMutableOrderedSet*)videoInstancesSet {
-	[self willAccessValueForKey:@"videoInstances"];
+- (NSMutableOrderedSet*)userVideoInstancesSet {
+	[self willAccessValueForKey:@"userVideoInstances"];
   
-	NSMutableOrderedSet *result = (NSMutableOrderedSet*)[self mutableOrderedSetValueForKey:@"videoInstances"];
+	NSMutableOrderedSet *result = (NSMutableOrderedSet*)[self mutableOrderedSetValueForKey:@"userVideoInstances"];
   
-	[self didAccessValueForKey:@"videoInstances"];
+	[self didAccessValueForKey:@"userVideoInstances"];
 	return result;
 }
 	

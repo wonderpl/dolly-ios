@@ -589,13 +589,13 @@
     
 
     // Reset the set
-    [self.videoInstancesSet removeAllObjects];
+    [self.userVideoInstancesSet removeAllObjects];
 	
     for (NSDictionary *videoInstanceDictionary in items) {
 		
 		VideoInstance *videoInstance = [VideoInstance instanceFromDictionary:videoInstanceDictionary usingManagedObjectContext:self.managedObjectContext];
 		
-		[self.videoInstancesSet addObject:videoInstance];
+		[self.userVideoInstancesSet addObject:videoInstance];
 	}
 
 }
@@ -610,7 +610,7 @@
     NSArray *items = [itemDict objectForKey:@"items"];
     
     
-	NSMutableDictionary *videoInstanceByKeyDictionary = [[NSMutableDictionary alloc] initWithCapacity: self.videoInstances.count];
+	NSMutableDictionary *videoInstanceByKeyDictionary = [[NSMutableDictionary alloc] initWithCapacity: self.userVideoInstances.count];
 	
     for (ChannelOwner *su in self.subscriptions)
     {
@@ -622,12 +622,12 @@
 		VideoInstance *videoInstance = videoInstanceByKeyDictionary[videoInstanceDictionary[@"id"]];
 		
         if (videoInstance) {
-			[self.videoInstancesSet removeObject:videoInstance];
+			[self.userVideoInstancesSet removeObject:videoInstance];
 		}
 		
 		videoInstance = [VideoInstance instanceFromDictionary:videoInstanceDictionary usingManagedObjectContext:self.managedObjectContext];
 		
-		[self.videoInstancesSet addObject:videoInstance];
+		[self.userVideoInstancesSet addObject:videoInstance];
 	}
     
 }

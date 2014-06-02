@@ -57,7 +57,7 @@
 		}
 		
 		sself.channelOwner.totalVideosValue = [dictionary[@"videos"][@"total"] intValue];
-		successBlock([sself.channelOwner.videoInstances array], [dictionary[@"videos"][@"total"] integerValue]);
+		successBlock([sself.channelOwner.userVideoInstances array], [dictionary[@"videos"][@"total"] integerValue]);
         
         
     };

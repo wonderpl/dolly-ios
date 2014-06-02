@@ -26,7 +26,7 @@ extern const struct ChannelOwnerRelationships {
 	__unsafe_unretained NSString *starred;
 	__unsafe_unretained NSString *subscriptions;
 	__unsafe_unretained NSString *userSubscriptions;
-	__unsafe_unretained NSString *videoInstances;
+	__unsafe_unretained NSString *userVideoInstances;
 } ChannelOwnerRelationships;
 
 extern const struct ChannelOwnerFetchedProperties {
@@ -263,9 +263,9 @@ extern const struct ChannelOwnerFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSOrderedSet *videoInstances;
+@property (nonatomic, strong) NSOrderedSet *userVideoInstances;
 
-- (NSMutableOrderedSet*)videoInstancesSet;
+- (NSMutableOrderedSet*)userVideoInstancesSet;
 
 
 
@@ -300,10 +300,10 @@ extern const struct ChannelOwnerFetchedProperties {
 - (void)addUserSubscriptionsObject:(ChannelOwner*)value_;
 - (void)removeUserSubscriptionsObject:(ChannelOwner*)value_;
 
-- (void)addVideoInstances:(NSOrderedSet*)value_;
-- (void)removeVideoInstances:(NSOrderedSet*)value_;
-- (void)addVideoInstancesObject:(VideoInstance*)value_;
-- (void)removeVideoInstancesObject:(VideoInstance*)value_;
+- (void)addUserVideoInstances:(NSOrderedSet*)value_;
+- (void)removeUserVideoInstances:(NSOrderedSet*)value_;
+- (void)addUserVideoInstancesObject:(VideoInstance*)value_;
+- (void)removeUserVideoInstancesObject:(VideoInstance*)value_;
 
 @end
 
@@ -438,8 +438,8 @@ extern const struct ChannelOwnerFetchedProperties {
 
 
 
-- (NSMutableOrderedSet*)primitiveVideoInstances;
-- (void)setPrimitiveVideoInstances:(NSMutableOrderedSet*)value;
+- (NSMutableOrderedSet*)primitiveUserVideoInstances;
+- (void)setPrimitiveUserVideoInstances:(NSMutableOrderedSet*)value;
 
 
 @end
