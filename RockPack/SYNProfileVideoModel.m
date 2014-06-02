@@ -67,8 +67,9 @@
         DebugLog(@"Update action failed");
     };
     
-	
-	BOOL isUserProfile = [self.channelOwner.uniqueId isEqualToString:appDelegate.currentUser.uniqueId];
+
+    //TODO: secure requests 
+//	BOOL isUserProfile = [self.channelOwner.uniqueId isEqualToString:appDelegate.currentUser.uniqueId];
 	
 //	if (isUserProfile) {
 //		[appDelegate.oAuthNetworkEngine videosForUserId: wself.channelOwner.uniqueId

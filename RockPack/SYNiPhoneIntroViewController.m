@@ -22,7 +22,6 @@
 
 #define DEGREES_RADIANS(angle) ((angle) / 180.0 * M_PI)
 
-static const CGFloat TransitionPause = 1.0f;
 static const CGFloat CloudTiming = 1.2f;
 
 
