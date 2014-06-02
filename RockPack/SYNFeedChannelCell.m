@@ -48,15 +48,16 @@
 							   placeholderImage:[UIImage imageNamed:@"PlaceholderAvatarProfile"]
 										options:SDWebImageRetryFailed];
 	
-	NSMutableAttributedString *channeOwnerString = [[NSMutableAttributedString alloc] initWithString:@"New by "];
+	NSMutableAttributedString *channelOwnerString = [[NSMutableAttributedString alloc]
+                                                     initWithString:NSLocalizedString(@"Great new videos from ", nil)];
 
 	NSString *channelOwnerName = channel.channelOwner.displayName;
 	UIFont *boldFont = [UIFont boldItalicAlternateFontOfSize:self.channelOwnerLabel.font.pointSize];
 	NSDictionary *attributes = @{ NSFontAttributeName : boldFont };
 	
-	[channeOwnerString appendAttributedString:[[NSAttributedString alloc] initWithString:channelOwnerName attributes:attributes]];
+	[channelOwnerString appendAttributedString:[[NSAttributedString alloc] initWithString:channelOwnerName attributes:attributes]];
 	
-	self.channelOwnerLabel.attributedText = channeOwnerString;
+	self.channelOwnerLabel.attributedText = channelOwnerString;
 	
 	self.followButton.selected = ([[SYNActivityManager sharedInstance] isSubscribedToChannelId:channel.uniqueId]);
 	
