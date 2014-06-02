@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Wonder PL Ltd. All rights reserved.
 //
 
+#import "AppConstants.h"
 #import "SYNRemoteLogger.h"
 #import "NSString+URLEncoding.h"
 
@@ -16,6 +17,8 @@ static NSString *const URLPrefix = @"http://dev.rockpack.com/log?message=%@";
 @property (nonatomic, strong) NSURLSession *session;
 
 @property (nonatomic, strong) NSString *uuid;
+
+@property BOOL enabled;
 
 @end
 
@@ -34,19 +37,26 @@ static NSString *const URLPrefix = @"http://dev.rockpack.com/log?message=%@";
 	if (self = [super init]) {
 		self.session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]];
 		self.uuid = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+        self.enabled = [[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultsDiagnosticLogging];
 	}
 	return self;
 }
 
 - (void)log:(NSString *)message {
 	NSString *fullMessage = [NSString stringWithFormat:@"%@ (%f) - %@", self.uuid, [[NSDate date] timeIntervalSince1970], message];
-	
-	NSString *URLString = [NSString stringWithFormat:URLPrefix, [fullMessage urlEncodeUsingEncoding:NSUTF8StringEncoding]];
-	NSURL *URL = [NSURL URLWithString:URLString];
-	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:URL];
-	
-	NSURLSessionDataTask *task = [self.session dataTaskWithRequest:request];
-	[task resume];
+
+    if (self.enabled) {
+        NSString *URLString = [NSString stringWithFormat:URLPrefix, [fullMessage urlEncodeUsingEncoding:NSUTF8StringEncoding]];
+        NSURL *URL = [NSURL URLWithString:URLString];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:URL];
+
+        NSURLSessionDataTask *task = [self.session dataTaskWithRequest:request];
+        [task resume];
+    }
+    else
+    {
+        DebugLog(fullMessage);
+    }
 }
 
 @end

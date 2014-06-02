@@ -271,7 +271,7 @@ static NSString* kPopularGenreUniqueId = @"1979";
 #define kUserDefaultsShareFirstTime @"UD_Share_First_Time"
 #define kUserDefaultsAddToCollectionFirstTime @"UD_Add_To_Collection_First_Time"
 #define kUserDefaultsShopMotionFirstTime @"UD_Shop_Motion_First_Time"
-
+#define kUserDefaultsDiagnosticLogging @"UD_Diagnostic_Logging"
 
 
 //Login Origin
