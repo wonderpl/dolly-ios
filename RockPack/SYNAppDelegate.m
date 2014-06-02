@@ -435,47 +435,27 @@
     [[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"applicationWillEnterForeground: %@, %@",
                                          self.loginViewController, self.currentOAuth2Credentials]];
 
-    if (self.loginViewController)
+    if (self.currentOAuth2Credentials)
     {
-//        // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-//        if (self.loginViewController.state == kLoginScreenStateInitial)
-//        {
-//            [self.loginViewController setUpInitialState];
-//        }
-//        else if (self.loginViewController.state == kLoginScreenStateLogin)
-//        {
-//            [self.loginViewController reEnableLoginControls];
-//        }
-    }
-    else
-    {
-        if(self.currentOAuth2Credentials)
+        NSTimeInterval refreshTimeout = [self.currentOAuth2Credentials.expirationDate timeIntervalSinceNow];
+    
+        if (refreshTimeout < kOAuthTokenExpiryMargin)
         {
-            NSTimeInterval refreshTimeout = [self.currentOAuth2Credentials.expirationDate timeIntervalSinceNow];
-        
-            if (refreshTimeout < kOAuthTokenExpiryMargin)
-            {
-                [[SYNRemoteLogger sharedLogger] log:@"applicationWillEnterForeground: refresh"];
-                [self refreshExpiredToken];
-            }
-            else
-            {
-                [self setTokenExpiryTimer];
-            }
+            [[SYNRemoteLogger sharedLogger] log:@"applicationWillEnterForeground: refresh"];
+            [self refreshExpiredToken];
+        }
+        else
+        {
+            [self setTokenExpiryTimer];
         }
     }
+
 }
 
 
 - (void) applicationDidBecomeActive: (UIApplication *) application
 {
     [FBAppEvents activateApp];
-    
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-//    if (self.loginViewController)
-//    {
-//        [self.loginViewController applicationResume];
-//    }
     
     [SYNActivityManager.sharedInstance updateActivityForCurrentUserWithReset:NO];
     
@@ -503,7 +483,12 @@
     
     [self.oAuthNetworkEngine
      trackSessionWithMessage: message];
-	
+
+    if (!self.window.rootViewController)
+    {
+        self.window.rootViewController = [self createAndReturnRootViewController];
+    }
+
     SYNOAuth2Credential *credential = [SYNOAuth2Credential credentialFromKeychainForService: [[NSBundle mainBundle] bundleIdentifier]
                                                                                     account: self.currentUser.uniqueId];
 	
