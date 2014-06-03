@@ -31,15 +31,10 @@ static const CGFloat UpcomingVideosDividerHeight = 40.0;
 @interface SYNVideoInfoViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIViewControllerTransitioningDelegate, SYNWebViewCellDelegate, SYNVideoActionsBarDelegate, SYNVideoClickToMoreCellDelegate>
 
 @property (nonatomic, strong) IBOutlet UICollectionView *collectionView;
-
 @property (nonatomic, assign) CGFloat descriptionHeight;
-
 @property (nonatomic, strong, readonly) VideoInstance *currentVideoInstance;
-
 @property (nonatomic, strong) NSMutableOrderedSet *annotations;
-
 @property (nonatomic, weak) SYNVideoActionsBar *videoActionsBar;
-
 @property (nonatomic, assign) BOOL hasTrackedDescriptionView;
 @property (nonatomic, assign) BOOL hasTrackedUpcomingVideosView;
 
@@ -75,6 +70,7 @@ static const CGFloat UpcomingVideosDividerHeight = 40.0;
 #pragma mark - Public
 
 - (BOOL)addVideoAnnotation:(VideoAnnotation *)annotation {
+    
 	if ([self.annotations containsObject:annotation]) {
 		return NO;
 	}
@@ -94,7 +90,7 @@ static const CGFloat UpcomingVideosDividerHeight = 40.0;
         NSString *shopMoitonString = @"ShopMotion";
         float numberOfFrames = 15;
         
-        for (int i = 0; i < 21; i++) {
+        for (int i = 0; i < 10	; i++) {
             [images addObject:[UIImage imageNamed: [NSString stringWithFormat:@"%@%d", shopMoitonString, 0]]];
         }
         
@@ -105,7 +101,7 @@ static const CGFloat UpcomingVideosDividerHeight = 40.0;
         button.hidden = NO;
         
         
-        float totalAnimationTime = 1.45;
+        float totalAnimationTime = 0.65;
         UIImageView *animationImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 21, 25)];
         animationImageView.animationImages = images;
         animationImageView.animationDuration = totalAnimationTime;
@@ -114,9 +110,9 @@ static const CGFloat UpcomingVideosDividerHeight = 40.0;
         [button addSubview:animationImageView];
         [animationImageView startAnimating];
         
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.45 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(totalAnimationTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [animationImageView removeFromSuperview];
-            [button setBackgroundImage: [UIImage imageNamed:@"ShopMotionButton"] forState:UIControlStateNormal];
+            [button setBackgroundImage: [UIImage imageNamed:@"ShopMotionButtonActive"] forState:UIControlStateNormal];
             
             [button setTitle:[NSString stringWithFormat:@"       %@", @([self.annotations count])] forState:UIControlStateNormal];
             

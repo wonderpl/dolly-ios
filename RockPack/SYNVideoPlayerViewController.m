@@ -358,7 +358,7 @@
 	[path addQuadCurveToPoint:destinationPoint controlPoint:CGPointMake(destinationPoint.x, imageView.center.y)];
 	
 	animation.path = [path CGPath];
-	animation.duration = 1.3;
+	animation.duration = 0.6;
 	animation.delegate = self;
 	animation.removedOnCompletion = YES;
 	
