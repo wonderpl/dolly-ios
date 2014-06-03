@@ -235,17 +235,13 @@ static const CGFloat TransitionDuration = 0.5f;
 
 - (void) collectionsTabTapped {
 
-    
     if (self.isUserProfile) {
         self.channelCollectionViewController.headerView.secondTab.selected = NO;
         self.channelCollectionViewController.headerView.firstTab.selected = YES;
-
     } else {
         self.channelCollectionViewController.headerView.secondTab.selected = YES;
         self.channelCollectionViewController.headerView.firstTab.selected = NO;
-
     }
-    
 	
 	if (self.isChannelsCollectionViewShowing) {
 		return;
@@ -265,34 +261,9 @@ static const CGFloat TransitionDuration = 0.5f;
     [self.channelCollectionViewController.headerView layoutIfNeeded];
     [self.videoCollectionViewController.headerView layoutIfNeeded];
 
-//    if (IS_IPHONE) {
-//		int headerSize = self.isUserProfile ? 523 : 523;
-//		
-//		CGRect toFrame = self.view.frame;
-//		toFrame.origin.x = 0;
-//				
-//		CGRect fromFrame = self.view.frame;
-//		fromFrame.origin.x = 320;
-//
-//		self.channelCollectionViewController.view.frame = CGRectMake(-320, 0, 320, headerSize);
-//		self.channelCollectionViewController.headerView.frame = CGRectMake(320, 0, 320, headerSize);
-//		
-//		[self transitionFromViewController:self.subscriptionCollectionViewController toViewController:self.channelCollectionViewController duration:0.35 options:UIViewAnimationCurveEaseInOut animations:^{
-//			
-//			[self.view bringSubviewToFront:self.followingContainer];
-//
-//			self.channelCollectionViewController.view.frame = toFrame;
-//			self.subscriptionCollectionViewController.view.frame = fromFrame;
-//			self.subscriptionCollectionViewController.headerView.frame = CGRectMake(-320, 0, 320, headerSize);
-//			self.channelCollectionViewController.headerView.frame = CGRectMake(0, 0, 320, headerSize);
-//						
-//		} completion:nil];
-//		
-//	} else {
-		self.channelContainer.hidden = NO;
-		self.videosContainer.hidden = YES;
-	    self.followingContainer.hidden = YES;
-//	}
+    self.channelContainer.hidden = NO;
+    self.videosContainer.hidden = YES;
+    self.followingContainer.hidden = YES;
 
 	[self.channelCollectionViewController.model reloadInitialPage];
 }
@@ -336,46 +307,11 @@ static const CGFloat TransitionDuration = 0.5f;
 		[[SYNTrackingManager sharedManager] trackOtherUserCollectionFollowingScreenView];
 	}
 
-    CGPoint offSet = self.channelCollectionViewController.cv.contentOffset;
-
+	[self alignOffSet:self.channelCollectionViewController.cv.contentOffset];
     
-    
-	[self alignOffSet:offSet];
-    
-    
-	
-//	if (IS_IPHONE) {
-//		CGRect toFrame = self.view.frame;
-//		toFrame.origin.x = 0;
-//		
-//		CGRect fromFrame = self.view.frame;
-//		fromFrame.origin.x = -320;
-//		
-//		
-//		int headerSize = self.isUserProfile ? 523 : 523;
-//		
-//		self.videoCollectionViewController.view.frame = CGRectMake(320, 0, 320, headerSize);
-//		self.videoCollectionViewController.headerView.frame = CGRectMake(-320, 0, 320, headerSize);
-//				
-//		[self transitionFromViewController:self.channelCollectionViewController toViewController:self.videoCollectionViewController duration:0.35 options:UIViewAnimationCurveEaseInOut animations:^{
-//			[self.view bringSubviewToFront:self.channelContainer];
-//
-//			self.videoCollectionViewController.view.frame = toFrame;
-//			self.videoCollectionViewController.headerView.frame = CGRectMake(0, 0, 320, headerSize);
-//			
-//			
-//			self.channelCollectionViewController.view.frame = fromFrame;
-//			self.channelCollectionViewController.headerView.frame = CGRectMake(320, 0, 320, headerSize);
-//			
-//		} completion:nil];
-//
-//	} else {
-		self.videosContainer.hidden = YES;
-		self.channelContainer.hidden = YES;
-        self.followingContainer.hidden = NO;
-//	}
-	
-//	[self.subscriptionCollectionViewController.model reloadInitialPage];
+    self.videosContainer.hidden = YES;
+    self.channelContainer.hidden = YES;
+    self.followingContainer.hidden = NO;
 }
 
 
@@ -385,59 +321,20 @@ static const CGFloat TransitionDuration = 0.5f;
 		return;
 	}
 	
-    
-    if (self.isUserProfile) {
-        
-    } else {
-        self.videoCollectionViewController.headerView.firstTab.selected = YES;
-        self.videoCollectionViewController.headerView.secondTab.selected = NO;
-    }
+    self.videoCollectionViewController.headerView.firstTab.selected = YES;
+    self.videoCollectionViewController.headerView.secondTab.selected = NO;
     
     [[SYNTrackingManager sharedManager] trackOtherUserCollectionVideoScreenView];
-    
-    CGPoint offSet = self.channelCollectionViewController.cv.contentOffset;
 
-    
-    
-	[self alignOffSet:offSet];
+	[self alignOffSet:self.channelCollectionViewController.cv.contentOffset];
     
     [self.videoCollectionViewController coverPhotoAnimation];
     [self.channelCollectionViewController coverPhotoAnimation];
     [self.videoCollectionViewController.headerView layoutIfNeeded];
     [self.channelCollectionViewController.headerView layoutIfNeeded];
     
-	
-    //	if (IS_IPHONE) {
-    //		CGRect toFrame = self.view.frame;
-    //		toFrame.origin.x = 0;
-    //
-    //		CGRect fromFrame = self.view.frame;
-    //		fromFrame.origin.x = -320;
-    //
-    //
-    //		int headerSize = self.isUserProfile ? 523 : 523;
-    //
-    //		self.videoCollectionViewController.view.frame = CGRectMake(320, 0, 320, headerSize);
-    //		self.videoCollectionViewController.headerView.frame = CGRectMake(-320, 0, 320, headerSize);
-    //
-    //		[self transitionFromViewController:self.channelCollectionViewController toViewController:self.videoCollectionViewController duration:0.35 options:UIViewAnimationCurveEaseInOut animations:^{
-    //			[self.view bringSubviewToFront:self.channelContainer];
-    //
-    //			self.videoCollectionViewController.view.frame = toFrame;
-    //			self.videoCollectionViewController.headerView.frame = CGRectMake(0, 0, 320, headerSize);
-    //
-    //
-    //			self.channelCollectionViewController.view.frame = fromFrame;
-    //			self.channelCollectionViewController.headerView.frame = CGRectMake(320, 0, 320, headerSize);
-    //
-    //		} completion:nil];
-    //
-    //	} else {
     self.videosContainer.hidden = NO;
     self.channelContainer.hidden = YES;
-    //	}
-	
-    //	[self.subscriptionCollectionViewController.model reloadInitialPage];
 }
 
 

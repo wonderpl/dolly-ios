@@ -12,8 +12,6 @@
 @interface SYNDiscoverCategoriesCell ()
 
 @property (nonatomic, strong) IBOutlet UILabel *label;
-@property (nonatomic, strong) IBOutlet UIView* dimmingView;
-@property (nonatomic, strong) IBOutlet UIView *separator;
 @property (strong, nonatomic) IBOutlet UIImageView *arrowImage;
 
 @end
@@ -22,16 +20,13 @@
 
 - (void)awakeFromNib {
 	[super awakeFromNib];
-	
     self.label.font = [UIFont semiboldCustomFontOfSize: self.label.font.pointSize];
-
 }
 
 -(void)prepareForReuse {
     [super prepareForReuse];
     self.backgroundColor = [UIColor clearColor];
 	self.label.textColor = [UIColor blackColor];
-	
 	self.arrowImage.hidden = YES;
 }
 

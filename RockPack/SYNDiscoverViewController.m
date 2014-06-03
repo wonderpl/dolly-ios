@@ -73,9 +73,7 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *sideContainerWidth;
 
 @property (nonatomic, strong) NSIndexPath *selectedCellIndex;
-
 @property (nonatomic, strong) NSArray *genres;
-
 @property (nonatomic, strong) NSMutableArray *recentlyViewed;
 
 @end
@@ -111,9 +109,9 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
                     forCellWithReuseIdentifier:[SYNDiscoverCategoriesCell reuseIdentifier]];
     
 	
-	[self.categoriesCollectionView registerNib: [SYNDiscoverSectionHeaderView nib]					forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
+	[self.categoriesCollectionView registerNib: [SYNDiscoverSectionHeaderView nib]
+                    forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
 						   withReuseIdentifier: [SYNDiscoverSectionHeaderView reuseIdentifier]];
-	
 		
     if(IS_IPHONE)
     {
@@ -154,12 +152,9 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 											 selector:@selector(reloadCategories)
 												 name:CategoriesReloadedNotification
 											   object:nil];
-	self.recentlyViewed = [[NSMutableArray alloc] init];
-
-    self.selectedCellIndex = [NSIndexPath indexPathForItem:0 inSection:0];
-
     
-	
+	self.recentlyViewed = [[NSMutableArray alloc] init];
+    self.selectedCellIndex = [NSIndexPath indexPathForItem:0 inSection:0];
 
 }
 
@@ -300,7 +295,6 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 		[self.categoriesCollectionView selectItemAtIndexPath:self.selectedCellIndex animated:NO scrollPosition:UICollectionViewScrollPositionNone];
 	}
 	
-	
     NSString *title = (IS_IPHONE ? subGenre.name : @"");
     
     [self dispatchSearch:subGenre.uniqueId
@@ -358,10 +352,7 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
         [self.recentlyViewed removeObjectAtIndex:numberOfRecents];
         NSIndexPath *indexPath =[NSIndexPath indexPathForRow:numberOfRecents-1 inSection:1];
         [self.categoriesCollectionView deleteItemsAtIndexPaths:[NSArray arrayWithObject:indexPath]];
-		
-    } completion:^(BOOL finished) {
-		
-    }];
+    } completion:nil];
 }
 
 
@@ -403,19 +394,15 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 	SYNDiscoverCategoriesCell *categoryCell = [cv dequeueReusableCellWithReuseIdentifier:[SYNDiscoverCategoriesCell reuseIdentifier]
                                                                             forIndexPath: indexPath];
 	SubGenre *subGenre;
-	
-	
-	
+		
 	int index = indexPath.section;
 	
 	if (index>0) {
 		index--;
 	}
 	
-	
 	if (indexPath.section == 1) {
 		subGenre = [self.recentlyViewed objectAtIndex:indexPath.row];
-
 	} else {
 		Genre *genre = self.genres[index];
 		subGenre = genre.subgenres[indexPath.row];
