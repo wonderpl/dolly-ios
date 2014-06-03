@@ -67,21 +67,10 @@
         DebugLog(@"Update action failed");
     };
     
-
-    //TODO: secure requests 
-//	BOOL isUserProfile = [self.channelOwner.uniqueId isEqualToString:appDelegate.currentUser.uniqueId];
-	
-//	if (isUserProfile) {
-//		[appDelegate.oAuthNetworkEngine videosForUserId: wself.channelOwner.uniqueId
-//													   inRange: range
-//											 completionHandler: internalSuccessBlock
-//												  errorHandler: internalErrorBlock];
-//	} else {
-		[appDelegate.networkEngine videosForUserId: wself.channelOwner.uniqueId
-                                                inRange: range
-                                      completionHandler: internalSuccessBlock
-                                           errorHandler: internalErrorBlock];
-//	}
+    [appDelegate.networkEngine videosForUserId: wself.channelOwner.uniqueId
+                                       inRange: range
+                             completionHandler: internalSuccessBlock
+                                  errorHandler: internalErrorBlock];
 }
 
 
