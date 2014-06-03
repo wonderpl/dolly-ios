@@ -311,25 +311,25 @@ UISearchBarDelegate>
                          // push popup up
                          CGRect vFrame = self.view.frame;
 						 
-						 CGPoint offset = CGPointZero;
+						 CGRect offset = CGRectZero;
 						 if (self.presentingViewController) {
 							 // This will be set if we're using iOS7 view controller transitions, in which case the view isn't
 							 // transformed, so we have to manually offset it along the correct axis
-							 offset = [self keyboardOffsetForInterfaceOrientation:self.interfaceOrientation];
+							 offset.origin = [self keyboardOffsetForInterfaceOrientation:self.interfaceOrientation];
                              
-                             if(!IS_IPHONE_5) {
-                                 offset.y += 60.0f;
-                                 vFrame.size.height -= 60.0f;
-                             }
+                             
                              
 						 } else {
-							 offset = CGPointMake(0, -160);
+							 offset.origin = CGPointMake(0, -160);
 						 }
 						 
                          if (keyboardIsOnScreen) {
-							 vFrame = CGRectOffset(vFrame, offset.x, offset.y);
+                             
+							 vFrame = CGRectOffset(vFrame, offset.origin.x, offset.origin.y);
+                             
                          } else {
-							 vFrame = CGRectOffset(vFrame, -offset.x, -offset.y);
+                             
+							 vFrame = CGRectOffset(vFrame, -offset.origin.x, -offset.origin.y);
                          }
                          
                          self.view.frame = vFrame;
@@ -339,13 +339,42 @@ UISearchBarDelegate>
 }
 
 - (CGPoint)keyboardOffsetForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-	NSDictionary *mappings = @{
-							   @(UIInterfaceOrientationPortrait) : [NSValue valueWithCGPoint:CGPointMake(0, -160)],
-							   @(UIInterfaceOrientationPortraitUpsideDown) : [NSValue valueWithCGPoint:CGPointMake(0, 160)],
-							   @(UIInterfaceOrientationLandscapeLeft) : [NSValue valueWithCGPoint:CGPointMake(-160, 0)],
-							   @(UIInterfaceOrientationLandscapeRight) : [NSValue valueWithCGPoint:CGPointMake(160, 0)],
-							   };
-	return [mappings[@(interfaceOrientation)] CGPointValue];
+	
+    CGPoint point = CGPointZero;
+    switch (interfaceOrientation)
+    {
+            
+        case UIInterfaceOrientationPortrait:
+        {
+            point = CGPointMake(0, -160);
+            if(!IS_IPHONE_5)
+                point.y += 60.0f;
+        }
+        break;
+            
+        case UIInterfaceOrientationPortraitUpsideDown:
+        {
+            point = CGPointMake(0, 160);
+            if(!IS_IPHONE_5)
+                point.y -= 60.0f;
+            
+        }
+        break;
+            
+        case UIInterfaceOrientationLandscapeLeft:
+        {
+           point = CGPointMake(-160, 0);
+        }
+        break;
+            
+        case UIInterfaceOrientationLandscapeRight:
+        {
+            point = CGPointMake(160, 0);
+        }
+        break;
+            
+    }
+	return point;
 }
 
 
