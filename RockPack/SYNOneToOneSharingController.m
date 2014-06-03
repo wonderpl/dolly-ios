@@ -157,7 +157,9 @@ UISearchBarDelegate>
     }
     
     
-    if (IS_IPAD) {
+    if (IS_IPAD)
+    {
+        
         UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.searchBarContainer.frame byRoundingCorners:UIRectCornerTopLeft| UIRectCornerTopRight                                                         cornerRadii:CGSizeMake(10.0, 10.0)];
         CAShapeLayer *maskLayer = [CAShapeLayer layer];
         maskLayer.frame = self.searchBarContainer.bounds;
@@ -314,6 +316,12 @@ UISearchBarDelegate>
 							 // This will be set if we're using iOS7 view controller transitions, in which case the view isn't
 							 // transformed, so we have to manually offset it along the correct axis
 							 offset = [self keyboardOffsetForInterfaceOrientation:self.interfaceOrientation];
+                             
+                             if(!IS_IPHONE_5) {
+                                 offset.y += 60.0f;
+                                 vFrame.size.height -= 60.0f;
+                             }
+                             
 						 } else {
 							 offset = CGPointMake(0, -160);
 						 }
