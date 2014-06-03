@@ -172,13 +172,15 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Wonder" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="16T-Rl-cxk">
-                                        <rect key="frame" x="184" y="68" width="400" height="89"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="400" translatesAutoresizingMaskIntoConstraints="NO" id="16T-Rl-cxk" userLabel="Label First">
+                                        <rect key="frame" x="184" y="68" width="400" height="121"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="89" id="aqt-0r-FSF"/>
+                                            <constraint firstAttribute="height" constant="121" id="aqt-0r-FSF"/>
                                             <constraint firstAttribute="width" constant="400" id="nso-JM-BF4"/>
                                         </constraints>
+                                        <string key="text">Welcome to Wonder  
+Watch, collect and  share only the very best videos</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -251,7 +253,7 @@
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="centerY" secondItem="16T-Rl-cxk" secondAttribute="centerY" constant="11" id="1VL-ro-7OG"/>
+                                    <constraint firstAttribute="centerY" secondItem="16T-Rl-cxk" secondAttribute="centerY" constant="-5" id="1VL-ro-7OG"/>
                                     <constraint firstAttribute="centerY" secondItem="iQ8-pw-cpD" secondAttribute="centerY" constant="-12" id="E4c-9X-R7j"/>
                                     <constraint firstAttribute="centerY" secondItem="Qih-0Z-FcY" secondAttribute="centerY" id="Ete-zI-lMs"/>
                                     <constraint firstAttribute="centerX" secondItem="16T-Rl-cxk" secondAttribute="centerX" id="Ksr-kH-FYM"/>
