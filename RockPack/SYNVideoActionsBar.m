@@ -30,6 +30,8 @@
 	
 	self.shopButton.titleLabel.textAlignment = NSTextAlignmentCenter;
 	self.shopButton.titleLabel.font = [UIFont regularCustomFontOfSize:self.shopButton.titleLabel.font.pointSize];
+    [self.shopButton setBackgroundImage:[UIImage imageNamed:@"ShopMotion0"] forState:UIControlStateNormal];
+    [self.shopButton setBackgroundImage: [UIImage imageNamed:@"ShopMotionButtonActive"] forState:UIControlStateSelected];
 }
 
 + (instancetype)bar {

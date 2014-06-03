@@ -112,8 +112,7 @@ static const CGFloat UpcomingVideosDividerHeight = 40.0;
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(totalAnimationTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [animationImageView removeFromSuperview];
-            [button setBackgroundImage: [UIImage imageNamed:@"ShopMotionButtonActive"] forState:UIControlStateNormal];
-            
+			button.selected = YES;
             [button setTitle:[NSString stringWithFormat:@"       %@", @([self.annotations count])] forState:UIControlStateNormal];
             
         });
@@ -178,8 +177,12 @@ static const CGFloat UpcomingVideosDividerHeight = 40.0;
         BOOL isShopMotionVideo = [self.currentVideoInstance.video.videoAnnotations count] != 0;
         
 		cell.actionsBar.shopButton.hidden = !isShopMotionVideo;
-		
+		cell.actionsBar.shopButton.selected = NO;
+        [cell.actionsBar.shopButton setTitle:@"" forState:UIControlStateNormal];
+    	
+        
 		self.videoActionsBar = cell.actionsBar;
+        
 		
 		return cell;
 	} else if (indexPath.section == [self clickToMoreSectionIndex]) {
