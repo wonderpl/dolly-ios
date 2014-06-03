@@ -496,6 +496,7 @@ static const CGFloat TransitionDuration = 0.5f;
 - (void) setCollectionViewContentOffset:(CGPoint)contentOffset animated:(BOOL) animated{
     [self.channelCollectionViewController.cv setContentOffset:contentOffset animated:animated];
     [self.videoCollectionViewController.cv setContentOffset:contentOffset animated:animated];
+    [self.subscriptionCollectionViewController.cv setContentOffset:contentOffset animated:animated];
 }
 
 //TODO: only update the showing header
@@ -628,7 +629,6 @@ static const CGFloat TransitionDuration = 0.5f;
         }
     
     } else {
-        
         if ([self isVideosCollectionViewShowing]) {
             [self.videoCollectionViewController.model loadNextPageWithCompletionHandler:^(BOOL success, BOOL hasChanged) {
                 if (success) {
@@ -642,11 +642,11 @@ static const CGFloat TransitionDuration = 0.5f;
                	[self.videoCollectionViewController.cv reloadData];
             }];
         }
-        
     }
-    
-    
 }
+
+
+
 
 - (BOOL) isUserProfile {
     return [self.channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId];
