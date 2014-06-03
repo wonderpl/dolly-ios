@@ -19,6 +19,7 @@ extern const struct ChannelAttributes {
 	__unsafe_unretained NSString *subscribersCount;
 	__unsafe_unretained NSString *title;
 	__unsafe_unretained NSString *totalVideosValue;
+	__unsafe_unretained NSString *watchLater;
 } ChannelAttributes;
 
 extern const struct ChannelRelationships {
@@ -33,6 +34,7 @@ extern const struct ChannelFetchedProperties {
 @class ChannelOwner;
 @class ChannelOwner;
 @class VideoInstance;
+
 
 
 
@@ -230,6 +232,20 @@ extern const struct ChannelFetchedProperties {
 
 
 
+@property (nonatomic, strong) NSNumber* watchLater;
+
+
+
+@property BOOL watchLaterValue;
+- (BOOL)watchLaterValue;
+- (void)setWatchLaterValue:(BOOL)value_;
+
+//- (BOOL)validateWatchLater:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
 @property (nonatomic, strong) ChannelOwner *channelOwner;
 
 //- (BOOL)validateChannelOwner:(id*)value_ error:(NSError**)error_;
@@ -372,6 +388,15 @@ extern const struct ChannelFetchedProperties {
 
 - (int64_t)primitiveTotalVideosValueValue;
 - (void)setPrimitiveTotalVideosValueValue:(int64_t)value_;
+
+
+
+
+- (NSNumber*)primitiveWatchLater;
+- (void)setPrimitiveWatchLater:(NSNumber*)value;
+
+- (BOOL)primitiveWatchLaterValue;
+- (void)setPrimitiveWatchLaterValue:(BOOL)value_;
 
 
 

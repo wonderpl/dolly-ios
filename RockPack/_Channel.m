@@ -18,6 +18,7 @@ const struct ChannelAttributes ChannelAttributes = {
 	.subscribersCount = @"subscribersCount",
 	.title = @"title",
 	.totalVideosValue = @"totalVideosValue",
+	.watchLater = @"watchLater",
 };
 
 const struct ChannelRelationships ChannelRelationships = {
@@ -87,6 +88,11 @@ const struct ChannelFetchedProperties ChannelFetchedProperties = {
 	}
 	if ([key isEqualToString:@"totalVideosValueValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"totalVideosValue"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
+	if ([key isEqualToString:@"watchLaterValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"watchLater"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 		return keyPaths;
 	}
@@ -322,6 +328,32 @@ const struct ChannelFetchedProperties ChannelFetchedProperties = {
 
 - (void)setPrimitiveTotalVideosValueValue:(int64_t)value_ {
 	[self setPrimitiveTotalVideosValue:[NSNumber numberWithLongLong:value_]];
+}
+
+
+
+
+
+@dynamic watchLater;
+
+
+
+- (BOOL)watchLaterValue {
+	NSNumber *result = [self watchLater];
+	return [result boolValue];
+}
+
+- (void)setWatchLaterValue:(BOOL)value_ {
+	[self setWatchLater:[NSNumber numberWithBool:value_]];
+}
+
+- (BOOL)primitiveWatchLaterValue {
+	NSNumber *result = [self primitiveWatchLater];
+	return [result boolValue];
+}
+
+- (void)setPrimitiveWatchLaterValue:(BOOL)value_ {
+	[self setPrimitiveWatchLater:[NSNumber numberWithBool:value_]];
 }
 
 

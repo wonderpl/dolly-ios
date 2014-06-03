@@ -42,6 +42,7 @@
     copyChannel.subscribedByUserValue = channel.subscribedByUserValue;
     copyChannel.totalVideosValue = channel.totalVideosValue;
     copyChannel.favouritesValue = channel.favouritesValue;
+    copyChannel.watchLaterValue = channel.watchLaterValue;
     copyChannel.resourceURL = channel.resourceURL;
     copyChannel.channelDescription = channel.channelDescription;
     copyChannel.eCommerceURL = channel.eCommerceURL;
@@ -353,9 +354,10 @@
 
     // this field only comes back for the favourites channel
     NSNumber *favourites = dictionary[@"favourites"];
-    
     self.favouritesValue = ![favourites isKindOfClass: [NSNull class]] ? [favourites boolValue] : NO;
     
+    NSNumber *watchLater = dictionary[@"watchlater"];
+    self.watchLaterValue = ![watchLater isKindOfClass: [NSNull class]] ? [watchLater boolValue] : NO;
     
     self.resourceURL = [dictionary objectForKey: @"resource_url"
                                     withDefault: @"http://localhost"];

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13C64" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13D65" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="AbstractCommon" representedClassName="AbstractCommon" isAbstract="YES" syncable="YES">
         <attribute name="markedForDeletion" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="uniqueId" optional="YES" attributeType="String" syncable="YES"/>
@@ -25,6 +25,7 @@
         <attribute name="subscribersCount" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="totalVideosValue" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="watchLater" optional="YES" attributeType="Boolean" syncable="YES"/>
         <relationship name="channelOwner" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ChannelOwner" inverseName="channels" inverseEntity="ChannelOwner" syncable="YES"/>
         <relationship name="subscribers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ChannelOwner" inverseName="subscriptions" inverseEntity="ChannelOwner" syncable="YES"/>
         <relationship name="videoInstances" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="VideoInstance" inverseName="channel" inverseEntity="VideoInstance" syncable="YES"/>
@@ -157,7 +158,7 @@
     </entity>
     <elements>
         <element name="AbstractCommon" positionX="0" positionY="0" width="128" height="90"/>
-        <element name="Channel" positionX="0" positionY="0" width="128" height="300"/>
+        <element name="Channel" positionX="0" positionY="0" width="128" height="315"/>
         <element name="ChannelOwner" positionX="0" positionY="0" width="128" height="328"/>
         <element name="Comment" positionX="0" positionY="0" width="128" height="180"/>
         <element name="ExternalAccount" positionX="0" positionY="0" width="128" height="180"/>

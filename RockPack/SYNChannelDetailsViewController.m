@@ -1023,12 +1023,8 @@
     self.mode = kChannelDetailsModeEdit;
     
     //profile mode
-    
     self.viewProfileContainer.hidden = YES;
-//    self.btnAvatar.hidden = YES;
-	
 	self.txtViewTitle.hidden = NO;
-
 	self.btnAvatar.userInteractionEnabled = NO;
     self.btnShowFollowers.hidden = YES;
     self.btnShowVideos.hidden = YES;
@@ -1037,14 +1033,16 @@
     self.viewCirleButtonContainer.hidden = YES;
     self.viewFollowAndVideoContainer.hidden = YES;
     self.lblChannelTitle. hidden = YES;
+    
     //edit mode
-    self.btnDeleteChannel.hidden = NO;
+    
+    // if it is a watch later channel dont show delete button
+    self.btnDeleteChannel.hidden = self.channel.watchLaterValue;
+
     self.txtFieldChannelName.hidden = NO;
     self.txtViewDescription.hidden = NO;
     self.txtViewTitle.hidden = NO;
-	
-	
-	self.btnDeleteChannel.alpha = 0.0f;
+    self.btnDeleteChannel.alpha = 0.0f;
     self.txtFieldChannelName.alpha = 0.0f;
     self.txtViewDescription.alpha = 0.0f;
 	self.txtViewTitle.alpha = 0.0f;
