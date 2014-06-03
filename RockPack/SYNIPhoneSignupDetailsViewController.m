@@ -52,11 +52,14 @@
 	self.yearTextField.font = [UIFont lightCustomFontOfSize:self.yearTextField.font.pointSize];
 	
 	self.errorLabel.font = [UIFont lightCustomFontOfSize:self.errorLabel.font.pointSize];
+    
+    
 	
 	self.textFields = @[ self.emailTextField, self.passwordTextField, self.dayTextField, self.monthTextField, self.yearTextField ];
 	
 	[self updateDateOfBirthFieldsForLocale];
 }
+
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
@@ -64,8 +67,18 @@
 	[self.emailTextField becomeFirstResponder];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
+- (void)viewDidAppear:(BOOL)animated
+{
+    
 	[super viewDidAppear:animated];
+    
+    if(!IS_IPHONE_5)
+    {
+        CGRect errorFrame = self.errorLabel.frame;
+        errorFrame.origin.y = 66.0f;
+        self.errorLabel.frame = errorFrame;
+        
+    }
 	
 	[[SYNTrackingManager sharedManager] trackRegistrationStep2ScreenView];
 }
