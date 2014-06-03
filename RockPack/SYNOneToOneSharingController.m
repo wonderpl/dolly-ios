@@ -258,10 +258,9 @@ UISearchBarDelegate>
     
     if (![[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultsShareFirstTime]) {
         
-//        SYNShareOverlayViewController *overlay = [[SYNShareOverlayViewController alloc] init];
-//        [overlay addToViewController:self];
-//        
-//        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kUserDefaultsShareFirstTime];
+        SYNShareOverlayViewController *overlay = [[SYNShareOverlayViewController alloc] init];
+        [overlay addToViewController:self];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kUserDefaultsShareFirstTime];
     }
    
 }
