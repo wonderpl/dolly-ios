@@ -63,7 +63,6 @@ static const CGFloat DelayConstant = 0.5;
 @property (strong, nonatomic) IBOutlet UILabel *fashion;
 @property (strong, nonatomic) IBOutlet UILabel *film;
 @property (strong, nonatomic) IBOutlet UILabel *learnFrom;
-@property (strong, nonatomic) IBOutlet UILabel *experts;
 
 @end
 
@@ -91,23 +90,22 @@ static const CGFloat DelayConstant = 0.5;
     }
     
     [self.subtitleLabel setFont:[UIFont semiboldCustomFontOfSize:28]];
-    [self.messageView setFont:[UIFont regularCustomFontOfSize:24]];
+    [self.messageView setFont:[UIFont regularCustomFontOfSize:20]];
     [self.messageView2 setFont:[UIFont regularCustomFontOfSize:24]];
     [self.messageView3 setFont:[UIFont regularCustomFontOfSize:24]];
     [self.messageView4 setFont:[UIFont regularCustomFontOfSize:24]];
     [self.messageView5 setFont:[UIFont regularCustomFontOfSize:24]];
     
     
-    [self.culture setFont:[UIFont regularCustomFontOfSize:24]];
-    [self.mind setFont:[UIFont regularCustomFontOfSize:24]];
-    [self.tech setFont:[UIFont regularCustomFontOfSize:24]];
-    [self.food setFont:[UIFont regularCustomFontOfSize:24]];
-    [self.news setFont:[UIFont regularCustomFontOfSize:24]];
-    [self.wellness setFont:[UIFont regularCustomFontOfSize:24]];
-    [self.fashion setFont:[UIFont regularCustomFontOfSize:24]];
-    [self.film setFont:[UIFont regularCustomFontOfSize:24]];
-    [self.learnFrom setFont:[UIFont regularCustomFontOfSize:26]];
-    [self.experts setFont:[UIFont regularCustomFontOfSize:24]];
+    [self.culture setFont:[UIFont regularCustomFontOfSize:self.culture.font.pointSize]];
+    [self.mind setFont:[UIFont regularCustomFontOfSize:self.mind.font.pointSize]];
+    [self.tech setFont:[UIFont regularCustomFontOfSize:self.tech.font.pointSize]];
+    [self.food setFont:[UIFont regularCustomFontOfSize:self.food.font.pointSize]];
+    [self.news setFont:[UIFont regularCustomFontOfSize:self.news.font.pointSize]];
+    [self.wellness setFont:[UIFont regularCustomFontOfSize:self.wellness.font.pointSize]];
+    [self.fashion setFont:[UIFont regularCustomFontOfSize:self.fashion.font.pointSize]];
+    [self.film setFont:[UIFont regularCustomFontOfSize:self.film.font.pointSize]];
+    [self.learnFrom setFont:[UIFont regularCustomFontOfSize:self.learnFrom.font.pointSize]];
 
 
     
@@ -217,11 +215,11 @@ static const CGFloat DelayConstant = 0.5;
         
         [animationBlocks addObject:^(BOOL finished){;
             
-            [UIView animateWithDuration:CloudTiming delay:DelayConstant+0.4 options:UIViewAnimationCurveEaseInOut animations:^{
+            [UIView animateWithDuration:CloudTiming+0.2 delay:DelayConstant+1.4 options:UIViewAnimationCurveEaseInOut animations:^{
                 self.culture.alpha = 1.0;
             } completion:nil];
             
-            [UIView animateWithDuration:1.5 delay:DelayConstant-0.5 options:UIViewAnimationCurveEaseInOut animations:^{
+            [UIView animateWithDuration:1.5 delay:DelayConstant+0.2 options:UIViewAnimationCurveEaseInOut animations:^{
                 CGRect frame = self.backgroundFood.frame;
                 
                 frame.size = CGSizeMake(frame.size.width*2, frame.size.height*2);
@@ -332,25 +330,7 @@ static const CGFloat DelayConstant = 0.5;
 
             } completion:getNextAnimation ()];
         }];
-
         
-        [animationBlocks addObject:^(BOOL finished){;
-            
-            [UIView animateKeyframesWithDuration:1.5 delay:0.2 options:UIViewKeyframeAnimationOptionLayoutSubviews animations:^{
-                self.messageView4.alpha = 1.0;
-            } completion:getNextAnimation()];
-            
-        }];
-
-
-        [animationBlocks addObject:^(BOOL finished){;
-            
-            [UIView animateKeyframesWithDuration:1.0 delay:1.4 options:UIViewKeyframeAnimationOptionLayoutSubviews animations:^{
-                self.messageView4.alpha = 0.0;
-            } completion:getNextAnimation()];
-            
-        }];
-
         [animationBlocks addObject:^(BOOL finished){;
             [UIView animateKeyframesWithDuration:2.0 delay:0.0 options:UIViewKeyframeAnimationOptionLayoutSubviews animations:^{
                 self.messageView5.alpha = 1.0;
