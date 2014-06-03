@@ -365,12 +365,22 @@ UISearchBarDelegate>
     OWTwitterActivity *twitterActivity = [[OWTwitterActivity alloc] init];
 	OWMailActivity *mailActivity = [[OWMailActivity alloc] init];
     
-	NSArray *activities;
-	if ([MFMailComposeViewController canSendMail]) {
-		activities = @[ facebookActivity, twitterActivity, mailActivity ];
-	} else {
-		activities = @[ facebookActivity, twitterActivity ];
-	}
+	NSArray *activities = @[ facebookActivity, twitterActivity, mailActivity ];
+	
+    if(![SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook])
+    {
+        facebookActivity.enabled = NO;
+    }
+    
+    if(![SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter])
+    {
+        twitterActivity.enabled = NO;
+    }
+    
+    if (![MFMailComposeViewController canSendMail])
+    {
+        mailActivity.enabled = NO;
+    }
     
     self.activityViewController = [[OWActivityViewController alloc] initWithViewController: self
                                                                                 activities: activities];

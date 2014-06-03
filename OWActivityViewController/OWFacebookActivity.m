@@ -38,10 +38,13 @@
                           image: [UIImage imageNamed: @"ShareFacebookButton"]
                     actionBlock: nil];
     
+    
     if (!self)
     {
         return nil;
     }
+    
+    
     
     __typeof(&*self) __weak weakSelf = self;
     self.actionBlock = ^(OWActivity *activity, OWActivityViewController *activityViewController) {

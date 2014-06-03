@@ -72,6 +72,11 @@
     
     UIButton *button = [UIButton buttonWithType: UIButtonTypeCustom];
     
+    if(!activity.enabled)
+    {
+        button.userInteractionEnabled = NO;
+        button.alpha = 0.5;
+    }
     
     button.frame = CGRectMake(x, y , 61.0f, 61.0f);
     button.tag = index;

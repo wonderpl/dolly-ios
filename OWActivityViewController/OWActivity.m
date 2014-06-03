@@ -36,6 +36,8 @@
         _title = title;
         _image = image;
         _actionBlock = [actionBlock copy];
+        
+        _enabled = YES;
     }
     
     return self;
@@ -46,6 +48,7 @@
 {
     [Appirater userDidSignificantEvent: FALSE];
 }
+
 
 
 @end

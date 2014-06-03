@@ -39,6 +39,8 @@ typedef void (^OWActivityActionBlock)(OWActivity *activity, OWActivityViewContro
 @property (strong, nonatomic) OWActivityViewController *activityViewController;
 @property (strong, nonatomic) NSDictionary *userInfo;
 
+@property (nonatomic) BOOL enabled;
+
 - (id) initWithTitle: (NSString *) title
                image: (UIImage *) image
          actionBlock: (OWActivityActionBlock) actionBlock;
