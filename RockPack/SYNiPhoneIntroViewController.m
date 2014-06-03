@@ -22,7 +22,7 @@
 
 #define DEGREES_RADIANS(angle) ((angle) / 180.0 * M_PI)
 
-static const CGFloat CloudTiming = 1.2f;
+static const CGFloat CloudTiming = 0.9f;
 
 
 @interface SYNiPhoneIntroViewController () <UINavigationControllerDelegate, UIViewControllerTransitioningDelegate>
@@ -240,26 +240,29 @@ static const CGFloat CloudTiming = 1.2f;
         
         [animationBlocks addObject:^(BOOL finished){;
             
-            [UIView animateWithDuration:1.3 animations:^{
+            [UIView animateWithDuration:0.8 animations:^{
                 self.mind.alpha = 1.0;
             } completion: getNextAnimation()];
         }];
 
         [animationBlocks addObject:^(BOOL finished){;
-            [UIView animateWithDuration:1.9 animations:^{
+            [UIView animateWithDuration:0.8 animations:^{
                 self.tech.alpha = 1.0;
             } completion: getNextAnimation()];
+            
+            
+            [UIView animateWithDuration:CloudTiming delay:0.15 options:UIViewAnimationCurveEaseIn animations:^{
+                self.culture.alpha = 0.0;
+            } completion: nil];
+
         }];
 
         [animationBlocks addObject:^(BOOL finished){;
-            [UIView animateWithDuration:CloudTiming animations:^{
-                self.culture.alpha = 0.0;
-            } completion: getNextAnimation()];
             
             [UIView animateWithDuration:CloudTiming delay:0.15 options:UIViewAnimationCurveEaseIn animations:^{
                 self.food.alpha = 1.0;
                 
-            } completion:nil];
+            } completion:getNextAnimation()];
         
         }];
 
@@ -270,7 +273,7 @@ static const CGFloat CloudTiming = 1.2f;
                 self.mind.alpha = 0.0;
             } completion: nil];
             
-            [UIView animateWithDuration:0.5 delay:0.4 options:UIViewAnimationCurveEaseIn animations:^{
+            [UIView animateWithDuration:1.0 delay:0.4 options:UIViewAnimationCurveEaseIn animations:^{
                 self.news.alpha = 1.0;
                 
             } completion:getNextAnimation()];
@@ -317,27 +320,23 @@ static const CGFloat CloudTiming = 1.2f;
         }];
 
         [animationBlocks addObject:^(BOOL finished){;
-
             
-            [UIView animateWithDuration:0.5 delay:0.8 options:UIViewAnimationCurveEaseIn animations:^{
-                
+            [UIView animateWithDuration:0.5 delay:0.2 options:UIViewAnimationCurveEaseIn animations:^{
             	self.film.alpha = 0.0;
             } completion:nil];
 
             
-            [UIView animateWithDuration:0.8 delay:0.2 options:UIViewAnimationCurveEaseIn animations:^{
+            [UIView animateWithDuration:0.6 delay:0.2 options:UIViewAnimationCurveEaseIn animations:^{
             	self.news.alpha = 0.0;
-                self.experts.alpha = 1.0;
 
             } completion:getNextAnimation()];
         }];
         
         [animationBlocks addObject:^(BOOL finished){;
 
-            [UIView animateKeyframesWithDuration:1.3 delay:1.0 options:UIViewKeyframeAnimationOptionCalculationModeLinear animations:^{
+            [UIView animateKeyframesWithDuration:1.3 delay:0.1 options:UIViewKeyframeAnimationOptionCalculationModeLinear animations:^{
                 self.learnFrom.alpha = 0.0;
                 self.backgroundBeach.alpha = 0.0;
-                self.experts.alpha = 0.0;
 
             } completion:getNextAnimation ()];
         }];
