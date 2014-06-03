@@ -345,6 +345,10 @@ static const NSInteger TrackingDimensionConnection = 6;
 	[self trackScreenViewWithName:@"User Profile's following"];
 }
 
+- (void)trackOtherUserCollectionVideoScreenView {
+	[self trackScreenViewWithName:@"User Profile Video"];
+}
+
 - (void)trackCollectionFollowersScreenView {
 	[self trackScreenViewWithName:@"Subscriber list"];
 }

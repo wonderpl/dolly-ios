@@ -119,6 +119,7 @@ typedef NS_ENUM(NSInteger, kNotificationObjectType);
 - (void)trackOtherUserProfileScreenView;
 - (void)trackOtherUserCollectionFollowingScreenView;
 - (void)trackOtherUserCollectionScreenView;
+- (void)trackOtherUserCollectionVideoScreenView;
 
 - (void)trackVideoSwipeToVideo:(BOOL)isPrevious;
 

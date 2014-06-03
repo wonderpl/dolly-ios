@@ -330,12 +330,11 @@ static const CGFloat TransitionDuration = 0.5f;
 
     [self.channelCollectionViewController hideDescriptionCurrentlyShowing];
     
-    //TODO: fix tracking
-//	if ([self.channelOwner.uniqueId isEqualToString:appDelegate.currentUser.uniqueId]) {
-//		[[SYNTrackingManager sharedManager] trackOwnProfileFollowingScreenView];
-//	} else {
-//		[[SYNTrackingManager sharedManager] trackOtherUserCollectionFollowingScreenView];
-//	}
+	if ([self.channelOwner.uniqueId isEqualToString:appDelegate.currentUser.uniqueId]) {
+		[[SYNTrackingManager sharedManager] trackOwnProfileFollowingScreenView];
+	} else {
+		[[SYNTrackingManager sharedManager] trackOtherUserCollectionFollowingScreenView];
+	}
 
     CGPoint offSet = self.channelCollectionViewController.cv.contentOffset;
 
@@ -394,12 +393,7 @@ static const CGFloat TransitionDuration = 0.5f;
         self.videoCollectionViewController.headerView.secondTab.selected = NO;
     }
     
-    //TODO: fix tracking
-    //	if ([self.channelOwner.uniqueId isEqualToString:appDelegate.currentUser.uniqueId]) {
-    //		[[SYNTrackingManager sharedManager] trackOwnProfileFollowingScreenView];
-    //	} else {
-    //		[[SYNTrackingManager sharedManager] trackOtherUserCollectionFollowingScreenView];
-    //	}
+    [[SYNTrackingManager sharedManager] trackOtherUserCollectionVideoScreenView];
     
     CGPoint offSet = self.channelCollectionViewController.cv.contentOffset;
 
