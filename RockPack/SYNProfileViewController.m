@@ -328,6 +328,8 @@ static const CGFloat TransitionDuration = 0.5f;
         self.videoCollectionViewController.headerView.secondTab.selected = NO;
     }
 
+    [self.channelCollectionViewController hideDescriptionCurrentlyShowing];
+    
     //TODO: fix tracking
 //	if ([self.channelOwner.uniqueId isEqualToString:appDelegate.currentUser.uniqueId]) {
 //		[[SYNTrackingManager sharedManager] trackOwnProfileFollowingScreenView];

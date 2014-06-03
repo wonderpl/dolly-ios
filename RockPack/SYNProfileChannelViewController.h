@@ -20,5 +20,6 @@
 @property (nonatomic, weak) id<SYNProfileNavigationBarDelegate> delegate;
 
 - (void) coverPhotoAnimation;
+- (void) hideDescriptionCurrentlyShowing;
 
 @end

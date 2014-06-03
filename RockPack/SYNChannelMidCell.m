@@ -159,6 +159,10 @@
 
 - (IBAction)rightSwipe:(UISwipeGestureRecognizer *)recognizer {
 	
+    if (!self.isFromProfile) {
+        return;
+    }
+
     if (self.state == ChannelMidCellStateDefault) {
 		[self.viewControllerDelegate cellStateChanged];
         [self setState:ChannelMidCellStateDescription withAnimation:YES];
@@ -173,6 +177,11 @@
 }
 
 - (IBAction)leftSwipe:(UISwipeGestureRecognizer *)recognizer {
+    
+    if (!self.isFromProfile) {
+        return;
+    }
+
     if (self.state == ChannelMidCellStateDefault) {
 		[self.viewControllerDelegate cellStateChanged];
         [self setState:ChannelMidCellStateDelete withAnimation:YES];
