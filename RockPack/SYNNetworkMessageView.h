@@ -9,8 +9,9 @@
 @import UIKit;
 
 typedef enum NotificationMessageType : NSInteger {
-    NotificationMessageTypeError = 0,
-    NotificationMessageTypeSuccess = 1
+    NotificationMessageTypeNetworkError = 0,
+    NotificationMessageTypeSuccess = 1,
+    NotificationMessageTypeError = 2
 } NotificationMessageType;
 
 @interface SYNNetworkMessageView : UIView

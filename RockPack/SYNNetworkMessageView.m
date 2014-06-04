@@ -27,13 +27,14 @@
 - (id)initWithMessageType:(NotificationMessageType)type
 {
     UIImage* bgImage;
-    if(type == NotificationMessageTypeError)
+    if(type == NotificationMessageTypeSuccess)
     {
-        bgImage = [UIImage imageNamed:@"BarNetwork"];
+        // this is the 1pixel height image, either red or green according to the type
+        bgImage = [UIImage imageNamed:@"BarSucess"];
     }
     else
     {
-        bgImage = [UIImage imageNamed:@"BarSucess"];
+        bgImage = [UIImage imageNamed:@"BarNetwork"];
     }
     
     CGRect finalFrame = CGRectMake(0.0,
@@ -71,7 +72,7 @@
         
         // Wifi Icon
         
-        if(type == NotificationMessageTypeError)
+        if(type == NotificationMessageTypeNetworkError)
         {
             [self setIconImage:[UIImage imageNamed:@"IconNetwork"]];
             [self setText:NSLocalizedString(@"Network Error",nil)];

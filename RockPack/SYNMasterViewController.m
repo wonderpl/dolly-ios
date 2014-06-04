@@ -316,7 +316,7 @@
     {
         NSString* message = IS_IPAD ? NSLocalizedString(@"No_Network_iPad", nil) : NSLocalizedString(@"No_Network_iPhone", nil);
         
-        [self presentNotificationWithMessage:message andType:NotificationMessageTypeError];
+        [self presentNotificationWithMessage:message andType:NotificationMessageTypeNetworkError];
     }
     
     DebugLog(@"Network %@Reachable", [self.reachability currentReachabilityStatus] == NotReachable ? @"NOT " : @"");
