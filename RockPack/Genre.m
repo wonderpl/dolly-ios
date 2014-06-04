@@ -62,9 +62,11 @@
 	
 	NSMutableArray *subgenres = [NSMutableArray array];
 	for (NSDictionary *subcategoryDictionary in sortedSubcategoryDictionaries) {
-		SubGenre *subgenre = [SubGenre instanceFromDictionary:subcategoryDictionary
-									usingManagedObjectContext:self.managedObjectContext];
-		[subgenres addObject:subgenre];
+        if ([subcategoryDictionary[@"priority"] integerValue]>0) {
+            SubGenre *subgenre = [SubGenre instanceFromDictionary:subcategoryDictionary
+                                        usingManagedObjectContext:self.managedObjectContext];
+            [subgenres addObject:subgenre];
+        }
 	}
 	
 	self.subgenres = [NSOrderedSet orderedSetWithArray:subgenres];

@@ -157,13 +157,18 @@
 	
 	NSArray *sortDescriptors = @[ [NSSortDescriptor sortDescriptorWithKey:@"priority" ascending:NO] ];
 	NSArray *sortedGenreDictionaries = [genreDictionaries sortedArrayUsingDescriptors:sortDescriptors];
-	
-	NSMutableArray *genres = [NSMutableArray array];
+
+    //Delete all exisitng categories and set the new ones 
+	[self deleteExistingGenres];
+
+    NSMutableArray *genres = [NSMutableArray array];
 	for (NSDictionary *genreDictionary in sortedGenreDictionaries) {
-		Genre *genre = [Genre instanceFromDictionary:genreDictionary usingManagedObjectContext:self.managedObjectContext];
-		[genres addObject:genre];
+        if ([genreDictionary[@"priority"] integerValue]>0) {
+            Genre *genre = [Genre instanceFromDictionary:genreDictionary usingManagedObjectContext:self.managedObjectContext];
+            [genres addObject:genre];
+        }
 	}
-	
+    
 	return genres;
 }
 
