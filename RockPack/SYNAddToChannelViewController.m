@@ -137,7 +137,7 @@
 
 - (void)showInboarding {
     
-    if (YES/*![[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultsAddToCollectionFirstTime]*/) {
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultsAddToCollectionFirstTime]) {
 		SYNAddToChannelOverlayViewController *overlay = [[SYNAddToChannelOverlayViewController alloc] init];
         [overlay addToViewController:self];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kUserDefaultsAddToCollectionFirstTime];
