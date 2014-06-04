@@ -312,6 +312,8 @@ static const CGFloat TransitionDuration = 0.5f;
     self.videosContainer.hidden = YES;
     self.channelContainer.hidden = YES;
     self.followingContainer.hidden = NO;
+    
+    [self.subscriptionCollectionViewController.model reloadInitialPage];
 }
 
 
@@ -515,7 +517,7 @@ static const CGFloat TransitionDuration = 0.5f;
                                                } onError: nil];
         } else {
             
-            [self.subscriptionCollectionViewController.model loadNextPageWithCompletionHandler:^(BOOL success, BOOL hasChanged) {
+            [self.subscriptionCollectionViewController.model reloadInitialPageWithCompletionHandler:^(BOOL success, BOOL hasChanged) {
                 [self.subscriptionCollectionViewController.cv reloadData];
                	[self.channelCollectionViewController.cv reloadData];
             }];
@@ -523,14 +525,14 @@ static const CGFloat TransitionDuration = 0.5f;
     
     } else {
         if ([self isVideosCollectionViewShowing]) {
-            [self.videoCollectionViewController.model loadNextPageWithCompletionHandler:^(BOOL success, BOOL hasChanged) {
+            [self.videoCollectionViewController.model reloadInitialPageWithCompletionHandler:^(BOOL success, BOOL hasChanged) {
                 if (success) {
                     [self.videoCollectionViewController.cv reloadData];
                     [self.channelCollectionViewController.cv reloadData];
                 }
             }];
         } else {
-            [self.subscriptionCollectionViewController.model loadNextPageWithCompletionHandler:^(BOOL success, BOOL hasChanged) {
+            [self.subscriptionCollectionViewController.model reloadInitialPageWithCompletionHandler:^(BOOL success, BOOL hasChanged) {
                 [self.subscriptionCollectionViewController.cv reloadData];
                	[self.videoCollectionViewController.cv reloadData];
             }];
