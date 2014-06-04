@@ -266,6 +266,20 @@ static const CGFloat TransitionDuration = 0.5f;
     self.followingContainer.hidden = YES;
 
 	[self.channelCollectionViewController.model reloadInitialPage];
+    
+    NSString* eventName;
+    if(self.isUserProfile)
+        eventName = @"ownCollectionsTabClick";
+    else
+        eventName = @"otherCollectionsTabClick";
+    
+    [[SYNTrackingManager sharedManager] trackTabSelection:eventName
+                                      forChannelOwnerName:self.channelOwner.displayName];
+    
+    
+    
+    
+    
 }
 
 
@@ -314,6 +328,12 @@ static const CGFloat TransitionDuration = 0.5f;
     self.followingContainer.hidden = NO;
     
     [self.subscriptionCollectionViewController.model reloadInitialPage];
+    
+    if(self.isUserProfile)
+    {
+        [[SYNTrackingManager sharedManager] trackTabSelection:@"ownFollowingTabClick"
+                                          forChannelOwnerName:self.channelOwner.displayName];
+    }
 }
 
 
@@ -337,6 +357,16 @@ static const CGFloat TransitionDuration = 0.5f;
     
     self.videosContainer.hidden = NO;
     self.channelContainer.hidden = YES;
+    
+    
+    if(!self.isUserProfile)
+    {
+        [[SYNTrackingManager sharedManager] trackTabSelection:@"otherVideosTabClick"
+                                          forChannelOwnerName:self.channelOwner.displayName];
+    }
+  
+    
+    
 }
 
 

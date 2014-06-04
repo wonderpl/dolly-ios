@@ -454,6 +454,10 @@ static const NSInteger TrackingDimensionConnection = 6;
 	[self trackEventWithCategory:GoalCategory action:@"openDeepLink" label:url value:nil];
 }
 
+-(void)trackTabSelection:(NSString*)tabName forChannelOwnerName:(NSString*)channelOwnerName {
+    [self trackEventWithCategory:UIActionCategory action:tabName label:channelOwnerName value:nil];
+}
+
 - (void)trackCollectionShareCompletedWithService:(NSString *)service {
 	[self trackEventWithCategory:GoalCategory action:@"collectionShared" label:service value:nil];
 }
