@@ -1020,12 +1020,11 @@ didSelectRowAtIndexPath: (NSIndexPath *) indexPath
     CGRect sResTblFrame = self.searchResultsTableView.frame;
     
     sResTblFrame.origin.y = 44.0f;
-    sResTblFrame.size.height = self.view.frame.size.height - sResTblFrame.origin.y;
-    
+    sResTblFrame.size.height = MIN(self.view.frame.size.height, self.view.frame.size.width) - 44;
+  
     self.searchResultsTableView.frame = sResTblFrame;
     
     [self.view addSubview: self.searchResultsTableView];
-    
     [self.searchResultsTableView reloadData];
     
     return YES;
