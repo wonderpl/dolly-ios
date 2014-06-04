@@ -1188,7 +1188,7 @@
 
 - (void) deleteVideoInstancePressed: (UIButton *) deleteButton
 {
-    UIView *v = deleteButton.superview.superview;
+    UIView *v = deleteButton.superview.superview.superview;
     
     self.indexPathToDelete = [self.videoThumbnailCollectionView indexPathForItemAtPoint: v.center];
     
@@ -1229,21 +1229,15 @@
         return;
     }
     
-    UICollectionViewCell *cell = [self.videoThumbnailCollectionView cellForItemAtIndexPath: self.indexPathToDelete];
     
-    [UIView animateWithDuration: 0.2
-                     animations: ^{
-                         cell.alpha = 0.0;
-                     }
-                     completion: ^(BOOL finished) {
-                         [self.channel.videoInstancesSet removeObject: videoInstanceToDelete];
-                         [videoInstanceToDelete.managedObjectContext deleteObject: videoInstanceToDelete];
-						 
-						 self.channel.totalVideosValueValue--;
-                         self.model = [SYNChannelVideosModel modelWithChannel:self.channel];
-                         self.model.delegate = self;
-                        [self.videoThumbnailCollectionView reloadData];
-                     }];
+    [self.channel.videoInstancesSet removeObject: videoInstanceToDelete];
+    [videoInstanceToDelete.managedObjectContext deleteObject: videoInstanceToDelete];
+    
+    self.channel.totalVideosValueValue--;
+    self.model = [SYNChannelVideosModel modelWithChannel:self.channel];
+    self.model.delegate = self;
+    
+    [self.videoThumbnailCollectionView reloadData];
 }
 
 
