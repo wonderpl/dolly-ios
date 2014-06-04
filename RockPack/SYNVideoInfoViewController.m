@@ -287,6 +287,10 @@ static const CGFloat UpcomingVideosDividerHeight = 40.0;
 #pragma mark - SYNVideoActionsBarDelegate
 
 - (void)videoActionsBar:(SYNVideoActionsBar *)bar favouritesButtonPressed:(UIButton *)button {
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kReloadFeed
+                                                        object:self.currentVideoInstance];
+    
 	[self favouriteButtonPressed:button videoInstance:self.currentVideoInstance];
 }
 

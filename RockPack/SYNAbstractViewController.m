@@ -199,7 +199,9 @@
 
 #pragma mark - Social Actions Delegate
 
-- (void)favouriteButtonPressed:(UIButton *)button videoInstance:(VideoInstance *)videoInstance {
+- (void)favouriteButtonPressed:(UIButton *)button videoInstance:(VideoInstance *)videoInstance
+{
+    
 	[[SYNTrackingManager sharedManager] trackVideoLikeFromScreenName:[self trackingScreenName]];
 	
     BOOL didStar = (button.selected == NO);

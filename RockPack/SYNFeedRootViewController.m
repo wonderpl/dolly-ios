@@ -98,7 +98,10 @@
                                                         object: self
                                                       userInfo: @{kScrollingDirection:@(ScrollingDirectionUp)}];
 	
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData) name:kReloadFeed object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reloadData)
+                                                 name:kReloadFeed
+                                               object:nil];
 	
 	[self reloadData];
 }
@@ -317,6 +320,7 @@
 }
 
 - (void)videoCell:(SYNFeedVideoCell *)cell favouritePressed:(UIButton *)button {
+    
 	[self favouriteButtonPressed:button videoInstance:cell.videoInstance];
 }
 
