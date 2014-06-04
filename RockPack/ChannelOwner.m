@@ -158,9 +158,9 @@
     
     self.position = [dictionary objectForKey: @"position"
                                  withDefault: @0];
-// we do not use this value anymore !
-//    self.subscriptionCount = [dictionary objectForKey:@"subscription_count"
-//                                          withDefault:@0];
+
+    self.subscriptionCount = [dictionary objectForKey:@"subscription_count"
+                                          withDefault:@0];
     
     self.subscribersCount =[dictionary objectForKey:@"subscriber_count"
                                         withDefault:@0];
@@ -214,8 +214,8 @@
     self.position = [dictionary objectForKey: @"position"
                                  withDefault: @0];
     
-//    self.subscriptionCount = [dictionary objectForKey:@"subscription_count"
-//                                          withDefault:@0];
+    self.subscriptionCount = [dictionary objectForKey:@"subscription_count"
+                                          withDefault:@0];
     
     self.subscribersCount =[dictionary objectForKey:@"subscriber_count"
                                         withDefault:@0];
