@@ -177,22 +177,20 @@ static NSString *const kLXCollectionViewKeyPath = @"collectionView";
     
     [self.dataSource collectionView: self.collectionView itemAtIndexPath: previousIndexPath willMoveToIndexPath: newIndexPath];
     
-    __weak typeof(self) weakSelf = self;
-    
-    [self.collectionView
-     performBatchUpdates: ^{
-         __strong typeof(self) strongSelf = weakSelf;
-         
-         if (strongSelf)
-         {
-             [strongSelf.collectionView
-              deleteItemsAtIndexPaths: @[ previousIndexPath ]];
-             [strongSelf.collectionView
-              insertItemsAtIndexPaths: @[ newIndexPath ]];
-         }
-     }
-     
-     completion: nil];
+//    __weak typeof(self) weakSelf = self;
+//    
+//    [self.collectionView performBatchUpdates: ^{
+//        
+//         __strong typeof(self) strongSelf = weakSelf;
+//         
+//         if (strongSelf)
+//         {
+//             [strongSelf.collectionView
+//              deleteItemsAtIndexPaths: @[ previousIndexPath ]];
+//             [strongSelf.collectionView
+//              insertItemsAtIndexPaths: @[ newIndexPath ]];
+//         }
+//     } completion: nil];
 }
 
 

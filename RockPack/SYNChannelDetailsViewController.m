@@ -706,6 +706,7 @@
 
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *) collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
     SYNCollectionVideoCell *videoThumbnailCell = [collectionView dequeueReusableCellWithReuseIdentifier:[SYNCollectionVideoCell reuseIdentifier]
                                                                                            forIndexPath:indexPath];
     
@@ -713,6 +714,7 @@
     
     
     BOOL editable = (self.mode == kChannelDetailsModeEdit);
+    
     [videoThumbnailCell setEditable:editable];
     [videoThumbnailCell setVideoInstance:videoInstance];
     [videoThumbnailCell setDelegate:self];
