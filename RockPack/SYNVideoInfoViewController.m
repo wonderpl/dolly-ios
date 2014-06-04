@@ -164,8 +164,12 @@ static const CGFloat UpcomingVideosDividerHeight = 40.0;
 	}
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-	if (indexPath.section == [self actionsSectionIndex]) {
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+	if (indexPath.section == [self actionsSectionIndex])
+    {
+        
 		SYNVideoActionsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[SYNVideoActionsCell reuseIdentifier]
 																			  forIndexPath:indexPath];
 		
@@ -184,7 +188,11 @@ static const CGFloat UpcomingVideosDividerHeight = 40.0;
         
 		
 		return cell;
-	} else if (indexPath.section == [self clickToMoreSectionIndex]) {
+        
+	}
+    else if (indexPath.section == [self clickToMoreSectionIndex])
+    {
+        
 		SYNVideoClickToMoreCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[SYNVideoClickToMoreCell reuseIdentifier]
 																				  forIndexPath:indexPath];
 		
@@ -192,7 +200,9 @@ static const CGFloat UpcomingVideosDividerHeight = 40.0;
 		cell.delegate = self;
 		
 		return cell;
-	} else if (indexPath.section == [self descriptionSectionIndex]) {
+	}
+    else if (indexPath.section == [self descriptionSectionIndex])
+    {
 		SYNWebViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[SYNWebViewCell reuseIdentifier]
 																		 forIndexPath:indexPath];
 		
@@ -200,10 +210,15 @@ static const CGFloat UpcomingVideosDividerHeight = 40.0;
 		cell.delegate = self;
 		
 		return cell;
-	} else {
+	}
+    else
+    {
 		SYNVideoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[SYNVideoCell reuseIdentifier]
 																	   forIndexPath:indexPath];
-		cell.videoInstance = [self.model itemAtIndex:self.selectedIndex + indexPath.row + 1];
+        
+        
+        cell.videoInstance = [self.model itemAtIndex:self.selectedIndex + indexPath.row + 1];
+		
 		
 		return cell;
 	}

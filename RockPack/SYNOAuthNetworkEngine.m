@@ -1577,6 +1577,11 @@
             completionHandler: (MKNKUserSuccessBlock) completionBlock
                  errorHandler: (MKNKUserErrorBlock) errorBlock
 {
+    if(!userId)
+    {
+        errorBlock(@{@"error":@"userId is nil"});
+        return;
+    }
     NSDictionary *apiSubstitutionDictionary = @{@"USERID" : userId};
     
     NSString *apiString = [kAPIContentFeedUpdates stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];

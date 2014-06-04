@@ -52,6 +52,10 @@ static const NSInteger DefaultBatchSize = 40;
 }
 
 - (id)itemAtIndex:(NSInteger)index {
+    
+    if(self.loadedItems.count <= index)
+        return nil;
+    
 	return self.loadedItems[index];
 }
 

@@ -29,6 +29,10 @@
 
 
 - (void)setTitleText : (NSString*) string {
+    
+    if(!string)
+        return;
+    
 	string = [string uppercaseString];
 	UIColor *color = [UIColor colorWithRed: (112.0f / 255.0f)
 									 green: (123.0f / 255.0f)
