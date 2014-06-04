@@ -82,7 +82,6 @@ static const CGFloat UpcomingVideosDividerHeight = 40.0;
 	[self.collectionView setContentOffset:CGPointZero animated:YES];
 	
 	UIButton *button = self.videoActionsBar.shopButton;
-    [button setBackgroundImage: [UIImage new] forState:UIControlStateNormal];
 
 	if (isFirstAnnotation) {
         NSMutableArray *images = [[NSMutableArray alloc] init];
