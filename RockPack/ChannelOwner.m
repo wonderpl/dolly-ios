@@ -320,7 +320,8 @@
                 }
             }
 
-            
+            channel.title = channelDictionary[@"title"];
+            channel.channelDescription = channelDictionary[@"description"];
 
             [self.channelsSet addObject: channel];
         }
@@ -387,8 +388,8 @@
         if (!channelOwner)
         {
             channelOwner = [ChannelOwner instanceFromDictionary: subscriptionChannel
-                            usingManagedObjectContext: self.managedObjectContext
-                                  ignoringObjectTypes: kIgnoreVideoInstanceObjects];
+                                      usingManagedObjectContext: self.managedObjectContext
+                                            ignoringObjectTypes: kIgnoreVideoInstanceObjects];
         }
         else
         {
