@@ -78,6 +78,7 @@
 																				 origin:LoginOriginRockpack
 																	  completionHandler:completionBlock
 																			errorHander:errorBlock];
+                                               
 										   } errorHandler: errorBlock];
 }
 

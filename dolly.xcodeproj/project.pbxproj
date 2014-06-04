@@ -2957,6 +2957,7 @@
 		4C5E85EC18B6203600D0E937 /* In Boarding */ = {
 			isa = PBXGroup;
 			children = (
+				4C5E85F418B62F2500D0E937 /* Abstract */,
 				F468C757193768FF00838890 /* ShopMotion */,
 				F46D8C53192CE71D0048C486 /* Share */,
 				F4F5062A192CAAA600993D0B /* New Collection */,
@@ -2964,7 +2965,6 @@
 				4C5E862818B6812900D0E937 /* Collection details */,
 				4C5E860218B6331800D0E937 /* Discover */,
 				4C5E85F518B62F3400D0E937 /* Onboarding */,
-				4C5E85F418B62F2500D0E937 /* Abstract */,
 			);
 			name = "In Boarding";
 			sourceTree = "<group>";
