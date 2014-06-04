@@ -10,7 +10,6 @@
 #import "UIFont+SYNFont.h"
 
 @interface SYNShopMotionOverlayViewController ()
-@property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *textLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *tabImage;
 @property (strong, nonatomic) IBOutlet UIImageView *shopMotionImage;
@@ -18,6 +17,7 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *tabButtonHorizontalConstant;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *tabButtonVerticalConstant;
 @property (strong, nonatomic) IBOutlet UILabel *labelThisVideo;
+@property (strong, nonatomic) IBOutlet UILabel *labelShopMotionIcon;
 @property (strong, nonatomic) IBOutlet UILabel *labelWillAppear;
 @property (strong, nonatomic) IBOutlet UILabel *theMotion;
 @property (strong, nonatomic) IBOutlet UILabel *labelTapIcon;
@@ -40,11 +40,13 @@
 {
     [super viewDidLoad];
 
-    [self.labelThisVideo setFont:[UIFont regularCustomFontOfSize:17]];
-    [self.labelWillAppear setFont:[UIFont regularCustomFontOfSize:17]];
-    [self.theMotion setFont:[UIFont regularCustomFontOfSize:17]];
-    [self.labelTapIcon setFont:[UIFont regularCustomFontOfSize:17]];
-    [self.labelTapping setFont:[UIFont regularCustomFontOfSize:17]];
+    [self.labelThisVideo setFont:[UIFont regularCustomFontOfSize:self.labelThisVideo.font.pointSize]];
+    if(self.labelShopMotionIcon)
+        [self.labelShopMotionIcon setFont:[UIFont regularCustomFontOfSize:self.labelShopMotionIcon.font.pointSize]];
+    [self.labelWillAppear setFont:[UIFont regularCustomFontOfSize:self.labelWillAppear.font.pointSize]];
+    [self.theMotion setFont:[UIFont regularCustomFontOfSize:self.theMotion.font.pointSize]];
+    [self.labelTapIcon setFont:[UIFont regularCustomFontOfSize:self.labelTapIcon.font.pointSize]];
+    [self.labelTapping setFont:[UIFont regularCustomFontOfSize:self.labelTapping.font.pointSize]];
 }
 
 - (void)didReceiveMemoryWarning
