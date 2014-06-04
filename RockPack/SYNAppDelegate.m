@@ -395,7 +395,7 @@
 	
 	[[SYNGenreManager sharedManager] fetchGenresWithCompletion:nil];
 	
-	if ([SYNLoginManager sharedManager].registrationCheck) {
+	if (YES/*[SYNLoginManager sharedManager].registrationCheck*/) {
 		self.window.rootViewController = [[SYNOnBoardingViewController alloc] init];
 	} else {
 		self.window.rootViewController = [self createAndReturnRootViewController];

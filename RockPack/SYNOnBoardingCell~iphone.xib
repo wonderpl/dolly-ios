@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -14,14 +14,14 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;Name Label>" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ct3-5L-Zdd" userLabel="Name Label">
-                        <rect key="frame" x="82" y="14" width="124" height="15"/>
+                        <rect key="frame" x="82" y="14" width="133" height="18"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;Description Text>" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="124" translatesAutoresizingMaskIntoConstraints="NO" id="x0p-6l-BAu" userLabel="Description">
-                        <rect key="frame" x="82" y="35" width="124" height="14"/>
+                        <rect key="frame" x="82" y="36" width="124" height="14"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" red="0.59607845544815063" green="0.59607845544815063" blue="0.59607845544815063" alpha="1" colorSpace="calibratedRGB"/>
@@ -74,8 +74,8 @@
                 <constraint firstItem="ct3-5L-Zdd" firstAttribute="top" secondItem="mFM-Us-01N" secondAttribute="top" constant="14" id="KHd-jB-viC"/>
                 <constraint firstItem="Rhf-2u-7gT" firstAttribute="top" secondItem="mFM-Us-01N" secondAttribute="top" constant="12" id="Ouv-27-XM3"/>
                 <constraint firstItem="Rhf-2u-7gT" firstAttribute="leading" secondItem="mFM-Us-01N" secondAttribute="leading" constant="17" id="frT-v5-peP"/>
-                <constraint firstItem="eIs-wc-12W" firstAttribute="leading" secondItem="ct3-5L-Zdd" secondAttribute="trailing" constant="17" id="gec-S7-PKS"/>
-                <constraint firstItem="x0p-6l-BAu" firstAttribute="top" secondItem="ct3-5L-Zdd" secondAttribute="bottom" constant="6" id="h0C-RZ-N2A"/>
+                <constraint firstItem="eIs-wc-12W" firstAttribute="leading" secondItem="ct3-5L-Zdd" secondAttribute="trailing" constant="8" id="gec-S7-PKS"/>
+                <constraint firstItem="x0p-6l-BAu" firstAttribute="top" secondItem="ct3-5L-Zdd" secondAttribute="bottom" constant="4" id="h0C-RZ-N2A"/>
                 <constraint firstAttribute="trailing" secondItem="eIs-wc-12W" secondAttribute="trailing" constant="17" id="zCy-a7-tYp"/>
             </constraints>
             <size key="customSize" width="332" height="73"/>
