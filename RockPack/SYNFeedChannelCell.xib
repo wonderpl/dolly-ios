@@ -44,7 +44,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fgh-bY-3NE">
-                        <rect key="frame" x="20" y="125" width="280" height="48"/>
+                        <rect key="frame" x="20" y="133" width="280" height="48"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                         <state key="normal" title="Button">
@@ -88,11 +88,11 @@
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
-                <constraint firstItem="cZ1-7Z-VVS" firstAttribute="top" secondItem="Fgh-bY-3NE" secondAttribute="bottom" constant="34" id="1p4-B8-ka2"/>
-                <constraint firstItem="nch-3q-JDg" firstAttribute="top" secondItem="Fgh-bY-3NE" secondAttribute="bottom" constant="29" id="65y-pD-NZT"/>
+                <constraint firstItem="cZ1-7Z-VVS" firstAttribute="top" secondItem="Fgh-bY-3NE" secondAttribute="bottom" constant="26" id="1p4-B8-ka2"/>
+                <constraint firstItem="nch-3q-JDg" firstAttribute="top" secondItem="Fgh-bY-3NE" secondAttribute="bottom" constant="21" id="65y-pD-NZT"/>
                 <constraint firstAttribute="bottom" secondItem="qkx-0N-2Vf" secondAttribute="bottom" id="8R5-7s-DMM"/>
                 <constraint firstItem="2Rw-WP-yQk" firstAttribute="leading" secondItem="eHf-7g-4L4" secondAttribute="leading" constant="20" id="DVl-d9-NOa"/>
-                <constraint firstItem="Fgh-bY-3NE" firstAttribute="top" secondItem="eHf-7g-4L4" secondAttribute="top" constant="125" id="Gbm-dZ-YaJ"/>
+                <constraint firstItem="Fgh-bY-3NE" firstAttribute="top" secondItem="eHf-7g-4L4" secondAttribute="top" constant="133" id="Gbm-dZ-YaJ"/>
                 <constraint firstItem="Fgh-bY-3NE" firstAttribute="leading" secondItem="eHf-7g-4L4" secondAttribute="leading" constant="20" id="T1h-yN-211"/>
                 <constraint firstAttribute="trailing" secondItem="Fgh-bY-3NE" secondAttribute="trailing" constant="20" id="XAK-aT-1Q1"/>
                 <constraint firstAttribute="trailing" secondItem="2Rw-WP-yQk" secondAttribute="trailing" constant="20" id="YrV-N0-R4s"/>
