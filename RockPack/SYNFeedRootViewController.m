@@ -114,6 +114,8 @@
 	}
 	
 	self.shownInboarding = NO;
+    
+    [self showInboarding];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -228,7 +230,6 @@
     
     if (self.isViewLoaded && self.view.window) {
         [self showInboarding];
-    
     }
 }
 
