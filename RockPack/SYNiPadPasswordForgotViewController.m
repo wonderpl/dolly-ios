@@ -104,6 +104,8 @@
 																							delegate:nil
 																				   cancelButtonTitle:NSLocalizedString(@"OK", nil)
 																				   otherButtonTitles:nil] show];
+                                                                 
+                                                                 [self.navigationController popViewControllerAnimated:YES];
 															 }
 														 } errorHandler:^(NSError *error) {
 															 if (error.code<500 || error.code >= 600) {

@@ -120,7 +120,7 @@
 																				   cancelButtonTitle:NSLocalizedString(@"OK", nil)
 																				   otherButtonTitles:nil] show];
 																 
-																 [navigationItem setLeftBarButtonItem:self.backBarButton animated:YES];
+                                                                 [self.navigationController popViewControllerAnimated:YES];
 															 }
 														 } errorHandler:^(NSError *error) {
                                                              [navigationItem setLeftBarButtonItem:self.backBarButton animated:YES];
