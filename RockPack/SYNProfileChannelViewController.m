@@ -553,7 +553,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
                                                    
                                                    [weakSelf.cv performBatchUpdates:^{
                                                        
-                                                       [weakSelf.cv insertItemsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForItem:3 inSection:0]]];
+                                                       [weakSelf.cv insertItemsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForItem:2 inSection:0]]];
                                                    } completion:^(BOOL finished) {
                                                        
                                                        
@@ -582,7 +582,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     if (![[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultsCreateChannelFirstTime]) {
     
         if (self.isUserProfile) {
-            cell = ((SYNChannelMidCell*)[self.cv cellForItemAtIndexPath:[NSIndexPath indexPathForItem:3 inSection:0]]);
+            cell = ((SYNChannelMidCell*)[self.cv cellForItemAtIndexPath:[NSIndexPath indexPathForItem:2 inSection:0]]);
             if (cell) {
                 
                 if (IS_IPHONE && !IS_IPHONE_5) {
