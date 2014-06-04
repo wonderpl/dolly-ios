@@ -22,6 +22,7 @@
 #import "UIImageView+MKNetworkKitAdditions.h"
 #import "SYNLoginManager.h"
 #import "SYNOnBoardingViewController.h"
+#import "UIViewController+PresentNotification.h"
 #import "SYNOnBoardingOverlayViewController.h"
 #import "SYNTrackingManager.h"
 #import "SYNYouTubeWebView.h"
@@ -394,7 +395,7 @@
 	
 	[[SYNGenreManager sharedManager] fetchGenresWithCompletion:nil];
 	
-	if ([SYNLoginManager sharedManager].registrationCheck) {
+	if (YES/*[SYNLoginManager sharedManager].registrationCheck*/) {
 		self.window.rootViewController = [[SYNOnBoardingViewController alloc] init];
 	} else {
 		self.window.rootViewController = [self createAndReturnRootViewController];
@@ -405,7 +406,12 @@
 
 
 - (void)onBoardingCompleted: (NSNotification *)notification {
-    self.window.rootViewController = [self createAndReturnRootViewController];
+    UIViewController* mvc = [self createAndReturnRootViewController];
+    
+    self.window.rootViewController = mvc;
+    
+    [mvc presentNotificationWithMessage: NSLocalizedString(@"We are building your feed", nil)
+                                andType:NotificationMessageTypeSuccess];
 }
 
 #pragma mark - App Delegate Methods

@@ -299,6 +299,10 @@
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:kOnboardingCompleted
 														object:self];
+    
+    
+    
+    
 }
 
 - (NSString *)trackingScreenName {

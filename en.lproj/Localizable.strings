@@ -85,6 +85,8 @@
 
 "register_screen_legal" = "By using Wonder PL you agree to our\nTerms of Services & Privacy Policy";
 
+"We are building your feed" = "We are building your feed";
+
 
 //Placeholder for username textfield
 "login_screen_form_field_username_placeholder" = "Username";
