@@ -406,6 +406,7 @@
 
 
 - (void)onBoardingCompleted: (NSNotification *)notification {
+    
     UIViewController* mvc = [self createAndReturnRootViewController];
     
     self.window.rootViewController = mvc;
@@ -1434,7 +1435,7 @@
 
         // Wait a second to give the images a chance to download
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"updateFeedWithCompletionHandler: callback: %lu",
+            [[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"updateFeedWithCompletionHandler: callback: %u",
                                                  result]];
             completionHandler(result);
         });

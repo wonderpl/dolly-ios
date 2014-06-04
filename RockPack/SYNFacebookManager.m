@@ -208,7 +208,8 @@
     if ([FBSession.activeSession isOpen])
     {
         // Check to see that the permissions asked are not already granted...
-        if ([FBSession.activeSession.permissions indexOfObject:permissionString] == NSNotFound)
+        if ([FBSession.activeSession.permissions indexOfObject:permissionString] == NSNotFound &&
+            permissionType != kFacebookPermissionTypeEmail)
         {
             
             [FBSession.activeSession requestNewPublishPermissions: @[permissionString]
@@ -304,6 +305,7 @@
                                                       if (status == FBSessionStateOpen)
                                                       {
                                                           DebugLog(@"++ openSession: Calling recursive");
+                                                          
                                                           // Now here's the clever bit,
                                                           // Now we have an open session, call ourselves recursively so as to possibly extend the permissions
                                                           [self openSessionWithPermissionType: permissionType
