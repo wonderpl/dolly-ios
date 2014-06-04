@@ -11,7 +11,6 @@
                 <outlet property="labelThisVideo" destination="mKQ-Ku-Pul" id="LRW-BN-J9W"/>
                 <outlet property="labelWillAppear" destination="I4e-f4-Cob" id="t9u-nv-WYw"/>
                 <outlet property="theMotion" destination="Snm-Fw-6Eg" id="P2Z-aq-bKF"/>
-                <outlet property="titleLabel" destination="mKQ-Ku-Pul" id="Hsa-g6-WPA"/>
                 <outlet property="view" destination="iN0-l3-epB" id="Mwd-pc-UTJ"/>
             </connections>
         </placeholder>
