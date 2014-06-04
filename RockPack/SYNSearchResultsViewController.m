@@ -325,11 +325,7 @@ typedef void (^SearchResultCompleteBlock)(int);
     [self displayPopupMessage:@"Searching..." withLoader:YES];
     
     // == Perform Search for Genre == //
-    
-    self.videoSearchOperation = [appDelegate.networkEngine videosForGenreId: _currentSearchGenre
-                                                                   forRange: self.dataRequestRange
-                                                          completionHandler: self.videoSearchCompleteBlock];
-    
+
     self.userSearchOperation = [appDelegate.networkEngine usersForGenreId: _currentSearchGenre
                                                                  forRange: self.dataRequestRange2
                                                         completionHandler:^(int value) {
