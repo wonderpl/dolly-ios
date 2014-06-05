@@ -3455,6 +3455,10 @@
 				BE7D02FF179D5624008053DC /* SYNFriendsViewController.m */,
 				BE7D0300179D5624008053DC /* SYNFriendsViewController.xib */,
 				38A73D8517A0086400AD9E90 /* SYNFriendsViewController~iphone.xib */,
+				4C03237818AE6F8300E168EF /* SYNFriendCell.h */,
+				4C03237918AE6F8300E168EF /* SYNFriendCell.m */,
+				4C03237B18AE6F9E00E168EF /* SYNFriendCell~iphone.xib */,
+				4C03237D18AE6FBD00E168EF /* SYNFriendCell.xib */,
 			);
 			name = Friends;
 			sourceTree = "<group>";
@@ -3606,10 +3610,6 @@
 				4C0B9570191283D8008D8036 /* SYNSearchVideoLargeCell.xib */,
 				BEB31380181ECAE900FAF98A /* SYNSearchResultsCell.h */,
 				BEB31381181ECAE900FAF98A /* SYNSearchResultsCell.m */,
-				4C03237818AE6F8300E168EF /* SYNFriendCell.h */,
-				4C03237918AE6F8300E168EF /* SYNFriendCell.m */,
-				4C03237B18AE6F9E00E168EF /* SYNFriendCell~iphone.xib */,
-				4C03237D18AE6FBD00E168EF /* SYNFriendCell.xib */,
 				BEB313541817D8C400FAF98A /* SYNSearchResultsUserCell.h */,
 				BEB313551817D8C400FAF98A /* SYNSearchResultsUserCell.m */,
 				BEB31396182170E500FAF98A /* SYNSearchResultsUserCell.xib */,

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -13,8 +13,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="184" height="120"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C2L-kF-kHe" userLabel="follow" customClass="SYNFollowUserButton">
-                        <rect key="frame" x="50" y="99" width="85" height="30"/>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C2L-kF-kHe" userLabel="follow" customClass="SYNSocialButton">
+                        <rect key="frame" x="50" y="99" width="80" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                         <state key="normal" title="follow">
@@ -53,7 +53,6 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <size key="customSize" width="353" height="216"/>
             <connections>
-                <outlet property="followButton" destination="C2L-kF-kHe" id="8qj-nF-EMn"/>
                 <outlet property="userNameLabelButton" destination="RzS-do-VLF" id="YLH-ES-CeN"/>
                 <outlet property="userThumbnailButton" destination="JBF-27-jfy" id="ZJM-4k-1nl"/>
             </connections>

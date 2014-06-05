@@ -21,11 +21,13 @@
 
 @property (nonatomic, strong) UIView *separatorView;
 
-@property (nonatomic, strong) IBOutlet SYNSocialButton *followButton;
+
 @property (nonatomic, strong) IBOutlet UIButton *userThumbnailButton;
 @property (nonatomic, strong) IBOutlet UIButton *userNameLabelButton;
 @property (strong, nonatomic) UIAlertView *followAllAlertView;
 @property (strong, nonatomic) UIButton* alertViewButton;
+@property (strong, nonatomic) IBOutlet SYNSocialButton *followButton;
+
 
 @end
 
@@ -33,7 +35,9 @@
 
 #pragma mark -
 
-- (void)awakeFromNib {
+- (void)awakeFromNib
+{
+    
 	[super awakeFromNib];
 	
 	if (IS_IPHONE) {
@@ -42,15 +46,25 @@
 	
 	self.userNameLabelButton.titleLabel.font = [UIFont lightCustomFontOfSize:self.userNameLabelButton.titleLabel.font.pointSize];
 	
-	[self.userThumbnailButton addTarget:self action:@selector(profileButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-	[self.userNameLabelButton addTarget:self action:@selector(profileButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-	[self.followButton addTarget:self action:@selector(followButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+	[self.userThumbnailButton addTarget:self
+                                 action:@selector(profileButtonPressed:)
+                       forControlEvents:UIControlEventTouchUpInside];
+    
+	[self.userNameLabelButton addTarget:self
+                                 action:@selector(profileButtonPressed:)
+                       forControlEvents:UIControlEventTouchUpInside];
+    
+	[self.followButton addTarget:self
+                          action:@selector(followButtonPressed:)
+                forControlEvents:UIControlEventTouchUpInside];
     
 }
 
 #pragma mark - Set Data
 
-- (void)setChannelOwner:(ChannelOwner *)channelOwner {
+- (void)setChannelOwner:(ChannelOwner *)channelOwner
+{
+    
 	_channelOwner = channelOwner; // can be friend
 	
 	if (!_channelOwner) {
@@ -74,12 +88,13 @@
     
     channelOwner.subscribedByUserValue = [[SYNActivityManager sharedInstance] isSubscribedToUserId:channelOwner.uniqueId];
     
-    if (channelOwner.subscribedByUserValue == NO) {
-        [self.followButton setTitle:@"Follow" forState:UIControlStateNormal];
+    if (!channelOwner.subscribedByUserValue)
+    {
+        [self.followButton setTitle:@"follow" forState:UIControlStateNormal];
     }
     else
     {
-        [self.followButton setTitle:@"Unfollow" forState:UIControlStateSelected];
+        [self.followButton setTitle:@"following" forState:UIControlStateSelected];
     }
 }
 
@@ -96,8 +111,7 @@
     {
         // Set the new font size.
         font = [font fontWithSize:i];
-        CGSize constraintSize = CGSizeMake(self.userNameLabelButton.frame.size.width
-                                           , MAXFLOAT);
+        CGSize constraintSize = CGSizeMake(self.userNameLabelButton.frame.size.width, MAXFLOAT);
         
         CGRect textRect = [text boundingRectWithSize:constraintSize
                                              options:NSStringDrawingUsesLineFragmentOrigin
@@ -114,7 +128,8 @@
     
 }
 
-- (UIView *)separatorView {
+- (UIView *)separatorView
+{
 	if (!_separatorView) {
 		UIView *view = [[UIView alloc] init];
 		view.backgroundColor = [UIColor colorWithRed:(172.0f/255.0f) green:(172.0f/255.0f) blue:(172.0f/255.0f) alpha:1.0f];
