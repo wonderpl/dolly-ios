@@ -1435,6 +1435,7 @@
 		BEFAE89A1725485B009B2F66 /* SYNVideoQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNVideoQueue.h; sourceTree = "<group>"; };
 		BEFAE89B1725485B009B2F66 /* SYNVideoQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNVideoQueue.m; sourceTree = "<group>"; };
 		D9D50C4D95B04D83AF3B374D /* libPods-rockpackTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-rockpackTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA8E2410194104480041B95B /* Rockpack 12.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Rockpack 12.xcdatamodel"; sourceTree = "<group>"; };
 		DAB6042C193C84630012A7A8 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		E90506A418E05FD800E0910E /* UIDevice+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Helpers.h"; sourceTree = "<group>"; };
 		E90506A518E05FD800E0910E /* UIDevice+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Helpers.m"; sourceTree = "<group>"; };
@@ -5278,6 +5279,7 @@
 		01E427D11664C726009B941F /* Rockpack.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				DA8E2410194104480041B95B /* Rockpack 12.xcdatamodel */,
 				BE8F938E17B3C64E00E7035F /* Rockpack 11.xcdatamodel */,
 				BE8F938717B1224900E7035F /* Rockpack 10.xcdatamodel */,
 				BE7D035C17A13EF4008053DC /* Rockpack 7.xcdatamodel */,
@@ -5290,7 +5292,7 @@
 				3885165B17579086001A9FD4 /* Rockpack 2.xcdatamodel */,
 				01E427D21664C726009B941F /* Rockpack.xcdatamodel */,
 			);
-			currentVersion = BE8F938E17B3C64E00E7035F /* Rockpack 11.xcdatamodel */;
+			currentVersion = DA8E2410194104480041B95B /* Rockpack 12.xcdatamodel */;
 			path = Rockpack.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
