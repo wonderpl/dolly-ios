@@ -115,6 +115,8 @@
 	
 	self.shownInboarding = NO;
     
+    [self.feedCollectionView.collectionViewLayout invalidateLayout];
+    
     [self showInboarding];
 }
 
