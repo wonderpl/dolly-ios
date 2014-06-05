@@ -690,6 +690,7 @@
 		F48C161E192B665000107B32 /* TabActivityNotification@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F48C161C192B665000107B32 /* TabActivityNotification@2x~ipad.png */; };
 		F4952B9D19406D2E00DB5E39 /* SYNDiscoverSearchOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4952B9B19406D2E00DB5E39 /* SYNDiscoverSearchOverlayViewController.m */; };
 		F4952B9E19406D2E00DB5E39 /* SYNDiscoverSearchOverlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4952B9C19406D2E00DB5E39 /* SYNDiscoverSearchOverlayViewController.xib */; };
+		F4952BBE1940B06D00DB5E39 /* UICollectionViewFlowLayoutCenterItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F4952BBD1940B06D00DB5E39 /* UICollectionViewFlowLayoutCenterItem.m */; };
 		F4A443F719363A0F009287FA /* ShopMotion0.png in Resources */ = {isa = PBXBuildFile; fileRef = F4A443D919363A0F009287FA /* ShopMotion0.png */; };
 		F4A443F819363A0F009287FA /* ShopMotion1.png in Resources */ = {isa = PBXBuildFile; fileRef = F4A443DA19363A0F009287FA /* ShopMotion1.png */; };
 		F4A443F919363A0F009287FA /* ShopMotion2.png in Resources */ = {isa = PBXBuildFile; fileRef = F4A443DB19363A0F009287FA /* ShopMotion2.png */; };
@@ -1714,6 +1715,8 @@
 		F4952B9A19406D2E00DB5E39 /* SYNDiscoverSearchOverlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNDiscoverSearchOverlayViewController.h; sourceTree = "<group>"; };
 		F4952B9B19406D2E00DB5E39 /* SYNDiscoverSearchOverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNDiscoverSearchOverlayViewController.m; sourceTree = "<group>"; };
 		F4952B9C19406D2E00DB5E39 /* SYNDiscoverSearchOverlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNDiscoverSearchOverlayViewController.xib; sourceTree = "<group>"; };
+		F4952BBD1940B06D00DB5E39 /* UICollectionViewFlowLayoutCenterItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICollectionViewFlowLayoutCenterItem.m; sourceTree = "<group>"; };
+		F4952BBF1940B0AD00DB5E39 /* UICollectionViewFlowLayoutCenterItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UICollectionViewFlowLayoutCenterItem.h; sourceTree = "<group>"; };
 		F4A443D919363A0F009287FA /* ShopMotion0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ShopMotion0.png; sourceTree = "<group>"; };
 		F4A443DA19363A0F009287FA /* ShopMotion1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ShopMotion1.png; sourceTree = "<group>"; };
 		F4A443DB19363A0F009287FA /* ShopMotion2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ShopMotion2.png; sourceTree = "<group>"; };
@@ -2629,6 +2632,8 @@
 		01F8E77B16B039E6000D44B9 /* Video */ = {
 			isa = PBXGroup;
 			children = (
+				F4952BBF1940B0AD00DB5E39 /* UICollectionViewFlowLayoutCenterItem.h */,
+				F4952BBD1940B06D00DB5E39 /* UICollectionViewFlowLayoutCenterItem.m */,
 				E995ACD3192625BE004A8075 /* Video Players */,
 				E914BED5183CF018001616D3 /* SYNFullScreenVideoViewController.h */,
 				E914BED6183CF018001616D3 /* SYNFullScreenVideoViewController.m */,
@@ -4783,6 +4788,7 @@
 				011C167A173003E800CF50B9 /* OWActivityViewController.m in Sources */,
 				011C167B173003E800CF50B9 /* OWCopyActivity.m in Sources */,
 				F478E824193890CE0015BF38 /* SYNLoginNavigationController.m in Sources */,
+				F4952BBE1940B06D00DB5E39 /* UICollectionViewFlowLayoutCenterItem.m in Sources */,
 				011C167C173003E800CF50B9 /* OWFacebookActivity.m in Sources */,
 				BEC39C1B184E360F00DA8089 /* SYNOnBoardingFooter.m in Sources */,
 				011C167D173003E800CF50B9 /* OWMailActivity.m in Sources */,
