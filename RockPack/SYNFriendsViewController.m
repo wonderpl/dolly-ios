@@ -61,29 +61,39 @@
     
     self.preLoginLabel.font = [UIFont lightCustomFontOfSize:self.preLoginLabel.font.pointSize];
     self.preLoginLabel.text = NSLocalizedString (@"friends_invite", nil);
+    
     [self.activityIndicator hidesWhenStopped];
-	
+	self.activityIndicator.hidden = YES;
 }
 
-- (void)viewDidAppear:(BOOL)animated {
+- (void)viewDidAppear:(BOOL)animated
+{
+    
 	[super viewDidAppear:animated];
 	
-    if ([[SYNFacebookManager sharedFBManager] hasActiveSession]) {
+    if ([[SYNFacebookManager sharedFBManager] hasActiveSession])
+    {
+        
         self.facebookLoginButton.hidden = YES;
         
         self.friendsCollectionView.hidden = NO;
-        self.activityIndicator.hidden = NO;
+        
 		
         [self fetchAndDisplayFriends];
         
 		[[SYNTrackingManager sharedManager] trackFriendsScreenView];
-    } else {
+        
+    }
+    else
+    {
+        
         self.facebookLoginButton.hidden = NO;
         
         self.friendsCollectionView.hidden = YES;
-        self.activityIndicator.hidden = YES;
+        
         
 		[[SYNTrackingManager sharedManager] trackFriendsFBConnectScreenView];
+        
     }
 }
 
@@ -121,7 +131,9 @@
     
     self.emptyFriendsImageView.hidden = YES;
     
+    self.activityIndicator.hidden = NO;
     [self.activityIndicator startAnimating];
+    
     self.preLoginLabel.text = NSLocalizedString (@"friends_loading", nil);
     
     [appDelegate.oAuthNetworkEngine friendsForUser:appDelegate.currentUser
