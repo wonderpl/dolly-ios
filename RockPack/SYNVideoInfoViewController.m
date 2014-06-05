@@ -184,11 +184,16 @@ static const CGFloat UpcomingVideosDividerHeight = 40.0;
         BOOL isShopMotionVideo = [self.currentVideoInstance.video.videoAnnotations count] != 0;
         
 		cell.actionsBar.shopButton.hidden = !isShopMotionVideo;
-		cell.actionsBar.shopButton.selected = [self hasAnnotations];
-        [cell.actionsBar.shopButton setTitle:@"" forState:UIControlStateNormal];
-    	
+        if ([self hasAnnotations]) {
+            cell.actionsBar.shopButton.selected = YES;
+            [cell.actionsBar.shopButton setTitle:@"       1" forState:UIControlStateNormal];
+        } else {
+            cell.actionsBar.shopButton.selected = NO;
+            [cell.actionsBar.shopButton setTitle:@"" forState:UIControlStateNormal];
+            
+        }
         
-		self.videoActionsBar = cell.actionsBar;
+        self.videoActionsBar = cell.actionsBar;
         
 		
 		return cell;
