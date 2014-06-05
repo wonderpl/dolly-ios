@@ -254,14 +254,9 @@
     SYNFriendCell *userCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNFriendCell"
                                                                         forIndexPath: indexPath];
     
-    friend.subscribedByUserValue = [[SYNActivityManager sharedInstance] isSubscribedToUserId:friend.uniqueId];
     userCell.channelOwner = (ChannelOwner*)(friend);
     userCell.delegate = self;
-    
-    // As the followButton needs to be a SYNSocialButton to tie in with the callbacks we just need to style it on the fly
-    
-    userCell.followButton.backgroundColor = [UIColor clearColor];
-    // ================= //
+	userCell.followButton.selected = [[SYNActivityManager sharedInstance] isSubscribedToUserId:friend.uniqueId];
     
     
     return userCell;

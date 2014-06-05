@@ -6,10 +6,9 @@
 //  Copyright (c) 2014 Rockpack Ltd. All rights reserved.
 //
 
-
-
 @import UIKit;
 #import "SYNSearchResultsCell.h"
+#import "SYNFollowChannelButton.h"
 
 @class ChannelOwner;
 @class SYNSocialButton;
@@ -25,7 +24,7 @@
 
 @property (nonatomic, strong) ChannelOwner* channelOwner;
 
-@property (strong, nonatomic) IBOutlet UIButton *followButton;
+@property (strong, nonatomic) IBOutlet SYNFollowChannelButton *followButton;
 
 @property (nonatomic, strong, readonly) UIButton *userThumbnailButton;
 @property (nonatomic, strong, readonly) UIButton *userNameLabelButton;
