@@ -2306,10 +2306,10 @@
 			children = (
 				4CE0B4BF18CE258A009859CB /* SYNProfileHeader.h */,
 				4CE0B4C018CE258A009859CB /* SYNProfileHeader.m */,
-				F478E825193897160015BF38 /* SYNProfileVideoViewController.h */,
-				F478E826193897160015BF38 /* SYNProfileVideoViewController.m */,
 				4CE0B4C218CE25E6009859CB /* SYNProfileHeader~iphone.xib */,
 				4C9B519A18D721D600A3AB0D /* SYNProfileHeader~ipad.xib */,
+				F478E825193897160015BF38 /* SYNProfileVideoViewController.h */,
+				F478E826193897160015BF38 /* SYNProfileVideoViewController.m */,
 				4CF39EEC18CDD5850077CDF0 /* SYNProfileViewController.h */,
 				4CF39EED18CDD5850077CDF0 /* SYNProfileViewController.m */,
 				4CE0B4BC18CE1ADF009859CB /* SYNProfileEditViewController.h */,

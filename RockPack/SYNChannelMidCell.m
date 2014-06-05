@@ -128,6 +128,11 @@
         labelText = [NSString stringWithFormat: @"%@ %@", channel.subscribersCount, NSLocalizedString(@"Follower", nil)];
 		
     } else {
+        
+        if (channel.subscribersCount<0) {
+            channel.subscribersCount = 0;
+        }
+        
         labelText = [NSString stringWithFormat: @"%@ %@", channel.subscribersCount, NSLocalizedString(@"Subscribers", nil)];
     }
     

@@ -700,17 +700,30 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 
 
 - (void) followButtonTapped:(SYNChannelMidCell *)cell {
-    
+
+    if (![[SYNActivityManager sharedInstance] isSubscribedToChannelId:cell.channel.uniqueId]) {
+    	cell.channel.subscribersCountValue++;
+    } else {
+    	cell.channel.subscribersCountValue--;
+    }
+
+    BOOL isAlreadyFollowingUser = [[SYNActivityManager sharedInstance] isSubscribedToUserId:self.channelOwner.uniqueId];
+
     [self followButtonPressed:cell.followButton withChannel:cell.channel completion:^{
-
-        if ([[SYNActivityManager sharedInstance] isSubscribedToChannelId :cell.channel.uniqueId]) {
-        	cell.channel.subscribersCountValue ++;
-        } else {
-        	cell.channel.subscribersCountValue --;
-        }
-
         //hack to delay to allow for the animation as reloading stops it.
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.32 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            BOOL isCurrentlySubscribedToUser = [[SYNActivityManager sharedInstance] isSubscribedToUserId:self.channelOwner.uniqueId];
+            
+            if (isCurrentlySubscribedToUser != isAlreadyFollowingUser) {
+                
+                if (isCurrentlySubscribedToUser) {
+                    self.channelOwner.subscribersCountValue++;
+                } else {
+                    self.channelOwner.subscribersCountValue--;
+                }
+            }
+
             [self.cv reloadData];
         });
     }];

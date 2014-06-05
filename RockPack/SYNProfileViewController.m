@@ -411,7 +411,36 @@ static const CGFloat TransitionDuration = 0.5f;
 
 - (void) followUserButtonTapped:(SYNSocialButton*)sender {
     
+    
+    BOOL isAlreadyFollowingUser = sender.selected;
+    if (sender.selected) {
+        for (Channel *channel in self.channelOwner.channels) {
+            if (![[SYNActivityManager sharedInstance] isSubscribedToUserId:channel.uniqueId]) {
+                channel.subscribersCountValue--;
+            }
+        }
+    } else {
+        for (Channel *channel in self.channelOwner.channels) {
+            if (![[SYNActivityManager sharedInstance] isSubscribedToUserId:channel.uniqueId]) {
+                channel.subscribersCountValue++;
+            }
+        }
+    }
+
+    
     [self followControlPressed:sender withChannelOwner:self.channelOwner completion:^{
+        
+        BOOL isCurrentlySubscribedToUser = [[SYNActivityManager sharedInstance] isSubscribedToUserId:self.channelOwner.uniqueId];
+
+        if (isCurrentlySubscribedToUser != isAlreadyFollowingUser) {
+        
+            if (isCurrentlySubscribedToUser) {
+                self.channelOwner.subscribersCountValue++;
+            } else {
+                self.channelOwner.subscribersCountValue--;
+            }
+        }
+        
         [self reloadCollectionViews];
     }];
 }
