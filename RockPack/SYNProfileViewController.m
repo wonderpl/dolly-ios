@@ -68,7 +68,16 @@ static const CGFloat TransitionDuration = 0.5f;
         self.followingContainer.hidden = YES;
         self.videosContainer.hidden = YES;
         self.channelContainer.hidden = NO;
+        self.videoCollectionViewController.cv.scrollsToTop = NO;
+        self.channelCollectionViewController.cv.scrollsToTop = YES;
+        self.subscriptionCollectionViewController.cv.scrollsToTop = NO;
+    
     } else {
+        
+        self.videoCollectionViewController.cv.scrollsToTop = YES;
+        self.channelCollectionViewController.cv.scrollsToTop = NO;
+        self.subscriptionCollectionViewController.cv.scrollsToTop = NO;
+        
         self.videosContainer.hidden = NO;
         self.channelContainer.hidden = YES;
         self.followingContainer.hidden = YES;
@@ -263,6 +272,10 @@ static const CGFloat TransitionDuration = 0.5f;
 	if (self.isChannelsCollectionViewShowing) {
 		return;
 	}
+    
+    self.videoCollectionViewController.cv.scrollsToTop = NO;
+    self.channelCollectionViewController.cv.scrollsToTop = YES;
+    self.subscriptionCollectionViewController.cv.scrollsToTop = NO;
 
     CGPoint offSet;
     
@@ -320,7 +333,9 @@ static const CGFloat TransitionDuration = 0.5f;
 	if (!self.followingContainer.hidden) {
 		return;
 	}
-	
+    self.videoCollectionViewController.cv.scrollsToTop = NO;
+    self.channelCollectionViewController.cv.scrollsToTop = NO;
+    self.subscriptionCollectionViewController.cv.scrollsToTop = YES;
     
     if (self.isUserProfile) {
 		self.subscriptionCollectionViewController.headerView.firstTab.selected = NO;
@@ -375,6 +390,9 @@ static const CGFloat TransitionDuration = 0.5f;
     self.videosContainer.hidden = NO;
     self.channelContainer.hidden = YES;
     
+    self.videoCollectionViewController.cv.scrollsToTop = YES;
+    self.channelCollectionViewController.cv.scrollsToTop = NO;
+    self.subscriptionCollectionViewController.cv.scrollsToTop = NO;
     
     if(!self.isUserProfile)
     {
