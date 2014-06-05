@@ -103,6 +103,23 @@ static const CGFloat TransitionDuration = 0.5f;
         [self.navigationController.navigationBar setBackgroundTransparent:NO];
     }
 }
+
+- (void)scrollToTop:(UIGestureRecognizer *)gestureRecognizer {
+	
+    if ([self isChannelsCollectionViewShowing]) {
+        [self.channelCollectionViewController.cv setContentOffset:CGPointMake(0, -self.channelCollectionViewController.cv.contentInset.top) animated:YES];
+    }
+    
+    if ([self isVideosCollectionViewShowing]) {
+        [self.videoCollectionViewController.cv setContentOffset:CGPointMake(0, -self.videoCollectionViewController.cv.contentInset.top) animated:YES];
+    }
+
+    if ([self isFollowingsCollectionViewShowing]) {
+        [self.subscriptionCollectionViewController.cv setContentOffset:CGPointMake(0, -self.subscriptionCollectionViewController.cv.contentInset.top) animated:YES];
+    }
+
+}
+
 #pragma mark - segue
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
