@@ -29,5 +29,6 @@
 @property (nonatomic, weak) id<SYNVideoInfoViewControllerDelegate> delegate;
 
 - (BOOL)addVideoAnnotation:(VideoAnnotation *)annotation;
+- (BOOL)hasAnnotations;
 
 @end

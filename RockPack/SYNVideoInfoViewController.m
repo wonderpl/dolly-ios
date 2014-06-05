@@ -119,6 +119,10 @@ static const CGFloat UpcomingVideosDividerHeight = 40.0;
 	return YES;
 }
 
+- (BOOL) hasAnnotations {
+    return [self.annotations count]>0;
+}
+
 #pragma mark - Getters / Setters
 
 - (void)setSelectedIndex:(NSInteger)selectedIndex {

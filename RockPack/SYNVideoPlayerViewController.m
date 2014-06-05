@@ -308,7 +308,10 @@
 }
 
 - (void)videoPlayerFinishedPlaying {
-	[self playNextVideo];
+    //If there are annotations do not play the next video
+    if (!self.videoInfoViewController.hasAnnotations) {
+        [self playNextVideo];
+    }
 }
 
 - (void)videoPlayerErrorOccurred:(NSString *)reason {
