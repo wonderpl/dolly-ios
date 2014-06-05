@@ -203,12 +203,13 @@
 #pragma mark - Getters / Setters
 
 - (void)setVideoInstance:(VideoInstance *)videoInstance {
-    if (self.videoInstance) {
-        [self trackViewingStatisticsForCurrentVideo];
-    }
     
     if (!videoInstance) {
         return;
+    }
+
+    if (self.videoInstance) {
+        [self trackViewingStatisticsForCurrentVideo];
     }
 
 	_videoInstance = videoInstance;
