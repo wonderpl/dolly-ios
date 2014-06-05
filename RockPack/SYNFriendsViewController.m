@@ -257,9 +257,8 @@
     userCell.delegate = self;
     
     // As the followButton needs to be a SYNSocialButton to tie in with the callbacks we just need to style it on the fly
-    userCell.followButton.layer.borderWidth = 0.0f;
+    
     userCell.followButton.backgroundColor = [UIColor clearColor];
-    userCell.followButton.titleLabel.font = [UIFont lightCustomFontOfSize:20.0f];
     // ================= //
     
     
