@@ -688,6 +688,8 @@
 		F48C161A192B663B00107B32 /* TabActivityNotification~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = F48C1618192B663B00107B32 /* TabActivityNotification~iphone.png */; };
 		F48C161D192B665000107B32 /* TabActivityNotification~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F48C161B192B665000107B32 /* TabActivityNotification~ipad.png */; };
 		F48C161E192B665000107B32 /* TabActivityNotification@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F48C161C192B665000107B32 /* TabActivityNotification@2x~ipad.png */; };
+		F4952B9D19406D2E00DB5E39 /* SYNDiscoverSearchOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4952B9B19406D2E00DB5E39 /* SYNDiscoverSearchOverlayViewController.m */; };
+		F4952B9E19406D2E00DB5E39 /* SYNDiscoverSearchOverlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4952B9C19406D2E00DB5E39 /* SYNDiscoverSearchOverlayViewController.xib */; };
 		F4A443F719363A0F009287FA /* ShopMotion0.png in Resources */ = {isa = PBXBuildFile; fileRef = F4A443D919363A0F009287FA /* ShopMotion0.png */; };
 		F4A443F819363A0F009287FA /* ShopMotion1.png in Resources */ = {isa = PBXBuildFile; fileRef = F4A443DA19363A0F009287FA /* ShopMotion1.png */; };
 		F4A443F919363A0F009287FA /* ShopMotion2.png in Resources */ = {isa = PBXBuildFile; fileRef = F4A443DB19363A0F009287FA /* ShopMotion2.png */; };
@@ -1709,6 +1711,9 @@
 		F48C1618192B663B00107B32 /* TabActivityNotification~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabActivityNotification~iphone.png"; sourceTree = "<group>"; };
 		F48C161B192B665000107B32 /* TabActivityNotification~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabActivityNotification~ipad.png"; sourceTree = "<group>"; };
 		F48C161C192B665000107B32 /* TabActivityNotification@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabActivityNotification@2x~ipad.png"; sourceTree = "<group>"; };
+		F4952B9A19406D2E00DB5E39 /* SYNDiscoverSearchOverlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNDiscoverSearchOverlayViewController.h; sourceTree = "<group>"; };
+		F4952B9B19406D2E00DB5E39 /* SYNDiscoverSearchOverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNDiscoverSearchOverlayViewController.m; sourceTree = "<group>"; };
+		F4952B9C19406D2E00DB5E39 /* SYNDiscoverSearchOverlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNDiscoverSearchOverlayViewController.xib; sourceTree = "<group>"; };
 		F4A443D919363A0F009287FA /* ShopMotion0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ShopMotion0.png; sourceTree = "<group>"; };
 		F4A443DA19363A0F009287FA /* ShopMotion1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ShopMotion1.png; sourceTree = "<group>"; };
 		F4A443DB19363A0F009287FA /* ShopMotion2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ShopMotion2.png; sourceTree = "<group>"; };
@@ -2992,6 +2997,7 @@
 		4C5E860218B6331800D0E937 /* Discover */ = {
 			isa = PBXGroup;
 			children = (
+				F4952B9919406CCB00DB5E39 /* Search iPhone */,
 				4C5E861718B6573700D0E937 /* HighlightsOverlay */,
 				4C5E861618B6572B00D0E937 /* Video Overlay */,
 			);
@@ -3900,6 +3906,16 @@
 			name = Share;
 			sourceTree = "<group>";
 		};
+		F4952B9919406CCB00DB5E39 /* Search iPhone */ = {
+			isa = PBXGroup;
+			children = (
+				F4952B9A19406D2E00DB5E39 /* SYNDiscoverSearchOverlayViewController.h */,
+				F4952B9B19406D2E00DB5E39 /* SYNDiscoverSearchOverlayViewController.m */,
+				F4952B9C19406D2E00DB5E39 /* SYNDiscoverSearchOverlayViewController.xib */,
+			);
+			name = "Search iPhone";
+			sourceTree = "<group>";
+		};
 		F4A443D8193639D8009287FA /* Shop Motion */ = {
 			isa = PBXGroup;
 			children = (
@@ -4069,6 +4085,7 @@
 				BE1B3DC4180D4EEB00DA2BD6 /* SYNDiscoverViewController~iphone.xib in Resources */,
 				E9EF289618FD901E003B2D0F /* FreightTextPro-BookItalic.otf in Resources */,
 				E960239D18E5E6BA00A96CB4 /* SYNVideoPlayerViewController_iphone.storyboard in Resources */,
+				F4952B9E19406D2E00DB5E39 /* SYNDiscoverSearchOverlayViewController.xib in Resources */,
 				BE851B49183BE6BC00B8E8C6 /* ButtonUpload@2x.png in Resources */,
 				BE0815C716D5389C00ADB1DC /* SYNMasterViewController.xib in Resources */,
 				F4A4440F19363A0F009287FA /* ShopMotion9@2x.png in Resources */,
@@ -4693,6 +4710,7 @@
 				E9CE7A2D1887057500023A86 /* SYNiPadLoginToSignupAnimator.m in Sources */,
 				011A162E16EF5EC5008CF25E /* GKImageCropOverlayView.m in Sources */,
 				011A162F16EF5EC5008CF25E /* GKImageCropView.m in Sources */,
+				F4952B9D19406D2E00DB5E39 /* SYNDiscoverSearchOverlayViewController.m in Sources */,
 				4C03237518AE3F4D00E168EF /* SYNDiscoverSectionView.m in Sources */,
 				011A163016EF5EC5008CF25E /* GKImageCropViewController.m in Sources */,
 				011A163116EF5EC5008CF25E /* GKImagePicker.m in Sources */,

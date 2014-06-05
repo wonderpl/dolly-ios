@@ -162,7 +162,6 @@ static const NSInteger UsernameMaxLength = 20;
 																
 																NSNumber *availabilitynumber = result[@"available"];
 																
-																NSLog(@"resultresult : %@", result);
 																
 																if (availabilitynumber) {
 																	BOOL usernameAvailable = [availabilitynumber boolValue];

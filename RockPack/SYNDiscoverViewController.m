@@ -30,6 +30,7 @@
 #import "SYNDiscoverSectionHeaderView.h"
 #import "SYNGenreManager.h"
 #import "SYNDeviceManager.h"
+#import "SYNDiscoverSearchOverlayViewController.h"
 
 @import QuartzCore;
 
@@ -208,7 +209,15 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 												 selector:@selector(keyboardChanged:)
 													 name:UIKeyboardWillHideNotification
 												   object:nil];
-	}
+
+	
+        if (![[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultsDiscoverSearchFirstTime]) {
+            SYNDiscoverSearchOverlayViewController *overlay = [[SYNDiscoverSearchOverlayViewController alloc] init];
+            [overlay addToViewController:appDelegate.masterViewController];
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kUserDefaultsDiscoverSearchFirstTime];
+        }
+    
+    }
 	
 }
 
