@@ -74,8 +74,9 @@
     
     if(!activity.enabled)
     {
-        button.userInteractionEnabled = NO;
-        button.alpha = 0.5;
+        // Leave button interactive
+        // button.userInteractionEnabled = NO;
+        button.alpha = 0.1;
     }
     
     button.frame = CGRectMake(x, y , 61.0f, 61.0f);
