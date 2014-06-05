@@ -54,9 +54,19 @@
                                  action:@selector(profileButtonPressed:)
                        forControlEvents:UIControlEventTouchUpInside];
     
+    self.followButton.layer.cornerRadius = self.followButton.frame.size.height * 0.5;
+    self.followButton.layer.borderColor = self.followButton.titleLabel.textColor.CGColor;
+    self.followButton.layer.borderWidth = 1.0f;
+    
+    
+    [self.followButton setTitle:@"follow" forState:UIControlStateNormal];
+    [self.followButton setTitle:@"following" forState:UIControlStateSelected];
+    
 	[self.followButton addTarget:self
                           action:@selector(followButtonPressed:)
                 forControlEvents:UIControlEventTouchUpInside];
+    
+    
     
 }
 
@@ -73,7 +83,6 @@
 		return;
 	}
 	
-	self.followButton.dataItemLinked = channelOwner;
     
     [self.userThumbnailButton setImageWithURL:[NSURL URLWithString: channelOwner.thumbnailURL]
                                      forState:UIControlStateNormal
@@ -86,16 +95,8 @@
     
     [self setButtonTitleAndResizeText:channelOwner.displayName forLabel:self.userNameLabelButton.titleLabel];
     
-    channelOwner.subscribedByUserValue = [[SYNActivityManager sharedInstance] isSubscribedToUserId:channelOwner.uniqueId];
+    self.followButton.selected = channelOwner.subscribedByUserValue;
     
-    if (!channelOwner.subscribedByUserValue)
-    {
-        [self.followButton setTitle:@"follow" forState:UIControlStateNormal];
-    }
-    else
-    {
-        [self.followButton setTitle:@"following" forState:UIControlStateSelected];
-    }
 }
 
 // Could not set word wrapping for a UILabel with multiple lines and set linebreak as NSLineBreakByTruncatingTail so this method calculates a good font size according to the optimal font size and works it way down

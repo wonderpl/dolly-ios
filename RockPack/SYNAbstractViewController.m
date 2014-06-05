@@ -269,6 +269,8 @@
                  isOwner: (NSNumber *) isOwner
                  isVideo: (NSNumber *) isVideo
               usingImage: (UIImage *) usingImage {
+    
+    
 	SYNOneToOneSharingController *viewController = [self createSharingViewControllerForObjectType:objectType
 																						 objectId:objectId
 																						  isOwner:[isOwner boolValue]

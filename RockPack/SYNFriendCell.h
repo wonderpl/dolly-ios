@@ -25,7 +25,7 @@
 
 @property (nonatomic, strong) ChannelOwner* channelOwner;
 
-@property (strong, nonatomic) IBOutlet SYNSocialButton *followButton;
+@property (strong, nonatomic) IBOutlet UIButton *followButton;
 
 @property (nonatomic, strong, readonly) UIButton *userThumbnailButton;
 @property (nonatomic, strong, readonly) UIButton *userNameLabelButton;

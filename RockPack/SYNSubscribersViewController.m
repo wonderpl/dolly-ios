@@ -171,7 +171,7 @@
     userCell.channelOwner = channelOwner;
     userCell.delegate = self;
     userCell.followButton.hidden = YES;
-    NSLog(@"%@", userCell.followButton);
+    
     return userCell;
 }
 

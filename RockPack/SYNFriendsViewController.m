@@ -18,6 +18,7 @@
 #import "Friend.h"
 #import "SYNFacebookManager.h"
 #import "SYNMasterViewController.h"
+#import "SYNActivityManager.h"
 #import <QuartzCore/QuartzCore.h>
 #import "SYNTrackingManager.h"
 #import "SYNSocialButton.h"
@@ -248,11 +249,12 @@
                    cellForItemAtIndexPath: (NSIndexPath *) indexPath
 {
     
-    Friend *friend = self.friends[indexPath.row];
+    ChannelOwner *friend = (ChannelOwner*)self.friends[indexPath.row];
     
     SYNFriendCell *userCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNFriendCell"
-                                                                                            forIndexPath: indexPath];
+                                                                        forIndexPath: indexPath];
     
+    friend.subscribedByUserValue = [[SYNActivityManager sharedInstance] isSubscribedToUserId:friend.uniqueId];
     userCell.channelOwner = (ChannelOwner*)(friend);
     userCell.delegate = self;
     
