@@ -184,7 +184,7 @@ static const CGFloat UpcomingVideosDividerHeight = 40.0;
         BOOL isShopMotionVideo = [self.currentVideoInstance.video.videoAnnotations count] != 0;
         
 		cell.actionsBar.shopButton.hidden = !isShopMotionVideo;
-		cell.actionsBar.shopButton.selected = NO;
+		cell.actionsBar.shopButton.selected = [self hasAnnotations];
         [cell.actionsBar.shopButton setTitle:@"" forState:UIControlStateNormal];
     	
         
