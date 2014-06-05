@@ -123,8 +123,9 @@
 	
 	NSMutableDictionary *channelOwners = [NSMutableDictionary dictionary];
 	for (NSDictionary *dictionary in dictionaries) {
+        if ([dictionary isKindOfClass:[NSNull class]]) continue;
 		NSString *channelOwnerId = dictionary[@"id"];
-		
+
 		ChannelOwner *channelOwner = existingChannelOwners[channelOwnerId];
 		if (!channelOwner) {
 			channelOwner = [self insertInManagedObjectContext:managedObjectContext];

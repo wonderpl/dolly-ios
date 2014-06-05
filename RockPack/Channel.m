@@ -130,7 +130,6 @@
 	NSMutableDictionary *channels = [NSMutableDictionary dictionary];
 	for (NSDictionary *dictionary in dictionaries) {
 		NSString *channelId = dictionary[@"id"];
-		NSString *channelOwnerId = dictionary[@"owner"][@"id"];
 		
 		Channel *channel = existingChannels[channelId];
 		if (!channel) {
@@ -143,7 +142,10 @@
 		
 		[channel setBasicAttributesFromDictionary:dictionary];
 		
-		channel.channelOwner = channelOwners[channelOwnerId];
+        NSDictionary *ownerDict = dictionary[@"owner"];
+        if (![ownerDict isKindOfClass:[NSNull class]]) {
+            channel.channelOwner = channelOwners[ownerDict[@"id"]];
+        }
 		
 		channels[channelId] = channel;
 	}
