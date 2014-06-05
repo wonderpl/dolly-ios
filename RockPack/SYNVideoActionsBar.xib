@@ -80,10 +80,23 @@
                         <constraint firstAttribute="height" constant="24" id="tZR-1z-tv7"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YPU-lf-ze3">
+                    <rect key="frame" x="178" y="0.0" width="44" height="38"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="annotationButtonPressed:" destination="RuC-0K-OOM" eventType="touchUpInside" id="hpW-JH-2eb"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="YPU-lf-ze3" secondAttribute="bottom" constant="2" id="3Ox-dh-XG4"/>
                 <constraint firstItem="H5R-DI-TgM" firstAttribute="leading" secondItem="RuC-0K-OOM" secondAttribute="leading" id="9rb-kp-IZc"/>
+                <constraint firstItem="YPU-lf-ze3" firstAttribute="leading" secondItem="Ixh-ks-J92" secondAttribute="trailing" constant="9" id="HSk-8c-hOt"/>
                 <constraint firstAttribute="centerY" secondItem="pXu-bh-Z99" secondAttribute="centerY" constant="3" id="K1L-o6-O1o"/>
+                <constraint firstItem="YPU-lf-ze3" firstAttribute="top" secondItem="RuC-0K-OOM" secondAttribute="top" id="RIB-5s-rPE"/>
                 <constraint firstItem="gvq-tZ-yxZ" firstAttribute="leading" secondItem="pXu-bh-Z99" secondAttribute="trailing" constant="11" id="RWm-Ye-tqe"/>
                 <constraint firstItem="Zsz-gD-1Fi" firstAttribute="leading" secondItem="gvq-tZ-yxZ" secondAttribute="trailing" id="V0D-gJ-pPP"/>
                 <constraint firstItem="Ixh-ks-J92" firstAttribute="leading" secondItem="H5R-DI-TgM" secondAttribute="trailing" constant="4" id="aEb-vA-WPh"/>
@@ -91,6 +104,7 @@
                 <constraint firstAttribute="centerY" secondItem="Zsz-gD-1Fi" secondAttribute="centerY" id="iD5-Fd-Myo"/>
                 <constraint firstItem="pXu-bh-Z99" firstAttribute="leading" secondItem="Ixh-ks-J92" secondAttribute="trailing" constant="19" id="mBX-gS-4x6"/>
                 <constraint firstAttribute="centerY" secondItem="H5R-DI-TgM" secondAttribute="centerY" id="ql9-oP-LiQ"/>
+                <constraint firstItem="gvq-tZ-yxZ" firstAttribute="leading" secondItem="YPU-lf-ze3" secondAttribute="trailing" constant="-2" id="vDG-Bf-O1B"/>
                 <constraint firstAttribute="centerY" secondItem="Ixh-ks-J92" secondAttribute="centerY" id="vN2-Jq-grm"/>
                 <constraint firstAttribute="trailing" secondItem="Zsz-gD-1Fi" secondAttribute="trailing" id="xGv-rq-Cwi"/>
             </constraints>
