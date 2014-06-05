@@ -26,7 +26,7 @@
 @property (nonatomic, strong) IBOutlet UIButton *userNameLabelButton;
 @property (strong, nonatomic) UIAlertView *followAllAlertView;
 @property (strong, nonatomic) UIButton* alertViewButton;
-@property (strong, nonatomic) IBOutlet SYNSocialButton *followButton;
+
 
 
 @end

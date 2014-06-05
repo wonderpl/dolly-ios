@@ -53,6 +53,7 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <size key="customSize" width="353" height="216"/>
             <connections>
+                <outlet property="followButton" destination="C2L-kF-kHe" id="nzz-P9-eS9"/>
                 <outlet property="userNameLabelButton" destination="RzS-do-VLF" id="YLH-ES-CeN"/>
                 <outlet property="userThumbnailButton" destination="JBF-27-jfy" id="ZJM-4k-1nl"/>
             </connections>

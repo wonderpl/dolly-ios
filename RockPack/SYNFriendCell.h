@@ -24,7 +24,9 @@
 @interface SYNFriendCell : SYNSearchResultsCell
 
 @property (nonatomic, strong) ChannelOwner* channelOwner;
-@property (nonatomic, strong, readonly) SYNSocialButton *followButton;
+
+@property (strong, nonatomic) IBOutlet SYNSocialButton *followButton;
+
 @property (nonatomic, strong, readonly) UIButton *userThumbnailButton;
 @property (nonatomic, strong, readonly) UIButton *userNameLabelButton;
 

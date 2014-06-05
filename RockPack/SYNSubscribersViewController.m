@@ -164,13 +164,14 @@
                    cellForItemAtIndexPath: (NSIndexPath *) indexPath
 {
     SYNFriendCell* userCell = [collectionView dequeueReusableCellWithReuseIdentifier:[SYNFriendCell reuseIdentifier]
-																				   forIndexPath:indexPath];
+                                                                        forIndexPath:indexPath];
+    
     ChannelOwner* channelOwner = (ChannelOwner*)self.users[indexPath.item];
     
     userCell.channelOwner = channelOwner;
     userCell.delegate = self;
     userCell.followButton.hidden = YES;
-    
+    NSLog(@"%@", userCell.followButton);
     return userCell;
 }
 
