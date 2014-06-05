@@ -226,6 +226,15 @@
     return YES;
 }
 
+- (void)applicationProtectedDataDidBecomeAvailable:(UIApplication *)application
+{
+    // Save any credentials that could have been refreshed while the device was locked.
+    if (_currentOAuth2Credentials) {
+        [_currentOAuth2Credentials saveToKeychainForService: [[NSBundle mainBundle] bundleIdentifier]
+                                                    account: _currentOAuth2Credentials.userId];
+    }
+}
+
 - (void) refreshFacebookSession
 {
     // link to facebook
@@ -1046,8 +1055,6 @@
 
 - (void) setCurrentOAuth2Credentials: (SYNOAuth2Credential *) nCurrentOAuth2Credentials
 {
-    [_currentOAuth2Credentials removeFromKeychain];
-    
     if (!self.currentUser)
     {
         _currentOAuth2Credentials = nil;
@@ -1056,11 +1063,17 @@
     }
     
     _currentOAuth2Credentials = nCurrentOAuth2Credentials;
-    
-    if (_currentOAuth2Credentials != nil)
+
+    // Could be running in the background on a locked device, so don't try to save
+    // the credentials unless the keychain is available.
+    if ([UIApplication sharedApplication].protectedDataAvailable)
     {
-        [_currentOAuth2Credentials saveToKeychainForService: [[NSBundle mainBundle] bundleIdentifier]
-                                                    account: _currentOAuth2Credentials.userId];
+        if (_currentOAuth2Credentials) {
+            [_currentOAuth2Credentials saveToKeychainForService: [[NSBundle mainBundle] bundleIdentifier]
+                                                        account: _currentOAuth2Credentials.userId];
+        } else {
+            [_currentOAuth2Credentials removeFromKeychain];
+        }
     }
 }
 
