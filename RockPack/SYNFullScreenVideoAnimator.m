@@ -77,17 +77,16 @@ static const CGFloat AnimationDuration = 0.3;
 	fullScreenViewController.view.alpha = 0.0;
     fullScreenViewController.collectionView = collectionView;
 
+    if (IS_IPHONE) {
+        collectionView.contentOffset = CGPointMake(videoPlayerViewController.selectedIndex * CGRectGetWidth(fullScreenViewController.view.bounds), 0);
+    } else {
+        collectionView.contentOffset = CGPointMake(videoPlayerViewController.selectedIndex * CGRectGetWidth(fullScreenViewController.view.bounds), 0);
+    }
 
 	[UIView animateWithDuration:AnimationDuration
 					 animations:^{
 						 fullScreenViewController.view.alpha = 1.0;
 					 } completion:^(BOOL finished) {
-						 
-						 if (IS_IPHONE) {
-                             collectionView.contentOffset = CGPointMake(videoPlayerViewController.selectedIndex * CGRectGetWidth(fullScreenViewController.view.bounds), 0);
-                         } else {
-                             collectionView.contentOffset = CGPointMake(videoPlayerViewController.selectedIndex * CGRectGetWidth(fullScreenViewController.view.bounds), 0);
-                         }
 						 [transitionContext completeTransition:YES];
 					 }];
 }
