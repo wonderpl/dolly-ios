@@ -264,8 +264,6 @@
 		SYNVideoPlayer *videoPlayer = [SYNVideoPlayer playerForVideoInstance:videoInstance];
 		videoPlayer.delegate = self;
 		cell.videoPlayer = videoPlayer;
-        
-        NSLog(@"new SYNVideoPlayer");
 	}
 	
 	return cell;

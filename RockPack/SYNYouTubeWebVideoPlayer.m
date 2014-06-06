@@ -41,7 +41,6 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 
 - (void)dealloc {
 	_youTubeWebView.delegate = nil;
-    [_youTubeWebView loadHTMLString:@"" baseURL: nil];
 }
 
 #pragma mark - UIView
