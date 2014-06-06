@@ -626,30 +626,61 @@
         [[NSFileManager defaultManager] removeItemAtPath:storeURL.path error:&error];
     }
     
-    //Try to migrate
-    NSPersistentStore *store = [persistentStoreCoordinator addPersistentStoreWithType: NSSQLiteStoreType
-                                                                        configuration: nil
-                                                                                  URL: storeURL
-                                                                              options: @{NSInferMappingModelAutomaticallyOption: @(YES), NSMigratePersistentStoresAutomaticallyOption: @(YES)}
-                                                                                error: &error];
-    
-    if (error)
-    {
-        if ([[NSFileManager defaultManager] removeItemAtURL: storeURL
-                                                      error: &error])
-        {
-            DebugLog(@"Existing database - migration failed so deleted");
-        }
-        else
-        {
-            DebugLog(@"*** Could not delete persistent store, %@", error);
-        }
-        
+    NSDictionary *sourceMetadata = [NSPersistentStoreCoordinator metadataForPersistentStoreOfType: NSSQLiteStoreType
+                                                                                              URL: storeURL
+                                                                                            error: &error];
+    BOOL isCompatible;
+    if (sourceMetadata) {
+        NSManagedObjectModel *destinationModel = [persistentStoreCoordinator managedObjectModel];
+        isCompatible = [destinationModel isConfiguration:nil compatibleWithStoreMetadata:sourceMetadata];
+    } else {
+        // assume empty db is compatible
+        isCompatible = YES;
+    }
+
+    NSPersistentStore *store;
+
+    if (isCompatible) {
+        // Open existing db
         store = [persistentStoreCoordinator addPersistentStoreWithType: NSSQLiteStoreType
                                                          configuration: nil
                                                                    URL: storeURL
                                                                options: @{NSMigratePersistentStoresAutomaticallyOption: @(YES)}
                                                                  error: &error];
+    } else {
+        // Nuke the db to ensure we have clean schema and data, but first try to extract the current user
+        NSPersistentStore *tmpStore = [persistentStoreCoordinator addPersistentStoreWithType: NSSQLiteStoreType
+                                                                               configuration: nil
+                                                                                         URL: storeURL
+                                                                                     options: @{NSInferMappingModelAutomaticallyOption: @(YES), NSMigratePersistentStoresAutomaticallyOption: @(YES)}
+                                                                                       error: &error];
+        // currentUser getter will try and fetch user record from coredata
+        NSDictionary *currentUserDict;
+        if (self.currentUser) {
+            currentUserDict = @{@"id": self.currentUser.uniqueId,
+                                @"username": self.currentUser.username};
+        }
+        
+        // delete old db
+        [persistentStoreCoordinator removePersistentStore:tmpStore error:&error];
+        [[NSFileManager defaultManager] removeItemAtURL: storeURL error: &error];
+
+        // and create a new one
+        store = [persistentStoreCoordinator addPersistentStoreWithType: NSSQLiteStoreType
+                                                         configuration: nil
+                                                                   URL: storeURL
+                                                               options: @{NSMigratePersistentStoresAutomaticallyOption: @(YES)}
+                                                                 error: &error];
+
+        // create currentUser if we have the data
+        if (currentUserDict) {
+            _currentUser = [User instanceFromDictionary: currentUserDict
+                              usingManagedObjectContext: self.mainManagedObjectContext
+                                    ignoringObjectTypes: kIgnoreNothing];
+            _currentUser.currentValue = YES;
+            [self saveContext:YES];
+        }
+
     }
     
     if (store == nil)
