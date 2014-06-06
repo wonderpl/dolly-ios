@@ -61,14 +61,16 @@ static const CGFloat VideoAspectRatio = 16.0 / 9.0;
 													 name:UIDeviceOrientationDidChangeNotification
 												   object:nil];
         
-        NSIndexPath* indexPath = [NSIndexPath indexPathForItem:self.videoPlayerViewController.selectedIndex
-                                                     inSection:0];
         
-        [self.collectionView scrollToItemAtIndexPath:indexPath
-                                    atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
-                                            animated:NO];
 
 	}
+    
+    NSIndexPath* indexPath = [NSIndexPath indexPathForItem:self.videoPlayerViewController.selectedIndex
+                                                 inSection:0];
+    
+    [self.collectionView scrollToItemAtIndexPath:indexPath
+                                atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
+                                        animated:NO];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
