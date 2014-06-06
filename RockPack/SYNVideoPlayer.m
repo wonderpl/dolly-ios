@@ -67,6 +67,11 @@ static CGFloat const ControlsFadeTimer = 5.0;
 	return self;
 }
 
+- (void) dealloc
+{
+    NSLog(@"Deallocating VideoPlayer");
+}
+
 #pragma mark - Overridden
 
 - (void)layoutSubviews {
