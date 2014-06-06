@@ -60,6 +60,14 @@ static const CGFloat VideoAspectRatio = 16.0 / 9.0;
 												 selector:@selector(deviceOrientationChanged:)
 													 name:UIDeviceOrientationDidChangeNotification
 												   object:nil];
+        
+        NSIndexPath* indexPath = [NSIndexPath indexPathForItem:self.videoPlayerViewController.selectedIndex
+                                                     inSection:0];
+        
+        [self.collectionView scrollToItemAtIndexPath:indexPath
+                                    atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
+                                            animated:NO];
+
 	}
 }
 
@@ -82,8 +90,13 @@ static const CGFloat VideoAspectRatio = 16.0 / 9.0;
 	
 	self.videoContainerView.frame = [self videoContainerFrame];
 	
-	self.collectionView.contentOffset = CGPointMake(self.videoPlayerViewController.selectedIndex * CGRectGetWidth(self.view.bounds), 0);
-	[self.collectionView.collectionViewLayout invalidateLayout];
+    NSLog(@"Full Screen View Controller index : %i", self.videoPlayerViewController.selectedIndex);
+    
+    
+//    [self.collectionView setContentOffset:CGPointMake(self.videoPlayerViewController.selectedIndex * CGRectGetWidth(self.view.bounds), 0.0f)
+//                                 animated:YES];
+    
+	//[self.collectionView.collectionViewLayout invalidateLayout];
 }
 
 - (BOOL)prefersStatusBarHidden {

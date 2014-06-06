@@ -190,19 +190,26 @@
 	return UIStatusBarStyleDefault;
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-	if ([segue.identifier isEqualToString:@"VideoInfo"]) {
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    
+	if ([segue.identifier isEqualToString:@"VideoInfo"])
+    {
+        
 		SYNVideoInfoViewController *viewController = segue.destinationViewController;
 		viewController.model = self.model;
 		viewController.selectedIndex = self.selectedIndex;
 		viewController.delegate = self;
 		self.videoInfoViewController = viewController;
+        
 	}
 }
 
 #pragma mark - Getters / Setters
 
-- (void)setVideoInstance:(VideoInstance *)videoInstance {
+- (void)setVideoInstance:(VideoInstance *)videoInstance
+{
+    
     
     if (!videoInstance) {
         return;
@@ -224,6 +231,8 @@
 - (void)setSelectedIndex:(NSInteger)selectedIndex {
 
 	_selectedIndex = selectedIndex;
+    
+    NSLog(@"Selected Index: %i", selectedIndex);
 	
 	NSIndexPath *indexPath = [NSIndexPath indexPathForItem:self.selectedIndex inSection:0];
 	[self.videosCollectionView scrollToItemAtIndexPath:indexPath
