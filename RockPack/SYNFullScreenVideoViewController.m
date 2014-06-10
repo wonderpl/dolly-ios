@@ -92,13 +92,11 @@ static const CGFloat VideoAspectRatio = 16.0 / 9.0;
 	
 	self.videoContainerView.frame = [self videoContainerFrame];
 	
-    NSLog(@"Full Screen View Controller index : %i", self.videoPlayerViewController.selectedIndex);
     
+    [self.collectionView setContentOffset:CGPointMake(self.videoPlayerViewController.selectedIndex * CGRectGetWidth(self.view.bounds), 0.0f)
+                                 animated:YES];
     
-//    [self.collectionView setContentOffset:CGPointMake(self.videoPlayerViewController.selectedIndex * CGRectGetWidth(self.view.bounds), 0.0f)
-//                                 animated:YES];
-    
-	//[self.collectionView.collectionViewLayout invalidateLayout];
+	[self.collectionView.collectionViewLayout invalidateLayout];
 }
 
 - (BOOL)prefersStatusBarHidden {
@@ -140,6 +138,13 @@ static const CGFloat VideoAspectRatio = 16.0 / 9.0;
 - (CGRect)videoContainerFrame {
 	CGFloat width = CGRectGetWidth(self.view.bounds);
 	CGFloat height = width / VideoAspectRatio;
+    
+    
+    NSLog(@"aaaaa %@", NSStringFromCGRect(CGRectMake(0,
+                                               (CGRectGetHeight(self.view.bounds) - height) / 2.0,
+                                               width,
+                                               height)));
+    
 	return CGRectMake(0,
 					  (CGRectGetHeight(self.view.bounds) - height) / 2.0,
 					  width,
