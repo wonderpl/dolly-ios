@@ -187,7 +187,7 @@
 
 - (NSString *) description
 {
-    NSMutableString *userDescription = [NSMutableString stringWithFormat: @"User (id:'%i') - username: '%@'", [self.uniqueId intValue], self.username];
+    NSMutableString *userDescription = [NSMutableString stringWithFormat: @"User (id:'%@') - username: '%@'", self.uniqueId, self.username];
     
     [userDescription appendFormat: @"\n=== Own Channels (%@): ===", @([self.channels count])];
     
