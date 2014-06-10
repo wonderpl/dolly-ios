@@ -69,6 +69,8 @@
 // Used for animation
 @property (nonatomic, weak) UIImageView *annotationImageView;
 
+@property (nonatomic, assign) BOOL firstTime;
+
 @end
 
 
@@ -83,6 +85,7 @@
 	
 	SYNVideoPlayerViewController *viewController = [storyboard instantiateInitialViewController];
 	viewController.model = model;
+    viewController.firstTime = YES;
 	viewController.selectedIndex = selectedIndex;
 	
 	return viewController;
@@ -231,10 +234,11 @@
 
 - (void)setSelectedIndex:(NSInteger)selectedIndex {
 
-    if (_selectedIndex == selectedIndex) {
+    if (_selectedIndex == selectedIndex && !self.firstTime) {
         return;
     }
     
+    self.firstTime = NO;
 	_selectedIndex = selectedIndex;
 	
 	NSIndexPath *indexPath = [NSIndexPath indexPathForItem:self.selectedIndex inSection:0];
