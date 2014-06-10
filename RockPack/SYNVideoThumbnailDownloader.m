@@ -28,6 +28,8 @@
 	static SYNVideoThumbnailDownloader *downloader;
 	dispatch_once(&onceToken, ^{
 		downloader = [[SYNVideoThumbnailDownloader alloc] init];
+        downloader.imageCache.maxCacheSize = 1024000;
+        downloader.imageCache.maxCacheAge = 60;
 	});
 	return downloader;
 }
@@ -99,7 +101,7 @@
 	
 	UIImage *image = [[SDImageCache sharedImageCache] imageFromMemoryCacheForKey:imageCacheKey];
 	NSString *blurredImageCacheKey = [NSString stringWithFormat:@"blurred+%@", imageCacheKey];
-	
+
 	NSOperation *operation = [self blurOperationForImage:image cacheKey:blurredImageCacheKey completion:nil];
 	[self.processingQueue addOperation:operation];
 }
