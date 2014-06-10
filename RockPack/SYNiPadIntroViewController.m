@@ -65,18 +65,6 @@ static const CGFloat DelayConstant = 0.5;
 	
 	self.navigationController.delegate = self;
     
-    
-    CGRect tmpFrame = self.logoImageView.frame;
-    
-    
-    if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation]) ) {
-        tmpFrame = CGRectMake(self.view.center.x-(self.logoImageView.frame.size.width/2), self.view.center.y-(self.logoImageView.frame.size.height/2), tmpFrame.size.width, tmpFrame.size.height);
-    } else {
-        
-        tmpFrame = CGRectMake(self.view.frame.size.height/2-(self.logoImageView.frame.size.width/2), self.view.frame.size.height/2-(self.logoImageView.frame.size.height)*2, tmpFrame.size.width, tmpFrame.size.height);
-    }
-
-    
     self.loginButton.layer.borderColor = [[UIColor clearColor] CGColor];
     self.signupButton.layer.borderColor = [[UIColor clearColor] CGColor];
     
