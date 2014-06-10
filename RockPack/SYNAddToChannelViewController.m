@@ -360,11 +360,14 @@
 												 [[SYNTrackingManager sharedManager] trackCollectionCreatedWithName:name];
 												 
 												 NSString *channelId = response[@"id"];
-												 [self addCurrentVideoInstanceToChannel:channelId isFavourites:NO];
-												 
-												 [[NSNotificationCenter defaultCenter] postNotificationName:kChannelOwnerUpdateRequest
-																									 object:nil
-																								   userInfo: @{kChannelOwner : appDelegate.currentUser }];
+                                                 
+                                                 if (channelId) {
+                                                     [self addCurrentVideoInstanceToChannel:channelId isFavourites:NO];
+                                                     
+                                                     [[NSNotificationCenter defaultCenter] postNotificationName:kChannelOwnerUpdateRequest
+                                                                                                         object:nil
+                                                                                                       userInfo: @{kChannelOwner : appDelegate.currentUser }];
+                                                 }
 											 } errorHandler:^(NSDictionary *response) {
 												 NSString* messageE = IS_IPHONE ? NSLocalizedString(@"VIDEO NOT ADDED",nil) : NSLocalizedString(@"YOUR VIDEOS COULD NOT BE ADDED INTO YOUR COLLECTION",nil);
 												 
