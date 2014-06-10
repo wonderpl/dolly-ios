@@ -30,18 +30,18 @@ static CGFloat const ControlsFadeTimer = 5.0;
 @property (nonatomic, strong) UIPinchGestureRecognizer *maximiseMinimisePinchGestureRecognizer;
 @property (nonatomic, strong) SYNScrubberBar *scrubberBar;
 @property (nonatomic, strong) UIView *playerContainerView;
-@property (nonatomic, strong) NSTimer *progressUpdateTimer;
-
 @property (nonatomic, strong) UIView *controlsFadeTapView;
-@property (nonatomic, strong) NSTimer *controlsFadeTimer;
-@property (nonatomic, assign) BOOL controlsVisible;
 
+@property (nonatomic, strong) NSTimer *progressUpdateTimer;
+@property (nonatomic, strong) NSTimer *controlsFadeTimer;
+
+@property (nonatomic, assign) BOOL controlsVisible;
 @property (nonatomic, assign) BOOL videoViewed;
 @property (nonatomic, assign) BOOL hasBeganPlaying;
-
 @property (nonatomic, copy) NSArray *annotationButtons;
 
 @end
+
 
 @implementation SYNVideoPlayer
 
@@ -187,8 +187,7 @@ static CGFloat const ControlsFadeTimer = 5.0;
 
 - (void)setVideoInstance:(VideoInstance *)videoInstance {
 	_videoInstance = videoInstance;
-	
-	self.loadingView.videoInstance = videoInstance;
+    self.loadingView.videoInstance = videoInstance;
 }
 
 - (void)play {
@@ -200,14 +199,14 @@ static CGFloat const ControlsFadeTimer = 5.0;
 		
 		[self addGestureRecognizer:self.maximiseMinimiseGestureRecognizer];
 		[self addGestureRecognizer:self.maximiseMinimisePinchGestureRecognizer];
-		
-		[self startUpdatingProgress];
+        [self startUpdatingProgress];
+
 		
 		self.hasBeganPlaying = YES;
 	}
 	
 	self.state = SYNVideoPlayerStatePlaying;
-	
+
 	self.scrubberBar.playing = YES;
 }
 
@@ -215,6 +214,8 @@ static CGFloat const ControlsFadeTimer = 5.0;
 	self.state = SYNVideoPlayerStatePaused;
 	
 	self.scrubberBar.playing = NO;
+    
+    [self invalidate];
 }
 
 - (void)stop {
@@ -336,6 +337,7 @@ static CGFloat const ControlsFadeTimer = 5.0;
 													  repeats:YES];
 	
 	[[NSRunLoop mainRunLoop] addTimer:self.progressUpdateTimer forMode:NSRunLoopCommonModes];
+	
 }
 
 - (void)stopUpdatingProgress {
@@ -425,5 +427,15 @@ static CGFloat const ControlsFadeTimer = 5.0;
 	
 	self.annotationButtons = annotationButtons;
 }
+
+- (void)invalidate
+{
+    [self.progressUpdateTimer invalidate];
+    self.progressUpdateTimer = nil;
+
+	[self.controlsFadeTimer invalidate];
+    self.controlsFadeTimer = nil;
+}
+
 
 @end
