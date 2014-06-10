@@ -603,12 +603,7 @@ static const CGFloat TransitionDuration = 0.5f;
     
     } else {
         if ([self isVideosCollectionViewShowing]) {
-            [self.videoCollectionViewController.model reloadInitialPageWithCompletionHandler:^(BOOL success, BOOL hasChanged) {
-                if (success) {
-                    [self.videoCollectionViewController.cv reloadData];
-                    [self.channelCollectionViewController.cv reloadData];
-                }
-            }];
+            [self.videoCollectionViewController.model loadNextPage];
         } else {
             [self.subscriptionCollectionViewController.model reloadInitialPageWithCompletionHandler:^(BOOL success, BOOL hasChanged) {
                 [self.subscriptionCollectionViewController.cv reloadData];
