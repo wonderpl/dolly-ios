@@ -40,6 +40,7 @@
 
 @interface SYNAppDelegate () {
     BOOL enteredAppThroughNotification;
+    BOOL refetchUserData;
 }
 
 @property (nonatomic, strong) NSManagedObjectContext *channelsManagedObjectContext;
@@ -171,7 +172,7 @@
             
             [self setTokenExpiryTimer];
             
-            [self refreshFacebookSession];
+            [self refreshUserData];
             
             self.window.rootViewController = [self createAndReturnRootViewController];
             
@@ -233,6 +234,29 @@
         [_currentOAuth2Credentials saveToKeychainForService: [[NSBundle mainBundle] bundleIdentifier]
                                                     account: _currentOAuth2Credentials.userId];
     }
+}
+
+- (void) refreshUserData
+{
+    // Re-fetch data for current user
+    if (refetchUserData) {
+        [self.oAuthNetworkEngine retrieveAndRegisterUserFromCredentials: self.currentOAuth2Credentials
+         completionHandler: ^(NSDictionary* dictionary) {
+             refetchUserData = NO;
+             if ([self.currentUser.uniqueId isEqualToString: dictionary[@"id"]]) {
+                 // reset cached property but don't remove the old coredata record
+                 _currentUser.currentValue = NO;
+                 [self saveContext:YES];
+                 _currentUser = nil;
+             }
+             [[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"Refetched user data: %@", self.currentUser]];
+         }
+         errorHandler: ^(NSError *error) {
+             [[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"Failed to refetch user data: %@", error]];
+         }];
+    }
+
+    [self refreshFacebookSession];
 }
 
 - (void) refreshFacebookSession
@@ -307,7 +331,7 @@
         
         self.tokenExpiryTimer = nil;
         
-        [self refreshFacebookSession]; 
+        [self refreshUserData];
     } errorHandler: ^(id response) {
         DebugLog(@"Failed to refresh token");
         if (!self.window.rootViewController)
@@ -678,6 +702,7 @@
                               usingManagedObjectContext: self.mainManagedObjectContext
                                     ignoringObjectTypes: kIgnoreNothing];
             _currentUser.currentValue = YES;
+            refetchUserData = YES;
             [self saveContext:YES];
         }
 
