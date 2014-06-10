@@ -73,7 +73,7 @@
 		NSMutableAttributedString *curatedByString = [[NSMutableAttributedString alloc] initWithString:@"Added by "];
 		
 		NSString *channelOwnerName = videoInstance.channel.channelOwner.displayName;
-		NSDictionary *attributes = @{ NSFontAttributeName : [UIFont boldItalicAlternateFontOfSize:self.labelLabel.font.pointSize] };
+		NSDictionary *attributes = @{ NSFontAttributeName : [UIFont boldItalicAlternateFontOfSize:self.labelLabel.font.pointSize], NSForegroundColorAttributeName : [UIColor grayColor] };
 		
 		[curatedByString appendAttributedString:[[NSAttributedString alloc] initWithString:channelOwnerName attributes:attributes ]];
 		
@@ -105,8 +105,8 @@
 	
 	NSInteger strLength = [attributedString length];
 	NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
-	style.lineBreakMode = NSLineBreakByWordWrapping;
-	[style setLineSpacing:7];
+	style.lineBreakMode = NSLineBreakByTruncatingTail;
+	[style setLineSpacing:4];
 	[style setAlignment:NSTextAlignmentLeft];
 	
 	[attributedString addAttribute:NSParagraphStyleAttributeName

@@ -14,7 +14,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="71k-CY-H0Y" userLabel="Originator Thumbnail" customClass="SYNAvatarButton">
-                        <rect key="frame" x="139" y="16" width="43" height="43"/>
+                        <rect key="frame" x="139" y="10" width="43" height="43"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="43" id="KMV-gY-GuQ"/>
@@ -28,7 +28,7 @@
                         </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PSP-Md-g5O" userLabel="Video Thumbnail">
-                        <rect key="frame" x="16" y="153" width="288" height="162"/>
+                        <rect key="frame" x="16" y="170" width="288" height="162"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.83921568629999999" green="0.83921568629999999" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -43,7 +43,7 @@
                         </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DMH-Zk-ftY">
-                        <rect key="frame" x="16" y="63" width="43" height="40"/>
+                        <rect key="frame" x="16" y="66" width="43" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="oRV-56-3Vw"/>
@@ -63,23 +63,23 @@
                         </connections>
                     </button>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kaB-GM-XxE" userLabel="Label">
-                        <rect key="frame" x="16" y="73" width="36" height="17"/>
+                        <rect key="frame" x="16" y="76" width="36" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.31764705882352939" green="0.70196078431372544" blue="0.39215686274509803" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8LT-cL-UD0" userLabel="Title">
-                        <rect key="frame" x="273" y="75" width="31" height="15"/>
+                        <rect key="frame" x="273" y="78" width="31" height="15"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.74509803921568629" green="0.74509803921568629" blue="0.7803921568627451" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="288" translatesAutoresizingMaskIntoConstraints="NO" id="gYj-Gp-52k" userLabel="Duration">
-                        <rect key="frame" x="16" y="118" width="288" height="20"/>
+                        <rect key="frame" x="16" y="133" width="288" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -92,7 +92,7 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wYn-bf-10j">
-                        <rect key="frame" x="10" y="340" width="300" height="40"/>
+                        <rect key="frame" x="10" y="346" width="300" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="J69-iJ-sOo"/>
@@ -104,22 +104,22 @@
             <constraints>
                 <constraint firstItem="wYn-bf-10j" firstAttribute="leading" secondItem="RZU-6J-M1O" secondAttribute="leading" constant="10" id="35J-Yp-S0k"/>
                 <constraint firstItem="PSP-Md-g5O" firstAttribute="leading" secondItem="g1e-Lh-lg1" secondAttribute="leading" id="3bb-ZM-veo"/>
-                <constraint firstItem="PSP-Md-g5O" firstAttribute="top" secondItem="71k-CY-H0Y" secondAttribute="bottom" constant="94" id="5tg-vn-QFU"/>
+                <constraint firstItem="PSP-Md-g5O" firstAttribute="top" secondItem="71k-CY-H0Y" secondAttribute="bottom" constant="117" id="5tg-vn-QFU"/>
                 <constraint firstItem="PSP-Md-g5O" firstAttribute="top" secondItem="gYj-Gp-52k" secondAttribute="bottom" constant="15" id="Car-Mn-uYv"/>
                 <constraint firstItem="PSP-Md-g5O" firstAttribute="trailing" secondItem="g1e-Lh-lg1" secondAttribute="trailing" id="IIf-pj-rTw"/>
                 <constraint firstItem="PSP-Md-g5O" firstAttribute="leading" secondItem="kaB-GM-XxE" secondAttribute="leading" id="Siq-YX-Ssv"/>
                 <constraint firstItem="PSP-Md-g5O" firstAttribute="trailing" secondItem="gYj-Gp-52k" secondAttribute="trailing" id="SpD-c2-cMK"/>
                 <constraint firstItem="8LT-cL-UD0" firstAttribute="trailing" secondItem="PSP-Md-g5O" secondAttribute="trailing" id="VMC-dL-xCV"/>
-                <constraint firstItem="PSP-Md-g5O" firstAttribute="top" secondItem="kaB-GM-XxE" secondAttribute="bottom" constant="63" id="YnH-ra-I1W"/>
-                <constraint firstItem="71k-CY-H0Y" firstAttribute="top" secondItem="RZU-6J-M1O" secondAttribute="top" constant="16" id="Z5Z-N5-LUp"/>
+                <constraint firstItem="PSP-Md-g5O" firstAttribute="top" secondItem="kaB-GM-XxE" secondAttribute="bottom" constant="77" id="YnH-ra-I1W"/>
+                <constraint firstItem="71k-CY-H0Y" firstAttribute="top" secondItem="RZU-6J-M1O" secondAttribute="top" constant="10" id="Z5Z-N5-LUp"/>
                 <constraint firstAttribute="trailing" secondItem="wYn-bf-10j" secondAttribute="trailing" constant="10" id="dEZ-hK-5aF"/>
                 <constraint firstItem="DMH-Zk-ftY" firstAttribute="leading" secondItem="PSP-Md-g5O" secondAttribute="leading" id="hFf-6c-Fu3"/>
-                <constraint firstItem="wYn-bf-10j" firstAttribute="top" secondItem="PSP-Md-g5O" secondAttribute="bottom" constant="25" id="haQ-UC-Faw"/>
+                <constraint firstItem="wYn-bf-10j" firstAttribute="top" secondItem="PSP-Md-g5O" secondAttribute="bottom" constant="14" id="haQ-UC-Faw"/>
                 <constraint firstAttribute="centerX" secondItem="PSP-Md-g5O" secondAttribute="centerX" id="j7i-h4-yVW"/>
-                <constraint firstItem="PSP-Md-g5O" firstAttribute="top" secondItem="8LT-cL-UD0" secondAttribute="bottom" constant="63" id="lVI-eN-w2w"/>
+                <constraint firstItem="PSP-Md-g5O" firstAttribute="top" secondItem="8LT-cL-UD0" secondAttribute="bottom" constant="77" id="lVI-eN-w2w"/>
                 <constraint firstAttribute="centerX" secondItem="71k-CY-H0Y" secondAttribute="centerX" id="m0F-wt-vTR"/>
                 <constraint firstItem="PSP-Md-g5O" firstAttribute="leading" secondItem="gYj-Gp-52k" secondAttribute="leading" id="nFb-Gz-TBY"/>
-                <constraint firstItem="PSP-Md-g5O" firstAttribute="top" secondItem="DMH-Zk-ftY" secondAttribute="bottom" constant="50" id="q8J-rw-MnH"/>
+                <constraint firstItem="PSP-Md-g5O" firstAttribute="top" secondItem="DMH-Zk-ftY" secondAttribute="bottom" constant="64" id="q8J-rw-MnH"/>
                 <constraint firstAttribute="bottom" secondItem="g1e-Lh-lg1" secondAttribute="bottom" id="ynB-g6-9BT"/>
             </constraints>
             <size key="customSize" width="320" height="428"/>
