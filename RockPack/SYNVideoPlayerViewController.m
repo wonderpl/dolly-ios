@@ -90,6 +90,7 @@
 
 - (void)dealloc {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+    self.videoPlayerContainerView = nil;
 }
 
 #pragma mark - UIViewController

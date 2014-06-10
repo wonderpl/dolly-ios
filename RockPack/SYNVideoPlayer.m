@@ -34,6 +34,7 @@ static CGFloat const ControlsFadeTimer = 5.0;
 
 @property (nonatomic, strong) NSTimer *progressUpdateTimer;
 @property (nonatomic, strong) NSTimer *controlsFadeTimer;
+@property (nonatomic, strong) UIView *videoPlayerView;
 
 @property (nonatomic, assign) BOOL controlsVisible;
 @property (nonatomic, assign) BOOL videoViewed;
