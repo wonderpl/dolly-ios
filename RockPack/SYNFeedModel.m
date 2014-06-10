@@ -180,9 +180,9 @@
 			FeedItem *feedItem = existingFeedItems[feedItemId];
 			if (feedItem) {
 				[feedItem updateWithResource:resource];
-			} else {
+            } else {
 				feedItem = [FeedItem instanceFromResource:resource];
-			}
+            }
 			
 			[newFeedItemIds addObject:feedItemId];
 		}
