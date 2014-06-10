@@ -139,12 +139,6 @@ static const CGFloat VideoAspectRatio = 16.0 / 9.0;
 	CGFloat width = CGRectGetWidth(self.view.bounds);
 	CGFloat height = width / VideoAspectRatio;
     
-    
-    NSLog(@"aaaaa %@", NSStringFromCGRect(CGRectMake(0,
-                                               (CGRectGetHeight(self.view.bounds) - height) / 2.0,
-                                               width,
-                                               height)));
-    
 	return CGRectMake(0,
 					  (CGRectGetHeight(self.view.bounds) - height) / 2.0,
 					  width,
