@@ -11,16 +11,22 @@
 
 @implementation SYNSegmentedButton
 
+-(void)awakeFromNib {
+    [super awakeFromNib];
+    
+    
+    [self setTitleColor: [UIColor dollyGreen]
+               forState: UIControlStateNormal];
+    [self setTitleColor: [UIColor whiteColor]
+               forState: UIControlStateSelected];
+}
 
 
 -(void)setSelected:(BOOL)selected {
     [super setSelected:selected];
     
     if(selected) {
-		self.backgroundColor = [UIColor colorWithRed: 236.0f / 255.0f
-															  green: 240.0f / 255.0f
-															   blue: 241.0f / 255.0f
-															  alpha: 1.0f];
+		self.backgroundColor = [UIColor dollyGreen];
 	} else {
 		self.backgroundColor = [UIColor whiteColor];
     }
