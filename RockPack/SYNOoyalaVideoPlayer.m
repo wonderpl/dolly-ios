@@ -21,7 +21,7 @@ static NSString * const PlayerDomain = @"www.ooyala.com";
 
 @interface SYNOoyalaVideoPlayer ()
 
-@property (nonatomic, strong) OOOoyalaPlayer *ooyalaPlayer;
+@property (nonatomic, weak) OOOoyalaPlayer *ooyalaPlayer;
 
 @end
 
