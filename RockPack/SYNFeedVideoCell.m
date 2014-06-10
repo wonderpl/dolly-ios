@@ -81,7 +81,7 @@
 	}
 	self.durationLabel.text = [NSString friendlyLengthFromTimeInterval:videoInstance.video.durationValue];
 	
-	self.titleLabel.text = videoInstance.title;
+	self.titleLabel.attributedText = [self attributedStringFromString: videoInstance.title];
 	
 	NSURL *avatarURL = [NSURL URLWithString:self.videoInstance.originator.thumbnailURL];
 	[self.avatarThumbnailButton setImageWithURL:avatarURL
@@ -95,6 +95,26 @@
 	self.actionsBar.favouritedBy = [videoInstance.starrers array];
 	self.actionsBar.favouriteButton.selected = videoInstance.starredByUserValue;
 }
+
+-(NSMutableAttributedString*) attributedStringFromString:(NSString *) string {
+	
+	if (!string) {
+		return [[NSMutableAttributedString alloc] initWithString: @""];
+	}
+	NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString: string];
+	
+	NSInteger strLength = [attributedString length];
+	NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+	style.lineBreakMode = NSLineBreakByWordWrapping;
+	[style setLineSpacing:7];
+	[style setAlignment:NSTextAlignmentLeft];
+	
+	[attributedString addAttribute:NSParagraphStyleAttributeName
+							   value:style
+							   range:NSMakeRange(0, strLength)];
+	return attributedString;
+}
+
 
 - (SYNVideoActionsBar *)actionsBar {
 	if (!_actionsBar) {
