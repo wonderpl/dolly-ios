@@ -162,17 +162,19 @@
 		SYNFeedChannelCell *cell = [self channelCellForIndexPath:indexPath collectionView:collectionView];
 		
 		Channel *channel = [self.model resourceForFeedItem:feedItem];
-		cell.channel = channel;
-		cell.delegate = self;
-		
+        if (channel) {
+            cell.channel = channel;
+            cell.delegate = self;
+        }
 		return cell;
 	} else {
 		SYNFeedVideoCell *cell = [self videoCellForIndexPath:indexPath collectionView:collectionView];
 		
 		VideoInstance *videoInstance = [self.model resourceForFeedItem:feedItem];
-		cell.videoInstance = videoInstance;
-		cell.delegate = self;
-		
+        if (videoInstance) {
+            cell.videoInstance = videoInstance;
+            cell.delegate = self;
+        }
 		return cell;
 	}
 }
