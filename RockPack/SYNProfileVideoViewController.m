@@ -123,10 +123,11 @@ forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
     
 	VideoInstance *videoInstance = [self.model itemAtIndex:indexPath.item];
     
-    
-    [videoThumbnailCell setEditable:NO];
-    [videoThumbnailCell setVideoInstance:videoInstance];
-    [videoThumbnailCell setDelegate:self];
+    if (videoInstance) {
+        [videoThumbnailCell setEditable:NO];
+        [videoThumbnailCell setVideoInstance:videoInstance];
+        [videoThumbnailCell setDelegate:self];
+    }
     
     return videoThumbnailCell;
 }
