@@ -69,8 +69,6 @@
 // Used for animation
 @property (nonatomic, weak) UIImageView *annotationImageView;
 
-@property (nonatomic, assign) BOOL firstTime;
-
 @end
 
 
@@ -85,7 +83,6 @@
 	
 	SYNVideoPlayerViewController *viewController = [storyboard instantiateInitialViewController];
 	viewController.model = model;
-    viewController.firstTime = NO;
 	viewController.selectedIndex = selectedIndex;
 	
 	return viewController;
@@ -234,14 +231,11 @@
 
 - (void)setSelectedIndex:(NSInteger)selectedIndex {
 
-    if (_selectedIndex == selectedIndex && self.firstTime) {
+    if (_selectedIndex == selectedIndex) {
         return;
     }
     
 	_selectedIndex = selectedIndex;
-    self.firstTime = YES;
-
-    NSLog(@"Selected Index: %i", selectedIndex);
 	
 	NSIndexPath *indexPath = [NSIndexPath indexPathForItem:self.selectedIndex inSection:0];
 	[self.videosCollectionView scrollToItemAtIndexPath:indexPath
@@ -407,7 +401,13 @@
 - (void)videoInfoViewController:(SYNVideoInfoViewController *)viewController didSelectVideoAtIndex:(NSInteger)index {
 	VideoInstance *videoInstance = [self.model itemAtIndex:index];
 	[[SYNTrackingManager sharedManager] trackUpcomingVideoSelectedForTitle:videoInstance.title];
-	self.selectedIndex = index;
+    
+    //index gets set in scroll view delegates
+    
+	NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
+	[self.videosCollectionView scrollToItemAtIndexPath:indexPath
+									  atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
+											  animated:YES];
 }
 
 #pragma mark - IBActions
@@ -533,14 +533,18 @@
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
 	if (scrollView == self.videosCollectionView) {
-		self.selectedIndex = (NSInteger)(scrollView.contentOffset.x / scrollView.frame.size.width);
+        [self stoppedScrolling:scrollView];
 	}
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
 	if (scrollView == self.videosCollectionView) {
-		self.selectedIndex = (NSInteger)(scrollView.contentOffset.x / scrollView.frame.size.width);
+        [self stoppedScrolling:scrollView];
 	}
+}
+
+- (void)stoppedScrolling:(UIScrollView *)scrollView {
+    self.selectedIndex = (NSInteger)(scrollView.contentOffset.x / scrollView.frame.size.width);
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
