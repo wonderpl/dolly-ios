@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5056" systemVersion="12F45" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -39,8 +39,8 @@
                             <action selector="channelButtonPressed:" destination="IUo-RN-cL2" eventType="touchUpInside" id="Taj-F6-bZY"/>
                         </connections>
                     </button>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ov9-oB-CVO">
-                        <rect key="frame" x="153" y="136" width="42" height="21"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="324" translatesAutoresizingMaskIntoConstraints="NO" id="ov9-oB-CVO">
+                        <rect key="frame" x="12" y="136" width="324" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -98,8 +98,10 @@
                 <constraint firstAttribute="trailing" secondItem="E3C-aj-aTh" secondAttribute="trailing" id="2A2-mN-E3z"/>
                 <constraint firstAttribute="centerX" secondItem="ov9-oB-CVO" secondAttribute="centerX" id="8ou-9q-a9t"/>
                 <constraint firstAttribute="centerY" secondItem="30g-g0-9j5" secondAttribute="centerY" constant="-23" id="CRY-NH-wuN"/>
+                <constraint firstAttribute="trailing" secondItem="ov9-oB-CVO" secondAttribute="trailing" constant="12" id="Ffc-h4-CMk"/>
                 <constraint firstAttribute="bottom" secondItem="E3C-aj-aTh" secondAttribute="bottom" id="Fhq-sY-RNN"/>
                 <constraint firstItem="ov9-oB-CVO" firstAttribute="top" secondItem="zTb-nb-qDr" secondAttribute="bottom" constant="8" id="G4U-ao-atg"/>
+                <constraint firstItem="ov9-oB-CVO" firstAttribute="leading" secondItem="IUo-RN-cL2" secondAttribute="leading" constant="12" id="GOI-dj-kbC"/>
                 <constraint firstAttribute="centerX" secondItem="zTb-nb-qDr" secondAttribute="centerX" constant="1.5" id="GPy-h9-UzA"/>
                 <constraint firstItem="30g-g0-9j5" firstAttribute="leading" secondItem="IUo-RN-cL2" secondAttribute="leading" constant="20" id="Gj6-YB-8tf"/>
                 <constraint firstItem="kF5-cg-XMG" firstAttribute="leading" secondItem="IUo-RN-cL2" secondAttribute="leading" id="NqP-vD-86f"/>

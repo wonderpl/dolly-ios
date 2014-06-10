@@ -49,7 +49,7 @@
 										options:SDWebImageRetryFailed];
 	
 	NSMutableAttributedString *channelOwnerString = [[NSMutableAttributedString alloc]
-                                                     initWithString:NSLocalizedString(@"Great new videos from ", nil)];
+                                                     initWithString:NSLocalizedString(@"A collection of great new videos from ", nil)];
 
 	NSString *channelOwnerName = channel.channelOwner.displayName;
 	UIFont *boldFont = [UIFont boldItalicAlternateFontOfSize:self.channelOwnerLabel.font.pointSize];
