@@ -195,10 +195,7 @@ typedef void (^SearchResultCompleteBlock)(int);
 	[self.usersTabButton.titleLabel setFont:[UIFont regularCustomFontOfSize:self.usersTabButton.titleLabel.font.pointSize]];
 		
 	self.segmentedContainer.layer.borderWidth = IS_RETINA ? 0.5 : 1.0;
-	self.segmentedContainer.layer.borderColor = [[UIColor colorWithRed: 207.0f / 255.0f
-															  green: 217.0f / 255.0f
-															   blue: 219.0f / 255.0f
-															  alpha: 1.0f] CGColor];
+	self.segmentedContainer.layer.borderColor = [[UIColor dollyGreen] CGColor];
 	
 
 }
