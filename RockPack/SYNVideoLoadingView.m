@@ -48,9 +48,10 @@
 
 - (void)setVideoInstance:(VideoInstance *)videoInstance {
 	_videoInstance = videoInstance;
-	
-	[[SYNVideoThumbnailDownloader sharedDownloader] blurredImageForVideoInstance:videoInstance.video completion:^(UIImage *image) {
-		self.imageView.image = image;
+    __weak SYNVideoLoadingView* wself = self;
+
+	[[SYNVideoThumbnailDownloader sharedDownloader] blurredImageForVideoInstance:wself.videoInstance.video completion:^(UIImage *image) {
+		wself.imageView.image = image;
 	}];
 }
 
