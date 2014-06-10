@@ -164,8 +164,7 @@
     [self.userNameLabel setFont:[UIFont regularCustomFontOfSize:self.userNameLabel.font.pointSize]];
     self.userNameLabel.textColor = [UIColor dollyTextMediumGray];
 	
-    self.fullNameLabel.font = [UIFont boldCustomFontOfSize:self.fullNameLabel.font.pointSize];
-	self.fullNameLabel.textColor = [UIColor dollyTextMediumGray];
+    self.fullNameLabel.font = [UIFont boldCustomFontOfSize:24];
     
 
     NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
