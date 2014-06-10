@@ -23,7 +23,7 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 
 @interface SYNYouTubeWebVideoPlayer () <UIWebViewDelegate>
 
-@property (nonatomic, strong) UIWebView *youTubeWebView;
+@property (nonatomic, weak) UIWebView *youTubeWebView;
 
 @property (nonatomic, assign) SYNYouTubeVideoPlayerState youTubePlayerState;
 
