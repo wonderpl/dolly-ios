@@ -112,7 +112,11 @@
 	if (![self isBeingPresented]) {
 		self.model.delegate = self;
 	}
-	
+
+    if (IS_IPAD) {
+        [self.feedCollectionView.collectionViewLayout invalidateLayout];
+    }
+    
 	self.shownInboarding = NO;
     
     [self showInboarding];
