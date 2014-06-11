@@ -19,7 +19,7 @@
                     <rect key="frame" x="-325" y="-703" width="1084" height="1841"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="inboardingSearchBox" translatesAutoresizingMaskIntoConstraints="NO" id="kaa-2s-gcz">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="InboardingSearchBox.png" translatesAutoresizingMaskIntoConstraints="NO" id="kaa-2s-gcz">
                             <rect key="frame" x="331" y="707" width="409" height="35"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
@@ -38,6 +38,6 @@
         </view>
     </objects>
     <resources>
-        <image name="inboardingSearchBox" width="50" height="50"/>
+        <image name="InboardingSearchBox.png" width="409" height="35"/>
     </resources>
 </document>
