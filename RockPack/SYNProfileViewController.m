@@ -177,21 +177,37 @@ static const CGFloat TransitionDuration = 0.5f;
         
         __weak SYNProfileViewController *weakSelf = self;
         
-        [appDelegate.oAuthNetworkEngine userDataForUser: ((User *) self.channelOwner)
-                                           onCompletion: ^(id dictionary) {
-                                               
-                                               NSError *error = nil;
-                                               ChannelOwner * channelOwnerFromId = (ChannelOwner *)[channelOwnerObjectMOC existingObjectWithID: channelOwnerObjectId
-                                                                                                                                         error: &error];
-                                               if (channelOwnerFromId) {
-                                                   [channelOwnerFromId setAttributesFromDictionary: dictionary
-                                                                               ignoringObjectTypes: kIgnoreVideoInstanceObjects | kIgnoreChannelOwnerObject];
-                                                   _channelOwner = channelOwnerFromId;
-                                                   [weakSelf reloadCollectionViews];
-                                               } else {
-                                                   DebugLog (@"Channel disappeared from underneath us");
-                                               }
-                                           } onError: nil];
+        
+        if (self.isUserProfile) {
+            [appDelegate.oAuthNetworkEngine userDataForUser: ((User *) self.channelOwner)
+                                               onCompletion: ^(id dictionary) {
+                                                   
+                                                   NSError *error = nil;
+                                                   ChannelOwner * channelOwnerFromId = (ChannelOwner *)[channelOwnerObjectMOC existingObjectWithID: channelOwnerObjectId
+                                                                                                                                             error: &error];
+                                                   if (channelOwnerFromId) {
+                                                       [channelOwnerFromId setAttributesFromDictionary: dictionary
+                                                                                   ignoringObjectTypes: kIgnoreVideoInstanceObjects | kIgnoreChannelOwnerObject];
+                                                       _channelOwner = channelOwnerFromId;
+                                                       [weakSelf reloadCollectionViews];
+                                                   } else {
+                                                       DebugLog (@"Channel disappeared from underneath us");
+                                                   }
+                                               } onError: nil];
+
+        } else {
+            [appDelegate.networkEngine channelOwnerDataForChannelOwner:self.channelOwner onComplete:^(id dictionary) {
+                if (self.channelOwner)
+                {
+                    [self.channelOwner setAttributesFromDictionary: dictionary
+                                               ignoringObjectTypes: kIgnoreNothing];
+                }
+                
+            	[self.channelCollectionViewController.cv reloadData];
+                
+            } onError:nil];
+
+        }
     }
     
     self.channelOwner.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribedToUserId:self.channelOwner.uniqueId];
@@ -576,23 +592,43 @@ static const CGFloat TransitionDuration = 0.5f;
     
     if (self.isUserProfile) {
         if (self.isChannelsCollectionViewShowing) {
-            [appDelegate.oAuthNetworkEngine userDataForUser: ((User *) self.channelOwner)
-                                               onCompletion: ^(id dictionary) {
-                                                   
-                                                   if (self.channelOwner)
-                                                   {
-                                                       [self.channelOwner setAttributesFromDictionary: dictionary
-                                                                                  ignoringObjectTypes: kIgnoreNothing];
-                                                   }
-                                                   
-                                                   [self.subscriptionCollectionViewController.model loadNextPageWithCompletionHandler:^(BOOL success, BOOL hasChanged) {
-                                                       [self.subscriptionCollectionViewController.headerView setSegmentedControllerText];
-                                                       if (success) {
-                                                           [self.subscriptionCollectionViewController.cv reloadData];
-                                                           [self.channelCollectionViewController.cv reloadData];
+            
+            if (self.isUserProfile) {
+                [appDelegate.oAuthNetworkEngine userDataForUser: ((User *) self.channelOwner)
+                                                   onCompletion: ^(id dictionary) {
+                                                       
+                                                       if (self.channelOwner)
+                                                       {
+                                                           [self.channelOwner setAttributesFromDictionary: dictionary
+                                                                                      ignoringObjectTypes: kIgnoreNothing];
                                                        }
-                                                   }];
-                                               } onError: nil];
+                                                       
+                                                       [self.subscriptionCollectionViewController.model loadNextPageWithCompletionHandler:^(BOOL success, BOOL hasChanged) {
+                                                           [self.subscriptionCollectionViewController.headerView setSegmentedControllerText];
+                                                           if (success) {
+                                                               [self.subscriptionCollectionViewController.cv reloadData];
+                                                               [self.channelCollectionViewController.cv reloadData];
+                                                           }
+                                                       }];
+                                                   } onError: nil];
+
+            } else {
+                
+                [appDelegate.networkEngine channelOwnerDataForChannelOwner:self.channelOwner onComplete:^(id dictionary) {
+                    if (self.channelOwner)
+                    {
+                        [self.channelOwner setAttributesFromDictionary: dictionary
+                                                   ignoringObjectTypes: kIgnoreNothing];
+                    }
+
+                    [self.channelCollectionViewController.cv reloadData];
+
+                } onError:nil];
+                
+            }
+            
+            
+        
         } else {
             
             [self.subscriptionCollectionViewController.model reloadInitialPageWithCompletionHandler:^(BOOL success, BOOL hasChanged) {
