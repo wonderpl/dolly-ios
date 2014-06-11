@@ -551,12 +551,17 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
                                                                            ignoringObjectTypes: kIgnoreVideoInstanceObjects | kIgnoreChannelOwnerObject];
                                                if (weakSelf.channelOwner.channelsSet.count+1 > oldCount) {
                                                    
+                                                   
+                                                   self.model = [SYNProfileChannelModel modelWithChannelOwner:channelOwnerFromId];
+                                                   self.model.delegate = self;
+
                                                    [weakSelf.cv performBatchUpdates:^{
                                                        
                                                        [weakSelf.cv insertItemsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForItem:2 inSection:0]]];
                                                    } completion:^(BOOL finished) {
                                                        
-                                                       
+                                                       [self.cv reloadData];
+
                                                        [self showInboardingAnimationAfterCreate];
                                                    }];
                                                }
@@ -565,12 +570,6 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
                                            }
                                        } onError: errorBlock];
     
-    //TODO: fix this, animation not showing properly, after model changes. refactor into the profile model.
-    double delayInSeconds = 0.6;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [self.cv reloadData];
-    });
     
 }
 
@@ -664,14 +663,20 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     cell.state = ChannelMidCellStateDefault;
     
     __weak SYNProfileChannelViewController *weakSelf = self;
-    
+    __strong SYNProfileChannelViewController *strongSelf = self;
+
     [appDelegate.oAuthNetworkEngine deleteChannelForUserId: appDelegate.currentUser.uniqueId
                                                  channelId: cell.channel.uniqueId
                                          completionHandler: ^(id response) {
                                              
+                                            
+                                             [self.channelOwner.channelsSet removeObject:cell.channel];
+                                             
+                                             strongSelf.model = [SYNProfileChannelModel modelWithChannelOwner:_channelOwner];
+                                             strongSelf.model.delegate = strongSelf;
+
+                                             
                                              [weakSelf.cv performBatchUpdates:^{
-                                                 [weakSelf.channelOwner.channelsSet removeObject:cell.channel];
-                                                 
                                                  UIView *cellView = cell;
                                                  
                                                  weakSelf.indexPathToDelete = [weakSelf.cv indexPathForItemAtPoint: cellView.center];

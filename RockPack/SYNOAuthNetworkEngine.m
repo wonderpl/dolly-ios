@@ -494,6 +494,8 @@
                                                                                                    httpMethod: @"GET"
                                                                                                           ssl: YES];
     
+	networkOperation.shouldNotCacheResponse = YES;
+    
     [self addCommonHandlerToNetworkOperation: networkOperation
                            completionHandler: completionBlock
                                 errorHandler: errorBlock];
