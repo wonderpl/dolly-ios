@@ -548,7 +548,7 @@
 }
 
 - (void)stoppedScrolling:(UIScrollView *)scrollView {
-    self.selectedIndex = (NSInteger)(scrollView.contentOffset.x / scrollView.frame.size.width);
+    self.selectedIndex = (NSInteger)ceil(scrollView.contentOffset.x / scrollView.frame.size.width);
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
