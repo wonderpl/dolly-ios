@@ -180,6 +180,7 @@ static const CGFloat TransitionDuration = 0.5f;
         
         if (self.isUserProfile) {
             [appDelegate.oAuthNetworkEngine userDataForUser: ((User *) self.channelOwner)
+                                                    inRange: NSMakeRange(0, STANDARD_REQUEST_LENGTH)
                                                onCompletion: ^(id dictionary) {
                                                    
                                                    NSError *error = nil;
@@ -595,6 +596,8 @@ static const CGFloat TransitionDuration = 0.5f;
             
             if (self.isUserProfile) {
                 [appDelegate.oAuthNetworkEngine userDataForUser: ((User *) self.channelOwner)
+                                                        inRange: NSMakeRange(0, STANDARD_REQUEST_LENGTH)
+
                                                    onCompletion: ^(id dictionary) {
                                                        
                                                        if (self.channelOwner)

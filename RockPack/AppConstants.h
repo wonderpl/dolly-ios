@@ -98,7 +98,7 @@ typedef enum : NSInteger {
 #define kAPIUpdateChannelPrivacy    @"/ws/USERID/channels/CHANNELID/public/"    /* PUT */
 #define kAPIDeleteChannel           @"/ws/USERID/channels/CHANNELID/"           /* PUT */
 
-#define STANDARD_REQUEST_LENGTH 48
+#define STANDARD_REQUEST_LENGTH 40
 #define MAXIMUM_REQUEST_LENGTH 1000
 
 #define kURLTermsAndConditions @"http://wonderpl.com/tos"

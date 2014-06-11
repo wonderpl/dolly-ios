@@ -140,6 +140,7 @@ typedef void (^SYNOAuth2RefreshCompletionBlock)(NSError *error);
                             errorHandler: (MKNKUserErrorBlock) errorBlock;
 
 - (void) userDataForUser: (User *) user
+                 inRange: (NSRange) range
             onCompletion: (MKNKUserSuccessBlock) completionBlock
                  onError: (MKNKUserErrorBlock) errorBlock;
 

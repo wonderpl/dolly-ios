@@ -541,6 +541,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     
     
     [appDelegate.oAuthNetworkEngine userDataForUser: ((User *) self.channelOwner)
+     								inRange: NSMakeRange(0, self.channelOwner.channelsSet.count+1)
                                        onCompletion: ^(id dictionary) {
                                            
                                            NSError *error = nil;

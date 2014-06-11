@@ -468,8 +468,9 @@
 }
 
 -(void)userDataForUser:(User*)user
+               inRange:(NSRange) range
           onCompletion:(MKNKUserSuccessBlock) completionBlock
-               onError: (MKNKUserErrorBlock) errorBlock
+               onError:(MKNKUserErrorBlock) errorBlock
 {
 
     NSString *tmpString = user.uniqueId;
@@ -481,9 +482,9 @@
     NSDictionary *apiSubstitutionDictionary = @{@"USERID" : tmpString};
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
     
-    parameters[@"start"] = @(0);
+    parameters[@"start"] = @(range.location);
     
-    parameters[@"size"] = @(40);
+    parameters[@"size"] = @(range.length);
     
     parameters[@"locale"] = self.localeString;
     
