@@ -221,7 +221,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
         channelThumbnailCell.channel = channel;
         
         // Disallow deletion of favourites cell or other peoples channels
-        BOOL deletableChannelCheck = (!self.isUserProfile || channel.favouritesValue);
+        BOOL deletableChannelCheck = (!self.isUserProfile || channel.favouritesValue || channel.watchLaterValue);
         channelThumbnailCell.deletableCell = !deletableChannelCheck;
 		
         channelThumbnailCell.isFromProfile = YES;
