@@ -175,8 +175,7 @@
 
 	
 	self.segmentedBorder.layer.borderWidth = IS_RETINA ? 0.5 : 1.0;
-	
-	self.segmentedBorder.layer.borderColor = [[UIColor dollyGreen] CGColor];
+	self.segmentedBorder.layer.borderColor = [[UIColor dollySegmentedColor] CGColor];
 	
 	[self.firstTab.titleLabel setFont:[UIFont lightCustomFontOfSize:self.firstTab.titleLabel.font.pointSize]];
 	[self.secondTab.titleLabel setFont:[UIFont lightCustomFontOfSize:self.secondTab.titleLabel.font.pointSize]];

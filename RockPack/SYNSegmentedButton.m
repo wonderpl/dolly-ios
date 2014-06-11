@@ -15,7 +15,7 @@
     [super awakeFromNib];
     
     
-    [self setTitleColor: [UIColor dollyGreen]
+    [self setTitleColor: [UIColor dollySegmentedColor]
                forState: UIControlStateNormal];
     [self setTitleColor: [UIColor whiteColor]
                forState: UIControlStateSelected];
@@ -26,7 +26,7 @@
     [super setSelected:selected];
     
     if(selected) {
-		self.backgroundColor = [UIColor dollyGreen];
+		self.backgroundColor = [UIColor dollySegmentedColor];
 	} else {
 		self.backgroundColor = [UIColor whiteColor];
     }

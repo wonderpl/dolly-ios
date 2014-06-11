@@ -167,6 +167,10 @@ return [UIColor colorWithRed: 136.0f / 255.0f
 	return RGB(81, 179, 100);
 }
 
++ (UIColor *) dollySegmentedColor {
+    return RGB(112, 121, 123);
+}
+
 + (UIColor *) dollySearchBarColor
 {
    return [UIColor colorWithRed: (196.0f / 255.0f)
