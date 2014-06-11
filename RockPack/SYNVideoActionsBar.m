@@ -72,7 +72,9 @@
 }
 
 - (IBAction)annotationButtonPressed:(UIButton *)button {
-	[self.delegate videoActionsBar:self annotationButtonPressed:button];
+    if ([self.delegate respondsToSelector:@selector(videoActionsBar:annotationButtonPressed:)]) {
+        [self.delegate videoActionsBar:self annotationButtonPressed:button];
+    }
 }
 
 - (IBAction)addToChannelButtonPressed:(UIButton *)button {
