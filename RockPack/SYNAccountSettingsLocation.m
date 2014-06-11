@@ -176,13 +176,18 @@
                                            
                                            appDelegate.currentUser.locale = newLocale;
                                            
-                                           [appDelegate clearCoreDataMainEntities:NO];
-										   
-										   [[SYNGenreManager sharedManager] fetchGenresWithCompletion:^(NSArray *results) {
-											   [spinner stopAnimating];
-											   
-											   [wself.navigationController popViewControllerAnimated:YES];
-										   }];
+                                           // This is not currently needed on Wonder because we don't change the data between locales
+                                           if (0) {
+                                               [appDelegate clearCoreDataMainEntities:NO];
+
+                                               [[SYNGenreManager sharedManager] fetchGenresWithCompletion:^(NSArray *results) {
+                                                   [spinner stopAnimating];
+                                                   [wself.navigationController popViewControllerAnimated:YES];
+                                               }];
+                                           } else {
+                                               [spinner stopAnimating];
+                                               [wself.navigationController popViewControllerAnimated:YES];
+                                           }
 										   
                                        } errorHandler:^(id errorInfo) {
                                            
