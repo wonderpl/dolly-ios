@@ -187,7 +187,14 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 	[self updateContainerWidths];
 	
 	self.recentlyViewed = [self genreArrayFromDefaults];
-	
+    
+    __weak SYNDiscoverViewController* wself = self;
+    if (![self.genres count]) {
+        [[SYNGenreManager sharedManager] fetchGenresWithCompletion:^(NSArray *results) {
+            [wself reloadCategories];
+        }];
+    }
+
 	[self.categoriesCollectionView reloadData];
 	
 	//Automatically select editors picks on load.
@@ -218,7 +225,7 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
         }
     
     }
-	
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -839,6 +846,7 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 - (void)reloadCategories {
     
 	self.genres = [[SYNGenreManager sharedManager] genres];
+    
     [self.categoriesCollectionView reloadData];
     
     
