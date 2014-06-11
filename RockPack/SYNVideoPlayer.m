@@ -200,7 +200,6 @@ static CGFloat const ControlsFadeTimer = 5.0;
 		
 		[self addGestureRecognizer:self.maximiseMinimiseGestureRecognizer];
 		[self addGestureRecognizer:self.maximiseMinimisePinchGestureRecognizer];
-        [self startUpdatingProgress];
 
 		
 		self.hasBeganPlaying = YES;
@@ -209,6 +208,8 @@ static CGFloat const ControlsFadeTimer = 5.0;
 	self.state = SYNVideoPlayerStatePlaying;
 
 	self.scrubberBar.playing = YES;
+    [self startUpdatingProgress];
+
 }
 
 - (void)pause {
@@ -216,7 +217,8 @@ static CGFloat const ControlsFadeTimer = 5.0;
 	
 	self.scrubberBar.playing = NO;
     
-    [self invalidate];
+	[self stopControlsFadeTimer];
+	[self stopUpdatingProgress];
 }
 
 - (void)stop {
@@ -331,6 +333,10 @@ static CGFloat const ControlsFadeTimer = 5.0;
 }
 
 - (void)startUpdatingProgress {
+    
+    if (self.progressUpdateTimer) {
+        [self.progressUpdateTimer invalidate];
+    }
 	self.progressUpdateTimer = [NSTimer timerWithTimeInterval:0.25
 													   target:self
 													 selector:@selector(updateProgress)
@@ -427,15 +433,6 @@ static CGFloat const ControlsFadeTimer = 5.0;
 	}
 	
 	self.annotationButtons = annotationButtons;
-}
-
-- (void)invalidate
-{
-    [self.progressUpdateTimer invalidate];
-    self.progressUpdateTimer = nil;
-
-	[self.controlsFadeTimer invalidate];
-    self.controlsFadeTimer = nil;
 }
 
 
