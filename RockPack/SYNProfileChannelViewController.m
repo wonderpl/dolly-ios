@@ -479,7 +479,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
                                              [self cancelCreateChannelWithBlock:^{
                                                  
 
-												 weakSelf.headerView.channelOwner.totalVideosValueChannelValue--;
+												 weakSelf.headerView.channelOwner.totalVideosValueChannelValue++;
 												 [weakSelf.headerView setSegmentedControllerText];
 												 
 												 [self createNewCollection];
