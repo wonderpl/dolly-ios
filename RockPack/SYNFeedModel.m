@@ -151,8 +151,7 @@
 	
 	SYNAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
 	
-	NSManagedObjectContext *managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-	[managedObjectContext setPersistentStoreCoordinator:appDelegate.mainManagedObjectContext.persistentStoreCoordinator];
+	NSManagedObjectContext *managedObjectContext = appDelegate.mainManagedObjectContext;
 	
 	__block NSArray *feedItemIds = nil;
 	
