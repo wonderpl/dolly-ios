@@ -293,8 +293,10 @@
          
              // Save the new credential object in the keychain
              // The user passed back is assumed to be the current user
-             [newOAuth2Credentials saveToKeychainForService: [[NSBundle mainBundle] bundleIdentifier]
-                                                    account: responseDictionary[@"user_id"]];
+             if ([UIApplication sharedApplication].protectedDataAvailable) {
+                 [newOAuth2Credentials saveToKeychainForService: [[NSBundle mainBundle] bundleIdentifier]
+                                                        account: newOAuth2Credentials.userId];
+             }
              completionBlock(responseDictionary);
         }
         else
