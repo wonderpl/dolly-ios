@@ -213,8 +213,6 @@
 
 - (void)setVideoInstance:(VideoInstance *)videoInstance
 {
-    
-    
     if (!videoInstance) {
         return;
     }
@@ -237,14 +235,12 @@
     if (_selectedIndex == selectedIndex && !self.firstTime) {
         return;
     }
+
     
     self.firstTime = NO;
 	_selectedIndex = selectedIndex;
 	
-	NSIndexPath *indexPath = [NSIndexPath indexPathForItem:self.selectedIndex inSection:0];
-	[self.videosCollectionView scrollToItemAtIndexPath:indexPath
-									  atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
-											  animated:YES];
+    [self.videosCollectionView setContentOffset:CGPointMake(self.selectedIndex * CGRectGetWidth(self.videosCollectionView.frame), 0.0f)];
 	
 	self.videoInstance = [self.model itemAtIndex:selectedIndex];
 	
@@ -454,7 +450,6 @@
 	self.fullscreenViewController = [[SYNFullScreenVideoViewController alloc] init];
 	self.fullscreenViewController.videoPlayerViewController = self;
 	self.fullscreenViewController.transitioningDelegate = self;
-	
 	[self presentViewController:self.fullscreenViewController animated:YES completion:nil];
 }
 
@@ -485,6 +480,7 @@
 		[self maximiseVideoPlayer];
 		return YES;
 	}
+    self.currentVideoPlayer.maximised = NO;
 	return NO;
 }
 

@@ -60,9 +60,6 @@ static const CGFloat VideoAspectRatio = 16.0 / 9.0;
 												 selector:@selector(deviceOrientationChanged:)
 													 name:UIDeviceOrientationDidChangeNotification
 												   object:nil];
-        
-        
-
 	}
     
     NSIndexPath* indexPath = [NSIndexPath indexPathForItem:self.videoPlayerViewController.selectedIndex
@@ -83,20 +80,42 @@ static const CGFloat VideoAspectRatio = 16.0 / 9.0;
 	}
 }
 
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    self.videoContainerView.frame = [self videoContainerFrame];
+    [self.videoContainerView layoutIfNeeded];
+    [self.collectionView.collectionViewLayout invalidateLayout];
+    [self.collectionView setContentOffset:CGPointMake(self.videoPlayerViewController.selectedIndex * CGRectGetWidth(self.view.bounds), 0.0f)];
+    
+}
+
+
 - (NSUInteger)supportedInterfaceOrientations {
 	return (IS_IPHONE ? UIInterfaceOrientationMaskLandscape : UIInterfaceOrientationMaskAll);
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
 	[super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-	
-	self.videoContainerView.frame = [self videoContainerFrame];
-	
+    self.videoContainerView.frame = [self videoContainerFrame];
+    [self.collectionView.collectionViewLayout invalidateLayout];
+
+}
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    self.videoContainerView.frame = [self videoContainerFrame];
+    [self.collectionView.collectionViewLayout invalidateLayout];
+    [self.collectionView setContentOffset:CGPointMake(self.videoPlayerViewController.selectedIndex * CGRectGetWidth(self.videoContainerView.frame), 0.0f) animated:NO];
+
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
     
+    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
     [self.collectionView setContentOffset:CGPointMake(self.videoPlayerViewController.selectedIndex * CGRectGetWidth(self.view.bounds), 0.0f)
-                                 animated:YES];
-    
-	[self.collectionView.collectionViewLayout invalidateLayout];
+                                 animated:NO];
+
 }
 
 - (BOOL)prefersStatusBarHidden {

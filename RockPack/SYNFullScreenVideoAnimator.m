@@ -68,27 +68,15 @@ static const CGFloat AnimationDuration = 0.3;
 		make.width.equalTo(fullScreenViewController.videoContainerView.mas_width);
 		make.height.equalTo(fullScreenViewController.videoContainerView.mas_height);
 	}];
-	
-	[collectionView.collectionViewLayout invalidateLayout];
 	[collectionView layoutIfNeeded];
+	[collectionView.collectionViewLayout invalidateLayout];
 	
 	[containerView addSubview:fullScreenViewController.view];
 	
-	fullScreenViewController.view.alpha = 0.0;
     fullScreenViewController.collectionView = collectionView;
+    
+    [transitionContext completeTransition:YES];
 
-    if (IS_IPHONE) {
-        collectionView.contentOffset = CGPointMake(videoPlayerViewController.selectedIndex * CGRectGetWidth(fullScreenViewController.view.bounds), 0);
-    } else {
-        collectionView.contentOffset = CGPointMake(videoPlayerViewController.selectedIndex * CGRectGetWidth(fullScreenViewController.view.bounds), 0);
-    }
-
-	[UIView animateWithDuration:AnimationDuration
-					 animations:^{
-						 fullScreenViewController.view.alpha = 1.0;
-					 } completion:^(BOOL finished) {
-						 [transitionContext completeTransition:YES];
-					 }];
 }
 
 - (void)animateDismissingTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
@@ -99,29 +87,25 @@ static const CGFloat AnimationDuration = 0.3;
 	UICollectionView *collectionView = fullScreenViewController.collectionView;
 	
 	[containerView insertSubview:videoPlayerViewController.view belowSubview:fullScreenViewController.view];
-	
-	[UIView animateWithDuration:AnimationDuration
-					 animations:^{
-						 fullScreenViewController.view.alpha = 0.0;
-					 } completion:^(BOOL finished) {
-						 [videoPlayerViewController.videoPlayerContainerView addSubview:collectionView];
-						 [collectionView mas_updateConstraints:^(MASConstraintMaker *make) {
-							 make.centerX.equalTo(videoPlayerViewController.videoPlayerContainerView.mas_centerX);
-							 make.centerY.equalTo(videoPlayerViewController.videoPlayerContainerView.mas_centerY);
-							 make.width.equalTo(videoPlayerViewController.videoPlayerContainerView.mas_width);
-							 make.height.equalTo(videoPlayerViewController.videoPlayerContainerView.mas_height);
-						 }];
-						 
-						 [collectionView.collectionViewLayout invalidateLayout];
-						 [collectionView layoutIfNeeded];
-						 if (IS_IPHONE) {
-							 collectionView.contentOffset = CGPointMake(videoPlayerViewController.selectedIndex * 320, 0);
-						 } else {
-							 collectionView.contentOffset = CGPointMake(videoPlayerViewController.selectedIndex * 768, 0);
-						 }
-						 
-						 [transitionContext completeTransition:YES];
-					 }];
+    [videoPlayerViewController.videoPlayerContainerView addSubview:collectionView];
+    [collectionView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(videoPlayerViewController.videoPlayerContainerView.mas_centerX);
+        make.centerY.equalTo(videoPlayerViewController.videoPlayerContainerView.mas_centerY);
+        make.width.equalTo(videoPlayerViewController.videoPlayerContainerView.mas_width);
+        make.height.equalTo(videoPlayerViewController.videoPlayerContainerView.mas_height);
+    }];
+
+    
+    [collectionView.collectionViewLayout invalidateLayout];
+
+    [collectionView layoutIfNeeded];
+    if (IS_IPHONE) {
+        collectionView.contentOffset = CGPointMake(videoPlayerViewController.selectedIndex * 320, 0);
+    } else {
+        collectionView.contentOffset = CGPointMake(videoPlayerViewController.selectedIndex * 768, 0);
+    }
+    
+    [transitionContext completeTransition:YES];
 }
 
 @end
