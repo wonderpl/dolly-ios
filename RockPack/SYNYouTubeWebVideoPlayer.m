@@ -14,6 +14,8 @@
 #import "SYNYouTubeWebView.h"
 #import <Reachability.h>
 
+@import CoreTelephony.CTTelephonyNetworkInfo;
+
 typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 	SYNYouTubeVideoPlayerStateInitialised,
 	SYNYouTubeVideoPlayerStateReady,
@@ -26,6 +28,8 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 @property (nonatomic, strong) UIWebView *youTubeWebView;
 
 @property (nonatomic, assign) SYNYouTubeVideoPlayerState youTubePlayerState;
+
+@property (nonatomic, strong) NSTimer *timer;
 
 @end
 
@@ -41,6 +45,7 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 
 - (void)dealloc {
 	_youTubeWebView.delegate = nil;
+    self.timer = nil;
 }
 
 #pragma mark - UIView
@@ -62,7 +67,6 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 - (UIWebView *)youTubeWebView {
 	if (!_youTubeWebView) {
 		UIWebView *webView = [SYNYouTubeWebView webView];
-		
 		// The method is meant to return a number, so the only way it will return an empty string is if the method
 		// isn't loaded, which will only happen if the player isn't ready
 		BOOL isPlayerReady = ([[webView stringByEvaluatingJavaScriptFromString:@"player.getPlayerState()"] length] > 0);
@@ -154,6 +158,8 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 	if ([actionName isEqualToString:@"stateChange"]) {
 		if ([actionData isEqualToString:@"playing"] && self.youTubePlayerState == SYNYouTubeVideoPlayerStateLoaded) {
 			self.youTubePlayerState = SYNYouTubeVideoPlayerStatePlayStarted;
+            [self.timer invalidate];
+            self.timer = nil;
 			[self handleVideoPlayerStartedPlaying];
 		}
 		if ([actionData isEqualToString:@"paused"]) {
@@ -162,6 +168,17 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 		if ([actionData isEqualToString:@"ended"]) {
 			[self handleVideoPlayerFinishedPlaying];
 		}
+        if ([actionData isEqualToString:@"buffering"]) {
+            self.timer = [NSTimer scheduledTimerWithTimeInterval:[self bufferTIme]
+                                                          target:self
+                                                        selector:@selector(reloadVideo:)
+                                                        userInfo:nil
+                                                         repeats:NO];
+        } else {
+            if (self.timer) {
+                [self.timer invalidate];
+            }
+        }
 	}
 	
 	if ([actionName isEqualToString:@"playbackQuality"]) {
@@ -175,8 +192,39 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 	}
 }
 
+- (void)reloadVideo:(NSTimer *)timer {
+    
+}
+
+- (NSTimeInterval) bufferTIme {
+ 
+	NSDictionary *mapping = @{
+							  @"CTRadioAccessTechnologyGPRS"			:@(16),
+                              @"CTRadioAccessTechnologyEdge"			:@(16),
+                              @"CTRadioAccessTechnologyWCDMA" 			:@(12),
+                              @"CTRadioAccessTechnologyHSDPA" 			:@(12),
+                              @"CTRadioAccessTechnologyHSUPA" 			:@(12),
+                              @"CTRadioAccessTechnologyCDMA1x" 			:@(12),
+                              @"CTRadioAccessTechnologyCDMAEVDORev0" 	:@(12),
+                              @"CTRadioAccessTechnologyCDMAEVDORevA" 	:@(12),
+                              @"CTRadioAccessTechnologyCDMAEVDORevB" 	:@(12),
+                              @"CTRadioAccessTechnologyeHRPD" 			:@(12),
+                              @"CTRadioAccessTechnologyLTE" 			:@(12)
+							  };
+    
+    CTTelephonyNetworkInfo *telephonyInfo = [CTTelephonyNetworkInfo new];
+    
+    if (mapping[telephonyInfo.currentRadioAccessTechnology] != nil) {
+        return [mapping[telephonyInfo.currentRadioAccessTechnology] doubleValue];
+    }
+	
+    //Time for wifi
+    return 12;
+}
+
+
 - (void)loadPlayer {
-	if (self.youTubePlayerState == SYNYouTubeVideoPlayerStateReady) {
+    if (self.youTubePlayerState == SYNYouTubeVideoPlayerStateReady) {
 		NSString *sourceId = self.videoInstance.video.sourceId;
 		NSString *loadString = [NSString stringWithFormat:@"player.loadVideoById('%@', '0', '%@');", sourceId, @"default"];
 		[self.youTubeWebView stringByEvaluatingJavaScriptFromString:loadString];
