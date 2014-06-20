@@ -15,6 +15,7 @@
 #import "SYNTrackingManager.h"
 #import "SYNNotificationsMarkAllAsReadCell.h"
 #import "SYNActivityTabButton.h"
+#import <TestFlight.h>
 
 #define kNotificationsCellIdent @"kNotificationsCellIdent"
 #define kNotificationsSpecialCellIdent @"SYNNotificationsMarkAllAsReadCell"
@@ -87,9 +88,11 @@
 
 - (void) loadNotificationsWithcompletion :(void (^)(void))callbackBlock
 {
+    
+    TFLog(@"Current User ID: %@",appDelegate.currentUser.uniqueId );
+
     [appDelegate.oAuthNetworkEngine notificationsFromUserId: appDelegate.currentUser.uniqueId
                                           completionHandler: ^(id response) {
-                                              
                                               
                                               [self parseNotificationsFromDictionary:response];
                                               

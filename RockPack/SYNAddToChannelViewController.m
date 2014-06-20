@@ -26,6 +26,7 @@
 #import "SYNTrackingManager.h"
 #import "SYNChannelMidCell.h"
 #import "SYNAddToChannelOverlayViewController.h"
+#import <TestFlight.h>
 
 #define kAnimationExpansion 0.4f
 
@@ -382,6 +383,11 @@
 }
 
 - (void)addCurrentVideoInstanceToChannel:(NSString *)channelId isFavourites:(BOOL)isFavourites {
+    
+    TFLog(@"Current User ID: %@",appDelegate.currentUser.uniqueId );
+    TFLog(@"Channel ID: %@",channelId);
+    TFLog(@"VideoInstance ID: %@",self.videoInstance.uniqueId);
+    
     [appDelegate.oAuthNetworkEngine updateVideosForUserId:appDelegate.currentUser.uniqueId
 											 forChannelId:channelId
 										 videoInstanceIds:@[ self.videoInstance.uniqueId ]
