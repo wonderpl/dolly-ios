@@ -321,6 +321,49 @@
     //Add imageview to the window as placeholder while we wait for the token refresh call.
     [self.tokenExpiryTimer invalidate];
     
+    UIImageView *startImageView = nil;
+    CGPoint startImageCenter = self.window.center;
+    
+    if (IS_IPAD)
+    {
+        if (UIDeviceOrientationIsLandscape([[SYNDeviceManager sharedInstance] currentOrientation]))
+        {
+            startImageView = [[UIImageView alloc] initWithImage: [UIImage imageNamed: @"Default-Landscape"]];
+            
+            if ([[SYNDeviceManager sharedInstance] currentOrientation] == UIDeviceOrientationLandscapeLeft)
+            {
+                startImageView.transform = CGAffineTransformMakeRotation(M_PI_2);
+                startImageCenter.x -= 10;
+            }
+            else
+            {
+                startImageView.transform = CGAffineTransformMakeRotation(-M_PI_2);
+                startImageCenter.x += 10;
+            }
+        }
+        else
+        {
+            startImageView = [[UIImageView alloc] initWithImage: [UIImage imageNamed: @"Default-Portrait"]];
+            startImageCenter.y += 10;
+        }
+    }
+    else
+    {
+        if ([SYNDeviceManager.sharedInstance currentScreenHeight] > 480.0f)
+        {
+            startImageView = [[UIImageView alloc] initWithImage: [UIImage imageNamed: @"Default-568h"]];
+        }
+        else
+        {
+            startImageView = [[UIImageView alloc] initWithImage: [UIImage imageNamed: @"Default"]];
+        }
+    }
+    
+    [self.window addSubview: startImageView];
+    
+    startImageView.center = startImageCenter;
+
+    
     //refresh token
     [self.oAuthNetworkEngine refreshOAuthTokenWithCompletionHandler: ^(id response) {
         
@@ -332,12 +375,14 @@
         self.tokenExpiryTimer = nil;
         
         [self refreshUserData];
+        [startImageView removeFromSuperview];
     } errorHandler: ^(id response) {
         DebugLog(@"Failed to refresh token");
         if (!self.window.rootViewController)
         {
             self.window.rootViewController = [self createAndReturnRootViewController];
         }
+        [startImageView removeFromSuperview];
     }];
 }
 
