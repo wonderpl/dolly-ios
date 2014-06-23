@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -17,7 +17,21 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YOe-8L-ykc">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yor-To-b5O">
+                            <rect key="frame" x="20" y="20" width="280" height="22"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.35000000000000003" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="Yor-To-b5O" firstAttribute="top" secondItem="YOe-8L-ykc" secondAttribute="top" constant="20" id="A7B-VW-Z71"/>
+                        <constraint firstItem="Yor-To-b5O" firstAttribute="leading" secondItem="YOe-8L-ykc" secondAttribute="leading" constant="20" id="J0N-X9-KE0"/>
+                        <constraint firstAttribute="trailing" secondItem="Yor-To-b5O" secondAttribute="trailing" constant="20" id="iaZ-gA-CII"/>
+                    </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eiU-W9-fMb">
                     <rect key="frame" x="27" y="64" width="266" height="1"/>
@@ -73,6 +87,7 @@
                 <outlet property="activityIndicator" destination="6tN-Xu-vjt" id="b8N-H8-gP7"/>
                 <outlet property="imageView" destination="S93-P1-BAw" id="vv9-2G-reB"/>
                 <outlet property="loadingLabel" destination="Kkx-5N-9hb" id="V7L-ss-XXf"/>
+                <outlet property="titleLabel" destination="Yor-To-b5O" id="U3w-nt-C6V"/>
             </connections>
         </view>
     </objects>

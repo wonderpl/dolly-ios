@@ -13,6 +13,7 @@
 @interface SYNVideoLoadingView : UIView
 
 @property (nonatomic, strong) VideoInstance *videoInstance;
+@property (nonatomic, assign) BOOL fullscreen;
 
 + (instancetype)loadingViewWithFrame:(CGRect)frame;
 

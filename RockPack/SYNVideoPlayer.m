@@ -109,7 +109,6 @@ static CGFloat const ControlsFadeTimer = 5.0;
 
 - (void)scrubberBarCurrentTimeDidChange {
 	[self startControlsTimer];
-	
 	[self play];
 }
 
@@ -145,8 +144,8 @@ static CGFloat const ControlsFadeTimer = 5.0;
 	if (!_loadingView) {
 		SYNVideoLoadingView *loadingView = [SYNVideoLoadingView loadingViewWithFrame:self.bounds];
 		loadingView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
-		
-		self.loadingView = loadingView;
+        self.loadingView = loadingView;
+        self.loadingView.fullscreen = self.maximised;
 	}
 	return _loadingView;
 }
@@ -214,9 +213,7 @@ static CGFloat const ControlsFadeTimer = 5.0;
 
 - (void)pause {
 	self.state = SYNVideoPlayerStatePaused;
-	
 	self.scrubberBar.playing = NO;
-    
 	[self stopControlsFadeTimer];
 	[self stopUpdatingProgress];
 }
@@ -390,7 +387,7 @@ static CGFloat const ControlsFadeTimer = 5.0;
 - (void)handleVideoPlayerMaximise {
 	self.maximised = YES;
 	self.scrubberBar.fullscreen = YES;
-	[self.delegate videoPlayerMaximise];
+    [self.delegate videoPlayerMaximise];
 }
 
 - (void)handleVideoPlayerMinimise {
@@ -435,5 +432,9 @@ static CGFloat const ControlsFadeTimer = 5.0;
 	self.annotationButtons = annotationButtons;
 }
 
+- (void)setMaximised:(BOOL)maximised {
+    _maximised = maximised;
+    self.loadingView.fullscreen = _maximised;
+}
 
 @end

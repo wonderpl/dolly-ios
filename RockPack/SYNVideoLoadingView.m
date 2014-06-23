@@ -16,10 +16,10 @@
 @interface SYNVideoLoadingView ()
 
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView *activityIndicator;
-
 @property (nonatomic, strong) IBOutlet UIImageView *imageView;
-
 @property (nonatomic, strong) IBOutlet UILabel *loadingLabel;
+@property (nonatomic, strong) IBOutlet UILabel *titleLabel;
+@property (nonatomic, assign) BOOL maximise;
 
 @end
 
@@ -38,10 +38,9 @@
 
 - (void)awakeFromNib {
 	[super awakeFromNib];
-	
 	self.loadingLabel.font = [UIFont lightCustomFontOfSize:self.loadingLabel.font.pointSize];
-	
 	self.activityIndicator.transform = CGAffineTransformMakeScale(0.7, 0.7);
+    self.titleLabel.font = [UIFont boldCustomFontOfSize:self.titleLabel.font.pointSize];
 }
 
 #pragma mark - Getters / Setters
@@ -53,6 +52,19 @@
 	[[SYNVideoThumbnailDownloader sharedDownloader] blurredImageForVideoInstance:wself.videoInstance.video completion:^(UIImage *image) {
 		wself.imageView.image = image;
 	}];
+    
+    [self.titleLabel setText:videoInstance.title];
+
 }
+
+- (void) setFullscreen:(BOOL)fullscreen {
+    _fullscreen = fullscreen;
+    if (self.fullscreen) {
+        self.titleLabel.hidden = NO;
+    } else {
+        self.titleLabel.hidden = YES;
+    }
+}
+
 
 @end

@@ -71,6 +71,8 @@
 
 @property (nonatomic, assign) BOOL firstTime;
 
+@property (nonatomic, assign) BOOL maximised;
+
 @end
 
 
@@ -225,7 +227,6 @@
 	
 	if ([self isViewLoaded]) {
 		[self updateVideoInstanceDetails:videoInstance];
-		
 		[self playCurrentVideo];
 	}
 }
@@ -261,12 +262,13 @@
 	
 	if (indexPath.item == self.selectedIndex && self.currentVideoPlayer) {
 		cell.videoPlayer = self.currentVideoPlayer;
-	} else {
+    } else {
 		VideoInstance *videoInstance = [self.model itemAtIndex:indexPath.row];
 		
 		SYNVideoPlayer *videoPlayer = [SYNVideoPlayer playerForVideoInstance:videoInstance];
 		videoPlayer.delegate = self;
 		cell.videoPlayer = videoPlayer;
+        cell.videoPlayer.maximised = self.maximised;
 	}
 	
 	return cell;
@@ -450,10 +452,12 @@
 	self.fullscreenViewController = [[SYNFullScreenVideoViewController alloc] init];
 	self.fullscreenViewController.videoPlayerViewController = self;
 	self.fullscreenViewController.transitioningDelegate = self;
+    self.maximised = YES;
 	[self presentViewController:self.fullscreenViewController animated:YES completion:nil];
 }
 
 - (void)minimiseVideoPlayer {
+    self.maximised = NO;
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -475,12 +479,14 @@
 - (BOOL)handleRotationToOrientation:(UIDeviceOrientation)orientation {
 	if (UIDeviceOrientationIsLandscape(orientation)) {
 		[[SYNTrackingManager sharedManager] trackVideoMaximiseViaRotation];
-		
-		self.currentVideoPlayer.maximised = YES;
+		self.maximised = YES;
 		[self maximiseVideoPlayer];
 		return YES;
 	}
-    self.currentVideoPlayer.maximised = NO;
+    
+    if (IS_IPHONE) {
+        self.maximised = NO;
+    }
 	return NO;
 }
 
@@ -575,6 +581,11 @@
 							  NSStringFromClass([SYNAddToChannelViewController class])    : [SYNPopoverAnimator class]
 							  };
 	return mapping[NSStringFromClass([viewController class])];
+}
+
+- (void)setMaximised:(BOOL)maximised {
+    _maximised = maximised;
+    self.currentVideoPlayer.maximised = maximised;
 }
 
 @end
