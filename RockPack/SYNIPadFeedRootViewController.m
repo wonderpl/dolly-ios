@@ -43,15 +43,11 @@
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-	
+    [self.feedCollectionView reloadData];
+
 	[self.navigationController.navigationBar setBackgroundTransparent:NO];
 }
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval) duration {
-    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-	
-	[self.feedCollectionView reloadData];
-}
 
 #pragma mark - UIScrollViewDelegate
 

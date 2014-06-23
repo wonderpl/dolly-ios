@@ -33,6 +33,9 @@
 #import "UINavigationBar+Appearance.h"
 #import "SYNIPadFeedLayout.h"
 
+static const CGFloat heightLandscape = 645;
+static const CGFloat heightPortrait = 911;
+
 @interface SYNFeedRootViewController () <UIViewControllerTransitioningDelegate, SYNPagingModelDelegate, SYNVideoPlayerAnimatorDelegate, SYNFeedVideoCellDelegate, SYNFeedChannelCellDelegate>
 
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
@@ -88,9 +91,7 @@
     
     // Refresh control
     self.refreshControl = [[UIRefreshControl alloc] initWithFrame: CGRectMake(0, -44, 320, 44)];
-    
     [self.refreshControl setTintColor:[UIColor dollyActivityIndicator]];
-    
     [self.refreshControl addTarget: self
                             action: @selector(reloadData)
                   forControlEvents: UIControlEventValueChanged];
@@ -123,37 +124,34 @@
         BOOL orientationChanged = ((UIDeviceOrientationIsPortrait(self.lastOrientation) && UIDeviceOrientationIsLandscape(currentOrientation)) || (UIDeviceOrientationIsPortrait(currentOrientation) && UIDeviceOrientationIsLandscape(self.lastOrientation)));
         
         if (orientationChanged) {
-            
             if (UIDeviceOrientationIsPortrait(currentOrientation)) {
-            	CGPoint newOffset = CGPointMake(0, self.lastYOffset*1.425);
+            	CGPoint newOffset = CGPointMake(0, self.lastYOffset*heightPortrait/heightLandscape);
                 [self.feedCollectionView setContentOffset:newOffset animated:NO];
-
             } else {
-                CGPoint newOffset = CGPointMake(0, self.lastYOffset*0.70175);
+                CGPoint newOffset = CGPointMake(0, self.lastYOffset*heightLandscape/heightPortrait);
             	[self.feedCollectionView setContentOffset:newOffset animated:NO];
             }
         }
         
         [self.feedCollectionView reloadData];
-
     }
     
 	self.shownInboarding = NO;
-    
     [self showInboarding];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	
 	[[SYNTrackingManager sharedManager] trackFeedScreenView];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
     self.lastYOffset = self.feedCollectionView.contentOffset.y;
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
     self.lastOrientation = [[UIApplication sharedApplication] statusBarOrientation];
 }
 
@@ -161,21 +159,67 @@
 	[self.feedCollectionView setContentOffset:CGPointMake(0, -self.feedCollectionView.contentInset.top) animated:YES];
 }
 
-- (void) willRotateToInterfaceOrientation: (UIInterfaceOrientation) toInterfaceOrientation
-                                 duration: (NSTimeInterval) duration
-{
-    [super willRotateToInterfaceOrientation: toInterfaceOrientation
-                                   duration: duration];
-	
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    if (UIDeviceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
+        CGPoint newOffset = CGPointMake(0, self.lastYOffset*heightPortrait/heightLandscape);
+        if (newOffset.y+self.feedCollectionView.frame.size.height > self.feedCollectionView.contentSize.height) {
+            newOffset.y = self.feedCollectionView.contentSize.height - self.feedCollectionView.frame.size.height;
+            [self.feedCollectionView setContentOffset:newOffset animated:NO];
+        } else {
+            [self.feedCollectionView setContentOffset:newOffset animated:NO];
+        }
+    } else {
+        CGPoint newOffset = CGPointMake(0, self.lastYOffset*heightLandscape/heightPortrait);
+        if (newOffset.y+self.feedCollectionView.frame.size.height > self.feedCollectionView.contentSize.height) {
+            newOffset.y = self.feedCollectionView.contentSize.height - self.feedCollectionView.frame.size.height;
+            [self.feedCollectionView setContentOffset:newOffset animated:NO];
+        } else {
+            [self.feedCollectionView setContentOffset:newOffset animated:NO];
+        }
+    }
+    self.feedCollectionView.alpha = 1.0;
+    [self.feedCollectionView reloadData];
+}
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+	[super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    self.feedCollectionView.alpha = 0.0;
+    self.lastYOffset = self.feedCollectionView.contentOffset.y;
     [self.feedCollectionView.collectionViewLayout invalidateLayout];
     
 }
 
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+    
+    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+    self.feedCollectionView.alpha = 1.0;
+    
+    if (UIDeviceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
+        CGPoint newOffset = CGPointMake(0, self.lastYOffset*heightPortrait/heightLandscape);
+        if (newOffset.y+self.feedCollectionView.frame.size.height > self.feedCollectionView.contentSize.height) {
+            newOffset.y = self.feedCollectionView.contentSize.height - self.feedCollectionView.frame.size.height;
+            [self.feedCollectionView setContentOffset:newOffset animated:NO];
+        } else {
+            [self.feedCollectionView setContentOffset:newOffset animated:NO];
+        }
+    } else {
+        CGPoint newOffset = CGPointMake(0, self.lastYOffset*heightLandscape/heightPortrait);
+        if (newOffset.y+self.feedCollectionView.frame.size.height > self.feedCollectionView.contentSize.height) {
+            newOffset.y = self.feedCollectionView.contentSize.height - self.feedCollectionView.frame.size.height;
+            [self.feedCollectionView setContentOffset:newOffset animated:NO];
+        } else {
+            [self.feedCollectionView setContentOffset:newOffset animated:NO];
+        }
+    }
+}
+
+
 - (void)clearedLocationBoundData {
 	[self reloadData];
-
 	[self.feedCollectionView reloadData];
 }
+
 
 #pragma mark - UICollectionViewDataSource
 
@@ -244,27 +288,6 @@
 - (SYNFeedVideoCell *)videoCellForIndexPath:(NSIndexPath *)indexPath
 							 collectionView:(UICollectionView *)collectionView {
 	return nil;
-}
-
-#pragma mark - UIScrollViewDelegates
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    [super scrollViewDidScroll:scrollView];
-}
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    if (scrollView == self.feedCollectionView) {
-        [self stoppedScrolling:scrollView];
-	}
-}
-
-- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
-	if (scrollView == self.feedCollectionView) {
-        [self stoppedScrolling:scrollView];
-	}
-}
-
-- (void)stoppedScrolling:(UIScrollView *)scrollView {
 }
 
 #pragma mark - SYNVideoInfoCell
