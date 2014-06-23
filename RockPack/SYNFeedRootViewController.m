@@ -43,6 +43,9 @@
 
 @property (nonatomic, assign) BOOL shownInboarding;
 
+@property (nonatomic, assign) CGFloat lastYOffset;
+@property (nonatomic, assign) UIInterfaceOrientation lastOrientation;
+
 @end
 
 
@@ -115,6 +118,24 @@
 
     if (IS_IPAD) {
         [self.feedCollectionView.collectionViewLayout invalidateLayout];
+    
+        UIInterfaceOrientation currentOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+        BOOL orientationChanged = ((UIDeviceOrientationIsPortrait(self.lastOrientation) && UIDeviceOrientationIsLandscape(currentOrientation)) || (UIDeviceOrientationIsPortrait(currentOrientation) && UIDeviceOrientationIsLandscape(self.lastOrientation)));
+        
+        if (orientationChanged) {
+            
+            if (UIDeviceOrientationIsPortrait(currentOrientation)) {
+            	CGPoint newOffset = CGPointMake(0, self.lastYOffset*1.425);
+                [self.feedCollectionView setContentOffset:newOffset animated:NO];
+
+            } else {
+                CGPoint newOffset = CGPointMake(0, self.lastYOffset*0.70175);
+            	[self.feedCollectionView setContentOffset:newOffset animated:NO];
+            }
+        }
+        
+        [self.feedCollectionView reloadData];
+
     }
     
 	self.shownInboarding = NO;
@@ -128,6 +149,14 @@
 	[[SYNTrackingManager sharedManager] trackFeedScreenView];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    self.lastYOffset = self.feedCollectionView.contentOffset.y;
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    self.lastOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+}
+
 - (void)scrollToTop:(UIGestureRecognizer *)gestureRecognizer {
 	[self.feedCollectionView setContentOffset:CGPointMake(0, -self.feedCollectionView.contentInset.top) animated:YES];
 }
@@ -139,6 +168,7 @@
                                    duration: duration];
 	
     [self.feedCollectionView.collectionViewLayout invalidateLayout];
+    
 }
 
 - (void)clearedLocationBoundData {
@@ -214,6 +244,27 @@
 - (SYNFeedVideoCell *)videoCellForIndexPath:(NSIndexPath *)indexPath
 							 collectionView:(UICollectionView *)collectionView {
 	return nil;
+}
+
+#pragma mark - UIScrollViewDelegates
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [super scrollViewDidScroll:scrollView];
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    if (scrollView == self.feedCollectionView) {
+        [self stoppedScrolling:scrollView];
+	}
+}
+
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
+	if (scrollView == self.feedCollectionView) {
+        [self stoppedScrolling:scrollView];
+	}
+}
+
+- (void)stoppedScrolling:(UIScrollView *)scrollView {
 }
 
 #pragma mark - SYNVideoInfoCell
@@ -348,6 +399,8 @@
 	viewController.videoInstance = videoInstance;
 	
 	[self presentViewController:viewController animated:YES completion:nil];
+    
+    self.lastOrientation = [[UIApplication sharedApplication] statusBarOrientation];
 }
 
 - (void)videoCell:(SYNFeedVideoCell *)cell sharePressed:(UIButton *)button {
