@@ -239,8 +239,6 @@
     
     
     [self viewProfileDetails: notification.channelOwner];
-    
-    [self markAsReadForNotification: notification];
 }
 
 // this is the secondary button to the right
@@ -317,8 +315,6 @@
             AssertOrLog(@"Unexpected notification type");
             break;
     }
-    
-    [self markAsReadForNotification: notification];
 }
 
 - (void) markAllAsRead {
@@ -333,17 +329,9 @@
     [self markAsReadForNotification: notification];
 }
 
-- (void) markAsReadForNotification: (SYNNotification *) notification
-{
-
-    NSArray *array;
-    if (notification) {
-        array = @[@(notification.identifier)];
-	} else {
-        array = @[];
-	}
+- (void) markAsReadForNotification: (SYNNotification *) notification {
     
-    [appDelegate.oAuthNetworkEngine markAsReadForNotificationIndexes:array
+    [appDelegate.oAuthNetworkEngine markAsReadForNotificationIndexes:@[]
                                                           fromUserId:appDelegate.currentUser.uniqueId
                                                    completionHandler:^(id responce) {
                                                     
