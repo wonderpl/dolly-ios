@@ -875,7 +875,12 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 }
 
 - (BOOL)isUserProfile {
-	return [_channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId];
+    
+    if (self.channelOwner.uniqueId) {
+        return [_channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId];
+    }
+    
+    return NO;
 }
 
 

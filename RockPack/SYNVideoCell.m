@@ -36,17 +36,26 @@
 - (void)setVideoInstance:(VideoInstance *)videoInstance {
 	_videoInstance = videoInstance;
 	
-	[self.thumbnailImageView setImageWithURL:[NSURL URLWithString:videoInstance.thumbnailURL]];
+    
+    if (videoInstance.thumbnailURL) {
+        [self.thumbnailImageView setImageWithURL:[NSURL URLWithString:videoInstance.thumbnailURL]];
+    }
+    
 	
-	NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-	paragraphStyle.lineHeightMultiple = 1.3;
-	NSDictionary *attributes = @{ NSParagraphStyleAttributeName : paragraphStyle };
-	
-	NSAttributedString *attributedString = [[NSAttributedString alloc] initWithString:videoInstance.title
-																		   attributes:attributes];
-	
-	self.titleLabel.attributedText = attributedString;
-	self.originatorLabel.text = videoInstance.originator.displayName;
+    if (videoInstance.title) {
+        NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+        paragraphStyle.lineHeightMultiple = 1.3;
+        NSDictionary *attributes = @{ NSParagraphStyleAttributeName : paragraphStyle };
+        
+        NSAttributedString *attributedString = [[NSAttributedString alloc] initWithString:videoInstance.title
+                                                                               attributes:attributes];
+        
+        self.titleLabel.attributedText = attributedString;
+    }
+    
+    if (videoInstance.originator.displayName) {
+        self.originatorLabel.text = videoInstance.originator.displayName;
+    }
 }
 
 @end

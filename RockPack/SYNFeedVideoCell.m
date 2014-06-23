@@ -75,8 +75,12 @@
 		NSString *channelOwnerName = videoInstance.channel.channelOwner.displayName;
 		NSDictionary *attributes = @{ NSFontAttributeName : [UIFont boldItalicAlternateFontOfSize:self.labelLabel.font.pointSize], NSForegroundColorAttributeName : [UIColor grayColor] };
 		
-		[curatedByString appendAttributedString:[[NSAttributedString alloc] initWithString:channelOwnerName attributes:attributes ]];
-		
+        if (!channelOwnerName) {
+			channelOwnerName = @"";
+        }
+
+        [curatedByString appendAttributedString:[[NSAttributedString alloc] initWithString:channelOwnerName attributes:attributes ]];
+
 		[self.curatedByButton setAttributedTitle:curatedByString forState:UIControlStateNormal];
 	}
 	self.durationLabel.text = [NSString friendlyLengthFromTimeInterval:videoInstance.video.durationValue];
