@@ -21,15 +21,18 @@ static const NSInteger InitialWebViewCount = 3;
 #pragma mark - Public class
 
 + (instancetype)webView {
-	NSMutableArray *reusableWebViews = [self reusableWebViews];
+    NSMutableArray *reusableWebViews = [self reusableWebViews];
 	
 	SYNYouTubeWebView *webView = [reusableWebViews firstObject];
-	[reusableWebViews removeObject:webView];
-	
+    
+    [reusableWebViews removeObject:webView];
+    [reusableWebViews addObject:webView];
+    
 	if (!webView) {
 		webView = [self createWebView];
+        DebugLog(@"WebView was nil");
 	}
-	
+	    
 	return webView;
 }
 
