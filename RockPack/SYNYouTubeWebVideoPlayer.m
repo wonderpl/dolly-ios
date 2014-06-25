@@ -109,8 +109,14 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 #pragma mark - Overridden
 
 - (void)play {
-	[super play];
-	[self playVideo];
+    NSString *availability = [self.youTubeWebView stringByEvaluatingJavaScriptFromString: @"checkPlayerAvailability();"];
+    if ([availability isEqualToString: @"true"]) {
+        [super play];
+        [self playVideo];
+    } else {
+        [self reloadVideoPlayer];
+    }
+
 }
 
 - (void)playVideo {
@@ -178,7 +184,7 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
         if ([actionData isEqualToString:@"buffering"]) {
             self.timer = [NSTimer scheduledTimerWithTimeInterval:[self bufferTIme]
                                                           target:self
-                                                        selector:@selector(reloadVideoPlayer:)
+                                                        selector:@selector(reloadVideoPlayer)
                                                         userInfo:nil
                                                          repeats:NO];
         } else {
@@ -199,7 +205,7 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 	}
 }
 
-- (void)reloadVideoPlayer:(NSTimer *)timer {
+- (void)reloadVideoPlayer {
 
 	_youTubeWebView = [self newWebView];
     
