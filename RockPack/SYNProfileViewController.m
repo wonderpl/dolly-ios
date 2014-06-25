@@ -87,7 +87,7 @@ static const CGFloat TransitionDuration = 0.5f;
 - (void) viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	[SYNActivityManager.sharedInstance updateActivityForCurrentUserWithReset:NO];
-	if (self.isUserProfile) {
+	if ([self isUserProfile]) {
 		[[SYNTrackingManager sharedManager] trackOwnProfileScreenView];
     } else {
 		[[SYNTrackingManager sharedManager] trackOtherUserProfileScreenView];
@@ -197,16 +197,8 @@ static const CGFloat TransitionDuration = 0.5f;
                                                } onError: nil];
 
         } else {
-            [appDelegate.networkEngine channelOwnerDataForChannelOwner:self.channelOwner onComplete:^(id dictionary) {
-                if (self.channelOwner)
-                {
-                    [self.channelOwner setAttributesFromDictionary: dictionary
-                                               ignoringObjectTypes: kIgnoreNothing];
-                }
-                
-            	[self.channelCollectionViewController.cv reloadData];
-                
-            } onError:nil];
+            
+            [self setOtherUserProfileData];
 
         }
     }
@@ -306,11 +298,6 @@ static const CGFloat TransitionDuration = 0.5f;
     
     [[SYNTrackingManager sharedManager] trackTabSelection:eventName
                                       forChannelOwnerName:self.channelOwner.displayName];
-    
-    
-    
-    
-    
 }
 
 
@@ -331,12 +318,13 @@ static const CGFloat TransitionDuration = 0.5f;
 
 - (void) followingsTabTapped {
     
-	if (!self.followingContainer.hidden) {
+	if ([self isFollowingsCollectionViewShowing]) {
 		return;
 	}
     self.videoCollectionViewController.cv.scrollsToTop = NO;
     self.channelCollectionViewController.cv.scrollsToTop = NO;
     self.subscriptionCollectionViewController.cv.scrollsToTop = YES;
+    
     
     if (self.isUserProfile) {
 		self.subscriptionCollectionViewController.headerView.firstTab.selected = NO;
@@ -348,9 +336,11 @@ static const CGFloat TransitionDuration = 0.5f;
 
     [self.channelCollectionViewController hideDescriptionCurrentlyShowing];
     
-	if ([self.channelOwner.uniqueId isEqualToString:appDelegate.currentUser.uniqueId]) {
-		[[SYNTrackingManager sharedManager] trackOwnProfileFollowingScreenView];
+	if ([self isUserProfile]) {
+	    [[SYNTrackingManager sharedManager] trackOwnProfileFollowingScreenView];
 	} else {
+        
+        
 		[[SYNTrackingManager sharedManager] trackOtherUserCollectionFollowingScreenView];
 	}
 
@@ -362,7 +352,7 @@ static const CGFloat TransitionDuration = 0.5f;
     
     [self.subscriptionCollectionViewController.model reloadInitialPage];
     
-    if(self.isUserProfile)
+    if([self isUserProfile])
     {
         [[SYNTrackingManager sharedManager] trackTabSelection:@"ownFollowingTabClick"
                                           forChannelOwnerName:self.channelOwner.displayName];
@@ -400,9 +390,6 @@ static const CGFloat TransitionDuration = 0.5f;
         [[SYNTrackingManager sharedManager] trackTabSelection:@"otherVideosTabClick"
                                           forChannelOwnerName:self.channelOwner.displayName];
     }
-  
-    
-    
 }
 
 
@@ -588,6 +575,18 @@ static const CGFloat TransitionDuration = 0.5f;
 //	self.navigationBar.hidden = NO;
 }
 
+- (void) setOtherUserProfileData {
+    [appDelegate.networkEngine channelOwnerDataForChannelOwner:self.channelOwner onComplete:^(id dictionary) {
+        if (self.channelOwner)
+        {
+            [self.channelOwner setAttributesFromDictionary: dictionary
+                                       ignoringObjectTypes: kIgnoreNothing];
+        }
+        
+        [self.channelCollectionViewController.cv reloadData];
+        
+    } onError:nil];
+}
 
 - (void) updateProfileData {
     
@@ -616,22 +615,8 @@ static const CGFloat TransitionDuration = 0.5f;
                                                    } onError: nil];
 
             } else {
-                
-                [appDelegate.networkEngine channelOwnerDataForChannelOwner:self.channelOwner onComplete:^(id dictionary) {
-                    if (self.channelOwner)
-                    {
-                        [self.channelOwner setAttributesFromDictionary: dictionary
-                                                   ignoringObjectTypes: kIgnoreNothing];
-                    }
-
-                    [self.channelCollectionViewController.cv reloadData];
-
-                } onError:nil];
-                
+                [self setOtherUserProfileData];
             }
-            
-            
-        
         } else {
             
             [self.subscriptionCollectionViewController.model reloadInitialPageWithCompletionHandler:^(BOOL success, BOOL hasChanged) {
@@ -651,9 +636,6 @@ static const CGFloat TransitionDuration = 0.5f;
         }
     }
 }
-
-
-
 
 - (BOOL) isUserProfile {
     return [self.channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId];

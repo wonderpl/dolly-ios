@@ -22,27 +22,40 @@ describe(@"SYNProfileViewController", ^{
 	});
 
 	
-	it(@"should track screen view", ^{
-
-//		[[mockManager should]receive:@selector(trackOwnProfileScreenView)];
-//		[[mockManager should]receive:@selector(trackOwnProfileFollowingScreenView)];
-//		[[mockManager should]receive:@selector(trackOwnProfileFollowingScreenView)];
-//		[[mockManager should]receive:@selector(trackAvatarPhotoUploadCompleted)];
-//		[[mockManager should]receive:@selector(trackCoverPhotoUploadCompleted)];
-//		[[mockManager should]receive:@selector(trackCreateChannelScreenView)];
-//		[[mockManager should]receive:@selector(trackUserCollectionsFollowFromScreenName) withArguments:[viewController trackingScreenName]];
-
+	it(@"should track screen view", ^{        
+        [viewController stub:@selector(isUserProfile) andReturn:theValue(NO)];
 		[[mockManager should]receive:@selector(trackOtherUserProfileScreenView)];
 		[viewController viewDidAppear:YES];;
 		
 	});
 	
-	
-	it(@"should track the followings tab button", ^{
-		[[mockManager should]receive:@selector(trackOtherUserCollectionFollowingScreenView)];
-		[viewController followingsTabTapped];
+    it(@"should track screen view", ^{
+        
+        [viewController stub:@selector(isUserProfile) andReturn:theValue(YES)];
+        [[mockManager should]receive:@selector(trackOwnProfileScreenView)];
+		[viewController viewDidAppear:YES];;
+		
+	});
+
+	it(@"should track the followings tab button own user", ^{
+        [viewController stub:@selector(isFollowingsCollectionViewShowing) andReturn:theValue(NO)];
+        [viewController stub:@selector(isUserProfile) andReturn:theValue(YES)];
+		[[mockManager should]receive:@selector(trackOwnProfileFollowingScreenView)];
+        [[mockManager should]receive:@selector(trackTabSelection:forChannelOwnerName:)];
+        [[mockManager should]receive:@selector(trackOwnProfileFollowingScreenView)];
+
+        [viewController followingsTabTapped];
 
 	});
+
+    it(@"should track the followings tab button", ^{
+        [viewController stub:@selector(isFollowingsCollectionViewShowing) andReturn:theValue(NO)];
+        [viewController stub:@selector(isUserProfile) andReturn:theValue(NO)];
+		[[mockManager should]receive:@selector(trackOtherUserCollectionFollowingScreenView)];
+        [viewController followingsTabTapped];
+        
+	});
+    
 
 	it(@"should track cover photo upload", ^{
 		[[mockManager should]receive:@selector(trackCoverPhotoUpload)];
