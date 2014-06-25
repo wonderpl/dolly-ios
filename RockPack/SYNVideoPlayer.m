@@ -52,7 +52,6 @@ static CGFloat const ControlsFadeTimer = 5.0;
 	Class videoPlayerClass = [self videoPlayerClassesForSource:videoInstance.video.source];
 	SYNVideoPlayer *player = [[videoPlayerClass alloc] init];
 	player.videoInstance = videoInstance;
-	
 	return player;
 }
 
@@ -190,25 +189,26 @@ static CGFloat const ControlsFadeTimer = 5.0;
     self.loadingView.videoInstance = videoInstance;
 }
 
+- (void)playFirstTime {
+    self.hasBeganPlaying = NO;
+    [self play];
+}
+
 - (void)play {
-	if (!self.hasBeganPlaying) {
+    if (!self.hasBeganPlaying) {
 		self.videoPlayerView.frame = self.playerContainerView.bounds;
 		[self.playerContainerView addSubview:self.videoPlayerView];
 		[self.playerContainerView addSubview:self.controlsFadeTapView];
 		[self.playerContainerView addSubview:self.scrubberBar];
 		
-		[self addGestureRecognizer:self.maximiseMinimiseGestureRecognizer];
+        [self addGestureRecognizer:self.maximiseMinimiseGestureRecognizer];
 		[self addGestureRecognizer:self.maximiseMinimisePinchGestureRecognizer];
 
-		
 		self.hasBeganPlaying = YES;
 	}
-	
 	self.state = SYNVideoPlayerStatePlaying;
-
 	self.scrubberBar.playing = YES;
     [self startUpdatingProgress];
-
 }
 
 - (void)pause {

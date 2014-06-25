@@ -44,8 +44,8 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 }
 
 - (void)dealloc {
-	_youTubeWebView.delegate = nil;
     self.timer = nil;
+    self.youTubeWebView.delegate = nil;
 }
 
 #pragma mark - UIView
@@ -66,21 +66,26 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 
 - (UIWebView *)youTubeWebView {
 	if (!_youTubeWebView) {
-		UIWebView *webView = [SYNYouTubeWebView webView];
-		// The method is meant to return a number, so the only way it will return an empty string is if the method
-		// isn't loaded, which will only happen if the player isn't ready
-		BOOL isPlayerReady = ([[webView stringByEvaluatingJavaScriptFromString:@"player.getPlayerState()"] length] > 0);
-		if (isPlayerReady) {
-			self.youTubePlayerState = SYNYouTubeVideoPlayerStateReady;
-		}
-		
-		webView.delegate = self;
-		
-		self.youTubeWebView = webView;
+		_youTubeWebView = [self newWebView];
 	}
 	return _youTubeWebView;
 }
 
+
+- (UIWebView*) newWebView {
+    UIWebView *webView = [SYNYouTubeWebView webView];
+    // The method is meant to return a number, so the only way it will return an empty string is if the method
+    // isn't loaded, which will only happen if the player isn't ready
+    BOOL isPlayerReady = ([[webView stringByEvaluatingJavaScriptFromString:@"player.getPlayerState()"] length] > 0);
+    if (isPlayerReady) {
+        self.youTubePlayerState = SYNYouTubeVideoPlayerStateReady;
+    }
+    
+    webView.delegate = self;
+    
+    return webView;
+
+}
 #pragma mark - UIWebViewDelegate
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
@@ -105,7 +110,10 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 
 - (void)play {
 	[super play];
-	
+	[self playVideo];
+}
+
+- (void)playVideo {
 	if (self.youTubePlayerState == SYNYouTubeVideoPlayerStateLoaded || self.youTubePlayerState == SYNYouTubeVideoPlayerStatePlayStarted) {
 		[self.youTubeWebView stringByEvaluatingJavaScriptFromString:@"player.playVideo();"];
 	} else {
@@ -115,7 +123,6 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 
 - (void)pause {
 	[super pause];
-	
     [self.youTubeWebView stringByEvaluatingJavaScriptFromString:@"player.pauseVideo();"];
 }
 
@@ -147,7 +154,8 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 #pragma mark - Private
 
 - (void)handleYouTubePlayerEventNamed:(NSString *)actionName eventData:(NSString *)actionData {
-	if ([actionName isEqualToString:@"ready"]) {
+
+    if ([actionName isEqualToString:@"ready"]) {
 		self.youTubePlayerState = SYNYouTubeVideoPlayerStateReady;
 		
 		if (self.state == SYNVideoPlayerStatePlaying) {
@@ -159,7 +167,6 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 		if ([actionData isEqualToString:@"playing"] && self.youTubePlayerState == SYNYouTubeVideoPlayerStateLoaded) {
 			self.youTubePlayerState = SYNYouTubeVideoPlayerStatePlayStarted;
             [self.timer invalidate];
-            self.timer = nil;
 			[self handleVideoPlayerStartedPlaying];
 		}
 		if ([actionData isEqualToString:@"paused"]) {
@@ -171,7 +178,7 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
         if ([actionData isEqualToString:@"buffering"]) {
             self.timer = [NSTimer scheduledTimerWithTimeInterval:[self bufferTIme]
                                                           target:self
-                                                        selector:@selector(reloadVideo:)
+                                                        selector:@selector(reloadVideoPlayer:)
                                                         userInfo:nil
                                                          repeats:NO];
         } else {
@@ -192,8 +199,12 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 	}
 }
 
-- (void)reloadVideo:(NSTimer *)timer {
+- (void)reloadVideoPlayer:(NSTimer *)timer {
+
+	_youTubeWebView = [self newWebView];
     
+    [super playFirstTime];
+	[self playVideo];
 }
 
 - (NSTimeInterval) bufferTIme {
@@ -228,7 +239,6 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 		NSString *sourceId = self.videoInstance.video.sourceId;
 		NSString *loadString = [NSString stringWithFormat:@"player.loadVideoById('%@', '0', '%@');", sourceId, @"default"];
 		[self.youTubeWebView stringByEvaluatingJavaScriptFromString:loadString];
-		
 		self.youTubePlayerState = SYNYouTubeVideoPlayerStateLoaded;
 	}
 }
