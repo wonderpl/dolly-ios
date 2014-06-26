@@ -213,6 +213,9 @@ typedef void (^SearchResultCompleteBlock)(int);
         [self showUserOverLay];
     }
     // == So the unfollow/follow button gets updated 
+ 
+    [self.usersCollectionView.collectionViewLayout invalidateLayout];
+    
     [self.usersCollectionView reloadData];
     [self.videosCollectionView reloadData];
     
