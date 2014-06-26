@@ -23,6 +23,9 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 	SYNYouTubeVideoPlayerStatePlayStarted
 };
 
+static const CGFloat bufferingTime = 12;
+
+
 @interface SYNYouTubeWebVideoPlayer () <UIWebViewDelegate>
 
 @property (nonatomic, strong) UIWebView *youTubeWebView;
@@ -227,17 +230,17 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 - (NSTimeInterval) bufferTIme {
  
 	NSDictionary *mapping = @{
-							  @"CTRadioAccessTechnologyGPRS"			:@(16),
-                              @"CTRadioAccessTechnologyEdge"			:@(16),
-                              @"CTRadioAccessTechnologyWCDMA" 			:@(12),
-                              @"CTRadioAccessTechnologyHSDPA" 			:@(12),
-                              @"CTRadioAccessTechnologyHSUPA" 			:@(12),
-                              @"CTRadioAccessTechnologyCDMA1x" 			:@(12),
-                              @"CTRadioAccessTechnologyCDMAEVDORev0" 	:@(12),
-                              @"CTRadioAccessTechnologyCDMAEVDORevA" 	:@(12),
-                              @"CTRadioAccessTechnologyCDMAEVDORevB" 	:@(12),
-                              @"CTRadioAccessTechnologyeHRPD" 			:@(12),
-                              @"CTRadioAccessTechnologyLTE" 			:@(12)
+							  @"CTRadioAccessTechnologyGPRS"			:@(bufferingTime*1.3),
+                              @"CTRadioAccessTechnologyEdge"			:@(bufferingTime*1.3),
+                              @"CTRadioAccessTechnologyWCDMA" 			:@(bufferingTime),
+                              @"CTRadioAccessTechnologyHSDPA" 			:@(bufferingTime),
+                              @"CTRadioAccessTechnologyHSUPA" 			:@(bufferingTime),
+                              @"CTRadioAccessTechnologyCDMA1x" 			:@(bufferingTime),
+                              @"CTRadioAccessTechnologyCDMAEVDORev0" 	:@(bufferingTime),
+                              @"CTRadioAccessTechnologyCDMAEVDORevA" 	:@(bufferingTime),
+                              @"CTRadioAccessTechnologyCDMAEVDORevB" 	:@(bufferingTime),
+                              @"CTRadioAccessTechnologyeHRPD" 			:@(bufferingTime),
+                              @"CTRadioAccessTechnologyLTE" 			:@(bufferingTime)
 							  };
     
     CTTelephonyNetworkInfo *telephonyInfo = [CTTelephonyNetworkInfo new];
@@ -247,7 +250,7 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
     }
 	
     //Time for wifi
-    return 12;
+    return bufferingTime;
 }
 
 
