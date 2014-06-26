@@ -215,7 +215,10 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 
 - (void)reloadVideoPlayer {
 
-	_youTubeWebView = [self newWebView];
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Connection problem" message:@"We are attempting to reload your video" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alertView show];
+    
+    _youTubeWebView = [self newWebView];
     
     [super playFirstTime];
 	[self playVideo];
