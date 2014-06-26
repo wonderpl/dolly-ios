@@ -42,10 +42,9 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 	}
 	return self;
 }
-
 - (void)dealloc {
+	_youTubeWebView.delegate = nil;
     self.timer = nil;
-    self.youTubeWebView.delegate = nil;
 }
 
 #pragma mark - UIView
@@ -115,6 +114,7 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
         [self playVideo];
     } else {
         [self reloadVideoPlayer];
+    	DebugLog(@"checkPlayerAvailability : reloading player");
     }
 
 }
@@ -172,8 +172,7 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 	if ([actionName isEqualToString:@"stateChange"]) {
 		if ([actionData isEqualToString:@"playing"] && self.youTubePlayerState == SYNYouTubeVideoPlayerStateLoaded) {
 			self.youTubePlayerState = SYNYouTubeVideoPlayerStatePlayStarted;
-            [self.timer invalidate];
-			[self handleVideoPlayerStartedPlaying];
+            [self handleVideoPlayerStartedPlaying];
 		}
 		if ([actionData isEqualToString:@"paused"]) {
 			[self handleVideoPlayerPaused];
@@ -182,15 +181,14 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 			[self handleVideoPlayerFinishedPlaying];
 		}
         if ([actionData isEqualToString:@"buffering"]) {
+            
             self.timer = [NSTimer scheduledTimerWithTimeInterval:[self bufferTIme]
                                                           target:self
                                                         selector:@selector(reloadVideoPlayer)
                                                         userInfo:nil
                                                          repeats:NO];
         } else {
-            if (self.timer) {
-                [self.timer invalidate];
-            }
+			[self invalidateTimer];
         }
 	}
 	
@@ -203,6 +201,16 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 	if ([actionName isEqualToString:@"error"]) {
 		[self handleVideoPlayerError:actionData];
 	}
+}
+
+
+- (void) invalidateTimer {
+    if (self.timer) {
+        if ([self.timer isValid]) {
+            [self.timer invalidate];            
+        }
+        self.timer = nil;
+    }
 }
 
 - (void)reloadVideoPlayer {
