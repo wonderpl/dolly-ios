@@ -18,6 +18,7 @@
 
 @synthesize hasChangedSubscribeValue;
 @synthesize autoplayId;
+@synthesize channelDescription;
 
 #pragma mark - Object factory
 
@@ -522,10 +523,21 @@
     }
 }
 
--(void)setMarkedForDeletionValue:(BOOL)value_
-{
+- (void)setMarkedForDeletionValue:(BOOL)value_ {
     self.markedForDeletion = @(value_);
     self.channelOwner.markedForDeletionValue = value_;
+}
+
+- (void)setChannelDescription:(NSString *)newChannelDescription {
+    channelDescription = newChannelDescription;
+}
+
+- (NSString*)channelDescription {
+    if ([channelDescription isEqualToString:@""]) {
+        return NSLocalizedString(@"A collection of videos", nil);
+        
+    }
+    return channelDescription;
 }
 
 @end
