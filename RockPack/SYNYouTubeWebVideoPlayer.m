@@ -210,9 +210,9 @@ static const CGFloat bufferingTime = 12;
 - (void) invalidateTimer {
     if (self.timer) {
         if ([self.timer isValid]) {
-            [self.timer invalidate];            
+            [self.timer invalidate];
+            self.timer = nil;
         }
-        self.timer = nil;
     }
 }
 
