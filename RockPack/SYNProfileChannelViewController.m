@@ -79,6 +79,10 @@ static const CGFloat FULLNAMELABELIPADLANDSCAPE = 412.0f;
 	if (IS_IPAD) {
         [self updateLayoutForOrientation: [[SYNDeviceManager sharedInstance] orientation]];
     }
+    
+    if (self.creatingChannel) {
+        [self.navigationController.navigationBar setBackgroundTransparent:NO];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -370,6 +374,8 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
   
     [[SYNTrackingManager sharedManager] trackCreateChannelScreenView];
     
+        [self.navigationController.navigationBar setBackgroundTransparent:NO];
+
     self.creatingChannel = YES;
     
     self.cv.scrollEnabled = NO;
@@ -418,6 +424,8 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 - (void)cancelCreateHelper {
 	
 	self.createChannelCell.descriptionTextView.text = @"";
+
+        [self.navigationController.navigationBar setBackgroundTransparent:YES];
 
     self.creatingChannel = NO;
     self.cv.scrollEnabled = YES;
