@@ -73,6 +73,12 @@
     self.separatorBottom.frame = bottomLineFrame;
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+	
+	NSUInteger newLength = [textField.text length] + [string length] - range.length;
+    return (newLength > 25) ? NO : YES;
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     if(self.state == CreateNewChannelCellStateFinilizing) // has been into the description text view first
@@ -87,16 +93,14 @@
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    
-    
-    
     if ([text isEqualToString:@"\n"]) {
         
         [self.delegate confirmButtonPressed:nil];
         return NO;
     }  
     
-    return YES;
+    NSUInteger newLength = [textView.text length] + [text length] - range.length;
+    return (newLength > 100) ? NO : YES;
 }
 
 -(void)textViewDidBeginEditing:(UITextView *)textView
