@@ -477,17 +477,15 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
                                                   isPublic: YES
                                          completionHandler: ^(NSDictionary *resourceCreated) {
 											
-											 NSString *name = [self.createChannelCell.createTextField.text uppercaseString];
-											 [[SYNTrackingManager sharedManager] trackCollectionCreatedWithName:name];
-			
+											 NSString *name = self.createChannelCell.createTextField.text;
+											 [[SYNTrackingManager sharedManager] trackCollectionCreatedWithName:[name uppercaseString]];
                                             
                                              [self cancelCreateChannelWithBlock:^{
                                                  
-
 												 weakSelf.headerView.channelOwner.totalVideosValueChannelValue++;
 												 [weakSelf.headerView setSegmentedControllerText];
 												 
-												 [self createNewCollection];
+												 [self createNewCollectionWithName:name];
 
 
                                              }];
@@ -532,8 +530,9 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
                       otherButtonTitles: nil] show];
 }
 
-- (void)createNewCollection {
-    
+//TODO: ask for the channel to be returned in the createChannelForUserId request
+- (void)createNewCollectionWithName:(NSString*)name {
+        
     NSManagedObjectID *channelOwnerObjectId = self.channelOwner.objectID;
     NSManagedObjectContext *channelOwnerObjectMOC = self.channelOwner.managedObjectContext;
     MKNKUserErrorBlock errorBlock = ^(id error) {
@@ -543,7 +542,6 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     __block float oldCount = self.channelOwner.channelsSet.count+1;
     
     __weak SYNProfileChannelViewController *weakSelf = self;
-    
     
     [appDelegate.oAuthNetworkEngine userDataForUser: ((User *) self.channelOwner)
      								inRange: NSMakeRange(0, self.channelOwner.channelsSet.count+1)
@@ -557,13 +555,12 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
                                                                            ignoringObjectTypes: kIgnoreVideoInstanceObjects | kIgnoreChannelOwnerObject];
                                                if (weakSelf.channelOwner.channelsSet.count+1 > oldCount) {
                                                    
-                                                   
                                                    self.model = [SYNProfileChannelModel modelWithChannelOwner:channelOwnerFromId];
                                                    self.model.delegate = self;
 
                                                    [weakSelf.cv performBatchUpdates:^{
                                                        
-                                                       [weakSelf.cv insertItemsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForItem:2 inSection:0]]];
+                                                       [weakSelf.cv insertItemsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForItem:[self indexOfChannelTitle:name] inSection:0]]];
                                                    } completion:^(BOOL finished) {
                                                        
                                                        [self.cv reloadData];
@@ -575,8 +572,18 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
                                                DebugLog (@"Channel disappeared from underneath us");
                                            }
                                        } onError: errorBlock];
+}
+
+- (float)indexOfChannelTitle:(NSString*) newChannelTitle {
+    for (int i = 0; i<self.model.itemCount; i++) {
+        Channel *channel = [self.model itemAtIndex:i];
+        if ([channel.title isEqualToString:newChannelTitle]) {
+            //We add one to the index to account for the create channel cell
+            return i+1;
+        }
+    }
     
-    
+    return NSNotFound;
 }
 
 #pragma mark - inboarding animations
