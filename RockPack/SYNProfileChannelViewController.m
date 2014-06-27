@@ -373,16 +373,13 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 - (void)createNewButtonPressed {
   
     [[SYNTrackingManager sharedManager] trackCreateChannelScreenView];
-    
-        [self.navigationController.navigationBar setBackgroundTransparent:NO];
+	[self.navigationController.navigationBar setBackgroundTransparent:NO];
 
     self.creatingChannel = YES;
-    
     self.cv.scrollEnabled = NO;
 
     
     self.headerView.coverImage.alpha = ALPHA_IN_EDIT;
-
     self.createChannelCell.state = CreateNewChannelCellStateEditing;
     
     __weak SYNProfileChannelViewController *wself = self;
@@ -425,7 +422,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 	
 	self.createChannelCell.descriptionTextView.text = @"";
 
-        [self.navigationController.navigationBar setBackgroundTransparent:YES];
+	[self.navigationController.navigationBar setBackgroundTransparent:YES];
 
     self.creatingChannel = NO;
     self.cv.scrollEnabled = YES;
