@@ -47,6 +47,7 @@ static const CGFloat bufferingTime = 12;
 }
 - (void)dealloc {
 	_youTubeWebView.delegate = nil;
+    [self.timer invalidate];
     self.timer = nil;
 }
 
@@ -164,6 +165,8 @@ static const CGFloat bufferingTime = 12;
 
 - (void)handleYouTubePlayerEventNamed:(NSString *)actionName eventData:(NSString *)actionData {
 
+    NSLog(@"actionName :%@, actaionData :%@", actionName, actionData);
+    
     if ([actionName isEqualToString:@"ready"]) {
 		self.youTubePlayerState = SYNYouTubeVideoPlayerStateReady;
 		
@@ -184,14 +187,14 @@ static const CGFloat bufferingTime = 12;
 			[self handleVideoPlayerFinishedPlaying];
 		}
         if ([actionData isEqualToString:@"buffering"]) {
-            
+            [self.timer invalidate];
             self.timer = [NSTimer scheduledTimerWithTimeInterval:[self bufferTIme]
                                                           target:self
                                                         selector:@selector(reloadVideoPlayer)
                                                         userInfo:nil
                                                          repeats:NO];
         } else {
-			[self invalidateTimer];
+            [self.timer invalidate];
         }
 	}
 	
@@ -204,16 +207,6 @@ static const CGFloat bufferingTime = 12;
 	if ([actionName isEqualToString:@"error"]) {
 		[self handleVideoPlayerError:actionData];
 	}
-}
-
-
-- (void) invalidateTimer {
-    if (self.timer) {
-        if ([self.timer isValid]) {
-            [self.timer invalidate];
-            self.timer = nil;
-        }
-    }
 }
 
 - (void)reloadVideoPlayer {
