@@ -79,6 +79,9 @@
     [self.uploadPhotoButton.imageView setContentMode: UIViewContentModeScaleAspectFill];
 	[self updateDateOfBirthFieldsForLocale];
     
+    self.uploadPhotoButton.layer.cornerRadius = self.uploadPhotoButton.frame.size.height * 0.5;
+	self.uploadPhotoButton.layer.masksToBounds = YES;
+    self.uploadPhotoButton.layer.cornerRadius = self.uploadPhotoButton.frame.size.width/2;
     
 }
 

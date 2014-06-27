@@ -473,11 +473,11 @@ Watch, collect and  share only the very best videos</string>
                                 <color key="tintColor" red="0.2901960784" green="0.68627450980000004" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Lq-mR-Smo" userLabel="Button - Change avatar">
-                                <rect key="frame" x="35" y="82" width="154" height="154"/>
+                                <rect key="frame" x="61" y="98" width="98" height="101"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="154" id="QWs-um-Z5w"/>
-                                    <constraint firstAttribute="height" constant="154" id="u0U-ta-2hd"/>
+                                    <constraint firstAttribute="width" constant="98" id="QWs-um-Z5w"/>
+                                    <constraint firstAttribute="height" constant="101" id="u0U-ta-2hd"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" image="AvatarUpload.png">
@@ -600,17 +600,17 @@ Watch, collect and  share only the very best videos</string>
                             <constraint firstAttribute="trailing" secondItem="828-gY-WBy" secondAttribute="trailing" constant="34" id="GOU-Uw-9d9"/>
                             <constraint firstItem="Wme-3y-nyg" firstAttribute="leading" secondItem="uV0-QA-Zay" secondAttribute="leading" id="Gcx-oJ-UKj"/>
                             <constraint firstAttribute="centerX" secondItem="Wme-3y-nyg" secondAttribute="centerX" id="GuR-jS-2Jb"/>
-                            <constraint firstItem="Wme-3y-nyg" firstAttribute="leading" secondItem="4Lq-mR-Smo" secondAttribute="trailing" constant="35" id="Hnh-xD-ArM"/>
-                            <constraint firstItem="8Kn-IA-NUS" firstAttribute="top" secondItem="4Lq-mR-Smo" secondAttribute="bottom" constant="-18" id="I1O-7c-sh8"/>
+                            <constraint firstItem="Wme-3y-nyg" firstAttribute="leading" secondItem="4Lq-mR-Smo" secondAttribute="trailing" constant="65" id="Hnh-xD-ArM"/>
+                            <constraint firstItem="8Kn-IA-NUS" firstAttribute="top" secondItem="4Lq-mR-Smo" secondAttribute="bottom" constant="19" id="I1O-7c-sh8"/>
                             <constraint firstAttribute="centerX" secondItem="GvU-M3-vTi" secondAttribute="centerX" constant="270" id="IKf-NC-Goo"/>
-                            <constraint firstItem="4Lq-mR-Smo" firstAttribute="top" secondItem="Fm5-ca-Fg9" secondAttribute="top" constant="82" id="KAQ-xI-ZdF"/>
+                            <constraint firstItem="4Lq-mR-Smo" firstAttribute="top" secondItem="Fm5-ca-Fg9" secondAttribute="top" constant="98" id="KAQ-xI-ZdF"/>
                             <constraint firstItem="bzL-gs-cfb" firstAttribute="leading" secondItem="UZY-cA-Eit" secondAttribute="trailing" constant="12" id="Pay-O6-gsq"/>
                             <constraint firstAttribute="centerX" secondItem="e2l-ND-BGh" secondAttribute="centerX" constant="1" id="Pcp-qT-9bm"/>
                             <constraint firstAttribute="centerX" secondItem="d4o-Pt-0cZ" secondAttribute="centerX" id="Pfr-I6-tu3"/>
                             <constraint firstItem="JVE-g9-65a" firstAttribute="leading" secondItem="nqG-fN-QUl" secondAttribute="trailing" constant="12" id="Qgg-HF-Nlc"/>
                             <constraint firstItem="Wme-3y-nyg" firstAttribute="trailing" secondItem="UZY-cA-Eit" secondAttribute="trailing" id="Que-28-Cdn"/>
                             <constraint firstItem="nqG-fN-QUl" firstAttribute="centerY" secondItem="JVE-g9-65a" secondAttribute="centerY" id="Rc0-7Z-1Jp"/>
-                            <constraint firstItem="8Kn-IA-NUS" firstAttribute="centerX" secondItem="4Lq-mR-Smo" secondAttribute="centerX" constant="-2" id="VTC-Ea-UjP"/>
+                            <constraint firstItem="8Kn-IA-NUS" firstAttribute="centerX" secondItem="4Lq-mR-Smo" secondAttribute="centerX" id="VTC-Ea-UjP"/>
                             <constraint firstItem="UZY-cA-Eit" firstAttribute="centerY" secondItem="bzL-gs-cfb" secondAttribute="centerY" id="apb-Sn-Pj2"/>
                             <constraint firstItem="e2l-ND-BGh" firstAttribute="centerY" secondItem="828-gY-WBy" secondAttribute="centerY" id="clj-JU-Wva"/>
                             <constraint firstItem="uV0-QA-Zay" firstAttribute="top" secondItem="FDL-zp-eAh" secondAttribute="bottom" constant="12" id="fZW-fe-rJ1"/>
