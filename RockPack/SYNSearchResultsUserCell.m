@@ -16,6 +16,7 @@
 #import "SYNActivityManager.h"
 #import "UIImageView+WebCache.h"
 #import "SYNFollowUserButton.h"
+#import "SYNAppDelegate.h"
 
 @interface SYNSearchResultsUserCell ()
 
@@ -96,6 +97,13 @@
 
     channelOwner.subscribedByUserValue = [[SYNActivityManager sharedInstance] isSubscribedToUserId:channelOwner.uniqueId];
     
+    [self setUpGradientMask];
+	
+    
+    SYNAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    BOOL isUserProfile = [_channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId];
+	self.followButton.hidden = isUserProfile;
+    
     if (!channelOwner.subscribedByUserValue) {
         [self.followButton setTitle:NSLocalizedString(@"follow", "follow discover screen") forState:UIControlStateNormal];
     }
@@ -104,7 +112,6 @@
         [self.followButton setTitle:NSLocalizedString(@"unfollow", "unfollow discover screen") forState:UIControlStateSelected];
     }
 	
-	[self setUpGradientMask];
 	
 }
 
