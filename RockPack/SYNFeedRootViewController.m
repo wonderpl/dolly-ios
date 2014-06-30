@@ -180,7 +180,6 @@ static const CGFloat heightPortrait = 911;
         }
     }
     self.feedCollectionView.alpha = 1.0;
-    [self.feedCollectionView reloadData];
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
@@ -188,7 +187,8 @@ static const CGFloat heightPortrait = 911;
     self.feedCollectionView.alpha = 0.0;
     self.lastYOffset = self.feedCollectionView.contentOffset.y;
     [self.feedCollectionView.collectionViewLayout invalidateLayout];
-    
+    [self.feedCollectionView reloadData];
+
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
