@@ -46,9 +46,8 @@ static const CGFloat bufferingTime = 12;
 	return self;
 }
 - (void)dealloc {
-	_youTubeWebView.delegate = nil;
-    [self.timer invalidate];
     self.timer = nil;
+    self.youTubeWebView.delegate = nil;
 }
 
 #pragma mark - UIView
@@ -117,7 +116,7 @@ static const CGFloat bufferingTime = 12;
         [super play];
         [self playVideo];
     } else {
-        [self reloadVideoPlayer];
+        [self reloadVideoPlayer:nil];
     	DebugLog(@"checkPlayerAvailability : reloading player");
     }
 
@@ -187,14 +186,14 @@ static const CGFloat bufferingTime = 12;
 			[self handleVideoPlayerFinishedPlaying];
 		}
         if ([actionData isEqualToString:@"buffering"]) {
-            [self.timer invalidate];
-            self.timer = [NSTimer scheduledTimerWithTimeInterval:[self bufferTIme]
-                                                          target:self
-                                                        selector:@selector(reloadVideoPlayer)
-                                                        userInfo:nil
-                                                         repeats:NO];
+//            self.timer = [NSTimer scheduledTimerWithTimeInterval:[self bufferTIme]
+//                                                          target:self
+//                                                        selector:@selector(reloadVideoPlayer:)
+//                                                        userInfo:nil
+//                                                         repeats:NO];
+        
         } else {
-            [self.timer invalidate];
+            [self invalidateTimer];
         }
 	}
 	
@@ -209,8 +208,16 @@ static const CGFloat bufferingTime = 12;
 	}
 }
 
-- (void)reloadVideoPlayer {
+- (void)invalidateTimer {
+    if ([self.timer isValid]) {
+        [self.timer invalidate];
+    }
+}
 
+- (void)reloadVideoPlayer:(NSTimer *)timer  {
+    
+    DebugLog(@"Reloading Video Player with VideoInstance%@", self.videoInstance);
+    
     UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Connection problem" message:@"We are attempting to reload your video" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alertView show];
     

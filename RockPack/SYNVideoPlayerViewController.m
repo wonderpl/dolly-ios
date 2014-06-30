@@ -34,12 +34,13 @@
 #import "SYNVideoInfoViewController.h"
 #import "SYNShopMotionOverlayViewController.h"
 #import "SYNFeedRootViewController.h"
+#import "SYNVideoPlayerAnimator.h"
 
 @import AVFoundation;
 @import MediaPlayer;
 @import MessageUI;
 
-@interface SYNVideoPlayerViewController () <UIViewControllerTransitioningDelegate, UIPopoverControllerDelegate, UIScrollViewDelegate, SYNVideoPlayerDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SYNVideoInfoViewControllerDelegate>
+@interface SYNVideoPlayerViewController () <UIViewControllerTransitioningDelegate, UIPopoverControllerDelegate, UIScrollViewDelegate, SYNVideoPlayerDelegate, UICollectionViewDataSource, SYNVideoPlayerAnimatorDelegate, UICollectionViewDelegateFlowLayout, SYNVideoInfoViewControllerDelegate>
 
 @property (nonatomic, strong) IBOutlet UIButton *avatarButton;
 
@@ -66,6 +67,7 @@
 @property (nonatomic, strong) SYNVideoInfoViewController *videoInfoViewController;
 
 @property (nonatomic, strong) VideoInstance *videoInstance;
+
 
 // Used for animation
 @property (nonatomic, weak) UIImageView *annotationImageView;
@@ -176,11 +178,10 @@
 														name:UIDeviceOrientationDidChangeNotification
 													  object:nil];
 	}
+
     
-    if ([appDelegate.masterViewController.showingViewController isKindOfClass:[SYNFeedRootViewController class]]) {
-        NSDictionary * userInfo = @{ @"position" : @(self.selectedIndex) };
-        [[NSNotificationCenter defaultCenter] postNotificationName:kFeedPosition object:nil userInfo:userInfo];
-        
+    if ([self.dismissDelegate respondsToSelector:@selector(dismissPosition:)]) {
+        [self.dismissDelegate dismissPosition:self.selectedIndex];
     }
 
 }
@@ -274,7 +275,6 @@
 		cell.videoPlayer = self.currentVideoPlayer;
     } else {
 		VideoInstance *videoInstance = [self.model itemAtIndex:indexPath.row];
-		
 		SYNVideoPlayer *videoPlayer = [SYNVideoPlayer playerForVideoInstance:videoInstance];
 		videoPlayer.delegate = self;
 		cell.videoPlayer = videoPlayer;
