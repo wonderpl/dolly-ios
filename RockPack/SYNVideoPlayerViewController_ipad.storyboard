@@ -35,9 +35,14 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cU6-Nc-Ier">
-                                <rect key="frame" x="20" y="30" width="40" height="30"/>
+                                <rect key="frame" x="0.0" y="0.0" width="109" height="66"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="66" id="2Mv-fg-kXW"/>
+                                    <constraint firstAttribute="width" constant="109" id="v53-lc-iNv"/>
+                                </constraints>
                                 <color key="tintColor" red="0.46666666670000001" green="0.46666666670000001" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <inset key="contentEdgeInsets" minX="0.0" minY="13" maxX="26" maxY="0.0"/>
                                 <state key="normal" title="Close">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -122,12 +127,12 @@
                             <constraint firstItem="NWm-in-24r" firstAttribute="top" secondItem="Mur-BL-wuK" secondAttribute="bottom" constant="12" id="H5y-y1-uI4"/>
                             <constraint firstItem="NWm-in-24r" firstAttribute="trailing" secondItem="Mur-BL-wuK" secondAttribute="trailing" constant="10" id="HjN-ls-tZt"/>
                             <constraint firstItem="NWm-in-24r" firstAttribute="top" secondItem="tO4-Um-GHR" secondAttribute="bottom" constant="122" id="HsZ-e9-VeE"/>
-                            <constraint firstItem="cU6-Nc-Ier" firstAttribute="top" secondItem="tO4-Um-GHR" secondAttribute="bottom" constant="10" id="K0U-zo-U0X"/>
+                            <constraint firstItem="cU6-Nc-Ier" firstAttribute="top" secondItem="tO4-Um-GHR" secondAttribute="bottom" constant="-20" id="K0U-zo-U0X"/>
                             <constraint firstAttribute="centerX" secondItem="NWm-in-24r" secondAttribute="centerX" id="Lpq-9q-fXM"/>
                             <constraint firstItem="5hW-91-img" firstAttribute="top" secondItem="tO4-Um-GHR" secondAttribute="bottom" constant="10" id="cwa-g6-8Zg"/>
                             <constraint firstItem="mxU-fj-5q1" firstAttribute="top" secondItem="eHS-Sg-VLw" secondAttribute="bottom" id="eCL-wD-h7w"/>
                             <constraint firstItem="NWm-in-24r" firstAttribute="leading" secondItem="Mur-BL-wuK" secondAttribute="leading" constant="-10" id="hRU-mr-Nky"/>
-                            <constraint firstItem="cU6-Nc-Ier" firstAttribute="leading" secondItem="NCT-Oh-nxY" secondAttribute="leading" constant="20" id="jzp-WR-Vsy"/>
+                            <constraint firstItem="cU6-Nc-Ier" firstAttribute="leading" secondItem="NCT-Oh-nxY" secondAttribute="leading" id="jzp-WR-Vsy"/>
                             <constraint firstItem="eHS-Sg-VLw" firstAttribute="top" secondItem="NWm-in-24r" secondAttribute="bottom" id="yuj-72-VIk"/>
                         </constraints>
                     </view>
