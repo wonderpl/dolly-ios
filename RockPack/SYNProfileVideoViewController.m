@@ -20,7 +20,7 @@
 
 static const CGFloat PARALLAX_SCROLL_VALUE = 2.0f;
 
-@interface SYNProfileVideoViewController () <UIViewControllerTransitioningDelegate, SYNCollectionVideoCellDelegate,SYNVideoPlayerAnimatorDelegate, SYNPagingModelDelegate>
+@interface SYNProfileVideoViewController () <UIViewControllerTransitioningDelegate, SYNCollectionVideoCellDelegate,SYNVideoPlayerAnimatorDelegate, SYNPagingModelDelegate,SYNVideoPlayerDismissIndex>
 @property (nonatomic, strong) SYNProfileHeader* headerView;
 @property (nonatomic, strong) SYNProfileVideoModel *model;
 @property (nonatomic, strong) SYNVideoPlayerAnimator *videoPlayerAnimator;
@@ -254,7 +254,7 @@ forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
     SYNCollectionVideoCell *selectedCell = (SYNCollectionVideoCell *) candidateCell;
     NSIndexPath *indexPath = [self.cv indexPathForItemAtPoint: selectedCell.center];
 	
-	UIViewController *viewController = [SYNVideoPlayerViewController viewControllerWithModel:self.model
+	SYNVideoPlayerViewController *viewController = [SYNVideoPlayerViewController viewControllerWithModel:self.model
 																			   selectedIndex:indexPath.item];
 	
 	SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
@@ -262,6 +262,8 @@ forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
 	animator.cellIndexPath = indexPath;
 	
 	self.videoPlayerAnimator = animator;
+    viewController.dismissDelegate = self;
+    
 	viewController.transitioningDelegate = animator;
 	[self presentViewController:viewController animated:YES completion:nil];
     
@@ -313,5 +315,21 @@ forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
 - (void)pagingModelErrorOccurred:(SYNPagingModel *)pagingModel {
 	
 }
+
+
+#pragma mark - SYNVideoPlayerDismissIndex
+
+- (void)dismissPosition:(NSInteger)index {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
+    self.videoPlayerAnimator.cellIndexPath = indexPath;
+
+
+    if (UIDeviceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
+        [self.cv scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollDirectionHorizontal animated:NO];
+    } else {
+        [self.cv scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollDirectionVertical animated:NO];
+    }
+}
+
 
 @end

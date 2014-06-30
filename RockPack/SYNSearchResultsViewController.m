@@ -31,6 +31,8 @@
 #import "SYNSearchVideoLargeCell.h"
 #import "SYNSearchVideoSmallCell.h"
 #import "SYNSocialButton.h"
+#import "SYNVideoPlayerDismissIndex.h"
+
 
 typedef NS_ENUM(NSInteger, SYNSearchType) {
 	SYNSearchTypeUndefined,
@@ -40,7 +42,7 @@ typedef NS_ENUM(NSInteger, SYNSearchType) {
 
 typedef void (^SearchResultCompleteBlock)(int);
 
-@interface SYNSearchResultsViewController () <UICollectionViewDataSource, UICollectionViewDelegate, SYNVideoPlayerAnimatorDelegate>
+@interface SYNSearchResultsViewController () <UICollectionViewDataSource, UICollectionViewDelegate, SYNVideoPlayerAnimatorDelegate,SYNVideoPlayerDismissIndex>
 @property (strong, nonatomic) IBOutlet UIView *segmentedContainer;
 
 // UI stuff
@@ -521,13 +523,14 @@ typedef void (^SearchResultCompleteBlock)(int);
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 	if (collectionView == self.videosCollectionView) {
         SYNStaticModel *model = [[SYNStaticModel alloc] initWithItems:self.videosArray];
-		UIViewController *viewController = [SYNVideoPlayerViewController viewControllerWithModel:model
+		SYNVideoPlayerViewController *viewController = [SYNVideoPlayerViewController viewControllerWithModel:model
 																				   selectedIndex:indexPath.item];
         
 		SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
 		animator.delegate = self;
 		animator.cellIndexPath = indexPath;
 		self.videoPlayerAnimator = animator;
+        viewController.dismissDelegate = self;
 		viewController.transitioningDelegate = animator;
 		
 		[self presentViewController:viewController animated:YES completion:nil];
@@ -858,5 +861,18 @@ referenceSizeForFooterInSection: (NSInteger) section
         self.shownOverlay = YES;
     }
 }
+
+#pragma mark - SYNVideoPlayerDismissIndex
+
+- (void)dismissPosition:(NSInteger)index {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
+    self.videoPlayerAnimator.cellIndexPath = indexPath;
+    if (UIDeviceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
+        [self.videosCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollDirectionHorizontal animated:NO];
+    } else {
+        [self.videosCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollDirectionVertical animated:NO];
+    }
+}
+
 
 @end

@@ -49,7 +49,7 @@
 #define FULLNAMELABELIPADLANDSCAPE 258.0f
 
 
-@interface SYNChannelDetailsViewController () <UITextViewDelegate, UIViewControllerTransitioningDelegate, LXReorderableCollectionViewDelegateFlowLayout, SYNImagePickerControllerDelegate, SYNPagingModelDelegate, SYNVideoPlayerAnimatorDelegate,SYNCollectionVideoCellDelegate>
+@interface SYNChannelDetailsViewController () <UITextViewDelegate, UIViewControllerTransitioningDelegate, LXReorderableCollectionViewDelegateFlowLayout, SYNImagePickerControllerDelegate, SYNPagingModelDelegate, SYNVideoPlayerAnimatorDelegate,SYNCollectionVideoCellDelegate,SYNVideoPlayerDismissIndex>
 
 @property (nonatomic, strong) UIActivityIndicatorView *subscribingIndicator;
 @property (nonatomic, weak) Channel *originalChannel;
@@ -1661,7 +1661,7 @@
     SYNCollectionVideoCell *selectedCell = (SYNCollectionVideoCell *) candidateCell;
     NSIndexPath *indexPath = [self.videoThumbnailCollectionView indexPathForItemAtPoint: selectedCell.center];
 	
-	UIViewController *viewController = [SYNVideoPlayerViewController viewControllerWithModel:self.model
+	SYNVideoPlayerViewController *viewController = [SYNVideoPlayerViewController viewControllerWithModel:self.model
 																			   selectedIndex:indexPath.item];
 	
 	SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
@@ -1670,9 +1670,26 @@
 	
 	self.videoPlayerAnimator = animator;
 	viewController.transitioningDelegate = animator;
-	
+	viewController.dismissDelegate = self;
+    
 	[self presentViewController:viewController animated:YES completion:nil];
 
 }
+
+
+#pragma mark - SYNVideoPlayerDismissIndex
+
+- (void)dismissPosition:(NSInteger)index {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
+    self.videoPlayerAnimator.cellIndexPath = indexPath;
+
+    if (index+1<[self.model totalItemCount] && IS_IPHONE) {
+        indexPath = [NSIndexPath indexPathForItem:index+1 inSection:0];
+    }
+    
+    
+        [self.videoThumbnailCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollDirectionVertical animated:NO];
+}
+
 
 @end

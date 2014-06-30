@@ -33,6 +33,7 @@
 #import "VideoAnnotation.h"
 #import "SYNVideoInfoViewController.h"
 #import "SYNShopMotionOverlayViewController.h"
+#import "SYNFeedRootViewController.h"
 
 @import AVFoundation;
 @import MediaPlayer;
@@ -175,6 +176,13 @@
 														name:UIDeviceOrientationDidChangeNotification
 													  object:nil];
 	}
+    
+    if ([appDelegate.masterViewController.showingViewController isKindOfClass:[SYNFeedRootViewController class]]) {
+        NSDictionary * userInfo = @{ @"position" : @(self.selectedIndex) };
+        [[NSNotificationCenter defaultCenter] postNotificationName:kFeedPosition object:nil userInfo:userInfo];
+        
+    }
+
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -190,6 +198,8 @@
 	if (!isShowingFullScreen && !isShowingMail) {
 		[self.currentVideoPlayer pause];
 	}
+    
+    
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {

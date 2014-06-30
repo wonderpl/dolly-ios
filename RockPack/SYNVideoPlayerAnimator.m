@@ -41,10 +41,7 @@ static const CGFloat AnimationDuration = 0.3;
 		
 		videoPlayerViewController.view.alpha = 0.0;
 		
-		UIImage *blurredImage = [UIImage blurredImageFromImage:infoCell.imageView.image];
-		UIImageView *blurredImageView = [[UIImageView alloc] initWithImage:blurredImage];
-		blurredImageView.backgroundColor = [UIColor whiteColor];
-		
+		UIImageView *blurredImageView = [self blurredImageViewFromCell:infoCell];
 		self.blurredImageView = blurredImageView;
 		
 		UIView *videoPlayerContainerView = videoPlayerViewController.videoPlayerContainerView;
@@ -108,7 +105,9 @@ static const CGFloat AnimationDuration = 0.3;
 													   fromView:infoCell.imageView];
 		}
 		
-		UIImageView *blurredImageView = self.blurredImageView;
+		UIImageView *blurredImageView = [self blurredImageViewFromCell:infoCell];
+		self.blurredImageView = blurredImageView;
+
 		blurredImageView.alpha = 0.0;
 		blurredImageView.frame = [videoPlayerViewController.view convertRect:videoPlayerViewController.videoPlayerContainerView.bounds
 																	fromView:videoPlayerViewController.videoPlayerContainerView];
@@ -159,4 +158,13 @@ static const CGFloat AnimationDuration = 0.3;
 	return self;
 }
 
+
+- (UIImageView*)blurredImageViewFromCell:(id<SYNVideoInfoCell>)cell {
+ 
+    UIImage *blurredImage = [UIImage blurredImageFromImage:cell.imageView.image];
+    UIImageView *blurredImageView = [[UIImageView alloc] initWithImage:blurredImage];
+    blurredImageView.backgroundColor = [UIColor whiteColor];
+
+    return blurredImageView;
+}
 @end

@@ -33,11 +33,12 @@
 #import "UINavigationBar+Appearance.h"
 #import "SYNIPadFeedLayout.h"
 #import <TestFlight.h>
+#import "SYNVideoPlayerDismissIndex.h"
 
 static const CGFloat heightLandscape = 645;
 static const CGFloat heightPortrait = 911;
 
-@interface SYNFeedRootViewController () <UIViewControllerTransitioningDelegate, SYNPagingModelDelegate, SYNVideoPlayerAnimatorDelegate, SYNFeedVideoCellDelegate, SYNFeedChannelCellDelegate>
+@interface SYNFeedRootViewController () <UIViewControllerTransitioningDelegate, SYNPagingModelDelegate, SYNVideoPlayerAnimatorDelegate, SYNFeedVideoCellDelegate, SYNFeedChannelCellDelegate,SYNVideoPlayerDismissIndex>
 
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (nonatomic, strong) IBOutlet UICollectionView *feedCollectionView;
@@ -107,7 +108,7 @@ static const CGFloat heightPortrait = 911;
                                              selector:@selector(reloadData)
                                                  name:kReloadFeed
                                                object:nil];
-	
+    
 	[self reloadData];
 }
 
@@ -296,6 +297,8 @@ static const CGFloat heightPortrait = 911;
 - (id<SYNVideoInfoCell>)videoCellForIndexPath:(NSIndexPath *)indexPath {
 	UICollectionViewCell *cell = [self.feedCollectionView cellForItemAtIndexPath:indexPath];
 	if ([cell conformsToProtocol:@protocol(SYNVideoInfoCell)]) {
+        
+        
 		return (id<SYNVideoInfoCell>)cell;
 	}
 	return nil;
@@ -389,7 +392,7 @@ static const CGFloat heightPortrait = 911;
 	
 	// We need to convert it to the index in the array of videos since the player doesn't know about channels
 	NSInteger itemIndex = [self.model itemIndexForFeedIndex:indexPath.row];
-	UIViewController *viewController = [SYNVideoPlayerViewController viewControllerWithModel:self.model
+	SYNVideoPlayerViewController *viewController = [SYNVideoPlayerViewController viewControllerWithModel:self.model
 																			   selectedIndex:itemIndex];
 	
 	SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
@@ -397,7 +400,7 @@ static const CGFloat heightPortrait = 911;
 	animator.cellIndexPath = indexPath;
 	self.videoPlayerAnimator = animator;
 	viewController.transitioningDelegate = animator;
-	
+	viewController.dismissDelegate = self;
 	[self presentViewController:viewController animated:YES completion:nil];
 }
 
@@ -459,6 +462,23 @@ static const CGFloat heightPortrait = 911;
 
 - (void)channelCell:(SYNFeedChannelCell *)cell sharePressed:(UIButton *)button {
 	[self shareChannel:cell.channel];
+}
+
+
+#pragma mark - SYNVideoPlayerDismissIndex
+
+
+- (void)dismissPosition:(NSInteger)index {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
+    self.videoPlayerAnimator.cellIndexPath = indexPath;
+
+    if (UIDeviceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
+        [self.feedCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollDirectionHorizontal animated:NO];
+    } else {
+        [self.feedCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollDirectionVertical animated:NO];
+    }
+    [self.feedCollectionView reloadData];
+
 }
 
 @end

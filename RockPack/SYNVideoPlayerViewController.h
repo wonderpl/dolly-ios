@@ -7,6 +7,7 @@
 //
 
 #import "SYNAbstractViewController.h"
+#import "SYNVideoPlayerDismissIndex.h"
 
 @class VideoInstance;
 @class SYNVideoPlayer;
@@ -20,7 +21,7 @@
 
 @property (nonatomic, strong, readonly) UIView *videoPlayerContainerView;
 @property (nonatomic, strong, readonly) SYNVideoPlayer *currentVideoPlayer;
-
 @property (nonatomic, strong, readonly) UICollectionView *videosCollectionView;
+@property (nonatomic, weak) id<SYNVideoPlayerDismissIndex> dismissDelegate;
 
 @end

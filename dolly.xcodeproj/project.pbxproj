@@ -1750,6 +1750,7 @@
 		F4A443F619363A0F009287FA /* ShopMotion14@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ShopMotion14@2x.png"; sourceTree = "<group>"; };
 		F4A444151936602D009287FA /* ShopMotionBagItem.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ShopMotionBagItem.png; sourceTree = "<group>"; };
 		F4A4441719366089009287FA /* ShopMotionBagItem@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ShopMotionBagItem@2x.png"; sourceTree = "<group>"; };
+		F4A8F0911961B75900404F12 /* SYNVideoPlayerDismissIndex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYNVideoPlayerDismissIndex.h; sourceTree = "<group>"; };
 		F4C7E584192E3419006053DA /* CoverUpload@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CoverUpload@2x.png"; sourceTree = "<group>"; };
 		F4C7E585192E3419006053DA /* AvatarUpload.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AvatarUpload.png; sourceTree = "<group>"; };
 		F4C7E586192E3419006053DA /* AvatarUpload@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AvatarUpload@2x.png"; sourceTree = "<group>"; };
@@ -2236,6 +2237,7 @@
 		019824E41629CAF500216900 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				F4A8F0901961B41000404F12 /* Delegates */,
 				4C5C390418EF09C3007250EE /* UIPlaceHolderTextView */,
 				E947097A18D76236000174A7 /* Serializers */,
 				0E3AE68D1875DE5D008A8D00 /* Genre Manager */,
@@ -3959,6 +3961,14 @@
 				F4A443F619363A0F009287FA /* ShopMotion14@2x.png */,
 			);
 			name = "Shop Motion";
+			sourceTree = "<group>";
+		};
+		F4A8F0901961B41000404F12 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				F4A8F0911961B75900404F12 /* SYNVideoPlayerDismissIndex.h */,
+			);
+			name = Delegates;
 			sourceTree = "<group>";
 		};
 		F4C7E58C192F59D7006053DA /* Channel details */ = {
