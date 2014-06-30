@@ -26,6 +26,7 @@
 #import "SYNActivityManager.h"
 #import "SYNPopoverAnimator.h"
 #import "SYNProfileChannelViewController.h"
+#import <TestFlight.h>
 
 @import QuartzCore;
 
@@ -133,7 +134,7 @@
                                                             object: self
                                                           userInfo: @{kScrollingDirection:@(ScrollingDirectionUp)}];
     }
-    
+	TFLog(@"class : %@", [self class]);
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -774,6 +775,15 @@
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
 	return [SYNPopoverAnimator animatorForPresentation:NO];
+}
+
+#pragma mark - rotation
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    
+    TFLog(@"rotation in class %@", [self class]);
+    TFLog(@"to orientation %d", toInterfaceOrientation);
 }
 
 @end

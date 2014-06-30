@@ -32,6 +32,7 @@
 #import "SYNFeedOverlayLovingViewController.h"
 #import "UINavigationBar+Appearance.h"
 #import "SYNIPadFeedLayout.h"
+#import <TestFlight.h>
 
 static const CGFloat heightLandscape = 645;
 static const CGFloat heightPortrait = 911;
@@ -407,6 +408,9 @@ static const CGFloat heightPortrait = 911;
 
 - (void)videoCell:(SYNFeedVideoCell *)cell addToChannelPressed:(UIButton *)button {
 	VideoInstance *videoInstance = cell.videoInstance;
+    
+    NSIndexPath *indexPath = [self.feedCollectionView indexPathForCell:cell];
+	TFLog(@"Feed: Video Instance from model :%@", [self.model itemAtIndex:indexPath.row]);
 	
 	[[SYNTrackingManager sharedManager] trackVideoAddFromScreenName:[self trackingScreenName]];
 	
@@ -419,6 +423,8 @@ static const CGFloat heightPortrait = 911;
 	SYNAddToChannelViewController *viewController = [[SYNAddToChannelViewController alloc] initWithViewId:kExistingChannelsViewId];
 	viewController.modalPresentationStyle = UIModalPresentationCustom;
 	viewController.transitioningDelegate = self;
+    
+    TFLog(@"Feed: Video instance :%@", videoInstance);
 	viewController.videoInstance = videoInstance;
 	
 	[self presentViewController:viewController animated:YES completion:nil];

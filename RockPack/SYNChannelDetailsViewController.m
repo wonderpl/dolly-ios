@@ -41,6 +41,7 @@
 #import "SYNVideoActionsBar.h"
 #import "SYNCollectionVideoCell.h"
 #import "SYNAddToChannelViewController.h"
+#import <TestFlight.h>
 
 #define kHeightChange 30.0f
 #define FULL_NAME_LABEL_IPHONE 147.0f
@@ -1623,7 +1624,9 @@
 - (void)videoCell:(SYNCollectionVideoCell *)cell addToChannelPressed:(UIButton *)button {
 
     VideoInstance *videoInstance = cell.videoInstance;
-	
+    NSIndexPath *indexPath = [self.videoThumbnailCollectionView indexPathForCell:cell];
+    TFLog(@"Feed: Video Instance from model :%@", [self.model itemAtIndex:indexPath.row]);
+
 	[[SYNTrackingManager sharedManager] trackVideoAddFromScreenName:[self trackingScreenName]];
 	
     [appDelegate.oAuthNetworkEngine recordActivityForUserId:appDelegate.currentUser.uniqueId
@@ -1636,7 +1639,8 @@
 	viewController.modalPresentationStyle = UIModalPresentationCustom;
 	viewController.transitioningDelegate = self;
 	viewController.videoInstance = videoInstance;
-	
+    TFLog(@"Channel details: Video instance :%@", videoInstance);
+
 	[self presentViewController:viewController animated:YES completion:nil];
 
 }

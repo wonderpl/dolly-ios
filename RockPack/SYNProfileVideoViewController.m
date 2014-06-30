@@ -16,6 +16,7 @@
 #import "SYNVideoPlayerViewController.h"
 #import "SYNVideoPlayerAnimator.h"
 #import "UINavigationBar+Appearance.h"
+#import <TestFlight.h>
 
 static const CGFloat PARALLAX_SCROLL_VALUE = 2.0f;
 
@@ -216,8 +217,11 @@ forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
     
     VideoInstance *videoInstance = cell.videoInstance;
 	
+    NSIndexPath *indexPath = [self.cv indexPathForCell:cell];
+    TFLog(@"Feed: Video Instance from model :%@", [self.model itemAtIndex:indexPath.row]);
+
 	[[SYNTrackingManager sharedManager] trackVideoAddFromScreenName:[self trackingScreenName]];
-	
+
     [appDelegate.oAuthNetworkEngine recordActivityForUserId:appDelegate.currentUser.uniqueId
                                                      action:@"select"
                                             videoInstanceId:videoInstance.uniqueId
@@ -228,7 +232,8 @@ forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
 	viewController.modalPresentationStyle = UIModalPresentationCustom;
 	viewController.transitioningDelegate = self;
 	viewController.videoInstance = videoInstance;
-	
+    TFLog(@"ProfileVideoViewController: Video instance :%@", videoInstance);
+
 	[self presentViewController:viewController animated:YES completion:nil];
     
 }
