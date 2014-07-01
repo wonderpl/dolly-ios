@@ -48,6 +48,8 @@
 #define FULL_NAME_LABEL_IPAD_PORTRAIT 252.0f
 #define FULLNAMELABELIPADLANDSCAPE 258.0f
 
+static const CGFloat HeaderHeightIPad = 530;
+
 
 @interface SYNChannelDetailsViewController () <UITextViewDelegate, UIViewControllerTransitioningDelegate, LXReorderableCollectionViewDelegateFlowLayout, SYNImagePickerControllerDelegate, SYNPagingModelDelegate, SYNVideoPlayerAnimatorDelegate,SYNCollectionVideoCellDelegate,SYNVideoPlayerDismissIndex>
 
@@ -156,7 +158,7 @@
     }
     
     if (IS_IPAD) {
-        self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsMake(530, 0, 60, 0);
+        self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsMake(HeaderHeightIPad, 0, 60, 0);
         self.offsetValue = 530;
     }
     
@@ -1693,10 +1695,6 @@
 
 - (void)dismissPosition:(NSInteger)index {
     
-    if (IS_IPAD) {
-        return;
-    }
-    
     [self updateLayoutForOrientation: [[UIApplication sharedApplication] statusBarOrientation]];
     [self.videoThumbnailCollectionView.collectionViewLayout invalidateLayout];
     
@@ -1707,11 +1705,57 @@
         indexPath = [NSIndexPath indexPathForItem:index+1 inSection:0];
     }
     
-    [self.videoThumbnailCollectionView reloadData];
-    [self.videoThumbnailCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollDirectionVertical animated:YES];
-    [self.videoThumbnailCollectionView reloadData];
+    CGPoint point = [self calculateOffsetFromIndex:index];
+ 	[self.videoThumbnailCollectionView setContentOffset:point animated:NO];
+    
+}
 
+- (CGPoint) calculateOffsetFromIndex :(NSInteger) index {
+    float cellHeight = ((UICollectionViewFlowLayout*)self.videoThumbnailCollectionView.collectionViewLayout).itemSize.height;
 
+    
+    if (IS_IPHONE) {
+        return CGPointMake(0, index * cellHeight);
+    }
+    
+    if (IS_IPAD) {
+        if (UIDeviceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
+
+            if (index<2) {
+                return CGPointMake(0, -HeaderHeightIPad);
+            }
+
+            if (index<4) {
+                return CGPointMake(0, -HeaderHeightIPad-195);
+            }
+
+            if (index<6) {
+                return CGPointMake(0, 0);
+            }
+            
+            if (index + 2 > [self.model itemCount]) {
+                index-=2;
+            }
+            
+            return CGPointMake(0, index/2 * cellHeight);
+        
+        } else {
+
+            if (index<3) {
+                return CGPointMake(0, -400);
+            }
+            
+            if (index<6) {
+                return CGPointMake(0, -95);
+            }
+            
+            if (index+3 > [self.model itemCount]) {
+                index-=3;
+            }
+            return CGPointMake(0, index/3 * cellHeight);
+        }
+    }
+    return CGPointZero;
 }
 
 

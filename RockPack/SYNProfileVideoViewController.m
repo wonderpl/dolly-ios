@@ -19,6 +19,10 @@
 #import <TestFlight.h>
 
 static const CGFloat PARALLAX_SCROLL_VALUE = 2.0f;
+static const CGFloat ProfileHeaderHeightIPhone = 523;
+static const CGFloat ProfileHeaderHeightIPadPort = 780;
+static const CGFloat ProfileHeaderHeightIPadLand = 664;
+
 
 @interface SYNProfileVideoViewController () <UIViewControllerTransitioningDelegate, SYNCollectionVideoCellDelegate,SYNVideoPlayerAnimatorDelegate, SYNPagingModelDelegate,SYNVideoPlayerDismissIndex>
 @property (nonatomic, strong) SYNProfileHeader* headerView;
@@ -154,15 +158,15 @@ forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
     }
     if (IS_IPHONE) {
         if (self.isUserProfile) {
-            return CGSizeMake(320, 523);
+            return CGSizeMake(320, ProfileHeaderHeightIPhone);
         } else {
-            return CGSizeMake(320, 523);
+            return CGSizeMake(320, ProfileHeaderHeightIPhone);
         }
     } else {
         if (UIDeviceOrientationIsPortrait([[SYNDeviceManager sharedInstance] orientation])) {
-            return CGSizeMake(self.view.frame.size.width, 780);
+            return CGSizeMake(self.view.frame.size.width, ProfileHeaderHeightIPadPort);
         } else {
-            return CGSizeMake(self.view.frame.size.width, 664);
+            return CGSizeMake(self.view.frame.size.width, ProfileHeaderHeightIPadLand);
         }
     }
     return CGSizeZero;
@@ -321,20 +325,71 @@ forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
 
 - (void)dismissPosition:(NSInteger)index {
     
-    if (IS_IPAD) {
-        return;
-    }
-
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
     self.videoPlayerAnimator.cellIndexPath = indexPath;
 
 
-    if (UIDeviceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
-        [self.cv scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollDirectionHorizontal animated:NO];
-    } else {
-        [self.cv scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollDirectionVertical animated:NO];
+	[self.cv scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollDirectionVertical animated:NO];
+
+    [self updateLayoutForOrientation: [[UIApplication sharedApplication] statusBarOrientation]];
+    [self.cv.collectionViewLayout invalidateLayout];
+    
+    if (index+1<[self.model totalItemCount] && IS_IPHONE) {
+        indexPath = [NSIndexPath indexPathForItem:index+1 inSection:0];
     }
+    
+    CGPoint point = [self calculateOffsetFromIndex:index];
+ 	[self.cv setContentOffset:point animated:NO];
+
 }
 
+- (CGPoint) calculateOffsetFromIndex :(NSInteger) index {
+    float cellHeight = ((UICollectionViewFlowLayout*)self.cv.collectionViewLayout).itemSize.height;
+
+    if (IS_IPHONE) {
+        return CGPointMake(0, (index * cellHeight)+ProfileHeaderHeightIPhone+100);
+    }
+
+    
+    if (IS_IPAD) {
+        if (UIDeviceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
+            
+            if (index<2) {
+                return CGPointMake(0, 80);
+            }
+            
+            if (index<4) {
+                return CGPointMake(0, 398);
+            }
+            
+            if (index<6) {
+                return CGPointMake(0, 714);
+            }
+            
+            if (index + 2 > [self.model itemCount]) {
+                index-=2;
+            }
+            
+            return CGPointMake(0, (index/2 * cellHeight)+ProfileHeaderHeightIPadPort);
+            
+        } else {
+            
+            if (index<3) {
+                return CGPointMake(0, 220);
+            }
+            
+            if (index<6) {
+                return CGPointMake(0, 540);
+            }
+            
+            if (index+3 > [self.model itemCount]) {
+                index-=3;
+            }
+            return CGPointMake(0, (index/3 * cellHeight) +ProfileHeaderHeightIPadLand);
+        }
+    }
+    
+    return CGPointZero;
+}
 
 @end
