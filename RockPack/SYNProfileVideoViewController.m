@@ -320,6 +320,11 @@ forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
 #pragma mark - SYNVideoPlayerDismissIndex
 
 - (void)dismissPosition:(NSInteger)index {
+    
+    if (IS_IPAD) {
+        return;
+    }
+
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
     self.videoPlayerAnimator.cellIndexPath = indexPath;
 

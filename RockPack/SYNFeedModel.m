@@ -87,6 +87,20 @@
 	return (feedIndex - [channelIndexes count]);
 }
 
+- (NSInteger)videoIndexForFeedIndex:(NSInteger)feedIndex {
+    int counter = 0;
+	for (int i = 0; i<[self.feedItems count]; i++) {
+        FeedItem *item = [self.feedItems objectAtIndex:i];
+        if ([item.resourceType intValue] == FeedItemResourceTypeVideo) {
+            counter+=1;
+            if (counter > feedIndex) {
+                return i;
+            }
+        }
+    }
+    return 0;
+}
+
 - (void)reset {
 	[super reset];
 	

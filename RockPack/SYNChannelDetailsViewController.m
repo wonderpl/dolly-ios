@@ -133,7 +133,6 @@
         self.videoCollectionViewLayoutIPhoneEdit = [[LXReorderableCollectionViewFlowLayout alloc]init];
         self.videoCollectionViewLayoutIPhoneEdit.itemSize = CGSizeMake(282,289-kHeightChange);
         self.videoCollectionViewLayoutIPhoneEdit.sectionInset = UIEdgeInsetsMake(2, 5, 60, 2);
-
     }
     
     if (IS_IPAD) {
@@ -1680,15 +1679,26 @@
 #pragma mark - SYNVideoPlayerDismissIndex
 
 - (void)dismissPosition:(NSInteger)index {
+    
+    if (IS_IPAD) {
+        return;
+    }
+    
+    [self updateLayoutForOrientation: [[UIApplication sharedApplication] statusBarOrientation]];
+    [self.videoThumbnailCollectionView.collectionViewLayout invalidateLayout];
+    
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
     self.videoPlayerAnimator.cellIndexPath = indexPath;
-
+    
     if (index+1<[self.model totalItemCount] && IS_IPHONE) {
         indexPath = [NSIndexPath indexPathForItem:index+1 inSection:0];
     }
     
-    
-        [self.videoThumbnailCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollDirectionVertical animated:NO];
+    [self.videoThumbnailCollectionView reloadData];
+    [self.videoThumbnailCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollDirectionVertical animated:YES];
+    [self.videoThumbnailCollectionView reloadData];
+
+
 }
 
 

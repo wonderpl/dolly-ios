@@ -35,8 +35,8 @@
 #import <TestFlight.h>
 #import "SYNVideoPlayerDismissIndex.h"
 
-static const CGFloat heightLandscape = 645;
-static const CGFloat heightPortrait = 911;
+static const CGFloat heightLandscape = 703;
+static const CGFloat heightPortrait = 985;
 
 @interface SYNFeedRootViewController () <UIViewControllerTransitioningDelegate, SYNPagingModelDelegate, SYNVideoPlayerAnimatorDelegate, SYNFeedVideoCellDelegate, SYNFeedChannelCellDelegate,SYNVideoPlayerDismissIndex>
 
@@ -121,21 +121,7 @@ static const CGFloat heightPortrait = 911;
 
     if (IS_IPAD) {
         [self.feedCollectionView.collectionViewLayout invalidateLayout];
-    
-        UIInterfaceOrientation currentOrientation = [[UIApplication sharedApplication] statusBarOrientation];
-        BOOL orientationChanged = ((UIDeviceOrientationIsPortrait(self.lastOrientation) && UIDeviceOrientationIsLandscape(currentOrientation)) || (UIDeviceOrientationIsPortrait(currentOrientation) && UIDeviceOrientationIsLandscape(self.lastOrientation)));
-        
-        if (orientationChanged) {
-            if (UIDeviceOrientationIsPortrait(currentOrientation)) {
-            	CGPoint newOffset = CGPointMake(0, self.lastYOffset*heightPortrait/heightLandscape);
-                [self.feedCollectionView setContentOffset:newOffset animated:NO];
-            } else {
-                CGPoint newOffset = CGPointMake(0, self.lastYOffset*heightLandscape/heightPortrait);
-            	[self.feedCollectionView setContentOffset:newOffset animated:NO];
-            }
-        }
-        
-        [self.feedCollectionView reloadData];
+    	[self.feedCollectionView reloadData];
     }
     
 	self.shownInboarding = NO;
@@ -297,8 +283,6 @@ static const CGFloat heightPortrait = 911;
 - (id<SYNVideoInfoCell>)videoCellForIndexPath:(NSIndexPath *)indexPath {
 	UICollectionViewCell *cell = [self.feedCollectionView cellForItemAtIndexPath:indexPath];
 	if ([cell conformsToProtocol:@protocol(SYNVideoInfoCell)]) {
-        
-        
 		return (id<SYNVideoInfoCell>)cell;
 	}
 	return nil;
@@ -467,18 +451,23 @@ static const CGFloat heightPortrait = 911;
 
 #pragma mark - SYNVideoPlayerDismissIndex
 
-
 - (void)dismissPosition:(NSInteger)index {
-    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:[self.model videoIndexForFeedIndex:index] inSection:0];
     self.videoPlayerAnimator.cellIndexPath = indexPath;
+	[self.feedCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollDirectionVertical animated:NO];
+	[self scrollToItemAtIndex:index];
+}
 
+- (void)scrollToItemAtIndex:(NSInteger)index {
+    int height = 0;
     if (UIDeviceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
-        [self.feedCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollDirectionHorizontal animated:NO];
+        height = heightPortrait;
     } else {
-        [self.feedCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollDirectionVertical animated:NO];
+        height = heightLandscape;
     }
-    [self.feedCollectionView reloadData];
-
+    
+    int point = ([self.model videoIndexForFeedIndex:index] / 3) * height;
+    [self.feedCollectionView setContentOffset:CGPointMake(0, point) animated:NO];
 }
 
 @end

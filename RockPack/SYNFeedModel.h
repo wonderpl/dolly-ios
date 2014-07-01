@@ -20,5 +20,6 @@
 - (NSInteger)feedItemCount;
 
 - (NSInteger)itemIndexForFeedIndex:(NSInteger)feedIndex;
+- (NSInteger)videoIndexForFeedIndex:(NSInteger)feedIndex;
 
 @end
