@@ -1102,8 +1102,21 @@
     
 }
 
-
 - (void)cancelTapped {
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName: kChannelUpdateRequest
+                                                        object: self
+                                                      userInfo: @{kChannel: self.channel}];
+    
+    
+    //TODO: refactor the channel request and fix this hack
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.videoThumbnailCollectionView reloadData];
+    });
+    [self cancelEdit];
+}
+
+- (void)cancelEdit {
     
     [self profileMode];
     
@@ -1362,7 +1375,7 @@
                                                                      isUpdated: YES];
                                              
                                              
-											 [self cancelTapped];
+											 [self cancelEdit];
                                          }
                                               errorHandler: ^(id error) {
                                                   DebugLog(@"Error @ saveChannelPressed:");
