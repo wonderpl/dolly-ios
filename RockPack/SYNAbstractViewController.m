@@ -241,56 +241,33 @@
 
 - (void)shareChannel:(Channel *)channel {
 	VideoInstance *firstVideoInstance = [channel.videoInstances firstObject];
-	
 	UIImage *image = [[SDImageCache sharedImageCache] imageFromMemoryCacheForKey:firstVideoInstance.thumbnailURL];
-	
-	BOOL isOwner = [channel.channelOwner.uniqueId isEqualToString:appDelegate.currentUser.uniqueId];
-	[self shareChannel:channel isOwner:@(isOwner) usingImage:image];
+
+    [self requestShareLinkWithObjectType:@"channel" objectId:channel.uniqueId];
+
+    [self shareObject:channel usingImage:image];
 }
 
 - (void) shareVideoInstance: (VideoInstance *) videoInstance
 {
 	[self requestShareLinkWithObjectType: @"video_instance"
 								objectId: videoInstance.uniqueId];
-	
+
     // At this point it is safe to assume that the video thumbnail image is in the cache
     UIImage *thumbnailImage = [SDWebImageManager.sharedManager.imageCache imageFromMemoryCacheForKey: videoInstance.video.thumbnailURL];
-    
-    [self shareObjectType: @"video_instance"
-                 objectId: videoInstance.uniqueId
-                  isOwner: @NO
-                  isVideo: @YES
-               usingImage: thumbnailImage];
+    [self shareObject:videoInstance usingImage:thumbnailImage];
 }
 
 
-
-- (void) shareObjectType: (NSString *) objectType
-                objectId: (NSString *) objectId
-                 isOwner: (NSNumber *) isOwner
-                 isVideo: (NSNumber *) isVideo
-              usingImage: (UIImage *) usingImage {
-    
-    
-	SYNOneToOneSharingController *viewController = [self createSharingViewControllerForObjectType:objectType
-																						 objectId:objectId
-																						  isOwner:[isOwner boolValue]
-																						  isVideo:[isVideo boolValue]
-																							image:usingImage];
-	viewController.modalPresentationStyle = UIModalPresentationCustom;
+- (void)shareObject: (id) object usingImage: (UIImage *) usingImage {
+    SYNOneToOneSharingController *viewController = [self createSharingViewControllerForShareObject:object image:usingImage];
+    viewController.modalPresentationStyle = UIModalPresentationCustom;
 	viewController.transitioningDelegate = self;
-	
 	[self presentViewController:viewController animated:YES completion:nil];
 }
 
-- (SYNOneToOneSharingController *)createSharingViewControllerForObjectType:(NSString *)objectType
-																   objectId:(NSString *)objectId
-																	isOwner:(BOOL)isOwner
-																	isVideo:(BOOL)isVideo
-																	  image:(UIImage *)image {
+- (NSString*) userName {
 	NSString *userName = nil;
-	NSString *subject = @"";
-	
 	User *user = appDelegate.currentUser;
 	
 	if (user.fullNameIsPublicValue) {
@@ -300,19 +277,34 @@
 	if (![userName length]) {
 		userName = user.username;
 	}
-	
-	if (userName != nil) {
-		NSString *what = @"collection";
-		if (isVideo) {
-			what = @"video";
-		}
-		subject = [NSString stringWithFormat: @"%@ has shared a %@ with you", userName, what];
+    
+    return userName;
+}
+
+- (SYNOneToOneSharingController *)createSharingViewControllerForShareObject:(id) shareObject
+                                                                     	image:(UIImage *)image {
+    NSString *subject = @"";
+	NSString *userName = [self userName];
+	NSString *type = @"";
+    BOOL owner = NO;
+    
+    if ([shareObject isKindOfClass:[VideoInstance class]]) {
+        owner = [self isOwnerId:((VideoInstance*)shareObject).originator.uniqueId];
+        type = NSLocalizedString(@"video", nil);
+    }
+    
+    if ([shareObject isKindOfClass:[Channel class]]) {
+        owner = [self isOwnerId:((Channel*)shareObject).channelOwner.uniqueId];
+        type = NSLocalizedString(@"collection", nil);
+    }
+
+    if (userName != nil) {
+		subject = [NSString stringWithFormat: @"%@ has shared a %@ with you", userName, type];
 	}
-	
-	[self.mutableShareDictionary addEntriesFromDictionary:@{@"owner": @(isOwner),
-															@"video": @(isVideo),
+    
+	[self.mutableShareDictionary addEntriesFromDictionary:@{@"owner": @(owner),
+															@"video": @([shareObject isKindOfClass:[VideoInstance class]]),
 															@"subject": subject}];
-	
 	
 	// Only add image if we have one
 	if (image) {
@@ -327,7 +319,6 @@
                                objectId: (NSString *) objectId
 {
     // Get share link
-    
     self.mutableShareDictionary = @{@"type" : objectType,
                                     @"object_id" : objectId,
                                     @"text" : @"",
@@ -373,16 +364,6 @@
          
          
      }];
-}
-
-- (void)shareChannel:(Channel *)channel isOwner:(NSNumber *)isOwner usingImage:(UIImage *)image {
-	[self requestShareLinkWithObjectType:@"channel" objectId:channel.uniqueId];
-	
-	[self shareObjectType:@"channel"
-				 objectId:channel.uniqueId
-				  isOwner:isOwner
-				  isVideo:@NO
-			   usingImage:image];
 }
 
 
@@ -784,6 +765,10 @@
     
     TFLog(@"rotation in class %@", [self class]);
     TFLog(@"to orientation %d", toInterfaceOrientation);
+}
+
+- (BOOL) isOwnerId:(NSString *) unquieId {
+	return [unquieId isEqualToString:appDelegate.currentUser.uniqueId];
 }
 
 @end
