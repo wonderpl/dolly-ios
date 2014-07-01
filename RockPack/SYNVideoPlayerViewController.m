@@ -40,7 +40,7 @@
 @import MediaPlayer;
 @import MessageUI;
 
-@interface SYNVideoPlayerViewController () <UIViewControllerTransitioningDelegate, UIPopoverControllerDelegate, UIScrollViewDelegate, SYNVideoPlayerDelegate, UICollectionViewDataSource, SYNVideoPlayerAnimatorDelegate, UICollectionViewDelegateFlowLayout, SYNVideoInfoViewControllerDelegate>
+@interface SYNVideoPlayerViewController () <UIViewControllerTransitioningDelegate, UIPopoverControllerDelegate, UIScrollViewDelegate, SYNVideoPlayerDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SYNVideoInfoViewControllerDelegate>
 
 @property (nonatomic, strong) IBOutlet UIButton *avatarButton;
 
