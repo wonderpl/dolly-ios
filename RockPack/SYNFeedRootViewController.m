@@ -454,8 +454,12 @@ static const CGFloat heightPortrait = 985;
 - (void)dismissPosition:(NSInteger)index {
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:[self.model videoIndexForFeedIndex:index] inSection:0];
     self.videoPlayerAnimator.cellIndexPath = indexPath;
-	[self.feedCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollDirectionVertical animated:NO];
-	[self scrollToItemAtIndex:index];
+    
+    if (IS_IPHONE) {
+        [self.feedCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollDirectionVertical animated:NO];
+    } else {
+        [self scrollToItemAtIndex:index];
+    }
 }
 
 - (void)scrollToItemAtIndex:(NSInteger)index {
