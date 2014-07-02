@@ -162,8 +162,6 @@ static const CGFloat bufferingTime = 12;
 
 - (void)handleYouTubePlayerEventNamed:(NSString *)actionName eventData:(NSString *)actionData {
 
-    NSLog(@"actionName :%@, actaionData :%@", actionName, actionData);
-    
     if ([actionName isEqualToString:@"ready"]) {
 		self.youTubePlayerState = SYNYouTubeVideoPlayerStateReady;
 		
