@@ -32,8 +32,6 @@ static const CGFloat bufferingTime = 12;
 
 @property (nonatomic, assign) SYNYouTubeVideoPlayerState youTubePlayerState;
 
-@property (nonatomic, strong) NSTimer *timer;
-
 @end
 
 @implementation SYNYouTubeWebVideoPlayer
@@ -46,7 +44,7 @@ static const CGFloat bufferingTime = 12;
 	return self;
 }
 - (void)dealloc {
-    self.timer = nil;
+    self.reloadVideoTimer = nil;
     self.youTubeWebView.delegate = nil;
 }
 
@@ -186,11 +184,11 @@ static const CGFloat bufferingTime = 12;
 			[self handleVideoPlayerFinishedPlaying];
 		}
         if ([actionData isEqualToString:@"buffering"]) {
-//            self.timer = [NSTimer scheduledTimerWithTimeInterval:[self bufferTIme]
-//                                                          target:self
-//                                                        selector:@selector(reloadVideoPlayer:)
-//                                                        userInfo:nil
-//                                                         repeats:NO];
+            self.reloadVideoTimer = [NSTimer scheduledTimerWithTimeInterval:[self bufferTIme]
+                                                          target:self
+                                                        selector:@selector(reloadVideoPlayer:)
+                                                        userInfo:nil
+                                                         repeats:NO];
         
         } else {
             [self invalidateTimer];
@@ -209,8 +207,8 @@ static const CGFloat bufferingTime = 12;
 }
 
 - (void)invalidateTimer {
-    if ([self.timer isValid]) {
-        [self.timer invalidate];
+    if ([self.reloadVideoTimer isValid]) {
+        [self.reloadVideoTimer invalidate];
     }
 }
 

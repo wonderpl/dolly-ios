@@ -35,6 +35,7 @@
 #import "SYNShopMotionOverlayViewController.h"
 #import "SYNFeedRootViewController.h"
 #import "SYNVideoPlayerAnimator.h"
+#import "SYNYouTubeWebVideoPlayer.h"
 
 @import AVFoundation;
 @import MediaPlayer;
@@ -252,6 +253,10 @@
     self.firstTime = NO;
 	_selectedIndex = selectedIndex;
 	
+    if ([self.currentVideoPlayer isKindOfClass:[SYNYouTubeWebVideoPlayer class]]) {
+        [((SYNYouTubeWebVideoPlayer*)self.currentVideoPlayer).reloadVideoTimer invalidate];
+    }
+    
     [self.videosCollectionView setContentOffset:CGPointMake(self.selectedIndex * CGRectGetWidth(self.videosCollectionView.frame), 0.0f)];
 	
 	self.videoInstance = [self.model itemAtIndex:selectedIndex];

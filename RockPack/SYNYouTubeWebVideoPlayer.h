@@ -10,4 +10,8 @@
 
 @interface SYNYouTubeWebVideoPlayer : SYNVideoPlayer
 
+//Timer used to relaod videos that are stuck in a buffering state. This timer is invalidated in VideoPlayerView Controller when a new video is selected.
+
+@property (nonatomic, strong) NSTimer *reloadVideoTimer;
+
 @end
