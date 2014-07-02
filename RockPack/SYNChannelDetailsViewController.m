@@ -418,7 +418,6 @@ static const CGFloat HeaderHeightIPad = 530;
 - (void)scrollViewDidScroll: (UIScrollView *) scrollView {
     [super scrollViewDidScroll:scrollView];
     [self moveHeader:scrollView.contentOffset.y];
-    
 }
 
 - (void)killScroll {
@@ -1720,13 +1719,12 @@ static const CGFloat HeaderHeightIPad = 530;
     
     if (IS_IPAD) {
         if (UIDeviceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
-
             if (index<2) {
                 return CGPointMake(0, -HeaderHeightIPad);
             }
 
             if (index<4) {
-                return CGPointMake(0, -HeaderHeightIPad-195);
+                return CGPointMake(0, -HeaderHeightIPad+195);
             }
 
             if (index<6) {
