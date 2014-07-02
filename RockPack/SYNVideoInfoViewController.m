@@ -352,21 +352,7 @@ static const CGFloat UpcomingVideosDividerHeight = 40.0;
 
 - (void)videoActionsBar:(SYNVideoActionsBar *)bar shareButtonPressed:(UIButton *)button {
 	VideoInstance *videoInstance = [self.model itemAtIndex:self.selectedIndex];
-	
-	[self requestShareLinkWithObjectType:@"video_instance" objectId:videoInstance.uniqueId];
-	
-    // At this point it is safe to assume that the video thumbnail image is in the cache
-    UIImage *thumbnailImage = [[[SDWebImageManager sharedManager] imageCache] imageFromMemoryCacheForKey:videoInstance.video.thumbnailURL];
-	
-	SYNOneToOneSharingController *viewController = [self createSharingViewControllerForObjectType:@"video_instance"
-																						 objectId:videoInstance.video.thumbnailURL
-																						  isOwner:NO
-																						  isVideo:YES
-																							image:thumbnailImage];
-	viewController.modalPresentationStyle = UIModalPresentationCustom;
-	viewController.transitioningDelegate = self;
-	
-	[self presentViewController:viewController animated:YES completion:nil];
+    [self shareVideoInstance:videoInstance];
 }
 
 #pragma mark - SYNVideoClickToMoreCellDelegate

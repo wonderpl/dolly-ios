@@ -52,11 +52,9 @@
 
 - (void)shareChannel:(Channel *)channel;
 
-- (SYNOneToOneSharingController *)createSharingViewControllerForObjectType:(NSString *)objectType
-																  objectId:(NSString *)objectId
-																   isOwner:(BOOL)isOwner
-																   isVideo:(BOOL)isVideo
-																	 image:(UIImage *)image;
+
+- (SYNOneToOneSharingController *)createSharingViewControllerForShareObject:(id) shareObject
+                                                                      image:(UIImage *)image;
 
 - (SYNPopupMessageView*) displayPopupMessage: (NSString*) messageKey
                                   withLoader: (BOOL) isLoader;
