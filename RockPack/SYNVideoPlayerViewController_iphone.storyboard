@@ -144,6 +144,7 @@
                     <connections>
                         <outlet property="avatarButton" destination="LMk-aL-SHN" id="WpY-Fz-3ED"/>
                         <outlet property="followingButton" destination="XvK-bX-B3j" id="Ol8-cQ-PyX"/>
+                        <outlet property="videoInfoContainer" destination="IbH-kt-YGA" id="fJF-Hn-Kx3"/>
                         <outlet property="videoPlayerContainerView" destination="3Yv-dB-EFS" id="gfu-Oi-KGb"/>
                         <outlet property="videoTitleLabel" destination="nVh-CQ-apC" id="env-DE-dXb"/>
                         <outlet property="videosCollectionView" destination="WS0-IR-w5m" id="6Qf-VK-5G5"/>

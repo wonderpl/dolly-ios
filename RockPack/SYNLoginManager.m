@@ -205,6 +205,7 @@
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey: kUserDefaultsAddToCollectionFirstTime];
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey: kUserDefaultsShopMotionFirstTime];
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kUserDefaultsDiscoverSearchFirstTime];
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kUserDefaultsVideoPlayerFirstTime];
     } else {
         [[NSUserDefaults standardUserDefaults] setInteger:2 forKey: kUserDefaultsDiscoverUserFirstTime];
         [[NSUserDefaults standardUserDefaults] setInteger:2 forKey: kUserDefaultsOtherPersonsProfile];
@@ -214,6 +215,7 @@
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey: kUserDefaultsShareFirstTime];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey: kUserDefaultsAddToCollectionFirstTime];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey: kUserDefaultsShopMotionFirstTime];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kUserDefaultsVideoPlayerFirstTime];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kUserDefaultsDiscoverSearchFirstTime];
     }
     

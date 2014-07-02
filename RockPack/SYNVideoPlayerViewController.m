@@ -35,6 +35,7 @@
 #import "SYNShopMotionOverlayViewController.h"
 #import "SYNFeedRootViewController.h"
 #import "SYNVideoPlayerAnimator.h"
+#import "UIFont+SYNFont.h"
 #import "SYNYouTubeWebVideoPlayer.h"
 
 @import AVFoundation;
@@ -69,6 +70,7 @@
 
 @property (nonatomic, strong) VideoInstance *videoInstance;
 
+@property (strong, nonatomic) IBOutlet UIView *videoInfoContainer;
 
 // Used for animation
 @property (nonatomic, weak) UIImageView *annotationImageView;
@@ -76,6 +78,11 @@
 @property (nonatomic, assign) BOOL firstTime;
 
 @property (nonatomic, assign) BOOL maximised;
+
+@property (nonatomic, strong) UIView *collectionOverLay;
+@property (nonatomic, assign) BOOL showingOverlay;
+@property (nonatomic, strong) UILabel *overlayLabel;
+
 
 @end
 
@@ -93,7 +100,6 @@
 	viewController.model = model;
     viewController.firstTime = YES;
 	viewController.selectedIndex = selectedIndex;
-	
 	return viewController;
 }
 
@@ -134,6 +140,8 @@
 	
 	AVAudioSession *audioSession = [AVAudioSession sharedInstance];
 	[audioSession setActive:YES withOptions:0 error:nil];
+    
+    [self showInboardingSwipe];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -249,6 +257,7 @@
         return;
     }
 
+    [self removeVideoOverlay];
     
     self.firstTime = NO;
 	_selectedIndex = selectedIndex;
@@ -488,7 +497,7 @@
 	
 	self.followingButton.selected = [[SYNActivityManager sharedInstance] isSubscribedToUserId:videoInstance.originator.uniqueId];
 	[self.followingButton invalidateIntrinsicContentSize];
-    [self showInboarding:videoInstance];
+    [self showInboardingShopMotion:videoInstance];
 }
 
 - (BOOL)handleRotationToOrientation:(UIDeviceOrientation)orientation {
@@ -522,7 +531,73 @@
 	}
 }
 
-- (void) showInboarding :(VideoInstance*) videoInstance {
+- (void)showInboardingSwipe {
+
+    BOOL showOverlay = ![[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultsVideoPlayerFirstTime];
+
+    showOverlay = YES;
+    if (showOverlay) {
+        self.collectionOverLay = [[UIView alloc] initWithFrame:self.videoInfoViewController.view.frame];
+        [self.collectionOverLay setBackgroundColor:[UIColor colorWithWhite:0.0 alpha:0.8]];
+        [self.view setBackgroundColor:[UIColor colorWithWhite:0.0 alpha:0.8]];
+        [self.videoInfoViewController.view addSubview:self.collectionOverLay];
+        
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+        [label setFont:[UIFont regularCustomFontOfSize:24]];
+        [label setTextColor:[UIColor whiteColor]];
+        [label setText:@"Swipe the video overlay"];
+        [label sizeToFit];
+        
+        self.overlayLabel = label;
+        [self.view addSubview:self.overlayLabel];
+
+        [self updateViewWithOrientation:[[UIApplication sharedApplication] statusBarOrientation]];
+        
+    	UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(screenTapped:)];
+        [self.view addGestureRecognizer:tapGesture];
+
+        self.showingOverlay = YES;
+        
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kUserDefaultsVideoPlayerFirstTime];
+    }
+}
+
+- (void)updateViewWithOrientation:(UIDeviceOrientation)orientation {
+    if (UIDeviceOrientationIsPortrait(orientation)) {
+        self.overlayLabel.center = CGPointMake(self.view.center.x, self.view.center.y+100);
+    } else {
+        self.overlayLabel.center = CGPointMake(517.5, 613);
+    }
+}
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+	[self updateViewWithOrientation:toInterfaceOrientation];
+}
+
+- (void)screenTapped:(UITapGestureRecognizer*)tapGesture {
+    CGPoint point = [tapGesture locationInView:self.view];
+    
+    if (CGRectContainsPoint(self.videoPlayerContainerView.frame, point)) {
+        return;
+    }
+	[self removeVideoOverlay];
+}
+
+- (void)removeVideoOverlay {
+    
+    if (!self.showingOverlay) {
+        return;
+    }
+    
+    [UIView animateWithDuration:0.6f animations:^{
+        [self.collectionOverLay setBackgroundColor:[UIColor clearColor]];
+        self.view.backgroundColor = [UIColor whiteColor];
+    } completion:^(BOOL finished) {
+        [self.collectionOverLay removeFromSuperview];
+    }];
+}
+
+- (void) showInboardingShopMotion :(VideoInstance*) videoInstance {
     
     BOOL hasAnnotations = [videoInstance.video.videoAnnotations count] > 0;
     
@@ -531,10 +606,8 @@
     }
     
     if (![[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultsShopMotionFirstTime]) {
-    
-                SYNShopMotionOverlayViewController *overlay = [[SYNShopMotionOverlayViewController alloc] init];
-                [overlay addToViewController:self];
-        
+		SYNShopMotionOverlayViewController *overlay = [[SYNShopMotionOverlayViewController alloc] init];
+        [overlay addToViewController:self];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kUserDefaultsShopMotionFirstTime];
     }
 

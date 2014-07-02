@@ -140,6 +140,7 @@
                     <connections>
                         <outlet property="avatarButton" destination="bg0-NK-hTw" id="grV-d5-g20"/>
                         <outlet property="followingButton" destination="5hW-91-img" id="S72-OA-bnp"/>
+                        <outlet property="videoInfoContainer" destination="eHS-Sg-VLw" id="9qf-oi-pRa"/>
                         <outlet property="videoPlayerContainerView" destination="NWm-in-24r" id="d4J-L5-gq1"/>
                         <outlet property="videoTitleLabel" destination="Mur-BL-wuK" id="Nfl-Qx-GZi"/>
                         <outlet property="videosCollectionView" destination="0R6-e8-kts" id="fGz-Nu-k3m"/>
