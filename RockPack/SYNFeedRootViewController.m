@@ -149,24 +149,29 @@ static const CGFloat heightPortrait = 985;
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    if (UIDeviceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
-        CGPoint newOffset = CGPointMake(0, self.lastYOffset*heightPortrait/heightLandscape);
-        if (newOffset.y+self.feedCollectionView.frame.size.height > self.feedCollectionView.contentSize.height) {
-            newOffset.y = self.feedCollectionView.contentSize.height - self.feedCollectionView.frame.size.height;
-            [self.feedCollectionView setContentOffset:newOffset animated:NO];
-        } else {
-            [self.feedCollectionView setContentOffset:newOffset animated:NO];
-        }
-    } else {
-        CGPoint newOffset = CGPointMake(0, self.lastYOffset*heightLandscape/heightPortrait);
-        if (newOffset.y+self.feedCollectionView.frame.size.height > self.feedCollectionView.contentSize.height) {
-            newOffset.y = self.feedCollectionView.contentSize.height - self.feedCollectionView.frame.size.height;
-            [self.feedCollectionView setContentOffset:newOffset animated:NO];
-        } else {
-            [self.feedCollectionView setContentOffset:newOffset animated:NO];
-        }
-    }
+    [self calculateRotationOffSet];
     self.feedCollectionView.alpha = 1.0;
+}
+
+- (void)calculateRotationOffSet {
+    CGPoint newOffset = CGPointZero;
+    if (UIDeviceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
+        newOffset = CGPointMake(0, self.lastYOffset*heightPortrait/heightLandscape);
+    } else {
+        newOffset = CGPointMake(0, self.lastYOffset*heightLandscape/heightPortrait);
+    }
+    
+    BOOL offsetOutOfBounds = newOffset.y+self.feedCollectionView.frame.size.height > self.feedCollectionView.contentSize.height;
+    BOOL lowOffSet = newOffset.y < 300;
+
+    if (offsetOutOfBounds) {
+        newOffset.y = self.feedCollectionView.contentSize.height - self.feedCollectionView.frame.size.height;
+        [self.feedCollectionView setContentOffset:newOffset animated:NO];
+    } else if (lowOffSet) {
+        [self.feedCollectionView setContentOffset:CGPointMake(0, -self.feedCollectionView.contentInset.top) animated:NO];
+    } else {
+        [self.feedCollectionView setContentOffset:newOffset animated:NO];
+    }
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
@@ -182,24 +187,7 @@ static const CGFloat heightPortrait = 985;
     
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
     self.feedCollectionView.alpha = 1.0;
-    
-    if (UIDeviceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
-        CGPoint newOffset = CGPointMake(0, self.lastYOffset*heightPortrait/heightLandscape);
-        if (newOffset.y+self.feedCollectionView.frame.size.height > self.feedCollectionView.contentSize.height) {
-            newOffset.y = self.feedCollectionView.contentSize.height - self.feedCollectionView.frame.size.height;
-            [self.feedCollectionView setContentOffset:newOffset animated:NO];
-        } else {
-            [self.feedCollectionView setContentOffset:newOffset animated:NO];
-        }
-    } else {
-        CGPoint newOffset = CGPointMake(0, self.lastYOffset*heightLandscape/heightPortrait);
-        if (newOffset.y+self.feedCollectionView.frame.size.height > self.feedCollectionView.contentSize.height) {
-            newOffset.y = self.feedCollectionView.contentSize.height - self.feedCollectionView.frame.size.height;
-            [self.feedCollectionView setContentOffset:newOffset animated:NO];
-        } else {
-            [self.feedCollectionView setContentOffset:newOffset animated:NO];
-        }
-    }
+    [self calculateRotationOffSet];
 }
 
 
