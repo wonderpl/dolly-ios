@@ -82,7 +82,7 @@
 @property (nonatomic, strong) UIView *collectionOverLay;
 @property (nonatomic, assign) BOOL showingOverlay;
 @property (nonatomic, strong) UILabel *overlayLabel;
-
+@property (nonatomic, strong) UIGestureRecognizer *inboardingTapGesture;
 
 @end
 
@@ -121,6 +121,8 @@
 											 selector:@selector(activeWirelessRouteChanged:)
 												 name:MPVolumeViewWirelessRouteActiveDidChangeNotification
 											   object:nil];
+    
+    self.showingOverlay = NO;
 }
 
 - (NSUInteger)supportedInterfaceOrientations {
@@ -535,7 +537,6 @@
 
     BOOL showOverlay = ![[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultsVideoPlayerFirstTime];
 
-    showOverlay = YES;
     if (showOverlay) {
         self.collectionOverLay = [[UIView alloc] initWithFrame:self.videoInfoViewController.view.frame];
         [self.collectionOverLay setBackgroundColor:[UIColor colorWithWhite:0.0 alpha:0.8]];
@@ -553,8 +554,8 @@
 
         [self updateViewWithOrientation:[[UIApplication sharedApplication] statusBarOrientation]];
         
-    	UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(screenTapped:)];
-        [self.view addGestureRecognizer:tapGesture];
+    	self.inboardingTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(screenTapped:)];
+        [self.view addGestureRecognizer:self.inboardingTapGesture];
 
         self.showingOverlay = YES;
         
@@ -594,6 +595,8 @@
         self.view.backgroundColor = [UIColor whiteColor];
     } completion:^(BOOL finished) {
         [self.collectionOverLay removeFromSuperview];
+        [self.overlayLabel removeFromSuperview];
+        [self.view removeGestureRecognizer: self.inboardingTapGesture];
     }];
 }
 
