@@ -409,7 +409,7 @@
 											[[NSNotificationCenter defaultCenter] postNotificationName: kVideoQueueClear
 																								object: self];
 											
-											NSString* messageE = IS_IPHONE ? NSLocalizedString(@"VIDEO NOT ADDED",nil) : NSLocalizedString(@"YOUR VIDEOS COULD NOT BE ADDED INTO YOUR COLLECTION",nil);
+											NSString* messageE = IS_IPHONE ? NSLocalizedString(@"AN ERROR HAS OCCURRED",nil) : NSLocalizedString(@"AN ERROR HAS OCCURRED WHEN ADDING INTO YOUR COLLECTION",nil);
 											
 											[appDelegate.masterViewController presentNotificationWithMessage:messageE
 																									 andType:NotificationMessageTypeError];
