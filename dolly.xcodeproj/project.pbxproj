@@ -665,6 +665,9 @@
 		F468C75A1937692C00838890 /* SYNShopMotionOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F468C7591937692C00838890 /* SYNShopMotionOverlayViewController.m */; };
 		F468C75C1937696300838890 /* SYNShopMotionOverlayViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = F468C75B1937696300838890 /* SYNShopMotionOverlayViewController~iphone.xib */; };
 		F468C75E1937697800838890 /* SYNShopMotionOverlayViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = F468C75D1937697800838890 /* SYNShopMotionOverlayViewController~ipad.xib */; };
+		F46BFF2119645E34006A28EF /* SYNFeedAvatarOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F46BFF2019645E34006A28EF /* SYNFeedAvatarOverlayViewController.m */; };
+		F46BFF2319645E4B006A28EF /* SYNFeedAvatarOverlayViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = F46BFF2219645E4B006A28EF /* SYNFeedAvatarOverlayViewController~iphone.xib */; };
+		F46BFF2519645E77006A28EF /* SYNFeedAvatarOverlayViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = F46BFF2419645E77006A28EF /* SYNFeedAvatarOverlayViewController~ipad.xib */; };
 		F46D8C42192CC1DB0048C486 /* SYNFeedOverlayLovingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F46D8C41192CC1DB0048C486 /* SYNFeedOverlayLovingViewController.m */; };
 		F46D8C44192CC1FF0048C486 /* SYNFeedOverlayLovingViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = F46D8C43192CC1FF0048C486 /* SYNFeedOverlayLovingViewController~iphone.xib */; };
 		F46D8C46192CC20E0048C486 /* SYNFeedOverlayLovingViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = F46D8C45192CC20E0048C486 /* SYNFeedOverlayLovingViewController~ipad.xib */; };
@@ -1685,6 +1688,10 @@
 		F468C7591937692C00838890 /* SYNShopMotionOverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNShopMotionOverlayViewController.m; sourceTree = "<group>"; };
 		F468C75B1937696300838890 /* SYNShopMotionOverlayViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNShopMotionOverlayViewController~iphone.xib"; sourceTree = "<group>"; };
 		F468C75D1937697800838890 /* SYNShopMotionOverlayViewController~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNShopMotionOverlayViewController~ipad.xib"; sourceTree = "<group>"; };
+		F46BFF1F19645E34006A28EF /* SYNFeedAvatarOverlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNFeedAvatarOverlayViewController.h; sourceTree = "<group>"; };
+		F46BFF2019645E34006A28EF /* SYNFeedAvatarOverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNFeedAvatarOverlayViewController.m; sourceTree = "<group>"; };
+		F46BFF2219645E4B006A28EF /* SYNFeedAvatarOverlayViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNFeedAvatarOverlayViewController~iphone.xib"; sourceTree = "<group>"; };
+		F46BFF2419645E77006A28EF /* SYNFeedAvatarOverlayViewController~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNFeedAvatarOverlayViewController~ipad.xib"; sourceTree = "<group>"; };
 		F46D8C40192CC1DB0048C486 /* SYNFeedOverlayLovingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNFeedOverlayLovingViewController.h; sourceTree = "<group>"; };
 		F46D8C41192CC1DB0048C486 /* SYNFeedOverlayLovingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNFeedOverlayLovingViewController.m; sourceTree = "<group>"; };
 		F46D8C43192CC1FF0048C486 /* SYNFeedOverlayLovingViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNFeedOverlayLovingViewController~iphone.xib"; sourceTree = "<group>"; };
@@ -3079,6 +3086,10 @@
 				F46D8C41192CC1DB0048C486 /* SYNFeedOverlayLovingViewController.m */,
 				F46D8C43192CC1FF0048C486 /* SYNFeedOverlayLovingViewController~iphone.xib */,
 				F46D8C45192CC20E0048C486 /* SYNFeedOverlayLovingViewController~ipad.xib */,
+				F46BFF1F19645E34006A28EF /* SYNFeedAvatarOverlayViewController.h */,
+				F46BFF2019645E34006A28EF /* SYNFeedAvatarOverlayViewController.m */,
+				F46BFF2419645E77006A28EF /* SYNFeedAvatarOverlayViewController~ipad.xib */,
+				F46BFF2219645E4B006A28EF /* SYNFeedAvatarOverlayViewController~iphone.xib */,
 			);
 			name = Feed;
 			sourceTree = "<group>";
@@ -4225,6 +4236,7 @@
 				BED027CA1834D4CC00636659 /* ButtonMoreFeedback.png in Resources */,
 				BE31EFB2182D4B13006E20E2 /* SYNAddToChannelCell.xib in Resources */,
 				993B1ACA191A95FC008532D4 /* TabProfile@2x~iphone.png in Resources */,
+				F46BFF2319645E4B006A28EF /* SYNFeedAvatarOverlayViewController~iphone.xib in Resources */,
 				F4A443F919363A0F009287FA /* ShopMotion2.png in Resources */,
 				F4A4440119363A0F009287FA /* ShopMotion10.png in Resources */,
 				BE285D9C1725726300D995AB /* SYNAddToChannelViewController.xib in Resources */,
@@ -4307,6 +4319,7 @@
 				38A200B31731607F00FB9F57 /* IconLocation~iphone.png in Resources */,
 				38A200B41731607F00FB9F57 /* IconUsername@2x~iphone.png in Resources */,
 				38A200B51731607F00FB9F57 /* IconUsername~iphone.png in Resources */,
+				F46BFF2519645E77006A28EF /* SYNFeedAvatarOverlayViewController~ipad.xib in Resources */,
 				4C5E861C18B6580300D0E937 /* SYNDiscoverOverlayHighlightsViewController~iphone.xib in Resources */,
 				4CDD76A818CA014A000B2CBD /* SYNFeedOverlayAddingViewController~iphone.xib in Resources */,
 				993B1B45191AA4B5008532D4 /* TabFeed~ipad.png in Resources */,
@@ -4872,6 +4885,7 @@
 				BE3574E917CE07B00083CBB1 /* SYNOneToOneSharingController.m in Sources */,
 				BE06EEF417D78DCA0028F2E3 /* SYNOneToOneFriendCell.m in Sources */,
 				E9E1E28118561C780051E312 /* SYNPopoverAnimator.m in Sources */,
+				F46BFF2119645E34006A28EF /* SYNFeedAvatarOverlayViewController.m in Sources */,
 				BEB31305181565CE00FAF98A /* SYNSearchResultsViewController.m in Sources */,
 				0110AE6117DF383C00DC7724 /* SYNProgressView.m in Sources */,
 			);

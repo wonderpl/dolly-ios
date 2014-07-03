@@ -34,6 +34,7 @@
 #import "SYNIPadFeedLayout.h"
 #import <TestFlight.h>
 #import "SYNVideoPlayerDismissIndex.h"
+#import "SYNFeedAvatarOverlayViewController.h"
 
 static const CGFloat heightLandscape = 703;
 static const CGFloat heightPortrait = 985;
@@ -326,8 +327,7 @@ static const CGFloat heightPortrait = 985;
 
 - (void) showInboarding {
     NSInteger value = [[NSUserDefaults standardUserDefaults] integerForKey: kUserDefaultsFeedCount];
-
-    if (value < 3 && self.shownInboarding == NO) {
+    if (value < 6 && self.shownInboarding == NO) {
         if ([self.model itemCount]>0 && [self.model itemIndexForFeedIndex:0] == FeedItemResourceTypeVideo ) {
             
             [self.feedCollectionView setContentOffset:CGPointMake(0, -self.feedCollectionView.contentInset.top) animated:NO];
@@ -339,6 +339,11 @@ static const CGFloat heightPortrait = 985;
             
             if (value == 2) {
                 SYNFeedOverlayLovingViewController* overlay = [[SYNFeedOverlayLovingViewController alloc] init];
+                [overlay addToViewController:appDelegate.masterViewController];
+            }
+            
+            if (value == 5) {
+                SYNFeedAvatarOverlayViewController *overlay = [[SYNFeedAvatarOverlayViewController alloc] init];
                 [overlay addToViewController:appDelegate.masterViewController];
             }
             
