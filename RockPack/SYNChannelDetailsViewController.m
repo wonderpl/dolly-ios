@@ -180,14 +180,12 @@ static const CGFloat HeaderHeightIPad = 530;
     } else {
         self.txtViewDescription.placeholder = @"       Change collection details";
         self.txtViewTitle.placeholder = @"Change collection title";
-        
     }
     
     self.btnShowVideos.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     
     [self.videoThumbnailCollectionView reloadData];
     [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
-    
     
     [self setUpMode];
     
@@ -327,8 +325,6 @@ static const CGFloat HeaderHeightIPad = 530;
 
     [self.btnAvatar setContentMode:UIViewContentModeScaleToFill];
     [self.btnAvatar.imageView setContentMode:UIViewContentModeScaleToFill];
-    
-    
     [self.btnAvatar setImageWithURL: [NSURL URLWithString: self.channel.channelOwner.thumbnailLargeUrl]
                            forState: UIControlStateNormal
                    placeholderImage: placeholderImage
@@ -346,7 +342,6 @@ static const CGFloat HeaderHeightIPad = 530;
 	self.lblDescription.attributedText = [self attributedDescriptionStringFrom:self.channel.channelDescription];
 	
     self.txtViewDescription.text = self.lblDescription.text;
-    
     
     [self updateButtonCounts];
     
@@ -591,10 +586,7 @@ static const CGFloat HeaderHeightIPad = 530;
         }
     }
     
-
-    
     [self displayChannelDetails];
-    
 }
 
 - (void) updateChannelOwnerWithUser
@@ -685,6 +677,9 @@ static const CGFloat HeaderHeightIPad = 530;
         self.model.delegate = self;
         [self.videoThumbnailCollectionView reloadData];
 
+        if (self.autoplayId) {
+            [self showDeepLink];
+        }
 	});
 }
 
@@ -1567,46 +1562,6 @@ static const CGFloat HeaderHeightIPad = 530;
     [self.view removeGestureRecognizer:self.tapToHideKeyoboard];
 }
 
-
--(void) setAutoplayId:(NSString *)autoplayId
-{
-    
-    __block UIViewController *viewController;
-	
-    [appDelegate.oAuthNetworkEngine videoForChannelForUserId:appDelegate.currentUser.uniqueId channelId:self.channel.uniqueId instanceId:autoplayId completionHandler:^(id response) {
-        
-        VideoInstance *vidToPlay = [VideoInstance instanceFromDictionary:response usingManagedObjectContext:appDelegate.mainManagedObjectContext];
-		
-		NSInteger position = [self.channel.videoInstances indexOfObjectPassingTest:^BOOL(VideoInstance *videoInstance, NSUInteger idx, BOOL *stop) {
-			return [videoInstance.uniqueId isEqual:vidToPlay.uniqueId];
-		}];
-		
-		NSArray *videosArray = [self.channel.videoInstancesSet array];
-		SYNPagingModel *model = [[SYNStaticModel alloc] initWithItems:videosArray];
-        
-        //If the Video was not found, add the video instance to th end.
-        if (position == NSNotFound) {
-            
-            [self.channel addVideoInstancesObject:vidToPlay];
-			
-            
-			viewController = [SYNVideoPlayerViewController viewControllerWithModel:model
-																	 selectedIndex:[videosArray count] - 1];
-        } else {
-			viewController = [SYNVideoPlayerViewController viewControllerWithModel:model
-																	 selectedIndex:position];
-        }
-        
-		[self.navigationController presentViewController:viewController animated:YES completion:nil];
-        
-    } errorHandler:^(id  error) {
-		//TODO: Displaying something when the video is not found
-	
-	}];
-
-}
-
-
 -(NSMutableAttributedString*) attributedDescriptionStringFrom:(NSString *) string {
 	
 	if (!string) {
@@ -1687,6 +1642,42 @@ static const CGFloat HeaderHeightIPad = 530;
     
 	[self presentViewController:viewController animated:YES completion:nil];
 
+}
+
+- (void)showDeepLink {
+    __block UIViewController *viewController;
+    
+    [appDelegate.oAuthNetworkEngine videoForChannelForUserId:appDelegate.currentUser.uniqueId channelId:self.channel.uniqueId instanceId:self.autoplayId completionHandler:^(id response) {
+        
+        VideoInstance *vidToPlay = [VideoInstance instanceFromDictionary:response usingManagedObjectContext:appDelegate.mainManagedObjectContext];
+        
+        NSInteger position = [self.channel.videoInstances indexOfObjectPassingTest:^BOOL(VideoInstance *videoInstance, NSUInteger idx, BOOL *stop) {
+            return [videoInstance.uniqueId isEqual:vidToPlay.uniqueId];
+        }];
+        
+        
+        //If the Video was not found, add the video instance to th end.
+        
+        if (position == NSNotFound) {
+            
+            [self.channel addVideoInstancesObject:vidToPlay];
+            
+            viewController = [SYNVideoPlayerViewController viewControllerWithModel:self.model
+                                                                     selectedIndex:[self.model itemCount] - 1];
+        } else {
+            
+            viewController = [SYNVideoPlayerViewController viewControllerWithModel:self.model
+                                                                     selectedIndex:position];
+        }
+        
+        [self.navigationController presentViewController:viewController animated:YES completion:nil];
+        
+        self.autoplayId = nil;
+        
+    } errorHandler:^(id  error) {
+        //TODO: Displaying something when the video is not found
+        
+    }];
 }
 
 

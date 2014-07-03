@@ -152,7 +152,7 @@
             if ([userChannel.uniqueId isEqualToString: channel.uniqueId])
             {
                 [userChannel setAttributesFromDictionary: channelDictionary
-                                     ignoringObjectTypes: kIgnoreChannelOwnerObject];
+                                     ignoringObjectTypes: kIgnoreNothing];
                 
                 //channel.channelOwner = appDelegate.currentUser;
                 
@@ -174,6 +174,10 @@
     // define success block //
     
     MKNKUserErrorBlock errorBlock = ^(NSDictionary *errorDictionary) {
+        
+        
+        
+        
         DebugLog(@"Update action failed");
     };
     

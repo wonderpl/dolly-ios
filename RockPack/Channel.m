@@ -184,6 +184,14 @@
         hasVideoInstances = NO;
     }
     
+    NSDictionary *ownerDictionary = dictionary[@"owner"];
+    if (!(ignoringObjects & kIgnoreChannelOwnerObject) && ownerDictionary)
+    {
+        self.channelOwner = [ChannelOwner instanceFromDictionary: ownerDictionary
+                                       usingManagedObjectContext: self.managedObjectContext
+                                             ignoringObjectTypes: ignoringObjects | kIgnoreChannelObjects];
+    }
+
     if (!(ignoringObjects & kIgnoreVideoInstanceObjects) && hasVideoInstances)
     {
         
@@ -278,8 +286,8 @@
             {
                 videoInstance.position = newPosition;
             }
-			
-			if (!videoInstance.originator) {
+	
+            if (!videoInstance.originator) {
 				videoInstance.originator = self.channelOwner;
 			}
             
@@ -317,15 +325,6 @@
     }
     
     [self setBasicAttributesFromDictionary: dictionary];
-    
-    NSDictionary *ownerDictionary = dictionary[@"owner"];
-    
-    if (!(ignoringObjects & kIgnoreChannelOwnerObject) && ownerDictionary)
-    {
-        self.channelOwner = [ChannelOwner instanceFromDictionary: ownerDictionary
-                                       usingManagedObjectContext: self.managedObjectContext
-                                             ignoringObjectTypes: ignoringObjects | kIgnoreChannelObjects];
-    }
     
     self.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribedToUserId:self.uniqueId];
 }

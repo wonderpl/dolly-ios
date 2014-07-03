@@ -565,16 +565,8 @@
 //    [self viewChannelDetails:channel withAnimation:NO];
     SYNChannelDetailsViewController *channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel
                                                                usingMode:kChannelDetailsModeDisplay];
-    
-    [UIView animateWithDuration:0.5 animations:^{
-        [self.navigationController pushViewController:channelVC animated:NO];
-        
-    } completion:^(BOOL finished) {
-        channelVC.autoplayId = videoId;
-    }];
-
-    
-
+    channelVC.autoplayId = videoId;
+    [self.navigationController pushViewController:channelVC animated:YES];
 }
 
 - (UIViewController *)viewControllerOfClass:(Class)class {
