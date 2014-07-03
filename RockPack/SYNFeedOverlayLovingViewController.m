@@ -29,19 +29,12 @@
     if (IS_IPAD) {
         
         if (UIDeviceOrientationIsLandscape([SYNDeviceManager.sharedInstance orientation])) {
-            
             self.heartImage.frame = CGRectMake(136, 404, 24, 22);
-            
             self.textLabel.frame = CGRectMake(77, 251, 332, 129);
-            
-            
         } else {
 
             self.heartImage.frame = CGRectMake(183, 350, 24, 22);
-            
             self.textLabel.frame = CGRectMake(123, 197, 332, 129);
-
-            
         }
     }
 }
