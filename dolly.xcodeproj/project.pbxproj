@@ -265,6 +265,8 @@
 		4CF454E219113BCE0078473B /* searchbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CF454E019113BCE0078473B /* searchbar@2x.png */; };
 		7D034BB1193793EA00E4CBD1 /* InboardingShopMotionActionButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D034BAF193793EA00E4CBD1 /* InboardingShopMotionActionButton.png */; };
 		7D034BB2193793EA00E4CBD1 /* InboardingShopMotionActionButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D034BB0193793EA00E4CBD1 /* InboardingShopMotionActionButton@2x.png */; };
+		7D2A159C196AF28500F03296 /* InboardingAvatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D2A159A196AF28500F03296 /* InboardingAvatar.png */; };
+		7D2A159D196AF28500F03296 /* InboardingAvatar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D2A159B196AF28500F03296 /* InboardingAvatar@2x.png */; };
 		7D6A477119362E9800B998EA /* ShopMotionButtonActive.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D6A476F19362E9800B998EA /* ShopMotionButtonActive.png */; };
 		7D6A477219362E9800B998EA /* ShopMotionButtonActive@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D6A477019362E9800B998EA /* ShopMotionButtonActive@2x.png */; };
 		7D6D4F5A192A275C0084DC84 /* TabProfile@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D6D4F56192A275C0084DC84 /* TabProfile@2x~ipad.png */; };
@@ -1119,6 +1121,8 @@
 		4CF454E019113BCE0078473B /* searchbar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchbar@2x.png"; sourceTree = "<group>"; };
 		7D034BAF193793EA00E4CBD1 /* InboardingShopMotionActionButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InboardingShopMotionActionButton.png; sourceTree = "<group>"; };
 		7D034BB0193793EA00E4CBD1 /* InboardingShopMotionActionButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "InboardingShopMotionActionButton@2x.png"; sourceTree = "<group>"; };
+		7D2A159A196AF28500F03296 /* InboardingAvatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InboardingAvatar.png; sourceTree = "<group>"; };
+		7D2A159B196AF28500F03296 /* InboardingAvatar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "InboardingAvatar@2x.png"; sourceTree = "<group>"; };
 		7D6A476F19362E9800B998EA /* ShopMotionButtonActive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ShopMotionButtonActive.png; sourceTree = "<group>"; };
 		7D6A477019362E9800B998EA /* ShopMotionButtonActive@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ShopMotionButtonActive@2x.png"; sourceTree = "<group>"; };
 		7D6D4F56192A275C0084DC84 /* TabProfile@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabProfile@2x~ipad.png"; sourceTree = "<group>"; };
@@ -2106,6 +2110,8 @@
 		019824DE1629CA5900216900 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				7D2A159A196AF28500F03296 /* InboardingAvatar.png */,
+				7D2A159B196AF28500F03296 /* InboardingAvatar@2x.png */,
 				F4A443D8193639D8009287FA /* Shop Motion */,
 				7D6A476F19362E9800B998EA /* ShopMotionButtonActive.png */,
 				7D6A477019362E9800B998EA /* ShopMotionButtonActive@2x.png */,
@@ -4303,6 +4309,7 @@
 				E99F587118FC102700BA2CE4 /* SYNVideoLoadingView.xib in Resources */,
 				4CE8AAD118967E4B00D7E373 /* SYNNotificationsMarkAllAsReadCell.xib in Resources */,
 				38A200AA1731607F00FB9F57 /* IconBirthday@2x~iphone.png in Resources */,
+				7D2A159C196AF28500F03296 /* InboardingAvatar.png in Resources */,
 				F4A4440519363A0F009287FA /* ShopMotion14.png in Resources */,
 				38A200AB1731607F00FB9F57 /* IconBirthday~iphone.png in Resources */,
 				38A200AC1731607F00FB9F57 /* IconEmail@2x~iphone.png in Resources */,
@@ -4488,6 +4495,7 @@
 				BEB313B518280F1200FAF98A /* divider_feed.png in Resources */,
 				0E26BB4C182D1209008A57F1 /* SYNChannelDetailsViewController~ipad.xib in Resources */,
 				BE57C0201843588A00C6444A /* SYNOnBoardingViewController.xib in Resources */,
+				7D2A159D196AF28500F03296 /* InboardingAvatar@2x.png in Resources */,
 				1F4560721844E5EF0098983B /* PlaceholderAvatarFriends@2x.png in Resources */,
 				9937CA3119228EFC002D3C23 /* intro-home@2x~ipad.jpg in Resources */,
 				F46D8C4D192CC6A00048C486 /* inboardingSearchBox@2x~iphone.png in Resources */,

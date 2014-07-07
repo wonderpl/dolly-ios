@@ -21,11 +21,11 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="PlaceholderAvatarChannel.png" translatesAutoresizingMaskIntoConstraints="NO" id="ffE-a0-Y48">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="InboardingAvatar.png" translatesAutoresizingMaskIntoConstraints="NO" id="ffE-a0-Y48">
                     <rect key="frame" x="139" y="474" width="43" height="43"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="PlaceholderAvatarChannel.png" translatesAutoresizingMaskIntoConstraints="NO" id="Vlt-0g-ivU">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="InboardingAvatar.png" translatesAutoresizingMaskIntoConstraints="NO" id="Vlt-0g-ivU">
                     <rect key="frame" x="139" y="74" width="43" height="43"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -36,6 +36,6 @@
         </view>
     </objects>
     <resources>
-        <image name="PlaceholderAvatarChannel.png" width="60" height="60"/>
+        <image name="InboardingAvatar.png" width="43" height="43"/>
     </resources>
 </document>

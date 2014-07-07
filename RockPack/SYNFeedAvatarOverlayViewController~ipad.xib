@@ -29,13 +29,13 @@
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PlaceholderAvatarChannel.png" id="0vq-oc-wEM">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="InboardingAvatar.png" id="0vq-oc-wEM">
                             <rect key="frame" x="338" y="33" width="43" height="43"/>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PlaceholderAvatarChannel.png" id="HLX-EM-vz9">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="InboardingAvatar.png" id="HLX-EM-vz9">
                             <rect key="frame" x="175" y="605" width="43" height="43"/>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PlaceholderAvatarChannel.png" id="knm-Dd-tRQ">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="InboardingAvatar.png" id="knm-Dd-tRQ">
                             <rect key="frame" x="509" y="605" width="43" height="43"/>
                         </imageView>
                     </subviews>
@@ -47,6 +47,6 @@
         </view>
     </objects>
     <resources>
-        <image name="PlaceholderAvatarChannel.png" width="120" height="120"/>
+        <image name="InboardingAvatar.png" width="43" height="43"/>
     </resources>
 </document>
