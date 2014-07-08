@@ -115,6 +115,7 @@
     
     [self.coverImage setImageWithURL:[NSURL URLWithString: thumbnailUrlString]
                     placeholderImage:[UIImage imageNamed: @"placeholderwhite"]
+    						 options:SDWebImageRetryFailed
                            completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
                                if (image && cacheType == SDImageCacheTypeNone)
                                {

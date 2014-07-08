@@ -584,7 +584,7 @@ static const CGFloat TransitionDuration = 0.5f;
         }
         
         [self.channelCollectionViewController.cv reloadData];
-        
+        [self.videoCollectionViewController.cv reloadData];
     } onError:nil];
 }
 
@@ -593,30 +593,27 @@ static const CGFloat TransitionDuration = 0.5f;
     if (self.isUserProfile) {
         if (self.isChannelsCollectionViewShowing) {
             
-            if (self.isUserProfile) {
-                [appDelegate.oAuthNetworkEngine userDataForUser: ((User *) self.channelOwner)
-                                                        inRange: NSMakeRange(0, STANDARD_REQUEST_LENGTH)
-
-                                                   onCompletion: ^(id dictionary) {
-                                                       
-                                                       if (self.channelOwner)
-                                                       {
-                                                           [self.channelOwner setAttributesFromDictionary: dictionary
-                                                                                      ignoringObjectTypes: kIgnoreNothing];
+            [appDelegate.oAuthNetworkEngine userDataForUser: ((User *) self.channelOwner)
+                                                    inRange: NSMakeRange(0, STANDARD_REQUEST_LENGTH)
+             
+                                               onCompletion: ^(id dictionary) {
+                                                   
+                                                   if (self.channelOwner)
+                                                   {
+                                                       [self.channelOwner setAttributesFromDictionary: dictionary
+                                                                                  ignoringObjectTypes: kIgnoreNothing];
+                                                   }
+                                                   
+                                                   [self.subscriptionCollectionViewController.model loadNextPageWithCompletionHandler:^(BOOL success, BOOL hasChanged) {
+                                                       [self.subscriptionCollectionViewController.headerView setSegmentedControllerText];
+                                                       if (success) {
+                                                           [self.subscriptionCollectionViewController.cv reloadData];
+                                                           [self.channelCollectionViewController.cv reloadData];
                                                        }
-                                                       
-                                                       [self.subscriptionCollectionViewController.model loadNextPageWithCompletionHandler:^(BOOL success, BOOL hasChanged) {
-                                                           [self.subscriptionCollectionViewController.headerView setSegmentedControllerText];
-                                                           if (success) {
-                                                               [self.subscriptionCollectionViewController.cv reloadData];
-                                                               [self.channelCollectionViewController.cv reloadData];
-                                                           }
-                                                       }];
-                                                   } onError: nil];
-
-            } else {
-                [self setOtherUserProfileData];
-            }
+                                                   }];
+                                               } onError: nil];
+            
+            
         } else {
             
             [self.subscriptionCollectionViewController.model reloadInitialPageWithCompletionHandler:^(BOOL success, BOOL hasChanged) {
@@ -627,11 +624,12 @@ static const CGFloat TransitionDuration = 0.5f;
     
     } else {
         if ([self isVideosCollectionViewShowing]) {
-            [self.videoCollectionViewController.model loadNextPage];
+            [self.videoCollectionViewController.model loadNextPageWithCompletionHandler:^(BOOL success, BOOL hasChanged) {
+                [self.videoCollectionViewController.cv reloadData];
+            }];
         } else {
             [self.subscriptionCollectionViewController.model reloadInitialPageWithCompletionHandler:^(BOOL success, BOOL hasChanged) {
                 [self.subscriptionCollectionViewController.cv reloadData];
-               	[self.videoCollectionViewController.cv reloadData];
             }];
         }
     }
