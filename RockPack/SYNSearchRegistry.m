@@ -235,14 +235,8 @@
     for (NSDictionary *itemDictionary in itemsDictionary)
     {
         
-        if (!(friend = existingFriendsByUID[itemDictionary[@"id"]]))
-        {
-            if (!(friend = [Friend instanceFromDictionary: itemDictionary
-                                usingManagedObjectContext: appDelegate.searchManagedObjectContext]))
-            {
-                continue;
-            }
-        }
+    	friend = [Friend instanceFromDictionary: itemDictionary
+                      usingManagedObjectContext: appDelegate.searchManagedObjectContext];
         
         // if an address book friend has been transfered to
         
