@@ -272,7 +272,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
         
         channel = self.channelOwner.channels[indexPath.row - (self.isUserProfile ? 1 : 0)];
         
-        if (channel.favouritesValue) {
+        if (channel.favouritesValue || channel.watchLaterValue) {
             channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsFavourites];
             [self.navigationController pushViewController:channelVC animated:YES];
             return;
