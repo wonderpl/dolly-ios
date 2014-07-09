@@ -19,6 +19,7 @@
 #import "SYNTrackingManager.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import <Reachability.h>
+#import "SYNTwitterManager.h"
 
 #define DEGREES_RADIANS(angle) ((angle) / 180.0 * M_PI)
 
@@ -26,7 +27,7 @@ static const CGFloat CloudTiming = 0.5f;
 static const CGFloat DelayConstant = 0.5;
 
 
-@interface SYNiPhoneIntroViewController () <UINavigationControllerDelegate, UIViewControllerTransitioningDelegate>
+@interface SYNiPhoneIntroViewController () <UINavigationControllerDelegate, UIViewControllerTransitioningDelegate, UIActionSheetDelegate>
 
 @property (nonatomic, strong) SYNAppDelegate *appDelegate;
 
@@ -64,6 +65,8 @@ static const CGFloat DelayConstant = 0.5;
 @property (strong, nonatomic) IBOutlet UILabel *film;
 @property (strong, nonatomic) IBOutlet UILabel *learnFrom;
 
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
+
 @end
 
 @implementation SYNiPhoneIntroViewController
@@ -72,9 +75,10 @@ static const CGFloat DelayConstant = 0.5;
 	[super viewDidLoad];
 	
 	self.navigationController.delegate = self;
-	
+
 	self.appDelegate = [[UIApplication sharedApplication] delegate];
 	
+    self.spinner.hidden = YES;
     
     NSMutableArray* animationBlocks = [NSMutableArray new];
     
@@ -388,12 +392,7 @@ static const CGFloat DelayConstant = 0.5;
 - (IBAction)fadebookButtonPressed:(UIButton *)button {
 	[[SYNTrackingManager sharedManager] trackFacebookLogin];
 	
-	Reachability *reachability = [Reachability reachabilityWithHostname:self.appDelegate.networkEngine.hostName];
-    BOOL isReachable = ([reachability currentReachabilityStatus] != NotReachable);
-	if (!isReachable) {
-		[self showNetworkInacessibleAlert];
-		return;
-	}
+    [self reachable];
     
 	[[SYNLoginManager sharedManager] loginThroughFacebookWithCompletionHandler:^(NSDictionary* dictionary) {
 		[[NSNotificationCenter defaultCenter] postNotificationName:kLoginCompleted object:self];
@@ -428,5 +427,51 @@ static const CGFloat DelayConstant = 0.5;
 					  otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
 }
 
+- (IBAction)twitterButtonPressed:(id)sender {
+    
+    [[SYNTrackingManager sharedManager] trackTwitterLogin];
+    //Twitter Tracking
+    [self reachable];
+    [[SYNTwitterManager sharedTwitterManager] refreshTwitterAccounts:^(BOOL completion) {
+        if (completion) {
+            UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Choose an Account" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
+            for (ACAccount *acct in [[SYNTwitterManager sharedTwitterManager] accounts]) {
+                [sheet addButtonWithTitle:acct.username];
+            }
+            
+            sheet.cancelButtonIndex = [sheet addButtonWithTitle:@"Cancel"];
+            [sheet showInView:self.view];
+        }
+    }];
+}
+
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    if (buttonIndex != actionSheet.cancelButtonIndex) {
+        self.spinner.hidden = NO;
+        [self.spinner startAnimating];
+
+		ACAccount *account = [[[SYNTwitterManager sharedTwitterManager] accounts] objectAtIndex:buttonIndex];
+        
+        [[SYNLoginManager sharedManager] loginThroughTwitterWithAccount:account CompletionHandler:^(NSDictionary * response) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kLoginCompleted
+                                                                object:self];
+            self.spinner.hidden = YES;
+            [self.spinner stopAnimating];
+            
+        } errorHandler:nil];
+    }
+}
+
+
+- (void)reachable {
+    Reachability *reachability = [Reachability reachabilityWithHostname:self.appDelegate.networkEngine.hostName];
+    BOOL isReachable = ([reachability currentReachabilityStatus] != NotReachable);
+	if (!isReachable) {
+		[self showNetworkInacessibleAlert];
+		return;
+	}
+}
 
 @end

@@ -21,6 +21,7 @@ typedef NS_ENUM(NSInteger, kNotificationObjectType);
 - (void)trackVideoAddFromScreenName:(NSString *)screenName;
 - (void)trackVideoLikeFromScreenName:(NSString *)screenName;
 - (void)trackFacebookLogin;
+- (void)trackTwitterLogin;
 - (void)trackUserLoginFromOrigin:(NSString *)origin;
 - (void)trackUserRegistrationFromOrigin:(NSString *)origin;
 - (void)trackVideoShareWithService:(NSString *)service;

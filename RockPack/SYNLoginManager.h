@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "SYNNetworkOperationJsonObject.h"
 
+@import Accounts;
+
 @interface SYNLoginManager : NSObject
 
 //registrationCheck is set to yes, when a user registers an account
@@ -18,6 +20,12 @@
 
 - (void)loginThroughFacebookWithCompletionHandler:(MKNKJSONCompleteBlock)completionBlock
 									 errorHandler:(MKNKUserErrorBlock)errorBlock;
+
+
+- (void)loginThroughTwitterWithAccount : (ACAccount *) account
+                      CompletionHandler:(MKNKJSONCompleteBlock)completionBlock
+                                    errorHandler:(MKNKUserErrorBlock)errorBlock;
+
 
 - (void)loginForUsername:(NSString *)username
 			 forPassword:(NSString *)password

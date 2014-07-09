@@ -18,6 +18,9 @@
 #import "SYNTrackingManager.h"
 #import "SYNDeviceManager.h"
 #import "UIFont+SYNFont.h"
+#import "SYNTwitterManager.h"
+
+@import Accounts;
 
 #define DEGREES_RADIANS(angle) ((angle) / 180.0 * M_PI)
 
@@ -25,7 +28,7 @@ static const CGFloat CloudTiming = 0.5f;
 static const CGFloat DelayConstant = 0.5;
 
 
-@interface SYNiPadIntroViewController () <UINavigationControllerDelegate>
+@interface SYNiPadIntroViewController () <UINavigationControllerDelegate, UIActionSheetDelegate>
 
 @property (nonatomic, strong) IBOutlet UIButton *facebookButton;
 @property (nonatomic, strong) IBOutlet UIButton *signupButton;
@@ -56,6 +59,10 @@ static const CGFloat DelayConstant = 0.5;
 @property (strong, nonatomic) IBOutlet UILabel *film;
 @property (strong, nonatomic) IBOutlet UILabel *learnFrom;
 
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
+@property (strong, nonatomic) UIActionSheet *actionSheet;
+
+
 @end
 
 @implementation SYNiPadIntroViewController
@@ -64,6 +71,8 @@ static const CGFloat DelayConstant = 0.5;
 	[super viewDidLoad];
 	
 	self.navigationController.delegate = self;
+    
+    self.spinner.hidden = YES;
     
     self.loginButton.layer.borderColor = [[UIColor clearColor] CGColor];
     self.signupButton.layer.borderColor = [[UIColor clearColor] CGColor];
@@ -315,6 +324,7 @@ static const CGFloat DelayConstant = 0.5;
 											 selector:@selector(applicationWillEnterForeground:)
 												 name:UIApplicationWillEnterForegroundNotification
 											   object:nil];
+    
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -375,7 +385,15 @@ static const CGFloat DelayConstant = 0.5;
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillEnterForegroundNotification object:nil];
 }
 
+- (void) willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    
+    [self.actionSheet dismissWithClickedButtonIndex:self.actionSheet.cancelButtonIndex animated:YES];
+}
+
 - (IBAction)facebookButtonPressed:(UIButton *)button {
+    
+    [[SYNTrackingManager sharedManager] trackFacebookLogin];
+
 	[self disableLoginButtons];
 	
 	__weak typeof(self) weakSelf = self;
@@ -433,5 +451,40 @@ static const CGFloat DelayConstant = 0.5;
 		self.loginButton.alpha = 1.0;
 	}];
 }
+- (IBAction)twitterButtonPressed:(id)sender {
+
+    [[SYNTrackingManager sharedManager] trackTwitterLogin];
+    
+    [[SYNTwitterManager sharedTwitterManager] refreshTwitterAccounts:^(BOOL completion) {
+        if (completion) {
+            self.actionSheet = [[UIActionSheet alloc] initWithTitle:@"Choose an Account" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
+            for (ACAccount *acct in [[SYNTwitterManager sharedTwitterManager] accounts]) {
+                [self.actionSheet addButtonWithTitle:acct.username];
+            }
+            self.actionSheet.cancelButtonIndex = [self.actionSheet addButtonWithTitle:@"Cancel"];
+            [self.actionSheet showInView:self.view];
+        }
+    }];
+
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    if (buttonIndex != actionSheet.cancelButtonIndex) {
+        self.spinner.hidden = NO;
+        [self.spinner startAnimating];
+        
+		ACAccount *account = [[[SYNTwitterManager sharedTwitterManager] accounts] objectAtIndex:buttonIndex];
+        
+        [[SYNLoginManager sharedManager]loginThroughTwitterWithAccount:account CompletionHandler:^(NSDictionary * response) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kLoginCompleted
+                                                                object:self];
+            self.spinner.hidden = YES;
+            [self.spinner stopAnimating];
+            
+        } errorHandler:nil];
+    }
+}
+
 
 @end

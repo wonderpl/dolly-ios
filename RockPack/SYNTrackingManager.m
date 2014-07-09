@@ -101,6 +101,11 @@ static const NSInteger TrackingDimensionConnection = 6;
 	[self trackEventWithCategory:UIActionCategory action:@"facebookLogin"];
 }
 
+- (void)trackTwitterLogin {
+	[self trackEventWithCategory:UIActionCategory action:@"twitterLogin"];
+}
+
+
 - (void)trackDiscoverScreenView {
 	[self trackScreenViewWithName:@"Discover"];
 }

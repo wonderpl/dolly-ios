@@ -280,6 +280,7 @@ static NSString* kPopularGenreUniqueId = @"1979";
 
 #define kOriginFacebook @"Facebook"
 #define kOriginWonderPL @"WonderPL"
+#define kOriginTwitter @"Twitter"
 
 // Accounts
 
@@ -293,8 +294,9 @@ static NSString* kPopularGenreUniqueId = @"1979";
 
 typedef enum : NSInteger {
     LoginOriginRockpack = 0,
-    LoginOriginFacebook = 1
-    
+    LoginOriginFacebook = 1,
+    LoginOriginTwitter = 2
+
 } LoginOrigin;
 
 #define kLoginCompleted @"kLoginCompleted"

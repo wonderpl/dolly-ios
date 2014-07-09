@@ -10,6 +10,7 @@
 #import "SYNAppDelegate.h"
 #import "SYNOAuthNetworkEngine.h"
 #import "SYNFacebookManager.h"
+#import "SYNTwitterManager.h"
 #import "SYNActivityManager.h"
 #import "SYNOAuth2Credential.h"
 #import "SYNTrackingManager.h"
@@ -123,6 +124,29 @@
 		errorBlock(errorString);
 	}];
 }
+
+
+- (void)loginThroughTwitterWithAccount:(ACAccount*)account
+                     CompletionHandler:(MKNKJSONCompleteBlock)completionBlock
+                          errorHandler:(MKNKUserErrorBlock)errorBlock {
+    
+    SYNTwitterManager *twitterManager = [SYNTwitterManager sharedTwitterManager];
+    
+    [twitterManager loginWithAccount:account OnSuccess: ^(SYNOAuth2Credential *credential) {
+        
+        
+        [self registerLoginWithCredentials:credential
+                                    origin:LoginOriginTwitter
+                         completionHandler:completionBlock
+                               errorHander:errorBlock];
+        
+        NSLog(@"twitterManager loginOnSuccess");
+    } onFailure: ^(NSString *errorString) {
+        
+        NSLog(@"twitterManager onFailure");
+    }];
+}
+
 
 - (void)doRequestPasswordResetForUsername:(NSString *)username
 						completionHandler:(MKNKJSONCompleteBlock)completionBlock

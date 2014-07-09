@@ -664,6 +664,9 @@
 		F419A153192A72FF00DBA621 /* register-button.png in Resources */ = {isa = PBXBuildFile; fileRef = F419A151192A72FF00DBA621 /* register-button.png */; };
 		F419A154192A72FF00DBA621 /* register-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F419A152192A72FF00DBA621 /* register-button@2x.png */; };
 		F4275BC0192BA65600A4714C /* SYNiPadSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4275BBE192BA65600A4714C /* SYNiPadSignupViewController.m */; };
+		F42AD96A196AE8990020B7A0 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = F42AD965196AE8980020B7A0 /* NSData+Base64.m */; };
+		F42AD96B196AE8990020B7A0 /* OAuth+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = F42AD967196AE8980020B7A0 /* OAuth+Additions.m */; };
+		F42AD96C196AE8990020B7A0 /* OAuthCore.m in Sources */ = {isa = PBXBuildFile; fileRef = F42AD969196AE8990020B7A0 /* OAuthCore.m */; };
 		F468C75A1937692C00838890 /* SYNShopMotionOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F468C7591937692C00838890 /* SYNShopMotionOverlayViewController.m */; };
 		F468C75C1937696300838890 /* SYNShopMotionOverlayViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = F468C75B1937696300838890 /* SYNShopMotionOverlayViewController~iphone.xib */; };
 		F468C75E1937697800838890 /* SYNShopMotionOverlayViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = F468C75D1937697800838890 /* SYNShopMotionOverlayViewController~ipad.xib */; };
@@ -728,6 +731,8 @@
 		F4A4441419363A0F009287FA /* ShopMotion14@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4A443F619363A0F009287FA /* ShopMotion14@2x.png */; };
 		F4A444161936602D009287FA /* ShopMotionBagItem.png in Resources */ = {isa = PBXBuildFile; fileRef = F4A444151936602D009287FA /* ShopMotionBagItem.png */; };
 		F4A4441819366089009287FA /* ShopMotionBagItem@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4A4441719366089009287FA /* ShopMotionBagItem@2x.png */; };
+		F4C692E9196AA41C00F57DD9 /* SYNTwitterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C692E8196AA41C00F57DD9 /* SYNTwitterManager.m */; };
+		F4C692EC196ACB5E00F57DD9 /* TWSignedRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C692EB196ACB5E00F57DD9 /* TWSignedRequest.m */; };
 		F4C7E588192E3419006053DA /* CoverUpload@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4C7E584192E3419006053DA /* CoverUpload@2x.png */; };
 		F4C7E589192E3419006053DA /* AvatarUpload.png in Resources */ = {isa = PBXBuildFile; fileRef = F4C7E585192E3419006053DA /* AvatarUpload.png */; };
 		F4C7E58A192E3419006053DA /* AvatarUpload@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4C7E586192E3419006053DA /* AvatarUpload@2x.png */; };
@@ -1688,6 +1693,12 @@
 		F419A152192A72FF00DBA621 /* register-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "register-button@2x.png"; sourceTree = "<group>"; };
 		F4275BBE192BA65600A4714C /* SYNiPadSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNiPadSignupViewController.m; sourceTree = "<group>"; };
 		F4275BBF192BA65600A4714C /* SYNIPadSignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNIPadSignupViewController.h; sourceTree = "<group>"; };
+		F42AD964196AE8980020B7A0 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
+		F42AD965196AE8980020B7A0 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
+		F42AD966196AE8980020B7A0 /* OAuth+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OAuth+Additions.h"; sourceTree = "<group>"; };
+		F42AD967196AE8980020B7A0 /* OAuth+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OAuth+Additions.m"; sourceTree = "<group>"; };
+		F42AD968196AE8990020B7A0 /* OAuthCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuthCore.h; sourceTree = "<group>"; };
+		F42AD969196AE8990020B7A0 /* OAuthCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuthCore.m; sourceTree = "<group>"; };
 		F468C7581937692C00838890 /* SYNShopMotionOverlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNShopMotionOverlayViewController.h; sourceTree = "<group>"; };
 		F468C7591937692C00838890 /* SYNShopMotionOverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNShopMotionOverlayViewController.m; sourceTree = "<group>"; };
 		F468C75B1937696300838890 /* SYNShopMotionOverlayViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNShopMotionOverlayViewController~iphone.xib"; sourceTree = "<group>"; };
@@ -1762,6 +1773,10 @@
 		F4A444151936602D009287FA /* ShopMotionBagItem.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ShopMotionBagItem.png; sourceTree = "<group>"; };
 		F4A4441719366089009287FA /* ShopMotionBagItem@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ShopMotionBagItem@2x.png"; sourceTree = "<group>"; };
 		F4A8F0911961B75900404F12 /* SYNVideoPlayerDismissIndex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYNVideoPlayerDismissIndex.h; sourceTree = "<group>"; };
+		F4C692E7196AA41C00F57DD9 /* SYNTwitterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNTwitterManager.h; sourceTree = "<group>"; };
+		F4C692E8196AA41C00F57DD9 /* SYNTwitterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNTwitterManager.m; sourceTree = "<group>"; };
+		F4C692EA196ACB5E00F57DD9 /* TWSignedRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWSignedRequest.h; sourceTree = "<group>"; };
+		F4C692EB196ACB5E00F57DD9 /* TWSignedRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWSignedRequest.m; sourceTree = "<group>"; };
 		F4C7E584192E3419006053DA /* CoverUpload@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CoverUpload@2x.png"; sourceTree = "<group>"; };
 		F4C7E585192E3419006053DA /* AvatarUpload.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AvatarUpload.png; sourceTree = "<group>"; };
 		F4C7E586192E3419006053DA /* AvatarUpload@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AvatarUpload@2x.png"; sourceTree = "<group>"; };
@@ -1975,10 +1990,20 @@
 		012502BA16CA8FCE0029C7C8 /* Social Media */ = {
 			isa = PBXGroup;
 			children = (
+				F42AD964196AE8980020B7A0 /* NSData+Base64.h */,
+				F42AD965196AE8980020B7A0 /* NSData+Base64.m */,
+				F42AD966196AE8980020B7A0 /* OAuth+Additions.h */,
+				F42AD967196AE8980020B7A0 /* OAuth+Additions.m */,
+				F42AD968196AE8990020B7A0 /* OAuthCore.h */,
+				F42AD969196AE8990020B7A0 /* OAuthCore.m */,
+				F4C692EA196ACB5E00F57DD9 /* TWSignedRequest.h */,
+				F4C692EB196ACB5E00F57DD9 /* TWSignedRequest.m */,
 				0155FA2617A81D7600B04B51 /* SYNSessionTokenCachingStrategy.h */,
 				0155FA2717A81D7600B04B51 /* SYNSessionTokenCachingStrategy.m */,
 				012502BB16CA8FE30029C7C8 /* SYNFacebookManager.h */,
 				012502BC16CA8FE30029C7C8 /* SYNFacebookManager.m */,
+				F4C692E7196AA41C00F57DD9 /* SYNTwitterManager.h */,
+				F4C692E8196AA41C00F57DD9 /* SYNTwitterManager.m */,
 			);
 			name = "Social Media";
 			sourceTree = "<group>";
@@ -4643,9 +4668,11 @@
 				010DEFE11629BDC40080F26B /* main.m in Sources */,
 				010DEFE51629BDC40080F26B /* SYNAppDelegate.m in Sources */,
 				4C0B956819128186008D8036 /* SYNSearchVideoSmallCell.m in Sources */,
+				F42AD96B196AE8990020B7A0 /* OAuth+Additions.m in Sources */,
 				99F300C6191BAF57002C1D25 /* UIViewController+PresentNotification.m in Sources */,
 				0198250D1629DCF100216900 /* SYNContainerViewController.m in Sources */,
 				E92D3358184CDFEA0025D1DF /* UICollectionReusableView+Helpers.m in Sources */,
+				F4C692EC196ACB5E00F57DD9 /* TWSignedRequest.m in Sources */,
 				019825F1162C94A300216900 /* UIColor+SYNColor.m in Sources */,
 				0E2AB166188462DD004557A4 /* SYNWebViewController.m in Sources */,
 				BEB31374181AC6DB00FAF98A /* SYNSocialAddButton.m in Sources */,
@@ -4779,6 +4806,7 @@
 				E994A92419080E9900C37AFB /* SYNFeedVideoLargeCell.m in Sources */,
 				BE21EEAF16FB4ECE0067223B /* SYNAccountSettingsPassword.m in Sources */,
 				4CF39EF418CDF4420077CDF0 /* SYNProfileSubscriptionViewController.m in Sources */,
+				F42AD96C196AE8990020B7A0 /* OAuthCore.m in Sources */,
 				E9F62550188404A8000EF6A2 /* SYNiPhoneLoginAnimator.m in Sources */,
 				BE21EEB216FB56090067223B /* SYNPaddedUITextField.m in Sources */,
 				E91F04521844BDB50009D610 /* SYNVideoLoadingView.m in Sources */,
@@ -4887,9 +4915,11 @@
 				E94BEFAC18C9F19A00762651 /* Recommendation.m in Sources */,
 				0155FA2817A81D7600B04B51 /* SYNSessionTokenCachingStrategy.m in Sources */,
 				BE8F938A17B1267900E7035F /* _ExternalAccount.m in Sources */,
+				F42AD96A196AE8990020B7A0 /* NSData+Base64.m in Sources */,
 				BE8F938D17B1268500E7035F /* ExternalAccount.m in Sources */,
 				BE1B3DC3180D4EEB00DA2BD6 /* SYNDiscoverViewController.m in Sources */,
 				0125FB6F182BEAFB00EC822E /* SYNAvatarButton.m in Sources */,
+				F4C692E9196AA41C00F57DD9 /* SYNTwitterManager.m in Sources */,
 				BE3574E917CE07B00083CBB1 /* SYNOneToOneSharingController.m in Sources */,
 				BE06EEF417D78DCA0028F2E3 /* SYNOneToOneFriendCell.m in Sources */,
 				E9E1E28118561C780051E312 /* SYNPopoverAnimator.m in Sources */,

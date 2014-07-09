@@ -104,7 +104,7 @@
 
 // This code block is common to all of the signup/signin methods
 - (void) addCommonOAuthPropertiesToUnsignedNetworkOperation: (SYNNetworkOperationJsonObject *) networkOperation
-                                                  forOrigin: (NSString*)origin // @"Facebook" | @"Rockpack"
+                                                  forOrigin: (NSString*)origin // @"Facebook" | @"Rockpack" | @"Twitter"
                                           completionHandler: (MKNKLoginCompleteBlock) completionBlock
                                                errorHandler: (MKNKUserErrorBlock) errorBlock
 {
@@ -223,6 +223,28 @@
     [self enqueueOperation: networkOperation];
 }
 
+- (void) doTwitterLoginWithAccessToken: (NSString *) twitterAccessToken
+                     completionHandler: (MKNKLoginCompleteBlock) completionBlock
+                          errorHandler: (MKNKUserErrorBlock) errorBlock {
+    
+    NSString *apiString = [NSString stringWithFormat: @"%@", kAPISecureExternalLogin];
+    
+    NSDictionary* postLoginParams = @{@"external_system" : @"twitter",
+                                             @"external_token" : twitterAccessToken};
+    
+    SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject*) [self operationWithPath: apiString
+                                                                                                        params: postLoginParams
+                                                                                                    httpMethod: @"POST"
+                                                                                                           ssl: TRUE];
+    
+    [self addCommonOAuthPropertiesToUnsignedNetworkOperation: networkOperation
+                                                   forOrigin: kOriginTwitter
+                                           completionHandler: completionBlock
+                                                errorHandler: errorBlock];
+    
+    [self enqueueOperation: networkOperation];
+    
+}
 
 // Get authentication token by using exisiting username and password
 - (void) doSimpleLoginForUsername: (NSString*) username

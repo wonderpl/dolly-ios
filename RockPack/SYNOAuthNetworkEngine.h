@@ -35,6 +35,11 @@ typedef void (^SYNOAuth2RefreshCompletionBlock)(NSError *error);
                       completionHandler: (MKNKLoginCompleteBlock) completionBlock
                            errorHandler: (MKNKUserErrorBlock) errorBlock;
 
+- (void) doTwitterLoginWithAccessToken: (NSString *) twitterAccessToken
+                     completionHandler: (MKNKLoginCompleteBlock) completionBlock
+                          errorHandler: (MKNKUserErrorBlock) errorBlock;
+
+
 - (void) doRequestPasswordResetForUsername: (NSString *) username
                          completionHandler: (MKNKJSONCompleteBlock) completionBlock
                               errorHandler: (MKNKErrorBlock) errorBlock;
@@ -338,5 +343,7 @@ typedef void (^SYNOAuth2RefreshCompletionBlock)(NSError *error);
                    andCommentId:(NSString*)commentId
               completionHandler:(MKNKUserSuccessBlock) completionBlock
                    errorHandler:(MKNKUserErrorBlock) errorBlock;
+
+
 
 @end

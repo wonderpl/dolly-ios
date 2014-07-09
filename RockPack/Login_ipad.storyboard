@@ -190,21 +190,21 @@ Watch, collect and  share only the very best videos</string>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Culture" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sDj-fh-1EC">
-                                                <rect key="frame" x="95.5" y="27" width="150" height="29"/>
+                                                <rect key="frame" x="96" y="27" width="150" height="29"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="The Mind" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YAy-4W-dnw">
-                                                <rect key="frame" x="190.5" y="56" width="150" height="29"/>
+                                                <rect key="frame" x="191" y="56" width="150" height="29"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Technology" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ML-e3-n6d">
-                                                <rect key="frame" x="80.5" y="78" width="170" height="29"/>
+                                                <rect key="frame" x="81" y="78" width="170" height="29"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -218,14 +218,14 @@ Watch, collect and  share only the very best videos</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="News" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1dS-FN-p50">
-                                                <rect key="frame" x="201.5" y="86" width="170" height="21"/>
+                                                <rect key="frame" x="202" y="86" width="170" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Wellness" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fFg-86-6w6">
-                                                <rect key="frame" x="184.5" y="62" width="170" height="21"/>
+                                                <rect key="frame" x="185" y="62" width="170" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -239,7 +239,7 @@ Watch, collect and  share only the very best videos</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Learn from the experts" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x8W-VM-Y3N">
-                                                <rect key="frame" x="45.5" y="50" width="320" height="67"/>
+                                                <rect key="frame" x="46" y="50" width="320" height="67"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -265,11 +265,32 @@ Watch, collect and  share only the very best videos</string>
                                     <constraint firstAttribute="centerY" secondItem="3xa-jt-3Ce" secondAttribute="centerY" constant="10" id="mLM-uv-8dJ"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ioM-qv-gtF">
+                                <rect key="frame" x="275" y="837" width="250" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.25217363910000001" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="hju-KN-giL"/>
+                                    <constraint firstAttribute="width" constant="250" id="pHI-vS-LCj"/>
+                                </constraints>
+                                <state key="normal" title="Twitter">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="twitterButtonPressed:" destination="Ceh-Ho-dNE" eventType="touchUpInside" id="4bp-G6-wer"/>
+                                </connections>
+                            </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="AV9-Dn-QH8">
+                                <rect key="frame" x="374" y="362" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="ioM-qv-gtF" firstAttribute="top" secondItem="rf0-Xo-Csq" secondAttribute="bottom" constant="25" id="0iz-5O-Jxp"/>
                             <constraint firstAttribute="centerX" secondItem="qMr-3b-WtQ" secondAttribute="centerX" id="AXq-ZD-0MN"/>
                             <constraint firstItem="54G-xj-dpn" firstAttribute="leading" secondItem="zle-rK-vkk" secondAttribute="leading" id="Asn-1m-rs7"/>
+                            <constraint firstAttribute="centerX" secondItem="AV9-Dn-QH8" secondAttribute="centerX" id="CVJ-FM-MUk"/>
                             <constraint firstItem="zXm-b9-WkI" firstAttribute="top" secondItem="Qoj-bm-0fN" secondAttribute="bottom" constant="-20" id="HNV-M3-o9y"/>
                             <constraint firstAttribute="trailing" secondItem="Tq0-Em-HOe" secondAttribute="trailing" id="IJg-ae-1eH"/>
                             <constraint firstAttribute="trailing" secondItem="54G-xj-dpn" secondAttribute="trailing" id="Jmw-19-V7Z"/>
@@ -286,6 +307,8 @@ Watch, collect and  share only the very best videos</string>
                             <constraint firstItem="Tq0-Em-HOe" firstAttribute="top" secondItem="Qoj-bm-0fN" secondAttribute="bottom" constant="-20" id="Zmn-ZT-EJO"/>
                             <constraint firstAttribute="centerY" secondItem="rf0-Xo-Csq" secondAttribute="centerY" constant="-106.5" id="aQC-o6-cIp"/>
                             <constraint firstItem="Tq0-Em-HOe" firstAttribute="leading" secondItem="zle-rK-vkk" secondAttribute="leading" id="aTk-XR-D3l"/>
+                            <constraint firstAttribute="centerY" secondItem="AV9-Dn-QH8" secondAttribute="centerY" constant="140" id="d7l-83-NsJ"/>
+                            <constraint firstItem="ioM-qv-gtF" firstAttribute="leading" secondItem="rf0-Xo-Csq" secondAttribute="trailing" constant="-493" id="d8E-AL-pyY"/>
                             <constraint firstItem="qMr-3b-WtQ" firstAttribute="width" secondItem="zle-rK-vkk" secondAttribute="width" id="eUC-sz-j8l"/>
                             <constraint firstItem="Xm2-MX-96s" firstAttribute="top" secondItem="54G-xj-dpn" secondAttribute="bottom" constant="-1" id="hHS-NN-Gfz"/>
                             <constraint firstAttribute="centerX" secondItem="kcf-dV-8Oi" secondAttribute="centerX" constant="-0.5" id="hY1-yE-VUI"/>
@@ -317,6 +340,7 @@ Watch, collect and  share only the very best videos</string>
                         <outlet property="news" destination="1dS-FN-p50" id="QP2-SW-EHh"/>
                         <outlet property="orView" destination="8hK-cH-d8z" id="rT4-HS-veG"/>
                         <outlet property="signupButton" destination="hYE-YL-Gus" id="jvW-IY-7qr"/>
+                        <outlet property="spinner" destination="AV9-Dn-QH8" id="MBo-I0-biu"/>
                         <outlet property="tech" destination="9ML-e3-n6d" id="IVh-I8-Fkp"/>
                         <outlet property="wellness" destination="fFg-86-6w6" id="yLz-lh-lqL"/>
                     </connections>
