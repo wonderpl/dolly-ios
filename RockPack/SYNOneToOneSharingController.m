@@ -26,6 +26,7 @@
 #import "SYNWonderMailActivity.h"
 #import "SYNTrackingManager.h"
 #import "SYNShareOverlayViewController.h"
+#import "SYNAddEmailAlertView.h"
 
 @import AddressBook;
 @import QuartzCore;
@@ -70,6 +71,8 @@ UISearchBarDelegate>
 @property (strong, nonatomic) IBOutlet UIView *textContainerView;
 @property (strong, nonatomic) IBOutlet UIView *searchBarContainer;
 
+@property (weak, nonatomic) SYNAppDelegate *appDelegate;
+
 @end
 
 
@@ -111,6 +114,9 @@ UISearchBarDelegate>
 {
     [super viewDidLoad];
     
+    
+    self.appDelegate = (SYNAppDelegate *) [[UIApplication sharedApplication] delegate];
+
     self.friends = [NSMutableArray array];
     self.recentFriends = @[];
     
@@ -265,6 +271,12 @@ UISearchBarDelegate>
    
 }
 
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if ([self.appDelegate.currentUser.emailAddress isEqualToString:@""]) {
+        [[SYNAddEmailAlertView sharedInstance] showAlertView];
+    }
+}
 - (void) viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     self.addressBookImageCache = nil;
@@ -469,7 +481,6 @@ UISearchBarDelegate>
 
 - (void) fetchAndDisplayFriends
 {
-    __weak SYNAppDelegate *appDelegate = (SYNAppDelegate *) [[UIApplication sharedApplication] delegate];
     __weak SYNOneToOneSharingController *weakSelf = self;
     NSError *error;
     NSMutableArray *existingFriendsArray = [[NSMutableArray alloc] init];
@@ -531,7 +542,7 @@ UISearchBarDelegate>
     }
     
     MKNKUserSuccessBlock successBlock = ^(id dictionary) {
-        if ([appDelegate.searchRegistry
+        if ([self.appDelegate.searchRegistry
              registerFriendsFromDictionary: dictionary])
         {
             [weakSelf fetchAndDisplayFriends]; // this will reload the collection view
@@ -552,8 +563,8 @@ UISearchBarDelegate>
         [self showLoader: NO];
     };
     
-    self.lastNetworkOperation = [appDelegate.oAuthNetworkEngine
-                                 friendsForUser: appDelegate.currentUser
+    self.lastNetworkOperation = [self.appDelegate.oAuthNetworkEngine
+                                 friendsForUser: self.appDelegate.currentUser
                                  onlyRecent: NO
                                  completionHandler: successBlock
                                  errorHandler: failureBlock];
@@ -561,38 +572,36 @@ UISearchBarDelegate>
 
 - (NSArray*) getFriendsOrderedByName {
     
-    __weak SYNAppDelegate *appDelegate = (SYNAppDelegate *) [[UIApplication sharedApplication] delegate];
     NSError *error;
 
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     
     [fetchRequest setEntity: [NSEntityDescription entityForName: @"Friend"
-                                         inManagedObjectContext: appDelegate.searchManagedObjectContext]];
+                                         inManagedObjectContext: self.appDelegate.searchManagedObjectContext]];
     
     fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"displayName" ascending:YES selector:@selector(caseInsensitiveCompare:)]];
     
     [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"displayName != %@", @""]];
     
-    return [NSMutableArray arrayWithArray:[appDelegate.searchManagedObjectContext executeFetchRequest: fetchRequest
+    return [NSMutableArray arrayWithArray:[self.appDelegate.searchManagedObjectContext executeFetchRequest: fetchRequest
                                                                                                 error: &error]];
 }
 
 
 // This gets Friends that do not have a display name
 - (NSArray*)getFriendsOrderedByEmail {
-    __weak SYNAppDelegate *appDelegate = (SYNAppDelegate *) [[UIApplication sharedApplication] delegate];
     NSError *error;
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     
     [fetchRequest setEntity: [NSEntityDescription entityForName: @"Friend"
-                                         inManagedObjectContext: appDelegate.searchManagedObjectContext]];
+                                         inManagedObjectContext: self.appDelegate.searchManagedObjectContext]];
 
     fetchRequest.sortDescriptors =  @[[NSSortDescriptor sortDescriptorWithKey:@"email" ascending:YES selector:@selector(caseInsensitiveCompare:)]];
     
     [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"displayName == %@", @""]];
     
-    return [NSMutableArray arrayWithArray:[appDelegate.searchManagedObjectContext executeFetchRequest: fetchRequest
+    return [NSMutableArray arrayWithArray:[self.appDelegate.searchManagedObjectContext executeFetchRequest: fetchRequest
                                                                                                 error: &error]];
 }
 
@@ -606,11 +615,9 @@ UISearchBarDelegate>
         return;
     }
     
-    SYNAppDelegate *appDelegate = (SYNAppDelegate *) [[UIApplication sharedApplication] delegate];
-    
     NSArray *arrayOfAddressBookContacts = (__bridge_transfer NSArray *) ABAddressBookCopyArrayOfAllPeople(addressBookRef);
     
-    self.addressBookImageCache = [appDelegate.searchRegistry
+    self.addressBookImageCache = [self.appDelegate.searchRegistry
                                   registerFriendsFromAddressBookArray: arrayOfAddressBookContacts];
     
     CFRelease(addressBookRef);
@@ -897,13 +904,12 @@ didSelectRowAtIndexPath: (NSIndexPath *) indexPath
 
 - (void) presentAlertToFillEmailForFriend: (Friend *) friend
 {
-    SYNAppDelegate *appDelegate = (SYNAppDelegate *) [[UIApplication sharedApplication] delegate];
     NSString *titleText;
     
     if (!friend) // possibly by pressing the 'add new email' cell
     {
         // create friend on the fly
-        friend = [Friend insertInManagedObjectContext: appDelegate.searchManagedObjectContext];
+        friend = [Friend insertInManagedObjectContext: self.appDelegate.searchManagedObjectContext];
         friend.externalSystem = @"email";
         
         titleText = @"Enter a New Email";
@@ -1097,11 +1103,10 @@ didSelectRowAtIndexPath: (NSIndexPath *) indexPath
     
     self.friendHeldInQueue = nil;
     
-    SYNAppDelegate *appDelegate = (SYNAppDelegate *) [[UIApplication sharedApplication] delegate];
     __weak SYNOneToOneSharingController *wself = self;
 	
     
-    [appDelegate.oAuthNetworkEngine emailShareWithObjectType: self.mutableShareDictionary[@"type"]
+    [self.appDelegate.oAuthNetworkEngine emailShareWithObjectType: self.mutableShareDictionary[@"type"]
                                                     objectId: self.mutableShareDictionary[@"object_id"]
                                                   withFriend: friend
                                            completionHandler: ^(id no_content) {
@@ -1125,7 +1130,7 @@ didSelectRowAtIndexPath: (NSIndexPath *) indexPath
                                                NSString *notificationText =
                                                [NSString stringWithFormat: NSLocalizedString(@"sharing_object_sent", nil), typeName];
                                                
-                                               [appDelegate.masterViewController presentNotificationWithMessage:notificationText
+                                               [self.appDelegate.masterViewController presentNotificationWithMessage:notificationText
                                                                                                         andType:NotificationMessageTypeSuccess];
                                                
 											   if ([self.mutableShareDictionary[@"type"] isEqualToString:@"channel"]) {
@@ -1135,7 +1140,7 @@ didSelectRowAtIndexPath: (NSIndexPath *) indexPath
 											   }
 											   
 											   [self dismissViewControllerAnimated:YES completion:^{
-												   [appDelegate.masterViewController presentNotificationWithMessage:notificationText
+												   [self.appDelegate.masterViewController presentNotificationWithMessage:notificationText
 																											andType:NotificationMessageTypeSuccess];
 											   }];
 											   

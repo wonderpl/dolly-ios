@@ -36,6 +36,8 @@
 #import "SYNFeedModel.h"
 #import "SYNVideoPlayerViewController.h"
 #import "SYNRemoteLogger.h"
+#import "SYNAddEmailAlertView.h"
+
 @import AVFoundation;
 
 @interface SYNAppDelegate () {
@@ -576,6 +578,12 @@
 
     SYNOAuth2Credential *credential = [SYNOAuth2Credential credentialFromKeychainForService: [[NSBundle mainBundle] bundleIdentifier]
                                                                                     account: self.currentUser.uniqueId];
+    
+    if (credential) {
+        
+        
+        [[SYNAddEmailAlertView sharedInstance] appBecameActive];
+    }
 	
 	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"applicationDidBecomeActive: Starting app in state: %d",
                                          application.applicationState]];
