@@ -74,13 +74,12 @@
            forCellReuseIdentifier:kNotificationsCellIdent];
 }
 
+
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	
-	[self loadNotificationsWithcompletion:^{
+    [self loadNotificationsWithcompletion:^{
         [self markAllAsRead];
     }];
-	
 	[[SYNTrackingManager sharedManager] trackActivityScreenView];
 }
 
@@ -101,7 +100,9 @@
 												  // Hack to stop the tab bar from being by scrolling via bouncing with no notifications
 												  self.tableView.alwaysBounceVertical = NO;
 												  
-												  [self displayPopupMessage:NSLocalizedString (@"notification_empty", nil) withLoader:NO];
+                                                  if ([self isViewLoaded]) {
+                                                      [self displayPopupMessage:NSLocalizedString (@"notification_empty", nil) withLoader:NO];
+                                                	}
 											  } else {
 												  self.tableView.alwaysBounceVertical = YES;
 												  
