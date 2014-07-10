@@ -82,11 +82,7 @@
     
     [saveButton setTitle:@"Save" forState:UIControlStateNormal];
     
-    UIColor* color = [UIColor colorWithRed:(188.0f/255.0f)
-                                     green:(186.0f/255.0f)
-                                      blue:(212.0f/255.0f)
-                                     alpha:1.0f];
-    
+    UIColor* color = [UIColor dollyGreen];
     
     saveButton.layer.borderColor = color.CGColor;
     saveButton.layer.borderWidth = 1.0f;
