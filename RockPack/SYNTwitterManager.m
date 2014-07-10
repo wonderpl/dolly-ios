@@ -49,7 +49,7 @@ static NSString * const kOAuthTokenSecretIdentifier = @"oauth_token_secret";
     
     return twitterManager;
 }
--(id)init {
+- (id)init {
 	if (self = [super init]) {
         _accountStore = [[ACAccountStore alloc] init];
         self.accountIndex = 0;
@@ -57,9 +57,9 @@ static NSString * const kOAuthTokenSecretIdentifier = @"oauth_token_secret";
     return self;
 }
 
-- (void) loginWithAccount:(ACAccount *)account
-                OnSuccess:(TwitterLoginSuccessBlock)successBlock
-                onFailure:(TwitterLoginFailureBlock)failureBlock {
+- (void)loginWithAccount:(ACAccount *)account
+               OnSuccess:(TwitterLoginSuccessBlock)successBlock
+               onFailure:(TwitterLoginFailureBlock)failureBlock {
     
     SYNAppDelegate *appDelegate = (SYNAppDelegate *)[[UIApplication sharedApplication] delegate];
     
@@ -82,7 +82,7 @@ static NSString * const kOAuthTokenSecretIdentifier = @"oauth_token_secret";
     }];
 }
 
-- (NSString*) createExternalTokenFromDict:(NSData*) responseData {
+- (NSString*)createExternalTokenFromDict:(NSData*) responseData {
     NSString *responseStr = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
     NSArray *parts = [responseStr componentsSeparatedByString:@"&"];
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
@@ -99,7 +99,7 @@ static NSString * const kOAuthTokenSecretIdentifier = @"oauth_token_secret";
                          withHandler:(TWAPIHandler)handler {
     NSParameterAssert(account);
 
-    [self _step1WithCompletion:^(NSData *data, NSError *error) {
+    [self getRequestTokenWithCompletion:^(NSData *data, NSError *error) {
         if (!data) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 handler(nil, error);
@@ -107,7 +107,7 @@ static NSString * const kOAuthTokenSecretIdentifier = @"oauth_token_secret";
         }
         else {
             NSString *signedReverseAuthSignature = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            [self _step2WithAccount:account signature:signedReverseAuthSignature andHandler:^(NSData *responseData, NSError *error) {
+            [self getAccessTokenWithAccount:account signature:signedReverseAuthSignature andHandler:^(NSData *responseData, NSError *error) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     handler(responseData, error);
                 });
@@ -116,9 +116,9 @@ static NSString * const kOAuthTokenSecretIdentifier = @"oauth_token_secret";
     }];
 }
 
-- (void)_step2WithAccount:(ACAccount *)account
-                signature:(NSString *)signedReverseAuthSignature
-               andHandler:(TWAPIHandler)completion {
+- (void)getAccessTokenWithAccount:(ACAccount *)account
+                        signature:(NSString *)signedReverseAuthSignature
+                       andHandler:(TWAPIHandler)completion {
     
     NSParameterAssert(account);
     NSParameterAssert(signedReverseAuthSignature);
@@ -147,7 +147,7 @@ static NSString * const kOAuthTokenSecretIdentifier = @"oauth_token_secret";
     return [SLRequest requestForServiceType:SLServiceTypeTwitter requestMethod:requestMethod URL:url parameters:dict];
 }
 
-- (void)_step1WithCompletion:(TWAPIHandler)completion {
+- (void)getRequestTokenWithCompletion:(TWAPIHandler)completion {
     
     NSURL *url = [NSURL URLWithString:kOAuthUrlRequestToken];
     TWSignedRequest *step1Request = [[TWSignedRequest alloc] initWithURL:url parameters:@{kXAuthMode: kReverseAuth} requestMethod:TWSignedRequestMethodPOST];

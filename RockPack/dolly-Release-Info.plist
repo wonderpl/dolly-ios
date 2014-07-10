@@ -53,6 +53,10 @@
 	<string>517447921656577</string>
 	<key>FacebookNamespace</key>
 	<string>wonderpl</string>
+	<key>TwitterConsumerKey</key>
+	<string>bVc3883tOUt6fr0cWp5A5HcWV</string>
+	<key>TwitterConsumerSecret</key>
+	<string>BpYdvlouNBJfKP7Ypb4WpHJq2Xm9SYtfCg9ixW3hnRNCYpbjiu</string>
 	<key>FullVersion</key>
 	<string>1.1.1</string>
 	<key>LSApplicationCategoryType</key>

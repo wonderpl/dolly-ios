@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>TwitterConsumerKey</key>
-	<string>bVc3883tOUt6fr0cWp5A5HcWV</string>
-	<key>TwitterConsumerSecret</key>
-	<string>BpYdvlouNBJfKP7Ypb4WpHJq2Xm9SYtfCg9ixW3hnRNCYpbjiu</string>
 	<key>APIHostName</key>
 	<string>api.dev.wonderpl.com</string>
 	<key>AppURLScheme</key>
@@ -57,6 +53,10 @@
 	<string>573323026048639</string>
 	<key>FacebookNamespace</key>
 	<string>wonderpl-dev</string>
+	<key>TwitterConsumerKey</key>
+	<string>bVc3883tOUt6fr0cWp5A5HcWV</string>
+	<key>TwitterConsumerSecret</key>
+	<string>BpYdvlouNBJfKP7Ypb4WpHJq2Xm9SYtfCg9ixW3hnRNCYpbjiu</string>
 	<key>FullVersion</key>
 	<string>1.1.1</string>
 	<key>LSApplicationCategoryType</key>

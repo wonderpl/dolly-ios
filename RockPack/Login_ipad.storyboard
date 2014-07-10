@@ -77,7 +77,7 @@
                                             <segue destination="ulM-qc-tb0" kind="push" id="oHh-i9-djB"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iS9-hS-oFd" userLabel="Login UIButton" customClass="SYNFormButton">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iS9-hS-oFd" userLabel="Login UIButton" customClass="SYNFormButton">
                                         <rect key="frame" x="241" y="165" width="286" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
@@ -265,34 +265,35 @@ Watch, collect and  share only the very best videos</string>
                                     <constraint firstAttribute="centerY" secondItem="3xa-jt-3Ce" secondAttribute="centerY" constant="10" id="mLM-uv-8dJ"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ioM-qv-gtF">
-                                <rect key="frame" x="275" y="837" width="250" height="60"/>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="AV9-Dn-QH8">
+                                <rect key="frame" x="374" y="362" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.25217363910000001" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ioM-qv-gtF">
+                                <rect key="frame" x="241" y="806" width="286" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="hju-KN-giL"/>
-                                    <constraint firstAttribute="width" constant="250" id="pHI-vS-LCj"/>
+                                    <constraint firstAttribute="width" constant="286" id="ENn-0l-nly"/>
+                                    <constraint firstAttribute="height" constant="50" id="YTj-lU-FzA"/>
                                 </constraints>
-                                <state key="normal" title="Twitter">
+                                <state key="normal" title="Twitter Log in" backgroundImage="login-button.png">
+                                    <color key="titleColor" red="0.25098039215686274" green="0.59999999999999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="twitterButtonPressed:" destination="Ceh-Ho-dNE" eventType="touchUpInside" id="4bp-G6-wer"/>
                                 </connections>
                             </button>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="AV9-Dn-QH8">
-                                <rect key="frame" x="374" y="362" width="20" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="ioM-qv-gtF" firstAttribute="top" secondItem="rf0-Xo-Csq" secondAttribute="bottom" constant="25" id="0iz-5O-Jxp"/>
                             <constraint firstAttribute="centerX" secondItem="qMr-3b-WtQ" secondAttribute="centerX" id="AXq-ZD-0MN"/>
                             <constraint firstItem="54G-xj-dpn" firstAttribute="leading" secondItem="zle-rK-vkk" secondAttribute="leading" id="Asn-1m-rs7"/>
                             <constraint firstAttribute="centerX" secondItem="AV9-Dn-QH8" secondAttribute="centerX" id="CVJ-FM-MUk"/>
+                            <constraint firstAttribute="centerY" secondItem="ioM-qv-gtF" secondAttribute="centerY" constant="-319" id="FBr-Jr-179"/>
                             <constraint firstItem="zXm-b9-WkI" firstAttribute="top" secondItem="Qoj-bm-0fN" secondAttribute="bottom" constant="-20" id="HNV-M3-o9y"/>
                             <constraint firstAttribute="trailing" secondItem="Tq0-Em-HOe" secondAttribute="trailing" id="IJg-ae-1eH"/>
+                            <constraint firstAttribute="centerX" secondItem="ioM-qv-gtF" secondAttribute="centerX" id="Jb4-uv-03S"/>
                             <constraint firstAttribute="trailing" secondItem="54G-xj-dpn" secondAttribute="trailing" id="Jmw-19-V7Z"/>
                             <constraint firstAttribute="trailing" secondItem="hG9-qn-YA6" secondAttribute="trailing" id="LkS-b2-sQZ"/>
                             <constraint firstItem="qMr-3b-WtQ" firstAttribute="bottom" secondItem="rf0-Xo-Csq" secondAttribute="bottom" constant="-355" id="O0m-xg-I0H"/>
@@ -308,7 +309,6 @@ Watch, collect and  share only the very best videos</string>
                             <constraint firstAttribute="centerY" secondItem="rf0-Xo-Csq" secondAttribute="centerY" constant="-106.5" id="aQC-o6-cIp"/>
                             <constraint firstItem="Tq0-Em-HOe" firstAttribute="leading" secondItem="zle-rK-vkk" secondAttribute="leading" id="aTk-XR-D3l"/>
                             <constraint firstAttribute="centerY" secondItem="AV9-Dn-QH8" secondAttribute="centerY" constant="140" id="d7l-83-NsJ"/>
-                            <constraint firstItem="ioM-qv-gtF" firstAttribute="leading" secondItem="rf0-Xo-Csq" secondAttribute="trailing" constant="-493" id="d8E-AL-pyY"/>
                             <constraint firstItem="qMr-3b-WtQ" firstAttribute="width" secondItem="zle-rK-vkk" secondAttribute="width" id="eUC-sz-j8l"/>
                             <constraint firstItem="Xm2-MX-96s" firstAttribute="top" secondItem="54G-xj-dpn" secondAttribute="bottom" constant="-1" id="hHS-NN-Gfz"/>
                             <constraint firstAttribute="centerX" secondItem="kcf-dV-8Oi" secondAttribute="centerX" constant="-0.5" id="hY1-yE-VUI"/>
