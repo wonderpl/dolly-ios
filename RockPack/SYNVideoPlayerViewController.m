@@ -82,6 +82,7 @@
 @property (nonatomic, strong) UIView *collectionOverLay;
 @property (nonatomic, assign) BOOL showingOverlay;
 @property (nonatomic, strong) UILabel *overlayLabel;
+@property (nonatomic, strong) UIImageView *swipeImageView;
 @property (nonatomic, strong) UIGestureRecognizer *inboardingTapGesture;
 
 @end
@@ -546,12 +547,20 @@
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
         [label setFont:[UIFont regularCustomFontOfSize:24]];
         [label setTextColor:[UIColor whiteColor]];
-        [label setText:@"Swipe the video overlay"];
+        [label setText:@"Swipe right to go to the next video or left to go back"];
         [label sizeToFit];
         
         self.overlayLabel = label;
+        
+        self.swipeImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"onboard-finger-swipe-gesture"]];
+        
+        self.swipeImageView.center = CGPointMake(self.view.center.x, self.view.center.y);
+        
+        [self.view addSubview:self.swipeImageView];
+        
+        
         [self.view addSubview:self.overlayLabel];
-
+        
         [self updateViewWithOrientation:[[UIApplication sharedApplication] statusBarOrientation]];
         
     	self.inboardingTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(screenTapped:)];
@@ -566,7 +575,9 @@
 - (void)updateViewWithOrientation:(UIDeviceOrientation)orientation {
     if (UIDeviceOrientationIsPortrait(orientation)) {
         self.overlayLabel.center = CGPointMake(self.view.center.x, self.view.center.y+100);
+        self.swipeImageView.center = CGPointMake(404, 412);
     } else {
+        self.swipeImageView.center = CGPointMake(532, 412);
         self.overlayLabel.center = CGPointMake(517.5, 613);
     }
 }

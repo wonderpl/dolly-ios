@@ -740,6 +740,8 @@
 		F4C7E58F192F59F6006053DA /* RemoveVideo.png in Resources */ = {isa = PBXBuildFile; fileRef = F4C7E58D192F59F6006053DA /* RemoveVideo.png */; };
 		F4C7E590192F59F6006053DA /* RemoveVideo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4C7E58E192F59F6006053DA /* RemoveVideo@2x.png */; };
 		F4C91B18196D833700A2AA91 /* SYNAddEmailAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C91B17196D833700A2AA91 /* SYNAddEmailAlertView.m */; };
+		F4C91B1B196EF1F100A2AA91 /* onboard-finger-swipe-gesture@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4C91B19196EF1F100A2AA91 /* onboard-finger-swipe-gesture@2x.png */; };
+		F4C91B1C196EF1F100A2AA91 /* onboard-finger-swipe-gesture.png in Resources */ = {isa = PBXBuildFile; fileRef = F4C91B1A196EF1F100A2AA91 /* onboard-finger-swipe-gesture.png */; };
 		F4F5062D192CAAD700993D0B /* SYNAddToChannelOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F5062C192CAAD700993D0B /* SYNAddToChannelOverlayViewController.m */; };
 		F4F5062F192CAAFA00993D0B /* SYNAddToChannelOverlayViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4F5062E192CAAFA00993D0B /* SYNAddToChannelOverlayViewController~iphone.xib */; };
 		F4F50631192CAB1D00993D0B /* SYNAddToChannelOverlayViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4F50630192CAB1D00993D0B /* SYNAddToChannelOverlayViewController~ipad.xib */; };
@@ -1786,6 +1788,8 @@
 		F4C7E58E192F59F6006053DA /* RemoveVideo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RemoveVideo@2x.png"; sourceTree = "<group>"; };
 		F4C91B16196D833700A2AA91 /* SYNAddEmailAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAddEmailAlertView.h; sourceTree = "<group>"; };
 		F4C91B17196D833700A2AA91 /* SYNAddEmailAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAddEmailAlertView.m; sourceTree = "<group>"; };
+		F4C91B19196EF1F100A2AA91 /* onboard-finger-swipe-gesture@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "onboard-finger-swipe-gesture@2x.png"; sourceTree = "<group>"; };
+		F4C91B1A196EF1F100A2AA91 /* onboard-finger-swipe-gesture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "onboard-finger-swipe-gesture.png"; sourceTree = "<group>"; };
 		F4F5062B192CAAD700993D0B /* SYNAddToChannelOverlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNAddToChannelOverlayViewController.h; sourceTree = "<group>"; };
 		F4F5062C192CAAD700993D0B /* SYNAddToChannelOverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNAddToChannelOverlayViewController.m; sourceTree = "<group>"; };
 		F4F5062E192CAAFA00993D0B /* SYNAddToChannelOverlayViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNAddToChannelOverlayViewController~iphone.xib"; sourceTree = "<group>"; };
@@ -2138,6 +2142,8 @@
 		019824DE1629CA5900216900 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				F4C91B19196EF1F100A2AA91 /* onboard-finger-swipe-gesture@2x.png */,
+				F4C91B1A196EF1F100A2AA91 /* onboard-finger-swipe-gesture.png */,
 				7D2A159A196AF28500F03296 /* InboardingAvatar.png */,
 				7D2A159B196AF28500F03296 /* InboardingAvatar@2x.png */,
 				F4A443D8193639D8009287FA /* Shop Motion */,
@@ -4155,6 +4161,7 @@
 				4CB63A6E18BD052E00825F7C /* placeholderwhite.png in Resources */,
 				BE1B3DC4180D4EEB00DA2BD6 /* SYNDiscoverViewController~iphone.xib in Resources */,
 				E9EF289618FD901E003B2D0F /* FreightTextPro-BookItalic.otf in Resources */,
+				F4C91B1C196EF1F100A2AA91 /* onboard-finger-swipe-gesture.png in Resources */,
 				E960239D18E5E6BA00A96CB4 /* SYNVideoPlayerViewController_iphone.storyboard in Resources */,
 				F4952B9E19406D2E00DB5E39 /* SYNDiscoverSearchOverlayViewController.xib in Resources */,
 				BE851B49183BE6BC00B8E8C6 /* ButtonUpload@2x.png in Resources */,
@@ -4344,6 +4351,7 @@
 				F4A4441819366089009287FA /* ShopMotionBagItem@2x.png in Resources */,
 				9937C9FE19222CBC002D3C23 /* wonder-logo~iphone.png in Resources */,
 				1F65D49017EB3C8C004326A9 /* Images.xcassets in Resources */,
+				F4C91B1B196EF1F100A2AA91 /* onboard-finger-swipe-gesture@2x.png in Resources */,
 				E99F587118FC102700BA2CE4 /* SYNVideoLoadingView.xib in Resources */,
 				4CE8AAD118967E4B00D7E373 /* SYNNotificationsMarkAllAsReadCell.xib in Resources */,
 				38A200AA1731607F00FB9F57 /* IconBirthday@2x~iphone.png in Resources */,
