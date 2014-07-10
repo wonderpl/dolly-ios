@@ -545,9 +545,12 @@
         [self.videoInfoViewController.view addSubview:self.collectionOverLay];
         
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-        [label setFont:[UIFont regularCustomFontOfSize:24]];
+        [label setFont:[UIFont regularCustomFontOfSize: IS_IPAD ? 24 : 22]];
         [label setTextColor:[UIColor whiteColor]];
-        [label setText:@"Swipe right to go to the next video or left to go back"];
+       	label.numberOfLines = 2;
+
+        [label setText:@"Swipe right to go to the next \n video or left to go back"];
+        
         [label sizeToFit];
         
         self.overlayLabel = label;
