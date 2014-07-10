@@ -180,53 +180,15 @@
     
     // fetch existing friends
     
-    NSError *error;
-    NSArray *existingFriendsArray;
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    
-    [fetchRequest setEntity: [NSEntityDescription entityForName: @"Friend"
-                                         inManagedObjectContext: appDelegate.searchManagedObjectContext]];
-    
     
     // friends from address book are not found in the web service responce and should be protected from deletion
     //fetchRequest.predicate = [NSPredicate predicateWithFormat:@"externalSystem != %@", kEmail];
     
-    existingFriendsArray = [appDelegate.searchManagedObjectContext
-                            executeFetchRequest: fetchRequest
-                            error: &error];
-    
-    
-    
-    NSMutableDictionary *existingFriendsByUID = [NSMutableDictionary dictionaryWithCapacity: existingFriendsArray.count];
-    NSMutableDictionary *existingFriendsByemail = [NSMutableDictionary dictionaryWithCapacity: existingFriendsArray.count];
+    NSArray *existingFriendsArray = [self getExistingFriends];
+    NSMutableDictionary *existingFriendsByUID = [self getFriendsByIdFromArray:existingFriendsArray];
+    NSMutableDictionary *existingFriendsByEmail = [self getFriendsByEmailFromArray:existingFriendsArray];
 
-    //    NSMutableDictionary* existingFriendsByEmail = [NSMutableDictionary dictionaryWithCapacity:existingFriendsArray.count];
-    
-    for (Friend *existingFriend in existingFriendsArray)
-    {
-        if (!existingFriend.uniqueId)
-        {
-            existingFriend.markedForDeletionValue = YES;
-            continue;
-        }
-        
-        existingFriendsByUID[existingFriend.uniqueId] = existingFriend;
-        if (existingFriend.email) {
-            existingFriendsByemail[existingFriend.email] = existingFriend;
-        }
-        
-        if (!existingFriend.localOriginValue) // protect the address book friends...
-        {
-            existingFriend.markedForDeletionValue = YES;
-        }
-        
-        //        else if (existingFriend.email && ![existingFriend.email isEqualToString:@""]) // ... and save them in the dictionary
-        //            existingFriendsByEmail[existingFriend.email] = existingFriend;
-    }
-    
     // parse new data
-    
     
     NSArray *itemsDictionary = usersDictionary[@"items"];
 
@@ -234,14 +196,19 @@
     
     for (NSDictionary *itemDictionary in itemsDictionary)
     {
-        
+        NSLog(@"%@", itemDictionary);
     	friend = [Friend instanceFromDictionary: itemDictionary
                       usingManagedObjectContext: appDelegate.searchManagedObjectContext];
-        
+
         // if an address book friend has been transfered to
         
-        if (existingFriendsByemail[itemDictionary[@"email"]]) {
-            friend.thumbnailURL = ((Friend*)existingFriendsByemail[itemDictionary[@"email"]]).thumbnailURL;
+        if ([existingFriendsByUID objectForKey:itemDictionary[@"external_uid"]]) {
+            
+            ((Friend*)[existingFriendsByUID objectForKey:itemDictionary[@"external_uid"]]).markedForDeletionValue = YES;
+        }
+        
+        if (existingFriendsByEmail[itemDictionary[@"email"]]) {
+            friend.thumbnailURL = ((Friend*)existingFriendsByEmail[itemDictionary[@"email"]]).thumbnailURL;
         }
         friend.markedForDeletionValue = NO;
     }
@@ -264,15 +231,64 @@
     return YES;
 }
 
-- (BOOL) registerVideoInstancesFromDictionary: (NSDictionary *) dictionary
-{
+- (NSArray*)getExistingFriends {
+    
+    NSError *error;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    [fetchRequest setEntity: [NSEntityDescription entityForName: @"Friend"
+                                         inManagedObjectContext: appDelegate.searchManagedObjectContext]];
+
+    
+    return [appDelegate.searchManagedObjectContext
+     executeFetchRequest: fetchRequest
+     error: &error];
+}
+
+- (NSMutableDictionary*)getFriendsByIdFromArray :(NSArray*) friendsArray {
+    
+    
+    NSMutableDictionary *existingFriendsByUID = [NSMutableDictionary dictionaryWithCapacity: friendsArray.count];
+
+    for (Friend *existingFriend in friendsArray)
+    {
+        //Defensive, No id so delete
+        if (!existingFriend.uniqueId)
+        {
+            existingFriend.markedForDeletionValue = YES;
+            continue;
+        }
+        existingFriendsByUID[existingFriend.uniqueId] = existingFriend;
+        
+        if (!existingFriend.localOriginValue) // protect the address book friends...
+        {
+            existingFriend.markedForDeletionValue = YES;
+        }
+    }
+
+    
+    return existingFriendsByUID;
+}
+
+- (NSMutableDictionary*)getFriendsByEmailFromArray :(NSArray*) friendsArray {
+    
+    NSMutableDictionary *existingFriendsByEmail = [NSMutableDictionary dictionaryWithCapacity: friendsArray.count];
+    
+    for (Friend *existingFriend in friendsArray) {
+        if (existingFriend.email) {
+            existingFriendsByEmail[existingFriend.email] = existingFriend;
+        }
+	}
+    
+    return existingFriendsByEmail;
+}
+
+
+- (BOOL)registerVideoInstancesFromDictionary: (NSDictionary *) dictionary {
     return [self registerVideoInstancesFromDictionary:dictionary withViewId:kSearchViewId];
 }
 
-- (BOOL) registerVideoInstancesFromDictionary: (NSDictionary *) dictionary withViewId:(NSString*)viewId
-{
-    
-    
+- (BOOL) registerVideoInstancesFromDictionary: (NSDictionary *) dictionary withViewId:(NSString*)viewId {
     // == Check for Validity == //
     
     NSDictionary *videosDictionary = dictionary[@"videos"];
@@ -354,8 +370,7 @@
 }
 
 // User Recommendations (like that on the on boarding) are registered as Recommendation Obejcts
-- (BOOL) registerRecommendationsFromDictionary: (NSDictionary *) dictionary
-{
+- (BOOL) registerRecommendationsFromDictionary: (NSDictionary *) dictionary {
 	// Delete existing recommendations
 	NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[Recommendation entityName]];
 	NSArray *recommendations = [importManagedObjectContext executeFetchRequest:fetchRequest error:nil];
@@ -376,7 +391,6 @@
         
         if(!recomendation)
             continue;
-        
     }
     
     BOOL saveResult = [self saveImportContext];
@@ -389,15 +403,10 @@
     [appDelegate saveSearchContext];
     
     return YES;
-    
-    
 }
 
-
-
 - (BOOL) registerChannelOwnersFromDictionary: (NSDictionary *) dictionary
-                                   forViewId: (NSString *) viewId
-{
+                                   forViewId: (NSString *) viewId {
     
     
     NSDictionary *channelOwnersDictionary = dictionary[@"users"];

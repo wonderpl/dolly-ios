@@ -470,33 +470,12 @@ UISearchBarDelegate>
 - (void) fetchAndDisplayFriends
 {
     __weak SYNAppDelegate *appDelegate = (SYNAppDelegate *) [[UIApplication sharedApplication] delegate];
-    
     __weak SYNOneToOneSharingController *weakSelf = self;
-    
-    
     NSError *error;
-    NSMutableArray *existingFriendsArray;
+    NSMutableArray *existingFriendsArray = [[NSMutableArray alloc] init];
     
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    
-    [fetchRequest setEntity: [NSEntityDescription entityForName: @"Friend"
-                                         inManagedObjectContext: appDelegate.searchManagedObjectContext]];
-    
-    
-    fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"displayName" ascending:YES selector:@selector(caseInsensitiveCompare:)]];
-    
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"displayName != %@", @""]];
-   
-    existingFriendsArray = [NSMutableArray arrayWithArray:[appDelegate.searchManagedObjectContext executeFetchRequest: fetchRequest
-                                                                                                                error: &error]];
-    
-    
-    fetchRequest.sortDescriptors =  @[[NSSortDescriptor sortDescriptorWithKey:@"email" ascending:YES selector:@selector(caseInsensitiveCompare:)]];
-    
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"displayName == %@", @""]];
-    
-    [existingFriendsArray addObjectsFromArray:[NSMutableArray arrayWithArray:[appDelegate.searchManagedObjectContext executeFetchRequest: fetchRequest
-                                                                                                                                   error: &error]]];
+    [existingFriendsArray addObjectsFromArray:[self getFriendsOrderedByName]];
+    [existingFriendsArray addObjectsFromArray:[self getFriendsOrderedByEmail]];
     
     if (!error)
     {
@@ -525,6 +504,7 @@ UISearchBarDelegate>
 
             }
         }
+        
         
         // sort by date
         self.recentFriends = [recentlySharedFriendsMutableArray sortedArrayUsingComparator: ^NSComparisonResult (Friend *friendA, Friend *friendB) {
@@ -579,6 +559,42 @@ UISearchBarDelegate>
                                  errorHandler: failureBlock];
 }
 
+- (NSArray*) getFriendsOrderedByName {
+    
+    __weak SYNAppDelegate *appDelegate = (SYNAppDelegate *) [[UIApplication sharedApplication] delegate];
+    NSError *error;
+
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    [fetchRequest setEntity: [NSEntityDescription entityForName: @"Friend"
+                                         inManagedObjectContext: appDelegate.searchManagedObjectContext]];
+    
+    fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"displayName" ascending:YES selector:@selector(caseInsensitiveCompare:)]];
+    
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"displayName != %@", @""]];
+    
+    return [NSMutableArray arrayWithArray:[appDelegate.searchManagedObjectContext executeFetchRequest: fetchRequest
+                                                                                                error: &error]];
+}
+
+
+// This gets Friends that do not have a display name
+- (NSArray*)getFriendsOrderedByEmail {
+    __weak SYNAppDelegate *appDelegate = (SYNAppDelegate *) [[UIApplication sharedApplication] delegate];
+    NSError *error;
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    [fetchRequest setEntity: [NSEntityDescription entityForName: @"Friend"
+                                         inManagedObjectContext: appDelegate.searchManagedObjectContext]];
+
+    fetchRequest.sortDescriptors =  @[[NSSortDescriptor sortDescriptorWithKey:@"email" ascending:YES selector:@selector(caseInsensitiveCompare:)]];
+    
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"displayName == %@", @""]];
+    
+    return [NSMutableArray arrayWithArray:[appDelegate.searchManagedObjectContext executeFetchRequest: fetchRequest
+                                                                                                error: &error]];
+}
 
 - (void) fetchAddressBookFriends
 {
@@ -869,7 +885,8 @@ didSelectRowAtIndexPath: (NSIndexPath *) indexPath
         [self presentAlertToFillEmailForFriend: nil];
     }
     
-	NSString *origin = (lastCellPressed ? @"New" : ([friend.externalSystem isEqualToString: kFacebook] ? @"fromFB" : @"fromAB"));
+	NSString *origin = (lastCellPressed ? @"New" : ([friend.externalSystem isEqualToString: kFacebook] ? @"fromFB" : [friend.externalSystem isEqualToString: kTwitter] ? @"fromTwitter" : @"fromAB"));
+    
 	[[SYNTrackingManager sharedManager] trackShareFriendSearchSelect:origin];
 	
     [tableView removeFromSuperview];
