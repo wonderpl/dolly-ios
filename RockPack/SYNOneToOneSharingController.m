@@ -273,7 +273,7 @@ UISearchBarDelegate>
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    if ([self.appDelegate.currentUser.emailAddress isEqualToString:@""]) {
+    if (![self.appDelegate.currentUser.emailAddress length]) {
         [[SYNAddEmailAlertView sharedInstance] showAlertView];
     }
 }
@@ -1011,7 +1011,6 @@ didSelectRowAtIndexPath: (NSIndexPath *) indexPath
 - (BOOL) searchBar: (UISearchBar *) searchBar shouldChangeTextInRange: (NSRange) range replacementText: (NSString *) text
 {
 	self.currentSearchTerm = [searchBar.text stringByReplacingCharactersInRange:range withString:text];
-    
     [self.searchResultsTableView reloadData];
     
     return YES;

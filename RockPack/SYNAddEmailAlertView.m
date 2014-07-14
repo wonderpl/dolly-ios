@@ -8,6 +8,7 @@
 
 #import "SYNAddEmailAlertView.h"
 #import "NSString+Validation.h"
+#import "SYNMasterViewController.h"
 #import "SYNAppDelegate.h"
 #import "SYNOAuthNetworkEngine.h"
 
@@ -23,14 +24,13 @@ static NSInteger const kNumberOfDays = 5;
 
 @property (nonatomic, strong) NSDate *firstUseDate;
 @property (nonatomic, strong) NSDate *endUseDate;
-@property (nonatomic, assign) NSInteger useCount;
+@property (nonatomic, assign) NSInteger currentUseCount;
 @end
 
 @implementation SYNAddEmailAlertView
 
 
-+ (instancetype) sharedInstance
-{
++ (instancetype)sharedInstance {
     static dispatch_once_t onceQueue;
     static SYNAddEmailAlertView *emailReminder = nil;
     
@@ -48,41 +48,58 @@ static NSInteger const kNumberOfDays = 5;
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         
         if (![userDefaults valueForKey:kEmailReminderFirstUseDate]) {
-            
             self.firstUseDate = [NSDate date];
 			[userDefaults setObject:self.firstUseDate forKey:kEmailReminderFirstUseDate];
             [self calculateAndSetEndUseDate];
             [userDefaults setObject:self.endUseDate forKey:kEmailReminderRequestDate];
-
         } else {
-        
             self.firstUseDate = [userDefaults valueForKey:kEmailReminderFirstUseDate];
             self.endUseDate = [userDefaults valueForKeyPath:kEmailReminderRequestDate];
-            self.useCount = [[userDefaults valueForKeyPath:kEmailReminderUseCount] intValue];
-        
+            self.currentUseCount = [[userDefaults valueForKeyPath:kEmailReminderUseCount] intValue];
         }
     }
     return self;
 }
 
-- (BOOL)alertViewConditionsMet{
-	NSDate *currentDate = [NSDate date];
+- (BOOL)alertViewConditionsMet {
     
+    if (![self isLoggedIn] || [self hasEmailAddress]) {
+        return NO;
+    }
+    
+	NSDate *currentDate = [NSDate date];
     NSDate *earlierDate = [currentDate earlierDate:self.endUseDate];
 
     if (self.endUseDate == earlierDate) {
         return YES;
     }
     
-    if (self.useCount > kUseCount) {
+    if (self.currentUseCount > kUseCount) {
+        return YES;
+    }
+
+    return NO;
+}
+
+- (BOOL)isLoggedIn {
+    UIViewController *rootViewController = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
+    if ([rootViewController isKindOfClass:[SYNMasterViewController class]]) {
+        return YES;
+    }
+    return NO;
+}
+
+- (BOOL)hasEmailAddress {
+    SYNAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    if ([appDelegate.currentUser.emailAddress length]) {
         return YES;
     }
     return NO;
 }
 
 - (void)appBecameActive {
-    self.useCount+=1;
-    [[NSUserDefaults standardUserDefaults] setObject:@(self.useCount) forKey:kEmailReminderUseCount];
+    self.currentUseCount+=1;
+    [[NSUserDefaults standardUserDefaults] setObject:@(self.currentUseCount) forKey:kEmailReminderUseCount];
 
     if (![self alertViewConditionsMet]) {
         return;
@@ -93,7 +110,7 @@ static NSInteger const kNumberOfDays = 5;
 
 }
 
-- (void) setInitialValues {
+- (void)setInitialValues {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
 
     self.firstUseDate = [NSDate date];
@@ -102,24 +119,22 @@ static NSInteger const kNumberOfDays = 5;
     [self calculateAndSetEndUseDate];
     [userDefaults setObject:self.endUseDate forKey:kEmailReminderRequestDate];
 
-    self.useCount = 0;
-	[userDefaults setObject:@(self.useCount) forKey:kEmailReminderUseCount];
+    self.currentUseCount = 0;
+	[userDefaults setObject:@(self.currentUseCount) forKey:kEmailReminderUseCount];
 }
 
 - (void)showAlertView {
-    
     self.alertView = [[UIAlertView alloc]initWithTitle:@"Please Enter Your Email Address" message:@"Your email address will be used for newsletters, and notifications about your account" delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"Save", nil];
     self.alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
     [self.alertView show];
 }
 
-- (BOOL) alertViewShouldEnableFirstOtherButton: (UIAlertView *) alertView {
+- (BOOL)alertViewShouldEnableFirstOtherButton: (UIAlertView *) alertView {
     UITextField *textfield = [alertView textFieldAtIndex: 0];
     return [textfield.text isValidEmail];
 }
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    NSLog(@"buttonIndex : %d", buttonIndex);
     UITextField *textfield = [alertView textFieldAtIndex: 0];
     
     SYNAppDelegate* appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
@@ -129,21 +144,14 @@ static NSInteger const kNumberOfDays = 5;
                                                      forUser: appDelegate.currentUser
                                                 withNewValue: textfield.text
                                            completionHandler: ^(NSDictionary * dictionary){
-
                                                appDelegate.currentUser.emailAddress = textfield.text;
-                                               
-                                           } errorHandler: ^(id errorInfo) {
-                                               
-                                           }];
+                                           } errorHandler:nil];
         return;
     }
-    
     return;
 }
 
-
 - (void)calculateAndSetEndUseDate {
-    
     NSDateComponents *dateComponents = [NSDateComponents new];
     dateComponents.day = kNumberOfDays;
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -152,7 +160,5 @@ static NSInteger const kNumberOfDays = 5;
                                                                toDate: _firstUseDate
                                                               options:0];
 }
-
-
 
 @end

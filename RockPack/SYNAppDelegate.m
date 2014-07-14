@@ -579,11 +579,7 @@
     SYNOAuth2Credential *credential = [SYNOAuth2Credential credentialFromKeychainForService: [[NSBundle mainBundle] bundleIdentifier]
                                                                                     account: self.currentUser.uniqueId];
     
-    if (credential) {
-        
-        
-        [[SYNAddEmailAlertView sharedInstance] appBecameActive];
-    }
+    [[SYNAddEmailAlertView sharedInstance] appBecameActive];
 	
 	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"applicationDidBecomeActive: Starting app in state: %d",
                                          application.applicationState]];
