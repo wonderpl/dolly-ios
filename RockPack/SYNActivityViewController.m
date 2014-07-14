@@ -219,10 +219,19 @@
     return IS_IPAD ? 92.0f : 76.0f;
 }
 
-- (void)scrollToTop:(UIGestureRecognizer *)gestureRecognizer {
-	[self.tableView setContentOffset:CGPointMake(0, -64.0) animated:YES];
+- (void)scrollToTopIPad:(UIGestureRecognizer *)gestureRecognizer {
+	[self scrollToTop];
 }
 
+- (void)scrollToTopIPhone:(UIGestureRecognizer *)gestureRecognizer {
+	[self scrollToTop];
+}
+
+
+- (void)scrollToTop {
+    [self.tableView setContentOffset:CGPointMake(0, -64.0) animated:YES];
+
+}
 #pragma mark - Button Delegates
 
 // this is the user who initialed the action, goes to is profile

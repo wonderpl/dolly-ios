@@ -142,15 +142,19 @@
 	
 	// This is a bit dodgy but we're just going to use this method to indicate whether scrolling to the top of the
 	// collection view via the navigation bar is supported
-	if ([self respondsToSelector:@selector(scrollToTop:)]) {
+	if (([self respondsToSelector:@selector(scrollToTopIPad:)] && IS_IPAD )|| ([self respondsToSelector:@selector(scrollToTopIPhone:)] && IS_IPHONE)) {
+        
+        [self.scrollToTopGestureRecognizer setCancelsTouchesInView:NO];
+        [self.navigationController.navigationBar setUserInteractionEnabled:YES];
 		[self.navigationController.navigationBar addGestureRecognizer:self.scrollToTopGestureRecognizer];
-	}
+
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
 	
-	if ([self respondsToSelector:@selector(scrollToTop:)]) {
+	if (([self respondsToSelector:@selector(scrollToTopIPad:)] && IS_IPAD )|| ([self respondsToSelector:@selector(scrollToTopIPhone:)] && IS_IPHONE)) {
 		[self.navigationController.navigationBar removeGestureRecognizer:self.scrollToTopGestureRecognizer];
 	}
 }
@@ -388,7 +392,12 @@
 
 - (UITapGestureRecognizer *)scrollToTopGestureRecognizer {
 	if (!_scrollToTopGestureRecognizer) {
-		self.scrollToTopGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scrollToTop:)];
+        
+        if (IS_IPHONE) {
+            self.scrollToTopGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scrollToTopIPhone:)];
+        } else {
+            self.scrollToTopGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scrollToTopIPad:)];
+        }
 	}
 	return _scrollToTopGestureRecognizer;
 }

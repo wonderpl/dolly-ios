@@ -223,6 +223,16 @@ typedef void (^SearchResultCompleteBlock)(int);
     
 }
 
+- (void)scrollToTopIPhone:(UIGestureRecognizer *)gestureRecognizer {
+
+        if (self.searchResultsShowing == SearchResultsShowingUsers) {
+            [self.usersCollectionView setContentOffset:CGPointMake(0, 0) animated:YES];
+        } else {
+            [self.videosCollectionView setContentOffset:CGPointMake(0, 0) animated:YES];
+        }
+}
+
+
 -(SYNPopupMessageView*) displayPopupMessage:(NSString *)messageKey withLoader:(BOOL)isLoader
 {
     SYNPopupMessageView* pMsgView = [super displayPopupMessage:messageKey

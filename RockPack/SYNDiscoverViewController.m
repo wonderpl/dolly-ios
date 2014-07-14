@@ -159,19 +159,27 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 
 }
 
-- (void)scrollToTop:(UIGestureRecognizer *)gestureRecognizer {
+- (void)scrollToTopIPad:(UIGestureRecognizer *)gestureRecognizer {
 	CGPoint touchLocation = [gestureRecognizer locationInView:self.navigationController.navigationBar];
 	if (touchLocation.x > CGRectGetMaxX(self.categoriesCollectionView.frame)) {
-		[self.searchResultsController.usersCollectionView setContentOffset:CGPointZero animated:YES];
-		[self.searchResultsController.videosCollectionView setContentOffset:CGPointZero animated:YES];
-	} else {
-        if (IS_IPHONE) {
-            //108 is Nav bar + Search bar
-            [self.categoriesCollectionView setContentOffset:CGPointMake(0, -108) animated:YES];
+        
+        if (self.searchResultsController.searchResultsShowing == SearchResultsShowingUsers) {
+            [self.searchResultsController.usersCollectionView setContentOffset:CGPointZero animated:YES];
         } else {
-            [self.categoriesCollectionView setContentOffset:CGPointZero animated:YES];
+            [self.searchResultsController.videosCollectionView setContentOffset:CGPointZero animated:YES];
         }
-	}
+	} else {
+        [self.categoriesCollectionView setContentOffset:CGPointZero animated:YES];
+    }
+}
+
+- (void)scrollToTopIPhone:(UIGestureRecognizer *)gestureRecognizer {
+    if (IS_IPHONE) {
+        //108 is Nav bar + Search bar
+        [self.categoriesCollectionView setContentOffset:CGPointMake(0, -108) animated:YES];
+    } else {
+        [self.categoriesCollectionView setContentOffset:CGPointZero animated:YES];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {

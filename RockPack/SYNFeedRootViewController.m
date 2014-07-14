@@ -144,9 +144,18 @@ static const CGFloat heightPortrait = 985;
     self.lastOrientation = [[UIApplication sharedApplication] statusBarOrientation];
 }
 
-- (void)scrollToTop:(UIGestureRecognizer *)gestureRecognizer {
-	[self.feedCollectionView setContentOffset:CGPointMake(0, -self.feedCollectionView.contentInset.top) animated:YES];
+- (void)scrollToTopIPad:(UIGestureRecognizer *)gestureRecognizer {
+	[self scrollToTop];
 }
+
+- (void)scrollToTopIPhone:(UIGestureRecognizer *)gestureRecognizer {
+	[self scrollToTop];
+}
+
+- (void)scrollToTop {
+    [self.feedCollectionView setContentOffset:CGPointMake(0, -self.feedCollectionView.contentInset.top) animated:YES];
+}
+
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
