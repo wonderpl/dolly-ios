@@ -76,6 +76,7 @@
 		self.collectionView.contentInset = UIEdgeInsetsMake(64.0, 0.0, 0.0, 0.0);
 	}
     
+    self.collectionView.scrollsToTop = YES;
     
 }
 
@@ -83,6 +84,11 @@
 	[super viewDidAppear:animated];
 	
 	[[SYNTrackingManager sharedManager] trackOnboardingScreenView];
+}
+
+- (IBAction)scrollToTop:(id)sender {
+    float offset = IS_IPHONE ? -64 : 0;
+    [self.collectionView setContentOffset:CGPointMake(0, offset) animated:YES];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
