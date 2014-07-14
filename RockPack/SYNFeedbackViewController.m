@@ -268,6 +268,13 @@ static NSString* errorText = @"Please provide your feedback here...";
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
+    if (IS_IPHONE && !IS_IPHONE_5) {
+        CGRect frame = self.view.frame;
+        frame.origin.y = -70;
+        [UIView animateWithDuration:0.3 animations:^{
+            self.view.frame = frame;
+        }];
+    }
     if ([textView.text isEqualToString:placeholderText] || [textView.text isEqualToString:errorText]) {
         textView.text = @"";
         
