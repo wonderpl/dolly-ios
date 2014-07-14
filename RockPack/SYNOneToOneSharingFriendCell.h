@@ -6,13 +6,24 @@
 //  Copyright (c) 2013 Nick Banks. All rights reserved.
 //
 
+#import "Friend.h"
 @import UIKit;
+@class SYNOneToOneSharingFriendCell;
+
+
+@protocol SYNFriendShareCellDelegate <NSObject>
+
+- (void)cell:(SYNOneToOneSharingFriendCell*)cell tappedWithFriend:(Friend *)friendItem;
+
+@end
 
 @interface SYNOneToOneSharingFriendCell : UICollectionViewCell
 
-@property (nonatomic, strong) IBOutlet UIImageView *imageView;
-@property (nonatomic, strong) IBOutlet UILabel* nameLabel;
+@property (nonatomic, weak) id<SYNFriendShareCellDelegate> delegate;
 
-- (void) setDisplayName: (NSString*) displayName;
+- (void)setDisplayName:(NSString*)displayName;
+- (void)setFriend:(Friend*)friendItem;
+- (void)setAvatarImage:(UIImage*)avatarImage;
+- (void)setAvatarAlpha:(double)alpha;
 
 @end

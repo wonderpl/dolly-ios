@@ -40,7 +40,8 @@ UITextFieldDelegate,
 UITableViewDataSource,
 UITableViewDelegate,
 UIScrollViewDelegate,
-UISearchBarDelegate>
+UISearchBarDelegate,
+SYNFriendShareCellDelegate>
 {
     BOOL displayEmailCell;
 }
@@ -70,6 +71,9 @@ UISearchBarDelegate>
 @property (strong, nonatomic) OWActivityViewController *activityViewController;
 @property (strong, nonatomic) IBOutlet UIView *textContainerView;
 @property (strong, nonatomic) IBOutlet UIView *searchBarContainer;
+
+@property (nonatomic, weak) id<SYNFriendShareCellDelegate> delegate;
+
 
 @property (weak, nonatomic) SYNAppDelegate *appDelegate;
 
@@ -657,12 +661,9 @@ UISearchBarDelegate>
     
     if (realIndex == 0)
     {
-        userThumbnailCell.imageView.image = [UIImage imageNamed: @"ShareAddEntry.jpg"];
-        
+        [userThumbnailCell setAvatarImage:[UIImage imageNamed: @"ShareAddEntry.jpg"]];
         [userThumbnailCell setDisplayName: @"Add New"];
-        
-        userThumbnailCell.imageView.alpha = 1.0f;
-        
+        [userThumbnailCell setAvatarAlpha:1.0];
         return userThumbnailCell;
     }
     
@@ -675,22 +676,12 @@ UISearchBarDelegate>
     {
         Friend *friend = self.recentFriends[realIndex];
         
-        NSString *nameToDisplay;
-        
-        if ([friend.displayName length] > 0)
-        {
-            nameToDisplay = friend.displayName;
-            
-        }
-        else
-        {
-            nameToDisplay = friend.email;
-        }
-        
-        if ([friend.thumbnailURL hasPrefix: @"cached://"])                     // cached from address book image
+        [userThumbnailCell setFriend:friend];
+
+        if ([friend.thumbnailURL hasPrefix: @"cached://"])// cached from address book image
         {
             NSData *pdata = [self.addressBookImageCache
-                                      objectForKey: friend.thumbnailURL];
+                             objectForKey: friend.thumbnailURL];
             
             UIImage *img;
             
@@ -699,49 +690,20 @@ UISearchBarDelegate>
                 img = [UIImage imageNamed: @"PlaceholderAvatarChannel"];
             }
             
-            userThumbnailCell.imageView.image = img;
+            [userThumbnailCell setAvatarImage:img];
         }
-        else if ([friend.thumbnailURL hasPrefix: @"http"]) // includes https
-        {
-            if ([friend.thumbnailURL rangeOfString: @"localhost"].location == NSNotFound) // is not a fake URL
-            {
-                [userThumbnailCell.imageView setImageWithURL: [NSURL URLWithString: friend.thumbnailURL]
-                                            placeholderImage: [UIImage imageNamed: @"PlaceholderAvatarChannel"]
-                                                     options: SDWebImageRetryFailed];
-            }
-            else if (friend.email)
-            {
-                userThumbnailCell.imageView.image = [UIImage imageNamed: @"PlaceholderAvatarChannel"];
-            }
-            else
-            {
-                userThumbnailCell.imageView.image = [UIImage imageNamed: @"PlaceholderAvatarChannel"];
-            }
-        }
-        else if (friend.isOnRockpack)
-        {
-            userThumbnailCell.imageView.image = [UIImage imageNamed: @"PlaceholderAvatarChannel"];
-        }
-        else
-        {
-            userThumbnailCell.imageView.image = [UIImage imageNamed: @"PlaceholderAvatarChannel"];
-        }
-        
-        [userThumbnailCell setDisplayName:nameToDisplay];
-        
-        
-        userThumbnailCell.imageView.alpha = 1.0f;
+
+        [userThumbnailCell setAvatarAlpha: 1.0f];
     }
     else // on the fake slots (stubs)
     {
-        userThumbnailCell.imageView.image = [UIImage imageNamed: @"RecentContactPlaceholder"];
-        userThumbnailCell.nameLabel.text = @"Recent";
-        
-        
+        [userThumbnailCell setAvatarImage: [UIImage imageNamed: @"RecentContactPlaceholder"]];
+        [userThumbnailCell setDisplayName: @"Recent"];
         CGFloat factor = 1.0f - ((float) (realIndex - self.recentFriends.count) / (8-self.recentFriends.count));
-        // fade slots
-        userThumbnailCell.imageView.alpha = factor;
+        [userThumbnailCell setAvatarAlpha: factor];
     }
+    
+    userThumbnailCell.delegate = self;
     
     return userThumbnailCell;
 }
@@ -754,21 +716,17 @@ shouldSelectItemAtIndexPath: (NSIndexPath *) indexPath
     return indexPath.item + (displayEmailCell ? 0 : 1) <= self.recentFriends.count;
 }
 
+#pragma SYNFriendShareCellDelegate
 
-- (void) collectionView: (UICollectionView *) collectionView didSelectItemAtIndexPath: (NSIndexPath *) indexPath
-{
-    // it will (should) only be called for indexPath.item - 1 < self.recentFriends.count so it will exclude stub cells
+- (void)cell:(SYNOneToOneSharingFriendCell *)cell tappedWithFriend:(Friend *)friendItem {
     
-    if (indexPath.item == 0 && displayEmailCell) // first cell
-    {
+    if ([self.recentFriendsCollectionView indexPathForCell:cell].row == 0) {
         [self presentAlertToFillEmailForFriend: nil];
         return;
     }
     
-    Friend *friend = self.recentFriends[indexPath.row - (displayEmailCell ? 1 : 0)];
-    
-    
-    [self sendEmailToFriend: friend];
+    [self sendEmailToFriend: friendItem];
+
 }
 
 
@@ -801,7 +759,6 @@ shouldSelectItemAtIndexPath: (NSIndexPath *) indexPath
     if (indexPath.row == self.searchedFriends.count) // last 'special' cell
     {
         cell.imageView.image = [UIImage imageNamed: @"ShareAddEntrySmall.jpg"];
-        
         cell.textLabel.text = @"Add a new email address";
         cell.detailTextLabel.text = @"";
         cell.special = YES;

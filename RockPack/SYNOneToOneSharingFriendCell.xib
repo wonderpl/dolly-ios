@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4510" systemVersion="13A603" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -29,15 +29,29 @@
                         <color key="shadowColor" red="0.50980395079999996" green="0.55294120309999995" blue="0.56862747670000002" alpha="0.0" colorSpace="calibratedRGB"/>
                         <size key="shadowOffset" width="0.0" height="1"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="TVU-YC-wuU" customClass="SYNAvatarButton">
+                        <rect key="frame" x="16" y="0.0" width="48" height="48"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <state key="normal" backgroundImage="RecentContactPlaceholder.png">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="avatarButtonTapped:" destination="i4L-oY-xhJ" eventType="touchUpInside" id="fDg-ZN-vFy"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
             <size key="customSize" width="125" height="108"/>
             <connections>
+                <outlet property="avatarButton" destination="TVU-YC-wuU" id="vlP-aZ-IaX"/>
                 <outlet property="imageView" destination="7L2-Yb-HyQ" id="37G-ES-shT"/>
                 <outlet property="nameLabel" destination="atS-e1-vjb" id="0Fa-Hn-Aeb"/>
             </connections>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="RecentContactPlaceholder.png" width="90" height="90"/>
+    </resources>
 </document>
