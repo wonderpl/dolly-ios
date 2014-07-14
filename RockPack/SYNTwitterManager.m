@@ -165,7 +165,7 @@ static NSString * const kOAuthTokenSecretIdentifier = @"oauth_token_secret";
     	DebugLog(@"No keys");
     } else if (![self isLocalTwitterAccountAvailable]) {
 
-        [[[UIAlertView alloc]initWithTitle:@"You don't have any Twitter accounts" message:@"Go to settings and add a twitter account" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+        [[[UIAlertView alloc]initWithTitle:NSLocalizedString(@"No Twitter Account Heading", nil) message:NSLocalizedString(@"No Twitter Account Message", nil) delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
     
     } else {
         [self _obtainAccessToAccountsWithBlock:^(BOOL granted) {
@@ -175,7 +175,7 @@ static NSString * const kOAuthTokenSecretIdentifier = @"oauth_token_secret";
                 } else {
 					completion(NO);
                     
-                    [[[UIAlertView alloc]initWithTitle:@"Twitter access" message:@"You havn't given us access to your twitter. Go to settings and allow us to use your account" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+                    [[[UIAlertView alloc]initWithTitle:NSLocalizedString(@"No Twitter Access Heading", nil) message:NSLocalizedString(@"No Twitter Access Message", nil) delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];
 
                     DebugLog(@"No access to the Twitter accounts.");
                 }

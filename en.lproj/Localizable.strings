@@ -48,6 +48,12 @@
 // == Login / Registration / Forgot Password == //
 
 "Add your photo" = "Add your photo";
+"No Twitter Account Heading" = "You do not have any Twitter accounts";
+"No Twitter Account Message" = "Please go to your iOS Settings and sign in to Twitter.";
+
+"No Twitter Access Heading" = "We don't know who you are!";
+"No Twitter Access Message" = "Please make sure you are connected to the Internet, go to your iOS Settings and check your Twitter name and password.";
+
 
 // Pre Sign-Up Onboarding
 //iPhone - has line breaks
