@@ -124,7 +124,7 @@ static NSInteger const kNumberOfDays = 5;
 }
 
 - (void)showAlertView {
-    self.alertView = [[UIAlertView alloc]initWithTitle:@"Please Enter Your Email Address" message:@"Your email address will be used for newsletters, and notifications about your account" delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"Save", nil];
+    self.alertView = [[UIAlertView alloc]initWithTitle:@"Please Enter Your Email Address" message:@"Your email address will be used for newsletters, and notifications about your account" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Save", nil];
     self.alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
     [self.alertView show];
 }
