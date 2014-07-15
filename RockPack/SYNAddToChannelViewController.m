@@ -463,4 +463,13 @@
 }
 
 
+- (NSUInteger)supportedInterfaceOrientations
+{
+    if (IS_IPHONE) {
+        return UIInterfaceOrientationMaskPortrait;
+    } else {
+        return UIInterfaceOrientationMaskAll;
+    }
+}
+
 @end

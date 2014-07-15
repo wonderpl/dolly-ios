@@ -1166,6 +1166,14 @@ didSelectRowAtIndexPath: (NSIndexPath *) indexPath
     }
 }
 
+- (NSUInteger)supportedInterfaceOrientations {
+    if (IS_IPHONE) {
+        return UIInterfaceOrientationMaskPortrait;
+    } else {
+        return UIInterfaceOrientationMaskAll;
+    }
+}
+
 - (void) dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver: self];
