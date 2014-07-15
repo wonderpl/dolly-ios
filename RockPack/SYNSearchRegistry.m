@@ -225,6 +225,7 @@
         }
     }
     
+    [appDelegate.mainManagedObjectContext processPendingChanges];
     [appDelegate saveSearchContext];
     
     return YES;
@@ -257,7 +258,10 @@
             existingFriend.markedForDeletionValue = YES;
             continue;
         }
+        
         existingFriendsByUID[existingFriend.uniqueId] = existingFriend;
+        
+        
         
         if (!existingFriend.localOriginValue) // protect the address book friends...
         {
