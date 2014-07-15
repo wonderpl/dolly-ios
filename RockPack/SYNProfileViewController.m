@@ -39,7 +39,7 @@ static const CGFloat TransitionDuration = 0.5f;
 
 @implementation SYNProfileViewController
 
-+ (UINavigationController *)navigationControllerWithChannelOwner:(ChannelOwner*) channelOwner {
++ (UINavigationController *)navigationControllerWithChannelOwner:(ChannelOwner*)channelOwner {
 	NSString *filename = IS_IPAD ? @"Profile_IPad" : @"Profile_IPhone";
     
     UINavigationController *navigationController = [[UIStoryboard storyboardWithName:filename bundle:nil] instantiateInitialViewController];
@@ -84,7 +84,7 @@ static const CGFloat TransitionDuration = 0.5f;
     }
 }
 
-- (void) viewDidAppear:(BOOL)animated {
+- (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	[SYNActivityManager.sharedInstance updateActivityForCurrentUserWithReset:NO];
 	if ([self isUserProfile]) {
@@ -94,7 +94,7 @@ static const CGFloat TransitionDuration = 0.5f;
 	}
 }
 
-- (void) viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 	[self.navigationController.navigationBar setBackgroundTransparent:YES];
     [self.navigationBar setBarTintColor:[UIColor whiteColor]];
@@ -103,19 +103,33 @@ static const CGFloat TransitionDuration = 0.5f;
 	self.navigationItem.title = @"";
 }
 
-- (void) viewDidDisappear:(BOOL)animated {
+- (void)viewDidDisappear:(BOOL)animated {
     self.navigationBar.hidden = NO;
 }
 
-- (void) viewWillDisappear:(BOOL)animated {
+- (void)viewWillDisappear:(BOOL)animated {
     if (IS_IPHONE) {
         [self.navigationController.navigationBar setBackgroundTransparent:NO];
     }
 }
 
+
+- (void)scrollToTopIPad:(UIGestureRecognizer *)gestureRecognizer {
+	[self scrollToTop];
+}
+
+- (void)scrollToTopIPhone:(UIGestureRecognizer *)gestureRecognizer {
+	[self scrollToTop];
+}
+
+
+- (void)scrollToTop {
+//    [self.tableView setContentOffset:CGPointMake(0, -64.0) animated:YES];
+}
+
 #pragma mark - segue
 
-- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     NSString * segueName = segue.identifier;
     if ([segueName isEqualToString: @"channelSegue"]) {
         SYNProfileChannelViewController * channelCollectionViewController =[segue destinationViewController];
@@ -140,7 +154,7 @@ static const CGFloat TransitionDuration = 0.5f;
 
 }
 
-- (void) setChannelOwner: (ChannelOwner *) user {
+- (void)setChannelOwner:(ChannelOwner *)user {
     
     if (!appDelegate) {
         appDelegate = (SYNAppDelegate *) [[UIApplication sharedApplication] delegate];
@@ -207,7 +221,7 @@ static const CGFloat TransitionDuration = 0.5f;
 }
 
 
-- (void) singleChannelOwnerCheck: (ChannelOwner*) user {
+- (void)singleChannelOwnerCheck:(ChannelOwner*)user {
     
     NSFetchRequest *channelOwnerFetchRequest = [NSFetchRequest fetchRequestWithEntityName:[ChannelOwner entityName]];
     
@@ -252,7 +266,7 @@ static const CGFloat TransitionDuration = 0.5f;
 
 # pragma mark SYNProfileDelegate
 
-- (void) collectionsTabTapped {
+- (void)collectionsTabTapped {
 
     if (self.isUserProfile) {
         self.channelCollectionViewController.headerView.secondTab.selected = NO;
@@ -301,7 +315,7 @@ static const CGFloat TransitionDuration = 0.5f;
 }
 
 
-- (void) alignOffSet: (CGPoint) offset {
+- (void)alignOffSet:(CGPoint)offset {
     [self.subscriptionCollectionViewController.cv setContentOffset:offset];
 	[self.videoCollectionViewController.cv setContentOffset:offset];
     [self.channelCollectionViewController.cv setContentOffset:offset];
@@ -316,7 +330,7 @@ static const CGFloat TransitionDuration = 0.5f;
 
 }
 
-- (void) followingsTabTapped {
+- (void)followingsTabTapped {
     
 	if ([self isFollowingsCollectionViewShowing]) {
 		return;
@@ -360,7 +374,7 @@ static const CGFloat TransitionDuration = 0.5f;
 }
 
 
-- (void) videosTabTapped {
+- (void)videosTabTapped {
     
 	if (!self.videosContainer.hidden) {
 		return;
@@ -415,7 +429,7 @@ static const CGFloat TransitionDuration = 0.5f;
 	}];
 }
 
-- (void) moreButtonTapped {
+- (void)moreButtonTapped {
     
     SYNOptionsOverlayViewController* optionsVC = [[SYNOptionsOverlayViewController alloc] init];
     CGRect vFrame = optionsVC.view.frame;
@@ -432,7 +446,7 @@ static const CGFloat TransitionDuration = 0.5f;
     }];
 }
 
-- (void) followUserButtonTapped:(SYNSocialButton*)sender {
+- (void)followUserButtonTapped:(SYNSocialButton*)sender {
     
     
     BOOL isAlreadyFollowingUser = sender.selected;
@@ -470,7 +484,7 @@ static const CGFloat TransitionDuration = 0.5f;
 
 #pragma mark - SYNProfileEditDelegate
 
-- (void) setCollectionViewContentOffset:(CGPoint)contentOffset animated:(BOOL) animated{
+- (void)setCollectionViewContentOffset:(CGPoint)contentOffset animated:(BOOL) animated{
     [self.channelCollectionViewController.cv setContentOffset:contentOffset animated:animated];
     [self.videoCollectionViewController.cv setContentOffset:contentOffset animated:animated];
     [self.subscriptionCollectionViewController.cv setContentOffset:contentOffset animated:animated];
@@ -478,7 +492,7 @@ static const CGFloat TransitionDuration = 0.5f;
 
 //TODO: only update the showing header
 
-- (void) updateCoverImage: (NSString*) urlString {
+- (void)updateCoverImage:(NSString*)urlString {
 	[[SYNTrackingManager sharedManager] trackCoverPhotoUpload];
     self.channelOwner.coverPhotoURL = urlString;
     [self.channelCollectionViewController.headerView setCoverphotoImage:urlString];
@@ -486,14 +500,14 @@ static const CGFloat TransitionDuration = 0.5f;
 	[self.subscriptionCollectionViewController.headerView setCoverphotoImage:urlString];
 }
 
-- (void) updateAvatarImage: (NSString*) urlString {
+- (void)updateAvatarImage:(NSString*)urlString {
 	[[SYNTrackingManager sharedManager] trackAvatarUploadFromScreen:[self trackingScreenName]];
     [self.channelCollectionViewController.headerView setProfileImage:urlString];
 	[self.subscriptionCollectionViewController.headerView setProfileImage:urlString];
 	[self.videoCollectionViewController.headerView setProfileImage:urlString];
 }
 
-- (void) updateUserDescription: (NSString*) descriptionString {
+- (void)updateUserDescription:(NSString*)descriptionString {
     [self.subscriptionCollectionViewController.headerView setDescriptionText:descriptionString];
     [self.channelCollectionViewController.headerView setDescriptionText:descriptionString];
     [self.videoCollectionViewController.headerView setDescriptionText:descriptionString];
@@ -503,13 +517,13 @@ static const CGFloat TransitionDuration = 0.5f;
 
 #pragma mark - UIViewControllerTransitioningDelegate
 
-- (id<UIViewControllerAnimatedTransitioning>) animationControllerForPresentedController:(UIViewController *)presented
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
                                                                   presentingController:(UIViewController *)presenting
                                                                       sourceController:(UIViewController *)source {
     return self;
 }
 
-- (id<UIViewControllerAnimatedTransitioning>) animationControllerForDismissedController:(UIViewController *)dismissed {
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
     return self;
 }
 
@@ -519,7 +533,7 @@ static const CGFloat TransitionDuration = 0.5f;
     return TransitionDuration;
 }
 
-- (void) animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
+- (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
     UIView *container = transitionContext.containerView;
 	
 	SYNProfileViewController *fromVC = (SYNProfileViewController*)[transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
@@ -551,7 +565,7 @@ static const CGFloat TransitionDuration = 0.5f;
 
 #pragma mark - reload container collection views
 
-- (void) reloadCollectionViews {
+- (void)reloadCollectionViews {
     [self.channelCollectionViewController.cv.collectionViewLayout invalidateLayout];
     [self.subscriptionCollectionViewController.cv.collectionViewLayout invalidateLayout];
 	[self.videoCollectionViewController.cv.collectionViewLayout invalidateLayout];
@@ -567,15 +581,15 @@ static const CGFloat TransitionDuration = 0.5f;
 
 #pragma mark - SYNProfileNavigationBarDelegate
 
-- (void) hideNavigationBar {
+- (void)hideNavigationBar {
     //	self.navigationBar.hidden = YES;
 }
 
-- (void) showNavigationBar {
+- (void)showNavigationBar {
 //	self.navigationBar.hidden = NO;
 }
 
-- (void) setOtherUserProfileData {
+- (void)setOtherUserProfileData {
     [appDelegate.networkEngine channelOwnerDataForChannelOwner:self.channelOwner onComplete:^(id dictionary) {
         if (self.channelOwner)
         {
@@ -588,7 +602,7 @@ static const CGFloat TransitionDuration = 0.5f;
     } onError:nil];
 }
 
-- (void) updateProfileData {
+- (void)updateProfileData {
     
     if (self.isUserProfile) {
         if (self.isChannelsCollectionViewShowing) {
@@ -635,19 +649,19 @@ static const CGFloat TransitionDuration = 0.5f;
     }
 }
 
-- (BOOL) isUserProfile {
+- (BOOL)isUserProfile {
     return [self.channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId];
 }
 
-- (BOOL) isChannelsCollectionViewShowing {
+- (BOOL)isChannelsCollectionViewShowing {
     return !self.channelContainer.hidden;
 }
 
-- (BOOL) isVideosCollectionViewShowing {
+- (BOOL)isVideosCollectionViewShowing {
     return !self.videosContainer.hidden;
 }
 
-- (BOOL) isFollowingsCollectionViewShowing {
+- (BOOL)isFollowingsCollectionViewShowing {
     return !self.followingContainer.hidden;
 }
 
