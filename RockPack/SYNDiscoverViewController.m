@@ -818,8 +818,6 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
     } else {
 		[[SYNTrackingManager sharedManager] trackSearchInitiated];
 		
-        [self.categoriesCollectionView deselectItemAtIndexPath:self.selectedCellIndex animated:YES];
-        self.selectedCellIndex = nil;
         [self.searchResultsController searchForTerm:searchTerm];
     }
 }
