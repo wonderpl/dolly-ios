@@ -407,7 +407,7 @@ static const CGFloat DelayConstant = 0.5;
 	} errorHandler:^(id error) {
 		[weakSelf enableLoginButtons];
 		
-        NSLog(@"error :error :%@", error);
+        DebugLog(@"error :error :%@", error);
         if ([error isKindOfClass:[NSString class]]) {
 		[[[UIAlertView alloc] initWithTitle: NSLocalizedString(@"facebook_login_error_title", nil)
 									message: error

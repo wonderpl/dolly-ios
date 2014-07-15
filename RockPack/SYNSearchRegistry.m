@@ -196,7 +196,6 @@
     
     for (NSDictionary *itemDictionary in itemsDictionary)
     {
-        NSLog(@"%@", itemDictionary);
     	friend = [Friend instanceFromDictionary: itemDictionary
                       usingManagedObjectContext: appDelegate.searchManagedObjectContext];
 

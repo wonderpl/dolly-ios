@@ -646,7 +646,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
                 
                 [cell descriptionAnimation];
             } else {
-                NSLog(@"cell is nil");
+                DebugLog(@"cell is nil");
             }
             
             [[NSUserDefaults standardUserDefaults] setBool: YES

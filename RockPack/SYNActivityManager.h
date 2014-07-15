@@ -41,7 +41,6 @@
 
 - (void) addChannelSubscriptionsObject:(Channel *)channel;
 - (void) addUserSubscriptonsObject:(ChannelOwner*)channelOwner;
-- (void) subscribedList;
 - (NSUInteger) userFollowingCount;
 
 @end

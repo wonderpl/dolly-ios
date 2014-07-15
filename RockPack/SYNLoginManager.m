@@ -139,11 +139,8 @@
                                     origin:LoginOriginTwitter
                          completionHandler:completionBlock
                                errorHander:errorBlock];
-        
-        NSLog(@"twitterManager loginOnSuccess");
     } onFailure: ^(NSString *errorString) {
-        
-        NSLog(@"twitterManager onFailure");
+		DebugLog(@"%@", errorString);
     }];
 }
 

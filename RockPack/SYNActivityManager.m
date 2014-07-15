@@ -246,11 +246,6 @@
     [self.userSubscriptons addObject:channelOwner.uniqueId];
 }
 
--(void) subscribedList
-{
-    NSLog(@"%@", self.channelSubscriptions);
-}
-
 -(NSUInteger) userFollowingCount {
     return [self.userSubscriptons count];
 }
