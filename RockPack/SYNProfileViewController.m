@@ -113,20 +113,6 @@ static const CGFloat TransitionDuration = 0.5f;
     }
 }
 
-
-- (void)scrollToTopIPad:(UIGestureRecognizer *)gestureRecognizer {
-	[self scrollToTop];
-}
-
-- (void)scrollToTopIPhone:(UIGestureRecognizer *)gestureRecognizer {
-	[self scrollToTop];
-}
-
-
-- (void)scrollToTop {
-//    [self.tableView setContentOffset:CGPointMake(0, -64.0) animated:YES];
-}
-
 #pragma mark - segue
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
