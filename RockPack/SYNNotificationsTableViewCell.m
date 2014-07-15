@@ -78,6 +78,9 @@ typedef NS_ENUM(NSInteger, SYNNotificationsTableViewCellThumbnailType) {
         
     }
 	
+    if(IS_IPHONE && notification.objectType == kNotificationObjectTypeShareVideo) {
+        self.timeLabel.hidden = YES;
+    }
 }
 
 #pragma mark - Accesssors
@@ -139,7 +142,16 @@ typedef NS_ENUM(NSInteger, SYNNotificationsTableViewCellThumbnailType) {
 	NSString *mappedKey = stringMapping[@(notification.objectType)];
     
 	if (mappedKey) {
-		NSString *displayName = [notification.channelOwner.displayName uppercaseString];
+        NSString *displayName = [notification.channelOwner.displayName uppercaseString];
+
+        if (notification.objectType == kNotificationObjectTypeShareVideo) {
+            if ([notification.videoTitle length]) {
+                return [NSString stringWithFormat:NSLocalizedString(@"notification_share_video_with_title", nil), displayName, notification.videoTitle];
+            } else {
+	            return [NSString stringWithFormat:NSLocalizedString(mappedKey, nil), displayName, notification.videoTitle];
+            }
+        }
+        
 		return [NSString stringWithFormat:NSLocalizedString(mappedKey, nil), displayName];
 	} else {
 		return NSLocalizedString(notification.messageType, nil);

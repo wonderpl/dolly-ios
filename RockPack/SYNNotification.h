@@ -33,6 +33,7 @@ typedef NS_ENUM(NSInteger, kNotificationObjectType) {
 // Video Notification
 @property (nonatomic, strong) NSString *videoId;
 @property (nonatomic, strong) NSString *videoThumbnailUrl;
+@property (nonatomic, strong) NSString *videoTitle;
 
 // Channel notification
 @property (nonatomic, strong) NSString *channelId;

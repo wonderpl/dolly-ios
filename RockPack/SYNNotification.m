@@ -130,6 +130,7 @@
                 
                 self.videoId = videoDictionary[@"id"];
                 self.videoThumbnailUrl = videoDictionary[@"thumbnail_url"];
+                self.videoTitle = videoDictionary[@"title"];
                 
                 NSDictionary *channelDictionary = videoDictionary[@"channel"];
                 
