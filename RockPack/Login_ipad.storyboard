@@ -265,8 +265,8 @@ Watch, collect and  share only the very best videos</string>
                                     <constraint firstAttribute="centerY" secondItem="3xa-jt-3Ce" secondAttribute="centerY" constant="10" id="mLM-uv-8dJ"/>
                                 </constraints>
                             </view>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="AV9-Dn-QH8">
-                                <rect key="frame" x="374" y="362" width="20" height="20"/>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="AV9-Dn-QH8">
+                                <rect key="frame" x="366" y="354" width="37" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ioM-qv-gtF">
@@ -340,8 +340,8 @@ Watch, collect and  share only the very best videos</string>
                         <outlet property="news" destination="1dS-FN-p50" id="QP2-SW-EHh"/>
                         <outlet property="orView" destination="8hK-cH-d8z" id="rT4-HS-veG"/>
                         <outlet property="signupButton" destination="hYE-YL-Gus" id="jvW-IY-7qr"/>
-                        <outlet property="spinner" destination="AV9-Dn-QH8" id="MBo-I0-biu"/>
                         <outlet property="tech" destination="9ML-e3-n6d" id="IVh-I8-Fkp"/>
+                        <outlet property="twitterSpinner" destination="AV9-Dn-QH8" id="MPh-U5-m7V"/>
                         <outlet property="wellness" destination="fFg-86-6w6" id="yLz-lh-lqL"/>
                     </connections>
                 </viewController>

@@ -65,7 +65,7 @@ static const CGFloat DelayConstant = 0.5;
 @property (strong, nonatomic) IBOutlet UILabel *film;
 @property (strong, nonatomic) IBOutlet UILabel *learnFrom;
 
-@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *twitterSpinner;
 
 @end
 
@@ -78,7 +78,7 @@ static const CGFloat DelayConstant = 0.5;
 
 	self.appDelegate = [[UIApplication sharedApplication] delegate];
 	
-    self.spinner.hidden = YES;
+    self.twitterSpinner.hidden = YES;
     
     NSMutableArray* animationBlocks = [NSMutableArray new];
     
@@ -86,7 +86,6 @@ static const CGFloat DelayConstant = 0.5;
     
     // getNextAnimation
     // removes the first block in the queue and returns it
-    
     
     if (!IS_IPHONE_5 && IS_IPHONE) {
         [self.buttonContainerViewTopConstraint setConstant:186];
@@ -368,6 +367,7 @@ static const CGFloat DelayConstant = 0.5;
     [super viewWillAppear:animated];
 
 	[[SYNTrackingManager sharedManager] trackStartScreenView];
+    self.twitterSpinner.hidden = YES;
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -434,36 +434,59 @@ static const CGFloat DelayConstant = 0.5;
     [self reachable];
     [[SYNTwitterManager sharedTwitterManager] refreshTwitterAccounts:^(BOOL completion) {
         if (completion) {
-            UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Choose an Account" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
-            for (ACAccount *acct in [[SYNTwitterManager sharedTwitterManager] accounts]) {
-                [sheet addButtonWithTitle:acct.username];
+            
+            if ([self hasSingleTwitterAccount]) {
+				[self loginWithAccount:[[[SYNTwitterManager sharedTwitterManager] accounts] firstObject]];
+                self.twitterSpinner.hidden = NO;
+                [self.twitterSpinner startAnimating];
+                return;
             }
             
-            sheet.cancelButtonIndex = [sheet addButtonWithTitle:@"Cancel"];
-            [sheet showInView:self.view];
-        }
+            [self createAndDisplayActionSheet];
+		}
     }];
 }
 
+- (BOOL)hasSingleTwitterAccount {
+    return [[[SYNTwitterManager sharedTwitterManager] accounts] count] == 1;
+}
+
+- (void)createAndDisplayActionSheet {
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Select the account to sign in with" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
+    
+    for (ACAccount *acct in [[SYNTwitterManager sharedTwitterManager] accounts]) {
+        [sheet addButtonWithTitle:[NSString stringWithFormat:@"@%@", acct.username]];
+    }
+    
+    sheet.cancelButtonIndex = [sheet addButtonWithTitle:@"Cancel"];
+    [sheet showInView:self.view];
+}
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     
     if (buttonIndex != actionSheet.cancelButtonIndex) {
-        self.spinner.hidden = NO;
-        [self.spinner startAnimating];
+        self.twitterSpinner.hidden = NO;
+        [self.twitterSpinner startAnimating];
 
 		ACAccount *account = [[[SYNTwitterManager sharedTwitterManager] accounts] objectAtIndex:buttonIndex];
-        
-        [[SYNLoginManager sharedManager] loginThroughTwitterWithAccount:account CompletionHandler:^(NSDictionary * response) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:kLoginCompleted
-                                                                object:self];
-            self.spinner.hidden = YES;
-            [self.spinner stopAnimating];
-            
-        } errorHandler:nil];
+        [self loginWithAccount:account];
     }
 }
 
+- (void)loginWithAccount:(ACAccount*)account {
+    [[SYNLoginManager sharedManager] loginThroughTwitterWithAccount:account CompletionHandler:^(NSDictionary * response) {
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kLoginCompleted
+                                                            object:self];
+        self.twitterSpinner.hidden = YES;
+        [self.twitterSpinner stopAnimating];
+        
+    } errorHandler:^(id error) {
+        self.twitterSpinner.hidden = YES;
+        [self.twitterSpinner stopAnimating];
+        
+    }];
+}
 
 - (void)reachable {
     Reachability *reachability = [Reachability reachabilityWithHostname:self.appDelegate.networkEngine.hostName];

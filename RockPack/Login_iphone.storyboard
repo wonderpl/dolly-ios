@@ -269,8 +269,8 @@ Watch, collect and share only the very best videos</string>
                         <outlet property="orText" destination="JEF-6W-0IF" id="bL7-Ss-fCr"/>
                         <outlet property="orView" destination="wd1-cl-xBG" id="VCU-GP-s7W"/>
                         <outlet property="signupButton" destination="H6u-lu-1jq" id="Ihy-6i-i1A"/>
-                        <outlet property="spinner" destination="ypp-Pf-u4V" id="bMx-Qi-Xkl"/>
                         <outlet property="tech" destination="Gzm-uT-pPM" id="a5n-Oj-nti"/>
+                        <outlet property="twitterSpinner" destination="ypp-Pf-u4V" id="I8w-o5-GAh"/>
                         <outlet property="wellness" destination="bLm-U4-ZBK" id="k51-4h-MOY"/>
                     </connections>
                 </viewController>
