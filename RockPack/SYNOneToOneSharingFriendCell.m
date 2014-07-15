@@ -89,9 +89,7 @@
 	self.avatarButton.alpha = alpha;
 }
 - (IBAction)avatarButtonTapped:(id)sender {
-    if (self.friend) {
         [self.delegate cell:self tappedWithFriend:self.friend];
-    }
 }
 
 @end

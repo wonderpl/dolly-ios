@@ -664,6 +664,8 @@ SYNFriendShareCellDelegate>
         [userThumbnailCell setAvatarImage:[UIImage imageNamed: @"ShareAddEntry.jpg"]];
         [userThumbnailCell setDisplayName: @"Add New"];
         [userThumbnailCell setAvatarAlpha:1.0];
+        userThumbnailCell.delegate = self;
+        
         return userThumbnailCell;
     }
     
@@ -725,8 +727,10 @@ shouldSelectItemAtIndexPath: (NSIndexPath *) indexPath
         return;
     }
     
-    [self sendEmailToFriend: friendItem];
-
+    if (friendItem) {
+        [self sendEmailToFriend: friendItem];
+    }
+    
 }
 
 
