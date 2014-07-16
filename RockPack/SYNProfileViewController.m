@@ -34,6 +34,7 @@ static const CGFloat TransitionDuration = 0.5f;
 @property (strong, nonatomic) IBOutlet UINavigationItem *titleView;
 @property (strong, nonatomic) IBOutlet UINavigationBar *navigationBar;
 @property (assign, nonatomic) BOOL isUserProfile;
+@property (strong, nonatomic) IBOutlet UIButton *backButton;
 
 @end
 
@@ -92,6 +93,10 @@ static const CGFloat TransitionDuration = 0.5f;
     } else {
 		[[SYNTrackingManager sharedManager] trackOtherUserProfileScreenView];
 	}
+    
+    if (IS_IPHONE && self != [self.navigationController.viewControllers objectAtIndex:0]) {
+		self.backButton.hidden = NO;
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -101,6 +106,10 @@ static const CGFloat TransitionDuration = 0.5f;
 	self.navigationBar.hidden = YES;
 	[self updateProfileData];
 	self.navigationItem.title = @"";
+    
+    if (IS_IPHONE) {
+        self.backButton.hidden = YES;
+    }
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -649,6 +658,10 @@ static const CGFloat TransitionDuration = 0.5f;
 
 - (BOOL)isFollowingsCollectionViewShowing {
     return !self.followingContainer.hidden;
+}
+
+- (IBAction)backButtonTapped:(id)sender {
+	[self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

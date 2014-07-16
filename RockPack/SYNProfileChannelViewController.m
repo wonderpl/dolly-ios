@@ -71,7 +71,6 @@ static const CGFloat FULLNAMELABELIPADLANDSCAPE = 412.0f;
     [self.fakeNavigationBarTitle setText: self.channelOwner.displayName];
 
     self.tapToHideKeyoboard = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
-
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -90,6 +89,17 @@ static const CGFloat FULLNAMELABELIPADLANDSCAPE = 412.0f;
 	[UIView animateWithDuration:2.0 animations:^{
 		[self showInboardingAnimationDescription];
 	}];
+    
+    if (IS_IPHONE) {
+        [self.navigationController setNavigationBarHidden:YES];
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    if (IS_IPHONE) {
+        [self.navigationController setNavigationBarHidden:NO];        
+    }
 }
 
 - (void)registerNibs {
@@ -373,6 +383,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 - (void)createNewButtonPressed {
   
     [[SYNTrackingManager sharedManager] trackCreateChannelScreenView];
+    [self.navigationController.navigationBar setHidden:NO];
 	[self.navigationController.navigationBar setBackgroundTransparent:NO];
 
     self.creatingChannel = YES;
@@ -422,6 +433,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 	
 	self.createChannelCell.descriptionTextView.text = @"";
 
+    [self.navigationController.navigationBar setHidden:YES];
 	[self.navigationController.navigationBar setBackgroundTransparent:YES];
 
     self.creatingChannel = NO;
