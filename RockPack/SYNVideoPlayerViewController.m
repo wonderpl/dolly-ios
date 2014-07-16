@@ -78,7 +78,6 @@
 @property (nonatomic, assign) BOOL firstTime;
 
 @property (nonatomic, assign) BOOL maximised;
-
 @property (nonatomic, strong) UIView *collectionOverLay;
 @property (nonatomic, assign) BOOL showingOverlay;
 @property (nonatomic, strong) UILabel *overlayLabel;
@@ -557,11 +556,9 @@
         
         self.swipeImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"onboard-finger-swipe-gesture"]];
         
-        self.swipeImageView.center = CGPointMake(self.view.center.x, self.view.center.y);
+        self.swipeImageView.center = CGPointMake(self.view.center.x+20, self.view.center.y);
         
         [self.view addSubview:self.swipeImageView];
-        
-        
         [self.view addSubview:self.overlayLabel];
         
         [self updateViewWithOrientation:[[UIApplication sharedApplication] statusBarOrientation]];
@@ -576,11 +573,17 @@
 }
 
 - (void)updateViewWithOrientation:(UIDeviceOrientation)orientation {
+    
+    
     if (UIDeviceOrientationIsPortrait(orientation)) {
         self.overlayLabel.center = CGPointMake(self.view.center.x, self.view.center.y+100);
-        self.swipeImageView.center = CGPointMake(404, 412);
+        if (IS_IPAD) {
+            self.swipeImageView.center = CGPointMake(404, 412);
+        }
     } else {
-        self.swipeImageView.center = CGPointMake(532, 412);
+        if (IS_IPAD) {
+            self.swipeImageView.center = CGPointMake(532, 412);
+        }
         self.overlayLabel.center = CGPointMake(517.5, 613);
     }
 }
@@ -608,6 +611,7 @@
         [self.collectionOverLay setBackgroundColor:[UIColor clearColor]];
         self.view.backgroundColor = [UIColor whiteColor];
     } completion:^(BOOL finished) {
+        [self.swipeImageView removeFromSuperview];
         [self.collectionOverLay removeFromSuperview];
         [self.overlayLabel removeFromSuperview];
         [self.view removeGestureRecognizer: self.inboardingTapGesture];
