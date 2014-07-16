@@ -45,6 +45,9 @@
                     <items>
                         <navigationItem title="Welcome" id="OcI-8l-YzB"/>
                     </items>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="NDV-TT-8BL" appends="YES" id="OiA-n3-rnp"/>
+                    </connections>
                 </navigationBar>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -60,9 +63,6 @@
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-            <connections>
-                <outletCollection property="gestureRecognizers" destination="NDV-TT-8BL" appends="YES" id="zwN-F8-e89"/>
-            </connections>
         </view>
         <tapGestureRecognizer id="NDV-TT-8BL">
             <connections>

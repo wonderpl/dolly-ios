@@ -47,6 +47,7 @@
                     </items>
                     <connections>
                         <outlet property="delegate" destination="-1" id="SLM-1E-Pjc"/>
+                        <outletCollection property="gestureRecognizers" destination="9Ga-LQ-6kV" appends="YES" id="WuN-0I-DW4"/>
                     </connections>
                 </navigationBar>
             </subviews>
@@ -63,9 +64,6 @@
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-            <connections>
-                <outletCollection property="gestureRecognizers" destination="9Ga-LQ-6kV" appends="YES" id="VKW-37-BIT"/>
-            </connections>
         </view>
         <tapGestureRecognizer id="9Ga-LQ-6kV">
             <connections>
