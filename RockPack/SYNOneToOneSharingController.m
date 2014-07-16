@@ -585,7 +585,7 @@ SYNFriendShareCellDelegate>
     
     fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"displayName" ascending:YES selector:@selector(caseInsensitiveCompare:)]];
     
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"displayName != %@", @""]];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@("displayName != %@ AND uniqueId != %@" ), @"", @""]];
     
     return [NSMutableArray arrayWithArray:[self.appDelegate.searchManagedObjectContext executeFetchRequest: fetchRequest
                                                                                                 error: &error]];
@@ -603,7 +603,7 @@ SYNFriendShareCellDelegate>
 
     fetchRequest.sortDescriptors =  @[[NSSortDescriptor sortDescriptorWithKey:@"email" ascending:YES selector:@selector(caseInsensitiveCompare:)]];
     
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"displayName == %@", @""]];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"displayName == %@ AND uniqueId != %@", @"", @""]];
     
     return [NSMutableArray arrayWithArray:[self.appDelegate.searchManagedObjectContext executeFetchRequest: fetchRequest
                                                                                                 error: &error]];
