@@ -112,13 +112,10 @@ static const CGFloat TransitionDuration = 0.5f;
     }
 }
 
-- (void)viewDidDisappear:(BOOL)animated {
-    self.navigationBar.hidden = NO;
-}
-
 - (void)viewWillDisappear:(BOOL)animated {
     if (IS_IPHONE) {
         [self.navigationController.navigationBar setBackgroundTransparent:NO];
+        self.navigationBar.hidden = NO;
     }
 }
 

@@ -383,7 +383,6 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 - (void)createNewButtonPressed {
   
     [[SYNTrackingManager sharedManager] trackCreateChannelScreenView];
-    [self.navigationController.navigationBar setHidden:NO];
 	[self.navigationController.navigationBar setBackgroundTransparent:NO];
 
     self.creatingChannel = YES;
@@ -433,7 +432,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 	
 	self.createChannelCell.descriptionTextView.text = @"";
 
-    [self.navigationController.navigationBar setHidden:YES];
+    [self.navigationController.navigationBar setHidden:NO];
 	[self.navigationController.navigationBar setBackgroundTransparent:YES];
 
     self.creatingChannel = NO;
