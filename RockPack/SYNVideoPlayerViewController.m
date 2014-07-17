@@ -548,7 +548,7 @@
         [label setTextColor:[UIColor whiteColor]];
        	label.numberOfLines = 2;
 
-        [label setText:@"Swipe right to go to the next \n video or left to go back"];
+        [label setText:@"Swipe left to go to the next \n video or right to go back"];
         
         [label sizeToFit];
         
