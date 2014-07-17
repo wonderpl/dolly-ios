@@ -151,8 +151,11 @@
     }
 
     //Always pop the discovery screen to root
-    if(((UINavigationController*)self.viewControllers[1]).viewControllers.count > 1){        [((UINavigationController*)self.viewControllers[1]) popToRootViewControllerAnimated:NO];
+    if(((UINavigationController*)self.viewControllers[1]).viewControllers.count > 1){
+        [((UINavigationController*)self.viewControllers[1]) popToRootViewControllerAnimated:NO];
 
+        //Profile has a hidden navigation bar.
+		[((UINavigationController*)self.viewControllers[1]) setNavigationBarHidden:NO];
     }
     
     self.currentViewController = self.viewControllers[index];

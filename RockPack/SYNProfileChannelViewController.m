@@ -81,6 +81,7 @@ static const CGFloat FULLNAMELABELIPADLANDSCAPE = 412.0f;
     
     if (self.creatingChannel) {
         [self.navigationController.navigationBar setBackgroundTransparent:NO];
+        self.navigationController.navigationBarHidden = NO;
     }
 }
 
@@ -384,7 +385,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
   
     [[SYNTrackingManager sharedManager] trackCreateChannelScreenView];
 	[self.navigationController.navigationBar setBackgroundTransparent:NO];
-
+	self.navigationController.navigationBarHidden = NO;
     self.creatingChannel = YES;
     self.cv.scrollEnabled = NO;
 
