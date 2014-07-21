@@ -475,16 +475,6 @@ Watch, collect and share only the very best videos</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DVt-eI-lnc" userLabel="Container View">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" tag="11" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="MM" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ISr-E7-9UM" customClass="SYNTextFieldLogin">
-                                        <rect key="frame" x="99" y="208" width="70" height="38"/>
-                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad" returnKeyType="next"/>
-                                        <connections>
-                                            <action selector="textFieldDidChange:" destination="hNy-rk-sTx" eventType="editingChanged" id="dsY-UL-fbZ"/>
-                                            <outlet property="delegate" destination="hNy-rk-sTx" id="303-fV-GGe"/>
-                                        </connections>
-                                    </textField>
                                     <textField opaque="NO" clipsSubviews="YES" tag="9" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="0W0-cc-bMw" customClass="SYNTextFieldLogin">
                                         <rect key="frame" x="19" y="154" width="280" height="38"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -503,18 +493,8 @@ Watch, collect and share only the very best videos</string>
                                             <outlet property="delegate" destination="hNy-rk-sTx" id="2TC-nR-MMs"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" tag="10" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="DD" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2cD-Hl-iqM" customClass="SYNTextFieldLogin">
-                                        <rect key="frame" x="19" y="208" width="70" height="38"/>
-                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad" returnKeyType="next"/>
-                                        <connections>
-                                            <action selector="textFieldDidChange:" destination="hNy-rk-sTx" eventType="editingChanged" id="fea-Gm-c4J"/>
-                                            <outlet property="delegate" destination="hNy-rk-sTx" id="p3p-3h-iQu"/>
-                                        </connections>
-                                    </textField>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="AvJ-st-bOY" userLabel="Genred Control">
-                                        <rect key="frame" x="19" y="264" width="282" height="29"/>
+                                        <rect key="frame" x="19" y="210" width="282" height="29"/>
                                         <segments>
                                             <segment title="Male">
                                                 <size key="contentOffset" width="0.0" height="1"/>
@@ -534,16 +514,6 @@ Watch, collect and share only the very best videos</string>
                                         <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <size key="shadowOffset" width="0.0" height="1"/>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" tag="12" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="YYYY" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mTK-3C-v1m" customClass="SYNTextFieldLogin">
-                                        <rect key="frame" x="179" y="208" width="120" height="38"/>
-                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad" returnKeyType="send"/>
-                                        <connections>
-                                            <action selector="textFieldDidChange:" destination="hNy-rk-sTx" eventType="editingChanged" id="XAB-Qo-Kvn"/>
-                                            <outlet property="delegate" destination="hNy-rk-sTx" id="3GD-ML-fxh"/>
-                                        </connections>
-                                    </textField>
                                     <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OW4-lA-5zl">
                                         <rect key="frame" x="54" y="484" width="210" height="84"/>
                                         <constraints>
@@ -594,15 +564,12 @@ Watch, collect and share only the very best videos</string>
                         <outlet property="backBarButton" destination="Byf-JL-r7n" id="m1v-pp-Djo"/>
                         <outlet property="backgroundView" destination="WYc-4g-7av" id="1wn-E3-s6L"/>
                         <outlet property="containerView" destination="DVt-eI-lnc" id="CQw-lw-n4I"/>
-                        <outlet property="dayTextField" destination="2cD-Hl-iqM" id="hOt-Jb-C6g"/>
                         <outlet property="emailTextField" destination="SYU-0m-1wB" id="SBi-Mf-gN6"/>
                         <outlet property="errorLabel" destination="fZG-IX-cQF" id="hhk-3x-zvM"/>
                         <outlet property="genderSegmentedControl" destination="AvJ-st-bOY" id="JCK-Tv-ALJ"/>
-                        <outlet property="monthTextField" destination="ISr-E7-9UM" id="BsT-Mv-w2Z"/>
                         <outlet property="navigationBar" destination="X0H-i6-8nq" id="NYq-pS-tPc"/>
                         <outlet property="passwordTextField" destination="0W0-cc-bMw" id="F2p-ug-Jxe"/>
                         <outlet property="signUpBarButton" destination="7ws-6S-5Cy" id="Bfh-Zv-YRP"/>
-                        <outlet property="yearTextField" destination="mTK-3C-v1m" id="gh5-fP-Y3u"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6j3-bA-dHm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -962,6 +929,6 @@ Watch, collect and share only the very best videos</string>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="uhx-wm-F66"/>
+        <segue reference="1fQ-HG-P1W"/>
     </inferredMetricsTieBreakers>
 </document>

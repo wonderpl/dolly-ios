@@ -13,9 +13,6 @@
 @interface SYNIPadSignupViewController : SYNSignupViewController
 
 @property (nonatomic, strong, readonly) SYNTextFieldLogin *emailTextField;
-
-@property (nonatomic, strong, readonly) UIView *dobContainerView;
-
 @property (nonatomic, strong, readonly) UISegmentedControl *genderSegmentedControl;
 
 @property (nonatomic, strong, readonly) UIButton *registerButton;

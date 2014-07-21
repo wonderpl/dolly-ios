@@ -51,10 +51,7 @@ static const CGFloat FieldOffset = 60.0;
 		
 		CGPoint emailCenter = signupViewController.emailTextField.center;
 		signupViewController.emailTextField.center = CGPointMake(emailCenter.x - FieldOffset, emailCenter.y);
-		
-		CGPoint dobCenter = signupViewController.dobContainerView.center;
-		signupViewController.dobContainerView.center = CGPointMake(dobCenter.x - FieldOffset, dobCenter.y);
-		
+				
 		CGPoint genderCenter = signupViewController.genderSegmentedControl.center;
 		signupViewController.genderSegmentedControl.center = CGPointMake(genderCenter.x - FieldOffset, genderCenter.y);
 		
@@ -72,7 +69,6 @@ static const CGFloat FieldOffset = 60.0;
 							 loginViewController.loginButton.center = CGPointMake(loginCenter.x + FieldOffset, loginCenter.y);
 							 
 							 signupViewController.emailTextField.center = emailCenter;
-							 signupViewController.dobContainerView.center = dobCenter;
 							 signupViewController.genderSegmentedControl.center = genderCenter;
 							 signupViewController.uploadPhotoButton.center = uploadCenter;
 						 } completion:^(BOOL finished) {
@@ -104,16 +100,12 @@ static const CGFloat FieldOffset = 60.0;
 							 
 							 CGPoint emailCenter = signupViewController.emailTextField.center;
 							 signupViewController.emailTextField.center = CGPointMake(emailCenter.x - FieldOffset, emailCenter.y);
-							 
-							 CGPoint dobCenter = signupViewController.dobContainerView.center;
-							 signupViewController.dobContainerView.center = CGPointMake(dobCenter.x - FieldOffset, dobCenter.y);
-							 
+							 							 
 							 CGPoint genderCenter = signupViewController.genderSegmentedControl.center;
 							 signupViewController.genderSegmentedControl.center = CGPointMake(genderCenter.x - FieldOffset, genderCenter.y);
 							 
 							 CGPoint uploadCenter = signupViewController.uploadPhotoButton.center;
 							 signupViewController.uploadPhotoButton.center = CGPointMake(uploadCenter.x - FieldOffset, uploadCenter.y);
-
 							 
 						 } completion:^(BOOL finished) {
 							 [transitionContext completeTransition:YES];

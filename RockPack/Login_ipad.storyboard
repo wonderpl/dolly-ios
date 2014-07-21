@@ -361,53 +361,6 @@ Watch, collect and  share only the very best videos</string>
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e2l-ND-BGh" userLabel="DOB Fields">
-                                <rect key="frame" x="223" y="264" width="320" height="38"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="DD" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fEc-vg-oaK" userLabel="DD TextField" customClass="SYNTextFieldLogin">
-                                        <rect key="frame" x="0.0" y="0.0" width="70" height="38"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <color key="textColor" red="0.45882352939999999" green="0.45882352939999999" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
-                                        <connections>
-                                            <action selector="textFieldDidChange:" destination="ulM-qc-tb0" eventType="editingChanged" id="m4l-Ea-7rZ"/>
-                                            <outlet property="delegate" destination="ulM-qc-tb0" id="62x-JX-szc"/>
-                                        </connections>
-                                    </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" tag="4" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="MM" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b4d-uh-mpk" userLabel="MM TextField" customClass="SYNTextFieldLogin">
-                                        <rect key="frame" x="90" y="0.0" width="70" height="38"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <color key="textColor" red="0.45882352939999999" green="0.45882352939999999" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
-                                        <connections>
-                                            <action selector="textFieldDidChange:" destination="ulM-qc-tb0" eventType="editingChanged" id="pww-SK-zcF"/>
-                                            <outlet property="delegate" destination="ulM-qc-tb0" id="eQi-BR-JX0"/>
-                                        </connections>
-                                    </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" tag="5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="YYYY" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eMN-Co-cVw" userLabel="YYYY TextField" customClass="SYNTextFieldLogin">
-                                        <rect key="frame" x="182" y="0.0" width="140" height="38"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <color key="textColor" red="0.45882352939999999" green="0.45882352939999999" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
-                                        <connections>
-                                            <action selector="textFieldDidChange:" destination="ulM-qc-tb0" eventType="editingChanged" id="gbV-HC-tBH"/>
-                                            <outlet property="delegate" destination="ulM-qc-tb0" id="uaL-Y6-wWl"/>
-                                        </connections>
-                                    </textField>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="320" id="5Gd-lg-tO5"/>
-                                    <constraint firstAttribute="height" constant="38" id="QPg-Bg-IwR"/>
-                                </constraints>
-                            </view>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="178" translatesAutoresizingMaskIntoConstraints="NO" id="828-gY-WBy" userLabel="DOB Error Label">
                                 <rect key="frame" x="556" y="283" width="178" height="0.0"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -460,7 +413,7 @@ Watch, collect and  share only the very best videos</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="obP-kh-Tzz" userLabel="Register Button">
-                                <rect key="frame" x="224" y="354" width="320" height="50"/>
+                                <rect key="frame" x="224" y="310" width="320" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Gb4-wP-Ozr"/>
@@ -480,7 +433,7 @@ Watch, collect and  share only the very best videos</string>
                                 </connections>
                             </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="d4o-Pt-0cZ" userLabel="Gender Segmented Control">
-                                <rect key="frame" x="224" y="314" width="320" height="29"/>
+                                <rect key="frame" x="224" y="270" width="320" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -612,7 +565,6 @@ Watch, collect and  share only the very best videos</string>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="828-gY-WBy" firstAttribute="leading" secondItem="e2l-ND-BGh" secondAttribute="trailing" constant="13" id="10f-21-ATc"/>
                             <constraint firstItem="UZY-cA-Eit" firstAttribute="leading" secondItem="uV0-QA-Zay" secondAttribute="trailing" constant="10" id="1LE-cv-D9y"/>
                             <constraint firstAttribute="centerX" secondItem="nqG-fN-QUl" secondAttribute="centerX" id="1TF-d8-ri3"/>
                             <constraint firstItem="RGC-eW-fPG" firstAttribute="top" secondItem="GvU-M3-vTi" secondAttribute="bottom" constant="350" id="4Gf-fI-cyh"/>
@@ -628,17 +580,16 @@ Watch, collect and  share only the very best videos</string>
                             <constraint firstItem="8Kn-IA-NUS" firstAttribute="top" secondItem="4Lq-mR-Smo" secondAttribute="bottom" constant="19" id="I1O-7c-sh8"/>
                             <constraint firstAttribute="centerX" secondItem="GvU-M3-vTi" secondAttribute="centerX" constant="270" id="IKf-NC-Goo"/>
                             <constraint firstItem="4Lq-mR-Smo" firstAttribute="top" secondItem="Fm5-ca-Fg9" secondAttribute="top" constant="98" id="KAQ-xI-ZdF"/>
+                            <constraint firstItem="d4o-Pt-0cZ" firstAttribute="top" secondItem="nqG-fN-QUl" secondAttribute="bottom" constant="18" id="Kt3-aG-E4N"/>
+                            <constraint firstItem="828-gY-WBy" firstAttribute="leading" secondItem="JVE-g9-65a" secondAttribute="leading" id="Lsm-og-SmR"/>
                             <constraint firstItem="bzL-gs-cfb" firstAttribute="leading" secondItem="UZY-cA-Eit" secondAttribute="trailing" constant="12" id="Pay-O6-gsq"/>
-                            <constraint firstAttribute="centerX" secondItem="e2l-ND-BGh" secondAttribute="centerX" constant="1" id="Pcp-qT-9bm"/>
                             <constraint firstAttribute="centerX" secondItem="d4o-Pt-0cZ" secondAttribute="centerX" id="Pfr-I6-tu3"/>
                             <constraint firstItem="JVE-g9-65a" firstAttribute="leading" secondItem="nqG-fN-QUl" secondAttribute="trailing" constant="12" id="Qgg-HF-Nlc"/>
                             <constraint firstItem="Wme-3y-nyg" firstAttribute="trailing" secondItem="UZY-cA-Eit" secondAttribute="trailing" id="Que-28-Cdn"/>
                             <constraint firstItem="nqG-fN-QUl" firstAttribute="centerY" secondItem="JVE-g9-65a" secondAttribute="centerY" id="Rc0-7Z-1Jp"/>
                             <constraint firstItem="8Kn-IA-NUS" firstAttribute="centerX" secondItem="4Lq-mR-Smo" secondAttribute="centerX" id="VTC-Ea-UjP"/>
                             <constraint firstItem="UZY-cA-Eit" firstAttribute="centerY" secondItem="bzL-gs-cfb" secondAttribute="centerY" id="apb-Sn-Pj2"/>
-                            <constraint firstItem="e2l-ND-BGh" firstAttribute="centerY" secondItem="828-gY-WBy" secondAttribute="centerY" id="clj-JU-Wva"/>
                             <constraint firstItem="uV0-QA-Zay" firstAttribute="top" secondItem="FDL-zp-eAh" secondAttribute="bottom" constant="12" id="fZW-fe-rJ1"/>
-                            <constraint firstItem="e2l-ND-BGh" firstAttribute="top" secondItem="nqG-fN-QUl" secondAttribute="bottom" constant="12" id="hbJ-sq-eXK"/>
                             <constraint firstAttribute="trailing" secondItem="bzL-gs-cfb" secondAttribute="trailing" constant="34" id="iGK-6t-7X5"/>
                             <constraint firstItem="v4l-dE-Lli" firstAttribute="leading" secondItem="Wme-3y-nyg" secondAttribute="trailing" constant="12" id="juK-ut-muj"/>
                             <constraint firstItem="MZ6-hh-5iS" firstAttribute="leading" secondItem="Fm5-ca-Fg9" secondAttribute="leading" constant="29" id="kya-RZ-qxw"/>
@@ -649,8 +600,8 @@ Watch, collect and  share only the very best videos</string>
                             <constraint firstItem="UZY-cA-Eit" firstAttribute="top" secondItem="FDL-zp-eAh" secondAttribute="bottom" constant="12" id="qao-HV-YT5"/>
                             <constraint firstItem="LN4-od-ron" firstAttribute="leading" secondItem="FDL-zp-eAh" secondAttribute="trailing" constant="12" id="qjS-Rw-3sk"/>
                             <constraint firstItem="obP-kh-Tzz" firstAttribute="top" secondItem="d4o-Pt-0cZ" secondAttribute="bottom" constant="12" id="qrW-mf-mlu"/>
+                            <constraint firstItem="828-gY-WBy" firstAttribute="top" secondItem="JVE-g9-65a" secondAttribute="bottom" constant="50" id="rPT-TY-dFR"/>
                             <constraint firstItem="UZY-cA-Eit" firstAttribute="top" secondItem="uV0-QA-Zay" secondAttribute="top" id="tgD-PW-LQ7"/>
-                            <constraint firstItem="d4o-Pt-0cZ" firstAttribute="top" secondItem="e2l-ND-BGh" secondAttribute="bottom" constant="12" id="vdO-dO-D2Z"/>
                             <constraint firstItem="Wme-3y-nyg" firstAttribute="top" secondItem="uV0-QA-Zay" secondAttribute="bottom" constant="12" id="yzT-sr-n2b"/>
                             <constraint firstAttribute="centerX" secondItem="obP-kh-Tzz" secondAttribute="centerX" id="zmL-Hq-gN4"/>
                         </constraints>
@@ -659,15 +610,12 @@ Watch, collect and  share only the very best videos</string>
                     <connections>
                         <outlet property="AddPhotoLabel" destination="8Kn-IA-NUS" id="v1n-j3-gNz"/>
                         <outlet property="addPhotoLabel" destination="8Kn-IA-NUS" id="pSR-3T-jYk"/>
-                        <outlet property="dayTextField" destination="fEc-vg-oaK" id="fCW-gg-w0B"/>
-                        <outlet property="dobContainerView" destination="e2l-ND-BGh" id="cKL-wp-sci"/>
                         <outlet property="dobErrorLabel" destination="828-gY-WBy" id="Ip5-Vo-ZfB"/>
                         <outlet property="emailErrorLabel" destination="LN4-od-ron" id="E7s-7H-SJB"/>
                         <outlet property="emailTextField" destination="FDL-zp-eAh" id="VvI-K1-dsA"/>
                         <outlet property="firstNameTextField" destination="uV0-QA-Zay" id="bHZ-mI-mFO"/>
                         <outlet property="genderSegmentedControl" destination="d4o-Pt-0cZ" id="fv2-VR-S5X"/>
                         <outlet property="lastNameTextField" destination="UZY-cA-Eit" id="W6O-uc-MeC"/>
-                        <outlet property="monthTextField" destination="b4d-uh-mpk" id="QaM-FH-aDb"/>
                         <outlet property="nameErrorLabel" destination="bzL-gs-cfb" id="l6v-A0-MM5"/>
                         <outlet property="passwordErrorLabel" destination="JVE-g9-65a" id="qWz-Vj-Rj0"/>
                         <outlet property="passwordTextField" destination="nqG-fN-QUl" id="EFm-YA-Nkc"/>
@@ -675,7 +623,6 @@ Watch, collect and  share only the very best videos</string>
                         <outlet property="uploadPhotoButton" destination="4Lq-mR-Smo" id="cXa-sb-baY"/>
                         <outlet property="usernameErrorLabel" destination="v4l-dE-Lli" id="NDe-oz-6tY"/>
                         <outlet property="usernameTextField" destination="Wme-3y-nyg" id="7Y6-kc-40E"/>
-                        <outlet property="yearTextField" destination="eMN-Co-cVw" id="lHc-67-Euw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jAm-xQ-ssh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1101,6 +1048,6 @@ Watch, collect and  share only the very best videos</string>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="a0x-hG-aBP"/>
+        <segue reference="7Bv-VN-bSo"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -27,12 +27,8 @@
 @property (nonatomic, strong) IBOutlet SYNTextFieldLogin *usernameTextField;
 @property (nonatomic, strong) IBOutlet SYNTextFieldLogin *passwordTextField;
 
-@property (nonatomic, strong) IBOutlet SYNTextFieldLogin *dayTextField;
-@property (nonatomic, strong) IBOutlet SYNTextFieldLogin *monthTextField;
-@property (nonatomic, strong) IBOutlet SYNTextFieldLogin *yearTextField;
 @property (strong, nonatomic) IBOutlet UILabel *addPhotoLabel;
 
-@property (nonatomic, strong) IBOutlet UIView *dobContainerView;
 
 @property (nonatomic, strong) IBOutlet UISegmentedControl *genderSegmentedControl;
 
@@ -62,22 +58,18 @@
 	self.emailTextField.font = [UIFont lightCustomFontOfSize:self.emailTextField.font.pointSize];
 	self.passwordTextField.font = [UIFont lightCustomFontOfSize:self.passwordTextField.font.pointSize];
 	
-	self.dayTextField.font = [UIFont lightCustomFontOfSize:self.dayTextField.font.pointSize];
-	self.monthTextField.font = [UIFont lightCustomFontOfSize:self.monthTextField.font.pointSize];
-	self.yearTextField.font = [UIFont lightCustomFontOfSize:self.yearTextField.font.pointSize];
 	
 	self.emailErrorLabel.font = [UIFont lightCustomFontOfSize:self.emailErrorLabel.font.pointSize];
 	self.usernameErrorLabel.font = [UIFont lightCustomFontOfSize:self.usernameErrorLabel.font.pointSize];
 	self.passwordErrorLabel.font = [UIFont lightCustomFontOfSize:self.passwordErrorLabel.font.pointSize];
 	self.dobErrorLabel.font = [UIFont lightCustomFontOfSize:self.dobErrorLabel.font.pointSize];
 	
-	self.textFields = @[ self.emailTextField, self.firstNameTextField, self.lastNameTextField, self.usernameTextField, self.passwordTextField, self.dayTextField, self.monthTextField, self.yearTextField ];
+	self.textFields = @[ self.emailTextField, self.firstNameTextField, self.lastNameTextField, self.usernameTextField, self.passwordTextField];
 	self.addPhotoLabel.text = NSLocalizedString(@"Add your photo", @"Ipad add your photo label");
 
 	self.addPhotoLabel.font = [UIFont lightCustomFontOfSize:self.addPhotoLabel.font.pointSize];
 	
     [self.uploadPhotoButton.imageView setContentMode: UIViewContentModeScaleAspectFill];
-	[self updateDateOfBirthFieldsForLocale];
     
     self.uploadPhotoButton.layer.cornerRadius = self.uploadPhotoButton.frame.size.height * 0.5;
 	self.uploadPhotoButton.layer.masksToBounds = YES;
@@ -134,87 +126,21 @@
 	return nil;
 }
 
-- (void)updateDateOfBirthFieldsForLocale {
-	NSString *localeIdentifier = [[NSLocale autoupdatingCurrentLocale] localeIdentifier];
-	NSString *languageIdentifier = [NSLocale canonicalLanguageIdentifierFromString:localeIdentifier];
-	
-	// If we're in the US then we want to switch the day and month fields around since they have
-	// a non-intuitive date format
-	if ([languageIdentifier isEqualToString:@"en-US"]) {
-		SYNTextFieldLogin *dayTextField = self.monthTextField;
-		dayTextField.placeholder = @"DD";
-		
-		SYNTextFieldLogin *monthTextField = self.dayTextField;
-		monthTextField.placeholder = @"MM";
-		
-		self.dayTextField = dayTextField;
-		self.monthTextField = monthTextField;
-	}
-}
-
 - (BOOL)textField:(SYNTextFieldLogin *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
 	textField.errorMode = NO;
 	UILabel *errorLabel = [self errorLabelForTextField:textField];
 	errorLabel.text = nil;
 	
-	BOOL isDateField = (textField == self.dayTextField || textField == self.monthTextField || textField == self.yearTextField);
-	if (isDateField) {
-		self.dayTextField.errorMode = NO;
-		self.monthTextField.errorMode = NO;
-		self.yearTextField.errorMode = NO;
-	}
 	
 	NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
-	NSUInteger newLength = [newString length];
 	
 	if (textField == self.usernameTextField && [newString length] > 20) {
 		return NO;
 	}
-    
-    if ((textField == self.dayTextField || textField == self.monthTextField) && newLength > 2) {
-        return NO;
-    }
-    
-    if (textField == self.yearTextField && newLength > 4) {
-        return NO;
-    }
-	
-    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    
-    if (textField == self.dayTextField || textField == self.monthTextField || textField == self.yearTextField) {
-        if (([newString length] > 0) && ![numberFormatter numberFromString:newString]) {
-            return NO;
-        }
-    }
 	
     return YES;
 }
 
-- (IBAction)textFieldDidChange:(SYNTextFieldLogin *)textField {
-	if (textField == self.dayTextField && [textField.text length] == 2) {
-		[[self nextTextFieldAfter:textField] becomeFirstResponder];
-		
-		if ([self.monthTextField.text length] && [self.yearTextField.text length]) {
-			[self validateDateField:self.dayTextField monthField:self.monthTextField yearField:self.yearTextField errorLabel:self.dobErrorLabel];
-		}
-	}
-	
-	if (textField == self.monthTextField && [textField.text length] == 2) {
-		[[self nextTextFieldAfter:textField] becomeFirstResponder];
-		
-		if ([self.dayTextField.text length] && [self.yearTextField.text length]) {
-			[self validateDateField:self.dayTextField monthField:self.monthTextField yearField:self.yearTextField errorLabel:self.dobErrorLabel];
-		}
-	}
-	
-	if (textField == self.yearTextField && [textField.text length] == 4) {
-		[textField resignFirstResponder];
-		
-		if ([self.dayTextField.text length] && [self.monthTextField.text length]) {
-			[self validateDateField:self.dayTextField monthField:self.monthTextField yearField:self.yearTextField errorLabel:self.dobErrorLabel];
-		}
-    }
-}
 
 - (IBAction)registerButtonPressed:(UIButton *)button {
 	[self submitSignUp];
@@ -241,31 +167,16 @@
 		return;
 	}
 	
-	if (![self validateDateField:self.dayTextField
-					  monthField:self.monthTextField
-					   yearField:self.yearTextField
-					  errorLabel:self.dobErrorLabel]) {
-		return;
-	}
-	
 	[self.emailTextField resignFirstResponder];
 	[self.passwordTextField resignFirstResponder];
 	
-	[self.dayTextField resignFirstResponder];
-	[self.monthTextField resignFirstResponder];
-	[self.yearTextField resignFirstResponder];
 	
 	self.registerButton.enabled = NO;
-	
-	self.dayTextField.text = [self zeroPadIfOneCharacter:self.dayTextField.text];
-	self.monthTextField.text = [self zeroPadIfOneCharacter:self.monthTextField.text];
-	
-	NSString* dobString = [NSString stringWithFormat: @"%@-%@-%@", self.yearTextField.text, self.monthTextField.text, self.dayTextField.text];
+		
 	NSDictionary *userData = @{@"username": self.usernameTextField.text,
 							   @"password": self.passwordTextField.text,
 							   @"first_name": self.firstNameTextField.text,
 							   @"last_name": self.lastNameTextField.text,
-							   @"date_of_birth": dobString,
 							   @"locale": @"en-US",
 							   @"email": self.emailTextField.text,
 							   @"gender": self.genderSegmentedControl.selectedSegmentIndex == 0 ? @"m" : @"f"};
@@ -327,9 +238,6 @@
 	}
 	if (textField == self.passwordTextField) {
 		return self.passwordErrorLabel;
-	}
-	if (textField == self.dayTextField || textField == self.monthTextField || textField == self.yearTextField) {
-		return self.dobErrorLabel;
 	}
 	return nil;
 }
