@@ -667,6 +667,7 @@
 		F42AD96A196AE8990020B7A0 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = F42AD965196AE8980020B7A0 /* NSData+Base64.m */; };
 		F42AD96B196AE8990020B7A0 /* OAuth+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = F42AD967196AE8980020B7A0 /* OAuth+Additions.m */; };
 		F42AD96C196AE8990020B7A0 /* OAuthCore.m in Sources */ = {isa = PBXBuildFile; fileRef = F42AD969196AE8990020B7A0 /* OAuthCore.m */; };
+		F4623FF6197D6F7F00DEE044 /* SYNRoundButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F4623FF5197D6F7F00DEE044 /* SYNRoundButton.m */; };
 		F468C75A1937692C00838890 /* SYNShopMotionOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F468C7591937692C00838890 /* SYNShopMotionOverlayViewController.m */; };
 		F468C75C1937696300838890 /* SYNShopMotionOverlayViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = F468C75B1937696300838890 /* SYNShopMotionOverlayViewController~iphone.xib */; };
 		F468C75E1937697800838890 /* SYNShopMotionOverlayViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = F468C75D1937697800838890 /* SYNShopMotionOverlayViewController~ipad.xib */; };
@@ -1702,6 +1703,8 @@
 		F42AD967196AE8980020B7A0 /* OAuth+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OAuth+Additions.m"; sourceTree = "<group>"; };
 		F42AD968196AE8990020B7A0 /* OAuthCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuthCore.h; sourceTree = "<group>"; };
 		F42AD969196AE8990020B7A0 /* OAuthCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuthCore.m; sourceTree = "<group>"; };
+		F4623FF4197D6F7F00DEE044 /* SYNRoundButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNRoundButton.h; sourceTree = "<group>"; };
+		F4623FF5197D6F7F00DEE044 /* SYNRoundButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNRoundButton.m; sourceTree = "<group>"; };
 		F468C7581937692C00838890 /* SYNShopMotionOverlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNShopMotionOverlayViewController.h; sourceTree = "<group>"; };
 		F468C7591937692C00838890 /* SYNShopMotionOverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNShopMotionOverlayViewController.m; sourceTree = "<group>"; };
 		F468C75B1937696300838890 /* SYNShopMotionOverlayViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNShopMotionOverlayViewController~iphone.xib"; sourceTree = "<group>"; };
@@ -3726,6 +3729,8 @@
 				4C72DD4918FD96E6004AC132 /* SYNFollowChannelButton.m */,
 				0ECBED38187C66F900F28EB2 /* SYNFollowUserButton.h */,
 				0ECBED39187C66F900F28EB2 /* SYNFollowUserButton.m */,
+				F4623FF4197D6F7F00DEE044 /* SYNRoundButton.h */,
+				F4623FF5197D6F7F00DEE044 /* SYNRoundButton.m */,
 			);
 			name = Subclasses;
 			sourceTree = "<group>";
@@ -4781,6 +4786,7 @@
 				E98A851C19096B30001ADE09 /* SYNFeedChannelLargeCell.m in Sources */,
 				0125FB6C182BB41300EC822E /* SYNButton.m in Sources */,
 				0EFE39B0186458DE0006FA78 /* UIImageView+RoundImage.m in Sources */,
+				F4623FF6197D6F7F00DEE044 /* SYNRoundButton.m in Sources */,
 				E93122FB18916A43008ADBEB /* SYNTimestampView.m in Sources */,
 				BEF0AE0716E751280094BFDA /* SYNNetworkOperationJsonObjectParse.m in Sources */,
 				E979F30F19081C4A00FC6743 /* SYNFeedVideoSmallCell.m in Sources */,
