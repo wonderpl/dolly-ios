@@ -299,7 +299,7 @@ static const CGFloat HeaderHeightIPad = 530;
             self.btnFollowChannel.hidden = YES;
             [self centreView:self.btnShareChannel];
             CGRect tmpFrame = self.btnShareChannel.frame;
-            tmpFrame.origin.x = self.viewCirleButtonContainer.frame.size.width/2-tmpFrame.size.width/2;
+            tmpFrame.origin.x = self.viewCirleButtonContainer.frame.size.width/2-5;
 			self.btnShareChannel.frame = tmpFrame;
             tmpFrame = self.viewCirleButtonContainer.frame;
             tmpFrame.origin.y -= 4;
