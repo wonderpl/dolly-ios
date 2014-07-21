@@ -180,7 +180,7 @@
 "notification_unavailable_action" = "Your video has become unavailable";
 "notification_repack_action" = "%@ has added your video to a collection";
 "notification_subscribed_action" = "%@ is now following your collection";
-"notification_joined_action" = "Your Facebook friend %@ has joined Wonder PL";
+"notification_joined_action" = "Your friend %@ has joined Wonder PL";
 "notification_comment_action" = "%@ mentioned you in a comment.";
 "notification_share_video" = "%@ shared a video with you";
 "notification_share_video_with_title" = "%@ shared \"%@\" with you";
