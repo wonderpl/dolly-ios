@@ -226,6 +226,7 @@
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey: kUserDefaultsShopMotionFirstTime];
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kUserDefaultsDiscoverSearchFirstTime];
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kUserDefaultsVideoPlayerFirstTime];
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kUserDefaultsShareOnEven];
     } else {
         [[NSUserDefaults standardUserDefaults] setInteger:3 forKey: kUserDefaultsDiscoverUserFirstTime];
         [[NSUserDefaults standardUserDefaults] setInteger:2 forKey: kUserDefaultsOtherPersonsProfile];

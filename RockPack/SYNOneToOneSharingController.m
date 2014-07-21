@@ -277,10 +277,16 @@ SYNFriendShareCellDelegate>
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    if (![self.appDelegate.currentUser.emailAddress length]) {
+    
+    BOOL showAlert = [[[NSUserDefaults standardUserDefaults] valueForKey:kUserDefaultsShareOnEven] boolValue];
+    
+    if (![self.appDelegate.currentUser.emailAddress length] && showAlert) {
         [[SYNAddEmailAlertView sharedInstance] showAlertView];
     }
+    
+    [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithBool:!showAlert] forKey:kUserDefaultsShareOnEven];
 }
+
 - (void) viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     self.addressBookImageCache = nil;
