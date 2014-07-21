@@ -145,7 +145,19 @@ static NSInteger const kNumberOfDays = 5;
                                                 withNewValue: textfield.text
                                            completionHandler: ^(NSDictionary * dictionary){
                                                appDelegate.currentUser.emailAddress = textfield.text;
-                                           } errorHandler:nil];
+                                           
+                                           } errorHandler:^(NSDictionary *error) {
+
+                                            	NSString *message = error[@"message"][0];
+                                               
+                                               if (!message) {
+                                                   message = @"An error has occured while updating your email";
+                                               }
+                            
+                                               self.alertView = [[UIAlertView alloc]initWithTitle:@"A Problem has occured" message:[NSString stringWithFormat:@"\"%@\" Please enter your email address again", message] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Save", nil];
+                                               self.alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
+                                               [self.alertView show];
+                                           }];
         return;
     }
     return;
