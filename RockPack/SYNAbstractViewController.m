@@ -212,24 +212,14 @@
     BOOL didStar = (button.selected == NO);
     
     button.enabled = NO;
-	
+    [self starVideoInstance:videoInstance withButton:button didStar:didStar];
+    
     [appDelegate.oAuthNetworkEngine recordActivityForUserId: appDelegate.currentUser.uniqueId
                                                      action: (didStar ? @"star" : @"unstar")
                                             videoInstanceId: videoInstance.uniqueId
                                           completionHandler: ^(id response) {
                                               BOOL previousStarringState = videoInstance.starredByUserValue;
-                                              
-                                              if (didStar) {
-                                                  // Currently highlighted, so increment
-                                                  videoInstance.starredByUserValue = YES;
-                                                  
-                                                  button.selected = YES;
-                                              } else {
-                                                  // Currently highlighted, so decrement
-                                                  videoInstance.starredByUserValue = NO;
-                                                  
-                                                  button.selected = NO;
-                                              }
+                                              [self starVideoInstance:videoInstance withButton:button didStar:didStar];
                                               
                                               if (![videoInstance.managedObjectContext save:nil]) {
                                                   videoInstance.starredByUserValue = previousStarringState;
@@ -241,6 +231,23 @@
 											  
                                               button.enabled = YES;
                                           }];
+}
+
+
+- (void)starVideoInstance:(VideoInstance*)videoInstance withButton:(UIButton*)button didStar:(BOOL)didStar {
+
+    if (didStar) {
+        // Currently highlighted, so increment
+        videoInstance.starredByUserValue = YES;
+        
+        button.selected = YES;
+    } else {
+        // Currently highlighted, so decrement
+        videoInstance.starredByUserValue = NO;
+        
+        button.selected = NO;
+    }
+
 }
 
 - (void)shareChannel:(Channel *)channel {
