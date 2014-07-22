@@ -295,7 +295,7 @@ typedef void (^SearchResultCompleteBlock)(int);
 - (void) searchForGenre: (NSString *) genreId
 {	
 	if (IS_IPHONE) {
-		self.topVideoContraint.constant = 64;
+		self.topVideoContraint.constant = 63;
 	} else {
 		self.topVideoContraint.constant = 0;
 		self.topUserContraint.constant = 19;
@@ -503,7 +503,9 @@ typedef void (^SearchResultCompleteBlock)(int);
         } else {
             if (indexPath.row>1) {
                 userCell.descriptionLabel.hidden = YES;
+                [userCell.userNameLabel setFont:[UIFont semiboldCustomFontOfSize:14]];
             } else {
+                [userCell.userNameLabel setFont:[UIFont semiboldCustomFontOfSize:23]];
                 userCell.descriptionLabel.hidden = NO;
             }
         }
@@ -564,7 +566,7 @@ typedef void (^SearchResultCompleteBlock)(int);
             if (indexPath.row<2) {
                 return CGSizeMake(320, 192);
             } else {
-                return CGSizeMake(320, 101);
+                return CGSizeMake(155, 155);
             }
         }
         

@@ -26,7 +26,6 @@
 
 @property (nonatomic, strong) IBOutlet SYNSocialButton *followButton;
 @property (nonatomic, strong) IBOutlet SYNAvatarButton *userThumbnailButton;
-@property (strong, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (strong, nonatomic) UIAlertView *followAllAlertView;
 @property (strong, nonatomic) IBOutlet UIImageView *coverImage;
 @property (strong, nonatomic) IBOutlet UIView *gradientMask;
@@ -185,7 +184,7 @@
 	[super layoutSubviews];
 	
 	if (IS_IPHONE) {
-		self.separatorView.frame = CGRectMake(0, CGRectGetHeight(self.bounds) - 0.5, CGRectGetWidth(self.bounds), 0.5);
+		self.separatorView.frame = CGRectMake(0, 0, CGRectGetWidth(self.bounds), 0.5);
 	}
 }
 
