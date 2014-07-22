@@ -154,7 +154,7 @@ static NSInteger const kNumberOfDays = 5;
                                                    message = @"An error has occured while updating your email";
                                                }
                             
-                                               self.alertView = [[UIAlertView alloc]initWithTitle:@"A Problem has occured" message:[NSString stringWithFormat:@"\"%@\" Please enter your email address again", message] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Save", nil];
+                                               self.alertView = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"email_update_problem", nil) message:[NSString stringWithFormat:@"\"%@\" Please enter your email address again", message] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Save", nil];
                                                self.alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
                                                [self.alertView show];
                                            }];
