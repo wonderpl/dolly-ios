@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SYNRoundButton.h"
 
-@interface SYNFacebookButton : UIButton
+@interface SYNFacebookButton : SYNRoundButton
 
 @end

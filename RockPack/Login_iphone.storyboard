@@ -83,19 +83,19 @@ Watch, collect and share only the very best videos</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Culture" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OG3-DB-CQl">
-                                        <rect key="frame" x="50.5" y="133" width="150" height="29"/>
+                                        <rect key="frame" x="51" y="133" width="150" height="29"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="The Mind" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DVN-OK-Dh1">
-                                        <rect key="frame" x="145.5" y="162" width="150" height="29"/>
+                                        <rect key="frame" x="146" y="162" width="150" height="29"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Technology" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gzm-uT-pPM">
-                                        <rect key="frame" x="35.5" y="184" width="170" height="29"/>
+                                        <rect key="frame" x="36" y="184" width="170" height="29"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -107,13 +107,13 @@ Watch, collect and share only the very best videos</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="News" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tcs-QW-rdS">
-                                        <rect key="frame" x="156.5" y="192" width="170" height="21"/>
+                                        <rect key="frame" x="157" y="192" width="170" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Wellness" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bLm-U4-ZBK">
-                                        <rect key="frame" x="139.5" y="173" width="170" height="21"/>
+                                        <rect key="frame" x="140" y="173" width="170" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -144,25 +144,34 @@ Watch, collect and share only the very best videos</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LER-5Z-EXM">
                                 <rect key="frame" x="0.0" y="294" width="320" height="274"/>
                                 <subviews>
-                                    <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pbj-Ru-j0Q" userLabel="Facebook Button" customClass="SYNFacebookButton">
-                                        <rect key="frame" x="19" y="27" width="284" height="49"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                        <state key="normal" title="Login with Facebook" backgroundImage="facebook-login-button.png">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
+                                    <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pbj-Ru-j0Q" userLabel="Facebook Button" customClass="SYNFacebookButton">
+                                        <rect key="frame" x="20" y="38" width="280" height="37"/>
+                                        <color key="backgroundColor" red="0.2666666667" green="0.36078431370000003" blue="0.63529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <state key="normal" title="Login with Facebook" backgroundImage="FacebookSignInButton.png">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="fadebookButtonPressed:" destination="ZOV-1D-Jox" eventType="touchUpInside" id="Hzd-v0-Vlt"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m39-9A-UIQ" userLabel="Button Login">
-                                        <rect key="frame" x="18" y="116" width="284" height="49"/>
+                                    <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WEd-dN-0gb" userLabel="Twitter Button">
+                                        <rect key="frame" x="20" y="85" width="280" height="37"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <state key="normal" backgroundImage="TwitterSignInButton.png">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="twitterButtonPressed:" destination="ZOV-1D-Jox" eventType="touchUpInside" id="U2C-qb-LDC"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m39-9A-UIQ" userLabel="Button Login" customClass="SYNRoundButton">
+                                        <rect key="frame" x="20" y="132" width="280" height="37"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <accessibility key="accessibilityConfiguration" label="Login Navigation"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                        <state key="normal" backgroundImage="login-button.png">
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <state key="normal">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </state>
@@ -174,10 +183,16 @@ Watch, collect and share only the very best videos</string>
                                             <segue destination="gfp-5v-9XD" kind="push" identifier="Login" id="2gW-96-ptz"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H6u-lu-1jq" userLabel="Button Signup">
-                                        <rect key="frame" x="93" y="207" width="134" height="61"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <state key="normal" backgroundImage="sign-up-button.png">
+                                    <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H6u-lu-1jq" userLabel="Button Signup">
+                                        <rect key="frame" x="117" y="220" width="87" height="37"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="87" id="C3d-7C-Ync"/>
+                                            <constraint firstAttribute="height" constant="37" id="r8d-oA-Dlz"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <state key="normal">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </state>
                                         <state key="highlighted">
@@ -188,45 +203,27 @@ Watch, collect and share only the very best videos</string>
                                             <segue destination="qWp-Co-vD8" kind="push" id="lMt-2T-vOk"/>
                                         </connections>
                                     </button>
-                                    <view userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wd1-cl-xBG">
-                                        <rect key="frame" x="0.0" y="-294" width="291" height="403"/>
-                                        <subviews>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="or" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JEF-6W-0IF">
-                                                <rect key="frame" x="152" y="381" width="16" height="22"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="left-separator.png" translatesAutoresizingMaskIntoConstraints="NO" id="okZ-Nd-CwN">
-                                                <rect key="frame" x="67" y="391" width="70" height="1"/>
-                                            </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="right-separator.png" translatesAutoresizingMaskIntoConstraints="NO" id="Oxk-sb-VYu">
-                                                <rect key="frame" x="183" y="391" width="70" height="1"/>
-                                            </imageView>
-                                        </subviews>
-                                    </view>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Would you like to create an account" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="faK-MG-3vf">
-                                        <rect key="frame" x="34" y="187" width="253" height="21"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Would you like to create an account" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="faK-MG-3vf">
+                                        <rect key="frame" x="34" y="189" width="253" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="253" id="SPK-fr-dGM"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="centerX" secondItem="faK-MG-3vf" secondAttribute="centerX" constant="-0.5" id="DNg-JA-B5H"/>
+                                    <constraint firstAttribute="centerX" secondItem="H6u-lu-1jq" secondAttribute="centerX" constant="-0.5" id="ioU-Wq-wAe"/>
+                                    <constraint firstAttribute="bottom" secondItem="H6u-lu-1jq" secondAttribute="bottom" constant="17" id="lfI-Xt-lbb"/>
+                                    <constraint firstAttribute="centerY" secondItem="faK-MG-3vf" secondAttribute="centerY" constant="-62.5" id="o2C-5V-H3S"/>
+                                </constraints>
                             </view>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="ypp-Pf-u4V">
                                 <rect key="frame" x="141" y="217" width="37" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WEd-dN-0gb">
-                                <rect key="frame" x="18" y="31" width="284" height="49"/>
-                                <state key="normal" title="Twitter Log in" backgroundImage="login-button.png">
-                                    <color key="titleColor" red="0.25098039220000001" green="0.59999999999999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="twitterButtonPressed:" destination="ZOV-1D-Jox" eventType="touchUpInside" id="U2C-qb-LDC"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -266,10 +263,9 @@ Watch, collect and share only the very best videos</string>
                         <outlet property="messageView5" destination="nau-3q-OCY" id="6Lb-y7-YYB"/>
                         <outlet property="mind" destination="DVN-OK-Dh1" id="YFU-S3-ePO"/>
                         <outlet property="news" destination="tcs-QW-rdS" id="ZSy-uE-r6K"/>
-                        <outlet property="orText" destination="JEF-6W-0IF" id="bL7-Ss-fCr"/>
-                        <outlet property="orView" destination="wd1-cl-xBG" id="VCU-GP-s7W"/>
                         <outlet property="signupButton" destination="H6u-lu-1jq" id="Ihy-6i-i1A"/>
                         <outlet property="tech" destination="Gzm-uT-pPM" id="a5n-Oj-nti"/>
+                        <outlet property="twitterButton" destination="WEd-dN-0gb" id="MoY-cy-N0v"/>
                         <outlet property="twitterSpinner" destination="ypp-Pf-u4V" id="I8w-o5-GAh"/>
                         <outlet property="wellness" destination="bLm-U4-ZBK" id="k51-4h-MOY"/>
                     </connections>
@@ -911,15 +907,12 @@ Watch, collect and share only the very best videos</string>
     </scenes>
     <resources>
         <image name="AvatarUpload.png" width="88" height="88"/>
-        <image name="facebook-login-button.png" width="286" height="50"/>
+        <image name="FacebookSignInButton.png" width="280" height="37"/>
+        <image name="TwitterSignInButton.png" width="280" height="37"/>
         <image name="intro-beach.jpg" width="640" height="1136"/>
         <image name="intro-church.jpg" width="640" height="1136"/>
         <image name="intro-food.jpg" width="640" height="1136"/>
         <image name="intro-home.jpg" width="640" height="1136"/>
-        <image name="left-separator.png" width="70" height="1"/>
-        <image name="login-button.png" width="286" height="50"/>
-        <image name="right-separator.png" width="70" height="1"/>
-        <image name="sign-up-button.png" width="134" height="61"/>
         <image name="wonder-logo.png" width="85" height="49"/>
     </resources>
     <color key="tintColor" red="0.65490196079999996" green="0.65490196079999996" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>

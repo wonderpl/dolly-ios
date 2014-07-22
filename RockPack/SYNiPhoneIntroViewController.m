@@ -35,6 +35,7 @@ static const CGFloat DelayConstant = 0.5;
 @property (nonatomic, strong) IBOutlet UIView *containerView;
 @property (nonatomic, strong) IBOutlet UIButton *facebookButton;
 @property (nonatomic, strong) IBOutlet UIButton *loginButton;
+@property (strong, nonatomic) IBOutlet UIButton *twitterButton;
 @property (nonatomic, strong) IBOutlet UIButton *signupButton;
 @property (nonatomic, strong) IBOutlet UIImageView *logoImageView;
 @property (strong, nonatomic) IBOutlet UIView *orView;
@@ -112,7 +113,6 @@ static const CGFloat DelayConstant = 0.5;
 
 
     
-    [self.signupButton setTitle:@"Sign up" forState:UIControlStateNormal];
     
     self.signupButton.titleLabel.font = [UIFont regularCustomFontOfSize:self.signupButton.titleLabel.font.pointSize];
     self.signupButton.titleLabel.textColor = [UIColor whiteColor];
@@ -123,13 +123,15 @@ static const CGFloat DelayConstant = 0.5;
     
     [self.haveAnAccountLabel setFont:[UIFont regularCustomFontOfSize:14]];
     self.facebookButton.titleLabel.font = [UIFont regularCustomFontOfSize:self.facebookButton.titleLabel.font.pointSize];
-    
+    self.twitterButton.titleLabel.font = [UIFont regularCustomFontOfSize:self.twitterButton.titleLabel.font.pointSize];
     self.loginButton.titleLabel.font = [UIFont regularCustomFontOfSize:self.loginButton.titleLabel.font.pointSize];
 
     
-    [self.facebookButton setTitle:@"Log in with Facebook" forState:UIControlStateNormal];
-    [self.loginButton setTitle:@"Log in" forState:UIControlStateNormal];
-    
+    [self.facebookButton setTitle: NSLocalizedString(@"Facebook_Login", nil) forState:UIControlStateNormal];
+    [self.twitterButton setTitle:NSLocalizedString(@"Twitter_Login", nil) forState:UIControlStateNormal];
+    [self.loginButton setTitle:NSLocalizedString(@"Log_in", nil) forState:UIControlStateNormal];
+    [self.signupButton setTitle:NSLocalizedString(@"Sign_up", nil) forState:UIControlStateNormal];
+
     double delayInSecondChurch = 3.0;
 
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSecondChurch * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -200,6 +202,8 @@ static const CGFloat DelayConstant = 0.5;
                 self.signupButton.alpha = 1.0;
                 self.alreadyHaveAccountLabel.alpha = 1.0;
 
+            	self.twitterButton.alpha = 1.0;
+                
             } completion: getNextAnimation()];
         }];
         

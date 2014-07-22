@@ -668,6 +668,14 @@
 		F42AD96B196AE8990020B7A0 /* OAuth+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = F42AD967196AE8980020B7A0 /* OAuth+Additions.m */; };
 		F42AD96C196AE8990020B7A0 /* OAuthCore.m in Sources */ = {isa = PBXBuildFile; fileRef = F42AD969196AE8990020B7A0 /* OAuthCore.m */; };
 		F4623FF6197D6F7F00DEE044 /* SYNRoundButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F4623FF5197D6F7F00DEE044 /* SYNRoundButton.m */; };
+		F4624003197D82A200DEE044 /* FacebookSignInButton~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F4623FFF197D82A200DEE044 /* FacebookSignInButton~ipad.png */; };
+		F4624004197D82A200DEE044 /* FacebookSignInButton@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F4624000197D82A200DEE044 /* FacebookSignInButton@2x~ipad.png */; };
+		F4624005197D82A200DEE044 /* FacebookSignInButton~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = F4624001197D82A200DEE044 /* FacebookSignInButton~iphone.png */; };
+		F4624006197D82A200DEE044 /* FacebookSignInButton@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = F4624002197D82A200DEE044 /* FacebookSignInButton@2x~iphone.png */; };
+		F462400B197D82AE00DEE044 /* TwitterSignInButton~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F4624007197D82AE00DEE044 /* TwitterSignInButton~ipad.png */; };
+		F462400C197D82AE00DEE044 /* TwitterSignInButton@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F4624008197D82AE00DEE044 /* TwitterSignInButton@2x~ipad.png */; };
+		F462400D197D82AE00DEE044 /* TwitterSignInButton~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = F4624009197D82AE00DEE044 /* TwitterSignInButton~iphone.png */; };
+		F462400E197D82AE00DEE044 /* TwitterSignInButton@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = F462400A197D82AE00DEE044 /* TwitterSignInButton@2x~iphone.png */; };
 		F468C75A1937692C00838890 /* SYNShopMotionOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F468C7591937692C00838890 /* SYNShopMotionOverlayViewController.m */; };
 		F468C75C1937696300838890 /* SYNShopMotionOverlayViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = F468C75B1937696300838890 /* SYNShopMotionOverlayViewController~iphone.xib */; };
 		F468C75E1937697800838890 /* SYNShopMotionOverlayViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = F468C75D1937697800838890 /* SYNShopMotionOverlayViewController~ipad.xib */; };
@@ -1705,6 +1713,14 @@
 		F42AD969196AE8990020B7A0 /* OAuthCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuthCore.m; sourceTree = "<group>"; };
 		F4623FF4197D6F7F00DEE044 /* SYNRoundButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNRoundButton.h; sourceTree = "<group>"; };
 		F4623FF5197D6F7F00DEE044 /* SYNRoundButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNRoundButton.m; sourceTree = "<group>"; };
+		F4623FFF197D82A200DEE044 /* FacebookSignInButton~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FacebookSignInButton~ipad.png"; sourceTree = "<group>"; };
+		F4624000197D82A200DEE044 /* FacebookSignInButton@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FacebookSignInButton@2x~ipad.png"; sourceTree = "<group>"; };
+		F4624001197D82A200DEE044 /* FacebookSignInButton~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FacebookSignInButton~iphone.png"; sourceTree = "<group>"; };
+		F4624002197D82A200DEE044 /* FacebookSignInButton@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FacebookSignInButton@2x~iphone.png"; sourceTree = "<group>"; };
+		F4624007197D82AE00DEE044 /* TwitterSignInButton~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TwitterSignInButton~ipad.png"; sourceTree = "<group>"; };
+		F4624008197D82AE00DEE044 /* TwitterSignInButton@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TwitterSignInButton@2x~ipad.png"; sourceTree = "<group>"; };
+		F4624009197D82AE00DEE044 /* TwitterSignInButton~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TwitterSignInButton~iphone.png"; sourceTree = "<group>"; };
+		F462400A197D82AE00DEE044 /* TwitterSignInButton@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TwitterSignInButton@2x~iphone.png"; sourceTree = "<group>"; };
 		F468C7581937692C00838890 /* SYNShopMotionOverlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNShopMotionOverlayViewController.h; sourceTree = "<group>"; };
 		F468C7591937692C00838890 /* SYNShopMotionOverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNShopMotionOverlayViewController.m; sourceTree = "<group>"; };
 		F468C75B1937696300838890 /* SYNShopMotionOverlayViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNShopMotionOverlayViewController~iphone.xib"; sourceTree = "<group>"; };
@@ -3345,6 +3361,14 @@
 		BE270B8516EE485200CDDA6D /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				F4624007197D82AE00DEE044 /* TwitterSignInButton~ipad.png */,
+				F4624008197D82AE00DEE044 /* TwitterSignInButton@2x~ipad.png */,
+				F4624009197D82AE00DEE044 /* TwitterSignInButton~iphone.png */,
+				F462400A197D82AE00DEE044 /* TwitterSignInButton@2x~iphone.png */,
+				F4623FFF197D82A200DEE044 /* FacebookSignInButton~ipad.png */,
+				F4624000197D82A200DEE044 /* FacebookSignInButton@2x~ipad.png */,
+				F4624001197D82A200DEE044 /* FacebookSignInButton~iphone.png */,
+				F4624002197D82A200DEE044 /* FacebookSignInButton@2x~iphone.png */,
 				F419A151192A72FF00DBA621 /* register-button.png */,
 				F419A152192A72FF00DBA621 /* register-button@2x.png */,
 				9937CA15192250B7002D3C23 /* sign-up-button.png */,
@@ -4180,6 +4204,7 @@
 				99BEAEC4191D1F6500A27FC7 /* login-button@2x.png in Resources */,
 				1F458B0017E1C4E6003C14AC /* AppIcon29x29.png in Resources */,
 				F46D8C5A192CE7750048C486 /* SYNShareOverlayViewController~iphone.xib in Resources */,
+				F462400D197D82AE00DEE044 /* TwitterSignInButton~iphone.png in Resources */,
 				993B1ADD191A962F008532D4 /* TabActivitySelected~iphone.png in Resources */,
 				9937CA0219222CD6002D3C23 /* left-separator@2x.png in Resources */,
 				BE270BD016EF386300CDDA6D /* DividerLogin.png in Resources */,
@@ -4238,6 +4263,7 @@
 				9937C9FC19222CBC002D3C23 /* wonder-logo@2x~iphone.png in Resources */,
 				E985D36518FED44600D5A9E1 /* ShareButton@2x.png in Resources */,
 				BE21EE9D16FA28680067223B /* IconLocation.png in Resources */,
+				F4624005197D82A200DEE044 /* FacebookSignInButton~iphone.png in Resources */,
 				BE21EE9E16FA28680067223B /* IconLocation@2x.png in Resources */,
 				BE21EE9F16FA28680067223B /* IconUsername.png in Resources */,
 				F468C75C1937696300838890 /* SYNShopMotionOverlayViewController~iphone.xib in Resources */,
@@ -4301,6 +4327,7 @@
 				BE285DA1172584FF00D995AB /* SYNAddToChannelCreateNewCell.xib in Resources */,
 				F46D8C52192CC6A00048C486 /* InboardingHeartIcon.png in Resources */,
 				E985D36718FED44600D5A9E1 /* FavouriteButtonSelected@2x.png in Resources */,
+				F4624003197D82A200DEE044 /* FacebookSignInButton~ipad.png in Resources */,
 				E9AB7E05188EBC2A0041F58A /* SYNAddToChannelCreateNewCell~iphone.xib in Resources */,
 				1F458B0617E1C4E6003C14AC /* AppIcon76x76.png in Resources */,
 				E98A852119096B55001ADE09 /* SYNFeedChannelLargeCell.xib in Resources */,
@@ -4380,6 +4407,7 @@
 				F46BFF2519645E77006A28EF /* SYNFeedAvatarOverlayViewController~ipad.xib in Resources */,
 				4C5E861C18B6580300D0E937 /* SYNDiscoverOverlayHighlightsViewController~iphone.xib in Resources */,
 				4CDD76A818CA014A000B2CBD /* SYNFeedOverlayAddingViewController~iphone.xib in Resources */,
+				F4624006197D82A200DEE044 /* FacebookSignInButton@2x~iphone.png in Resources */,
 				993B1B45191AA4B5008532D4 /* TabFeed~ipad.png in Resources */,
 				F4A443FE19363A0F009287FA /* ShopMotion7.png in Resources */,
 				993B1B4C191AA4D3008532D4 /* TabProfile~ipad.png in Resources */,
@@ -4393,6 +4421,7 @@
 				BED027D11834D4CC00636659 /* ButtonMoreLogout@2x.png in Resources */,
 				9937CA3619228EFC002D3C23 /* intro-mountains-sea~iphone.jpg in Resources */,
 				E9AD5B69187D6B9600298D95 /* ButtonFacebook@2x.png in Resources */,
+				F4624004197D82A200DEE044 /* FacebookSignInButton@2x~ipad.png in Resources */,
 				BED027B41833F68100636659 /* SYNOptionsOverlayViewController~iphone.xib in Resources */,
 				F48C1619192B663B00107B32 /* TabActivityNotification@2x~iphone.png in Resources */,
 				4C5E861118B6353900D0E937 /* SYNDiscoverOverlayVideoViewController~iphone.xib in Resources */,
@@ -4415,6 +4444,7 @@
 				4C03237E18AE6FBD00E168EF /* SYNFriendCell.xib in Resources */,
 				4C03237C18AE6F9E00E168EF /* SYNFriendCell~iphone.xib in Resources */,
 				F478E82119378BD70015BF38 /* InboardingShopMotion@2x.png in Resources */,
+				F462400C197D82AE00DEE044 /* TwitterSignInButton@2x~ipad.png in Resources */,
 				0EF07868181EAE8300667417 /* ButtonMore@2x.png in Resources */,
 				1F458B2517E1CE8E003C14AC /* AppIcon-Dev-40x40@2x.png in Resources */,
 				BE57C022184358BA00C6444A /* SYNOnBoardingViewController~iphone.xib in Resources */,
@@ -4470,6 +4500,7 @@
 				F4C7E58B192E3419006053DA /* CoverUpload.png in Resources */,
 				E9EE08DC18F80379000DC06A /* ProximaNova-Semibold.otf in Resources */,
 				1F51A69F1742A93B009907CA /* PlaceholderNotificationAvatar@2x.png in Resources */,
+				F462400B197D82AE00DEE044 /* TwitterSignInButton~ipad.png in Resources */,
 				7D6D4F5C192A275C0084DC84 /* TabSearch@2x~ipad.png in Resources */,
 				1F51A6B01742A959009907CA /* PlaceholderAvatarChannel@2x~iphone.png in Resources */,
 				7D6D4F5A192A275C0084DC84 /* TabProfile@2x~ipad.png in Resources */,
@@ -4505,6 +4536,7 @@
 				E98A852319096B63001ADE09 /* SYNFeedChannelSmallCell.xib in Resources */,
 				9937CA3219228EFC002D3C23 /* intro-home~ipad.jpg in Resources */,
 				E9EF289518FD901E003B2D0F /* FreightTextPro-Book.otf in Resources */,
+				F462400E197D82AE00DEE044 /* TwitterSignInButton@2x~iphone.png in Resources */,
 				F4A443F719363A0F009287FA /* ShopMotion0.png in Resources */,
 				BED027C61834D4CC00636659 /* ButtonMoreAbout.png in Resources */,
 				1F458B2217E1CE8E003C14AC /* AppIcon-Dev-29x29.png in Resources */,

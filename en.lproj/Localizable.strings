@@ -72,6 +72,11 @@
 "startscreen_onboard_5_title_iphone" = "SCHMOOZE";
 "startscreen_onboard_5_iphone" = "\nA well-crafted pack is a gift that keeps on giving. You wonderful person you.";
 
+"Facebook_Login" = "Sign in with Facebook";
+"Twitter_Login" = "Sign in with Twitter";
+"Log_in" = "Log in";
+"Sign_up" = "Sign up";
+
 //iPad
 "startscreen_onboard_1_title_ipad" = " ";
 "startscreen_onboard_1_ipad" = "\nLove video again";

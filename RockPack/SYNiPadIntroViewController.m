@@ -62,6 +62,7 @@ static const CGFloat DelayConstant = 0.5;
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *twitterSpinner;
 @property (strong, nonatomic) UIActionSheet *actionSheet;
 
+@property (strong, nonatomic) IBOutlet UIButton *twitterButton;
 
 @end
 
@@ -93,6 +94,15 @@ static const CGFloat DelayConstant = 0.5;
     [self.film setFont:[UIFont regularCustomFontOfSize:self.film.font.pointSize]];
     [self.learnFrom setFont:[UIFont regularCustomFontOfSize:self.learnFrom.font.pointSize]];
 
+    [self.facebookButton setTitle: NSLocalizedString(@"Facebook_Login", nil) forState:UIControlStateNormal];
+    [self.twitterButton setTitle:NSLocalizedString(@"Twitter_Login", nil) forState:UIControlStateNormal];
+    [self.loginButton setTitle:NSLocalizedString(@"Log_in", nil) forState:UIControlStateNormal];
+	[self.signupButton setTitle:NSLocalizedString(@"Sign_up", nil) forState:UIControlStateNormal];
+    
+    [self.facebookButton.titleLabel setFont:[UIFont regularCustomFontOfSize:self.facebookButton.titleLabel.font.pointSize]];
+    [self.twitterButton.titleLabel setFont:[UIFont regularCustomFontOfSize:self.twitterButton.titleLabel.font.pointSize]];
+    [self.loginButton.titleLabel setFont:[UIFont regularCustomFontOfSize:self.loginButton.titleLabel.font.pointSize]];
+    [self.signupButton.titleLabel setFont:[UIFont regularCustomFontOfSize:self.signupButton.titleLabel.font.pointSize]];
     
     double delayInSecondChurch = 3.0;
     
@@ -174,6 +184,8 @@ static const CGFloat DelayConstant = 0.5;
             self.signupButton.frame = frame;
             self.signupButton.alpha = 1.0;
             self.alreadyHaveAccountLabel.alpha = 1.0;
+            
+            self.twitterButton.alpha = 1.0;
             
         } completion: getNextAnimation()];
     }];

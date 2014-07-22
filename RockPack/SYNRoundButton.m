@@ -28,8 +28,6 @@
 - (void)setup {
 	self.layer.cornerRadius = self.frame.size.height * 0.5;
 	self.layer.masksToBounds = YES;
-	self.contentHorizontalAlignment = UIControlContentHorizontalAlignmentFill;
-	self.contentVerticalAlignment = UIControlContentVerticalAlignmentFill;
 }
 
 

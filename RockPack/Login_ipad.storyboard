@@ -45,46 +45,38 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="djh-wF-rJq" userLabel="Facebook Button" customClass="SYNFacebookButton">
-                                        <rect key="frame" x="241" y="80" width="286" height="50"/>
+                                        <rect key="frame" x="208" y="138" width="350" height="47"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                        <color key="backgroundColor" red="0.2666666667" green="0.36078431370000003" blue="0.63529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <state key="normal" title="Log in with Facebook" backgroundImage="facebook-login-button.png">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
+                                        <state key="normal" backgroundImage="FacebookSignInButton.png">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="facebookButtonPressed:" destination="Ceh-Ho-dNE" eventType="touchUpInside" id="T7t-W9-Wc7"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hYE-YL-Gus" userLabel="Sign-Up UIButton" customClass="SYNFormButton">
-                                        <rect key="frame" x="317" y="258" width="134" height="61"/>
+                                    <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hYE-YL-Gus" userLabel="Sign-Up UIButton" customClass="SYNRoundButton">
+                                        <rect key="frame" x="329" y="349" width="109" height="46"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <state key="normal" title="Sign Up" backgroundImage="sign-up-button.png">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" red="0.83278566430000001" green="0.82134538830000003" blue="0.93503736410000005" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <segue destination="ulM-qc-tb0" kind="push" id="oHh-i9-djB"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iS9-hS-oFd" userLabel="Login UIButton" customClass="SYNFormButton">
-                                        <rect key="frame" x="241" y="165" width="286" height="50"/>
+                                    <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iS9-hS-oFd" userLabel="Login UIButton" customClass="SYNRoundButton">
+                                        <rect key="frame" x="209" y="252" width="350" height="47"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <accessibility key="accessibilityConfiguration" label="Login Navigation"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <state key="normal" title="Log in" backgroundImage="login-button.png">
+                                        <state key="normal" title="Log in">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </state>
@@ -99,7 +91,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" fixedFrame="YES" text="Would you like to create an account?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="271" translatesAutoresizingMaskIntoConstraints="NO" id="zXj-H4-kWP" userLabel="Member? UILabel">
-                                        <rect key="frame" x="248" y="211" width="271" height="46"/>
+                                        <rect key="frame" x="248" y="311" width="271" height="18"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -107,27 +99,17 @@
                                         <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.25" colorSpace="calibratedRGB"/>
                                         <size key="shadowOffset" width="0.0" height="1"/>
                                     </label>
-                                    <view alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8hK-cH-d8z">
-                                        <rect key="frame" x="262" y="135" width="245" height="24"/>
+                                    <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ioM-qv-gtF" userLabel="Twitter Button" customClass="SYNRoundButton">
+                                        <rect key="frame" x="209" y="195" width="350" height="47"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <subviews>
-                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="or" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gRM-im-IEg">
-                                                <rect key="frame" x="115" y="1" width="15" height="20"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="left-separator.png" translatesAutoresizingMaskIntoConstraints="NO" id="nhN-ap-HTY">
-                                                <rect key="frame" x="33" y="11" width="70" height="1"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="right-separator.png" translatesAutoresizingMaskIntoConstraints="NO" id="ULo-tj-fbs">
-                                                <rect key="frame" x="142" y="11" width="70" height="1"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            </imageView>
-                                        </subviews>
-                                    </view>
+                                        <color key="backgroundColor" red="0.23137254900000001" green="0.60784313729999995" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" backgroundImage="TwitterSignInButton.png">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="twitterButtonPressed:" destination="Ceh-Ho-dNE" eventType="touchUpInside" id="4bp-G6-wer"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="768" id="3Tq-eS-Lys"/>
@@ -269,31 +251,14 @@ Watch, collect and  share only the very best videos</string>
                                 <rect key="frame" x="366" y="354" width="37" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ioM-qv-gtF">
-                                <rect key="frame" x="241" y="806" width="286" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="286" id="ENn-0l-nly"/>
-                                    <constraint firstAttribute="height" constant="50" id="YTj-lU-FzA"/>
-                                </constraints>
-                                <state key="normal" title="Twitter Log in" backgroundImage="login-button.png">
-                                    <color key="titleColor" red="0.25098039215686274" green="0.59999999999999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="twitterButtonPressed:" destination="Ceh-Ho-dNE" eventType="touchUpInside" id="4bp-G6-wer"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="qMr-3b-WtQ" secondAttribute="centerX" id="AXq-ZD-0MN"/>
                             <constraint firstItem="54G-xj-dpn" firstAttribute="leading" secondItem="zle-rK-vkk" secondAttribute="leading" id="Asn-1m-rs7"/>
                             <constraint firstAttribute="centerX" secondItem="AV9-Dn-QH8" secondAttribute="centerX" id="CVJ-FM-MUk"/>
-                            <constraint firstAttribute="centerY" secondItem="ioM-qv-gtF" secondAttribute="centerY" constant="-319" id="FBr-Jr-179"/>
                             <constraint firstItem="zXm-b9-WkI" firstAttribute="top" secondItem="Qoj-bm-0fN" secondAttribute="bottom" constant="-20" id="HNV-M3-o9y"/>
                             <constraint firstAttribute="trailing" secondItem="Tq0-Em-HOe" secondAttribute="trailing" id="IJg-ae-1eH"/>
-                            <constraint firstAttribute="centerX" secondItem="ioM-qv-gtF" secondAttribute="centerX" id="Jb4-uv-03S"/>
                             <constraint firstAttribute="trailing" secondItem="54G-xj-dpn" secondAttribute="trailing" id="Jmw-19-V7Z"/>
                             <constraint firstAttribute="trailing" secondItem="hG9-qn-YA6" secondAttribute="trailing" id="LkS-b2-sQZ"/>
                             <constraint firstItem="qMr-3b-WtQ" firstAttribute="bottom" secondItem="rf0-Xo-Csq" secondAttribute="bottom" constant="-355" id="O0m-xg-I0H"/>
@@ -338,9 +303,9 @@ Watch, collect and  share only the very best videos</string>
                         <outlet property="messageView5" destination="3xa-jt-3Ce" id="Pbq-QS-g8B"/>
                         <outlet property="mind" destination="YAy-4W-dnw" id="dxh-un-JfU"/>
                         <outlet property="news" destination="1dS-FN-p50" id="QP2-SW-EHh"/>
-                        <outlet property="orView" destination="8hK-cH-d8z" id="rT4-HS-veG"/>
                         <outlet property="signupButton" destination="hYE-YL-Gus" id="jvW-IY-7qr"/>
                         <outlet property="tech" destination="9ML-e3-n6d" id="IVh-I8-Fkp"/>
+                        <outlet property="twitterButton" destination="ioM-qv-gtF" id="POE-lM-G3e"/>
                         <outlet property="twitterSpinner" destination="AV9-Dn-QH8" id="MPh-U5-m7V"/>
                         <outlet property="wellness" destination="fFg-86-6w6" id="yLz-lh-lqL"/>
                     </connections>
@@ -1030,16 +995,13 @@ Watch, collect and  share only the very best videos</string>
         <image name="AvatarUpload.png" width="88" height="88"/>
         <image name="BackButtonApp.png" width="20" height="29"/>
         <image name="DividerLogin.png" width="306" height="3"/>
-        <image name="facebook-login-button.png" width="286" height="50"/>
+        <image name="FacebookSignInButton.png" width="350" height="46"/>
+        <image name="TwitterSignInButton.png" width="350" height="46"/>
         <image name="intro-beach.jpg" width="768" height="1024"/>
         <image name="intro-church.jpg" width="768" height="1024"/>
         <image name="intro-food.jpg" width="768" height="1024"/>
         <image name="intro-home.jpg" width="768" height="1024"/>
-        <image name="left-separator.png" width="70" height="1"/>
-        <image name="login-button.png" width="286" height="50"/>
         <image name="register-button.png" width="320" height="51"/>
-        <image name="right-separator.png" width="70" height="1"/>
-        <image name="sign-up-button.png" width="134" height="61"/>
         <image name="wonder-logo.png" width="210" height="120"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
