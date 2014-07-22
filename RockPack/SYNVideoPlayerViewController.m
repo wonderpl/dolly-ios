@@ -607,11 +607,12 @@
         return;
     }
     
+    [self.swipeImageView removeFromSuperview];
+    
     [UIView animateWithDuration:0.6f animations:^{
         [self.collectionOverLay setBackgroundColor:[UIColor clearColor]];
         self.view.backgroundColor = [UIColor whiteColor];
     } completion:^(BOOL finished) {
-        [self.swipeImageView removeFromSuperview];
         [self.collectionOverLay removeFromSuperview];
         [self.overlayLabel removeFromSuperview];
         [self.view removeGestureRecognizer: self.inboardingTapGesture];
