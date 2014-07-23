@@ -113,26 +113,42 @@
 	
     [self.spinner startAnimating];
     
+    __weak typeof(self) wself = self;
+    
+    
+    MKNKUserSuccessBlock successBlock = ^(NSDictionary *response) {
+        
+        
+        
+        [self.spinner stopAnimating];
+        
+        if (![appDelegate.searchRegistry registerRecommendationsFromDictionary:response])
+            return;
+        
+        NSArray *recommendations = [self fetchRecommendations];
+        NSArray *groupedRecommendations = [self groupRecommendations:recommendations byGenres:genres];
+        
+        self.groupedRecommendations = groupedRecommendations;
+        
+        [self.collectionView reloadData];
+
+    };
+    
     [appDelegate.oAuthNetworkEngine getRecommendationsForUserId:appDelegate.currentUser.uniqueId
                                                   andEntityName:[ChannelOwner entityName]
                                                          params:nil
-                                              completionHandler:^(id response) {
-                                                  [self.spinner stopAnimating];
-                                                  
-                                                  if (![appDelegate.searchRegistry registerRecommendationsFromDictionary:response])
-                                                      return;
-												  
-												  NSArray *recommendations = [self fetchRecommendations];
-												  NSArray *groupedRecommendations = [self groupRecommendations:recommendations byGenres:genres];
-												  
-													  self.groupedRecommendations = groupedRecommendations;
-                                                  
-												  [self.collectionView reloadData];
-                                                  
-                                              } errorHandler:^(id error) {
+                                              completionHandler:successBlock
+                                                   errorHandler:^(id error) {
                                                   
                                                   [self.spinner stopAnimating];
+                                                  [[[UIAlertView alloc] initWithTitle:@"Error" message:@"There has been an error while getting you reccomendations, We're going to try again" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil] show];
                                                   
+                                                  [appDelegate.oAuthNetworkEngine getRecommendationsForUserId:appDelegate.currentUser.uniqueId
+                                                                                                andEntityName:[ChannelOwner entityName]
+                                                                                                       params:nil completionHandler:successBlock
+                                                                                                 errorHandler:^(id error) {
+                                                                                                           [[[UIAlertView alloc] initWithTitle:@"Error" message:@"There has been an error while getting you reccomendations again, We wont't try again." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil] show];
+                                                                                                 }];
                                               }];
 }
 

@@ -214,7 +214,6 @@
 
 
 - (void) setRegistrationCheck:(BOOL)registrationCheck {
-    
     if (registrationCheck == YES) {
         [[NSUserDefaults standardUserDefaults] setInteger:0 forKey: kUserDefaultsDiscoverUserFirstTime];
 		[[NSUserDefaults standardUserDefaults] setInteger:0 forKey: kUserDefaultsOtherPersonsProfile];
