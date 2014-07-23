@@ -17,10 +17,11 @@
 	[self.createTextField setFont:[UIFont regularCustomFontOfSize:self.createTextField.font.pointSize]];
     [self setBorder];
     //May not be a good idea to do this
-    [self.createTextField setValue:[UIColor lightGrayColor]
-                    forKeyPath:@"_placeholderLabel.textColor"];
-    
+    [self.createTextField setValue:[UIColor grayColor]
+                        forKeyPath:@"_placeholderLabel.textColor"];
     [self.createTextField setFont:[UIFont lightCustomFontOfSize:self.createTextField.font.pointSize]];
+	[self.descriptionPlaceholderLabel setTextColor:[UIColor grayColor]];
+    
     [self.descriptionTextView setFont:[UIFont lightCustomFontOfSize:self.descriptionTextView.font.pointSize]];
     [self.createCellButton.titleLabel setFont:[UIFont boldCustomFontOfSize:self.createCellButton.titleLabel.font.pointSize]];
     [self.descriptionPlaceholderLabel setFont:[UIFont lightCustomFontOfSize:self.descriptionPlaceholderLabel.font.pointSize]];
