@@ -137,8 +137,6 @@
 											
 											[[NSNotificationCenter defaultCenter] postNotificationName:kLoginCompleted
 																								object:self];
-											
-											[[SYNTrackingManager sharedManager] trackUserLoginFromOrigin:kOriginWonderPL];
 										} errorHandler:^(NSDictionary *errorDictionary) {
 											[navigationItem setLeftBarButtonItem:self.backBarButton animated:YES];
 											[navigationItem setRightBarButtonItem:self.loginBarButton animated:YES];

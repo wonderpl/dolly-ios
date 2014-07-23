@@ -132,17 +132,14 @@
              
              // if the user loggin in with an external account is not yet registered, a record is created on the fly and 'registered' is sent back
              
-             BOOL hasJustBeenRegistered = responseDictionary[@"registered"] ? YES : NO;
+             BOOL hasJustBeenRegistered = [responseDictionary[@"registered"] boolValue];
              
-             
-             if ([((NSNumber*)responseDictionary[@"registered"]) boolValue]) {
-                 [SYNLoginManager sharedManager].registrationCheck = [((NSNumber*)responseDictionary[@"registered"]) boolValue];
+             if (hasJustBeenRegistered) {
+                 [SYNLoginManager sharedManager].registrationCheck = YES;
+                 [[SYNTrackingManager sharedManager] trackUserRegistrationFromOrigin:origin];
              } else {
                  [SYNLoginManager sharedManager].registrationCheck = NO;
-             }
-             if(hasJustBeenRegistered)
-             {
-				 [[SYNTrackingManager sharedManager] trackUserRegistrationFromOrigin:origin];
+                 [[SYNTrackingManager sharedManager] trackUserLoginFromOrigin:origin];
              }
              
              SYNOAuth2Credential* newOAuth2Credentials = [SYNOAuth2Credential credentialWithAccessToken: responseDictionary[@"access_token"]

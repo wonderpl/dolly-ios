@@ -144,11 +144,6 @@
 }
 
 - (void)submitLogin {
-	[[SYNTrackingManager sharedManager] trackUserLoginFromOrigin:kOriginWonderPL];
-	
-//    [self clearAllErrorArrows];
-//    
-//    [self resignAllFirstResponders];
     
 	if (![self loginFormIsValidForUsername:self.emailUsernameTextField password:self.passwordTextField]) {
 		return;
