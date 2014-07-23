@@ -11,13 +11,4 @@
 
 @interface SYNFriendsViewController : SYNAbstractViewController <SYNSocialActionsDelegate>
 
-@property (nonatomic, strong) IBOutlet UICollectionView* friendsCollectionView;
-@property (nonatomic, strong) IBOutlet UILabel* preLoginLabel;
-@property (nonatomic, strong) IBOutlet UIButton* facebookLoginButton;
-@property (nonatomic, strong) IBOutlet UIActivityIndicatorView* activityIndicator;
-
-
--(IBAction)facebookLoginPressed:(id)sender;
-
-
 @end

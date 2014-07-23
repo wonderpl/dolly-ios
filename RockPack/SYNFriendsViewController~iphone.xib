@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -9,7 +9,7 @@
             <connections>
                 <outlet property="activityIndicator" destination="14" id="15"/>
                 <outlet property="emptyFriendsImageView" destination="osk-K0-aza" id="SGN-jq-QbO"/>
-                <outlet property="facebookLoginButton" destination="4" id="9"/>
+                <outlet property="facebookLoginButton" destination="YNe-KZ-asm" id="fCR-KK-kWX"/>
                 <outlet property="friendsCollectionView" destination="7" id="11"/>
                 <outlet property="preLoginLabel" destination="6" id="10"/>
                 <outlet property="view" destination="1" id="3"/>
@@ -36,31 +36,12 @@
                         <outlet property="delegate" destination="-1" id="13"/>
                     </connections>
                 </collectionView>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4" userLabel="Button Facebook" customClass="SYNFacebookButton">
-                    <rect key="frame" x="30" y="297" width="260" height="44"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="260" id="6kp-ql-tLC"/>
-                        <constraint firstAttribute="height" constant="44" id="fPr-xF-aag"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="FIND MY FACEBOOK FRIENDS">
-                        <color key="titleColor" red="0.23921568630000001" green="0.35294117650000001" blue="0.59215686270000001" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="facebookLoginPressed:" destination="-1" eventType="touchUpInside" id="16"/>
-                    </connections>
-                </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="IconFriendsEmpty.png" translatesAutoresizingMaskIntoConstraints="NO" id="osk-K0-aza">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconFriendsEmpty.png" translatesAutoresizingMaskIntoConstraints="NO" id="osk-K0-aza">
                     <rect key="frame" x="123" y="191" width="73" height="64"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" misplaced="YES" text="Wonder PL is better with friends." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="263" translatesAutoresizingMaskIntoConstraints="NO" id="6" userLabel="We ll send...">
-                    <rect key="frame" x="29" y="259" width="263" height="22"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Wonder PL is better with friends." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="263" translatesAutoresizingMaskIntoConstraints="NO" id="6" userLabel="We ll send...">
+                    <rect key="frame" x="28" y="259" width="263" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="eqa-Du-MKH"/>
@@ -75,13 +56,23 @@
                     <rect key="frame" x="150" y="213" width="20" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </activityIndicatorView>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YNe-KZ-asm">
+                    <rect key="frame" x="32" y="304" width="254" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="FIND MY FACEBOOK FRIENDS">
+                        <color key="titleColor" red="0.2666666667" green="0.36078431370000003" blue="0.63529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="facebookLoginPressed:" destination="-1" eventType="touchUpInside" id="sZP-Xw-Fhm"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="6" firstAttribute="top" secondItem="osk-K0-aza" secondAttribute="bottom" constant="4" id="1SJ-Ck-9hk"/>
                 <constraint firstAttribute="centerX" secondItem="6" secondAttribute="centerX" id="8MP-M5-Ykd"/>
-                <constraint firstAttribute="centerX" secondItem="4" secondAttribute="centerX" id="IJM-sj-tXm"/>
-                <constraint firstItem="4" firstAttribute="top" secondItem="6" secondAttribute="bottom" constant="16" id="NJj-Uf-CKh"/>
                 <constraint firstAttribute="centerX" secondItem="osk-K0-aza" secondAttribute="centerX" constant="0.5" id="SSD-cZ-ECJ"/>
                 <constraint firstItem="osk-K0-aza" firstAttribute="top" secondItem="1" secondAttribute="top" constant="191" id="jK4-hY-WLa"/>
             </constraints>

@@ -28,32 +28,25 @@
 }
 
 @property (nonatomic, strong) NSArray* friends;
-@property (nonatomic) BOOL onRockpackFilterOn;
-@property (nonatomic, weak) Friend* currentlySelectedFriend;
 @property (nonatomic, strong) NSMutableString* currentSearchTerm;
-
 @property (nonatomic, strong) IBOutlet UIImageView* emptyFriendsImageView;
-
+@property (nonatomic, strong) IBOutlet UICollectionView* friendsCollectionView;
+@property (nonatomic, strong) IBOutlet UILabel* preLoginLabel;
+@property (nonatomic, strong) IBOutlet UIButton* facebookLoginButton;
+@property (nonatomic, strong) IBOutlet UIActivityIndicatorView* activityIndicator;
 
 @end
 
 @implementation SYNFriendsViewController
 
-@synthesize onRockpackFilterOn;
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
-    onRockpackFilterOn = NO;
     
     self.currentSearchTerm = [[NSMutableString alloc] init];
     
     
     self.friends = [NSArray array];
-    
-    
     // == Register Cells == //
     
     [self.friendsCollectionView registerNib: [UINib nibWithNibName: @"SYNFriendCell" bundle: nil]
@@ -66,61 +59,19 @@
 	self.activityIndicator.hidden = YES;
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    
+- (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	
-    if ([[SYNFacebookManager sharedFBManager] hasActiveSession])
-    {
-        
-        self.facebookLoginButton.hidden = YES;
-        
-        self.friendsCollectionView.hidden = NO;
-        
-		
-        [self fetchAndDisplayFriends];
-        
-		[[SYNTrackingManager sharedManager] trackFriendsScreenView];
-        
-    }
-    else
-    {
-        
-        self.facebookLoginButton.hidden = NO;
-        
-        self.friendsCollectionView.hidden = YES;
-        
-        
-		[[SYNTrackingManager sharedManager] trackFriendsFBConnectScreenView];
-        
-    }
+    [[SYNTrackingManager sharedManager] trackFriendsScreenView];
 }
 
--(void)fetchAndDisplayFriends
-{
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self fetchAndDisplayFriends];
+}
+
+- (void)fetchAndDisplayFriends {
     
-    NSError *error;
-    NSArray *existingFriendsArray;
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    
-    [fetchRequest setEntity: [NSEntityDescription entityForName: @"Friend"
-                                         inManagedObjectContext: appDelegate.searchManagedObjectContext]];
-    
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"resourceURL != NULL"];
-    
-    existingFriendsArray = [appDelegate.searchManagedObjectContext executeFetchRequest: fetchRequest
-                                                                                 error: &error];
-    
-    if(!error)
-    {
-   
-        self.friends = [NSArray arrayWithArray:existingFriendsArray];
-        
-        [self.friendsCollectionView reloadData];
-        
-    }
+    [self setFriendsFromCoreDataAndReload];
     
     if(hasAttemptedToLoadData)
         return;
@@ -140,46 +91,49 @@
                                         onlyRecent:NO
                                  completionHandler:^(id dictionary) {
         
-                                     if([appDelegate.searchRegistry registerFriendsFromDictionary:dictionary])
-                                     {
-                                         [weakSelf fetchAndDisplayFriends];
-                                     }
-                                     else
-                                     {
+                                     if([appDelegate.searchRegistry registerFriendsFromDictionary:dictionary]) {
+                                         [weakSelf setFriendsFromCoreDataAndReload];
+                                     } else {
                                          DebugLog(@"There was a problem loading friends");
                                      }
                                      
-                                     
                                      [self.activityIndicator stopAnimating];
-        
-                                     
-        
-                                     [self fetchAndDisplayFriends];
-        
-                                     if(self.friends.count == 0)
-                                     {
+                                     if(self.friends.count == 0) {
                                          self.emptyFriendsImageView.hidden = NO;
                                          self.preLoginLabel.hidden = NO;
                                          self.preLoginLabel.text = NSLocalizedString (@"friends_empty", nil);
-                                     }
-                                     else
-                                     {
+                                         self.facebookLoginButton.hidden = NO;
+                                     } else {
                                          self.preLoginLabel.hidden = YES;
+                                         self.facebookLoginButton.hidden = YES;
                                      }
                                      
-        
                                  } errorHandler:^(id dictionary) {
                                      [self.activityIndicator stopAnimating];
-                                     
-        
                                  }];
 }
 
+- (void)setFriendsFromCoreDataAndReload {
+    
+    NSError *error;
+    NSArray *existingFriendsArray;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    [fetchRequest setEntity: [NSEntityDescription entityForName: @"Friend"
+                                         inManagedObjectContext: appDelegate.searchManagedObjectContext]];
+    
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"resourceURL != NULL"];
+    
+    existingFriendsArray = [appDelegate.searchManagedObjectContext executeFetchRequest: fetchRequest
+                                                                                 error: &error];
+    
+    if(!error) {
+        self.friends = [NSArray arrayWithArray:existingFriendsArray];
+        [self.friendsCollectionView reloadData];
+    }
+}
 
-
-
--(IBAction)facebookLoginPressed:(id)sender
-{
+- (IBAction)facebookLoginPressed:(id)sender {
     self.activityIndicator.center = self.facebookLoginButton.center;
     
     [self.activityIndicator startAnimating];
@@ -194,7 +148,6 @@
     
     SYNFacebookManager* facebookManager = [SYNFacebookManager sharedFBManager];
     
-    
     [facebookManager loginOnSuccess: ^(NSDictionary<FBGraphUser> *dictionary) {
         
         FBAccessTokenData* accessTokenData = [[FBSession activeSession] accessTokenData];
@@ -208,7 +161,6 @@
                                                               weakSelf.friendsCollectionView.hidden = NO;
                                                               weakSelf.preLoginLabel.hidden = YES;
                                                               weakSelf.facebookLoginButton.hidden = YES;
-                                                              
                                                               
                                                               [weakSelf fetchAndDisplayFriends];
             
@@ -227,39 +179,29 @@
                                                               }];
             
                                                           }];
-        
-        
     } onFailure: ^(NSString* errorString) {
-        
         [weakSelf.activityIndicator stopAnimating];
-        
         weakSelf.facebookLoginButton.hidden = NO;
-        
         weakSelf.preLoginLabel.text = @"Log in with Facebook was cancelled.";
-        
-        
      }];
 
 }
 
 #pragma mark - UICollectionView Delegate/Data Source
 
-- (NSInteger) numberOfSectionsInCollectionView: (UICollectionView *) collectionView
-{
+- (NSInteger) numberOfSectionsInCollectionView: (UICollectionView *) collectionView {
     return 1;
 }
 
 
 - (NSInteger) collectionView: (UICollectionView *) view
-      numberOfItemsInSection: (NSInteger) section
-{
+      numberOfItemsInSection: (NSInteger) section {
     return self.friends.count;
 }
 
 
 - (UICollectionViewCell *) collectionView: (UICollectionView *) collectionView
-                   cellForItemAtIndexPath: (NSIndexPath *) indexPath
-{
+                   cellForItemAtIndexPath: (NSIndexPath *) indexPath {
     
     ChannelOwner *friend = (ChannelOwner*)self.friends[indexPath.row];
     
@@ -270,15 +212,12 @@
     userCell.delegate = self;
 	userCell.followButton.selected = [[SYNActivityManager sharedInstance] isSubscribedToUserId:friend.uniqueId];
     
-    
     return userCell;
 }
 
 
-- (void) profileButtonTapped: (UIButton *) profileButton
-{
-    if(!profileButton)
-    {
+- (void) profileButtonTapped: (UIButton *) profileButton {
+    if(!profileButton) {
         AssertOrLog(@"No profileButton passed");
         return; // did not manage to get the cell
     }
@@ -288,29 +227,20 @@
         candidate = [candidate superview];
     }
     
-    if(![candidate isKindOfClass:[SYNFriendCell class]])
-    {
+    if(![candidate isKindOfClass:[SYNFriendCell class]]) {
         AssertOrLog(@"Did not manage to get the cell from: %@", profileButton);
         return; // did not manage to get the cell
     }
     SYNFriendCell* searchUserCell = (SYNFriendCell*)candidate;
-    
     [self viewProfileDetails:searchUserCell.channelOwner];
 }
 
-- (void) collectionView: (UICollectionView *) collectionView didSelectItemAtIndexPath: (NSIndexPath *) indexPath
-{
-    
-    
+- (void)collectionView: (UICollectionView *) collectionView didSelectItemAtIndexPath: (NSIndexPath *) indexPath {
     Friend* selectedFriend = self.friends[indexPath.item];
-    
-    
     [self viewProfileDetails:(ChannelOwner*)selectedFriend];
-    
 }
 
--(NSString*)title
-{
+- (NSString*)title {
     return viewId;
 }
 
