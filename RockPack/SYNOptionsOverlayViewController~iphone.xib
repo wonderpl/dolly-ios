@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNOptionsOverlayViewController">
@@ -24,6 +24,7 @@
                 <button alpha="0.74999999999999978" tag="9" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gWB-CL-GH1" userLabel="Hints">
                     <rect key="frame" x="130" y="364" width="60" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <accessibility key="accessibilityConfiguration" label="Hints"/>
                     <color key="tintColor" red="0.94310461956521741" green="0.86116166464390309" blue="0.90857010973284058" alpha="0.0" colorSpace="calibratedRGB"/>
                     <state key="normal" image="ButtonMoreHints.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -32,6 +33,7 @@
                 <button alpha="0.74999999999999978" tag="8" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BJF-XA-3U1" userLabel="Logout">
                     <rect key="frame" x="220" y="364" width="60" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <accessibility key="accessibilityConfiguration" label="Logout"/>
                     <color key="tintColor" red="0.94310461956521741" green="0.86116166464390309" blue="0.90857010973284058" alpha="0.0" colorSpace="calibratedRGB"/>
                     <state key="normal" image="ButtonMoreLogout.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -40,6 +42,7 @@
                 <button alpha="0.74999999999999978" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GDc-om-S33" userLabel="Settings">
                     <rect key="frame" x="40" y="171" width="60" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <accessibility key="accessibilityConfiguration" label="Settings"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="3sa-VW-JT7"/>
                         <constraint firstAttribute="width" constant="60" id="YB7-lJ-YQu"/>
@@ -52,6 +55,7 @@
                 <button alpha="0.74999999999999978" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dl8-D5-ycD" userLabel="Friends">
                     <rect key="frame" x="130" y="171" width="60" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <accessibility key="accessibilityConfiguration" label="Friends"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="60" id="ahV-o5-rTN"/>
                         <constraint firstAttribute="height" constant="60" id="lmx-c1-5Ak"/>
@@ -64,6 +68,7 @@
                 <button alpha="0.74999999999999978" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tvl-Tq-qqU" userLabel="About">
                     <rect key="frame" x="220" y="171" width="60" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <accessibility key="accessibilityConfiguration" label="About"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="60" id="36o-Nk-qlw"/>
                         <constraint firstAttribute="height" constant="60" id="7vB-IR-Ed5"/>
@@ -76,6 +81,7 @@
                 <button alpha="0.74999999999999978" tag="4" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mhV-Nr-PkJ" userLabel="Feedback">
                     <rect key="frame" x="40" y="268" width="60" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <accessibility key="accessibilityConfiguration" label="FeedBack"/>
                     <color key="tintColor" red="0.94310461956521741" green="0.86116166464390309" blue="0.90857010973284058" alpha="0.0" colorSpace="calibratedRGB"/>
                     <state key="normal" image="ButtonMoreFeedback.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -84,6 +90,7 @@
                 <button alpha="0.74999999999999978" tag="5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="67f-LU-RAg" userLabel="Rate">
                     <rect key="frame" x="130" y="268" width="60" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <accessibility key="accessibilityConfiguration" label="Rate"/>
                     <color key="tintColor" red="0.94310461956521741" green="0.86116166464390309" blue="0.90857010973284058" alpha="0.0" colorSpace="calibratedRGB"/>
                     <state key="normal" image="ButtonMoreRate.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -92,6 +99,7 @@
                 <button alpha="0.74999999999999978" tag="6" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VTM-zm-rmt" userLabel="Blog">
                     <rect key="frame" x="220" y="268" width="60" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <accessibility key="accessibilityConfiguration" label="Blog"/>
                     <color key="tintColor" red="0.94310461956521741" green="0.86116166464390309" blue="0.90857010973284058" alpha="0.0" colorSpace="calibratedRGB"/>
                     <state key="normal" image="ButtonMoreBlog.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -100,6 +108,7 @@
                 <button alpha="0.74999999999999978" tag="7" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QBb-D6-iHz" userLabel="Help">
                     <rect key="frame" x="41" y="364" width="60" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <accessibility key="accessibilityConfiguration" label="Help"/>
                     <color key="tintColor" red="0.94310461956521741" green="0.86116166464390309" blue="0.90857010973284058" alpha="0.0" colorSpace="calibratedRGB"/>
                     <state key="normal" image="ButtonMoreHelp.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -108,6 +117,7 @@
                 <button alpha="0.74999999999999978" tag="10" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mW8-ml-mOT" userLabel="Edit Profile">
                     <rect key="frame" x="130" y="70" width="60" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <accessibility key="accessibilityConfiguration" label="ButtonMoreEdit"/>
                     <color key="tintColor" red="0.94310461956521741" green="0.86116166464390309" blue="0.90857010973284058" alpha="0.0" colorSpace="calibratedRGB"/>
                     <state key="normal" image="ButtonMoreEdit.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>

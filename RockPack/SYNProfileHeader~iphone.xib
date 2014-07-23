@@ -27,12 +27,11 @@
                     <rect key="frame" x="15" y="380" width="290" height="101"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="tintColor" red="0.50980392159999999" green="0.50980392159999999" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <accessibility key="accessibilityConfiguration" label="FixedDescriptionLabel"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="290" id="Z2I-9Q-0Gj"/>
                         <constraint firstAttribute="height" constant="101" id="jHH-3i-uTW"/>
                     </constraints>
-                    <string key="text">Something about
-                        me...</string>
                     <color key="textColor" red="0.46666666865348816" green="0.46666666865348816" blue="0.50980395078659058" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" keyboardType="numberPad" returnKeyType="send"/>
@@ -105,6 +104,7 @@
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wzg-oF-9q5" userLabel="Button - Upload Avatar" customClass="SYNAvatarButton">
                             <rect key="frame" x="2" y="2" width="92" height="92"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <accessibility key="accessibilityConfiguration" label="EditButton"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <connections>
                                 <action selector="avatarButtonTapped:" destination="79y-KX-90i" eventType="touchUpInside" id="jLw-co-8MP"/>
@@ -131,6 +131,7 @@
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZcY-bz-9ib" userLabel="Button - Collections tab" customClass="SYNSegmentedButton">
                             <rect key="frame" x="159" y="0.0" width="161" height="34"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <accessibility key="accessibilityConfiguration" label="SecondSegmentedTab"/>
                             <state key="normal" title="Button">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -142,6 +143,7 @@
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Ua-76-NhD" userLabel="Button - Followings tab" customClass="SYNSegmentedButton">
                             <rect key="frame" x="0.0" y="0.0" width="161" height="34"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <accessibility key="accessibilityConfiguration" label="FirstSegmentedTab"/>
                             <state key="normal" title="Button">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
