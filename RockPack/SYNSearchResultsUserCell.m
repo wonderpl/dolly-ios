@@ -117,12 +117,12 @@
 
 -(void) setUpGradientMask {
 	CAGradientLayer *mask = [CAGradientLayer layer];
-	mask.colors = @[ (id)[[UIColor clearColor] CGColor],
-					 (id)[[UIColor colorWithWhite:0.0 alpha:0.1] CGColor],
+	mask.colors = @[(id)[[UIColor colorWithWhite:0.0 alpha:0.7] CGColor],
+					 (id)[[UIColor colorWithWhite:0.0 alpha:0.3] CGColor],
 					 (id)[[UIColor colorWithWhite:0.0 alpha:0.2] CGColor],
 					 (id)[[UIColor colorWithWhite:0.0 alpha:0.3] CGColor],
 					 (id)[[UIColor colorWithWhite:0.0 alpha:0.45] CGColor] ];
-	mask.locations = @[@0.0, @0.2, @0.4, @0.8, @1.0];
+	mask.locations = @[@0.0, @0.25, @0.4, @0.8, @1.0];
 	
 	mask.frame = self.bounds;
 	self.gradientMask.layer.mask = mask;

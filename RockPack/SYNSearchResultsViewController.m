@@ -496,14 +496,18 @@ typedef void (^SearchResultCompleteBlock)(int);
         
         if (IS_IPAD) {
             if (indexPath.row>2) {
+                [userCell.userNameLabel setFont:[UIFont semiboldCustomFontOfSize:16]];
+
                 userCell.descriptionLabel.hidden = YES;
             } else {
+                [userCell.userNameLabel setFont:[UIFont semiboldCustomFontOfSize:23]];
+
                 userCell.descriptionLabel.hidden = NO;
             }
         } else {
             if (indexPath.row>1) {
                 userCell.descriptionLabel.hidden = YES;
-                [userCell.userNameLabel setFont:[UIFont semiboldCustomFontOfSize:14]];
+                [userCell.userNameLabel setFont:[UIFont semiboldCustomFontOfSize:18]];
             } else {
                 [userCell.userNameLabel setFont:[UIFont semiboldCustomFontOfSize:23]];
                 userCell.descriptionLabel.hidden = NO;
@@ -576,18 +580,18 @@ typedef void (^SearchResultCompleteBlock)(int);
                 if (indexPath.row == 0) {
                     return CGSizeMake(360, 210);
                 } else if (indexPath.row == 1 || indexPath.row == 2) {
-                    return CGSizeMake(360, 165);
+                    return CGSizeMake(360, 170);
                 } else {
-                    return CGSizeMake(360, 102);
+                    return CGSizeMake(174, 170);
                 }
             } else {
                 
                 if (indexPath.row == 0) {
                     return CGSizeMake(582, 210);
-                } else if (indexPath.row == 1 || indexPath.row == 2) {
-                    return CGSizeMake(282, 164);
+                } else if (indexPath.row == 1) {
+                    return CGSizeMake(383, 185);
                 } else {
-                    return CGSizeMake(282, 102);
+                    return CGSizeMake(185, 185);
                 }
             }
         }
@@ -598,7 +602,7 @@ typedef void (^SearchResultCompleteBlock)(int);
 		} else {
 			
 			if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation])) {
-				return CGSizeMake(386, 90);
+				return CGSizeMake(388, 90);
 			} else {
 				return CGSizeMake(604, 148);
 			}
