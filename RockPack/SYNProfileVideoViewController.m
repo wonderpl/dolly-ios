@@ -60,8 +60,9 @@ forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
     if (IS_IPAD) {
         [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
         [self.navigationController.navigationBar setBackgroundTransparent:YES];
+        self.navigationController.navigationBarHidden = YES;
     }
-    self.navigationController.navigationBarHidden = YES;
+    
     self.model.delegate = self;
 
 }
