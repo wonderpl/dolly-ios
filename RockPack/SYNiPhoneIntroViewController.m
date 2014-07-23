@@ -176,6 +176,9 @@ static const CGFloat DelayConstant = 0.5;
             frame.origin.y -= 30;
             self.signupButton.frame = frame;
 
+            frame = self.logoImageView.frame;
+            frame.origin.y -= 30;
+            self.logoImageView.frame = frame;
 
             [UIView animateWithDuration:1.0 animations:^{
                 

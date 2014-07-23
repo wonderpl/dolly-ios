@@ -44,7 +44,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="wonder-logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="dHb-gc-rUo" userLabel="Logo">
-                                <rect key="frame" x="118" y="18" width="85" height="49"/>
+                                <rect key="frame" x="118" y="48" width="85" height="49"/>
                             </imageView>
                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SWz-5O-OKk" userLabel="Message container">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="302"/>
