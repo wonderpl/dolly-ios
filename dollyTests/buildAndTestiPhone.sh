@@ -14,6 +14,4 @@ clean \
 build \
 install
 
-./choose_sim_device "iPhone"
-
 instruments -t BasicTest "/Users/$USER/Documents/UIAutomationBuild/build/Applications/dolly.app" -e UIASCRIPT "./login_tests.js"
