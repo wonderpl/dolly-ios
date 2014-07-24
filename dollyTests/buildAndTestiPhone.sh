@@ -1,4 +1,4 @@
-osascript ./SimulatorReset.txt
+osascript SimulatorReset.txt
 
 xcodebuild \
 ARCHS=i386 \
