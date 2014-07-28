@@ -23,6 +23,7 @@
 #import "SYNTrackingManager.h"
 #import "SYNVideoActionsBar.h"
 #import <SDWebImageManager.h>
+#import "SYNActivityManager.h"
 
 static const CGFloat ActionCellHeight = 50.0;
 static const CGFloat ClickToMoreCellHeight = 60.0;
@@ -339,6 +340,7 @@ static const CGFloat UpcomingVideosDividerHeight = 40.0;
     [appDelegate.oAuthNetworkEngine recordActivityForUserId:appDelegate.currentUser.uniqueId
                                                      action:@"select"
                                             videoInstanceId:videoInstance.uniqueId
+                                               trackingCode:[[SYNActivityManager sharedInstance] trackingCodeForVideoInstance:videoInstance]
                                           completionHandler:nil
                                                errorHandler:nil];
 	

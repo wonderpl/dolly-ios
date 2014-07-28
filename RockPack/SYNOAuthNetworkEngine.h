@@ -168,6 +168,12 @@ typedef void (^SYNOAuth2RefreshCompletionBlock)(NSError *error);
                completionHandler: (MKNKUserSuccessBlock) completionBlock
                     errorHandler: (MKNKUserErrorBlock) errorBlock;
 
+- (void) recordActivityForUserId: (NSString *) userId
+                          action: (NSString *) action
+                 videoInstanceId: (NSString *) videoInstanceId
+                    trackingCode: (NSString *) trackingCode
+               completionHandler: (MKNKUserSuccessBlock) completionBlock
+                    errorHandler: (MKNKUserErrorBlock) errorBlock;
 
 - (void) recordActivityForUserId: (NSString *) userId
                           action: (NSString *) action

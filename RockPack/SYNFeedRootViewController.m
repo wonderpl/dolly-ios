@@ -35,6 +35,7 @@
 #import <TestFlight.h>
 #import "SYNVideoPlayerDismissIndex.h"
 #import "SYNFeedAvatarOverlayViewController.h"
+#import "SYNActivityManager.h"
 
 static const CGFloat heightLandscape = 703;
 static const CGFloat heightPortrait = 985;
@@ -406,6 +407,7 @@ static const CGFloat heightPortrait = 985;
     [appDelegate.oAuthNetworkEngine recordActivityForUserId:appDelegate.currentUser.uniqueId
                                                      action:@"select"
                                             videoInstanceId:videoInstance.uniqueId
+                                               trackingCode:[[SYNActivityManager sharedInstance] trackingCodeForVideoInstance:videoInstance]
                                           completionHandler:nil
                                                errorHandler:nil];
 	

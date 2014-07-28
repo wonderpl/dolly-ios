@@ -333,7 +333,8 @@
 	[appDelegate.oAuthNetworkEngine recordActivityForUserId:appDelegate.currentOAuth2Credentials.userId
 													 action:@"view"
 											videoInstanceId:self.videoInstance.uniqueId
-										  completionHandler:nil
+                                               trackingCode:[[SYNActivityManager sharedInstance] trackingCodeForVideoInstance:self.videoInstance]
+                                          completionHandler:nil
 											   errorHandler:^(NSDictionary* errorDictionary) {
 												   DebugLog(@"View action failed");
 											   }];

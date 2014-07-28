@@ -22,9 +22,6 @@
 @property (nonatomic, strong) NSMutableDictionary *trackingDictionary;
 @property (nonatomic, weak) SYNAppDelegate *appDelegate;
 
-
-
-
 @end
 
 
@@ -207,6 +204,8 @@
         key = [NSString stringWithFormat:@"%@%@", key, [self.appDelegate.window.rootViewController class]];
     }
     
+    NSLog(@" Tracking value : %@", self.trackingDictionary[key]);
+    
     return self.trackingDictionary[key];
 }
 
@@ -223,12 +222,33 @@
     
     
     NSLog(@" Full Dictionary  :%@", self.trackingDictionary);
+    NSLog(@" Keyyy  :%@", key);
     NSLog(@" Single Object  :%@", self.trackingDictionary[key]);
     
     return self.trackingDictionary[key];
 }
 
+- (NSString*)trackingCodeForVideoInstance :(VideoInstance*) videoInstance {
 
+    NSString* key = [NSString stringWithFormat:@"%@%lld", videoInstance.uniqueId, videoInstance.positionValue];
+    
+    if ([self.appDelegate.window.rootViewController isKindOfClass:[SYNMasterViewController class]]) {
+        key = [NSString stringWithFormat:@"%@%@", key, [self.appDelegate.masterViewController.showingViewController class]];
+        
+    } else {
+        key = [NSString stringWithFormat:@"%@%@", key, [self.appDelegate.window.rootViewController class]];
+    }
+    
+    
+    NSLog(@" Full Dictionary  :%@", self.trackingDictionary);
+    NSLog(@" Keyyy  :%@", key);
+    NSLog(@" Single Object  :%@", self.trackingDictionary[key]);
+    
+    return self.trackingDictionary[key];
+
+    
+    
+}
 
 - (void) unsubscribeToUser: (ChannelOwner *) channelOwner
        completionHandler: (MKNKUserSuccessBlock) completionBlock
@@ -311,4 +331,14 @@
     return [self.userSubscriptons count];
 }
 
+
+- (void) viewVideo: (VideoInstance *) videoInstance
+       completionHandler: (MKNKUserSuccessBlock) completionBlock
+            errorHandler: (MKNKUserErrorBlock) errorBlock {
+    
+    
+ 
+    
+    
+}
 @end

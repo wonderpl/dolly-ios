@@ -282,6 +282,7 @@
                 channel = [Channel instanceFromDictionary: channelDictionary
                                 usingManagedObjectContext: self.managedObjectContext
                                       ignoringObjectTypes: ignoringObjects | kIgnoreChannelOwnerObject];
+                [[SYNActivityManager sharedInstance] addObjectFromDict:channelDictionary];
             }
             else
             {

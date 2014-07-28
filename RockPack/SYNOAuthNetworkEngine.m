@@ -1305,8 +1305,8 @@
 
     if (action && videoInstanceId)
     {
-    params = @{@"action" : action,
-                             @"video_instance" : videoInstanceId};
+    	params = @{@"action" : action,
+           @"video_instance" : videoInstanceId};
     }
     else
     {
@@ -1328,6 +1328,49 @@
     
     [self enqueueSignedOperation: networkOperation];
 }
+
+- (void) recordActivityForUserId: (NSString *) userId
+                          action: (NSString *) action
+                 videoInstanceId: (NSString *) videoInstanceId
+                    trackingCode: (NSString *) trackingCode
+               completionHandler: (MKNKUserSuccessBlock) completionBlock
+                    errorHandler: (MKNKUserErrorBlock) errorBlock
+{
+    NSDictionary *apiSubstitutionDictionary = @{@"USERID" : userId};
+    
+    NSString *apiString = [kAPIRecordUserActivity stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
+    
+    // We need to handle locale differently (so add the locale to the URL) as opposed to the other parameters which are in the POST body
+    apiString = [NSString stringWithFormat: @"%@?locale=%@", apiString, self.localeString];
+    
+    NSDictionary *params = nil;
+    
+    if (action && videoInstanceId)
+    {
+    	params = @{@"action" : action,
+                   @"video_instance" : videoInstanceId};
+    }
+    else
+    {
+        AssertOrLog(@"recordActivityForUserId : One or more of the required parameters is nil");
+    }
+    
+    
+    
+    SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject*)[self operationWithPath: apiString
+                                                                                                       params: params
+                                                                                                   httpMethod: @"POST"
+                                                                                                          ssl: TRUE];
+    [networkOperation addHeaders: @{@"Content-Type" : @"application/json"}];
+    networkOperation.postDataEncoding = MKNKPostDataEncodingTypeJSON;
+    
+    [self addCommonHandlerToNetworkOperation: networkOperation
+                           completionHandler: completionBlock
+                                errorHandler: errorBlock];
+    
+    [self enqueueSignedOperation: networkOperation];
+}
+
 
 
 - (void) activityForUserId: (NSString *) userId

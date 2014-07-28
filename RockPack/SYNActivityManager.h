@@ -43,7 +43,7 @@
 - (void) addChannelSubscriptionsObject:(Channel *)channel;
 - (void) addUserSubscriptonsObject:(ChannelOwner*)channelOwner;
 - (NSUInteger) userFollowingCount;
-
+- (NSString*)trackingCodeForVideoInstance :(VideoInstance*) videoInstance;
 - (void)addObjectFromDict :(NSDictionary*) dict;
 - (NSString*)trackingCodeForChannel :(Channel*) channel;
 

@@ -1593,6 +1593,7 @@ static const CGFloat HeaderHeightIPad = 530;
     [appDelegate.oAuthNetworkEngine recordActivityForUserId:appDelegate.currentUser.uniqueId
                                                      action:@"select"
                                             videoInstanceId:videoInstance.uniqueId
+                                               trackingCode:[[SYNActivityManager sharedInstance] trackingCodeForVideoInstance:videoInstance]
                                           completionHandler:nil
                                                errorHandler:nil];
 	
