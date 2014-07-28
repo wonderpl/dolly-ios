@@ -168,6 +168,15 @@ typedef void (^SYNOAuth2RefreshCompletionBlock)(NSError *error);
                completionHandler: (MKNKUserSuccessBlock) completionBlock
                     errorHandler: (MKNKUserErrorBlock) errorBlock;
 
+
+- (void) recordActivityForUserId: (NSString *) userId
+                          action: (NSString *) action
+                      objectType: (NSString *) objectType
+                          withId: (NSString *) instanceId
+                withTrackignCode: (NSString *) trackingCode
+               completionHandler: (MKNKUserSuccessBlock) completionBlock
+                    errorHandler: (MKNKUserErrorBlock) errorBlock;
+
 - (void) activityForUserId: (NSString *) userId
          completionHandler: (MKNKUserSuccessBlock) completionBlock
               errorHandler: (MKNKUserErrorBlock) errorBlock;
@@ -217,7 +226,7 @@ typedef void (^SYNOAuth2RefreshCompletionBlock)(NSError *error);
                           errorHandler: (MKNKUserErrorBlock) errorBlock;
 
 
-// Sunscriptions
+// Subscriptions
 
 - (void) channelSubscriptionsForUserId: (NSString *) userId
                             credential: (SYNOAuth2Credential *) credential
@@ -276,14 +285,15 @@ typedef void (^SYNOAuth2RefreshCompletionBlock)(NSError *error);
                                  completionHandler: (MKNKUserSuccessBlock) completionBlock
                                       errorHandler: (MKNKUserErrorBlock) errorBlock;
 
-
 - (void) subscribeAllForUserId: (NSString *) userId
                      subUserId: (NSString *) subUserId
+              withTrackingCode: (NSString *) trackingCode
              completionHandler: (MKNKUserSuccessBlock) completionBlock
                   errorHandler: (MKNKUserErrorBlock) errorBlock;
 
 - (void) unsubscribeAllForUserId: (NSString *) userId
                        subUserId: (NSString *) subUserId
+                withTrackingCode: (NSString *) trackingCode
                completionHandler: (MKNKUserSuccessBlock) completionBlock
                     errorHandler: (MKNKUserErrorBlock) errorBlock;
 

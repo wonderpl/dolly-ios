@@ -39,8 +39,11 @@
          completionHandler: (MKNKUserSuccessBlock) completionBlock
               errorHandler: (MKNKUserErrorBlock) errorBlock;
 
+
 - (void) addChannelSubscriptionsObject:(Channel *)channel;
 - (void) addUserSubscriptonsObject:(ChannelOwner*)channelOwner;
 - (NSUInteger) userFollowingCount;
+
+- (void)addObjectFromDict :(NSDictionary*) dict;
 
 @end

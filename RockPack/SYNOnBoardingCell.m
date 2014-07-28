@@ -72,6 +72,7 @@
 
 }
 - (IBAction)followButtonTapped:(id)sender {
+    self.channelOwner.positionValue = self.recommendation.positionValue;
 	[self.delegate followControlPressed:self.followButton withChannelOwner:self.channelOwner completion:nil];
 }
 

@@ -1237,8 +1237,54 @@
     
 }
 
+- (void) recordActivityForUserId: (NSString *) userId
+                          action: (NSString *) action
+                      objectType: (NSString *) objectType
+                          withId: (NSString *) instanceId
+                withTrackignCode: (NSString *) trackingCode
+               completionHandler: (MKNKUserSuccessBlock) completionBlock
+                    errorHandler: (MKNKUserErrorBlock) errorBlock {
 
+    NSDictionary *apiSubstitutionDictionary = @{@"USERID" : userId};
+    
+    NSString *apiString = [kAPIRecordUserActivity stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
+    
+    // We need to handle locale differently (so add the locale to the URL) as opposed to the other parameters which are in the POST body
+    apiString = [NSString stringWithFormat: @"%@?locale=%@", apiString, self.localeString];
+    
+    NSDictionary *params = nil;
+    
+    if (action && objectType)
+    {
+        params = @{@"action" : action,
+              @"object_type" : objectType,
+		        @"object_id" : userId,
+                   @"tracking_code" : trackingCode
+                   };
+    }
+    else
+    {
+        AssertOrLog(@"recordActivityForUserId : One or more of the required parameters is nil");
+    }
+    
+    NSLog(@"params : %@", params);
+    
+    SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject*)[self operationWithPath: apiString
+                                                                                                       params: params
+                                                                                                   httpMethod: @"POST"
+                                                                                                          ssl: TRUE];
+    [networkOperation addHeaders: @{@"Content-Type" : @"application/json"}];
+    networkOperation.postDataEncoding = MKNKPostDataEncodingTypeJSON;
+    
+    [self addCommonHandlerToNetworkOperation: networkOperation
+                           completionHandler: completionBlock
+                                errorHandler: errorBlock];
+    
+    [self enqueueSignedOperation: networkOperation];
 
+    
+    
+}
 
 // User activity
 
@@ -1311,10 +1357,10 @@
 
 
 - (void) subscribeAllForUserId: (NSString *) userId
-                 subUserId: (NSString *) subUserId
-               completionHandler: (MKNKUserSuccessBlock) completionBlock
-                    errorHandler: (MKNKUserErrorBlock) errorBlock
-{
+                     subUserId: (NSString *) subUserId
+              withTrackingCode: (NSString *) trackingCode
+             completionHandler: (MKNKUserSuccessBlock) completionBlock
+                  errorHandler: (MKNKUserErrorBlock) errorBlock {
     NSDictionary *apiSubstitutionDictionary = @{@"USERID" : userId};
     
     NSString *apiString = [kAPIRecordUserActivity stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
@@ -1328,7 +1374,8 @@
     {
         params = @{@"action" : @"subscribe_all",
                    @"object_type": @"user",
-                       @"object_id" : subUserId };
+                   @"object_id" : subUserId,
+                   @"tracking_code": trackingCode};
     }
     else
     {
@@ -1347,13 +1394,17 @@
                                 errorHandler: errorBlock];
     
     [self enqueueSignedOperation: networkOperation];
+
+    
+    
+    
 }
 
 - (void) unsubscribeAllForUserId: (NSString *) userId
-                     subUserId: (NSString *) subUserId
-             completionHandler: (MKNKUserSuccessBlock) completionBlock
-                  errorHandler: (MKNKUserErrorBlock) errorBlock
-{
+                       subUserId: (NSString *) subUserId
+                withTrackingCode: (NSString *) trackingCode
+               completionHandler: (MKNKUserSuccessBlock) completionBlock
+                    errorHandler: (MKNKUserErrorBlock) errorBlock {
     NSDictionary *apiSubstitutionDictionary = @{@"USERID" : userId};
     
     NSString *apiString = [kAPIRecordUserActivity stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
@@ -1367,7 +1418,9 @@
     {
         params = @{@"action" : @"unsubscribe_all",
                    @"object_type": @"user",
-                   @"object_id" : subUserId };
+                   @"object_id" : subUserId,
+                   @"tracking_code": trackingCode};
+
     }
     else
     {
@@ -1386,6 +1439,7 @@
                                 errorHandler: errorBlock];
     
     [self enqueueSignedOperation: networkOperation];
+
 }
 
 

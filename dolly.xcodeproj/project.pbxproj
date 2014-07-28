@@ -667,6 +667,9 @@
 		F42AD96A196AE8990020B7A0 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = F42AD965196AE8980020B7A0 /* NSData+Base64.m */; };
 		F42AD96B196AE8990020B7A0 /* OAuth+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = F42AD967196AE8980020B7A0 /* OAuth+Additions.m */; };
 		F42AD96C196AE8990020B7A0 /* OAuthCore.m in Sources */ = {isa = PBXBuildFile; fileRef = F42AD969196AE8990020B7A0 /* OAuthCore.m */; };
+		F4623FEF197D1AD000DEE044 /* buildAndTestiPhone.sh in Resources */ = {isa = PBXBuildFile; fileRef = F4623FEE197D1AD000DEE044 /* buildAndTestiPhone.sh */; };
+		F4623FF1197D1B5500DEE044 /* SimulatorReset.txt in Resources */ = {isa = PBXBuildFile; fileRef = F4623FF0197D1B5500DEE044 /* SimulatorReset.txt */; };
+		F4623FF3197D25AB00DEE044 /* choose_sim_device in Resources */ = {isa = PBXBuildFile; fileRef = F4623FF2197D25AB00DEE044 /* choose_sim_device */; };
 		F4623FF6197D6F7F00DEE044 /* SYNRoundButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F4623FF5197D6F7F00DEE044 /* SYNRoundButton.m */; };
 		F4624003197D82A200DEE044 /* FacebookSignInButton~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F4623FFF197D82A200DEE044 /* FacebookSignInButton~ipad.png */; };
 		F4624004197D82A200DEE044 /* FacebookSignInButton@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F4624000197D82A200DEE044 /* FacebookSignInButton@2x~ipad.png */; };
@@ -676,9 +679,6 @@
 		F462400C197D82AE00DEE044 /* TwitterSignInButton@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F4624008197D82AE00DEE044 /* TwitterSignInButton@2x~ipad.png */; };
 		F462400D197D82AE00DEE044 /* TwitterSignInButton~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = F4624009197D82AE00DEE044 /* TwitterSignInButton~iphone.png */; };
 		F462400E197D82AE00DEE044 /* TwitterSignInButton@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = F462400A197D82AE00DEE044 /* TwitterSignInButton@2x~iphone.png */; };
-		F4623FEF197D1AD000DEE044 /* buildAndTestiPhone.sh in Resources */ = {isa = PBXBuildFile; fileRef = F4623FEE197D1AD000DEE044 /* buildAndTestiPhone.sh */; };
-		F4623FF1197D1B5500DEE044 /* SimulatorReset.txt in Resources */ = {isa = PBXBuildFile; fileRef = F4623FF0197D1B5500DEE044 /* SimulatorReset.txt */; };
-		F4623FF3197D25AB00DEE044 /* choose_sim_device in Resources */ = {isa = PBXBuildFile; fileRef = F4623FF2197D25AB00DEE044 /* choose_sim_device */; };
 		F468C75A1937692C00838890 /* SYNShopMotionOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F468C7591937692C00838890 /* SYNShopMotionOverlayViewController.m */; };
 		F468C75C1937696300838890 /* SYNShopMotionOverlayViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = F468C75B1937696300838890 /* SYNShopMotionOverlayViewController~iphone.xib */; };
 		F468C75E1937697800838890 /* SYNShopMotionOverlayViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = F468C75D1937697800838890 /* SYNShopMotionOverlayViewController~ipad.xib */; };
@@ -1719,6 +1719,9 @@
 		F42AD967196AE8980020B7A0 /* OAuth+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OAuth+Additions.m"; sourceTree = "<group>"; };
 		F42AD968196AE8990020B7A0 /* OAuthCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuthCore.h; sourceTree = "<group>"; };
 		F42AD969196AE8990020B7A0 /* OAuthCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuthCore.m; sourceTree = "<group>"; };
+		F4623FEE197D1AD000DEE044 /* buildAndTestiPhone.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = buildAndTestiPhone.sh; sourceTree = "<group>"; };
+		F4623FF0197D1B5500DEE044 /* SimulatorReset.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SimulatorReset.txt; sourceTree = "<group>"; };
+		F4623FF2197D25AB00DEE044 /* choose_sim_device */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = choose_sim_device; sourceTree = "<group>"; };
 		F4623FF4197D6F7F00DEE044 /* SYNRoundButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNRoundButton.h; sourceTree = "<group>"; };
 		F4623FF5197D6F7F00DEE044 /* SYNRoundButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNRoundButton.m; sourceTree = "<group>"; };
 		F4623FFF197D82A200DEE044 /* FacebookSignInButton~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FacebookSignInButton~ipad.png"; sourceTree = "<group>"; };
@@ -1729,9 +1732,6 @@
 		F4624008197D82AE00DEE044 /* TwitterSignInButton@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TwitterSignInButton@2x~ipad.png"; sourceTree = "<group>"; };
 		F4624009197D82AE00DEE044 /* TwitterSignInButton~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TwitterSignInButton~iphone.png"; sourceTree = "<group>"; };
 		F462400A197D82AE00DEE044 /* TwitterSignInButton@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TwitterSignInButton@2x~iphone.png"; sourceTree = "<group>"; };
-		F4623FEE197D1AD000DEE044 /* buildAndTestiPhone.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = buildAndTestiPhone.sh; sourceTree = "<group>"; };
-		F4623FF0197D1B5500DEE044 /* SimulatorReset.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SimulatorReset.txt; sourceTree = "<group>"; };
-		F4623FF2197D25AB00DEE044 /* choose_sim_device */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = choose_sim_device; sourceTree = "<group>"; };
 		F468C7581937692C00838890 /* SYNShopMotionOverlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNShopMotionOverlayViewController.h; sourceTree = "<group>"; };
 		F468C7591937692C00838890 /* SYNShopMotionOverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNShopMotionOverlayViewController.m; sourceTree = "<group>"; };
 		F468C75B1937696300838890 /* SYNShopMotionOverlayViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNShopMotionOverlayViewController~iphone.xib"; sourceTree = "<group>"; };

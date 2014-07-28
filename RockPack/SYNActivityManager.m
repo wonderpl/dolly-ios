@@ -11,6 +11,7 @@
 #import "Video.h"
 #import "SYNAppDelegate.h"
 #import "VideoInstance.h"
+#import "SYNMasterViewController.h"
 
 @interface SYNActivityManager ()
 
@@ -18,7 +19,7 @@
 @property (nonatomic, strong) NSMutableSet *recentlyViewed;
 @property (nonatomic, strong) NSMutableSet *channelSubscriptions;
 @property (nonatomic, strong) NSMutableSet *userSubscriptons;
-
+@property (nonatomic, strong) NSMutableDictionary *trackingDictionary;
 @property (nonatomic, weak) SYNAppDelegate *appDelegate;
 
 
@@ -46,6 +47,7 @@
 -(id)init {
 	if (self = [super init]) {
 		self.appDelegate = (SYNAppDelegate *)[[UIApplication sharedApplication] delegate];
+        self.trackingDictionary = [NSMutableDictionary new];
         [self initAllValues];
     }
     return self;
@@ -172,6 +174,7 @@
 {
     [self.appDelegate.oAuthNetworkEngine subscribeAllForUserId: self.appDelegate.currentUser.uniqueId
                                                      subUserId: channelOwner.uniqueId
+                            		withTrackingCode:[self trackingCodeForUser:channelOwner]
                                              completionHandler:^(NSDictionary *responseDictionary) {
                                                  
                                                  if (responseDictionary && [responseDictionary isKindOfClass:[NSDictionary class]]) {
@@ -192,6 +195,23 @@
 }
 
 
+
+
+- (NSString*)trackingCodeForUser :(ChannelOwner*) user {
+    
+    NSString* key = [NSString stringWithFormat:@"%@%lld", user.uniqueId, user.positionValue];
+    
+    if ([self.appDelegate.window.rootViewController isKindOfClass:[SYNMasterViewController class]]) {
+        key = [NSString stringWithFormat:@"%@%@", key, [self.appDelegate.masterViewController.showingViewController class]];
+        
+    } else {
+        key = [NSString stringWithFormat:@"%@%@", key, [self.appDelegate.window.rootViewController class]];
+    }
+    
+    return self.trackingDictionary[key];
+}
+
+
 - (void) unsubscribeToUser: (ChannelOwner *) channelOwner
        completionHandler: (MKNKUserSuccessBlock) completionBlock
             errorHandler: (MKNKUserErrorBlock) errorBlock
@@ -199,6 +219,7 @@
 
     [self.appDelegate.oAuthNetworkEngine unsubscribeAllForUserId: self.appDelegate.currentUser.uniqueId
                                                      subUserId: channelOwner.uniqueId
+                                              withTrackingCode:[self trackingCodeForUser:channelOwner]
                                              completionHandler:^(NSDictionary *responseDictionary) {
 
 													 if (responseDictionary && [responseDictionary isKindOfClass:[NSDictionary class]]) {
@@ -216,6 +237,27 @@
                                                  }
                                              }];
 }
+
+- (void)addObjectFromDict :(NSDictionary*) dict {
+    
+    NSString* key = [NSString stringWithFormat:@"%@%@", dict[@"id"], dict[@"position"]];
+    
+    if ([self.appDelegate.window.rootViewController isKindOfClass:[SYNMasterViewController class]]) {
+        key = [NSString stringWithFormat:@"%@%@", key, [self.appDelegate.masterViewController.showingViewController class]];
+        
+    } else {
+        key = [NSString stringWithFormat:@"%@%@", key, [self.appDelegate.window.rootViewController class]];
+    }
+    
+    
+    NSLog(@"tracking_code : %@", dict[@"tracking_code"]);
+    [self.trackingDictionary setValue:dict[@"tracking_code"] forKey:key];
+    
+    NSLog(@"self.trackingDictionaryself.trackingDictionaryself.trackingDictionary%@", self.trackingDictionary);
+}
+
+
+
 
 #pragma mark - helper methods
 - (BOOL) isRecentlyStarred:(NSString*)videoId
