@@ -45,5 +45,7 @@
 - (NSUInteger) userFollowingCount;
 
 - (void)addObjectFromDict :(NSDictionary*) dict;
+- (NSString*)trackingCodeForChannel :(Channel*) channel;
+
 
 @end

@@ -1361,6 +1361,7 @@
               withTrackingCode: (NSString *) trackingCode
              completionHandler: (MKNKUserSuccessBlock) completionBlock
                   errorHandler: (MKNKUserErrorBlock) errorBlock {
+
     NSDictionary *apiSubstitutionDictionary = @{@"USERID" : userId};
     
     NSString *apiString = [kAPIRecordUserActivity stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
@@ -1374,8 +1375,14 @@
     {
         params = @{@"action" : @"subscribe_all",
                    @"object_type": @"user",
-                   @"object_id" : subUserId,
-                   @"tracking_code": trackingCode};
+                   @"object_id" : subUserId};
+
+        if (trackingCode) {
+            params = @{@"action" : @"subscribe_all",
+                       @"object_type": @"user",
+                       @"object_id" : subUserId,
+                       @"tracking_code": trackingCode};
+        }
     }
     else
     {
@@ -1416,10 +1423,17 @@
     
     if (subUserId)
     {
-        params = @{@"action" : @"unsubscribe_all",
-                   @"object_type": @"user",
-                   @"object_id" : subUserId,
-                   @"tracking_code": trackingCode};
+        
+        if (trackingCode) {
+            params = @{@"action" : @"unsubscribe_all",
+                       @"object_type": @"user",
+                       @"object_id" : subUserId,
+                       @"tracking_code": trackingCode};
+        } else {
+            params = @{@"action" : @"unsubscribe_all",
+                       @"object_type": @"user",
+                       @"object_id" : subUserId};
+        }
 
     }
     else
@@ -1503,7 +1517,8 @@
 }
 
 - (void) channelSubscribeForUserId: (NSString *) userId
-                        channelId: (NSString *) channelId
+                         channelId: (NSString *) channelId
+                  withTrackingCode: (NSString *)trackingCode
                  completionHandler: (MKNKUserSuccessBlock) completionBlock
                       errorHandler: (MKNKUserErrorBlock) errorBlock
 {
@@ -1549,6 +1564,7 @@
 
 - (void) channelUnsubscribeForUserId: (NSString *) userId
                            channelId: (NSString *) channelId
+					withTrackingCode: (NSString *)trackingCode
                    completionHandler: (MKNKUserSuccessBlock) completionBlock
                         errorHandler: (MKNKUserErrorBlock) errorBlock
 {

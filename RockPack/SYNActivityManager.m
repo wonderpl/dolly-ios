@@ -122,7 +122,7 @@
                errorHandler: (MKNKUserErrorBlock) errorBlock
 {
     
-    [self.appDelegate.oAuthNetworkEngine channelSubscribeForUserId:self.appDelegate.currentUser.uniqueId channelId:channel.uniqueId completionHandler:^(NSDictionary *responseDictionary) {
+    [self.appDelegate.oAuthNetworkEngine channelSubscribeForUserId:self.appDelegate.currentUser.uniqueId channelId:channel.uniqueId withTrackingCode:[self trackingCodeForChannel:channel] completionHandler:^(NSDictionary *responseDictionary) {
         
         if (responseDictionary && [responseDictionary isKindOfClass:[NSDictionary class]]) {
             [self registerActivityFromDictionary:responseDictionary];
@@ -145,8 +145,7 @@
           completionHandler: (MKNKUserSuccessBlock) completionBlock
                errorHandler: (MKNKUserErrorBlock) errorBlock
 {
-    [self.appDelegate.oAuthNetworkEngine channelUnsubscribeForUserId:self.appDelegate.currentUser.uniqueId channelId:channel.uniqueId completionHandler:^(NSDictionary *responseDictionary) {
-
+    [self.appDelegate.oAuthNetworkEngine channelUnsubscribeForUserId:self.appDelegate.currentUser.uniqueId channelId:channel.uniqueId withTrackingCode:[self trackingCodeForChannel:channel] completionHandler:^(NSDictionary *responseDictionary) {
         
         if (responseDictionary && [responseDictionary isKindOfClass:[NSDictionary class]]) {
             [self registerActivityFromDictionary:responseDictionary];
@@ -211,6 +210,25 @@
     return self.trackingDictionary[key];
 }
 
+- (NSString*)trackingCodeForChannel :(Channel*) channel {
+    
+    NSString* key = [NSString stringWithFormat:@"%@%lld", channel.uniqueId, channel.positionValue];
+    
+    if ([self.appDelegate.window.rootViewController isKindOfClass:[SYNMasterViewController class]]) {
+        key = [NSString stringWithFormat:@"%@%@", key, [self.appDelegate.masterViewController.showingViewController class]];
+        
+    } else {
+        key = [NSString stringWithFormat:@"%@%@", key, [self.appDelegate.window.rootViewController class]];
+    }
+    
+    
+    NSLog(@" Full Dictionary  :%@", self.trackingDictionary);
+    NSLog(@" Single Object  :%@", self.trackingDictionary[key]);
+    
+    return self.trackingDictionary[key];
+}
+
+
 
 - (void) unsubscribeToUser: (ChannelOwner *) channelOwner
        completionHandler: (MKNKUserSuccessBlock) completionBlock
@@ -240,6 +258,9 @@
 
 - (void)addObjectFromDict :(NSDictionary*) dict {
     
+    
+    NSLog(@"dict :ddd  %@", dict[@"position"]);
+    
     NSString* key = [NSString stringWithFormat:@"%@%@", dict[@"id"], dict[@"position"]];
     
     if ([self.appDelegate.window.rootViewController isKindOfClass:[SYNMasterViewController class]]) {
@@ -255,8 +276,6 @@
     
     NSLog(@"self.trackingDictionaryself.trackingDictionaryself.trackingDictionary%@", self.trackingDictionary);
 }
-
-
 
 
 #pragma mark - helper methods

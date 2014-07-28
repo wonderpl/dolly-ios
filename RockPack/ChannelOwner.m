@@ -6,7 +6,7 @@
 #import "SYNAppDelegate.h"
 #import "NSString+Utils.h"
 #import "VideoInstance.h"
-
+#import "SYNActivityManager.h"
 @implementation ChannelOwner
 
 
@@ -227,9 +227,9 @@
     self.channelOwnerDescription = [dictionary objectForKey:@"description"
                                                 withDefault:@""];
     
-    
-    
-    
+    if (dictionary[@"tracking_code"]) {
+        [[SYNActivityManager sharedInstance] addObjectFromDict:dictionary];
+    }
     self.totalVideosValueSubscriptions = [dictionary objectForKey: @"subscription_count" withDefault:0];
 
     BOOL hasChannels = YES;
@@ -391,7 +391,7 @@
             channelOwner = [ChannelOwner instanceFromDictionary: subscriptionChannel
                                       usingManagedObjectContext: self.managedObjectContext
                                             ignoringObjectTypes: kIgnoreVideoInstanceObjects];
-        }
+		}
         else
         {
             [subscriptionInsancesByIdDictionary removeObjectForKey: uniqueId];
@@ -404,6 +404,7 @@
         
         channelOwner.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribedToUserId:channelOwner.uniqueId];
 		
+        [[SYNActivityManager sharedInstance] addObjectFromDict:subscriptionChannel];
         [self.userSubscriptionsSet addObject: channelOwner];
         
     }
@@ -571,7 +572,7 @@
 						usingManagedObjectContext: self.managedObjectContext
 							  ignoringObjectTypes: kIgnoreVideoInstanceObjects];
 		
-		
+        [[SYNActivityManager sharedInstance] addObjectFromDict:channelDictionary];
         channelOwner.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribedToUserId:self.uniqueId];
 		
 		

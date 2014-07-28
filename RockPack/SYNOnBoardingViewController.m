@@ -363,7 +363,6 @@
 
 - (void)followControlPressed:(UIButton *)button withChannelOwner:(ChannelOwner *)channelOwner completion:(void (^)(void))callbackBlock {
 
-    
     [super followControlPressed:button withChannelOwner:channelOwner completion:^{
         if ([[SYNActivityManager sharedInstance] isSubscribedToUserId:channelOwner.uniqueId]) {
             
@@ -382,11 +381,7 @@
         } else {
             self.followedCount--;
         }
-        
-        
     }];
-
-    
 }
 
 - (BOOL)shouldAutorotate {
