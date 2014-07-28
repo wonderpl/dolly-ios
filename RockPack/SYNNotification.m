@@ -12,6 +12,7 @@
 #import "NSDate+RFC1123.h"
 #import "SYNAppDelegate.h"
 #import "SYNNotification.h"
+#import "SYNActivityManager.h"
 
 @interface SYNNotification ()
 
@@ -113,6 +114,9 @@
         {
             // the response can either have a channel tag or a video tag, in the second case the video tag will include a channel tag //
             
+            
+            
+
             // case 1 : Channel Tag
             NSDictionary *channelDictionary = messageDictionary[@"channel"];
             
@@ -131,6 +135,16 @@
                 self.videoId = videoDictionary[@"id"];
                 self.videoThumbnailUrl = videoDictionary[@"thumbnail_url"];
                 self.videoTitle = videoDictionary[@"title"];
+                
+                
+                if (data[@"tracking_code"]) {
+                    NSDictionary* trackingDict = @{@"tracking_code" : data[@"tracking_code"],
+                                                   @"position": data[@"position"],
+                                                   @"id" : videoDictionary[@"id"]
+                                                   };
+                    
+                    [[SYNActivityManager sharedInstance] addObjectFromDict:trackingDict];
+                }
                 
                 NSDictionary *channelDictionary = videoDictionary[@"channel"];
                 
@@ -151,6 +165,16 @@
                                                usingManagedObjectContext: appDelegate.mainManagedObjectContext
                                                      ignoringObjectTypes: kIgnoreChannelObjects];
                 
+                if (data[@"tracking_code"]) {
+                    
+                    NSDictionary* trackingDict = @{@"tracking_code" : data[@"tracking_code"],
+                                                   @"position": data[@"position"],
+                                                   @"id" : userDictionary[@"id"]
+                                                   };
+                    
+                    [[SYNActivityManager sharedInstance] addObjectFromDict:trackingDict];
+                    
+                }
                 
                 self.channelOwner.viewId = kSideNavigationViewId;
             }

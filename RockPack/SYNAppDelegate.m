@@ -1401,7 +1401,26 @@
 		
 		NSString *dollyURLString = [NSString stringWithFormat:@"%@://%@", appURLScheme, urlString];
         NSURL *dollyURL = [NSURL URLWithString:dollyURLString];
-		
+		      
+        if (userInfo[@"tracking_code"]) {
+            NSArray *pathComponents = dollyURL.pathComponents;
+            NSString *videoId = pathComponents[4];
+            NSString *channelId = pathComponents[2];
+            
+            NSDictionary* trackingDict = @{@"tracking_code" : userInfo[@"tracking_code"],
+                                           @"id" : channelId
+                                           };
+            
+            [[SYNActivityManager sharedInstance] addObjectFromDict:trackingDict];
+
+            trackingDict = @{@"tracking_code" : userInfo[@"tracking_code"],
+                                           @"id" : videoId
+                                           };
+            
+            [[SYNActivityManager sharedInstance] addObjectFromDict:trackingDict];
+
+        }
+        
         [self parseAndActionRockpackURL:dollyURL];
     }
 }

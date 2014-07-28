@@ -1237,17 +1237,15 @@
     
 }
 
-
-
-
 // User activity
-
 - (void) recordActivityForUserId: (NSString *) userId
                           action: (NSString *) action
-                 videoInstanceId: (NSString *) videoInstanceId
+                      objectType: (NSString *) objectType
+                          withId: (NSString *) instanceId
+                withTrackignCode: (NSString *) trackingCode
                completionHandler: (MKNKUserSuccessBlock) completionBlock
-                    errorHandler: (MKNKUserErrorBlock) errorBlock
-{
+                    errorHandler: (MKNKUserErrorBlock) errorBlock {
+
     NSDictionary *apiSubstitutionDictionary = @{@"USERID" : userId};
     
     NSString *apiString = [kAPIRecordUserActivity stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
@@ -1256,19 +1254,30 @@
     apiString = [NSString stringWithFormat: @"%@?locale=%@", apiString, self.localeString];
     
     NSDictionary *params = nil;
-
-    if (action && videoInstanceId)
+    
+    if (action && objectType)
     {
-    params = @{@"action" : action,
-                             @"video_instance" : videoInstanceId};
+        
+        if (trackingCode) {
+            params = @{@"action" : action,
+                       @"object_type" : objectType,
+                       @"object_id" : instanceId,
+                       @"tracking_code" : trackingCode
+                       };
+        }
+        else
+        {
+            params = @{@"action" : action,
+                       @"object_type" : objectType,
+                       @"object_id" : instanceId,
+                       };
+        }
     }
     else
     {
         AssertOrLog(@"recordActivityForUserId : One or more of the required parameters is nil");
     }
     
-    
-
     SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject*)[self operationWithPath: apiString
                                                                                                        params: params
                                                                                                    httpMethod: @"POST"
@@ -1281,7 +1290,31 @@
                                 errorHandler: errorBlock];
     
     [self enqueueSignedOperation: networkOperation];
+
+    
+    
 }
+
+- (void) recordActivityForUserId: (NSString *) userId
+                          action: (NSString *) action
+                 videoInstanceId: (NSString *) videoInstanceId
+                    trackingCode: (NSString *) trackingCode
+               completionHandler: (MKNKUserSuccessBlock) completionBlock
+                    errorHandler: (MKNKUserErrorBlock) errorBlock
+{
+    [self recordActivityForUserId:userId action:action objectType:@"video_instance" withId:videoInstanceId withTrackignCode:trackingCode completionHandler:completionBlock errorHandler:errorBlock];
+}
+
+- (void) recordActivityForUserId: (NSString *) userId
+                          action: (NSString *) action
+               channelInstanceId: (NSString *) channelInstanceId
+                    trackingCode: (NSString *) trackingCode
+               completionHandler: (MKNKUserSuccessBlock) completionBlock
+                    errorHandler: (MKNKUserErrorBlock) errorBlock
+{
+    [self recordActivityForUserId:userId action:action objectType:@"channel" withId:channelInstanceId withTrackignCode:trackingCode completionHandler:completionBlock errorHandler:errorBlock];
+}
+
 
 
 - (void) activityForUserId: (NSString *) userId
@@ -1311,10 +1344,11 @@
 
 
 - (void) subscribeAllForUserId: (NSString *) userId
-                 subUserId: (NSString *) subUserId
-               completionHandler: (MKNKUserSuccessBlock) completionBlock
-                    errorHandler: (MKNKUserErrorBlock) errorBlock
-{
+                     subUserId: (NSString *) subUserId
+              withTrackingCode: (NSString *) trackingCode
+             completionHandler: (MKNKUserSuccessBlock) completionBlock
+                  errorHandler: (MKNKUserErrorBlock) errorBlock {
+
     NSDictionary *apiSubstitutionDictionary = @{@"USERID" : userId};
     
     NSString *apiString = [kAPIRecordUserActivity stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
@@ -1328,7 +1362,14 @@
     {
         params = @{@"action" : @"subscribe_all",
                    @"object_type": @"user",
-                       @"object_id" : subUserId };
+                   @"object_id" : subUserId};
+
+        if (trackingCode) {
+            params = @{@"action" : @"subscribe_all",
+                       @"object_type": @"user",
+                       @"object_id" : subUserId,
+                       @"tracking_code": trackingCode};
+        }
     }
     else
     {
@@ -1347,13 +1388,17 @@
                                 errorHandler: errorBlock];
     
     [self enqueueSignedOperation: networkOperation];
+
+    
+    
+    
 }
 
 - (void) unsubscribeAllForUserId: (NSString *) userId
-                     subUserId: (NSString *) subUserId
-             completionHandler: (MKNKUserSuccessBlock) completionBlock
-                  errorHandler: (MKNKUserErrorBlock) errorBlock
-{
+                       subUserId: (NSString *) subUserId
+                withTrackingCode: (NSString *) trackingCode
+               completionHandler: (MKNKUserSuccessBlock) completionBlock
+                    errorHandler: (MKNKUserErrorBlock) errorBlock {
     NSDictionary *apiSubstitutionDictionary = @{@"USERID" : userId};
     
     NSString *apiString = [kAPIRecordUserActivity stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
@@ -1365,9 +1410,18 @@
     
     if (subUserId)
     {
-        params = @{@"action" : @"unsubscribe_all",
-                   @"object_type": @"user",
-                   @"object_id" : subUserId };
+        
+        if (trackingCode) {
+            params = @{@"action" : @"unsubscribe_all",
+                       @"object_type": @"user",
+                       @"object_id" : subUserId,
+                       @"tracking_code": trackingCode};
+        } else {
+            params = @{@"action" : @"unsubscribe_all",
+                       @"object_type": @"user",
+                       @"object_id" : subUserId};
+        }
+
     }
     else
     {
@@ -1386,6 +1440,7 @@
                                 errorHandler: errorBlock];
     
     [self enqueueSignedOperation: networkOperation];
+
 }
 
 
@@ -1449,7 +1504,8 @@
 }
 
 - (void) channelSubscribeForUserId: (NSString *) userId
-                        channelId: (NSString *) channelId
+                         channelId: (NSString *) channelId
+                  withTrackingCode: (NSString *)trackingCode
                  completionHandler: (MKNKUserSuccessBlock) completionBlock
                       errorHandler: (MKNKUserErrorBlock) errorBlock
 {
@@ -1464,9 +1520,17 @@
 
     if (userId)
     {
-        params = @{@"action" : @"subscribe",
-                   @"object_type": @"channel",
-                   @"object_id" : channelId };
+        if (trackingCode) {
+            params = @{@"action" : @"subscribe",
+                       @"object_type": @"channel",
+                       @"object_id" : channelId,
+                       @"tracking_code:": trackingCode};
+        } else {
+            params = @{@"action" : @"subscribe",
+                       @"object_type": @"channel",
+                       @"object_id" : channelId};
+        }
+        
     }
     else
     {
@@ -1495,6 +1559,7 @@
 
 - (void) channelUnsubscribeForUserId: (NSString *) userId
                            channelId: (NSString *) channelId
+					withTrackingCode: (NSString *)trackingCode
                    completionHandler: (MKNKUserSuccessBlock) completionBlock
                         errorHandler: (MKNKUserErrorBlock) errorBlock
 {
@@ -1509,9 +1574,19 @@
     
     if (userId)
     {
-        params = @{@"action" : @"unsubscribe",
-                   @"object_type": @"channel",
-                   @"object_id" : channelId };
+        
+        if (trackingCode) {
+            params = @{@"action" : @"unsubscribe",
+                       @"object_type": @"channel",
+                       @"object_id" : channelId,
+                       @"tracking_code:": trackingCode };
+        }
+        else
+        {
+            params = @{@"action" : @"unsubscribe",
+                       @"object_type": @"channel",
+                       @"object_id" : channelId };
+        }
     }
     else
     {
@@ -1671,9 +1746,9 @@
     
 }
 
-
 - (void) shareLinkWithObjectType: (NSString *) objectType
                         objectId: (NSString *) objectId
+					trackingCode: (NSString *) trackingCode
                completionHandler: (MKNKUserSuccessBlock) completionBlock
                     errorHandler: (MKNKUserErrorBlock) errorBlock
 {
@@ -1684,14 +1759,29 @@
     
     if (objectType && objectId)
     {
-        params = @{@"object_type" : objectType,
-                   @"object_id" : objectId};
+        if (trackingCode) {
+            
+            
+            NSLog(@"objectId objectId : %@", objectId);
+            params = @{@"object_type" : objectType,
+                       @"action": @"share",
+                       @"object_id" : objectId,
+                       @"tracking_code" : trackingCode
+                       };
+        }
+        else
+        {
+            params = @{@"object_type" : objectType,
+                       @"action": @"share",
+                       @"object_id" : objectId
+                       };
+        }
     }
     else
     {
         AssertOrLog(@"shareLinkWithObjectType : One or more of the required parameters is nil");
     }
-
+    
     
     SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject*)[self operationWithPath: apiString
                                                                                                        params: params
@@ -1706,6 +1796,7 @@
     
     [self enqueueSignedOperation: networkOperation];
 }
+
 
 - (void) emailShareWithObjectType: (NSString *) shareType
                          objectId: (NSString *) objectId

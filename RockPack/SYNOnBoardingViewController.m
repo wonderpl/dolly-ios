@@ -113,12 +113,7 @@
 	
     [self.spinner startAnimating];
     
-    __weak typeof(self) wself = self;
-    
-    
     MKNKUserSuccessBlock successBlock = ^(NSDictionary *response) {
-        
-        
         
         [self.spinner stopAnimating];
         
@@ -366,31 +361,27 @@
 	[self.collectionView.collectionViewLayout invalidateLayout];
 }
 
+- (void)followControlPressed:(UIButton *)button withChannelOwner:(ChannelOwner *)channelOwner completion:(void (^)(void))callbackBlock {
 
-- (void)followControlPressed:(UIButton *)button withChannelOwner:(ChannelOwner *)channelOwner completion :(void (^)(void))callbackBlock {
-
-    [super followControlPressed:button withChannelOwner:channelOwner completion:^{
-            if ([[SYNActivityManager sharedInstance] isSubscribedToUserId:channelOwner.uniqueId]) {
-                
-                NSString *text = IS_IPAD ? [NSString stringWithFormat:@"You have successfully followed %@", channelOwner.displayName] : [NSString stringWithFormat:@"Following %@", channelOwner.displayName];
-                
-                [self presentNotificationWithMessage: text andType:NotificationMessageTypeSuccess];
-            } else {
-                
-                NSString *text = IS_IPAD ? [NSString stringWithFormat:@"You have successfully unfollowed %@", channelOwner.displayName] : [NSString stringWithFormat:@"Unfollowed %@", channelOwner.displayName];
-
-                [self presentNotificationWithMessage: text andType:NotificationMessageTypeSuccess];
-            }
+    [super followControlPressed:button withChannelOwner:channelOwner withVideoInstace:nil completion:^{
+        if ([[SYNActivityManager sharedInstance] isSubscribedToUserId:channelOwner.uniqueId]) {
+            
+            NSString *text = IS_IPAD ? [NSString stringWithFormat:@"You have successfully followed %@", channelOwner.displayName] : [NSString stringWithFormat:@"Following %@", channelOwner.displayName];
+            
+            [self presentNotificationWithMessage: text andType:NotificationMessageTypeSuccess];
+        } else {
+            
+            NSString *text = IS_IPAD ? [NSString stringWithFormat:@"You have successfully unfollowed %@",channelOwner.displayName] : [NSString stringWithFormat:@"Unfollowed %@", channelOwner.displayName];
+            
+            [self presentNotificationWithMessage: text andType:NotificationMessageTypeSuccess];
+        }
         
         if (button.selected) {
             self.followedCount++;
         } else {
             self.followedCount--;
         }
-
-        
     }];
-    
 }
 
 - (BOOL)shouldAutorotate {

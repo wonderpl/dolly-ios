@@ -452,6 +452,36 @@
     return (SYNAbstractViewController*)(self.containerViewController.currentViewController.topViewController);
 }
 
+- (NSArray*) viewControllers {
+    return self.containerViewController.currentViewController.viewControllers;
+}
+
+- (SYNAbstractViewController*) rootViewController
+{
+    int count = [self.containerViewController.currentViewController.viewControllers count]-1;
+    
+    for (int i = count; i>=0; i--) {
+        
+        SYNAbstractViewController *viewController = [self.containerViewController.currentViewController.viewControllers objectAtIndex:i];
+        NSString *className = NSStringFromClass([viewController class]);
+        className = [className lowercaseString];
+        
+        if (!([className rangeOfString:@"profile"].location == NSNotFound)) {
+            return viewController;
+        }
+        
+        if (!([className rangeOfString:@"feed"].location == NSNotFound)) {
+            return viewController;
+        }
+        
+        if (!([className rangeOfString:@"activity"].location == NSNotFound)) {
+            return viewController;
+        }
+    }
+
+    return (SYNAbstractViewController*)([self.containerViewController.currentViewController.viewControllers firstObject]);
+}
+
 -(NSArray*)tabs
 {
     return self.tabsView.subviews;

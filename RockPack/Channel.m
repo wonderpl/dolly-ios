@@ -37,6 +37,7 @@
     copyChannel.uniqueId = channel.uniqueId;
     copyChannel.categoryId = channel.categoryId;
     copyChannel.position = channel.position;
+    copyChannel.positionValue = channel.positionValue;
     copyChannel.title = channel.title;
     copyChannel.lastUpdated = channel.lastUpdated;
     copyChannel.subscribersCount = channel.subscribersCount;
@@ -148,6 +149,8 @@
             channel.channelOwner = channelOwners[ownerDict[@"id"]];
         }
 		
+        [[SYNActivityManager sharedInstance] addObjectFromDict:dictionary];
+
 		channels[channelId] = channel;
 	}
 
@@ -183,6 +186,7 @@
     {
         hasVideoInstances = NO;
     }
+    
     
     NSDictionary *ownerDictionary = dictionary[@"owner"];
     if (!(ignoringObjects & kIgnoreChannelOwnerObject) && ownerDictionary)
@@ -248,6 +252,8 @@
         
         for (NSDictionary *channelDictionary in itemArray)
         {
+            
+            
             newUniqueId = channelDictionary[@"id"];
             
             if (!newUniqueId || ![newUniqueId isKindOfClass: [NSString class]])
@@ -338,8 +344,10 @@
     
     self.categoryId = (categoryNumber && [categoryNumber isKindOfClass: [NSNumber class]]) ? [categoryNumber stringValue] : @"";
     
-    self.position = [dictionary objectForKey: @"position"
-                                 withDefault: @0];
+    self.positionValue = [[dictionary objectForKey: @"position"
+                                       withDefault: @-1] longLongValue];
+    
+    
     
     self.title = [dictionary objectForKey: @"title"
                                        withDefault: @""];
@@ -366,7 +374,6 @@
     
     self.channelDescription = [dictionary objectForKey: @"description"
                                            withDefault: @""];
-    
     
     self.public = [dictionary objectForKey: @"public"
                                withDefault: @YES]; // default is public

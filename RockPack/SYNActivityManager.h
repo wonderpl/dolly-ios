@@ -31,16 +31,22 @@
             completionHandler: (MKNKUserSuccessBlock) completionBlock
                  errorHandler: (MKNKUserErrorBlock) errorBlock;
 
-- (void) subscribeToUser: (ChannelOwner *) channelOwner
-       completionHandler: (MKNKUserSuccessBlock) completionBlock
-            errorHandler: (MKNKUserErrorBlock) errorBlock;
-
-- (void) unsubscribeToUser: (ChannelOwner *) channelOwner
-         completionHandler: (MKNKUserSuccessBlock) completionBlock
-              errorHandler: (MKNKUserErrorBlock) errorBlock;
-
 - (void) addChannelSubscriptionsObject:(Channel *)channel;
 - (void) addUserSubscriptonsObject:(ChannelOwner*)channelOwner;
 - (NSUInteger) userFollowingCount;
+- (NSString*)trackingCodeForVideoInstance :(VideoInstance*) videoInstance;
+- (void)addObjectFromDict :(NSDictionary*) dict;
+- (NSString*)trackingCodeForChannel :(Channel*) channel;
+- (NSString*)trackingCodeForChannel :(Channel*) channel videoInstance :(VideoInstance*)videoInstance;
+- (void) unsubscribeToUser: (ChannelOwner *) channelOwner
+             videoInstance: (VideoInstance*) videoInstance
+         completionHandler: (MKNKUserSuccessBlock) completionBlock
+              errorHandler: (MKNKUserErrorBlock) errorBlock;
+
+- (void) subscribeToUser: (ChannelOwner *) channelOwner
+             videoInstance: (VideoInstance*) videoInstance
+         completionHandler: (MKNKUserSuccessBlock) completionBlock
+            errorHandler: (MKNKUserErrorBlock) errorBlock;
+
 
 @end

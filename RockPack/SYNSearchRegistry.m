@@ -16,6 +16,7 @@
 #import "VideoInstance.h"
 #import "Recommendation.h"
 #import "NSString+Validation.h"
+#import "SYNActivityManager.h"
 
 @import AddressBook;
 
@@ -344,6 +345,8 @@
                                                                   existingVideos: existingVideos];
             
             videoInstance.viewId = viewId; // kSearchViewId and kMoodViewId usually
+        
+        	[[SYNActivityManager sharedInstance] addObjectFromDict:fullItemDictionary];
         }
     }
     

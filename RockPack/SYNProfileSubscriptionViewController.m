@@ -407,7 +407,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 
 - (void)followUserTapped:(SYNSocialButton *)button {
 	
-	[self followControlPressed:button withChannelOwner:button.dataItemLinked completion:^{
+	[self followControlPressed:button withChannelOwner:button.dataItemLinked withVideoInstace:nil completion:^{
 		[self.cv reloadData];
 	}];
 }

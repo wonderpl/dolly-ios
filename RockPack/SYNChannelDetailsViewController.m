@@ -40,7 +40,6 @@
 #import "UIPlaceHolderTextView.h"
 #import "SYNVideoActionsBar.h"
 #import "SYNCollectionVideoCell.h"
-#import "SYNAddToChannelViewController.h"
 #import <TestFlight.h>
 
 #define kHeightChange 30.0f
@@ -1584,26 +1583,10 @@ static const CGFloat HeaderHeightIPad = 530;
 // TODO: abstract this call, Copy paste from Feed Root.
 - (void)videoCell:(SYNCollectionVideoCell *)cell addToChannelPressed:(UIButton *)button {
 
-    VideoInstance *videoInstance = cell.videoInstance;
     NSIndexPath *indexPath = [self.videoThumbnailCollectionView indexPathForCell:cell];
     TFLog(@"Feed: Video Instance from model :%@", [self.model itemAtIndex:indexPath.row]);
-
-	[[SYNTrackingManager sharedManager] trackVideoAddFromScreenName:[self trackingScreenName]];
-	
-    [appDelegate.oAuthNetworkEngine recordActivityForUserId:appDelegate.currentUser.uniqueId
-                                                     action:@"select"
-                                            videoInstanceId:videoInstance.uniqueId
-                                          completionHandler:nil
-                                               errorHandler:nil];
-	
-	SYNAddToChannelViewController *viewController = [[SYNAddToChannelViewController alloc] initWithViewId:kExistingChannelsViewId];
-	viewController.modalPresentationStyle = UIModalPresentationCustom;
-	viewController.transitioningDelegate = self;
-	viewController.videoInstance = videoInstance;
-    TFLog(@"Channel details: Video instance :%@", videoInstance);
-
-	[self presentViewController:viewController animated:YES completion:nil];
-
+    
+    [self addToChannelButtonPressed:button videoInstance:cell.videoInstance];
 }
 
 - (void)videoCell:(SYNCollectionVideoCell *)cell sharePressed:(UIButton *)button {

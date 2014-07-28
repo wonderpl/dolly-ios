@@ -329,11 +329,12 @@
 }
 
 - (void)videoPlayerVideoViewed {
-
+    
 	[appDelegate.oAuthNetworkEngine recordActivityForUserId:appDelegate.currentOAuth2Credentials.userId
 													 action:@"view"
 											videoInstanceId:self.videoInstance.uniqueId
-										  completionHandler:nil
+                                               trackingCode:[[SYNActivityManager sharedInstance] trackingCodeForChannel:self.videoInstance.channel videoInstance:self.videoInstance]
+                                          completionHandler:nil
 											   errorHandler:^(NSDictionary* errorDictionary) {
 												   DebugLog(@"View action failed");
 											   }];
@@ -445,7 +446,7 @@
 }
 
 - (IBAction)followButtonPressed:(UIButton *)button {
-	[self followControlPressed:button withChannelOwner:self.videoInstance.originator completion:^{
+	[self followControlPressed:button withChannelOwner:self.videoInstance.originator withVideoInstace:self.videoInstance completion:^{
 		
 	}];
 }

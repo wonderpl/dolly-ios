@@ -6,7 +6,7 @@
 #import "SYNAppDelegate.h"
 #import "NSString+Utils.h"
 #import "VideoInstance.h"
-
+#import "SYNActivityManager.h"
 @implementation ChannelOwner
 
 
@@ -227,9 +227,9 @@
     self.channelOwnerDescription = [dictionary objectForKey:@"description"
                                                 withDefault:@""];
     
-    
-    
-    
+    if (dictionary[@"tracking_code"]) {
+        [[SYNActivityManager sharedInstance] addObjectFromDict:dictionary];
+    }
     self.totalVideosValueSubscriptions = [dictionary objectForKey: @"subscription_count" withDefault:0];
 
     BOOL hasChannels = YES;
@@ -282,9 +282,13 @@
                 channel = [Channel instanceFromDictionary: channelDictionary
                                 usingManagedObjectContext: self.managedObjectContext
                                       ignoringObjectTypes: ignoringObjects | kIgnoreChannelOwnerObject];
+                
             }
             else
             {
+                
+                
+                
                 [channelInsanceByIdDictionary removeObjectForKey: newUniqueId];
             }
             
@@ -325,6 +329,8 @@
             channel.channelDescription = channelDictionary[@"description"];
 
             [self.channelsSet addObject: channel];
+            [[SYNActivityManager sharedInstance] addObjectFromDict:channelDictionary];
+
         }
         
         for (id key in channelInsanceByIdDictionary)
@@ -391,7 +397,7 @@
             channelOwner = [ChannelOwner instanceFromDictionary: subscriptionChannel
                                       usingManagedObjectContext: self.managedObjectContext
                                             ignoringObjectTypes: kIgnoreVideoInstanceObjects];
-        }
+		}
         else
         {
             [subscriptionInsancesByIdDictionary removeObjectForKey: uniqueId];
@@ -404,6 +410,7 @@
         
         channelOwner.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribedToUserId:channelOwner.uniqueId];
 		
+        [[SYNActivityManager sharedInstance] addObjectFromDict:subscriptionChannel];
         [self.userSubscriptionsSet addObject: channelOwner];
         
     }
@@ -571,7 +578,7 @@
 						usingManagedObjectContext: self.managedObjectContext
 							  ignoringObjectTypes: kIgnoreVideoInstanceObjects];
 		
-		
+        [[SYNActivityManager sharedInstance] addObjectFromDict:channelDictionary];
         channelOwner.subscribedByUserValue = [SYNActivityManager.sharedInstance isSubscribedToUserId:self.uniqueId];
 		
 		
@@ -597,6 +604,8 @@
 		
 		VideoInstance *videoInstance = [VideoInstance instanceFromDictionary:videoInstanceDictionary usingManagedObjectContext:self.managedObjectContext];
 		
+        [[SYNActivityManager sharedInstance] addObjectFromDict:videoInstanceDictionary];
+        
 		[self.userVideoInstancesSet addObject:videoInstance];
 	}
 
@@ -629,6 +638,8 @@
 		
 		videoInstance = [VideoInstance instanceFromDictionary:videoInstanceDictionary usingManagedObjectContext:self.managedObjectContext];
 		
+        [[SYNActivityManager sharedInstance] addObjectFromDict:videoInstanceDictionary];
+
 		[self.userVideoInstancesSet addObject:videoInstance];
 	}
     

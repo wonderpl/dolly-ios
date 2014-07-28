@@ -12,7 +12,6 @@
 #import "SYNDeviceManager.h"
 #import "SYNCollectionVideoCell.h"
 #import "SYNTrackingManager.h"
-#import "SYNAddToChannelViewController.h"
 #import "SYNVideoPlayerViewController.h"
 #import "SYNVideoPlayerAnimator.h"
 #import "UINavigationBar+Appearance.h"
@@ -218,28 +217,10 @@ forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
 
 // TODO: abstract this call, Copy paste from Feed Root.
 - (void)videoCell:(SYNCollectionVideoCell *)cell addToChannelPressed:(UIButton *)button {
-    
-    VideoInstance *videoInstance = cell.videoInstance;
-	
     NSIndexPath *indexPath = [self.cv indexPathForCell:cell];
     TFLog(@"Feed: Video Instance from model :%@", [self.model itemAtIndex:indexPath.row]);
 
-	[[SYNTrackingManager sharedManager] trackVideoAddFromScreenName:[self trackingScreenName]];
-
-    [appDelegate.oAuthNetworkEngine recordActivityForUserId:appDelegate.currentUser.uniqueId
-                                                     action:@"select"
-                                            videoInstanceId:videoInstance.uniqueId
-                                          completionHandler:nil
-                                               errorHandler:nil];
-	
-	SYNAddToChannelViewController *viewController = [[SYNAddToChannelViewController alloc] initWithViewId:kExistingChannelsViewId];
-	viewController.modalPresentationStyle = UIModalPresentationCustom;
-	viewController.transitioningDelegate = self;
-	viewController.videoInstance = videoInstance;
-    TFLog(@"ProfileVideoViewController: Video instance :%@", videoInstance);
-
-	[self presentViewController:viewController animated:YES completion:nil];
-    
+    [self addToChannelButtonPressed:button videoInstance:cell.videoInstance];
 }
 
 - (void)videoCell:(SYNCollectionVideoCell *)cell sharePressed:(UIButton *)button {

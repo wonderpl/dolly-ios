@@ -80,7 +80,7 @@
 		}
 		
 		[videoInstance setAttributesFromDictionary:dictionary];
-		
+		[[SYNActivityManager sharedInstance] addObjectFromDict:dictionary];
 		[videoInstance.starrersSet removeAllObjects];
 		NSArray *starringUserIds = [dictionary[@"starring_users"] valueForKey:@"id"];
 		for (NSString *starringUserId in starringUserIds) {

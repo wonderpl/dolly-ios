@@ -1,7 +1,7 @@
 #import "Recommendation.h"
 #import "NSDictionary+Validation.h"
 #import "ChannelOwner.h"
-
+#import "SYNActivityManager.h"
 
 @interface Recommendation ()
 
@@ -32,17 +32,21 @@
                                  withDefault:@""];
     
 	self.position = dictionary[@"position"];
-	
+    
 	self.categoryId = [NSString stringWithFormat:@"%@", dictionary[@"category"]];
     
     self.displayName = [dictionary objectForKey:@"display_name"
                                     withDefault:@""];
-    
     self.avatarUrl = [dictionary objectForKey:@"avatar_thumbnail_url"
                                   withDefault:@""];
     
     self.descriptionText = [dictionary objectForKey:@"description"
                                         withDefault:@""];
+    
+    
+    if (dictionary[@"tracking_code"]) {
+        [[SYNActivityManager sharedInstance] addObjectFromDict:dictionary];
+    }
 }
 
 - (ChannelOwner *)channelOwner {

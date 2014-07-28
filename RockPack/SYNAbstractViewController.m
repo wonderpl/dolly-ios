@@ -27,6 +27,7 @@
 #import "SYNPopoverAnimator.h"
 #import "SYNProfileChannelViewController.h"
 #import <TestFlight.h>
+#import "SYNAddToChannelViewController.h"
 
 @import QuartzCore;
 
@@ -217,6 +218,7 @@
     [appDelegate.oAuthNetworkEngine recordActivityForUserId: appDelegate.currentUser.uniqueId
                                                      action: (didStar ? @"star" : @"unstar")
                                             videoInstanceId: videoInstance.uniqueId
+                                               trackingCode:[[SYNActivityManager sharedInstance] trackingCodeForVideoInstance:videoInstance]
                                           completionHandler: ^(id response) {
                                               BOOL previousStarringState = videoInstance.starredByUserValue;
                                               [self starVideoInstance:videoInstance withButton:button didStar:didStar];
@@ -233,6 +235,31 @@
                                           }];
 }
 
+- (void)addToChannelButtonPressed:(UIButton *)button videoInstance:(VideoInstance *)videoInstance {
+    
+    NSLog(@"ADD videoInstance.uniqueId %@",videoInstance);
+    
+    NSLog(@"ADD videoInstance ID %@",videoInstance.uniqueId);
+
+    [[SYNTrackingManager sharedManager] trackVideoAddFromScreenName:[self trackingScreenName]];
+    [appDelegate.oAuthNetworkEngine recordActivityForUserId:appDelegate.currentUser.uniqueId
+                                                     action:@"select"
+                                            videoInstanceId:videoInstance.uniqueId
+                                               trackingCode:[[SYNActivityManager sharedInstance] trackingCodeForVideoInstance:videoInstance]
+                                          completionHandler:nil
+                                               errorHandler:nil];
+	
+	SYNAddToChannelViewController *viewController = [[SYNAddToChannelViewController alloc] initWithViewId:kExistingChannelsViewId];
+	viewController.modalPresentationStyle = UIModalPresentationCustom;
+	viewController.transitioningDelegate = self;
+	viewController.videoInstance = videoInstance;
+    TFLog(@"Channel details: Video instance :%@", videoInstance);
+    
+	[self presentViewController:viewController animated:YES completion:nil];
+
+    
+    
+}
 
 - (void)starVideoInstance:(VideoInstance*)videoInstance withButton:(UIButton*)button didStar:(BOOL)didStar {
 
@@ -254,18 +281,25 @@
 	VideoInstance *firstVideoInstance = [channel.videoInstances firstObject];
 	UIImage *image = [[SDImageCache sharedImageCache] imageFromMemoryCacheForKey:firstVideoInstance.thumbnailURL];
 
-    [self requestShareLinkWithObjectType:@"channel" objectId:channel.uniqueId];
+
+    [self requestShareLinkWithObjectType:@"channel" objectId:channel.uniqueId trackingCode:[[SYNActivityManager sharedInstance] trackingCodeForChannel:channel]];
 
     [self shareObject:channel usingImage:image];
 }
 
 - (void) shareVideoInstance: (VideoInstance *) videoInstance
 {
-	[self requestShareLinkWithObjectType: @"video_instance"
-								objectId: videoInstance.uniqueId];
+    
+    NSLog(@"SHARE videoInstance.uniqueId %@",videoInstance);
 
+	[self requestShareLinkWithObjectType: @"video_instance"
+								objectId: videoInstance.uniqueId
+     	trackingCode:[[SYNActivityManager sharedInstance] trackingCodeForVideoInstance:videoInstance]];
+    
     // At this point it is safe to assume that the video thumbnail image is in the cache
     UIImage *thumbnailImage = [SDWebImageManager.sharedManager.imageCache imageFromMemoryCacheForKey: videoInstance.video.thumbnailURL];
+    
+
     [self shareObject:videoInstance usingImage:thumbnailImage];
 }
 
@@ -328,6 +362,7 @@
 
 - (void) requestShareLinkWithObjectType: (NSString *) objectType
                                objectId: (NSString *) objectId
+                           trackingCode: (NSString *) trackingCode
 {
     // Get share link
     self.mutableShareDictionary = @{@"type" : objectType,
@@ -341,6 +376,7 @@
     
     [appDelegate.oAuthNetworkEngine shareLinkWithObjectType: objectType
                                                    objectId: objectId
+                                               trackingCode: trackingCode
                                           completionHandler: ^(NSDictionary *responseDictionary)
      {
          NSString *resourceURLString = [responseDictionary objectForKey: @"resource_url"
@@ -371,10 +407,7 @@
          [[NSNotificationCenter defaultCenter] postNotificationName:kShareLinkForObjectObtained
                                                              object:self];
          
-     } errorHandler: ^(NSDictionary *errorDictionary) {
-         
-         
-     }];
+     } errorHandler:nil];
 }
 
 
@@ -598,26 +631,11 @@
 }
 
 
-- (void)followControlPressed:(UIButton *)button withChannelOwner:(ChannelOwner *)channelOwner completion :(void (^)(void))callbackBlock {
-	
-	if(!channelOwner)
-		return;
-	
-	BOOL isCurrentUser = (BOOL)[channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId];
-	
-	if (isCurrentUser) {
-		return;
-	}
-    
-	[[SYNTrackingManager sharedManager] trackUserCollectionsFollowFromScreenName:[self trackingScreenName]];
-	
-	button.enabled = NO;
-	[button invalidateIntrinsicContentSize];
-	
-    
+- (void)followControlPressed:(UIButton *)button withChannelOwner:(ChannelOwner *)channelOwner withVideoInstace:(VideoInstance*)videoInstance completion :(void (^)(void))callbackBlock {
     
 	if ([[SYNActivityManager sharedInstance] isSubscribedToUserId:channelOwner.uniqueId]) {
         [[SYNActivityManager sharedInstance] unsubscribeToUser:channelOwner
+                                                 videoInstance:videoInstance
 											 completionHandler:^(id responce) {
 												 
 												 button.selected = NO;
@@ -635,12 +653,13 @@
 												 [button invalidateIntrinsicContentSize];
 											 }];
 	} else {
-
+        
         
         [self followButtonAnimation:button];
         button.selected = YES;
-
+        
         [[SYNActivityManager sharedInstance] subscribeToUser:channelOwner
+                                               videoInstance:videoInstance
 										   completionHandler: ^(id responce) {
 											   
 											   button.enabled = YES;
@@ -655,18 +674,16 @@
 										   } errorHandler: ^(id error) {
 											   button.enabled = YES;
                                                button.selected = NO;
-
+                                               
 											   [button invalidateIntrinsicContentSize];
 										   }];
-
+        
 	}
 }
 
 - (void)followButtonPressed:(UIButton *)button withChannel:(Channel *)channel completion :(void (^)(void))callbackBlock {
-    
-    
 
-    [[SYNTrackingManager sharedManager] trackCollectionFollowFromScreenName:[self trackingScreenName]];
+        [[SYNTrackingManager sharedManager] trackCollectionFollowFromScreenName:[self trackingScreenName]];
     
 	if ([[SYNActivityManager sharedInstance]isSubscribedToChannelId:channel.uniqueId]) {
         [[SYNActivityManager sharedInstance] unsubscribeToChannel: channel
@@ -685,11 +702,6 @@
                                                     button.enabled = YES;
                                                 }];
 	} else {
-        
-        
-        // Automatticcaly set the button to selected so we dont wait for a server response,
-		// We're assuming the response will be good. On a error it will get unselected, It will
-        //Also fix itself using the data in the activity manager
         
         [self followButtonAnimation:button];
         button.selected = YES;
