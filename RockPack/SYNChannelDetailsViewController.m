@@ -127,20 +127,18 @@ static const CGFloat HeaderHeightIPad = 530;
         [self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
     }
     
-    if (IS_IPHONE) {
-        self.videoCollectionViewLayoutIPhone.sectionInset = UIEdgeInsetsMake(2, 5, 60, 2);
-    }
-	
 	if (IS_IPHONE) {
+        self.videoCollectionViewLayoutIPhone.sectionInset = UIEdgeInsetsMake(2, 0, 60, 0);
         self.videoCollectionViewLayoutIPhoneEdit = [[LXReorderableCollectionViewFlowLayout alloc]init];
-        self.videoCollectionViewLayoutIPhoneEdit.itemSize = CGSizeMake(282,289-kHeightChange);
-        self.videoCollectionViewLayoutIPhoneEdit.sectionInset = UIEdgeInsetsMake(2, 5, 60, 2);
+        self.videoCollectionViewLayoutIPhoneEdit.itemSize = CGSizeMake(300,284-kHeightChange);
+        self.videoCollectionViewLayoutIPhoneEdit.sectionInset = self.videoCollectionViewLayoutIPhone.sectionInset;
     }
     
     if (IS_IPAD) {
         self.videoCollectionViewLayoutIPadEdit = [[LXReorderableCollectionViewFlowLayout alloc]init];
-        self.videoCollectionViewLayoutIPadEdit.itemSize = CGSizeMake(282, 289-kHeightChange);
-        self.videoCollectionViewLayoutIPadEdit.sectionInset = UIEdgeInsetsMake(0, 35, 60, 35);
+        self.videoCollectionViewLayoutIPadEdit.itemSize = CGSizeMake(300, 284-kHeightChange);
+        self.videoCollectionViewLayoutIPadEdit.sectionInset = UIEdgeInsetsMake(2, 0, 60, 0);
+
     }
     self.barBtnCancel = [[UIBarButtonItem alloc]initWithTitle:@"cancel"
                                                         style:UIBarButtonItemStyleBordered
@@ -153,22 +151,18 @@ static const CGFloat HeaderHeightIPad = 530;
                                                      action:@selector(saveTapped)];
     
     if (IS_IPHONE) {
-        self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsMake(470, 0, 60, 0);
-        self.offsetValue = 470;
+        self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsMake(350, 0, 60, 0);
+        self.offsetValue = 350;
     }
     
     if (IS_IPAD) {
         self.videoThumbnailCollectionView.contentInset = UIEdgeInsetsMake(HeaderHeightIPad, 0, 60, 0);
         self.offsetValue = 530;
     }
-    
-    
-    
+        
     self.tapToHideKeyoboard = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     [self displayChannelDetails];
     
-    [self.navigationController.navigationBar setBackgroundTransparent:YES];
-
 }
 
 - (void)viewWillAppear: (BOOL) animated {
@@ -190,11 +184,13 @@ static const CGFloat HeaderHeightIPad = 530;
     [self setUpMode];
     
     [self setupFonts];
-    self.navigationItem.title = @"";
 
-
+    if (IS_IPAD) {
+        self.navigationItem.title = @"";
+    } else {
+        self.navigationItem.title = @"COLLECTION";
+    }
 	self.model.delegate = self;
-    [self.navigationController.navigationBar setBackgroundTransparent:YES];
 
 }
 
@@ -214,16 +210,11 @@ static const CGFloat HeaderHeightIPad = 530;
 		[[SYNTrackingManager sharedManager] trackOtherUserCollectionScreenView];
 	}
     
-    [self.navigationController.navigationBar setBackgroundTransparent:YES];
-
 }
 
 - (void)viewWillDisappear: (BOOL) animated {
     [super viewWillDisappear: animated];
-    if (IS_IPHONE) {
-        [self.navigationController.navigationBar setBackgroundTransparent:NO];
-    }
-	
+    
     // Remove notifications individually
     // Do this rather than plain RemoveObserver call as low memory handling is based on NSNotifications.
     [[NSNotificationCenter defaultCenter] removeObserver: self
@@ -240,7 +231,9 @@ static const CGFloat HeaderHeightIPad = 530;
         [self.subscribingIndicator removeFromSuperview];
         self.subscribingIndicator = nil;
     }
-	
+    
+    self.navigationItem.title = @"";
+
 }
 
 - (NSString *)trackingScreenName {
@@ -771,13 +764,13 @@ static const CGFloat HeaderHeightIPad = 530;
     if (IS_IPAD) {
         if (UIDeviceOrientationIsPortrait(orientation))
         {
-            self.videoCollectionViewLayoutIPadEdit.sectionInset = UIEdgeInsetsMake(0, 35, 0, 35);
-            self.videoCollectionViewLayoutIPad.sectionInset = UIEdgeInsetsMake(0, 35, 0, 35);
+            self.videoCollectionViewLayoutIPadEdit.sectionInset = UIEdgeInsetsMake(0, 24, 0, 24);
+            self.videoCollectionViewLayoutIPad.sectionInset = UIEdgeInsetsMake(0, 24, 0, 24);
         }
         else
         {
-            self.videoCollectionViewLayoutIPadEdit.sectionInset = UIEdgeInsetsMake(0, 20, 0, 20);
-            self.videoCollectionViewLayoutIPad.sectionInset = UIEdgeInsetsMake(0, 20, 0, 20);
+            self.videoCollectionViewLayoutIPadEdit.sectionInset = UIEdgeInsetsMake(0, 3, 0, 3);
+            self.videoCollectionViewLayoutIPad.sectionInset = UIEdgeInsetsMake(0, 8, 0, 8);
         }
     }
 }

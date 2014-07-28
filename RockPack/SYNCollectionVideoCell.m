@@ -32,7 +32,14 @@
 	self.durationLabel.font = [UIFont regularCustomFontOfSize:self.durationLabel.font.pointSize];
     self.tap = [[UITapGestureRecognizer alloc] initWithTarget: self
                                                        action: @selector(showVideo)];
+    [self.imageView.layer setBorderColor:[[UIColor colorWithWhite:0.85 alpha:1.0] CGColor]];
+	[self.imageView.layer setBorderWidth:1.0];
 
+}
+
+- (void)prepareForReuse {
+    [super prepareForReuse];
+    self.actionsBar.hidden = NO;
 }
 
 #pragma mark - Set Video Instance

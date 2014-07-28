@@ -283,26 +283,20 @@ forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
 #pragma mark - orientation change 
 
 - (void) willAnimateRotationToInterfaceOrientation: (UIInterfaceOrientation) toInterfaceOrientation
-                                          duration: (NSTimeInterval) duration
-{
-    if (IS_IPAD) {
+                                          duration: (NSTimeInterval) duration {
+	if (IS_IPAD) {
         [self updateLayoutForOrientation: toInterfaceOrientation];
     }
 }
 
 
-- (void) updateLayoutForOrientation: (UIDeviceOrientation) orientation
-{
+- (void) updateLayoutForOrientation: (UIDeviceOrientation) orientation {
     if (IS_IPAD) {
-        if (UIDeviceOrientationIsPortrait(orientation))
-        {
-            self.defaultLayout.sectionInset = UIEdgeInsetsMake(0, 36, 70, 36);
+        if (UIDeviceOrientationIsPortrait(orientation)) {
+            self.defaultLayout.sectionInset = UIEdgeInsetsMake(0, 24, 70, 24);
+        } else {
+            self.defaultLayout.sectionInset = UIEdgeInsetsMake(0, 8, 70, 8);
         }
-        else
-        {
-            self.defaultLayout.sectionInset = UIEdgeInsetsMake(0, 20, 70, 20);
-        }
-        
         [self.cv.collectionViewLayout invalidateLayout];
     }
 }
@@ -310,9 +304,6 @@ forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
 #pragma mark - SYNPagingModelDelegate
 
 - (void)pagingModelDataUpdated:(SYNPagingModel *)pagingModel {
-    
-    
-    
     [self.cv reloadData];
 }
 
