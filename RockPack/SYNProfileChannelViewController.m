@@ -558,13 +558,16 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
                                                    
                                                    self.model = [SYNProfileChannelModel modelWithChannelOwner:channelOwnerFromId];
                                                    self.model.delegate = self;
-
+                                                   
+                                                   
                                                    [weakSelf.cv performBatchUpdates:^{
                                                        
                                                        [weakSelf.cv insertItemsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForItem:[self indexOfChannelTitle:name] inSection:0]]];
                                                    } completion:^(BOOL finished) {
                                                        
                                                        [self.cv reloadData];
+                                                       
+                                                       [self scrollToNewPosition:[NSIndexPath indexPathForItem:[self indexOfChannelTitle:name] inSection:0]];
 
                                                        [self showInboardingAnimationAfterCreate];
                                                    }];
@@ -573,6 +576,16 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
                                                DebugLog (@"Channel disappeared from underneath us");
                                            }
                                        } onError: errorBlock];
+}
+
+- (void)scrollToNewPosition:(NSIndexPath*)index {    
+    if (IS_IPHONE) {
+        [self.cv setContentOffset:CGPointMake(0, 524+((index.row-1)*93)) animated:YES];
+    }
+    
+    if (IS_IPAD) {
+        [self.cv scrollToItemAtIndexPath:index atScrollPosition:UICollectionViewScrollDirectionVertical animated:YES];
+    }
 }
 
 - (float)indexOfChannelTitle:(NSString*) newChannelTitle {
