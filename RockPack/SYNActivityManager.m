@@ -203,7 +203,7 @@
     } else {
         key = [NSString stringWithFormat:@"%@%@", key, [self.appDelegate.window.rootViewController class]];
     }
-    
+    NSLog(@" Keyyy  :%@", key);
     NSLog(@" Tracking value : %@", self.trackingDictionary[key]);
     
     return self.trackingDictionary[key];
@@ -220,8 +220,6 @@
         key = [NSString stringWithFormat:@"%@%@", key, [self.appDelegate.window.rootViewController class]];
     }
     
-    
-    NSLog(@" Full Dictionary  :%@", self.trackingDictionary);
     NSLog(@" Keyyy  :%@", key);
     NSLog(@" Single Object  :%@", self.trackingDictionary[key]);
     
@@ -240,7 +238,6 @@
     }
     
     
-    NSLog(@" Full Dictionary  :%@", self.trackingDictionary);
     NSLog(@" Keyyy  :%@", key);
     NSLog(@" Single Object  :%@", self.trackingDictionary[key]);
     
@@ -278,9 +275,6 @@
 
 - (void)addObjectFromDict :(NSDictionary*) dict {
     
-    
-    NSLog(@"dict :ddd  %@", dict[@"position"]);
-    
     NSString* key = [NSString stringWithFormat:@"%@%@", dict[@"id"], dict[@"position"]];
     
     if ([self.appDelegate.window.rootViewController isKindOfClass:[SYNMasterViewController class]]) {
@@ -290,11 +284,7 @@
         key = [NSString stringWithFormat:@"%@%@", key, [self.appDelegate.window.rootViewController class]];
     }
     
-    
-    NSLog(@"tracking_code : %@", dict[@"tracking_code"]);
     [self.trackingDictionary setValue:dict[@"tracking_code"] forKey:key];
-    
-    NSLog(@"self.trackingDictionaryself.trackingDictionaryself.trackingDictionary%@", self.trackingDictionary);
 }
 
 

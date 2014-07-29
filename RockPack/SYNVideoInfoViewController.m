@@ -19,7 +19,6 @@
 #import "VideoAnnotation.h"
 #import "SYNPagingModel.h"
 #import "SYNOneToOneSharingController.h"
-#import "SYNAddToChannelViewController.h"
 #import "SYNTrackingManager.h"
 #import "SYNVideoActionsBar.h"
 #import <SDWebImageManager.h>
@@ -334,22 +333,8 @@ static const CGFloat UpcomingVideosDividerHeight = 40.0;
 
 - (void)videoActionsBar:(SYNVideoActionsBar *)bar addToChannelButtonPressed:(UIButton *)button {
 	VideoInstance *videoInstance = [self.model itemAtIndex:self.selectedIndex];
-	
-	[[SYNTrackingManager sharedManager] trackVideoAddFromScreenName:[self trackingScreenName]];
-	
-    [appDelegate.oAuthNetworkEngine recordActivityForUserId:appDelegate.currentUser.uniqueId
-                                                     action:@"select"
-                                            videoInstanceId:videoInstance.uniqueId
-                                               trackingCode:[[SYNActivityManager sharedInstance] trackingCodeForVideoInstance:videoInstance]
-                                          completionHandler:nil
-                                               errorHandler:nil];
-	
-	SYNAddToChannelViewController *viewController = [[SYNAddToChannelViewController alloc] initWithViewId:kExistingChannelsViewId];
-	viewController.modalPresentationStyle = UIModalPresentationCustom;
-	viewController.transitioningDelegate = self;
-	viewController.videoInstance = videoInstance;
-	
-	[self presentViewController:viewController animated:YES completion:nil];
+		
+    [self addToChannelButtonPressed:button videoInstance:videoInstance];
 }
 
 - (void)videoActionsBar:(SYNVideoActionsBar *)bar shareButtonPressed:(UIButton *)button {

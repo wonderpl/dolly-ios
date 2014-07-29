@@ -1348,7 +1348,8 @@
     if (action && videoInstanceId)
     {
     	params = @{@"action" : action,
-                   @"video_instance" : videoInstanceId};
+               @"object_type": @"video_instance",
+           @"video_instance" : videoInstanceId};
     }
     else
     {

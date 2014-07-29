@@ -23,7 +23,6 @@
 #import "SYNFeedOverlayAddingViewController.h"
 #import "SYNVideoPlayerViewController.h"
 #import "SYNFeedVideoCell.h"
-#import "SYNAddToChannelViewController.h"
 #import "SYNFeedChannelCell.h"
 #import "SYNOneToOneSharingController.h"
 #import "UIDevice+Helpers.h"
@@ -397,29 +396,9 @@ static const CGFloat heightPortrait = 985;
 }
 
 - (void)videoCell:(SYNFeedVideoCell *)cell addToChannelPressed:(UIButton *)button {
-	VideoInstance *videoInstance = cell.videoInstance;
-    
     NSIndexPath *indexPath = [self.feedCollectionView indexPathForCell:cell];
 	TFLog(@"Feed: Video Instance from model :%@", [self.model itemAtIndex:indexPath.row]);
-	
-	[[SYNTrackingManager sharedManager] trackVideoAddFromScreenName:[self trackingScreenName]];
-	
-    [appDelegate.oAuthNetworkEngine recordActivityForUserId:appDelegate.currentUser.uniqueId
-                                                     action:@"select"
-                                            videoInstanceId:videoInstance.uniqueId
-                                               trackingCode:[[SYNActivityManager sharedInstance] trackingCodeForVideoInstance:videoInstance]
-                                          completionHandler:nil
-                                               errorHandler:nil];
-	
-	SYNAddToChannelViewController *viewController = [[SYNAddToChannelViewController alloc] initWithViewId:kExistingChannelsViewId];
-	viewController.modalPresentationStyle = UIModalPresentationCustom;
-	viewController.transitioningDelegate = self;
-    
-    TFLog(@"Feed: Video instance :%@", videoInstance);
-	viewController.videoInstance = videoInstance;
-	
-	[self presentViewController:viewController animated:YES completion:nil];
-    
+    [self addToChannelButtonPressed:button videoInstance:cell.videoInstance];
     self.lastOrientation = [[UIApplication sharedApplication] statusBarOrientation];
 }
 

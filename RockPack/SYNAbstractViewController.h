@@ -68,6 +68,7 @@
 - (NSString *)trackingScreenName;
 
 - (void)favouriteButtonPressed:(UIButton *)button videoInstance:(VideoInstance *)videoInstance;
+- (void)addToChannelButtonPressed:(UIButton *)button videoInstance:(VideoInstance *)videoInstance;
 
 - (void) applicationWillEnterForeground: (UIApplication *) application;
 

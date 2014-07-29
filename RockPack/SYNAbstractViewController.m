@@ -27,6 +27,7 @@
 #import "SYNPopoverAnimator.h"
 #import "SYNProfileChannelViewController.h"
 #import <TestFlight.h>
+#import "SYNAddToChannelViewController.h"
 
 @import QuartzCore;
 
@@ -217,6 +218,7 @@
     [appDelegate.oAuthNetworkEngine recordActivityForUserId: appDelegate.currentUser.uniqueId
                                                      action: (didStar ? @"star" : @"unstar")
                                             videoInstanceId: videoInstance.uniqueId
+                                               trackingCode:[[SYNActivityManager sharedInstance] trackingCodeForVideoInstance:videoInstance]
                                           completionHandler: ^(id response) {
                                               BOOL previousStarringState = videoInstance.starredByUserValue;
                                               [self starVideoInstance:videoInstance withButton:button didStar:didStar];
@@ -233,6 +235,27 @@
                                           }];
 }
 
+- (void)addToChannelButtonPressed:(UIButton *)button videoInstance:(VideoInstance *)videoInstance {
+    
+    [[SYNTrackingManager sharedManager] trackVideoAddFromScreenName:[self trackingScreenName]];
+    [appDelegate.oAuthNetworkEngine recordActivityForUserId:appDelegate.currentUser.uniqueId
+                                                     action:@"select"
+                                            videoInstanceId:videoInstance.uniqueId
+                                               trackingCode:[[SYNActivityManager sharedInstance] trackingCodeForVideoInstance:videoInstance]
+                                          completionHandler:nil
+                                               errorHandler:nil];
+	
+	SYNAddToChannelViewController *viewController = [[SYNAddToChannelViewController alloc] initWithViewId:kExistingChannelsViewId];
+	viewController.modalPresentationStyle = UIModalPresentationCustom;
+	viewController.transitioningDelegate = self;
+	viewController.videoInstance = videoInstance;
+    TFLog(@"Channel details: Video instance :%@", videoInstance);
+    
+	[self presentViewController:viewController animated:YES completion:nil];
+
+    
+    
+}
 
 - (void)starVideoInstance:(VideoInstance*)videoInstance withButton:(UIButton*)button didStar:(BOOL)didStar {
 
