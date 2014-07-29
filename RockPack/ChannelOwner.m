@@ -599,6 +599,8 @@
 		
 		VideoInstance *videoInstance = [VideoInstance instanceFromDictionary:videoInstanceDictionary usingManagedObjectContext:self.managedObjectContext];
 		
+        [[SYNActivityManager sharedInstance] addObjectFromDict:videoInstanceDictionary];
+        
 		[self.userVideoInstancesSet addObject:videoInstance];
 	}
 
@@ -631,6 +633,8 @@
 		
 		videoInstance = [VideoInstance instanceFromDictionary:videoInstanceDictionary usingManagedObjectContext:self.managedObjectContext];
 		
+        [[SYNActivityManager sharedInstance] addObjectFromDict:videoInstanceDictionary];
+
 		[self.userVideoInstancesSet addObject:videoInstance];
 	}
     
