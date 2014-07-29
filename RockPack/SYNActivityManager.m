@@ -204,7 +204,12 @@
         key = [NSString stringWithFormat:@"%@%@", key, [self.appDelegate.window.rootViewController class]];
     }
     NSLog(@" Keyyy  :%@", key);
-    NSLog(@" Tracking value : %@", self.trackingDictionary[key]);
+    
+    if (self.trackingDictionary[key]) {
+        NSLog(@" Tracking value : %@", self.trackingDictionary[key]);
+    } else {
+        NSLog(@" Full dictionary : %@", self.trackingDictionary);
+    }
     
     return self.trackingDictionary[key];
 }
@@ -220,7 +225,11 @@
         key = [NSString stringWithFormat:@"%@%@", key, [self.appDelegate.window.rootViewController class]];
     }
     
-    NSLog(@" Keyyy  :%@", key);
+    if (self.trackingDictionary[key]) {
+        NSLog(@" Tracking value : %@", self.trackingDictionary[key]);
+    } else {
+        NSLog(@" Full dictionary : %@", self.trackingDictionary);
+    }
     NSLog(@" Single Object  :%@", self.trackingDictionary[key]);
     
     return self.trackingDictionary[key];
@@ -239,7 +248,12 @@
     
     
     NSLog(@" Keyyy  :%@", key);
-    NSLog(@" Single Object  :%@", self.trackingDictionary[key]);
+    
+    if (self.trackingDictionary[key]) {
+        NSLog(@" Tracking value : %@", self.trackingDictionary[key]);
+    } else {
+        NSLog(@" Full dictionary : %@", self.trackingDictionary);
+    }
     
     return self.trackingDictionary[key];
 

@@ -165,21 +165,14 @@ typedef void (^SYNOAuth2RefreshCompletionBlock)(NSError *error);
 - (void) recordActivityForUserId: (NSString *) userId
                           action: (NSString *) action
                  videoInstanceId: (NSString *) videoInstanceId
-               completionHandler: (MKNKUserSuccessBlock) completionBlock
-                    errorHandler: (MKNKUserErrorBlock) errorBlock;
-
-- (void) recordActivityForUserId: (NSString *) userId
-                          action: (NSString *) action
-                 videoInstanceId: (NSString *) videoInstanceId
                     trackingCode: (NSString *) trackingCode
                completionHandler: (MKNKUserSuccessBlock) completionBlock
                     errorHandler: (MKNKUserErrorBlock) errorBlock;
 
 - (void) recordActivityForUserId: (NSString *) userId
                           action: (NSString *) action
-                      objectType: (NSString *) objectType
-                          withId: (NSString *) instanceId
-                withTrackignCode: (NSString *) trackingCode
+               channelInstanceId: (NSString *) channelInstanceId
+                    trackingCode: (NSString *) trackingCode
                completionHandler: (MKNKUserSuccessBlock) completionBlock
                     errorHandler: (MKNKUserErrorBlock) errorBlock;
 
@@ -264,6 +257,13 @@ typedef void (^SYNOAuth2RefreshCompletionBlock)(NSError *error);
                         objectId: (NSString *) objectId
                completionHandler: (MKNKUserSuccessBlock) completionBlock
                     errorHandler: (MKNKUserErrorBlock) errorBlock;
+
+- (void) shareLinkWithObjectType: (NSString *) objectType
+                        objectId: (NSString *) objectId
+					trackingCode: (NSString *) trackingCode
+               completionHandler: (MKNKUserSuccessBlock) completionBlock
+                    errorHandler: (MKNKUserErrorBlock) errorBlock;
+
 
 - (void) emailShareWithObjectType: (NSString *) shareType
                          objectId: (NSString *) objectId

@@ -1237,6 +1237,7 @@
     
 }
 
+// User activity
 - (void) recordActivityForUserId: (NSString *) userId
                           action: (NSString *) action
                       objectType: (NSString *) objectType
@@ -1256,18 +1257,26 @@
     
     if (action && objectType)
     {
-        params = @{@"action" : action,
-              @"object_type" : objectType,
-		        @"object_id" : userId,
-                   @"tracking_code" : trackingCode
-                   };
+        
+        if (trackingCode) {
+            params = @{@"action" : action,
+                       @"object_type" : objectType,
+                       @"object_id" : instanceId,
+                       @"tracking_code" : trackingCode
+                       };
+        }
+        else
+        {
+            params = @{@"action" : action,
+                       @"object_type" : objectType,
+                       @"object_id" : userId,
+                       };
+        }
     }
     else
     {
         AssertOrLog(@"recordActivityForUserId : One or more of the required parameters is nil");
     }
-    
-    NSLog(@"params : %@", params);
     
     SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject*)[self operationWithPath: apiString
                                                                                                        params: params
@@ -1284,49 +1293,6 @@
 
     
     
-}
-
-// User activity
-
-- (void) recordActivityForUserId: (NSString *) userId
-                          action: (NSString *) action
-                 videoInstanceId: (NSString *) videoInstanceId
-               completionHandler: (MKNKUserSuccessBlock) completionBlock
-                    errorHandler: (MKNKUserErrorBlock) errorBlock
-{
-    NSDictionary *apiSubstitutionDictionary = @{@"USERID" : userId};
-    
-    NSString *apiString = [kAPIRecordUserActivity stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
-    
-    // We need to handle locale differently (so add the locale to the URL) as opposed to the other parameters which are in the POST body
-    apiString = [NSString stringWithFormat: @"%@?locale=%@", apiString, self.localeString];
-    
-    NSDictionary *params = nil;
-
-    if (action && videoInstanceId)
-    {
-    	params = @{@"action" : action,
-           @"video_instance" : videoInstanceId};
-    }
-    else
-    {
-        AssertOrLog(@"recordActivityForUserId : One or more of the required parameters is nil");
-    }
-    
-    
-
-    SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject*)[self operationWithPath: apiString
-                                                                                                       params: params
-                                                                                                   httpMethod: @"POST"
-                                                                                                          ssl: TRUE];
-    [networkOperation addHeaders: @{@"Content-Type" : @"application/json"}];
-    networkOperation.postDataEncoding = MKNKPostDataEncodingTypeJSON;
-    
-    [self addCommonHandlerToNetworkOperation: networkOperation
-                           completionHandler: completionBlock
-                                errorHandler: errorBlock];
-    
-    [self enqueueSignedOperation: networkOperation];
 }
 
 - (void) recordActivityForUserId: (NSString *) userId
@@ -1336,40 +1302,17 @@
                completionHandler: (MKNKUserSuccessBlock) completionBlock
                     errorHandler: (MKNKUserErrorBlock) errorBlock
 {
-    NSDictionary *apiSubstitutionDictionary = @{@"USERID" : userId};
-    
-    NSString *apiString = [kAPIRecordUserActivity stringByReplacingOccurrencesOfStrings: apiSubstitutionDictionary];
-    
-    // We need to handle locale differently (so add the locale to the URL) as opposed to the other parameters which are in the POST body
-    apiString = [NSString stringWithFormat: @"%@?locale=%@", apiString, self.localeString];
-    
-    NSDictionary *params = nil;
-    
-    if (action && videoInstanceId)
-    {
-    	params = @{@"action" : action,
-               @"object_type": @"video_instance",
-           @"video_instance" : videoInstanceId};
-    }
-    else
-    {
-        AssertOrLog(@"recordActivityForUserId : One or more of the required parameters is nil");
-    }
-    
-    
-    
-    SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject*)[self operationWithPath: apiString
-                                                                                                       params: params
-                                                                                                   httpMethod: @"POST"
-                                                                                                          ssl: TRUE];
-    [networkOperation addHeaders: @{@"Content-Type" : @"application/json"}];
-    networkOperation.postDataEncoding = MKNKPostDataEncodingTypeJSON;
-    
-    [self addCommonHandlerToNetworkOperation: networkOperation
-                           completionHandler: completionBlock
-                                errorHandler: errorBlock];
-    
-    [self enqueueSignedOperation: networkOperation];
+    [self recordActivityForUserId:userId action:action objectType:@"video_instance" withId:videoInstanceId withTrackignCode:trackingCode completionHandler:completionBlock errorHandler:errorBlock];
+}
+
+- (void) recordActivityForUserId: (NSString *) userId
+                          action: (NSString *) action
+               channelInstanceId: (NSString *) channelInstanceId
+                    trackingCode: (NSString *) trackingCode
+               completionHandler: (MKNKUserSuccessBlock) completionBlock
+                    errorHandler: (MKNKUserErrorBlock) errorBlock
+{
+    [self recordActivityForUserId:userId action:action objectType:@"channel" withId:channelInstanceId withTrackignCode:trackingCode completionHandler:completionBlock errorHandler:errorBlock];
 }
 
 
@@ -1579,7 +1522,8 @@
     {
         params = @{@"action" : @"subscribe",
                    @"object_type": @"channel",
-                   @"object_id" : channelId };
+                   @"object_id" : channelId,
+                   @"tracking_code:": trackingCode};
     }
     else
     {
@@ -1625,7 +1569,8 @@
     {
         params = @{@"action" : @"unsubscribe",
                    @"object_type": @"channel",
-                   @"object_id" : channelId };
+                   @"object_id" : channelId,
+                   @"tracking_code:": trackingCode };
     }
     else
     {
@@ -1785,9 +1730,9 @@
     
 }
 
-
 - (void) shareLinkWithObjectType: (NSString *) objectType
                         objectId: (NSString *) objectId
+					trackingCode: (NSString *) trackingCode
                completionHandler: (MKNKUserSuccessBlock) completionBlock
                     errorHandler: (MKNKUserErrorBlock) errorBlock
 {
@@ -1798,14 +1743,29 @@
     
     if (objectType && objectId)
     {
-        params = @{@"object_type" : objectType,
-                   @"object_id" : objectId};
+        if (trackingCode) {
+            
+            
+            NSLog(@"objectId objectId : %@", objectId);
+            params = @{@"object_type" : objectType,
+                       @"action": @"share",
+                       @"object_id" : objectId,
+                       @"tracking_code" : trackingCode
+                       };
+        }
+        else
+        {
+            params = @{@"object_type" : objectType,
+                       @"action": @"share",
+                       @"object_id" : objectId
+                       };
+        }
     }
     else
     {
         AssertOrLog(@"shareLinkWithObjectType : One or more of the required parameters is nil");
     }
-
+    
     
     SYNNetworkOperationJsonObject *networkOperation = (SYNNetworkOperationJsonObject*)[self operationWithPath: apiString
                                                                                                        params: params
@@ -1820,6 +1780,7 @@
     
     [self enqueueSignedOperation: networkOperation];
 }
+
 
 - (void) emailShareWithObjectType: (NSString *) shareType
                          objectId: (NSString *) objectId

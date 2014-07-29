@@ -237,6 +237,10 @@
 
 - (void)addToChannelButtonPressed:(UIButton *)button videoInstance:(VideoInstance *)videoInstance {
     
+    NSLog(@"ADD videoInstance.uniqueId %@",videoInstance);
+    
+    NSLog(@"ADD videoInstance ID %@",videoInstance.uniqueId);
+
     [[SYNTrackingManager sharedManager] trackVideoAddFromScreenName:[self trackingScreenName]];
     [appDelegate.oAuthNetworkEngine recordActivityForUserId:appDelegate.currentUser.uniqueId
                                                      action:@"select"
@@ -277,25 +281,24 @@
 	VideoInstance *firstVideoInstance = [channel.videoInstances firstObject];
 	UIImage *image = [[SDImageCache sharedImageCache] imageFromMemoryCacheForKey:firstVideoInstance.thumbnailURL];
 
-    [self requestShareLinkWithObjectType:@"channel" objectId:channel.uniqueId];
+
+    [self requestShareLinkWithObjectType:@"channel" objectId:channel.uniqueId trackingCode:[[SYNActivityManager sharedInstance] trackingCodeForChannel:channel]];
 
     [self shareObject:channel usingImage:image];
 }
 
 - (void) shareVideoInstance: (VideoInstance *) videoInstance
 {
-	[self requestShareLinkWithObjectType: @"video_instance"
-								objectId: videoInstance.uniqueId];
+    
+    NSLog(@"SHARE videoInstance.uniqueId %@",videoInstance);
 
+	[self requestShareLinkWithObjectType: @"video_instance"
+								objectId: videoInstance.uniqueId
+     	trackingCode:[[SYNActivityManager sharedInstance] trackingCodeForVideoInstance:videoInstance]];
+    
     // At this point it is safe to assume that the video thumbnail image is in the cache
     UIImage *thumbnailImage = [SDWebImageManager.sharedManager.imageCache imageFromMemoryCacheForKey: videoInstance.video.thumbnailURL];
     
-    [appDelegate.oAuthNetworkEngine recordActivityForUserId:appDelegate.currentUser.uniqueId
-                                                     action:@"select"
-                                            videoInstanceId:videoInstance.uniqueId
-                                               trackingCode:[[SYNActivityManager sharedInstance] trackingCodeForVideoInstance:videoInstance]
-                                          completionHandler:nil
-                                               errorHandler:nil];
 
     [self shareObject:videoInstance usingImage:thumbnailImage];
 }
@@ -359,6 +362,7 @@
 
 - (void) requestShareLinkWithObjectType: (NSString *) objectType
                                objectId: (NSString *) objectId
+                           trackingCode: (NSString *) trackingCode
 {
     // Get share link
     self.mutableShareDictionary = @{@"type" : objectType,
@@ -372,6 +376,7 @@
     
     [appDelegate.oAuthNetworkEngine shareLinkWithObjectType: objectType
                                                    objectId: objectId
+                                               trackingCode: trackingCode
                                           completionHandler: ^(NSDictionary *responseDictionary)
      {
          NSString *resourceURLString = [responseDictionary objectForKey: @"resource_url"
@@ -402,10 +407,7 @@
          [[NSNotificationCenter defaultCenter] postNotificationName:kShareLinkForObjectObtained
                                                              object:self];
          
-     } errorHandler: ^(NSDictionary *errorDictionary) {
-         
-         
-     }];
+     } errorHandler:nil];
 }
 
 
@@ -716,11 +718,6 @@
                                                     button.enabled = YES;
                                                 }];
 	} else {
-        
-        
-        // Automatticcaly set the button to selected so we dont wait for a server response,
-		// We're assuming the response will be good. On a error it will get unselected, It will
-        //Also fix itself using the data in the activity manager
         
         [self followButtonAnimation:button];
         button.selected = YES;
