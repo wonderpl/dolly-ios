@@ -138,7 +138,7 @@
 }
 
 - (void)followButtonPressed:(UIButton *)button {
-    [self.delegate followControlPressed:self.followButton withChannelOwner:self.channelOwner completion:nil];
+    [self.delegate followControlPressed:self.followButton withChannelOwner:self.channelOwner withVideoInstace:nil completion:nil];
 }
 
 @end

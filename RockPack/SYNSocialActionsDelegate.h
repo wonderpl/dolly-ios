@@ -9,10 +9,11 @@
 @import Foundation;
 
 @class ChannelOwner;
+@class VideoInstance;
 
 @protocol SYNSocialActionsDelegate <NSObject>
 
-- (void)followControlPressed:(UIButton *)button withChannelOwner:(ChannelOwner *)channelOwner completion :(void (^)(void))callbackBlock;
+- (void)followControlPressed:(UIButton *)button withChannelOwner:(ChannelOwner *)channelOwner withVideoInstace:(VideoInstance*)videoInstance completion :(void (^)(void))callbackBlock;
 
 //need to change
 @optional

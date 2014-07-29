@@ -74,6 +74,8 @@
 
 - (CGSize) footerSize;
 
+- (void)followControlPressed:(UIButton *)button withChannelOwner:(ChannelOwner *)channelOwner withVideoInstace:(VideoInstance*)videoInstance completion :(void (^)(void))callbackBlock;
+
 - (void)followControlPressed:(UIButton *)button withChannelOwner:(ChannelOwner *)channelOwner completion :(void (^)(void))callbackBlock;
 - (void)followButtonPressed:(UIButton *)button withChannel:(Channel *)channel completion :(void (^)(void))callbackBlock;
 

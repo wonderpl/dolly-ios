@@ -47,5 +47,15 @@
 - (void)addObjectFromDict :(NSDictionary*) dict;
 - (NSString*)trackingCodeForChannel :(Channel*) channel;
 
+- (void) unsubscribeToUser: (ChannelOwner *) channelOwner
+             videoInstance: (VideoInstance*) videoInstance
+         completionHandler: (MKNKUserSuccessBlock) completionBlock
+              errorHandler: (MKNKUserErrorBlock) errorBlock;
+
+- (void) subscribeToUser: (ChannelOwner *) channelOwner
+             videoInstance: (VideoInstance*) videoInstance
+         completionHandler: (MKNKUserSuccessBlock) completionBlock
+            errorHandler: (MKNKUserErrorBlock) errorBlock;
+
 
 @end

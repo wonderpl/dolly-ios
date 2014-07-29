@@ -38,6 +38,8 @@ typedef void (^VideoOverlayDismissBlock)(void);
 
 @property (nonatomic, readonly) SYNAbstractViewController* showingViewController;
 
+@property (nonatomic, readonly) SYNAbstractViewController* rootViewController;
+
 - (id) initWithContainerViewController: (UIViewController*) root;
 
 - (void) presentNotificationWithMessage : (NSString*) message andType:(NotificationMessageType)type;

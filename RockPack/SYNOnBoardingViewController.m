@@ -363,7 +363,7 @@
 
 - (void)followControlPressed:(UIButton *)button withChannelOwner:(ChannelOwner *)channelOwner completion:(void (^)(void))callbackBlock {
 
-    [super followControlPressed:button withChannelOwner:channelOwner completion:^{
+    [super followControlPressed:button withChannelOwner:channelOwner withVideoInstace:nil completion:^{
         if ([[SYNActivityManager sharedInstance] isSubscribedToUserId:channelOwner.uniqueId]) {
             
             NSString *text = IS_IPAD ? [NSString stringWithFormat:@"You have successfully followed %@", channelOwner.displayName] : [NSString stringWithFormat:@"Following %@", channelOwner.displayName];

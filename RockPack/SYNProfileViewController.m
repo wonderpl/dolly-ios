@@ -448,7 +448,7 @@ static const CGFloat TransitionDuration = 0.5f;
     }
 
     
-    [self followControlPressed:sender withChannelOwner:self.channelOwner completion:^{
+    [self followControlPressed:sender withChannelOwner:self.channelOwner withVideoInstace:nil completion:^{
         
         BOOL isCurrentlySubscribedToUser = [[SYNActivityManager sharedInstance] isSubscribedToUserId:self.channelOwner.uniqueId];
 

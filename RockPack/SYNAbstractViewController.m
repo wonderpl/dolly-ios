@@ -631,6 +631,57 @@
 }
 
 
+- (void)followControlPressed:(UIButton *)button withChannelOwner:(ChannelOwner *)channelOwner withVideoInstace:(VideoInstance*)videoInstance completion :(void (^)(void))callbackBlock {
+    
+	if ([[SYNActivityManager sharedInstance] isSubscribedToUserId:channelOwner.uniqueId]) {
+        [[SYNActivityManager sharedInstance] unsubscribeToUser:channelOwner
+                                                 videoInstance:videoInstance
+											 completionHandler:^(id responce) {
+												 
+												 button.selected = NO;
+												 button.enabled = YES;
+												 [[NSNotificationCenter defaultCenter] postNotificationName:kReloadFeed object:self userInfo:nil];
+                                                 
+                                                 if (callbackBlock) {
+                                                     callbackBlock();
+                                                 }
+                                                 
+												 [button invalidateIntrinsicContentSize];
+                                                 
+											 } errorHandler:^(id error) {
+												 button.enabled = YES;
+												 [button invalidateIntrinsicContentSize];
+											 }];
+	} else {
+        
+        
+        [self followButtonAnimation:button];
+        button.selected = YES;
+        
+        [[SYNActivityManager sharedInstance] subscribeToUser:channelOwner
+                                               videoInstance:videoInstance
+										   completionHandler: ^(id responce) {
+											   
+											   button.enabled = YES;
+											   
+											   [[NSNotificationCenter defaultCenter] postNotificationName:kReloadFeed object:self userInfo:nil];
+											   [button invalidateIntrinsicContentSize];
+                                               
+                                               if (callbackBlock) {
+                                                   callbackBlock();
+                                               }
+                                               
+										   } errorHandler: ^(id error) {
+											   button.enabled = YES;
+                                               button.selected = NO;
+                                               
+											   [button invalidateIntrinsicContentSize];
+										   }];
+        
+	}
+}
+
+
 - (void)followControlPressed:(UIButton *)button withChannelOwner:(ChannelOwner *)channelOwner completion :(void (^)(void))callbackBlock {
 	
 	if(!channelOwner)

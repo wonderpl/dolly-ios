@@ -12,6 +12,7 @@
 #import "NSDate+RFC1123.h"
 #import "SYNAppDelegate.h"
 #import "SYNNotification.h"
+#import "SYNActivityManager.h"
 
 @interface SYNNotification ()
 
@@ -113,6 +114,12 @@
         {
             // the response can either have a channel tag or a video tag, in the second case the video tag will include a channel tag //
             
+            
+            NSMutableDictionary* trackingDictionary = [[NSMutableDictionary alloc] init];
+            
+            [trackingDictionary setValue:data[@"tracking_code"] forKey:@"tracking_code"];
+            [trackingDictionary setValue:data[@"position"] forKey:@"position"];
+
             // case 1 : Channel Tag
             NSDictionary *channelDictionary = messageDictionary[@"channel"];
             
@@ -131,6 +138,10 @@
                 self.videoId = videoDictionary[@"id"];
                 self.videoThumbnailUrl = videoDictionary[@"thumbnail_url"];
                 self.videoTitle = videoDictionary[@"title"];
+                
+                [trackingDictionary setValue:videoDictionary[@"id"] forKey:@"id"];
+
+                [[SYNActivityManager sharedInstance] addObjectFromDict:trackingDictionary];
                 
                 NSDictionary *channelDictionary = videoDictionary[@"channel"];
                 

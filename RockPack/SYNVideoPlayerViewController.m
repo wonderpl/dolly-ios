@@ -446,7 +446,7 @@
 }
 
 - (IBAction)followButtonPressed:(UIButton *)button {
-	[self followControlPressed:button withChannelOwner:self.videoInstance.originator completion:^{
+	[self followControlPressed:button withChannelOwner:self.videoInstance.originator withVideoInstace:self.videoInstance completion:^{
 		
 	}];
 }

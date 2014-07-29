@@ -20,6 +20,8 @@
 @property (nonatomic, strong) NSMutableSet *channelSubscriptions;
 @property (nonatomic, strong) NSMutableSet *userSubscriptons;
 @property (nonatomic, strong) NSMutableDictionary *trackingDictionary;
+@property (nonatomic, strong) NSMutableDictionary *trackingDictionaryNoPosition;
+
 @property (nonatomic, weak) SYNAppDelegate *appDelegate;
 
 @end
@@ -45,6 +47,7 @@
 	if (self = [super init]) {
 		self.appDelegate = (SYNAppDelegate *)[[UIApplication sharedApplication] delegate];
         self.trackingDictionary = [NSMutableDictionary new];
+        self.trackingDictionaryNoPosition = [NSMutableDictionary new];
         [self initAllValues];
     }
     return self;
@@ -164,13 +167,96 @@
 #pragma mark - user subscriptions
 
 
+- (NSString*)trackingCodeForUser :(ChannelOwner*) user withVideoInstance:(VideoInstance*) videoInstance{
+    
+    NSString* key = [NSString stringWithFormat:@"%@%lld%@", user.uniqueId, user.positionValue, [self classNameForTracking]];
+    
+    NSLog(@"%@", key);
+    
+    if (!self.trackingDictionary[key]) {
+        NSLog(@"No Key %@", self.trackingDictionary[key]);
+        
+        NSLog(@"Key for user %@", self.trackingDictionary[key]);
+        
+        NSLog(@"%@", self.trackingDictionary);
+        
+        NSString *videoInstanceKey = [NSString stringWithFormat:@"%@%lld%@", videoInstance.uniqueId, videoInstance.positionValue, [self classNameForTracking]];
+        
+        NSLog(@"videoInstanceKey : %@", videoInstanceKey);
+
+        if (self.trackingDictionary[videoInstanceKey]) {
+            return self.trackingDictionary[videoInstanceKey];
+        }
+        
+        return self.trackingDictionaryNoPosition[[NSString stringWithFormat:@"%@%@", user.uniqueId, [self classNameForTracking]]];
+    }
+    
+    NSLog(@"Key for user %@", self.trackingDictionary[key]);
+    
+    return self.trackingDictionary[key];
+}
+
+
+- (NSString*)trackingCodeForUser :(ChannelOwner*) user{
+
+    NSString* key = [NSString stringWithFormat:@"%@%lld%@", user.uniqueId, user.positionValue, [self classNameForTracking]];
+    
+    NSLog(@"%@", key);
+    
+    if (!self.trackingDictionary[key]) {
+        NSLog(@"No Key %@", self.trackingDictionary[key]);
+
+        NSLog(@"Key for user %@", self.trackingDictionary[key]);
+        
+        NSLog(@"%@", self.trackingDictionary);
+        
+
+        return self.trackingDictionaryNoPosition[[NSString stringWithFormat:@"%@%@", user.uniqueId, [self classNameForTracking]]];
+    }
+    
+    NSLog(@"Key for user %@", self.trackingDictionary[key]);
+    
+    return self.trackingDictionary[key];
+}
+
+
+- (NSString*) classNameForTracking {
+    if ([self.appDelegate.window.rootViewController isKindOfClass:[SYNMasterViewController class]]) {
+        return NSStringFromClass([self.appDelegate.masterViewController.rootViewController class]);
+    } else {
+        return NSStringFromClass([self.appDelegate.window.rootViewController class]);
+    }
+}
+
+- (NSString*)trackingCodeForChannel :(Channel*) channel {
+    NSString* key = [NSString stringWithFormat:@"%@%lld%@", channel.uniqueId, channel.positionValue, [self classNameForTracking]];
+
+    if (!self.trackingDictionary[key]) {
+        return self.trackingDictionaryNoPosition[[NSString stringWithFormat:@"%@%@", channel.uniqueId, [self classNameForTracking]]];
+    }
+    
+    return self.trackingDictionary[key];
+}
+
+- (NSString*)trackingCodeForVideoInstance :(VideoInstance*) videoInstance {
+    NSString* key = [NSString stringWithFormat:@"%@%lld%@", videoInstance.uniqueId, videoInstance.positionValue, [self classNameForTracking]];
+    
+    if (!self.trackingDictionary[key]) {
+    	return self.trackingDictionaryNoPosition[[NSString stringWithFormat:@"%@%@", videoInstance.uniqueId, [self classNameForTracking]]];
+    }
+    
+    return self.trackingDictionary[key];
+}
+
 - (void) subscribeToUser: (ChannelOwner *) channelOwner
-          completionHandler: (MKNKUserSuccessBlock) completionBlock
-               errorHandler: (MKNKUserErrorBlock) errorBlock
+           videoInstance: (VideoInstance*) videoInstance
+       completionHandler: (MKNKUserSuccessBlock) completionBlock
+            errorHandler: (MKNKUserErrorBlock) errorBlock
 {
+    
     [self.appDelegate.oAuthNetworkEngine subscribeAllForUserId: self.appDelegate.currentUser.uniqueId
                                                      subUserId: channelOwner.uniqueId
-                            		withTrackingCode:[self trackingCodeForUser:channelOwner]
+                                              withTrackingCode:[self trackingCodeForUser:channelOwner withVideoInstance:videoInstance]
                                              completionHandler:^(NSDictionary *responseDictionary) {
                                                  
                                                  if (responseDictionary && [responseDictionary isKindOfClass:[NSDictionary class]]) {
@@ -192,113 +278,64 @@
 
 
 
-
-- (NSString*)trackingCodeForUser :(ChannelOwner*) user {
-    
-    NSString* key = [NSString stringWithFormat:@"%@%lld", user.uniqueId, user.positionValue];
-    
-    if ([self.appDelegate.window.rootViewController isKindOfClass:[SYNMasterViewController class]]) {
-        key = [NSString stringWithFormat:@"%@%@", key, [self.appDelegate.masterViewController.showingViewController class]];
-        
-    } else {
-        key = [NSString stringWithFormat:@"%@%@", key, [self.appDelegate.window.rootViewController class]];
-    }
-    NSLog(@" Keyyy  :%@", key);
-    
-    if (self.trackingDictionary[key]) {
-        NSLog(@" Tracking value : %@", self.trackingDictionary[key]);
-    } else {
-        NSLog(@" Full dictionary : %@", self.trackingDictionary);
-    }
-    
-    return self.trackingDictionary[key];
-}
-
-- (NSString*)trackingCodeForChannel :(Channel*) channel {
-    
-    NSString* key = [NSString stringWithFormat:@"%@%lld", channel.uniqueId, channel.positionValue];
-    
-    if ([self.appDelegate.window.rootViewController isKindOfClass:[SYNMasterViewController class]]) {
-        key = [NSString stringWithFormat:@"%@%@", key, [self.appDelegate.masterViewController.showingViewController class]];
-        
-    } else {
-        key = [NSString stringWithFormat:@"%@%@", key, [self.appDelegate.window.rootViewController class]];
-    }
-    
-    if (self.trackingDictionary[key]) {
-        NSLog(@" Tracking value : %@", self.trackingDictionary[key]);
-    } else {
-        NSLog(@" Full dictionary : %@", self.trackingDictionary);
-    }
-    NSLog(@" Single Object  :%@", self.trackingDictionary[key]);
-    
-    return self.trackingDictionary[key];
-}
-
-- (NSString*)trackingCodeForVideoInstance :(VideoInstance*) videoInstance {
-
-    NSString* key = [NSString stringWithFormat:@"%@%lld", videoInstance.uniqueId, videoInstance.positionValue];
-    
-    if ([self.appDelegate.window.rootViewController isKindOfClass:[SYNMasterViewController class]]) {
-        key = [NSString stringWithFormat:@"%@%@", key, [self.appDelegate.masterViewController.showingViewController class]];
-        
-    } else {
-        key = [NSString stringWithFormat:@"%@%@", key, [self.appDelegate.window.rootViewController class]];
-    }
-    
-    
-    NSLog(@" Keyyy  :%@", key);
-    
-    if (self.trackingDictionary[key]) {
-        NSLog(@" Tracking value : %@", self.trackingDictionary[key]);
-    } else {
-        NSLog(@" Full dictionary : %@", self.trackingDictionary);
-    }
-    
-    return self.trackingDictionary[key];
-
-    
-    
-}
-
 - (void) unsubscribeToUser: (ChannelOwner *) channelOwner
-       completionHandler: (MKNKUserSuccessBlock) completionBlock
-            errorHandler: (MKNKUserErrorBlock) errorBlock
+             videoInstance: (VideoInstance*) videoInstance
+         completionHandler: (MKNKUserSuccessBlock) completionBlock
+              errorHandler: (MKNKUserErrorBlock) errorBlock
 {
-
+    
     [self.appDelegate.oAuthNetworkEngine unsubscribeAllForUserId: self.appDelegate.currentUser.uniqueId
-                                                     subUserId: channelOwner.uniqueId
-                                              withTrackingCode:[self trackingCodeForUser:channelOwner]
-                                             completionHandler:^(NSDictionary *responseDictionary) {
-
-													 if (responseDictionary && [responseDictionary isKindOfClass:[NSDictionary class]]) {
-														 [self registerActivityFromDictionary:responseDictionary];
-													 }
-                                                 if (completionBlock) {
-                                                     completionBlock(responseDictionary);
-                                                 }
-                                                 
-                                             } errorHandler:^(NSDictionary *error) {
-                                                 
-                                                 if (errorBlock)
-                                                 {
-                                                     errorBlock(error);
-                                                 }
-                                             }];
+                                                       subUserId: channelOwner.uniqueId
+                                                withTrackingCode:[self trackingCodeForUser:channelOwner withVideoInstance:videoInstance]
+                                               completionHandler:^(NSDictionary *responseDictionary) {
+                                                   
+                                                   if (responseDictionary && [responseDictionary isKindOfClass:[NSDictionary class]]) {
+                                                       [self registerActivityFromDictionary:responseDictionary];
+                                                   }
+                                                   if (completionBlock) {
+                                                       completionBlock(responseDictionary);
+                                                   }
+                                                   
+                                               } errorHandler:^(NSDictionary *error) {
+                                                   
+                                                   if (errorBlock)
+                                                   {
+                                                       errorBlock(error);
+                                                   }
+                                               }];
 }
+
+
+- (void)addObjectFromNotifications :(NSDictionary*) dict {
+
+    NSString* classString = @"";
+    
+    if ([self.appDelegate.window.rootViewController isKindOfClass:[SYNMasterViewController class]]) {
+        classString = NSStringFromClass([self.appDelegate.masterViewController.rootViewController class]);
+    } else {
+        classString = NSStringFromClass([self.appDelegate.window.rootViewController class]);
+    }
+    
+    NSString* key = [NSString stringWithFormat:@"%@%@%@", dict[@"id"], dict[@"position"], classString];
+    [self.trackingDictionary setValue:dict[@"tracking_code"] forKey:key];
+    [self.trackingDictionaryNoPosition setValue:dict[@"tracking_code"] forKey:[NSString stringWithFormat:@"%@%@", dict[@"id"],  classString]];
+
+}
+
+
 
 - (void)addObjectFromDict :(NSDictionary*) dict {
-    
-    NSString* key = [NSString stringWithFormat:@"%@%@", dict[@"id"], dict[@"position"]];
+    NSString* classString = @"";
     
     if ([self.appDelegate.window.rootViewController isKindOfClass:[SYNMasterViewController class]]) {
-        key = [NSString stringWithFormat:@"%@%@", key, [self.appDelegate.masterViewController.showingViewController class]];
-        
+        classString = NSStringFromClass([self.appDelegate.masterViewController.rootViewController class]);
     } else {
-        key = [NSString stringWithFormat:@"%@%@", key, [self.appDelegate.window.rootViewController class]];
+        classString = NSStringFromClass([self.appDelegate.window.rootViewController class]);
     }
-    
+
+    NSString* key = [NSString stringWithFormat:@"%@%@%@", dict[@"id"], dict[@"position"], classString];
     [self.trackingDictionary setValue:dict[@"tracking_code"] forKey:key];
+    [self.trackingDictionaryNoPosition setValue:dict[@"tracking_code"] forKey:[NSString stringWithFormat:@"%@%@", dict[@"id"],  classString]];
 }
 
 
@@ -339,10 +376,6 @@
 - (void) viewVideo: (VideoInstance *) videoInstance
        completionHandler: (MKNKUserSuccessBlock) completionBlock
             errorHandler: (MKNKUserErrorBlock) errorBlock {
-    
-    
- 
-    
-    
 }
+
 @end
