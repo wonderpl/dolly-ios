@@ -1269,7 +1269,7 @@
         {
             params = @{@"action" : action,
                        @"object_type" : objectType,
-                       @"object_id" : userId,
+                       @"object_id" : instanceId,
                        };
         }
     }
