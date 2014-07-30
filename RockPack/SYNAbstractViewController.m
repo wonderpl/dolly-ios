@@ -683,10 +683,7 @@
 
 - (void)followButtonPressed:(UIButton *)button withChannel:(Channel *)channel completion :(void (^)(void))callbackBlock {
 
-    
-    
-    
-    [[SYNTrackingManager sharedManager] trackCollectionFollowFromScreenName:[self trackingScreenName]];
+        [[SYNTrackingManager sharedManager] trackCollectionFollowFromScreenName:[self trackingScreenName]];
     
 	if ([[SYNActivityManager sharedInstance]isSubscribedToChannelId:channel.uniqueId]) {
         [[SYNActivityManager sharedInstance] unsubscribeToChannel: channel

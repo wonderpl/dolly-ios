@@ -452,10 +452,18 @@
     return (SYNAbstractViewController*)(self.containerViewController.currentViewController.topViewController);
 }
 
+- (NSArray*) viewControllers {
+    return self.containerViewController.currentViewController.viewControllers;
+}
+
 - (SYNAbstractViewController*) rootViewController
 {
     int count = [self.containerViewController.currentViewController.viewControllers count]-1;
 
+    
+    NSLog(@"View Controllers  : :%@", self.containerViewController.currentViewController.viewControllers);
+    
+    
     for (int i = count; i>=0; i--) {
         
         
@@ -463,15 +471,20 @@
         NSString *className = NSStringFromClass([viewController class]);
         className = [className lowercaseString];
         
-        if (![className rangeOfString:@"profile"].location == NSNotFound) {
+        NSLog(@"View Controller : %@", className);
+        
+        
+        if (!([className rangeOfString:@"profile"].location == NSNotFound)) {
+            
+            NSLog(@"found profile");
             return viewController;
         }
         
-        if (![className rangeOfString:@"feed"].location == NSNotFound) {
+        if (!([className rangeOfString:@"feed"].location == NSNotFound)) {
             return viewController;
         }
         
-        if (![className rangeOfString:@"activity"].location == NSNotFound) {
+        if (!([className rangeOfString:@"activity"].location == NSNotFound)) {
             return viewController;
         }
     }

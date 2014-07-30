@@ -37,7 +37,7 @@
 - (NSString*)trackingCodeForVideoInstance :(VideoInstance*) videoInstance;
 - (void)addObjectFromDict :(NSDictionary*) dict;
 - (NSString*)trackingCodeForChannel :(Channel*) channel;
-
+- (NSString*)trackingCodeForChannel :(Channel*) channel videoInstance :(VideoInstance*)videoInstance;
 - (void) unsubscribeToUser: (ChannelOwner *) channelOwner
              videoInstance: (VideoInstance*) videoInstance
          completionHandler: (MKNKUserSuccessBlock) completionBlock

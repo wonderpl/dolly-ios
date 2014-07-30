@@ -141,6 +141,7 @@
                 
                 [trackingDictionary setValue:videoDictionary[@"id"] forKey:@"id"];
 
+                
                 [[SYNActivityManager sharedInstance] addObjectFromDict:trackingDictionary];
                 
                 NSDictionary *channelDictionary = videoDictionary[@"channel"];
@@ -162,6 +163,11 @@
                                                usingManagedObjectContext: appDelegate.mainManagedObjectContext
                                                      ignoringObjectTypes: kIgnoreChannelObjects];
                 
+                
+                [trackingDictionary setValue:userDictionary[@"id"] forKey:@"id"];
+
+                [[SYNActivityManager sharedInstance] addObjectFromDict:trackingDictionary];
+
                 
                 self.channelOwner.viewId = kSideNavigationViewId;
             }

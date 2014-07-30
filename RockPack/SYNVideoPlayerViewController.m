@@ -329,11 +329,11 @@
 }
 
 - (void)videoPlayerVideoViewed {
-
+    
 	[appDelegate.oAuthNetworkEngine recordActivityForUserId:appDelegate.currentOAuth2Credentials.userId
 													 action:@"view"
 											videoInstanceId:self.videoInstance.uniqueId
-                                               trackingCode:[[SYNActivityManager sharedInstance] trackingCodeForVideoInstance:self.videoInstance]
+                                               trackingCode:[[SYNActivityManager sharedInstance] trackingCodeForChannel:self.videoInstance.channel videoInstance:self.videoInstance]
                                           completionHandler:nil
 											   errorHandler:^(NSDictionary* errorDictionary) {
 												   DebugLog(@"View action failed");

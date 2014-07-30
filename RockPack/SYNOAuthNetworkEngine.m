@@ -1586,7 +1586,6 @@
             params = @{@"action" : @"unsubscribe",
                        @"object_type": @"channel",
                        @"object_id" : channelId };
-
         }
     }
     else
