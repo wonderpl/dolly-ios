@@ -122,9 +122,9 @@ static const CGFloat heightPortrait = 985;
 
     if (IS_IPAD) {
         [self.feedCollectionView.collectionViewLayout invalidateLayout];
-    	[self.feedCollectionView reloadData];
     }
     
+    [self.feedCollectionView reloadData];
 	self.shownInboarding = NO;
     [self showInboarding];
 }

@@ -311,9 +311,6 @@ static const CGFloat UpcomingVideosDividerHeight = 40.0;
 
 - (void)videoActionsBar:(SYNVideoActionsBar *)bar favouritesButtonPressed:(UIButton *)button {
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:kReloadFeed
-                                                        object:self.currentVideoInstance];
-    
 	[self favouriteButtonPressed:button videoInstance:self.currentVideoInstance];
 }
 
@@ -332,14 +329,11 @@ static const CGFloat UpcomingVideosDividerHeight = 40.0;
 }
 
 - (void)videoActionsBar:(SYNVideoActionsBar *)bar addToChannelButtonPressed:(UIButton *)button {
-	VideoInstance *videoInstance = [self.model itemAtIndex:self.selectedIndex];
-		
-    [self addToChannelButtonPressed:button videoInstance:videoInstance];
+    [self addToChannelButtonPressed:button videoInstance:self.currentVideoInstance];
 }
 
 - (void)videoActionsBar:(SYNVideoActionsBar *)bar shareButtonPressed:(UIButton *)button {
-	VideoInstance *videoInstance = [self.model itemAtIndex:self.selectedIndex];
-    [self shareVideoInstance:videoInstance];
+    [self shareVideoInstance:self.currentVideoInstance];
 }
 
 #pragma mark - SYNVideoClickToMoreCellDelegate
