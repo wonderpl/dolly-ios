@@ -13,6 +13,7 @@
 #import "VideoInstance.h"
 #import "SYNMasterViewController.h"
 #import "SYNChannelDetailsViewController.h"
+#import "SYNActivityViewController.h"
 
 @interface SYNActivityManager ()
 
@@ -169,14 +170,17 @@
 
 - (NSString*)trackingCodeForUser :(ChannelOwner*) user withVideoInstance:(VideoInstance*) videoInstance{
     
+    
+    if ([[self.appDelegate.masterViewController.viewControllers firstObject] isKindOfClass:[SYNActivityViewController class]]) {
+        return [self trackingCodeForVideoInstance:videoInstance];
+    }
+
     SYNAbstractViewController *viewController = [self.appDelegate.masterViewController.viewControllers lastObject];
     
     NSLog(@"AllVCs%@", self.appDelegate.masterViewController.viewControllers);
     NSLog(@"ChossenVC %@", [viewController class]);
     if ([viewController isKindOfClass:[SYNChannelDetailsViewController class]]) {
         return self.trackingDictionaryNoPosition[[NSString stringWithFormat:@"%@%@", videoInstance.channel.uniqueId, [self classNameForTracking]]];
-
-        
     }
     
     
@@ -206,7 +210,6 @@
 
     NSString* key = [NSString stringWithFormat:@"%@%lld%@", user.uniqueId, user.positionValue, [self classNameForTracking]];
     
-    NSLog(@"%@", key);
     
     if (!self.trackingDictionary[key]) {
         NSLog(@"No Key %@", self.trackingDictionary[key]);
@@ -234,17 +237,19 @@
 }
 
 - (NSString*)trackingCodeForChannel :(Channel*) channel videoInstance :(VideoInstance*)videoInstance {
+
     
+    if ([[self.appDelegate.masterViewController.viewControllers firstObject] isKindOfClass:[SYNActivityViewController class]]) {
+        return [self trackingCodeForVideoInstance:videoInstance];
+    }
     
     SYNAbstractViewController *viewController = [self.appDelegate.masterViewController.viewControllers lastObject];
     
     NSLog(@"AllVCs%@", self.appDelegate.masterViewController.viewControllers);
     NSLog(@"ChossenVC %@", [viewController class]);
     if ([viewController isKindOfClass:[SYNChannelDetailsViewController class]]) {
-        
         NSLog(@"CHANELL DETAILS TRACKING");
-        
-            return [self trackingCodeForChannel:channel];
+        return [self trackingCodeForChannel:channel];
     }
     
     return [self trackingCodeForVideoInstance:videoInstance];
@@ -279,7 +284,7 @@
 		return [self trackingCodeForChannel:videoInstance.channel];
     }
     
-    
+    NSLog(@"%@", videoInstance.uniqueId);
     NSString* key = [NSString stringWithFormat:@"%@%lld%@", videoInstance.uniqueId, videoInstance.positionValue, [self classNameForTracking]];
     
     if (!self.trackingDictionary[key]) {

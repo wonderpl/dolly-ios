@@ -115,10 +115,7 @@
             // the response can either have a channel tag or a video tag, in the second case the video tag will include a channel tag //
             
             
-            NSMutableDictionary* trackingDictionary = [[NSMutableDictionary alloc] init];
             
-            [trackingDictionary setValue:data[@"tracking_code"] forKey:@"tracking_code"];
-            [trackingDictionary setValue:data[@"position"] forKey:@"position"];
 
             // case 1 : Channel Tag
             NSDictionary *channelDictionary = messageDictionary[@"channel"];
@@ -139,10 +136,15 @@
                 self.videoThumbnailUrl = videoDictionary[@"thumbnail_url"];
                 self.videoTitle = videoDictionary[@"title"];
                 
-                [trackingDictionary setValue:videoDictionary[@"id"] forKey:@"id"];
-
+                NSDictionary* trackingDict = @{@"tracking_code" : data[@"tracking_code"],
+                                               @"position": data[@"position"],
+                                               @"id" : videoDictionary[@"id"]
+                                               };
                 
-                [[SYNActivityManager sharedInstance] addObjectFromDict:trackingDictionary];
+                
+                NSLog(@"trackingDict : %@", trackingDict);
+                
+                [[SYNActivityManager sharedInstance] addObjectFromDict:trackingDict];
                 
                 NSDictionary *channelDictionary = videoDictionary[@"channel"];
                 
@@ -163,10 +165,14 @@
                                                usingManagedObjectContext: appDelegate.mainManagedObjectContext
                                                      ignoringObjectTypes: kIgnoreChannelObjects];
                 
+                NSDictionary* trackingDict = @{@"tracking_code" : data[@"tracking_code"],
+                                               @"position": data[@"position"],
+                                               @"id" : userDictionary[@"id"]
+                                               };
                 
-                [trackingDictionary setValue:userDictionary[@"id"] forKey:@"id"];
+                NSLog(@"trackingDict : %@", trackingDict);
 
-                [[SYNActivityManager sharedInstance] addObjectFromDict:trackingDictionary];
+                [[SYNActivityManager sharedInstance] addObjectFromDict:trackingDict];
 
                 
                 self.channelOwner.viewId = kSideNavigationViewId;
