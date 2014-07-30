@@ -1520,10 +1520,17 @@
 
     if (userId)
     {
-        params = @{@"action" : @"subscribe",
-                   @"object_type": @"channel",
-                   @"object_id" : channelId,
-                   @"tracking_code:": trackingCode};
+        if (trackingCode) {
+            params = @{@"action" : @"subscribe",
+                       @"object_type": @"channel",
+                       @"object_id" : channelId,
+                       @"tracking_code:": trackingCode};
+        } else {
+            params = @{@"action" : @"subscribe",
+                       @"object_type": @"channel",
+                       @"object_id" : channelId};
+        }
+        
     }
     else
     {
@@ -1567,10 +1574,20 @@
     
     if (userId)
     {
-        params = @{@"action" : @"unsubscribe",
-                   @"object_type": @"channel",
-                   @"object_id" : channelId,
-                   @"tracking_code:": trackingCode };
+        
+        if (trackingCode) {
+            params = @{@"action" : @"unsubscribe",
+                       @"object_type": @"channel",
+                       @"object_id" : channelId,
+                       @"tracking_code:": trackingCode };
+        }
+        else
+        {
+            params = @{@"action" : @"unsubscribe",
+                       @"object_type": @"channel",
+                       @"object_id" : channelId };
+
+        }
     }
     else
     {

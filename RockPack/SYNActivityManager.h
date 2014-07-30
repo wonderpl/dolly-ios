@@ -31,15 +31,6 @@
             completionHandler: (MKNKUserSuccessBlock) completionBlock
                  errorHandler: (MKNKUserErrorBlock) errorBlock;
 
-- (void) subscribeToUser: (ChannelOwner *) channelOwner
-       completionHandler: (MKNKUserSuccessBlock) completionBlock
-            errorHandler: (MKNKUserErrorBlock) errorBlock;
-
-- (void) unsubscribeToUser: (ChannelOwner *) channelOwner
-         completionHandler: (MKNKUserSuccessBlock) completionBlock
-              errorHandler: (MKNKUserErrorBlock) errorBlock;
-
-
 - (void) addChannelSubscriptionsObject:(Channel *)channel;
 - (void) addUserSubscriptonsObject:(ChannelOwner*)channelOwner;
 - (NSUInteger) userFollowingCount;

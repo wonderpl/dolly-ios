@@ -681,75 +681,11 @@
 	}
 }
 
-
-- (void)followControlPressed:(UIButton *)button withChannelOwner:(ChannelOwner *)channelOwner completion :(void (^)(void))callbackBlock {
-	
-	if(!channelOwner)
-		return;
-	
-	BOOL isCurrentUser = (BOOL)[channelOwner.uniqueId isEqualToString: appDelegate.currentUser.uniqueId];
-	
-	if (isCurrentUser) {
-		return;
-	}
-    
-	[[SYNTrackingManager sharedManager] trackUserCollectionsFollowFromScreenName:[self trackingScreenName]];
-	
-	button.enabled = NO;
-	[button invalidateIntrinsicContentSize];
-	
-    
-    
-	if ([[SYNActivityManager sharedInstance] isSubscribedToUserId:channelOwner.uniqueId]) {
-        [[SYNActivityManager sharedInstance] unsubscribeToUser:channelOwner
-											 completionHandler:^(id responce) {
-												 
-												 button.selected = NO;
-												 button.enabled = YES;
-												 [[NSNotificationCenter defaultCenter] postNotificationName:kReloadFeed object:self userInfo:nil];
-                                                 
-                                                 if (callbackBlock) {
-                                                     callbackBlock();
-                                                 }
-                                                 
-												 [button invalidateIntrinsicContentSize];
-                                                 
-											 } errorHandler:^(id error) {
-												 button.enabled = YES;
-												 [button invalidateIntrinsicContentSize];
-											 }];
-	} else {
-
-        
-        [self followButtonAnimation:button];
-        button.selected = YES;
-
-        [[SYNActivityManager sharedInstance] subscribeToUser:channelOwner
-										   completionHandler: ^(id responce) {
-											   
-											   button.enabled = YES;
-											   
-											   [[NSNotificationCenter defaultCenter] postNotificationName:kReloadFeed object:self userInfo:nil];
-											   [button invalidateIntrinsicContentSize];
-                                               
-                                               if (callbackBlock) {
-                                                   callbackBlock();
-                                               }
-                                               
-										   } errorHandler: ^(id error) {
-											   button.enabled = YES;
-                                               button.selected = NO;
-
-											   [button invalidateIntrinsicContentSize];
-										   }];
-
-	}
-}
-
 - (void)followButtonPressed:(UIButton *)button withChannel:(Channel *)channel completion :(void (^)(void))callbackBlock {
-    
-    
 
+    
+    
+    
     [[SYNTrackingManager sharedManager] trackCollectionFollowFromScreenName:[self trackingScreenName]];
     
 	if ([[SYNActivityManager sharedInstance]isSubscribedToChannelId:channel.uniqueId]) {

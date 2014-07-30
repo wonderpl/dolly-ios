@@ -175,9 +175,7 @@
     
     if (!self.trackingDictionary[key]) {
         NSLog(@"No Key %@", self.trackingDictionary[key]);
-        
         NSLog(@"Key for user %@", self.trackingDictionary[key]);
-        
         NSLog(@"%@", self.trackingDictionary);
         
         NSString *videoInstanceKey = [NSString stringWithFormat:@"%@%lld%@", videoInstance.uniqueId, videoInstance.positionValue, [self classNameForTracking]];
