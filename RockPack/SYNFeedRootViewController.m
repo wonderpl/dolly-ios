@@ -80,8 +80,9 @@ static const CGFloat heightPortrait = 985;
 	
 	self.model = [SYNFeedModel sharedModel];
 	self.model.delegate = self;
-	
-    self.feedCollectionView.contentInset = UIEdgeInsetsMake(64.0, 0.0, 0.0, 0.0);
+	if (IS_IPAD) {
+        self.feedCollectionView.contentInset = UIEdgeInsetsMake(64.0, 0.0, 0.0, 0.0);
+    }
 	
 	if (![self.model itemCount]) {
 		[self displayPopupMessage: NSLocalizedString(@"feed_screen_loading_message", nil)
@@ -124,6 +125,12 @@ static const CGFloat heightPortrait = 985;
         [self.feedCollectionView.collectionViewLayout invalidateLayout];
     }
     
+    if (IS_IPHONE) {
+        self.navigationItem.title = @"";
+        [self.navigationController.navigationBar setBackgroundTransparent:YES];
+        [self.navigationController setNavigationBarHidden:YES];
+    }
+    
     [self.feedCollectionView reloadData];
 	self.shownInboarding = NO;
     [self showInboarding];
@@ -136,6 +143,11 @@ static const CGFloat heightPortrait = 985;
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    if (IS_IPHONE) {
+        [self.navigationController.navigationBar setBackgroundTransparent:YES];
+        [self.navigationController setNavigationBarHidden:NO];
+    }
+
     self.lastYOffset = self.feedCollectionView.contentOffset.y;
 }
 
@@ -237,6 +249,11 @@ static const CGFloat heightPortrait = 985;
 		VideoInstance *videoInstance = [self.model resourceForFeedItem:feedItem];
         if (videoInstance) {
             cell.videoInstance = videoInstance;
+            if (indexPath.row%2==0) {
+                [cell setLightView];
+            } else {
+                [cell setDarkView];
+            }
             cell.delegate = self;
         }
 		return cell;

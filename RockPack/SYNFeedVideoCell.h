@@ -33,4 +33,7 @@
 
 @property (nonatomic, weak) id<SYNFeedVideoCellDelegate> delegate;
 
+- (void)setDarkView;
+- (void)setLightView;
+
 @end

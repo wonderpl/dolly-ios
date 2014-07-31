@@ -379,11 +379,7 @@
         classString = NSStringFromClass([self.appDelegate.window.rootViewController class]);
     }
 
-    NSString* key = [NSString stringWithFormat:@"%@%@%@", dict[@"id"], dict[@"position"], classString];
-    
-    
-    NSLog(@"keyyy %@", key);
-    
+    NSString* key = [NSString stringWithFormat:@"%@%@%@", dict[@"id"], dict[@"position"], classString];    
     [self.trackingDictionary setValue:dict[@"tracking_code"] forKey:key];
     [self.trackingDictionaryNoPosition setValue:dict[@"tracking_code"] forKey:[NSString stringWithFormat:@"%@%@", dict[@"id"],  classString]];
 }

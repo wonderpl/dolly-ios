@@ -11,5 +11,6 @@
 @interface UIImage (Blur)
 
 + (UIImage *)blurredImageFromImage:(UIImage *)inputImage;
++ (UIImage *)blurredImageFromImage:(UIImage *)inputImage blurValue:(NSNumber*) value;
 
 @end

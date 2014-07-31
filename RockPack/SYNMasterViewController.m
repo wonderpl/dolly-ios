@@ -460,10 +460,6 @@
 {
     int count = [self.containerViewController.currentViewController.viewControllers count]-1;
 
-    
-    NSLog(@"View Controllers  : :%@", self.containerViewController.currentViewController.viewControllers);
-    
-    
     for (int i = count; i>=0; i--) {
         
         
