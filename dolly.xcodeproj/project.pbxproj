@@ -667,6 +667,7 @@
 		F42AD96A196AE8990020B7A0 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = F42AD965196AE8980020B7A0 /* NSData+Base64.m */; };
 		F42AD96B196AE8990020B7A0 /* OAuth+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = F42AD967196AE8980020B7A0 /* OAuth+Additions.m */; };
 		F42AD96C196AE8990020B7A0 /* OAuthCore.m in Sources */ = {isa = PBXBuildFile; fileRef = F42AD969196AE8990020B7A0 /* OAuthCore.m */; };
+		F45ACC7E19895A3A000615D8 /* NSString+StrippingHTML.m in Sources */ = {isa = PBXBuildFile; fileRef = F45ACC7D19895A3A000615D8 /* NSString+StrippingHTML.m */; };
 		F4623FEF197D1AD000DEE044 /* buildAndTestiPhone.sh in Resources */ = {isa = PBXBuildFile; fileRef = F4623FEE197D1AD000DEE044 /* buildAndTestiPhone.sh */; };
 		F4623FF1197D1B5500DEE044 /* SimulatorReset.txt in Resources */ = {isa = PBXBuildFile; fileRef = F4623FF0197D1B5500DEE044 /* SimulatorReset.txt */; };
 		F4623FF3197D25AB00DEE044 /* choose_sim_device in Resources */ = {isa = PBXBuildFile; fileRef = F4623FF2197D25AB00DEE044 /* choose_sim_device */; };
@@ -1719,6 +1720,8 @@
 		F42AD967196AE8980020B7A0 /* OAuth+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OAuth+Additions.m"; sourceTree = "<group>"; };
 		F42AD968196AE8990020B7A0 /* OAuthCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuthCore.h; sourceTree = "<group>"; };
 		F42AD969196AE8990020B7A0 /* OAuthCore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuthCore.m; sourceTree = "<group>"; };
+		F45ACC7C19895A3A000615D8 /* NSString+StrippingHTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+StrippingHTML.h"; sourceTree = "<group>"; };
+		F45ACC7D19895A3A000615D8 /* NSString+StrippingHTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+StrippingHTML.m"; sourceTree = "<group>"; };
 		F4623FEE197D1AD000DEE044 /* buildAndTestiPhone.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = buildAndTestiPhone.sh; sourceTree = "<group>"; };
 		F4623FF0197D1B5500DEE044 /* SimulatorReset.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SimulatorReset.txt; sourceTree = "<group>"; };
 		F4623FF2197D25AB00DEE044 /* choose_sim_device */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = choose_sim_device; sourceTree = "<group>"; };
@@ -2468,6 +2471,8 @@
 				E90506A518E05FD800E0910E /* UIDevice+Helpers.m */,
 				E98DCCC519239C000041DEB4 /* NSArray+Helpers.h */,
 				E98DCCC619239C000041DEB4 /* NSArray+Helpers.m */,
+				F45ACC7C19895A3A000615D8 /* NSString+StrippingHTML.h */,
+				F45ACC7D19895A3A000615D8 /* NSString+StrippingHTML.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -4901,6 +4906,7 @@
 				E9F6256A18868784000EF6A2 /* SYNiPadIntroViewController.m in Sources */,
 				E9CDFFBB19090EDC00A95B90 /* SYNIPhoneFeedRootViewController.m in Sources */,
 				BE21EE7C16F9FF520067223B /* SYNAccountSettingBasicController.m in Sources */,
+				F45ACC7E19895A3A000615D8 /* NSString+StrippingHTML.m in Sources */,
 				BE21EE8716FA202F0067223B /* SYNAccountSettingsFullNameInput.m in Sources */,
 				BE21EEA316FB1E750067223B /* SYNAccountSettingsDOB.m in Sources */,
 				E98A851F19096B3C001ADE09 /* SYNFeedChannelSmallCell.m in Sources */,
@@ -5232,6 +5238,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/**",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = dolly;
 				PROVISIONING_PROFILE = "A16D3FE9-7216-49C7-80E4-5900BF1336AF";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
