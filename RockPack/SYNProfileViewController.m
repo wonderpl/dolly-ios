@@ -103,7 +103,8 @@ static const CGFloat TransitionDuration = 0.5f;
 	self.navigationItem.title = @"";
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
     if (IS_IPHONE) {
         [self.navigationController.navigationBar setBackgroundTransparent:NO];
         self.navigationBar.hidden = NO;
