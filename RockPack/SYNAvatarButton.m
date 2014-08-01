@@ -29,7 +29,7 @@
 	self.layer.masksToBounds = YES;
 	
     //Added a border for avatars that are white.
-	self.layer.borderColor = [[UIColor blackColor] CGColor];
+	self.layer.borderColor = [[UIColor colorWithWhite:219.0/255.0 alpha:1.0] CGColor];
 	self.layer.borderWidth = (IS_RETINA ? 0.5 : 1.0);
 	
 	self.contentHorizontalAlignment = UIControlContentHorizontalAlignmentFill;

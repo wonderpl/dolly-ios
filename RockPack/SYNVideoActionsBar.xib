@@ -110,8 +110,10 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="addButton" destination="gvq-tZ-yxZ" id="Iz4-rV-c7Z"/>
                 <outlet property="favouriteButton" destination="H5R-DI-TgM" id="hvL-IF-NVf"/>
                 <outlet property="favouritedByContainer" destination="Ixh-ks-J92" id="OZ7-vV-XTM"/>
+                <outlet property="shareButton" destination="Zsz-gD-1Fi" id="nq1-0o-ccA"/>
                 <outlet property="shopButton" destination="pXu-bh-Z99" id="L4a-LT-LHZ"/>
             </connections>
         </view>

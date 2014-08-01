@@ -249,10 +249,15 @@ static const CGFloat heightPortrait = 985;
 		VideoInstance *videoInstance = [self.model resourceForFeedItem:feedItem];
         if (videoInstance) {
             cell.videoInstance = videoInstance;
-            if (indexPath.row%2==0) {
+            
+            if (IS_IPAD) {
                 [cell setLightView];
             } else {
-                [cell setDarkView];
+                if (indexPath.row%2==0) {
+                    [cell setLightView];
+                } else {
+                    [cell setDarkView];
+                }
             }
             cell.delegate = self;
         }

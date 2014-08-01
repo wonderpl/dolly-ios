@@ -88,10 +88,10 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 	
     if (self.videoInstance.video.videoDescription.length > 0) {
         [self.descriptionLabel setAttributedText:[self attributedStringFromString:[self.videoInstance.video.videoDescription stringByStrippingHTML] withLineHeight:1.5]];
-        [self.heightConstantTop setConstant:18];
+        [self.heightConstantTop setConstant:17];
 
     } else {
-        [self.heightConstantTop setConstant:8];
+        [self.heightConstantTop setConstant:2];
     }
     
     [self layoutIfNeeded];
@@ -148,6 +148,7 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
     [self.titleLabel setTextColor:[UIColor whiteColor]];
     [self.descriptionLabel setTextColor:[UIColor whiteColor]];
     [self setVideoLabelWithColor: [UIColor whiteColor]];
+    [self.actionsBar setLightAssets];
     
 }
 
@@ -184,9 +185,12 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
                            alpha: 1.0f]];
 
     
+    [self.actionsBar setDarkAssets];
+    
     
 }
 
+//TODO: make into category
 -(NSMutableAttributedString*) attributedStringFromString:(NSString *) string withLineHeight:(int) lineHeight{
 	
     if (!string) {

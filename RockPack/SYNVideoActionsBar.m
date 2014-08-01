@@ -18,6 +18,8 @@
 @property (nonatomic, weak) IBOutlet UIButton *favouriteButton;
 
 @property (nonatomic, weak) IBOutlet UIView *favouritedByContainer;
+@property (strong, nonatomic) IBOutlet UIButton *addButton;
+@property (strong, nonatomic) IBOutlet UIButton *shareButton;
 
 @property (nonatomic, copy) NSArray *favouritedByButtons;
 
@@ -32,6 +34,7 @@
 	self.shopButton.titleLabel.font = [UIFont regularCustomFontOfSize:self.shopButton.titleLabel.font.pointSize];
     [self.shopButton setBackgroundImage:[UIImage imageNamed:@"ShopMotion0"] forState:UIControlStateNormal];
     [self.shopButton setBackgroundImage: [UIImage imageNamed:@"ShopMotionButtonActive"] forState:UIControlStateSelected];
+	[self setDarkAssets];
 }
 
 + (instancetype)bar {
@@ -84,5 +87,17 @@
 - (IBAction)shareButtonPressed:(UIButton *)button {
 	[self.delegate videoActionsBar:self shareButtonPressed:button];
 }
+
+
+- (void) setLightAssets {
+	[self.addButton setImage:[UIImage imageNamed:@"AddButtonLight.png"] forState:UIControlStateNormal];
+    [self.shareButton setImage:[UIImage imageNamed:@"shareButtonLight.png"] forState:UIControlStateNormal];
+}
+
+- (void) setDarkAssets {
+	[self.addButton setImage:[UIImage imageNamed:@"AddButton.png"] forState:UIControlStateNormal];
+    [self.shareButton setImage:[UIImage imageNamed:@"shareButton.png"] forState:UIControlStateNormal];
+}
+
 
 @end

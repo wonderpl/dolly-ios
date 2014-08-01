@@ -32,4 +32,8 @@
 
 + (instancetype)bar;
 
+- (void) setLightAssets;
+- (void) setDarkAssets;
+
+
 @end
