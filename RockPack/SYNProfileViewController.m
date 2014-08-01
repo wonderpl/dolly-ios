@@ -86,6 +86,10 @@ static const CGFloat TransitionDuration = 0.5f;
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
+    [self.navigationController.navigationBar setBackgroundTransparent:YES];
+    [self.navigationBar setBarTintColor:[UIColor whiteColor]];
+	self.navigationBar.hidden = YES;
+
 	[SYNActivityManager.sharedInstance updateActivityForCurrentUserWithReset:NO];
 	if ([self isUserProfile]) {
 		[[SYNTrackingManager sharedManager] trackOwnProfileScreenView];

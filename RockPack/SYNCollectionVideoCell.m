@@ -28,7 +28,7 @@
     
 	self.actionsBar.frame = self.videoActionsContainer.bounds;
 	[self.videoActionsContainer addSubview:self.actionsBar];
-	self.titleLabel.font = [UIFont boldCustomFontOfSize:self.titleLabel.font.pointSize];
+    [self.titleLabel setFont:[UIFont lightCustomFontOfSize:self.titleLabel.font.pointSize]];
 	self.durationLabel.font = [UIFont regularCustomFontOfSize:self.durationLabel.font.pointSize];
     self.tap = [[UITapGestureRecognizer alloc] initWithTarget: self
                                                        action: @selector(showVideo)];
@@ -56,14 +56,14 @@
                    placeholderImage: [UIImage imageNamed: @"PlaceholderChannelSmall.png"]
                             options: SDImageCacheTypeNone];
     
-    self.titleLabel.text = videoInstance.title;
+	self.titleLabel.attributedText = [self attributedStringFromString: videoInstance.title withLineHeight:8];
+    [self layoutIfNeeded];
     self.actionsBar.favouritedBy = [videoInstance.starrers array];
 	self.actionsBar.favouriteButton.selected = videoInstance.starredByUserValue;
 
 }
 
 #pragma mark - Set delegate
-
 
 - (void)setDelegate:(id<SYNCollectionVideoCellDelegate>)delegate {
     _delegate = delegate;
@@ -129,6 +129,27 @@
         [self.imageView addGestureRecognizer:self.tap];
         
 	}
+}
+
+-(NSMutableAttributedString*) attributedStringFromString:(NSString *) string withLineHeight:(int) lineHeight{
+	
+    if (!string) {
+		return [[NSMutableAttributedString alloc] initWithString: @""];
+	}
+	NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString: string];
+	
+	NSInteger strLength = [attributedString length];
+	NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+	style.lineBreakMode = NSLineBreakByTruncatingTail;
+	[style setLineSpacing:lineHeight];
+	[style setAlignment:NSTextAlignmentLeft];
+	
+	[attributedString addAttribute:NSParagraphStyleAttributeName
+                             value:style
+                             range:NSMakeRange(0, strLength)];
+	return attributedString;
+    
+    
 }
 
 @end
