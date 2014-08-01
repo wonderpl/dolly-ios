@@ -153,6 +153,16 @@
                     self.channelId = channelDictionary[@"id"];
                     self.channelResourceUrl = channelDictionary[@"resource_url"];
                     // no thumbnail url in case of a channel object within a video object
+                    
+                    if (data[@"tracking_code"]) {
+                        NSDictionary* trackingDict = @{@"tracking_code" : data[@"tracking_code"],
+                                                       @"position": data[@"position"],
+                                                       @"id" : channelDictionary[@"id"]
+                                                       };
+                        
+                        [[SYNActivityManager sharedInstance] addObjectFromDict:trackingDict];
+                    }
+
                 }
             }
             

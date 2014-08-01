@@ -216,7 +216,7 @@
 - (NSString*)trackingCodeForChannel :(Channel*) channel videoInstance :(VideoInstance*)videoInstance {
     
     if ([[self.appDelegate.masterViewController.viewControllers firstObject] isKindOfClass:[SYNActivityViewController class]]) {
-        return [self trackingCodeForVideoInstance:videoInstance];
+        return [self trackingCodeForChannel:channel];
     }
     
     SYNAbstractViewController *viewController = [self.appDelegate.masterViewController.viewControllers lastObject];
@@ -243,7 +243,7 @@
     
     SYNAbstractViewController *viewController = [self.appDelegate.masterViewController.viewControllers lastObject];
     
-    if ([viewController isKindOfClass:[SYNChannelDetailsViewController class]] && ![[self classNameForTracking] isEqualToString: NSStringFromClass([SYNActivityViewController class])]) {
+    if ([viewController isKindOfClass:[SYNChannelDetailsViewController class]]) {
 		return [self trackingCodeForChannel:videoInstance.channel];
     }
     
