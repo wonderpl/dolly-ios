@@ -88,13 +88,12 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 	
     if (self.videoInstance.video.videoDescription.length > 0) {
         [self.descriptionLabel setAttributedText:[self attributedStringFromString:[self.videoInstance.video.videoDescription stringByStrippingHTML] withLineHeight:1.5]];
-        [self.heightConstantTop setConstant:17];
 
     } else {
-        [self.heightConstantTop setConstant:2];
+        [self.heightConstantTop setConstant:8];
+        [self layoutIfNeeded];
     }
     
-    [self layoutIfNeeded];
     
 	NSURL *avatarURL = [NSURL URLWithString:self.videoInstance.originator.thumbnailURL];
 	[self.avatarThumbnailButton setImageWithURL:avatarURL

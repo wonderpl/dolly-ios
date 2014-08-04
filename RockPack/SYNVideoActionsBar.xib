@@ -17,10 +17,10 @@
                         <constraint firstAttribute="width" constant="40" id="bI9-AS-CcU"/>
                         <constraint firstAttribute="height" constant="40" id="nfH-Gp-j6I"/>
                     </constraints>
-                    <state key="normal" image="FavouriteButton.png">
+                    <state key="normal" image="FavouriteButtonSelected.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" image="FavouriteButtonSelected.png"/>
+                    <state key="selected" image="FavouriteButton.png"/>
                     <connections>
                         <action selector="favouriteButtonPressed:" destination="RuC-0K-OOM" eventType="touchUpInside" id="7Uj-7d-JcX"/>
                     </connections>
