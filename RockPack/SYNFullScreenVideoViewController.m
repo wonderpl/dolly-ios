@@ -115,6 +115,7 @@ static const CGFloat VideoAspectRatio = 16.0 / 9.0;
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
     [self.collectionView setContentOffset:CGPointMake(self.videoPlayerViewController.selectedIndex * CGRectGetWidth(self.view.bounds), 0.0f)
                                  animated:NO];
+    [self.collectionView reloadData];
 
 }
 
