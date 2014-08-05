@@ -55,13 +55,14 @@
         label.shadowOffset = CGSizeMake(0.0f, 1.0f);
         
         label.numberOfLines = 0;
-        
+        label.userInteractionEnabled = NO;
         self.messageLabel = label;
         
         // BG
 //        self.backgroundColor = [UIColor colorWithWhite:IS_IPHONE ? 237.0f/255.0f : 242.0f/255.0f alpha:0.9f];
 
         // Add
+        self.userInteractionEnabled = NO;
         [self addSubview: label];
         
         [self setMessage: message];
