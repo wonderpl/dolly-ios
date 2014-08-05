@@ -704,6 +704,7 @@
 		F46D8C5A192CE7750048C486 /* SYNShareOverlayViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = F46D8C59192CE7750048C486 /* SYNShareOverlayViewController~iphone.xib */; };
 		F46D8C5D192CF5E10048C486 /* InboardingSearchBox~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F46D8C5B192CF5E10048C486 /* InboardingSearchBox~ipad.png */; };
 		F46D8C5E192CF5E10048C486 /* InboardingSearchBox@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F46D8C5C192CF5E10048C486 /* InboardingSearchBox@2x~ipad.png */; };
+		F473B04B198FCD0F00194F90 /* SYNTabBarTouchesView.m in Sources */ = {isa = PBXBuildFile; fileRef = F473B04A198FCD0F00194F90 /* SYNTabBarTouchesView.m */; };
 		F478E82019378BD70015BF38 /* InboardingShopMotion.png in Resources */ = {isa = PBXBuildFile; fileRef = F478E81E19378BD70015BF38 /* InboardingShopMotion.png */; };
 		F478E82119378BD70015BF38 /* InboardingShopMotion@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F478E81F19378BD70015BF38 /* InboardingShopMotion@2x.png */; };
 		F478E824193890CE0015BF38 /* SYNLoginNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F478E823193890CE0015BF38 /* SYNLoginNavigationController.m */; };
@@ -1767,6 +1768,8 @@
 		F46D8C59192CE7750048C486 /* SYNShareOverlayViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNShareOverlayViewController~iphone.xib"; sourceTree = "<group>"; };
 		F46D8C5B192CF5E10048C486 /* InboardingSearchBox~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "InboardingSearchBox~ipad.png"; sourceTree = "<group>"; };
 		F46D8C5C192CF5E10048C486 /* InboardingSearchBox@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "InboardingSearchBox@2x~ipad.png"; sourceTree = "<group>"; };
+		F473B049198FCD0F00194F90 /* SYNTabBarTouchesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNTabBarTouchesView.h; sourceTree = "<group>"; };
+		F473B04A198FCD0F00194F90 /* SYNTabBarTouchesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNTabBarTouchesView.m; sourceTree = "<group>"; };
 		F478E81E19378BD70015BF38 /* InboardingShopMotion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InboardingShopMotion.png; sourceTree = "<group>"; };
 		F478E81F19378BD70015BF38 /* InboardingShopMotion@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "InboardingShopMotion@2x.png"; sourceTree = "<group>"; };
 		F478E822193890CE0015BF38 /* SYNLoginNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNLoginNavigationController.h; sourceTree = "<group>"; };
@@ -3279,6 +3282,8 @@
 				3862E8B91729797F0066E8E7 /* SYNMasterViewController~iphone.xib */,
 				E9A465FC187FFA76007511B3 /* SYNTabBar.h */,
 				E9A465FD187FFA76007511B3 /* SYNTabBar.m */,
+				F473B049198FCD0F00194F90 /* SYNTabBarTouchesView.h */,
+				F473B04A198FCD0F00194F90 /* SYNTabBarTouchesView.m */,
 			);
 			name = Master;
 			sourceTree = "<group>";
@@ -4833,6 +4838,7 @@
 				BEE01B7318521DCF000CF681 /* Comment.m in Sources */,
 				F478E82A1938BD020015BF38 /* SYNProfileVideoModel.m in Sources */,
 				0199F13B16721A4500E479C6 /* SYNFeedRootViewController.m in Sources */,
+				F473B04B198FCD0F00194F90 /* SYNTabBarTouchesView.m in Sources */,
 				01946B911683335400354601 /* _ChannelOwner.m in Sources */,
 				E9CDFFB819090EC900A95B90 /* SYNIPadFeedRootViewController.m in Sources */,
 				4CDD76A618CA014A000B2CBD /* SYNFeedOverlayAddingViewController.m in Sources */,
@@ -5254,7 +5260,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/**",
 				);
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = dolly;
 				PROVISIONING_PROFILE = "A16D3FE9-7216-49C7-80E4-5900BF1336AF";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";

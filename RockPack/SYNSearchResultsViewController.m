@@ -578,20 +578,24 @@ typedef void (^SearchResultCompleteBlock)(int);
             
             if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation])) {
                 if (indexPath.row == 0) {
-                    return CGSizeMake(360, 210);
+                    return CGSizeMake(460, 210);
                 } else if (indexPath.row == 1 || indexPath.row == 2) {
-                    return CGSizeMake(360, 170);
+                    return CGSizeMake(460, 170);
                 } else {
-                    return CGSizeMake(174, 170);
+            		if ((indexPath.row)%4 == 0 || (indexPath.row-1)%4 == 0) {
+                        return CGSizeMake(294, 147);
+                    } else {
+                        return CGSizeMake(147, 147);
+                    }
                 }
             } else {
                 
                 if (indexPath.row == 0) {
-                    return CGSizeMake(582, 210);
+                    return CGSizeMake(650, 210);
                 } else if (indexPath.row == 1) {
-                    return CGSizeMake(383, 185);
+                    return CGSizeMake(426, 185);
                 } else {
-                    return CGSizeMake(185, 185);
+	                 return CGSizeMake(205, 185);
                 }
             }
         }
@@ -602,9 +606,9 @@ typedef void (^SearchResultCompleteBlock)(int);
 		} else {
 			
 			if (UIDeviceOrientationIsPortrait([SYNDeviceManager.sharedInstance orientation])) {
-				return CGSizeMake(388, 90);
+				return CGSizeMake(460, 90);
 			} else {
-				return CGSizeMake(604, 148);
+				return CGSizeMake(644, 148);
 			}
 		}
 		

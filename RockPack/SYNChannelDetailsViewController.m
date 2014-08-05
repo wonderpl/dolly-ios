@@ -763,13 +763,13 @@ static const CGFloat HeaderHeightIPad = 530;
     if (IS_IPAD) {
         if (UIDeviceOrientationIsPortrait(orientation))
         {
-            self.videoCollectionViewLayoutIPadEdit.sectionInset = UIEdgeInsetsMake(0, 24, 0, 24);
-            self.videoCollectionViewLayoutIPad.sectionInset = UIEdgeInsetsMake(0, 24, 0, 24);
+            self.videoCollectionViewLayoutIPadEdit.sectionInset = UIEdgeInsetsMake(0, 55, 0, 55);
+            self.videoCollectionViewLayoutIPad.sectionInset = UIEdgeInsetsMake(0, 55, 0, 55);
         }
         else
         {
-            self.videoCollectionViewLayoutIPadEdit.sectionInset = UIEdgeInsetsMake(0, 3, 0, 3);
-            self.videoCollectionViewLayoutIPad.sectionInset = UIEdgeInsetsMake(0, 8, 0, 8);
+            self.videoCollectionViewLayoutIPadEdit.sectionInset = UIEdgeInsetsMake(0, 22, 0, 22);
+            self.videoCollectionViewLayoutIPad.sectionInset = UIEdgeInsetsMake(0, 25, 0, 25);
         }
     }
 }
