@@ -49,15 +49,14 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 - (void)awakeFromNib {
 	[super awakeFromNib];
 
-	self.labelLabel.font = [UIFont italicAlternateFontOfSize:self.labelLabel.font.pointSize];
     [self.curatedByButton.titleLabel setFont:[UIFont regularAlternateFontOfSize: self.curatedByButton.titleLabel.font.pointSize]];
-    [self.labelLabel setFont:[UIFont regularAlternateFontOfSize: self.labelLabel.font.pointSize]];
+    [self.labelLabel setFont:[UIFont regularCustomFontOfSize: self.labelLabel.font.pointSize]];
 
 	
     self.durationLabel.font = [UIFont regularCustomFontOfSize:self.durationLabel.font.pointSize];
-    [self.descriptionLabel setFont:[UIFont regularAlternateFontOfSize:self.descriptionLabel.font.pointSize]];
+    [self.descriptionLabel setFont:[UIFont lightCustomFontOfSize:self.descriptionLabel.font.pointSize]];
 
-    [self.titleLabel setFont:[UIFont lightCustomFontOfSize:self.titleLabel.font.pointSize]];
+    [self.titleLabel setFont:[UIFont boldCustomFontOfSize:self.titleLabel.font.pointSize]];
 	
 	self.actionsBar.frame = self.videoActionsContainer.bounds;
 	[self.videoActionsContainer addSubview:self.actionsBar];
@@ -84,12 +83,14 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 	_videoInstance = videoInstance;
 	
 	self.durationLabel.text = [NSString friendlyLengthFromTimeInterval:videoInstance.video.durationValue];
-	self.titleLabel.attributedText = [self attributedStringFromString: videoInstance.title withLineHeight:8];
+	self.titleLabel.attributedText = [self attributedStringFromString: videoInstance.title withLineHeight:2];
 	
     if (self.videoInstance.video.videoDescription.length > 0) {
-        [self.descriptionLabel setAttributedText:[self attributedStringFromString:[self.videoInstance.video.videoDescription stringByStrippingHTML] withLineHeight:1.5]];
-
+        self.titleLabel.numberOfLines = 2;
+        [self.descriptionLabel setText:[self.videoInstance.video.videoDescription stringByStrippingHTML]];
     } else {
+        
+        self.titleLabel.numberOfLines = 4;
         [self.heightConstantTop setConstant:8];
         [self layoutIfNeeded];
     }
@@ -119,7 +120,7 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 		self.labelLabel.text = nil;
 		
 		NSString *channelOwnerName = self.videoInstance.channel.channelOwner.displayName;
-		NSDictionary *attributes = @{ NSFontAttributeName : [UIFont regularAlternateFontOfSize:self.labelLabel.font.pointSize],
+		NSDictionary *attributes = @{ NSFontAttributeName : [UIFont regularCustomFontOfSize:self.labelLabel.font.pointSize],
                                       NSForegroundColorAttributeName : textColor};
 		
         if (!channelOwnerName) {
@@ -162,9 +163,9 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
                                                    blue: 123.0f / 255.0f
                                                   alpha: 1.0f]];
     
-    [self.durationLabel setTextColor:[UIColor colorWithRed: 183.0f / 255.0f
-                                                     green: 188.0f / 255.0f
-                                                      blue: 189.0f / 255.0f
+    [self.durationLabel setTextColor:[UIColor colorWithRed: 112.0f / 255.0f
+                                                     green: 121.0f / 255.0f
+                                                      blue: 123.0f / 255.0f
                                                      alpha: 1.0f]];
     
     [self.titleLabel setTextColor:[UIColor colorWithRed: 46.0f / 255.0f
