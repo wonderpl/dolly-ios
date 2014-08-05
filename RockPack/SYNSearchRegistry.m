@@ -226,7 +226,7 @@
         }
     }
     
-    [appDelegate.mainManagedObjectContext processPendingChanges];
+    [appDelegate.searchManagedObjectContext processPendingChanges];
     [appDelegate saveSearchContext];
     
     return YES;
