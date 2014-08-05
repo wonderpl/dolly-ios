@@ -120,7 +120,18 @@
     
     // Copy Channels
     self.channels = [appDelegate.currentUser.channels array];
-    
+
+    [appDelegate.oAuthNetworkEngine userDataForUser: ((User *) appDelegate.currentUser)
+                                            inRange: NSMakeRange(0, STANDARD_REQUEST_LENGTH)
+                                       onCompletion: ^(id dictionary) {
+                                           if (appDelegate.currentUser) {
+                                               [appDelegate.currentUser setAttributesFromDictionary: dictionary
+                                                                          ignoringObjectTypes: kIgnoreVideoInstanceObjects | kIgnoreChannelOwnerObject];
+                                           }
+                                           self.channels = [appDelegate.currentUser.channels array];
+                                           [self.currentChannelsCollectionView reloadData];
+                                       } onError: nil];
+
     [self.currentChannelsCollectionView reloadData];
     [self showInboarding];
 
