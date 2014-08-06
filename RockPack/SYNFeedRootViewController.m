@@ -49,6 +49,8 @@ static const CGFloat heightPortrait = 985;
 
 @property (nonatomic, assign) BOOL shownInboarding;
 
+@property (nonatomic, strong) NSIndexPath *lastIndex;
+
 @property (nonatomic, assign) CGFloat lastYOffset;
 @property (nonatomic, assign) UIInterfaceOrientation lastOrientation;
 
@@ -123,6 +125,8 @@ static const CGFloat heightPortrait = 985;
 
     if (IS_IPAD) {
         [self.feedCollectionView.collectionViewLayout invalidateLayout];
+        [self.navigationController.navigationBar setBackgroundTransparent:YES];
+        [self.navigationController setNavigationBarHidden:YES];
     }
     
     if (IS_IPHONE) {
@@ -149,11 +153,17 @@ static const CGFloat heightPortrait = 985;
     }
 
     self.lastYOffset = self.feedCollectionView.contentOffset.y;
+	self.lastIndex = [self.feedCollectionView indexPathForItemAtPoint:[self.feedCollectionView center]];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     self.lastOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+
+    if (IS_IPAD) {
+        [self.navigationController.navigationBar setBackgroundTransparent:NO];
+        [self.navigationController setNavigationBarHidden:NO];
+    }
 }
 
 - (void)scrollToTopIPad:(UIGestureRecognizer *)gestureRecognizer {
@@ -178,9 +188,9 @@ static const CGFloat heightPortrait = 985;
 - (void)calculateRotationOffSet {
     CGPoint newOffset = CGPointZero;
     if (UIDeviceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
-        newOffset = CGPointMake(0, self.lastYOffset*heightPortrait/heightLandscape);
+        newOffset = CGPointMake(0, self.lastYOffset*674/1024);
     } else {
-        newOffset = CGPointMake(0, self.lastYOffset*heightLandscape/heightPortrait);
+        newOffset = CGPointMake(0, self.lastYOffset*1024/768);
     }
     
     BOOL offsetOutOfBounds = newOffset.y+self.feedCollectionView.frame.size.height > self.feedCollectionView.contentSize.height;
@@ -198,8 +208,10 @@ static const CGFloat heightPortrait = 985;
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
 	[super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    
     self.feedCollectionView.alpha = 0.0;
     self.lastYOffset = self.feedCollectionView.contentOffset.y;
+    self.lastIndex = [self.feedCollectionView indexPathForItemAtPoint:[self.feedCollectionView center]];
     [self.feedCollectionView.collectionViewLayout invalidateLayout];
     [self.feedCollectionView reloadData];
 
@@ -296,6 +308,10 @@ static const CGFloat heightPortrait = 985;
 - (SYNFeedVideoCell *)videoCellForIndexPath:(NSIndexPath *)indexPath
 							 collectionView:(UICollectionView *)collectionView {
 	return nil;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [super scrollViewDidScroll:scrollView];
 }
 
 #pragma mark - SYNVideoInfoCell
@@ -470,12 +486,12 @@ static const CGFloat heightPortrait = 985;
 - (void)scrollToItemAtIndex:(NSInteger)index {
     int height = 0;
     if (UIDeviceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
-        height = heightPortrait;
+        height = 674;
     } else {
-        height = heightLandscape;
+        height = 768;
     }
     
-    int point = ([self.model videoIndexForFeedIndex:index] / 3) * height;
+    int point = ([self.model videoIndexForFeedIndex:index]) * height;
     [self.feedCollectionView setContentOffset:CGPointMake(0, point) animated:NO];
 }
 

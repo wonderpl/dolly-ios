@@ -83,18 +83,25 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 	_videoInstance = videoInstance;
 	
 	self.durationLabel.text = [NSString friendlyLengthFromTimeInterval:videoInstance.video.durationValue];
-	self.titleLabel.attributedText = [self attributedStringFromString: videoInstance.title withLineHeight:2];
-	
-    if (self.videoInstance.video.videoDescription.length > 0) {
-        self.titleLabel.numberOfLines = 2;
-        [self.descriptionLabel setText:[self.videoInstance.video.videoDescription stringByStrippingHTML]];
+    
+    if (IS_IPHONE) {
+        self.titleLabel.attributedText = [self attributedStringFromString: videoInstance.title withLineHeight:2];
     } else {
-        
-        self.titleLabel.numberOfLines = 4;
-        [self.heightConstantTop setConstant:8];
-        [self layoutIfNeeded];
+        [self.titleLabel setText: videoInstance.title];
     }
     
+    
+    if (IS_IPHONE) {
+        if (self.videoInstance.video.videoDescription.length > 0) {
+            self.titleLabel.numberOfLines = 2;
+            [self.descriptionLabel setText:[self.videoInstance.video.videoDescription stringByStrippingHTML]];
+        } else {
+            
+            self.titleLabel.numberOfLines = 4;
+            [self.heightConstantTop setConstant:8];
+            [self layoutIfNeeded];
+        }
+    }
     
 	NSURL *avatarURL = [NSURL URLWithString:self.videoInstance.originator.thumbnailURL];
 	[self.avatarThumbnailButton setImageWithURL:avatarURL

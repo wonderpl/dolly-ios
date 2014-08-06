@@ -25,8 +25,8 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
-	SYNIPadFeedLayout *layout = (SYNIPadFeedLayout *)self.feedCollectionView.collectionViewLayout;
-	layout.model = self.model;
+//	SYNIPadFeedLayout *layout = (SYNIPadFeedLayout *)self.feedCollectionView.collectionViewLayout;
+//	layout.model = self.model;
 	
 	[self.feedCollectionView registerNib:[SYNFeedVideoLargeCell nib]
 			  forCellWithReuseIdentifier:[SYNFeedVideoLargeCell reuseIdentifier]];
@@ -54,8 +54,7 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 	[super scrollViewDidScroll:scrollView];
 	
-	SYNIPadFeedLayout *layout = (SYNIPadFeedLayout *)self.feedCollectionView.collectionViewLayout;
-	layout.blockLocation = (scrollView.contentOffset.y + scrollView.contentInset.top) / scrollView.bounds.size.height;
+//	layout.blockLocation = (scrollView.contentOffset.y + scrollView.contentInset.top) / scrollView.bounds.size.height;
 }
 
 #pragma mark - Overridden
@@ -64,8 +63,7 @@
 								 collectionView:(UICollectionView *)collectionView {
 	
 	BOOL isLargeCell = [self isLargeCellAtIndexPath:indexPath];
-	NSString *reuseIdentifier = (isLargeCell ? [SYNFeedChannelLargeCell reuseIdentifier]
-											 : [SYNFeedChannelSmallCell reuseIdentifier]);
+	NSString *reuseIdentifier = [SYNFeedChannelLargeCell reuseIdentifier];
 	
 	return [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier
 																forIndexPath:indexPath];
@@ -75,12 +73,31 @@
 							 collectionView:(UICollectionView *)collectionView {
 	
 	BOOL isLargeCell = [self isLargeCellAtIndexPath:indexPath];
-	NSString *reuseIdentifier = (isLargeCell ? [SYNFeedVideoLargeCell reuseIdentifier]
-											 : [SYNFeedVideoSmallCell reuseIdentifier]);
+	NSString *reuseIdentifier = [SYNFeedVideoLargeCell reuseIdentifier];
 	
 	return [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier
 													 forIndexPath:indexPath];
 }
+
+
+- (CGSize)collectionView:(UICollectionView *)collectionView
+				  layout:(UICollectionViewLayout *)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+	
+	FeedItem *feedItem = [self.model feedItemAtindex:indexPath.item];
+	
+	CGFloat collectionViewWidth = CGRectGetWidth(collectionView.bounds);
+	BOOL isVideo = (feedItem.resourceTypeValue == FeedItemResourceTypeVideo);
+	
+    if (UIDeviceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
+        return CGSizeMake(674, 1024);
+    } else {
+        return CGSizeMake(1024, 768);
+    }
+    
+	return CGSizeZero;
+}
+
 
 #pragma mark - Private
 
