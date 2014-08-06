@@ -9,7 +9,7 @@
                 <outlet property="feedCollectionView" destination="kmB-4e-y8Z" id="6Aa-KU-IDZ"/>
                 <outlet property="infoView" destination="9pI-kS-xLU" id="MC5-jH-E7U"/>
                 <outlet property="leftConstant" destination="Ukd-hv-42m" id="IKV-kQ-f2F"/>
-                <outlet property="rightConstant" destination="uv7-MS-NNa" id="3jT-2K-La5"/>
+                <outlet property="rightConstant" destination="roN-m2-kHk" id="d2v-jb-Y9G"/>
                 <outlet property="view" destination="1" id="8Dn-DF-fqS"/>
             </connections>
         </placeholder>
@@ -42,6 +42,9 @@
                             <rect key="frame" x="5" y="4" width="390" height="760"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="390" id="LeU-8U-D0r"/>
+                            </constraints>
                         </webView>
                     </subviews>
                     <color key="backgroundColor" red="0.29019609089999998" green="0.68627452850000004" blue="0.36078432199999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -50,7 +53,6 @@
                         <constraint firstAttribute="width" constant="512" id="Ptb-Pp-bbB"/>
                         <constraint firstItem="9pI-kS-xLU" firstAttribute="top" secondItem="cG7-fS-UDB" secondAttribute="top" constant="4" id="XfV-wF-wBf"/>
                         <constraint firstAttribute="bottom" secondItem="9pI-kS-xLU" secondAttribute="bottom" constant="4" id="Z6x-0W-NI6"/>
-                        <constraint firstAttribute="trailing" secondItem="9pI-kS-xLU" secondAttribute="trailing" constant="117" id="uv7-MS-NNa"/>
                     </constraints>
                 </view>
             </subviews>
@@ -62,6 +64,8 @@
                 <constraint firstAttribute="bottom" secondItem="cG7-fS-UDB" secondAttribute="bottom" id="DQk-6i-bcE"/>
                 <constraint firstAttribute="trailing" secondItem="cG7-fS-UDB" secondAttribute="trailing" constant="-117" id="Ukd-hv-42m"/>
                 <constraint firstItem="kmB-4e-y8Z" firstAttribute="top" secondItem="1" secondAttribute="top" id="ZQK-Cr-vic"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="cG7-fS-UDB" secondAttribute="trailing" constant="-117" id="i36-nW-Ljg"/>
+                <constraint firstItem="cG7-fS-UDB" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="629" id="roN-m2-kHk"/>
                 <constraint firstItem="cG7-fS-UDB" firstAttribute="leading" secondItem="kmB-4e-y8Z" secondAttribute="trailing" constant="-1" id="u5S-jP-P8j"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>

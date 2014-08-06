@@ -174,31 +174,18 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
     CGPoint translatedPoint = [(UIPanGestureRecognizer*)recognizer translationInView:self.view];
     
     if ([(UIPanGestureRecognizer*)recognizer state] == UIGestureRecognizerStateBegan) {
-        self.firstX = self.leftConstant.constant;
+        self.firstX = self.rightConstant.constant;
         self.firstY = [[recognizer view] center].y;
     }
     
-    if (self.firstX-translatedPoint.x > -480 && self.firstX-translatedPoint.x < 0) {
-        NSLog(@"translatedPoint : %f", self.firstX-translatedPoint.x);
-        [self.leftConstant setConstant:(self.firstX-translatedPoint.x)];
-    }
     
-    if (self.firstX-translatedPoint.x > 0) {
-        [self.leftConstant setConstant:0];
+    NSLog(@"translatedPoint : %f", self.firstX+translatedPoint.x);
+
+    if (self.firstX+translatedPoint.x > 550 &&  self.firstX+translatedPoint.x < 970) {
+        [self.rightConstant setConstant:(self.firstX+translatedPoint.x)];
     }
     
     if ([(UIPanGestureRecognizer*)recognizer state] == UIGestureRecognizerStateEnded) {
-        
-        if (self.firstX-translatedPoint.x > 0) {
-            [self.leftConstant setConstant:0];
-        }
-    
-        if (self.firstX-translatedPoint.x <= -480) {
-            [self.leftConstant setConstant:-480];
-        }
-        
-        
-
     }
     
 }
