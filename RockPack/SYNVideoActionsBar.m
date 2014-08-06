@@ -91,12 +91,12 @@
 
 - (void) setLightAssets {
 	[self.addButton setImage:[UIImage imageNamed:@"AddButtonLight.png"] forState:UIControlStateNormal];
-    [self.shareButton setImage:[UIImage imageNamed:@"shareButtonLight.png"] forState:UIControlStateNormal];
+    [self.shareButton setImage:[UIImage imageNamed:@"ShareButtonLight.png"] forState:UIControlStateNormal];
 }
 
 - (void) setDarkAssets {
 	[self.addButton setImage:[UIImage imageNamed:@"AddButton.png"] forState:UIControlStateNormal];
-    [self.shareButton setImage:[UIImage imageNamed:@"shareButton.png"] forState:UIControlStateNormal];
+    [self.shareButton setImage:[UIImage imageNamed:@"ShareButton.png"] forState:UIControlStateNormal];
 }
 
 

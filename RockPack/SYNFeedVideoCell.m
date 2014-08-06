@@ -56,14 +56,14 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 
 	
     self.durationLabel.font = [UIFont regularCustomFontOfSize:self.durationLabel.font.pointSize];
-    [self.descriptionLabel setFont:[UIFont regularAlternateFontOfSize:self.descriptionLabel.font.pointSize]];
-
+    
     if (IS_IPHONE) {
-        [self.titleLabel setFont:[UIFont lightCustomFontOfSize:self.titleLabel.font.pointSize]];
+        [self.descriptionLabel setFont:[UIFont regularAlternateFontOfSize:self.descriptionLabel.font.pointSize]];
     } else {
-        [self.titleLabel setFont:[UIFont boldCustomFontOfSize:self.titleLabel.font.pointSize]];
-
+        [self.descriptionLabel setFont:[UIFont regularCustomFontOfSize:self.descriptionLabel.font.pointSize]];
     }
+
+    [self.titleLabel setFont:[UIFont boldCustomFontOfSize:self.titleLabel.font.pointSize]];
 	
 	self.actionsBar.frame = self.videoActionsContainer.bounds;
 	[self.videoActionsContainer addSubview:self.actionsBar];
@@ -186,10 +186,12 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
                                                       blue: 189.0f / 255.0f
                                                      alpha: 1.0f]];
     
-    [self.titleLabel setTextColor:[UIColor colorWithRed: 46.0f / 255.0f
-                                                  green: 46.0f / 255.0f
-                                                   blue: 50.0f / 255.0f
-                                                  alpha: 1.0f]];
+    if (IS_IPHONE) {
+        [self.titleLabel setTextColor:[UIColor colorWithRed: 46.0f / 255.0f
+                                                      green: 46.0f / 255.0f
+                                                       blue: 50.0f / 255.0f
+                                                      alpha: 1.0f]];        
+    }
     
     [self.descriptionLabel setTextColor:[UIColor colorWithRed: 46.0f / 255.0f
                                                         green: 46.0f / 255.0f

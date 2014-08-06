@@ -25,7 +25,7 @@
 #import "SYNActivityManager.h"
 
 static const CGFloat ActionCellHeight = 50.0;
-static const CGFloat ClickToMoreCellHeight = 60.0;
+static const CGFloat ClickToMoreCellHeight = 45.0;
 static const CGFloat UpcomingVideosDividerHeight = 40.0;
 
 @interface SYNVideoInfoViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIViewControllerTransitioningDelegate, SYNWebViewCellDelegate, SYNVideoActionsBarDelegate, SYNVideoClickToMoreCellDelegate>

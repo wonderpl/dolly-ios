@@ -83,7 +83,7 @@ static const CGFloat heightPortrait = 985;
 	self.model = [SYNFeedModel sharedModel];
 	self.model.delegate = self;
 	if (IS_IPAD) {
-        self.feedCollectionView.contentInset = UIEdgeInsetsMake(64.0, 0.0, 0.0, 0.0);
+//        self.feedCollectionView.contentInset = UIEdgeInsetsMake(64.0, 0.0, 0.0, 0.0);
     }
 	
 	if (![self.model itemCount]) {
@@ -112,6 +112,7 @@ static const CGFloat heightPortrait = 985;
                                              selector:@selector(reloadData)
                                                  name:kReloadFeed
                                                object:nil];
+    
     
 	[self reloadData];
 }
@@ -494,5 +495,7 @@ static const CGFloat heightPortrait = 985;
     int point = ([self.model videoIndexForFeedIndex:index]) * height;
     [self.feedCollectionView setContentOffset:CGPointMake(0, point) animated:NO];
 }
+
+
 
 @end

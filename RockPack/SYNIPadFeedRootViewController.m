@@ -17,6 +17,20 @@
 #import "VideoInstance.h"
 #import "SYNIPadFeedLayout.h"
 #import "UINavigationBar+Appearance.h"
+#import "Video.h"
+
+static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
+
+@interface SYNIPadFeedRootViewController ()
+
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *leftConstant;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *rightConstant;
+
+@property (nonatomic, assign) float firstX;
+@property (nonatomic, assign) float firstY;
+@property (strong, nonatomic) IBOutlet UIWebView *infoView;
+
+@end
 
 @implementation SYNIPadFeedRootViewController
 
@@ -39,6 +53,12 @@
 	
 	[self.feedCollectionView registerNib:[SYNFeedChannelSmallCell nib]
 			  forCellWithReuseIdentifier:[SYNFeedChannelSmallCell reuseIdentifier]];
+
+    UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveInfoBar:)];
+    [panRecognizer setMinimumNumberOfTouches:1];
+    [panRecognizer setMaximumNumberOfTouches:1];
+    [self.infoView addGestureRecognizer:panRecognizer];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -92,10 +112,43 @@
     if (UIDeviceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
         return CGSizeMake(768, 1024);
     } else {
+        
+        NSLog(@"%@", NSStringFromCGSize(CGSizeMake(964-self.leftConstant.constant, 768)));
+        NSLog(@"left constant : %f", self.leftConstant.constant);
         return CGSizeMake(1024, 768);
     }
     
 	return CGSizeZero;
+}
+
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    [self stoppedScrolling];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView
+                  willDecelerate:(BOOL)decelerate
+{
+    if (!decelerate) {
+        [self stoppedScrolling];
+    }
+}
+
+- (void)stoppedScrolling
+{
+	FeedItem *feedItem = [self.model feedItemAtindex:[self currentPage]];
+	
+	if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo) {
+        VideoInstance *videoInstance = [self.model resourceForFeedItem:feedItem];
+        NSURL *templateURL = [[NSBundle mainBundle] URLForResource:HTMLTemplateFilename withExtension:@"html"];
+        NSString *templateString = [NSString stringWithContentsOfURL:templateURL encoding:NSUTF8StringEncoding error:nil];
+        NSString *HTMLString = [templateString stringByReplacingOccurrencesOfString:@"%{DESCRIPTION}" withString:videoInstance.video.videoDescription];
+        [self.infoView loadHTMLString:HTMLString baseURL:nil];
+	}
+
+    
+    
 }
 
 
@@ -113,5 +166,52 @@
 		return (isEvenBlock ? (blockOffset == 0) : (blockOffset == 2));
 	}
 }
+
+#pragma mark - Pan Gesture
+- (void)moveInfoBar:(UIPanGestureRecognizer *)recognizer {
+    
+    [self.view bringSubviewToFront:[(UIPanGestureRecognizer*)recognizer view]];
+    CGPoint translatedPoint = [(UIPanGestureRecognizer*)recognizer translationInView:self.view];
+    
+    if ([(UIPanGestureRecognizer*)recognizer state] == UIGestureRecognizerStateBegan) {
+        self.firstX = self.leftConstant.constant;
+        self.firstY = [[recognizer view] center].y;
+    }
+    
+    if (self.firstX-translatedPoint.x > -480 && self.firstX-translatedPoint.x < 0) {
+        NSLog(@"translatedPoint : %f", self.firstX-translatedPoint.x);
+        [self.leftConstant setConstant:(self.firstX-translatedPoint.x)];
+    }
+    
+    if (self.firstX-translatedPoint.x > 0) {
+        [self.leftConstant setConstant:0];
+    }
+    
+    if ([(UIPanGestureRecognizer*)recognizer state] == UIGestureRecognizerStateEnded) {
+        
+        if (self.firstX-translatedPoint.x > 0) {
+            [self.leftConstant setConstant:0];
+        }
+    
+        if (self.firstX-translatedPoint.x <= -480) {
+            [self.leftConstant setConstant:-480];
+        }
+        
+        
+
+    }
+    
+}
+
+- (NSInteger)currentPage {
+    CGPoint contentOffset = self.feedCollectionView.contentOffset;
+    CGSize viewSize = self.feedCollectionView.bounds.size;
+    
+    NSInteger verticalPage = MAX(0.0, contentOffset.y / viewSize.height);
+    
+    return verticalPage;
+}
+
+
 
 @end
