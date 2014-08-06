@@ -50,6 +50,7 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 	[super awakeFromNib];
 
 	self.labelLabel.font = [UIFont italicAlternateFontOfSize:self.labelLabel.font.pointSize];
+    
     [self.curatedByButton.titleLabel setFont:[UIFont regularAlternateFontOfSize: self.curatedByButton.titleLabel.font.pointSize]];
     [self.labelLabel setFont:[UIFont regularAlternateFontOfSize: self.labelLabel.font.pointSize]];
 
@@ -57,7 +58,12 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
     self.durationLabel.font = [UIFont regularCustomFontOfSize:self.durationLabel.font.pointSize];
     [self.descriptionLabel setFont:[UIFont regularAlternateFontOfSize:self.descriptionLabel.font.pointSize]];
 
-    [self.titleLabel setFont:[UIFont lightCustomFontOfSize:self.titleLabel.font.pointSize]];
+    if (IS_IPHONE) {
+        [self.titleLabel setFont:[UIFont lightCustomFontOfSize:self.titleLabel.font.pointSize]];
+    } else {
+        [self.titleLabel setFont:[UIFont boldCustomFontOfSize:self.titleLabel.font.pointSize]];
+
+    }
 	
 	self.actionsBar.frame = self.videoActionsContainer.bounds;
 	[self.videoActionsContainer addSubview:self.actionsBar];
@@ -95,6 +101,18 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
     }
     
     [self layoutIfNeeded];
+    
+    if (IS_IPHONE) {
+        if (self.videoInstance.video.videoDescription.length > 0) {
+            self.titleLabel.numberOfLines = 2;
+            [self.descriptionLabel setText:[self.videoInstance.video.videoDescription stringByStrippingHTML]];
+        } else {
+            
+            self.titleLabel.numberOfLines = 4;
+            [self.heightConstantTop setConstant:8];
+            [self layoutIfNeeded];
+        }
+    }
     
 	NSURL *avatarURL = [NSURL URLWithString:self.videoInstance.originator.thumbnailURL];
 	[self.avatarThumbnailButton setImageWithURL:avatarURL
