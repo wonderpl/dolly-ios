@@ -65,7 +65,6 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
     [self.feedCollectionView reloadData];
-    [self setWebViewHTML];
 	[self.navigationController.navigationBar setBackgroundTransparent:NO];
 }
 
@@ -167,14 +166,14 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
         self.firstX = self.rightConstant.constant;
     }
 
-    if (self.firstX+translatedPoint.x > 550 &&  self.firstX+translatedPoint.x < 970) {
+    if (self.firstX+translatedPoint.x > 415 &&  self.firstX+translatedPoint.x < 1000) {
         [self.rightConstant setConstant:(self.firstX+translatedPoint.x)];
         [self.feedCollectionView.collectionViewLayout invalidateLayout];
     }
     
     
-    if (self.firstX+translatedPoint.x < 550) {
-        [self.rightConstant setConstant:550];
+    if (self.firstX+translatedPoint.x < 415) {
+        [self.rightConstant setConstant:415];
         [self.feedCollectionView.collectionViewLayout invalidateLayout];
 
     }
@@ -189,6 +188,10 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
     return verticalPage;
 }
 
+- (void)clickToMore:(UIButton *)button withURL:(NSURL *)url {
+    
+	[self.infoView loadRequest:[NSURLRequest requestWithURL:url]];
+}
 
 
 @end

@@ -18,6 +18,9 @@
 #import "NSString+StrippingHTML.h"
 #import <UIImageView+WebCache.h>
 #import "UIImage+Blur.h"
+#import "UIColor+SYNColor.h"
+#import "SYNVideoPlayer.h"
+#import "SYNVideoPlayerCell.h"
 
 static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 
@@ -41,7 +44,10 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 @property (nonatomic, strong) SYNVideoActionsBar *actionsBar;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *heightConstant;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *heightConstantTop;
-
+@property (strong, nonatomic) IBOutlet UIButton *clickToMore;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *descriptionTop;
+@property (strong, nonatomic) IBOutlet SYNVideoPlayerCell *videoPlayerView;
+@property (strong, nonatomic) SYNVideoPlayer *videoPlayer;
 @end
 
 @implementation SYNFeedVideoCell
@@ -70,6 +76,12 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 	
 	self.videoThumbnailButton.layer.borderColor = [[UIColor colorWithWhite:0 alpha:0.05] CGColor];
 	self.videoThumbnailButton.layer.borderWidth = 1.0;
+    
+    self.clickToMore.layer.cornerRadius = (CGRectGetHeight(self.clickToMore.frame) / 2.0);
+	self.clickToMore.layer.borderColor = [[UIColor dollyButtonGreenColor] CGColor];
+	self.clickToMore.layer.borderWidth = 2.0;
+	self.clickToMore.tintColor = [UIColor dollyButtonGreenColor];
+
 
 }
 
@@ -79,7 +91,6 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
     [self setBackgroundColor:[UIColor whiteColor]];
     self.backgroundImage.image = [UIImage new];
     [self.descriptionLabel setText: @""];
-
 }
 
 - (UIImageView *)imageView {
@@ -95,8 +106,9 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
     if (self.videoInstance.video.videoDescription.length > 0) {
         [self.descriptionLabel setAttributedText:[self attributedStringFromString:[self.videoInstance.video.videoDescription stringByStrippingHTML] withLineHeight:1.5]];
         [self.heightConstantTop setConstant:17];
-
+		[self.descriptionTop setConstant:50];
     } else {
+        [self.descriptionTop setConstant:10];
         [self.heightConstantTop setConstant:2];
     }
     
@@ -124,6 +136,10 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 	[self.videoThumbnailButton setImageWithURL:thumbnailURL forState:UIControlStateNormal];
     self.actionsBar.favouritedBy = [videoInstance.starrers array];
 	self.actionsBar.favouriteButton.selected = videoInstance.starredByUserValue;
+    
+	[self setClickToMoreTitle:videoInstance.video.linkTitle];
+	self.videoPlayer = [SYNVideoPlayer playerForVideoInstance:videoInstance];
+    [self.videoPlayerView setVideoPlayer:self.videoPlayer];
 }
 
 
@@ -207,7 +223,6 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
     
     [self.actionsBar setDarkAssets];
     
-    
 }
 
 //TODO: make into category
@@ -230,6 +245,10 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 	return attributedString;
 
     
+}
+- (IBAction)clickToMoreTapped:(id)sender {
+    [self.delegate clickToMore:self.clickToMore withURL:[NSURL URLWithString:self.videoInstance.video.linkURL]];
+
 }
 
 - (SYNVideoActionsBar *)actionsBar {
@@ -259,11 +278,18 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 }
 
 - (IBAction)videoThumbnailPressed:(UIButton *)button {
-	[self.delegate videoCellThumbnailPressed:self];
+//	[self.delegate videoCellThumbnailPressed:self];
+    [self.videoPlayer play];
 }
 
 - (IBAction)addedByPressed:(UIButton *)button {
 	[self.delegate videoCell:self addedByPressed:button];
 }
+
+- (void)setClickToMoreTitle:(NSString *)title {
+    self.clickToMore.hidden = ([title length] == 0);
+	[self.clickToMore setTitle:title forState:UIControlStateNormal];
+}
+
 
 @end

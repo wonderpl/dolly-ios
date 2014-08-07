@@ -23,6 +23,9 @@
 - (void)videoCell:(SYNFeedVideoCell *)cell sharePressed:(UIButton *)button;
 - (void)videoCell:(SYNFeedVideoCell *)cell addedByPressed:(UIButton *)button;
 
+@optional
+- (void)clickToMore:(UIButton *)button withURL:(NSURL *)url;
+
 @end
 
 @interface SYNFeedVideoCell : UICollectionViewCell <SYNVideoInfoCell>
