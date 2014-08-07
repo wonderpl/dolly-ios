@@ -124,41 +124,47 @@ UIATarget.onAlert = function onAlert(alert) {
 }
 
 
-target.delay(5);
+function loginTests() {
 
-var logInButton = target.frontMostApp().mainWindow().buttons()["Login Navigation"];
-UIALogger.logMessage("Tapping default Log in button");
-logInButton.tap();
-if (logInWithUser("111111","rockpack")) {
-	UIALogger.logMessage("Pass test");
-	UIALogger.logPass("logInWith real user");
-} else {
-	UIALogger.logFail("logInWith real user");
+    
+    target.delay(5);
+    
+    var logInButton = target.frontMostApp().mainWindow().buttons()["Login Navigation"];
+    UIALogger.logMessage("Tapping default Log in button");
+    logInButton.tap();
+    if (logInWithUser("111111","rockpack")) {
+        UIALogger.logMessage("Pass test");
+        UIALogger.logPass("logInWith real user");
+    } else {
+        UIALogger.logFail("logInWith real user");
+    }
+    
+    logInButton.tap();
+    
+    if (logInWithUser("213eu8qdoji","")) {
+        UIALogger.logFail("log in with user name only");
+    } else {
+        UIALogger.logMessage("Pass test");
+        UIALogger.logPass("log in with user name only");
+    }
+    
+    if (logInWithUser("","")) {
+        UIALogger.logFail("log in with no data");
+    } else {
+        UIALogger.logMessage("Pass test");
+        UIALogger.logPass("log in with no data");
+    }
+    
+    if (logInWithUser("qwdqwddqwd","asdad((£U*(@OIJ")) {
+        UIALogger.logFail("log in with invalid user");
+    } else {
+        UIALogger.logMessage("Pass test");
+        UIALogger.logPass("log in with invalid user");
+    }
+    
+    target.frontMostApp().navigationBar().leftButton().tap();
+    forgotPassword();
+    
+
 }
-
-logInButton.tap();
-
-if (logInWithUser("213eu8qdoji","")) {
-	UIALogger.logFail("log in with user name only");
-} else {
-	UIALogger.logMessage("Pass test");
-	UIALogger.logPass("log in with user name only");
-}
-
-if (logInWithUser("","")) {
-	UIALogger.logFail("log in with no data");
-} else {
-	UIALogger.logMessage("Pass test");
-	UIALogger.logPass("log in with no data");
-}
-
-if (logInWithUser("qwdqwddqwd","asdad((£U*(@OIJ")) {
-	UIALogger.logFail("log in with invalid user");
-} else {
-	UIALogger.logMessage("Pass test");
-	UIALogger.logPass("log in with invalid user");
-}
-
-target.frontMostApp().navigationBar().leftButton().tap();
-forgotPassword();
 

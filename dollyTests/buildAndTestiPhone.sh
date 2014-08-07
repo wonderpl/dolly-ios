@@ -14,4 +14,4 @@ clean \
 build \
 install
 
-instruments -t BasicTest "/Users/$USER/Documents/UIAutomationBuild/build/Applications/dolly.app" -e UIASCRIPT "./login_tests.js"
+instruments -t BasicTest "/Users/$USER/Documents/UIAutomationBuild/build/Applications/dolly.app" -e UIASCRIPT "./test_suite.js"
