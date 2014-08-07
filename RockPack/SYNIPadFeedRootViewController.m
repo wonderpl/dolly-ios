@@ -27,8 +27,8 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *rightConstant;
 
 @property (nonatomic, assign) float firstX;
-@property (nonatomic, assign) float firstY;
 @property (strong, nonatomic) IBOutlet UIWebView *infoView;
+@property (strong, nonatomic) IBOutlet UIView *infoViewContainer;
 
 @end
 
@@ -59,12 +59,13 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
     [panRecognizer setMaximumNumberOfTouches:1];
     [self.infoView addGestureRecognizer:panRecognizer];
 
+    [self.infoViewContainer addGestureRecognizer:panRecognizer];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
     [self.feedCollectionView reloadData];
-
+    [self setWebViewHTML];
 	[self.navigationController.navigationBar setBackgroundTransparent:NO];
 }
 
@@ -73,8 +74,6 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 	[super scrollViewDidScroll:scrollView];
-	
-//	layout.blockLocation = (scrollView.contentOffset.y + scrollView.contentInset.top) / scrollView.bounds.size.height;
 }
 
 #pragma mark - Overridden
@@ -82,7 +81,6 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 - (SYNFeedChannelCell *)channelCellForIndexPath:(NSIndexPath *)indexPath
 								 collectionView:(UICollectionView *)collectionView {
 	
-	BOOL isLargeCell = [self isLargeCellAtIndexPath:indexPath];
 	NSString *reuseIdentifier = [SYNFeedChannelLargeCell reuseIdentifier];
 	
 	return [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier
@@ -92,7 +90,6 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 - (SYNFeedVideoCell *)videoCellForIndexPath:(NSIndexPath *)indexPath
 							 collectionView:(UICollectionView *)collectionView {
 	
-	BOOL isLargeCell = [self isLargeCellAtIndexPath:indexPath];
 	NSString *reuseIdentifier = [SYNFeedVideoLargeCell reuseIdentifier];
 	
 	return [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier
@@ -104,18 +101,11 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 				  layout:(UICollectionViewLayout *)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
 	
-	FeedItem *feedItem = [self.model feedItemAtindex:indexPath.item];
-	
-	CGFloat collectionViewWidth = CGRectGetWidth(collectionView.bounds);
-	BOOL isVideo = (feedItem.resourceTypeValue == FeedItemResourceTypeVideo);
-	
     if (UIDeviceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
         return CGSizeMake(768, 1024);
     } else {
-        
-        NSLog(@"%@", NSStringFromCGSize(CGSizeMake(964-self.leftConstant.constant, 768)));
-        NSLog(@"left constant : %f", self.leftConstant.constant);
-        return CGSizeMake(1024, 768);
+        NSLog(@"left constant : %f", self.rightConstant.constant);
+        return CGSizeMake(self.rightConstant.constant, 768);
     }
     
 	return CGSizeZero;
@@ -137,7 +127,11 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 
 - (void)stoppedScrolling
 {
-	FeedItem *feedItem = [self.model feedItemAtindex:[self currentPage]];
+    [self setWebViewHTML];
+}
+
+- (void)setWebViewHTML {
+    FeedItem *feedItem = [self.model feedItemAtindex:[self currentPage]];
 	
 	if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo) {
         VideoInstance *videoInstance = [self.model resourceForFeedItem:feedItem];
@@ -146,11 +140,7 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
         NSString *HTMLString = [templateString stringByReplacingOccurrencesOfString:@"%{DESCRIPTION}" withString:videoInstance.video.videoDescription];
         [self.infoView loadHTMLString:HTMLString baseURL:nil];
 	}
-
-    
-    
 }
-
 
 #pragma mark - Private
 
@@ -175,19 +165,19 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
     
     if ([(UIPanGestureRecognizer*)recognizer state] == UIGestureRecognizerStateBegan) {
         self.firstX = self.rightConstant.constant;
-        self.firstY = [[recognizer view] center].y;
     }
-    
-    
-    NSLog(@"translatedPoint : %f", self.firstX+translatedPoint.x);
 
     if (self.firstX+translatedPoint.x > 550 &&  self.firstX+translatedPoint.x < 970) {
         [self.rightConstant setConstant:(self.firstX+translatedPoint.x)];
+        [self.feedCollectionView.collectionViewLayout invalidateLayout];
     }
     
-    if ([(UIPanGestureRecognizer*)recognizer state] == UIGestureRecognizerStateEnded) {
-    }
     
+    if (self.firstX+translatedPoint.x < 550) {
+        [self.rightConstant setConstant:550];
+        [self.feedCollectionView.collectionViewLayout invalidateLayout];
+
+    }
 }
 
 - (NSInteger)currentPage {

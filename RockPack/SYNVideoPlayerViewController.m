@@ -38,6 +38,8 @@
 #import "UIFont+SYNFont.h"
 #import "SYNYouTubeWebVideoPlayer.h"
 
+static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
+
 @import AVFoundation;
 @import MediaPlayer;
 @import MessageUI;
@@ -83,6 +85,10 @@
 @property (nonatomic, strong) UILabel *overlayLabel;
 @property (nonatomic, strong) UIImageView *swipeImageView;
 @property (nonatomic, strong) UIGestureRecognizer *inboardingTapGesture;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *leftWebViewConstant;
+@property (strong, nonatomic) IBOutlet UIWebView *webView;
+@property (nonatomic, assign) float firstX;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *rightConstant;
 
 @end
 
@@ -123,6 +129,12 @@
 											   object:nil];
     
     self.showingOverlay = NO;
+    
+    UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveInfoBar:)];
+    [panRecognizer setMinimumNumberOfTouches:1];
+    [panRecognizer setMaximumNumberOfTouches:1];
+    [self.webView addGestureRecognizer:panRecognizer];
+
 }
 
 - (NSUInteger)supportedInterfaceOrientations {
@@ -246,7 +258,7 @@
     }
 
 	_videoInstance = videoInstance;
-	
+    
 	if ([self isViewLoaded]) {
 		[self updateVideoInstanceDetails:videoInstance];
 		[self playCurrentVideo];
@@ -268,10 +280,10 @@
         [((SYNYouTubeWebVideoPlayer*)self.currentVideoPlayer).reloadVideoTimer invalidate];
     }
     
+    
     [self.videosCollectionView setContentOffset:CGPointMake(self.selectedIndex * CGRectGetWidth(self.videosCollectionView.frame), 0.0f)];
 	
 	self.videoInstance = [self.model itemAtIndex:selectedIndex];
-	
 	self.videoInfoViewController.selectedIndex = selectedIndex;
 }
 
@@ -500,6 +512,12 @@
 	
 	self.followingButton.selected = [[SYNActivityManager sharedInstance] isSubscribedToUserId:videoInstance.originator.uniqueId];
 	[self.followingButton invalidateIntrinsicContentSize];
+    
+    NSURL *templateURL = [[NSBundle mainBundle] URLForResource:HTMLTemplateFilename withExtension:@"html"];
+    NSString *templateString = [NSString stringWithContentsOfURL:templateURL encoding:NSUTF8StringEncoding error:nil];
+    NSString *HTMLString = [templateString stringByReplacingOccurrencesOfString:@"%{DESCRIPTION}" withString:videoInstance.video.videoDescription];
+    [self.webView loadHTMLString:HTMLString baseURL:nil];
+
     [self showInboardingShopMotion:videoInstance];
 }
 
@@ -698,5 +716,32 @@
     _maximised = maximised;
     self.currentVideoPlayer.maximised = maximised;
 }
+
+#pragma mark - Pan Gesture
+- (void)moveInfoBar:(UIPanGestureRecognizer *)recognizer {
+    
+    [self.view bringSubviewToFront:[(UIPanGestureRecognizer*)recognizer view]];
+    CGPoint translatedPoint = [(UIPanGestureRecognizer*)recognizer translationInView:self.view];
+    
+    if ([(UIPanGestureRecognizer*)recognizer state] == UIGestureRecognizerStateBegan) {
+        self.firstX = self.rightConstant.constant;
+    }
+    
+    if (self.firstX+translatedPoint.x > 550 &&  self.firstX+translatedPoint.x < 970) {
+        [self.rightConstant setConstant:(self.firstX+translatedPoint.x)];
+    	[self.view layoutIfNeeded];
+    }
+    
+    if (self.firstX+translatedPoint.x < 550) {
+        [self.rightConstant setConstant:550];
+    	[self.view layoutIfNeeded];
+    }
+    
+    if ([(UIPanGestureRecognizer*)recognizer state] == UIGestureRecognizerStateEnded) {
+    }
+    
+}
+
+
 
 @end

@@ -8,6 +8,7 @@
             <connections>
                 <outlet property="feedCollectionView" destination="kmB-4e-y8Z" id="6Aa-KU-IDZ"/>
                 <outlet property="infoView" destination="9pI-kS-xLU" id="MC5-jH-E7U"/>
+                <outlet property="infoViewContainer" destination="cG7-fS-UDB" id="xqX-Cz-KgT"/>
                 <outlet property="leftConstant" destination="Ukd-hv-42m" id="IKV-kQ-f2F"/>
                 <outlet property="rightConstant" destination="roN-m2-kHk" id="d2v-jb-Y9G"/>
                 <outlet property="view" destination="1" id="8Dn-DF-fqS"/>
@@ -39,11 +40,11 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9pI-kS-xLU">
-                            <rect key="frame" x="5" y="4" width="390" height="760"/>
+                            <rect key="frame" x="5" y="4" width="458" height="760"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="390" id="LeU-8U-D0r"/>
+                                <constraint firstAttribute="width" constant="458" id="LeU-8U-D0r"/>
                             </constraints>
                         </webView>
                     </subviews>
