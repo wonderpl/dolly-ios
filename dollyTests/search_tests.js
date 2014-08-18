@@ -47,7 +47,9 @@ function goToEditorsPicks() {
 }
 
 
-goToEditorsPicks();
+function searchTests() {
+    goToEditorsPicks();
+}
 
 
 

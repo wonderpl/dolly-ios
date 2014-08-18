@@ -4,9 +4,15 @@ var target = UIATarget.localTarget();
 
 
 function logInWithUser(userName, password) {
-	var testName = "logInWithUser";
+    target.delay(2);
+
+    var testName = "logInWithUser";
 	
 	UIALogger.logStart(testName);
+    
+    var logInButton = target.frontMostApp().mainWindow().buttons()["Login Navigation"];
+    UIALogger.logMessage("Tapping default Log in button");
+    logInButton.tap();
     
 	UIALogger.logMessage("Tapping user name field");
 	var userNameTextField = target.frontMostApp().mainWindow().textFields()["Username Field"].textFields()["Username Field"];
@@ -23,7 +29,6 @@ function logInWithUser(userName, password) {
 	target.delay(2);
 	
 	if (feedCheck()) {
-		logOut();
 		return true;
 	} else {
 		return false;
@@ -95,14 +100,8 @@ function forgotPassword() {
 	target.delay(1);
 	
 	textField.tap();
-	target.frontMostApp().mainWindow().textFields()[0].textFields()[0].setValue("aa");
-    
-    
-	if(alertView.isValid) {
-		UIALogger.logFail(testName);
-	} else {
-		UIALogger.logPass(testName);
-	}
+	
+    target.frontMostApp().mainWindow().textFields()[0].textFields()[0].setValue("aa");
 	
 	target.frontMostApp().navigationBar().leftButton().tap();
 	target.frontMostApp().navigationBar().leftButton().tap();
@@ -125,27 +124,23 @@ UIATarget.onAlert = function onAlert(alert) {
 
 
 function loginTests() {
-
     
     target.delay(5);
     
-    var logInButton = target.frontMostApp().mainWindow().buttons()["Login Navigation"];
-    UIALogger.logMessage("Tapping default Log in button");
-    logInButton.tap();
     if (logInWithUser("111111","rockpack")) {
         UIALogger.logMessage("Pass test");
         UIALogger.logPass("logInWith real user");
+        logOut();
     } else {
         UIALogger.logFail("logInWith real user");
     }
-    
-    logInButton.tap();
     
     if (logInWithUser("213eu8qdoji","")) {
         UIALogger.logFail("log in with user name only");
     } else {
         UIALogger.logMessage("Pass test");
         UIALogger.logPass("log in with user name only");
+        target.frontMostApp().navigationBar().leftButton().tap();
     }
     
     if (logInWithUser("","")) {
@@ -153,6 +148,7 @@ function loginTests() {
     } else {
         UIALogger.logMessage("Pass test");
         UIALogger.logPass("log in with no data");
+        target.frontMostApp().navigationBar().leftButton().tap();
     }
     
     if (logInWithUser("qwdqwddqwd","asdad((£U*(@OIJ")) {

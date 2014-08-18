@@ -42,29 +42,7 @@ function createNewCollection() {
 		
 }
 
-function logInWithUser(userName, password) {
-	var testName = "logInWithUser";
-	
-	UIALogger.logStart(testName);
 
-	UIALogger.logMessage("Tapping user name field");
-	var userNameTextField = target.frontMostApp().mainWindow().textFields()["Username Field"].textFields()["Username Field"];
-	userNameTextField.setValue(userName);
-
-	UIALogger.logMessage("Tapping password field");
-	var passwordTextField = target.frontMostApp().mainWindow().secureTextFields()["Password Field"].secureTextFields()["Password Field"];
-	passwordTextField.tap();
-	passwordTextField.setValue(password);
-	
-	UIALogger.logMessage("Tapping Log in button");
-	target.frontMostApp().navigationBar().rightButton().tap();
-	
-	
-	target.delay(2);	
+function profileTests() {
+	editDescriptionTest();
 }
-
-
-
-editDescriptionTest();
-createNewCollection();
-editDescriptionTest();
