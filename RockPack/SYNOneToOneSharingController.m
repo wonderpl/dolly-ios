@@ -166,10 +166,8 @@ SYNFriendShareCellDelegate>
         
     }
     
-    
-    if (IS_IPAD)
+	if (IS_IPAD)
     {
-        
         UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.searchBarContainer.frame byRoundingCorners:UIRectCornerTopLeft| UIRectCornerTopRight                                                         cornerRadii:CGSizeMake(10.0, 10.0)];
         CAShapeLayer *maskLayer = [CAShapeLayer layer];
         maskLayer.frame = self.searchBarContainer.bounds;

@@ -60,7 +60,6 @@ static CGFloat const ControlsFadeTimer = 5.0;
 - (id)initWithFrame:(CGRect)frame {
 	if (self = [super initWithFrame:frame]) {
 		self.backgroundColor = [UIColor blackColor];
-		
 		[self addSubview:self.playerContainerView];
 		[self addSubview:self.loadingView];
 	}
@@ -206,7 +205,6 @@ static CGFloat const ControlsFadeTimer = 5.0;
 
 		self.hasBeganPlaying = YES;
 	}
-	self.state = SYNVideoPlayerStatePlaying;
 	self.scrubberBar.playing = YES;
     [self startUpdatingProgress];
 }
@@ -243,6 +241,8 @@ static CGFloat const ControlsFadeTimer = 5.0;
     
 	[self fadeInControls];
 	
+    self.state = SYNVideoPlayerStatePlaying;
+    NSLog(@"Playing");
 	[self.delegate videoPlayerStartedPlaying];
 }
 
@@ -253,7 +253,7 @@ static CGFloat const ControlsFadeTimer = 5.0;
 - (void)handleVideoPlayerFinishedPlaying {
 	if (self.state != SYNVideoPlayerStateEnded) {
 		self.state = SYNVideoPlayerStateEnded;
-		
+        NSLog(@"FINISHED PLAYERING");
 		[self.delegate videoPlayerFinishedPlaying];
 	}
 }
@@ -377,6 +377,7 @@ static CGFloat const ControlsFadeTimer = 5.0;
 }
 
 - (void)maximiseMinimiseGestureRecognizerTapped:(UITapGestureRecognizer *)gestureRecognizer {
+    
 	if (self.maximised) {
 		[self handleVideoPlayerMinimise];
 	} else {

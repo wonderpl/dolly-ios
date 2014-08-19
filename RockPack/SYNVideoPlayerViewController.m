@@ -44,15 +44,8 @@
 
 @interface SYNVideoPlayerViewController () <UIViewControllerTransitioningDelegate, UIPopoverControllerDelegate, UIScrollViewDelegate, SYNVideoPlayerDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SYNVideoInfoViewControllerDelegate>
 
-@property (nonatomic, strong) IBOutlet UIButton *avatarButton;
-
-@property (nonatomic, strong) IBOutlet UIButton *followingButton;
-
-@property (nonatomic, strong) IBOutlet UILabel *videoTitleLabel;
 
 @property (nonatomic, assign) BOOL hasTrackedAirPlayUse;
-
-@property (nonatomic, strong) SYNVideoPlayer *currentVideoPlayer;
 
 @property (nonatomic, assign) NSTimeInterval autoplayStartTime;
 
@@ -69,8 +62,6 @@
 @property (nonatomic, strong) SYNVideoInfoViewController *videoInfoViewController;
 
 @property (nonatomic, strong) VideoInstance *videoInstance;
-
-@property (strong, nonatomic) IBOutlet UIView *videoInfoContainer;
 
 // Used for animation
 @property (nonatomic, weak) UIImageView *annotationImageView;
@@ -114,19 +105,16 @@
 	[super viewDidLoad];
 	
 	appDelegate = [[UIApplication sharedApplication] delegate];
-	
-	self.videoTitleLabel.font = [UIFont boldCustomFontOfSize:self.videoTitleLabel.font.pointSize];
-	
+		
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(activeWirelessRouteChanged:)
 												 name:MPVolumeViewWirelessRouteActiveDidChangeNotification
 											   object:nil];
-    
     self.showingOverlay = NO;
 }
 
 - (NSUInteger)supportedInterfaceOrientations {
-	return ([[UIDevice currentDevice] isPhone] ? UIInterfaceOrientationMaskPortrait : UIInterfaceOrientationMaskAll);
+	return UIInterfaceOrientationMaskLandscape;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -144,32 +132,33 @@
 	[audioSession setActive:YES withOptions:0 error:nil];
     
     [self showInboardingSwipe];
+	
 }
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	
 	if ([self isBeingPresented]) {
-		[self playCurrentVideo];
-	}
+//		if (self.currentVideoPlayer.state != SYNVideoPlayerStatePlaying) {
+//            [self playCurrentVideo];
+//        }
+    }
 	
 	Genre *genre = [[SYNGenreManager sharedManager] genreWithId:self.videoInstance.channel.categoryId];
 	[[SYNTrackingManager sharedManager] setCategoryDimension:genre.name];
 	[[SYNTrackingManager sharedManager] trackVideoPlayerScreenView];
 	
 	if (IS_IPHONE) {
-		UIDevice *device = [UIDevice currentDevice];
-		BOOL rotated = [self handleRotationToOrientation:device.orientation];
-		
-		// We only want to add an observer in the case where we haven't displayed the video full screen since
-		// in that case viewWillDisappear is called before the observer is added meaning it isn't removed properly
-		if (!rotated) {
-			[[NSNotificationCenter defaultCenter] addObserver:self
-													 selector:@selector(deviceOrientationChanged:)
-														 name:UIDeviceOrientationDidChangeNotification
-													   object:nil];
-		}
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(deviceOrientationChanged:)
+                                                     name:UIDeviceOrientationDidChangeNotification
+                                                   object:nil];
+        [self.currentVideoPlayer layoutIfNeeded];
 	}
+    
+    self.currentVideoPlayer.delegate = nil;
+    self.currentVideoPlayer.delegate = self;
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -181,7 +170,7 @@
 	if (isActuallyBeingDismissed) {
 		[self trackViewingStatisticsForCurrentVideo];
 		
-		[self.currentVideoPlayer pause];
+//		[self.currentVideoPlayer pause];
 	}
 	
 	if (IS_IPHONE) {
@@ -190,9 +179,9 @@
 													  object:nil];
 	}
 
-    
     if ([self.dismissDelegate respondsToSelector:@selector(dismissPosition:)]) {
-        [self.dismissDelegate dismissPosition:self.selectedIndex];
+//        [self.dismissDelegate dismissPosition:self.selectedIndex];
+        [self.dismissDelegate dismissPosition:self.selectedIndex :self.currentVideoPlayer];
     }
 
 }
@@ -204,39 +193,26 @@
 	[audioSession setActive:NO withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation error:nil];
 	
 	BOOL isShowingMail = [self.presentedViewController isKindOfClass:[MFMailComposeViewController class]];
-	BOOL isShowingFullScreen = [self.presentedViewController isKindOfClass:[SYNFullScreenVideoViewController class]];
+	BOOL isShowingFullScreen = [self.presentedViewController isKindOfClass:[SYNVideoPlayerViewController class]];
 	
 	// If we're showing another view controller which isn't full screen or mail then we want to pause the video
-	if (!isShowingFullScreen && !isShowingMail) {
+	if (isShowingFullScreen && !isShowingMail) {
 		[self.currentVideoPlayer pause];
 	}
-    
-    
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
 	return UIStatusBarStyleDefault;
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    
-	if ([segue.identifier isEqualToString:@"VideoInfo"])
-    {
-        
-		SYNVideoInfoViewController *viewController = segue.destinationViewController;
-		viewController.model = self.model;
-		viewController.selectedIndex = self.selectedIndex;
-		viewController.delegate = self;
-		self.videoInfoViewController = viewController;
-        
-	}
-}
-
 #pragma mark - Getters / Setters
 
 - (void)setVideoInstance:(VideoInstance *)videoInstance
 {
+    if (self.firstTime) {
+        return;
+    }
+    
     if (!videoInstance) {
         return;
     }
@@ -289,10 +265,14 @@
 	
 	if (indexPath.item == self.selectedIndex && self.currentVideoPlayer) {
 		cell.videoPlayer = self.currentVideoPlayer;
+        self.currentVideoPlayer.delegate = self;
+
     } else {
 		VideoInstance *videoInstance = [self.model itemAtIndex:indexPath.row];
 		SYNVideoPlayer *videoPlayer = [SYNVideoPlayer playerForVideoInstance:videoInstance];
 		videoPlayer.delegate = self;
+        
+        
 		cell.videoPlayer = videoPlayer;
         cell.videoPlayer.maximised = self.maximised;
 	}
@@ -320,8 +300,9 @@
 
 - (void)videoPlayerMaximise {
 	[[SYNTrackingManager sharedManager] trackVideoMaximise];
-	
-	[self maximiseVideoPlayer];
+    NSLog(@"Minimiseeee VPC");
+    
+	[self minimiseVideoPlayer];
 }
 
 - (void)videoPlayerMinimise {
@@ -417,14 +398,6 @@
 #pragma mark - SYNVideoInfoViewControllerDelegate
 
 - (void)videoInfoViewController:(SYNVideoInfoViewController *)viewController didScrollToContentOffset:(CGPoint)contentOffset {
-	if (contentOffset.y > 0) {
-		CGFloat opacity = 1.0 - (0.88 * MIN(1.0, contentOffset.y / 60.0));
-		self.avatarButton.alpha = opacity;
-		self.videoTitleLabel.alpha = opacity;
-	} else {
-		self.avatarButton.alpha = 1.0;
-		self.videoTitleLabel.alpha = 1.0;
-	}
 }
 
 - (void)videoInfoViewController:(SYNVideoInfoViewController *)viewController didSelectVideoAtIndex:(NSInteger)index {
@@ -480,26 +453,17 @@
 	self.fullscreenViewController.videoPlayerViewController = self;
 	self.fullscreenViewController.transitioningDelegate = self;
     self.maximised = YES;
+	self.currentVideoPlayer.delegate = self;
 	[self presentViewController:self.fullscreenViewController animated:YES completion:nil];
 }
 
 - (void)minimiseVideoPlayer {
+    self.currentVideoPlayer.delegate = self;
     self.maximised = NO;
-	[self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:NO completion:nil];
 }
 
 - (void)updateVideoInstanceDetails:(VideoInstance *)videoInstance {
-	NSURL *avatarURL = [NSURL URLWithString:videoInstance.originator.thumbnailURL];
-
-	[self.avatarButton setImageWithURL:avatarURL
-							  forState:UIControlStateNormal
-					  placeholderImage:[UIImage imageNamed:@"PlaceholderAvatarProfile"]
-							   options:SDWebImageRetryFailed];
-    
-	[self.videoTitleLabel setText:videoInstance.title animated:YES];
-	
-	self.followingButton.selected = [[SYNActivityManager sharedInstance] isSubscribedToUserId:videoInstance.originator.uniqueId];
-	[self.followingButton invalidateIntrinsicContentSize];
     [self showInboardingShopMotion:videoInstance];
 }
 
@@ -507,14 +471,12 @@
 	if (UIDeviceOrientationIsLandscape(orientation)) {
 		[[SYNTrackingManager sharedManager] trackVideoMaximiseViaRotation];
 		self.maximised = YES;
-		[self maximiseVideoPlayer];
 		return YES;
-	}
-    
-    if (IS_IPHONE) {
-        self.maximised = NO;
+	} else {
+        [self dismissViewControllerAnimated:NO completion:nil];
     }
-	return NO;
+    
+    return NO;
 }
 
 - (void)activeWirelessRouteChanged:(NSNotification *)notification {
@@ -698,5 +660,7 @@
     _maximised = maximised;
     self.currentVideoPlayer.maximised = maximised;
 }
+
+
 
 @end

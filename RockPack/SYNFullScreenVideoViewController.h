@@ -16,7 +16,7 @@
 
 @property (nonatomic, strong, readonly) UIView *videoContainerView;
 
-@property (nonatomic, strong) UICollectionView *collectionView;
+@property (nonatomic, weak) UICollectionView *collectionView;
 
 @property (nonatomic, weak) SYNVideoPlayerViewController *videoPlayerViewController;
 

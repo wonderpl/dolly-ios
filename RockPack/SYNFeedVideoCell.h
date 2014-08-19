@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "SYNVideoInfoCell.h"
+#import "SYNVideoPlayerCell.h"
+#import "SYNVideoPlayer.h"
 
 @class VideoInstance;
 @class SYNVideoActionsBar;
@@ -22,6 +24,7 @@
 - (void)videoCell:(SYNFeedVideoCell *)cell addToChannelPressed:(UIButton *)button;
 - (void)videoCell:(SYNFeedVideoCell *)cell sharePressed:(UIButton *)button;
 - (void)videoCell:(SYNFeedVideoCell *)cell addedByPressed:(UIButton *)button;
+- (void)videoCell:(SYNFeedVideoCell *)cell maximiseVideoPlayer:(UIButton *)button;
 
 @end
 
@@ -30,6 +33,8 @@
 @property (nonatomic, strong) VideoInstance *videoInstance;
 
 @property (nonatomic, strong, readonly) SYNVideoActionsBar *actionsBar;
+
+@property (strong, nonatomic) IBOutlet SYNVideoPlayerCell *videoPlayerCell;
 
 @property (nonatomic, weak) id<SYNFeedVideoCellDelegate> delegate;
 

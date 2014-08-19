@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="A2R-aS-gre">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="A2R-aS-gre">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -30,9 +30,6 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="selected" title="Following"/>
-                                <connections>
-                                    <action selector="followButtonPressed:" destination="A2R-aS-gre" eventType="touchUpInside" id="QPj-70-Ng2"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cU6-Nc-Ier">
                                 <rect key="frame" x="0.0" y="0.0" width="109" height="66"/>
@@ -46,9 +43,6 @@
                                 <state key="normal" title="Close">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <action selector="closeButtonPressed:" destination="A2R-aS-gre" eventType="touchUpInside" id="qA3-VH-6aF"/>
-                                </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NWm-in-24r">
                                 <rect key="frame" x="0.0" y="142" width="768" height="432"/>
@@ -94,9 +88,6 @@
                                 <rect key="frame" x="0.0" y="574" width="768" height="450"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <connections>
-                                    <segue destination="m23-ZN-QJD" kind="embed" identifier="VideoInfo" id="sNR-ZF-Pad"/>
-                                </connections>
                             </containerView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mur-BL-wuK">
                                 <rect key="frame" x="10" y="108" width="748" height="22"/>
@@ -138,11 +129,7 @@
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
-                        <outlet property="avatarButton" destination="bg0-NK-hTw" id="grV-d5-g20"/>
-                        <outlet property="followingButton" destination="5hW-91-img" id="S72-OA-bnp"/>
-                        <outlet property="videoInfoContainer" destination="eHS-Sg-VLw" id="9qf-oi-pRa"/>
                         <outlet property="videoPlayerContainerView" destination="NWm-in-24r" id="d4J-L5-gq1"/>
-                        <outlet property="videoTitleLabel" destination="Mur-BL-wuK" id="Nfl-Qx-GZi"/>
                         <outlet property="videosCollectionView" destination="0R6-e8-kts" id="fGz-Nu-k3m"/>
                     </connections>
                 </viewController>
@@ -159,11 +146,11 @@
                         <viewControllerLayoutGuide type="bottom" id="V6Z-nk-Qet"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="B3o-K4-kJ6">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="450"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gaB-DP-QK3">
-                                <rect key="frame" x="0.0" y="0.0" width="768" height="450"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gaB-DP-QK3">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="bQA-Ys-mhK">

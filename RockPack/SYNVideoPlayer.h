@@ -12,7 +12,8 @@ typedef NS_ENUM(NSInteger, SYNVideoPlayerState) {
 	SYNVideoPlayerStateInitialised,
 	SYNVideoPlayerStatePlaying,
 	SYNVideoPlayerStatePaused,
-	SYNVideoPlayerStateEnded
+	SYNVideoPlayerStateEnded,
+    SYNVideoPlayerStatePrePlaying
 };
 
 @class VideoInstance;

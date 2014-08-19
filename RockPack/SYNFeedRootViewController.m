@@ -35,11 +35,14 @@
 #import "SYNVideoPlayerDismissIndex.h"
 #import "SYNFeedAvatarOverlayViewController.h"
 #import "SYNActivityManager.h"
+#import "SYNFullScreenVideoViewController.h"
+#import "SYNFullScreenVideoAnimator.h"
+#import "SYNYouTubeWebVideoPlayer.h"
 
 static const CGFloat heightLandscape = 703;
 static const CGFloat heightPortrait = 985;
 
-@interface SYNFeedRootViewController () <UIViewControllerTransitioningDelegate, SYNPagingModelDelegate, SYNVideoPlayerAnimatorDelegate, SYNFeedVideoCellDelegate, SYNFeedChannelCellDelegate,SYNVideoPlayerDismissIndex>
+@interface SYNFeedRootViewController () <UIViewControllerTransitioningDelegate, SYNPagingModelDelegate, SYNVideoPlayerAnimatorDelegate, SYNFeedVideoCellDelegate, SYNFeedChannelCellDelegate, SYNVideoPlayerDismissIndex, SYNVideoPlayerDelegate>
 
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (nonatomic, strong) IBOutlet UICollectionView *feedCollectionView;
@@ -51,6 +54,12 @@ static const CGFloat heightPortrait = 985;
 
 @property (nonatomic, assign) CGFloat lastYOffset;
 @property (nonatomic, assign) UIInterfaceOrientation lastOrientation;
+@property (nonatomic, strong) SYNVideoPlayer *currentVideoPlayer;
+
+@property (nonatomic, assign) NSInteger selectedIndex;
+@property (nonatomic, strong) SYNFullScreenVideoViewController *fullscreenViewController;
+
+@property (nonatomic, assign) UIDeviceOrientation videoOrientation;
 
 @end
 
@@ -76,8 +85,11 @@ static const CGFloat heightPortrait = 985;
 
 - (void) viewDidLoad
 {
+    NSLog(@"STAKE viewDidLoad start %d", self.currentVideoPlayer.state);
+
     [super viewDidLoad];
 	
+    self.selectedIndex = -1;
 	self.model = [SYNFeedModel sharedModel];
 	self.model.delegate = self;
 	
@@ -110,10 +122,56 @@ static const CGFloat heightPortrait = 985;
                                                  name:kReloadFeed
                                                object:nil];
     
+    if (IS_IPHONE) {
+		self.videoOrientation = [[UIDevice currentDevice] orientation];
+		
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(deviceOrientationChanged:)
+													 name:UIDeviceOrientationDidChangeNotification
+												   object:nil];
+	}
+
+    
 	[self reloadData];
+    
+    NSLog(@"STAKE viewDidLoad end %d", self.currentVideoPlayer.state);
+
+}
+
+- (void)deviceOrientationChanged:(NSNotification *)notification {
+	UIDevice *device = [notification object];
+	
+	if (device.orientation == UIDeviceOrientationPortrait) {
+	} else if (UIDeviceOrientationIsLandscape(device.orientation)) {
+		self.videoOrientation = device.orientation;
+
+        if (IS_IPHONE) {
+            
+            NSLog(@"stateee %d", self.currentVideoPlayer.state);
+            
+            if ([self isVideoOnScreen]) {
+            	[self videoPlayerMaximise];
+            }
+        }
+    }
+}
+
+
+- (BOOL)isVideoOnScreen {
+    NSArray *arr = [self.feedCollectionView visibleCells];
+    for (UICollectionViewCell *cell in arr) {
+        if ([self.feedCollectionView indexPathForCell:cell].row == self.selectedIndex) {
+            NSLog(@"Video On Screen");
+            
+            return YES;
+        }
+    }
+    return NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    NSLog(@"STAKE viewWillAppear start %d", self.currentVideoPlayer.state);
+
     [super viewWillAppear:animated];
 	
 	if (![self isBeingPresented]) {
@@ -124,14 +182,32 @@ static const CGFloat heightPortrait = 985;
         [self.feedCollectionView.collectionViewLayout invalidateLayout];
     }
     
+    if (self.currentVideoPlayer) {
+        self.currentVideoPlayer.delegate = self;        
+    }
+ 
     [self.feedCollectionView reloadData];
+
+    if (self.currentVideoPlayer.state == SYNVideoPlayerStatePlaying) {
+		[self.currentVideoPlayer play];
+    }
+    
 	self.shownInboarding = NO;
     [self showInboarding];
+    NSLog(@"STAKE viewWillAppear end %d", self.currentVideoPlayer.state);
+
 }
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	[[SYNTrackingManager sharedManager] trackFeedScreenView];
+    
+    NSLog(@"STAKE viewDidAppear %d", self.currentVideoPlayer.state);
+    
+    if (self.currentVideoPlayer.state == SYNVideoPlayerStatePlaying) {
+        [self.currentVideoPlayer play];
+    }
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -217,6 +293,27 @@ static const CGFloat heightPortrait = 985;
 	return [self.model feedItemCount];
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [super scrollViewDidScroll:scrollView];
+    
+	BOOL isCurrentVideoPlayerOffScreen = NO;
+	for (UICollectionViewCell *cell in [self.feedCollectionView visibleCells]) {
+        if ([self.feedCollectionView indexPathForCell:cell].row == self.selectedIndex) {
+            isCurrentVideoPlayerOffScreen = YES;
+        }
+    }
+    
+    if (isCurrentVideoPlayerOffScreen) {
+        
+        if (self.currentVideoPlayer.state == SYNVideoPlayerStatePrePlaying) {
+            if ([self.currentVideoPlayer isKindOfClass:[SYNYouTubeWebVideoPlayer class]]) {
+                [((SYNYouTubeWebVideoPlayer*)self.currentVideoPlayer).reloadVideoTimer invalidate];
+            }
+        }
+        [self.currentVideoPlayer pause];
+    }
+}
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
 	
 	FeedItem *feedItem = [self.model feedItemAtindex:indexPath.row];
@@ -234,10 +331,22 @@ static const CGFloat heightPortrait = 985;
 	} else {
 		SYNFeedVideoCell *cell = [self videoCellForIndexPath:indexPath collectionView:collectionView];
 		
-		VideoInstance *videoInstance = [self.model resourceForFeedItem:feedItem];
+        VideoInstance *videoInstance = [self.model itemAtIndex:indexPath.row];
+		SYNVideoPlayer *videoPlayer = [SYNVideoPlayer playerForVideoInstance:videoInstance];
+        
         if (videoInstance) {
             cell.videoInstance = videoInstance;
             cell.delegate = self;
+            if (indexPath.item == self.selectedIndex && self.currentVideoPlayer) {
+                cell.videoPlayerCell.videoPlayer = self.currentVideoPlayer;
+                
+                if (cell.videoPlayerCell.videoPlayer.state == SYNVideoPlayerStatePaused) {
+                    cell.videoPlayerCell.hidden = NO;
+                }
+            } else {
+                cell.videoPlayerCell.videoPlayer = videoPlayer;
+                cell.videoPlayerCell.hidden = YES;
+            }
         }
 		return cell;
 	}
@@ -374,20 +483,31 @@ static const CGFloat heightPortrait = 985;
 }
 
 - (void)videoCellThumbnailPressed:(SYNFeedVideoCell *)cell {
-	NSIndexPath *indexPath = [self.feedCollectionView indexPathForCell:cell];
-	
-	// We need to convert it to the index in the array of videos since the player doesn't know about channels
-	NSInteger itemIndex = [self.model itemIndexForFeedIndex:indexPath.row];
-	SYNVideoPlayerViewController *viewController = [SYNVideoPlayerViewController viewControllerWithModel:self.model
-																			   selectedIndex:itemIndex];
-	
-	SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
-	animator.delegate = self;
-	animator.cellIndexPath = indexPath;
-	self.videoPlayerAnimator = animator;
-	viewController.transitioningDelegate = animator;
-	viewController.dismissDelegate = self;
-	[self presentViewController:viewController animated:YES completion:nil];
+//	NSIndexPath *indexPath = [self.feedCollectionView indexPathForCell:cell];
+//	
+//	// We need to convert it to the index in the array of videos since the player doesn't know about channels
+//	NSInteger itemIndex = [self.model itemIndexForFeedIndex:indexPath.row];
+//	SYNVideoPlayerViewController *viewController = [SYNVideoPlayerViewController viewControllerWithModel:self.model
+//																			   selectedIndex:itemIndex];
+//	
+//	SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
+//	animator.delegate = self;
+//	animator.cellIndexPath = indexPath;
+//	self.videoPlayerAnimator = animator;
+//	viewController.transitioningDelegate = animator;
+//	viewController.dismissDelegate = self;
+//	[self presentViewController:viewController animated:YES completion:nil];
+    
+    if (self.selectedIndex == [[self.feedCollectionView indexPathForCell:cell] row]) {
+        return;
+    }
+    
+    [self.currentVideoPlayer stop];
+	SYNVideoPlayer *videoPlayer = cell.videoPlayerCell.videoPlayer;
+	[videoPlayer play];
+	self.currentVideoPlayer = videoPlayer;
+    self.currentVideoPlayer.delegate = self;
+    self.selectedIndex = [[self.feedCollectionView indexPathForCell:cell] row] ;
 }
 
 - (void)videoCell:(SYNFeedVideoCell *)cell favouritePressed:(UIButton *)button {
@@ -434,6 +554,12 @@ static const CGFloat heightPortrait = 985;
 
 #pragma mark - SYNVideoPlayerDismissIndex
 
+- (void) dismissPosition:(NSInteger)index :(SYNVideoPlayer *)videoPlayer {
+    self.currentVideoPlayer = videoPlayer;
+    self.currentVideoPlayer.delegate = self;
+    [self dismissPosition:index];
+}
+
 - (void)dismissPosition:(NSInteger)index {
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:[self.model videoIndexForFeedIndex:index] inSection:0];
     self.videoPlayerAnimator.cellIndexPath = indexPath;
@@ -456,5 +582,84 @@ static const CGFloat heightPortrait = 985;
     int point = ([self.model videoIndexForFeedIndex:index] / 3) * height;
     [self.feedCollectionView setContentOffset:CGPointMake(0, point) animated:NO];
 }
+
+
+- (void)videoCell:(SYNFeedVideoCell *)cell maximiseVideoPlayer:(UIButton *)button {
+	NSIndexPath *indexPath = [self.feedCollectionView indexPathForCell:cell];
+
+	// We need to convert it to the index in the array of videos since the player doesn't know about channels
+	//	NSInteger itemIndex = [self.model itemIndexForFeedIndex:indexPath.row];
+    
+	SYNVideoPlayerViewController *viewController = [SYNVideoPlayerViewController viewControllerWithModel:self.model
+                                                                                           selectedIndex:[self.feedCollectionView indexPathForCell:cell].row];
+    
+    viewController.currentVideoPlayer = self.currentVideoPlayer;
+
+//    [viewController.videosCollectionView reloadData];
+    
+	SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
+	animator.delegate = self;
+	animator.cellIndexPath = indexPath;
+	self.videoPlayerAnimator = animator;
+	viewController.transitioningDelegate = animator;
+	viewController.dismissDelegate = self;
+	[self presentViewController:viewController animated:YES completion:nil];
+}
+
+- (void)videoPlayerStartedPlaying {
+    
+}
+
+- (void)videoPlayerVideoViewed {
+    
+}
+
+- (void)videoPlayerFinishedPlaying {
+    VideoInstance *videoInstance = [self.model itemAtIndex:self.selectedIndex];
+    SYNVideoPlayer *videoPlayer = [SYNVideoPlayer playerForVideoInstance:videoInstance];
+	self.currentVideoPlayer = videoPlayer;
+
+}
+
+- (void)videoPlayerErrorOccurred:(NSString *)reason {
+    
+}
+
+- (void)videoPlayerAnnotationSelected:(VideoAnnotation *)annotation button:(UIButton *)button {
+    
+}
+
+- (void)videoPlayerMinimise {
+}
+
+- (void)videoPlayerMaximise {
+    NSLog(@"Maximiseee");
+	// We need to convert it to the index in the array of videos since the player doesn't know about channels
+		NSInteger itemIndex = [self.model itemIndexForFeedIndex:self.selectedIndex];
+    
+	SYNVideoPlayerViewController *viewController = [SYNVideoPlayerViewController viewControllerWithModel:self.model
+                                                                                           selectedIndex:itemIndex];
+    
+    viewController.currentVideoPlayer = self.currentVideoPlayer;
+    
+    //    [viewController.videosCollectionView reloadData];
+    
+	SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
+	animator.delegate = self;
+	animator.cellIndexPath = [NSIndexPath indexPathForItem:itemIndex inSection:0];
+	self.videoPlayerAnimator = animator;
+	viewController.transitioningDelegate = animator;
+	viewController.dismissDelegate = self;
+	[self presentViewController:viewController animated:NO completion:nil];
+    
+}
+
+//- (Class)animationClassForViewController:(UIViewController *)viewController {
+//	NSDictionary *mapping = @{
+//							  NSStringFromClass([SYNFullScreenVideoViewController class]) : [SYNFullScreenVideoAnimator class],
+//							  };
+//	return mapping[NSStringFromClass([viewController class])];
+//}
+
 
 @end

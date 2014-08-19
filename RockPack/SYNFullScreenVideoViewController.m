@@ -37,6 +37,14 @@ static const CGFloat VideoAspectRatio = 16.0 / 9.0;
 	
 	[self.view addSubview:self.backgroundView];
 	[self.view addSubview:self.videoContainerView];
+
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [button addTarget:self
+               action:@selector(aMethod:)
+     forControlEvents:UIControlEventTouchUpInside];
+    [button setTitle:@"Show View" forState:UIControlStateNormal];
+    button.frame = CGRectMake(80.0, 210.0, 160.0, 40.0);
+    [self.view addSubview:button];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -87,7 +95,6 @@ static const CGFloat VideoAspectRatio = 16.0 / 9.0;
     [self.videoContainerView layoutIfNeeded];
     [self.collectionView.collectionViewLayout invalidateLayout];
     [self.collectionView setContentOffset:CGPointMake(self.videoPlayerViewController.selectedIndex * CGRectGetWidth(self.view.bounds), 0.0f)];
-    
 }
 
 
@@ -149,7 +156,6 @@ static const CGFloat VideoAspectRatio = 16.0 / 9.0;
 	UIDevice *device = [notification object];
 	
 	if (device.orientation == UIDeviceOrientationPortrait) {
-		[self dismissViewControllerAnimated:YES completion:nil];
 	} else if (UIDeviceOrientationIsLandscape(device.orientation)) {
 		self.videoOrientation = device.orientation;
 	}

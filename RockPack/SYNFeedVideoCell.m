@@ -15,6 +15,7 @@
 #import "NSString+Timecode.h"
 #import "SYNVideoActionsBar.h"
 #import <UIButton+WebCache.h>
+#import "SYNYouTubeWebVideoPlayer.h"
 
 @interface SYNFeedVideoCell () <SYNVideoActionsBarDelegate>
 
@@ -52,7 +53,20 @@
 	
 	self.videoThumbnailButton.layer.borderColor = [[UIColor colorWithWhite:0 alpha:0.05] CGColor];
 	self.videoThumbnailButton.layer.borderWidth = 1.0;
+    
+    self.videoPlayerCell.hidden = YES;
+}
 
+- (void)prepareForReuse {
+    [super prepareForReuse];
+
+    NSLog(@"state ==============: %d", self.videoPlayerCell.videoPlayer.state);
+    
+    
+//
+//    if (self.videoPlayerCell.videoPlayer.state != SYNVideoPlayerStatePlaying) {
+//        [self.videoPlayerCell.videoPlayer pause];
+//    }
 }
 
 - (UIImageView *)imageView {
@@ -98,6 +112,11 @@
 	
 	self.actionsBar.favouritedBy = [videoInstance.starrers array];
 	self.actionsBar.favouriteButton.selected = videoInstance.starredByUserValue;
+    
+    
+    if (self.videoPlayerCell.videoPlayer.state != SYNVideoPlayerStatePlaying) {
+        [self.videoPlayerCell setHidden:YES];
+    }
 }
 
 -(NSMutableAttributedString*) attributedStringFromString:(NSString *) string {
@@ -152,6 +171,22 @@
 
 - (IBAction)addedByPressed:(UIButton *)button {
 	[self.delegate videoCell:self addedByPressed:button];
+}
+- (IBAction)playVideo:(id)sender {
+    
+    self.videoPlayerCell.hidden = NO;
+    [self.delegate videoCellThumbnailPressed:self];
+}
+- (IBAction)maximise:(UIButton *)button {
+    [self.delegate videoCell:self maximiseVideoPlayer:button];
+}
+- (IBAction)enlarge:(id)sender {
+    if (self.videoPlayerCell.hidden == YES) {
+        NSLog(@"HIDDEN");
+    } else {
+        NSLog(@"NIOT HIDDEN");
+        self.videoPlayerCell.hidden = YES;
+    }
 }
 
 @end
