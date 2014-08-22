@@ -16,15 +16,27 @@
 #import "SYNVideoActionsBar.h"
 #import <UIButton+WebCache.h>
 #import "SYNYouTubeWebVideoPlayer.h"
+#import "NSString+StrippingHTML.h"
+#import <UIImageView+WebCache.h>
+#import "UIImage+Blur.h"
+#import "SYNActivityManager.h"
+#import "SYNFollowUserButton.h"
+#import "UIColor+SYNColor.h"
+
+
+static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 
 @interface SYNFeedVideoCell () <SYNVideoActionsBarDelegate>
 
 @property (nonatomic, strong) IBOutlet UIButton *avatarThumbnailButton;
 
 @property (nonatomic, strong) IBOutlet UILabel *titleLabel;
+@property (strong, nonatomic) IBOutlet SYNFollowUserButton *followButton;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *videoTopSpace;
 
 @property (nonatomic, strong) IBOutlet UILabel *labelLabel;
 @property (nonatomic, strong) IBOutlet UIButton *curatedByButton;
+@property (strong, nonatomic) IBOutlet UIButton *clickToMoreButton;
 
 @property (nonatomic, strong) IBOutlet UILabel *durationLabel;
 
@@ -32,8 +44,13 @@
 
 @property (nonatomic, strong) IBOutlet UIView *videoActionsContainer;
 
+@property (strong, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (nonatomic, strong) SYNVideoActionsBar *actionsBar;
 
+@property (strong, nonatomic) IBOutlet UILabel *originatorDisplayNameLabel;
+@property (strong, nonatomic) IBOutlet UIButton *favouriteButton;
+
+@property (strong, nonatomic) IBOutlet UIButton *loveButton;
 @end
 
 @implementation SYNFeedVideoCell
@@ -41,12 +58,25 @@
 - (void)awakeFromNib {
 	[super awakeFromNib];
 	
-	self.labelLabel.font = [UIFont italicAlternateFontOfSize:self.labelLabel.font.pointSize];
-	self.curatedByButton.titleLabel.font = [UIFont italicAlternateFontOfSize:self.curatedByButton.titleLabel.font.pointSize];
-	
-	self.durationLabel.font = [UIFont regularCustomFontOfSize:self.durationLabel.font.pointSize];
-	
-	self.titleLabel.font = [UIFont boldCustomFontOfSize:self.titleLabel.font.pointSize];
+    [self.curatedByButton.titleLabel setFont:[UIFont regularCustomFontOfSize: self.curatedByButton.titleLabel.font.pointSize]];
+    
+    if (IS_IPAD) {
+        [self.labelLabel setFont:[UIFont regularCustomFontOfSize: self.labelLabel.font.pointSize]];
+        self.durationLabel.font = [UIFont regularCustomFontOfSize:self.durationLabel.font.pointSize];
+        [self.descriptionLabel setFont:[UIFont lightCustomFontOfSize:self.descriptionLabel.font.pointSize]];
+
+    } else {
+        [self.labelLabel setFont:[UIFont semiboldCustomFontOfSize: self.labelLabel.font.pointSize]];
+        self.durationLabel.font = [UIFont semiboldCustomFontOfSize:self.durationLabel.font.pointSize];
+        [self.descriptionLabel setFont:[UIFont lightCustomFontOfSize:self.descriptionLabel.font.pointSize]];
+    }
+
+    if (IS_IPHONE) {
+        [self.titleLabel setFont:[UIFont lightCustomFontOfSize:self.titleLabel.font.pointSize]];
+    } else {
+        [self.titleLabel setFont:[UIFont lightCustomFontOfSize:self.titleLabel.font.pointSize]];
+
+    }
 	
 	self.actionsBar.frame = self.videoActionsContainer.bounds;
 	[self.videoActionsContainer addSubview:self.actionsBar];
@@ -55,18 +85,15 @@
 	self.videoThumbnailButton.layer.borderWidth = 1.0;
     
     self.videoPlayerCell.hidden = YES;
+    self.playButton.hidden = NO;
+
+    [self.actionsBar feedBar];
 }
 
 - (void)prepareForReuse {
     [super prepareForReuse];
-
-    NSLog(@"state ==============: %d", self.videoPlayerCell.videoPlayer.state);
-    
-    
-//
-//    if (self.videoPlayerCell.videoPlayer.state != SYNVideoPlayerStatePlaying) {
-//        [self.videoPlayerCell.videoPlayer pause];
-//    }
+    self.playButton.hidden = NO;
+    self.videoPlayerCell.hidden = YES;
 }
 
 - (UIImageView *)imageView {
@@ -75,32 +102,24 @@
 
 - (void)setVideoInstance:(VideoInstance *)videoInstance {
 	_videoInstance = videoInstance;
-	
-	BOOL hasLabel = ([videoInstance.label length]);
-	if (hasLabel) {
-		self.labelLabel.text = videoInstance.label;
-		
-		[self.curatedByButton setAttributedTitle:nil forState:UIControlStateNormal];
-	} else {
-		self.labelLabel.text = nil;
-		
-		NSMutableAttributedString *curatedByString = [[NSMutableAttributedString alloc] initWithString:@"Added by "];
-		
-		NSString *channelOwnerName = videoInstance.channel.channelOwner.displayName;
-		NSDictionary *attributes = @{ NSFontAttributeName : [UIFont boldItalicAlternateFontOfSize:self.labelLabel.font.pointSize], NSForegroundColorAttributeName : [UIColor grayColor] };
-		
-        if (!channelOwnerName) {
-			channelOwnerName = @"";
+    
+    [self.titleLabel setText:videoInstance.title];
+    self.labelLabel.text = videoInstance.label;
+    self.durationLabel.text = [NSString friendlyLengthFromTimeInterval:videoInstance.video.durationValue];
+
+    if (self.videoInstance.video.videoDescription.length > 0) {
+        [self.descriptionLabel setAttributedText:[self attributedStringFromString:[self.videoInstance.video.videoDescription stringByStrippingHTML] withLineHeight:12]];
+
+    }
+    
+    
+    if (IS_IPHONE) {
+        if (self.videoInstance.video.videoDescription.length > 0) {
+            self.titleLabel.numberOfLines = 2;
+            [self.descriptionLabel setAttributedText:[self attributedStringFromString:[self.videoInstance.video.videoDescription stringByStrippingHTML] withLineHeight:2]];
         }
-
-        [curatedByString appendAttributedString:[[NSAttributedString alloc] initWithString:channelOwnerName attributes:attributes ]];
-
-		[self.curatedByButton setAttributedTitle:curatedByString forState:UIControlStateNormal];
-	}
-	self.durationLabel.text = [NSString friendlyLengthFromTimeInterval:videoInstance.video.durationValue];
-	
-	self.titleLabel.attributedText = [self attributedStringFromString: videoInstance.title];
-	
+    }
+    
 	NSURL *avatarURL = [NSURL URLWithString:self.videoInstance.originator.thumbnailURL];
 	[self.avatarThumbnailButton setImageWithURL:avatarURL
 									   forState:UIControlStateNormal
@@ -108,15 +127,106 @@
 										options:SDWebImageRetryFailed];
 	
 	NSURL *thumbnailURL = [NSURL URLWithString:videoInstance.thumbnailURL];
+    self.videoThumbnailButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentFill;
+    self.videoThumbnailButton.contentVerticalAlignment = UIControlContentVerticalAlignmentFill;
+
+	[self.videoThumbnailButton setImageWithURL:thumbnailURL forState:UIControlStateNormal];
+    [self.videoThumbnailButton setContentMode:UIViewContentModeScaleToFill];
+
+    [self.videoThumbnailButton setContentScaleFactor:1.3];
+
+    self.actionsBar.favouritedBy = [videoInstance.starrers array];
+    
+	self.actionsBar.favouriteButton.selected = videoInstance.starredByUserValue;
+    self.actionsBar.frame = self.videoActionsContainer.bounds;
+    [self.actionsBar layoutIfNeeded];
+    
+    
+    [self.originatorDisplayNameLabel setText:self.videoInstance.originator.displayName];
+    
+    [self.originatorDisplayNameLabel setFont:[UIFont regularCustomFontOfSize:self.originatorDisplayNameLabel.font.pointSize]];
+ 
+   self.followButton.selected = [[SYNActivityManager sharedInstance] isSubscribedToUserId:self.videoInstance.originator.uniqueId];
+    
+    
+    self.clickToMoreButton.layer.cornerRadius = (CGRectGetHeight(self.clickToMoreButton.frame) / 2.0);
+	self.clickToMoreButton.layer.borderColor = [[UIColor dollyButtonGreenColor] CGColor];
+	self.clickToMoreButton.layer.borderWidth = 1.0;
+	
+	self.clickToMoreButton.tintColor = [UIColor dollyButtonGreenColor];
+
+    self.clickToMoreButton.hidden = ([self.videoInstance.video.linkTitle length] == 0);
+	[self.clickToMoreButton setTitle:self.videoInstance.video.linkTitle forState:UIControlStateNormal];
+
+    BOOL hasLabel = ([self.videoInstance.label length]);
+	if (hasLabel) {
+		self.labelLabel.text = [self.videoInstance.label uppercaseString];
+		[self.curatedByButton setAttributedTitle:nil forState:UIControlStateNormal];
+	} else {
+		self.labelLabel.text = nil;
+		
+		NSString *channelOwnerName = self.videoInstance.channel.channelOwner.displayName;
+		NSDictionary *attributes = @{ NSFontAttributeName : [UIFont semiboldCustomFontOfSize:self.labelLabel.font.pointSize],
+                                      NSForegroundColorAttributeName : [UIColor colorWithRed: 112.0f / 255.0f
+                                                                                       green: 121.0f / 255.0f
+                                                                                        blue: 123.0f / 255.0f
+                                                                                       alpha: 1.0f]};
+		
+        if (!channelOwnerName) {
+			channelOwnerName = @"";
+        }
+        
+        NSMutableAttributedString *curatedByString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"ADDED BY %@", [channelOwnerName uppercaseString]] attributes:attributes ];
+		[self.curatedByButton setAttributedTitle:curatedByString forState:UIControlStateNormal];
+
+	}
+    
+    [self.durationLabel setTextColor:[UIColor colorWithRed: 112.0f / 255.0f
+                                                    green: 121.0f / 255.0f
+                                                     blue: 123.0f / 255.0f
+                                                     alpha: 1.0f]];
+    
+    if (![self.videoInstance.video.videoDescription length] && ![self.videoInstance.video.linkTitle length]) {
+        [self.videoTopSpace setConstant:20];
+        self.titleLabel.numberOfLines = 3;
+        NSLog(@"---50");
+    } else {
+        [self.videoTopSpace setConstant:5];
+        NSLog(@"---46");
+        self.titleLabel.numberOfLines = 2;
+
+    }
+
+    [self layoutIfNeeded];
+
+}
+
+
+- (void) setVideoLabelWithColor:(UIColor*) textColor{
+    
+	self.durationLabel.text = [NSString friendlyLengthFromTimeInterval:self.videoInstance.video.durationValue];
+	
+	self.titleLabel.attributedText = [self attributedStringFromString: self.videoInstance.title];
+	
+	NSURL *avatarURL = [NSURL URLWithString:self.videoInstance.originator.thumbnailURL];
+	[self.avatarThumbnailButton setImageWithURL:avatarURL
+									   forState:UIControlStateNormal
+							   placeholderImage:[UIImage imageNamed:@"PlaceholderAvatarProfile"]
+										options:SDWebImageRetryFailed];
+	
+	NSURL *thumbnailURL = [NSURL URLWithString:self.videoInstance.thumbnailURL];
 	[self.videoThumbnailButton setImageWithURL:thumbnailURL forState:UIControlStateNormal];
 	
-	self.actionsBar.favouritedBy = [videoInstance.starrers array];
-	self.actionsBar.favouriteButton.selected = videoInstance.starredByUserValue;
+	self.actionsBar.favouritedBy = [self.videoInstance.starrers array];
+	self.actionsBar.favouriteButton.selected = self.videoInstance.starredByUserValue;
+
+    [self.curatedByButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.labelLabel setTextColor:[UIColor whiteColor]];
+    [self.durationLabel setTextColor:[UIColor whiteColor]];
+    [self.titleLabel setTextColor:[UIColor whiteColor]];
+    [self.descriptionLabel setTextColor:[UIColor whiteColor]];
+    [self setVideoLabelWithColor: [UIColor whiteColor]];
     
-    
-    if (self.videoPlayerCell.videoPlayer.state != SYNVideoPlayerStatePlaying) {
-        [self.videoPlayerCell setHidden:YES];
-    }
 }
 
 -(NSMutableAttributedString*) attributedStringFromString:(NSString *) string {
@@ -128,8 +238,7 @@
 	
 	NSInteger strLength = [attributedString length];
 	NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
-	style.lineBreakMode = NSLineBreakByTruncatingTail;
-	[style setLineSpacing:4];
+	style.lineBreakMode = NSLineBreakByWordWrapping;
 	[style setAlignment:NSTextAlignmentLeft];
 	
 	[attributedString addAttribute:NSParagraphStyleAttributeName
@@ -173,20 +282,41 @@
 	[self.delegate videoCell:self addedByPressed:button];
 }
 - (IBAction)playVideo:(id)sender {
-    
     self.videoPlayerCell.hidden = NO;
+    self.playButton.hidden = YES;
     [self.delegate videoCellThumbnailPressed:self];
 }
-- (IBAction)maximise:(UIButton *)button {
-    [self.delegate videoCell:self maximiseVideoPlayer:button];
+
+-(NSMutableAttributedString*) attributedStringFromString:(NSString *) string withLineHeight:(int) lineHeight{
+	
+    if (!string) {
+		return [[NSMutableAttributedString alloc] initWithString: @""];
+	}
+	NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString: string];
+	
+	NSInteger strLength = [attributedString length];
+	NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+	style.lineBreakMode = NSLineBreakByWordWrapping;
+	[style setLineSpacing:lineHeight];
+	[style setAlignment:NSTextAlignmentLeft];
+	
+	[attributedString addAttribute:NSParagraphStyleAttributeName
+                             value:style
+                             range:NSMakeRange(0, strLength)];
+	return attributedString;
 }
-- (IBAction)enlarge:(id)sender {
-    if (self.videoPlayerCell.hidden == YES) {
-        NSLog(@"HIDDEN");
-    } else {
-        NSLog(@"NIOT HIDDEN");
-        self.videoPlayerCell.hidden = YES;
-    }
+- (IBAction)addButtonTapped:(id)sender {
+    [self.delegate videoCell:self addToChannelPressed:sender];
+
+}
+- (IBAction)favouriteButtonTapped:(id)sender {
+    
+    [self.delegate videoCell:self favouritePressed:sender];
+
+}
+- (IBAction)shareButtonTapped:(id)sender {
+    [self.delegate videoCell:self sharePressed:sender];
+
 }
 
 @end

@@ -35,6 +35,7 @@
 @property (nonatomic, strong, readonly) SYNVideoActionsBar *actionsBar;
 
 @property (strong, nonatomic) IBOutlet SYNVideoPlayerCell *videoPlayerCell;
+@property (strong, nonatomic) IBOutlet UIButton *playButton;
 
 @property (nonatomic, weak) id<SYNFeedVideoCellDelegate> delegate;
 

@@ -20,6 +20,9 @@
 @property (nonatomic, weak) IBOutlet UIView *favouritedByContainer;
 
 @property (nonatomic, copy) NSArray *favouritedByButtons;
+@property (strong, nonatomic) IBOutlet UIButton *addButton;
+@property (strong, nonatomic) IBOutlet UIButton *shareButton;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *leftFavouriedByContainer;
 
 @end
 
@@ -48,10 +51,13 @@
 	
 	CGFloat buttonSize = CGRectGetHeight(self.favouritedByContainer.bounds);
 	
+
 	NSMutableArray *buttons = [NSMutableArray array];
-	[favouritedBy enumerateObjectsUsingBlock:^(ChannelOwner *channelOwner, NSUInteger idx, BOOL *stop) {
-		CGRect frame = CGRectMake(idx * (buttonSize + 6.0), 0.0, buttonSize, buttonSize);
-		NSURL *thumbnailURL = [NSURL URLWithString:channelOwner.thumbnailURL];
+
+    
+    for (int i = 0; i < 3; i++) {
+        CGRect frame = CGRectMake(i * (buttonSize + 6.0), 0.0, buttonSize, buttonSize);
+		NSURL *thumbnailURL = [NSURL URLWithString:@"http://media.us.wonderpl.com/images/avatar/thumbnail_medium/sXL9Ld9OtFcBODfJV5YoAw.jpg"];
 		
 		SYNAvatarButton *button = [[SYNAvatarButton alloc] initWithFrame:frame];
 		[button setImageWithURL:thumbnailURL
@@ -62,7 +68,8 @@
 		
 		[buttons addObject:button];
 		[self.favouritedByContainer addSubview:button];
-	}];
+        
+    }
 	
 	self.favouritedByButtons = buttons;
 }
@@ -84,5 +91,23 @@
 - (IBAction)shareButtonPressed:(UIButton *)button {
 	[self.delegate videoActionsBar:self shareButtonPressed:button];
 }
+
+- (void) setLightAssets {
+	[self.addButton setImage:[UIImage imageNamed:@"AddButtonLight.png"] forState:UIControlStateNormal];
+    [self.shareButton setImage:[UIImage imageNamed:@"ShareButtonLight.png"] forState:UIControlStateNormal];
+}
+
+- (void) setDarkAssets {
+	[self.addButton setImage:[UIImage imageNamed:@"AddButton.png"] forState:UIControlStateNormal];
+    [self.shareButton setImage:[UIImage imageNamed:@"ShareButton.png"] forState:UIControlStateNormal];
+}
+
+- (void)feedBar {
+    self.shareButton.hidden = YES;
+    self.addButton.hidden = YES;
+    self.favouriteButton.hidden = YES;
+    [self.leftFavouriedByContainer setConstant:-35];
+}
+
 
 @end

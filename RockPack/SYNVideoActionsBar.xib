@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -17,10 +17,10 @@
                         <constraint firstAttribute="width" constant="40" id="bI9-AS-CcU"/>
                         <constraint firstAttribute="height" constant="40" id="nfH-Gp-j6I"/>
                     </constraints>
-                    <state key="normal" image="FavouriteButton.png">
+                    <state key="normal" image="FavouriteButtonSelected.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="selected" image="FavouriteButtonSelected.png"/>
+                    <state key="selected" image="FavouriteButton.png"/>
                     <connections>
                         <action selector="favouriteButtonPressed:" destination="RuC-0K-OOM" eventType="touchUpInside" id="7Uj-7d-JcX"/>
                     </connections>
@@ -110,8 +110,11 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="addButton" destination="gvq-tZ-yxZ" id="hvy-LY-aiM"/>
                 <outlet property="favouriteButton" destination="H5R-DI-TgM" id="hvL-IF-NVf"/>
                 <outlet property="favouritedByContainer" destination="Ixh-ks-J92" id="OZ7-vV-XTM"/>
+                <outlet property="leftFavouriedByContainer" destination="aEb-vA-WPh" id="EIV-ae-EkF"/>
+                <outlet property="shareButton" destination="Zsz-gD-1Fi" id="WeN-XC-EjP"/>
                 <outlet property="shopButton" destination="pXu-bh-Z99" id="L4a-LT-LHZ"/>
             </connections>
         </view>

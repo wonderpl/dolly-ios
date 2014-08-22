@@ -93,8 +93,6 @@ static const CGFloat heightPortrait = 985;
 	self.model = [SYNFeedModel sharedModel];
 	self.model.delegate = self;
 	
-    self.feedCollectionView.contentInset = UIEdgeInsetsMake(64.0, 0.0, 0.0, 0.0);
-	
 	if (![self.model itemCount]) {
 		[self displayPopupMessage: NSLocalizedString(@"feed_screen_loading_message", nil)
 					   withLoader: YES];
@@ -131,6 +129,10 @@ static const CGFloat heightPortrait = 985;
 												   object:nil];
 	}
 
+    
+    if (IS_IPHONE) {
+        [self.navigationController.navigationBar setHidden:YES];
+    }
     
 	[self reloadData];
     
@@ -303,7 +305,7 @@ static const CGFloat heightPortrait = 985;
         }
     }
     
-    if (isCurrentVideoPlayerOffScreen) {
+    if (!isCurrentVideoPlayerOffScreen) {
         
         if (self.currentVideoPlayer.state == SYNVideoPlayerStatePrePlaying) {
             if ([self.currentVideoPlayer isKindOfClass:[SYNYouTubeWebVideoPlayer class]]) {
@@ -339,10 +341,7 @@ static const CGFloat heightPortrait = 985;
             cell.delegate = self;
             if (indexPath.item == self.selectedIndex && self.currentVideoPlayer) {
                 cell.videoPlayerCell.videoPlayer = self.currentVideoPlayer;
-                
-                if (cell.videoPlayerCell.videoPlayer.state == SYNVideoPlayerStatePaused) {
-                    cell.videoPlayerCell.hidden = NO;
-                }
+                cell.videoPlayerCell.hidden = NO;
             } else {
                 cell.videoPlayerCell.videoPlayer = videoPlayer;
                 cell.videoPlayerCell.hidden = YES;
@@ -483,33 +482,27 @@ static const CGFloat heightPortrait = 985;
 }
 
 - (void)videoCellThumbnailPressed:(SYNFeedVideoCell *)cell {
-//	NSIndexPath *indexPath = [self.feedCollectionView indexPathForCell:cell];
-//	
-//	// We need to convert it to the index in the array of videos since the player doesn't know about channels
-//	NSInteger itemIndex = [self.model itemIndexForFeedIndex:indexPath.row];
-//	SYNVideoPlayerViewController *viewController = [SYNVideoPlayerViewController viewControllerWithModel:self.model
-//																			   selectedIndex:itemIndex];
-//	
-//	SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
-//	animator.delegate = self;
-//	animator.cellIndexPath = indexPath;
-//	self.videoPlayerAnimator = animator;
-//	viewController.transitioningDelegate = animator;
-//	viewController.dismissDelegate = self;
-//	[self presentViewController:viewController animated:YES completion:nil];
     
     if (self.selectedIndex == [[self.feedCollectionView indexPathForCell:cell] row]) {
         return;
     }
     
+    [self playVideoInCell:cell];
+}
+
+- (void)playVideoInCell:(SYNFeedVideoCell*) cell{
+    
+    cell.videoPlayerCell.hidden = NO;
+    cell.playButton.hidden = YES;
+
     [self.currentVideoPlayer stop];
-	SYNVideoPlayer *videoPlayer = cell.videoPlayerCell.videoPlayer;
+    SYNVideoPlayer *videoPlayer = [SYNVideoPlayer playerForVideoInstance:cell.videoInstance];
+    cell.videoPlayerCell.videoPlayer = videoPlayer;
 	[videoPlayer play];
 	self.currentVideoPlayer = videoPlayer;
     self.currentVideoPlayer.delegate = self;
     self.selectedIndex = [[self.feedCollectionView indexPathForCell:cell] row] ;
 }
-
 - (void)videoCell:(SYNFeedVideoCell *)cell favouritePressed:(UIButton *)button {
     
 	[self favouriteButtonPressed:button videoInstance:cell.videoInstance];
@@ -615,10 +608,21 @@ static const CGFloat heightPortrait = 985;
 }
 
 - (void)videoPlayerFinishedPlaying {
-    VideoInstance *videoInstance = [self.model itemAtIndex:self.selectedIndex];
-    SYNVideoPlayer *videoPlayer = [SYNVideoPlayer playerForVideoInstance:videoInstance];
-	self.currentVideoPlayer = videoPlayer;
+ 
+    for (int i = self.selectedIndex+1; i<[self.model itemCount]; i++) {
+        FeedItem *feedItem = [self.model feedItemAtindex:i];
 
+        if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo) {
+            
+                [self.feedCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredVertically animated:YES];
+                
+                SYNFeedVideoCell *cell = (SYNFeedVideoCell*)[self.feedCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
+            
+	            self.selectedIndex = i;
+                [self playVideoInCell:cell];
+                break;
+        }
+    }
 }
 
 - (void)videoPlayerErrorOccurred:(NSString *)reason {

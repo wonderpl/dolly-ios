@@ -14,6 +14,9 @@
 #import "VideoInstance.h"
 #import "SYNFeedModel.h"
 
+
+static const CGFloat cellHeight = 568;
+
 @interface SYNIPhoneFeedRootViewController () <UICollectionViewDelegateFlowLayout>
 
 @end
@@ -61,11 +64,33 @@
 	
 	BOOL isVideo = (feedItem.resourceTypeValue == FeedItemResourceTypeVideo);
 	
-	return (isVideo ? CGSizeMake(collectionViewWidth, 401.0) : CGSizeMake(collectionViewWidth, 267.0));
+	return (isVideo ? CGSizeMake(collectionViewWidth, cellHeight) : CGSizeMake(collectionViewWidth, cellHeight));
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
 	return ([self.model hasMoreItems] ? [self footerSize] : CGSizeZero);
 }
+
+//- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
+//{
+//    float pageWidth = cellHeight;
+//    
+//    float currentOffset = scrollView.contentOffset.y;
+//    float targetOffset = targetContentOffset->y;
+//    float newTargetOffset = 0;
+//    
+//    if (targetOffset > currentOffset)
+//        newTargetOffset = ceilf(currentOffset / pageWidth) * pageWidth;
+//    else
+//        newTargetOffset = floorf(currentOffset / pageWidth) * pageWidth;
+//    
+//    if (newTargetOffset < 0)
+//        newTargetOffset = 0;
+//    else if (newTargetOffset > scrollView.contentSize.height)
+//        newTargetOffset = scrollView.contentSize.height;
+//    
+//    targetContentOffset->y = currentOffset;
+//    [scrollView setContentOffset:CGPointMake(0, newTargetOffset) animated:YES];
+//}
 
 @end

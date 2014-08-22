@@ -32,4 +32,6 @@
 
 + (instancetype)bar;
 
+- (void)feedBar;
+
 @end
