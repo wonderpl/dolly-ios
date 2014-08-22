@@ -82,9 +82,6 @@ static const CGFloat heightPortrait = 985;
 	
 	self.model = [SYNFeedModel sharedModel];
 	self.model.delegate = self;
-	if (IS_IPAD) {
-        self.feedCollectionView.contentInset = UIEdgeInsetsMake(64.0, 0.0, 0.0, 0.0);
-    }
 	
 	if (![self.model itemCount]) {
 		[self displayPopupMessage: NSLocalizedString(@"feed_screen_loading_message", nil)
@@ -261,16 +258,7 @@ static const CGFloat heightPortrait = 985;
 		VideoInstance *videoInstance = [self.model resourceForFeedItem:feedItem];
         if (videoInstance) {
             cell.videoInstance = videoInstance;
-            
-            if (IS_IPAD) {
-                [cell setLightView];
-            } else {
-                if (indexPath.row%2==0) {
-                    [cell setLightView];
-                } else {
-                    [cell setDarkView];
-                }
-            }
+            [cell setLightView];
             cell.delegate = self;
         }
 		return cell;

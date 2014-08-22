@@ -71,27 +71,27 @@ static const CGFloat cellHeight = 568;
 	return ([self.model hasMoreItems] ? [self footerSize] : CGSizeZero);
 }
 
-- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
-{
-    float pageWidth = cellHeight;
-    
-    float currentOffset = scrollView.contentOffset.y;
-    float targetOffset = targetContentOffset->y;
-    float newTargetOffset = 0;
-    
-    if (targetOffset > currentOffset)
-        newTargetOffset = ceilf(currentOffset / pageWidth) * pageWidth;
-    else
-        newTargetOffset = floorf(currentOffset / pageWidth) * pageWidth;
-    
-    if (newTargetOffset < 0)
-        newTargetOffset = 0;
-    else if (newTargetOffset > scrollView.contentSize.height)
-        newTargetOffset = scrollView.contentSize.height;
-    
-    targetContentOffset->y = currentOffset;
-    [scrollView setContentOffset:CGPointMake(0, newTargetOffset) animated:YES];
-}
+//- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
+//{
+//    float pageWidth = cellHeight;
+//    
+//    float currentOffset = scrollView.contentOffset.y;
+//    float targetOffset = targetContentOffset->y;
+//    float newTargetOffset = 0;
+//    
+//    if (targetOffset > currentOffset)
+//        newTargetOffset = ceilf(currentOffset / pageWidth) * pageWidth;
+//    else
+//        newTargetOffset = floorf(currentOffset / pageWidth) * pageWidth;
+//    
+//    if (newTargetOffset < 0)
+//        newTargetOffset = 0;
+//    else if (newTargetOffset > scrollView.contentSize.height)
+//        newTargetOffset = scrollView.contentSize.height;
+//    
+//    targetContentOffset->y = currentOffset;
+//    [scrollView setContentOffset:CGPointMake(0, newTargetOffset) animated:YES];
+//}
 
 
 @end

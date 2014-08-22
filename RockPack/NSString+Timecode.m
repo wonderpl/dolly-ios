@@ -42,13 +42,13 @@
 			roundedMinutes = 0;
 		}
 		if (roundedMinutes) {
-			return [NSString stringWithFormat:@"%d HR %d MIN WATCH", hours, roundedMinutes];
+			return [NSString stringWithFormat:@"%d hr %d min watch", hours, roundedMinutes];
 		} else {
-			return [NSString stringWithFormat:@"%d HR WATCH", hours];
+			return [NSString stringWithFormat:@"%d hr watch", hours];
 		}
 	}
 
-	return [NSString stringWithFormat:@"%d MIN WATCH", minutes];
+	return [NSString stringWithFormat:@"%d min watch", minutes];
 }
 
 @end

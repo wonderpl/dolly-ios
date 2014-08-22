@@ -51,10 +51,13 @@
 	
 	CGFloat buttonSize = CGRectGetHeight(self.favouritedByContainer.bounds);
 	
+
 	NSMutableArray *buttons = [NSMutableArray array];
-	[favouritedBy enumerateObjectsUsingBlock:^(ChannelOwner *channelOwner, NSUInteger idx, BOOL *stop) {
-		CGRect frame = CGRectMake(idx * (buttonSize + 6.0), 0.0, buttonSize, buttonSize);
-		NSURL *thumbnailURL = [NSURL URLWithString:channelOwner.thumbnailURL];
+
+    
+    for (int i = 0; i < 3; i++) {
+        CGRect frame = CGRectMake(i * (buttonSize + 6.0), 0.0, buttonSize, buttonSize);
+		NSURL *thumbnailURL = [NSURL URLWithString:@"http://media.us.wonderpl.com/images/avatar/thumbnail_medium/sXL9Ld9OtFcBODfJV5YoAw.jpg"];
 		
 		SYNAvatarButton *button = [[SYNAvatarButton alloc] initWithFrame:frame];
 		[button setImageWithURL:thumbnailURL
@@ -65,7 +68,8 @@
 		
 		[buttons addObject:button];
 		[self.favouritedByContainer addSubview:button];
-	}];
+        
+    }
 	
 	self.favouritedByButtons = buttons;
 }
@@ -91,12 +95,12 @@
 
 - (void) setLightAssets {
 	[self.addButton setImage:[UIImage imageNamed:@"AddButtonLight.png"] forState:UIControlStateNormal];
-    [self.shareButton setImage:[UIImage imageNamed:@"shareButtonLight.png"] forState:UIControlStateNormal];
+    [self.shareButton setImage:[UIImage imageNamed:@"ShareButtonLight.png"] forState:UIControlStateNormal];
 }
 
 - (void) setDarkAssets {
 	[self.addButton setImage:[UIImage imageNamed:@"AddButton.png"] forState:UIControlStateNormal];
-    [self.shareButton setImage:[UIImage imageNamed:@"shareButton.png"] forState:UIControlStateNormal];
+    [self.shareButton setImage:[UIImage imageNamed:@"ShareButton.png"] forState:UIControlStateNormal];
 }
 
 
