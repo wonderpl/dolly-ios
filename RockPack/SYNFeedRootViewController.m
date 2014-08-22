@@ -196,7 +196,6 @@ static const CGFloat heightPortrait = 985;
     
 	self.shownInboarding = NO;
     [self showInboarding];
-    NSLog(@"STAKE viewWillAppear end %d", self.currentVideoPlayer.state);
 
 }
 
@@ -204,17 +203,15 @@ static const CGFloat heightPortrait = 985;
 	[super viewDidAppear:animated];
 	[[SYNTrackingManager sharedManager] trackFeedScreenView];
     
-    NSLog(@"STAKE viewDidAppear %d", self.currentVideoPlayer.state);
-    
     if (self.currentVideoPlayer.state == SYNVideoPlayerStatePlaying) {
         [self.currentVideoPlayer play];
     }
-    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     self.lastYOffset = self.feedCollectionView.contentOffset.y;
+    [self.currentVideoPlayer pause];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
