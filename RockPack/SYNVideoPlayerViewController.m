@@ -139,9 +139,9 @@
 	[super viewDidAppear:animated];
 	
 	if ([self isBeingPresented]) {
-//		if (self.currentVideoPlayer.state != SYNVideoPlayerStatePlaying) {
-//            [self playCurrentVideo];
-//        }
+		if (self.currentVideoPlayer.state != SYNVideoPlayerStatePlaying) {
+            [self.currentVideoPlayer play];
+        }
     }
 	
 	Genre *genre = [[SYNGenreManager sharedManager] genreWithId:self.videoInstance.channel.categoryId];
@@ -180,7 +180,6 @@
 	}
 
     if ([self.dismissDelegate respondsToSelector:@selector(dismissPosition:)]) {
-//        [self.dismissDelegate dismissPosition:self.selectedIndex];
         [self.dismissDelegate dismissPosition:self.selectedIndex :self.currentVideoPlayer];
     }
 
@@ -266,6 +265,7 @@
 	if (indexPath.item == self.selectedIndex && self.currentVideoPlayer) {
 		cell.videoPlayer = self.currentVideoPlayer;
         self.currentVideoPlayer.delegate = self;
+        [cell.videoPlayer layoutSubviews];
 
     } else {
 		VideoInstance *videoInstance = [self.model itemAtIndex:indexPath.row];
