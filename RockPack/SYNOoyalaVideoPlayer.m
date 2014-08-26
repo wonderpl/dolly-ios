@@ -9,14 +9,14 @@
 #import "SYNOoyalaVideoPlayer.h"
 #import <OOOoyalaPlayer.h>
 #import <OOOoyalaError.h>
+#import <OOPlayerDomain.h>
 #import "SYNScrubberBar.h"
 #import "VideoInstance.h"
 #import "Video.h"
 #import "SYNVideoPlayer+Protected.h"
 
-static NSString * const EmbedCoded = @"xxbjk1YjpHm4-VkWfWfEKBbyEkh358su";
 static NSString * const PCode = @"Z5Mm06XeZlcDlfU_1R9v_L2KwYG6";
-static NSString * const PlayerDomain = @"www.ooyala.com";
+static NSString * const PlayerDomain = @"http://wonderpl.com";
 
 
 @interface SYNOoyalaVideoPlayer ()
@@ -38,7 +38,7 @@ static NSString * const PlayerDomain = @"www.ooyala.com";
 
 - (OOOoyalaPlayer *)ooyalaPlayer {
 	if (!_ooyalaPlayer) {
-		OOOoyalaPlayer *ooyalaPlayer = [[OOOoyalaPlayer alloc] initWithPcode:PCode domain:PlayerDomain];
+		OOOoyalaPlayer *ooyalaPlayer = [[OOOoyalaPlayer alloc] initWithPcode:PCode domain:[[OOPlayerDomain alloc] initWithString:PlayerDomain]];
 		
 		NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
 		[notificationCenter addObserver:self
