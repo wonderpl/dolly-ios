@@ -50,6 +50,7 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 @property (strong, nonatomic) IBOutlet UILabel *originatorDisplayNameLabel;
 @property (strong, nonatomic) IBOutlet UIButton *favouriteButton;
 
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *clickToMoreHeight;
 @property (strong, nonatomic) IBOutlet UIButton *loveButton;
 @end
 
@@ -88,6 +89,17 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
     self.playButton.hidden = NO;
 
     [self.actionsBar feedBar];
+    
+    self.clickToMoreButton.layer.cornerRadius = (CGRectGetHeight(self.clickToMoreButton.frame) / 2.0);
+	self.clickToMoreButton.layer.borderColor = [[UIColor dollyButtonGreenColor] CGColor];
+	self.clickToMoreButton.layer.borderWidth = 1.0;
+	
+	self.clickToMoreButton.tintColor = [UIColor dollyButtonGreenColor];
+
+    self.videoThumbnailButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentFill;
+    self.videoThumbnailButton.contentVerticalAlignment = UIControlContentVerticalAlignmentFill;
+    [self.videoThumbnailButton setContentMode:UIViewContentModeScaleToFill];
+
 }
 
 - (void)prepareForReuse {
@@ -112,7 +124,6 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 
     }
     
-    
     if (IS_IPHONE) {
         if (self.videoInstance.video.videoDescription.length > 0) {
             self.titleLabel.numberOfLines = 2;
@@ -125,38 +136,31 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 									   forState:UIControlStateNormal
 							   placeholderImage:[UIImage imageNamed:@"PlaceholderAvatarProfile"]
 										options:SDWebImageRetryFailed];
-	
-	NSURL *thumbnailURL = [NSURL URLWithString:videoInstance.thumbnailURL];
-    self.videoThumbnailButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentFill;
-    self.videoThumbnailButton.contentVerticalAlignment = UIControlContentVerticalAlignmentFill;
-
+    NSURL *thumbnailURL = [NSURL URLWithString:videoInstance.thumbnailURL];
 	[self.videoThumbnailButton setImageWithURL:thumbnailURL forState:UIControlStateNormal];
-    [self.videoThumbnailButton setContentMode:UIViewContentModeScaleToFill];
-
     [self.videoThumbnailButton setContentScaleFactor:1.3];
 
-    self.actionsBar.favouritedBy = [videoInstance.starrers array];
     
+    self.actionsBar.favouritedBy = [videoInstance.starrers array];
 	self.actionsBar.favouriteButton.selected = videoInstance.starredByUserValue;
     self.actionsBar.frame = self.videoActionsContainer.bounds;
     [self.actionsBar layoutIfNeeded];
     
     
     [self.originatorDisplayNameLabel setText:self.videoInstance.originator.displayName];
-    
     [self.originatorDisplayNameLabel setFont:[UIFont regularCustomFontOfSize:self.originatorDisplayNameLabel.font.pointSize]];
  
    self.followButton.selected = [[SYNActivityManager sharedInstance] isSubscribedToUserId:self.videoInstance.originator.uniqueId];
     
-    
-    self.clickToMoreButton.layer.cornerRadius = (CGRectGetHeight(self.clickToMoreButton.frame) / 2.0);
-	self.clickToMoreButton.layer.borderColor = [[UIColor dollyButtonGreenColor] CGColor];
-	self.clickToMoreButton.layer.borderWidth = 1.0;
-	
-	self.clickToMoreButton.tintColor = [UIColor dollyButtonGreenColor];
-
     self.clickToMoreButton.hidden = ([self.videoInstance.video.linkTitle length] == 0);
 	[self.clickToMoreButton setTitle:self.videoInstance.video.linkTitle forState:UIControlStateNormal];
+    if ([self.videoInstance.video.linkTitle length] == 0) {
+        [self.clickToMoreHeight setConstant:0];
+    } else {
+        [self.clickToMoreHeight setConstant:30];
+    }
+    
+    
 
     BOOL hasLabel = ([self.videoInstance.label length]);
 	if (hasLabel) {
@@ -189,16 +193,12 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
     if (![self.videoInstance.video.videoDescription length] && ![self.videoInstance.video.linkTitle length]) {
         [self.videoTopSpace setConstant:20];
         self.titleLabel.numberOfLines = 3;
-        NSLog(@"---50");
     } else {
         [self.videoTopSpace setConstant:5];
-        NSLog(@"---46");
         self.titleLabel.numberOfLines = 2;
-
     }
 
     [self layoutIfNeeded];
-
 }
 
 

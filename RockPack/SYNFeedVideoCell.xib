@@ -234,6 +234,7 @@
             <connections>
                 <outlet property="avatarThumbnailButton" destination="71k-CY-H0Y" id="Lao-D1-36e"/>
                 <outlet property="clickToMoreButton" destination="VPe-gc-wdn" id="191-ga-Zu8"/>
+                <outlet property="clickToMoreHeight" destination="Xcl-5c-qI1" id="KWl-M2-V1c"/>
                 <outlet property="curatedByButton" destination="DMH-Zk-ftY" id="GdM-z1-Yus"/>
                 <outlet property="descriptionLabel" destination="mfC-OQ-T9d" id="l72-xU-SLN"/>
                 <outlet property="durationLabel" destination="8LT-cL-UD0" id="1YV-ZK-3pM"/>
