@@ -106,6 +106,7 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
     [super prepareForReuse];
     self.playButton.hidden = NO;
     self.videoPlayerCell.hidden = YES;
+    self.descriptionLabel.text = @"";
 }
 
 - (UIImageView *)imageView {
