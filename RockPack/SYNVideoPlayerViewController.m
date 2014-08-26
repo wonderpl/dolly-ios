@@ -156,9 +156,7 @@
         [self.currentVideoPlayer layoutIfNeeded];
 	}
     
-    self.currentVideoPlayer.delegate = nil;
     self.currentVideoPlayer.delegate = self;
-
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

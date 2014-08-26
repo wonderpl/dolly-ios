@@ -38,6 +38,7 @@
 #import "SYNFullScreenVideoViewController.h"
 #import "SYNFullScreenVideoAnimator.h"
 #import "SYNYouTubeWebVideoPlayer.h"
+#import "SYNWebViewController.h"
 
 static const CGFloat heightLandscape = 703;
 static const CGFloat heightPortrait = 985;
@@ -130,9 +131,6 @@ static const CGFloat heightPortrait = 985;
 	}
 
     
-    if (IS_IPHONE) {
-        [self.navigationController.navigationBar setHidden:YES];
-    }
     
 	[self reloadData];
     
@@ -196,6 +194,11 @@ static const CGFloat heightPortrait = 985;
     
 	self.shownInboarding = NO;
     [self showInboarding];
+    
+    if (IS_IPHONE) {
+        [self.navigationController.navigationBar setHidden:YES];
+    }
+
 
 }
 
@@ -212,6 +215,11 @@ static const CGFloat heightPortrait = 985;
     [super viewWillDisappear:animated];
     self.lastYOffset = self.feedCollectionView.contentOffset.y;
     [self.currentVideoPlayer pause];
+    
+    if (IS_IPHONE) {
+        [self.navigationController.navigationBar setHidden:NO];
+    }
+
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -331,7 +339,6 @@ static const CGFloat heightPortrait = 985;
 		SYNFeedVideoCell *cell = [self videoCellForIndexPath:indexPath collectionView:collectionView];
 		
         VideoInstance *videoInstance = [self.model itemAtIndex:indexPath.row];
-		SYNVideoPlayer *videoPlayer = [SYNVideoPlayer playerForVideoInstance:videoInstance];
         
         if (videoInstance) {
             cell.videoInstance = videoInstance;
@@ -340,7 +347,6 @@ static const CGFloat heightPortrait = 985;
                 cell.videoPlayerCell.videoPlayer = self.currentVideoPlayer;
                 cell.videoPlayerCell.hidden = NO;
             } else {
-                cell.videoPlayerCell.videoPlayer = videoPlayer;
                 cell.videoPlayerCell.hidden = YES;
             }
         }
@@ -515,6 +521,25 @@ static const CGFloat heightPortrait = 985;
 - (void)videoCell:(SYNFeedVideoCell *)cell sharePressed:(UIButton *)button {
 	[self shareVideoInstance:cell.videoInstance];
 }
+
+- (void)videoCell:(SYNFeedVideoCell *)cell clickToMorePressed:(UIButton *)button {
+    Video *video = cell.videoInstance.video;
+	NSURL *linkURL = [NSURL URLWithString:video.linkURL];
+	
+	UIViewController *viewController = [SYNWebViewController webViewControllerForURL:linkURL withTrackingName:@"Click to more"];
+    
+	[self presentViewController:viewController animated:YES completion:nil];
+    
+    [[SYNTrackingManager sharedManager] trackClickToMoreWithTitle:cell.videoInstance.title
+                                                              URL:video.linkURL];
+
+}
+
+
+- (void)videoCell:(SYNFeedVideoCell *)cell followButtonPressed:(UIButton *)button {
+	[self followControlPressed:button withChannelOwner:cell.videoInstance.originator withVideoInstace:cell.videoInstance completion:nil];
+}
+
 
 - (void)videoCell:(SYNFeedVideoCell *)cell addedByPressed:(UIButton *)button {
 	VideoInstance *videoInstance = cell.videoInstance;

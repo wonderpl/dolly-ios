@@ -25,6 +25,8 @@
 - (void)videoCell:(SYNFeedVideoCell *)cell sharePressed:(UIButton *)button;
 - (void)videoCell:(SYNFeedVideoCell *)cell addedByPressed:(UIButton *)button;
 - (void)videoCell:(SYNFeedVideoCell *)cell maximiseVideoPlayer:(UIButton *)button;
+- (void)videoCell:(SYNFeedVideoCell *)cell clickToMorePressed:(UIButton *)button;
+- (void)videoCell:(SYNFeedVideoCell *)cell followButtonPressed:(UIButton *)button;
 
 @end
 

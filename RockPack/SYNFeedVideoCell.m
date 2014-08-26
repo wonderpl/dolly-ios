@@ -36,7 +36,7 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 
 @property (nonatomic, strong) IBOutlet UILabel *labelLabel;
 @property (nonatomic, strong) IBOutlet UIButton *curatedByButton;
-@property (strong, nonatomic) IBOutlet UIButton *clickToMoreButton;
+@property (nonatomic, strong) IBOutlet UIButton *clickToMoreButton;
 
 @property (nonatomic, strong) IBOutlet UILabel *durationLabel;
 
@@ -95,10 +95,14 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 	self.clickToMoreButton.layer.borderWidth = 1.0;
 	
 	self.clickToMoreButton.tintColor = [UIColor dollyButtonGreenColor];
-
+    [self.clickToMoreButton.titleLabel setFont:[UIFont regularCustomFontOfSize:self.clickToMoreButton.titleLabel.font.pointSize]];
+    
     self.videoThumbnailButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentFill;
     self.videoThumbnailButton.contentVerticalAlignment = UIControlContentVerticalAlignmentFill;
     [self.videoThumbnailButton setContentMode:UIViewContentModeScaleToFill];
+    
+    [self.originatorDisplayNameLabel setFont:[UIFont regularCustomFontOfSize:self.originatorDisplayNameLabel.font.pointSize]];
+
 
 }
 
@@ -122,7 +126,6 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 
     if (self.videoInstance.video.videoDescription.length > 0) {
         [self.descriptionLabel setAttributedText:[self attributedStringFromString:[self.videoInstance.video.videoDescription stringByStrippingHTML] withLineHeight:12]];
-
     }
     
     if (IS_IPHONE) {
@@ -137,19 +140,16 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 									   forState:UIControlStateNormal
 							   placeholderImage:[UIImage imageNamed:@"PlaceholderAvatarProfile"]
 										options:SDWebImageRetryFailed];
+    
     NSURL *thumbnailURL = [NSURL URLWithString:videoInstance.thumbnailURL];
 	[self.videoThumbnailButton setImageWithURL:thumbnailURL forState:UIControlStateNormal];
     [self.videoThumbnailButton setContentScaleFactor:1.3];
 
-    
     self.actionsBar.favouritedBy = [videoInstance.starrers array];
 	self.actionsBar.favouriteButton.selected = videoInstance.starredByUserValue;
     self.actionsBar.frame = self.videoActionsContainer.bounds;
-    [self.actionsBar layoutIfNeeded];
-    
     
     [self.originatorDisplayNameLabel setText:self.videoInstance.originator.displayName];
-    [self.originatorDisplayNameLabel setFont:[UIFont regularCustomFontOfSize:self.originatorDisplayNameLabel.font.pointSize]];
  
    self.followButton.selected = [[SYNActivityManager sharedInstance] isSubscribedToUserId:self.videoInstance.originator.uniqueId];
     
@@ -160,7 +160,6 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
     } else {
         [self.clickToMoreHeight setConstant:30];
     }
-    
     
 
     BOOL hasLabel = ([self.videoInstance.label length]);
@@ -190,7 +189,7 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
                                                     green: 121.0f / 255.0f
                                                      blue: 123.0f / 255.0f
                                                      alpha: 1.0f]];
-    
+
     if (![self.videoInstance.video.videoDescription length] && ![self.videoInstance.video.linkTitle length]) {
         [self.videoTopSpace setConstant:20];
         self.titleLabel.numberOfLines = 3;
@@ -199,7 +198,6 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
         self.titleLabel.numberOfLines = 2;
     }
 
-    [self layoutIfNeeded];
 }
 
 
@@ -308,15 +306,23 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 }
 - (IBAction)addButtonTapped:(id)sender {
     [self.delegate videoCell:self addToChannelPressed:sender];
-
 }
+
 - (IBAction)favouriteButtonTapped:(id)sender {
     
     [self.delegate videoCell:self favouritePressed:sender];
-
 }
+
 - (IBAction)shareButtonTapped:(id)sender {
     [self.delegate videoCell:self sharePressed:sender];
+}
+
+- (IBAction)clickToMoreTapped:(id)sender {
+    [self.delegate videoCell:self clickToMorePressed:sender];
+}
+
+- (IBAction)followButtonTapped:(id)sender {
+    [self.delegate videoCell:self followButtonPressed:sender];
 
 }
 
