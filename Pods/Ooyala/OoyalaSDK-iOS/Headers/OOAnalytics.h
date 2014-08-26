@@ -21,13 +21,6 @@
 @property(nonatomic, strong) NSString *userAgent;
 
 /** @internal
- * Initialize an OOAnalytics using the specified api
- * @param[in] api the API to initialize this OOAnalytics with
- * @returns the initialized OOAnalytics
- */
-- (id)initWithAPI:(OOOoyalaAPIClient *)api;
-
-/** @internal
  * Initialize an OOAnalytics using the specified api and module params
  * @param[in] api the API to initialize this OOAnalytics with
  * @param[in] moduleParams additional ModuleParams to initialize Analytics with
@@ -52,15 +45,15 @@
 - (void)initializeVideoWithEmbedCode:(NSString *)embedCode duration:(NSNumber *)duration;
 
 /**
- * Report a player load
- */
-- (void)reportPlayerLoad;
-
-/**
  * Report a playhead update to the specified time
  * @param[in] time the new playhead time (in seconds)
  */
 - (void)reportPlayheadUpdateToTime:(NSNumber *)time;
+
+/**
+ * Report that the player was asked to play
+ */
+- (void)reportPlayRequested;
 
 /**
  * Report that the player has started playing

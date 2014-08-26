@@ -17,6 +17,7 @@
 @class OOOoyalaAPIHelper;
 @class OOContentItem;
 @class OOOoyalaError;
+@class OOPlayerDomain;
 
 /**
  * Ooyala API client implementation.
@@ -31,7 +32,7 @@
  * @param[in] domain the embed domain
  * @returns the initialized OOOoyalaAPIClient
  */
-- (id)initWithPcode:(NSString *)pcode domain:(NSString *)domain;
+- (id)initWithPcode:(NSString *)pcode domain:(OOPlayerDomain *)domain;
 
 /**
  * Initialize an OOOoyalaAPIClient with pcode, embed domain and OOEmbedTokenGenerator.
@@ -44,7 +45,7 @@
  * @returns the initialized OOOoyalaAPIClient
  */
 - (id)initWithPcode:(NSString *)pcode
-              domain:(NSString *)domain
+              domain:(OOPlayerDomain *)domain
  embedTokenGenerator:(id<OOEmbedTokenGenerator>)generator;
 
 /**
@@ -58,7 +59,7 @@
  * @returns the initialized OOOoyalaAPIClient
  */
 - (id)initWithPcode:(NSString *)pcode
-             domain:(NSString *)domain
+             domain:(OOPlayerDomain *)domain
  secureUrlGenerator:(id<OOSecureURLGenerator>)secureURLGenerator;
 
 
@@ -77,7 +78,7 @@
 - (id)initWithAPIKey:(NSString *)apiKey
               secret:(NSString *)secret
                pcode:(NSString *)pcode
-              domain:(NSString *)domain;
+              domain:(OOPlayerDomain *)domain;
 
 /**
  * Initialize an OOOoyalaAPIClient with pcode, embed domain, API key and secret and OOEmbedTokenGenerator
@@ -96,7 +97,7 @@
 - (id)initWithAPIKey:(NSString *)apiKey
               secret:(NSString *)secret
                pcode:(NSString *)pcode
-              domain:(NSString *)domain
+              domain:(OOPlayerDomain *)domain
  embedTokenGenerator:(id<OOEmbedTokenGenerator>)generator;
 
 /**
@@ -112,7 +113,7 @@
  * @returns the initialized OOOoyalaAPIClient
  */
 - (id)initWithPcode:(NSString *)pcode
-             domain:(NSString *)domain
+             domain:(OOPlayerDomain *)domain
 embedTokenGenerator:(id<OOEmbedTokenGenerator>)generator
  secureUrlGenerator:(id<OOSecureURLGenerator>)secureURLGenerator;
 
@@ -236,7 +237,7 @@ embedTokenGenerator:(id<OOEmbedTokenGenerator>)generator
  * Get the embed domain that this OOOoyalaAPIClient uses
  * @returns the embed domain this OOOoyalaAPIClient uses
  */
-- (NSString *)domain;
+- (OOPlayerDomain *)domain;
 
 + (NSString*) messageForAuthCode:(int) code;
 

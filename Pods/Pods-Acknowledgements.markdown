@@ -336,7 +336,7 @@ THE SOFTWARE.
 
 ## Ooyala
 
-Copyright (c) 2012 Ooyala All rights reserved
+Copyright (c) 2014 Ooyala All rights reserved
 
 ## Reachability
 

@@ -14,6 +14,7 @@
 #import "OOSecureURLGenerator.h"
 #import "OOCallbacks.h"
 #import "OOEmbedTokenGenerator.h"
+#import "OOClosedCaptionsStyle.h"
 
 @class OOContentItem;
 @class OOVideo;
@@ -22,6 +23,7 @@
 @class OOClosedCaptionsStyle;
 @class OOStreamPlayer;
 @class OOAdSpot;
+@class OOPlayerDomain;
 
 /**
  * Defines player behavior after video playback has ended, defaults to OOOoyalaPlayerActionAtEndContinue
@@ -114,6 +116,7 @@ extern NSString *const OOOoyalaPlayerErrorNotification; /**< Fires when an error
 extern NSString *const OOOoyalaPlayerAdErrorNotification; /**< Fires when an error occurs while trying to play an ad */
 extern NSString *const OOOoyalaPlayerMetadataReadyNotification; /**< Fires when content metadata is ready to be accessed */
 extern NSString *const OOOoyalaPlayerLanguageChangedNotification; /**< Fires when close caption language changed*/
+extern NSString *const OOOoyalaPlayerSeekCompletedNotification; /**< Fires when a seek completes*/
 
 @interface OOOoyalaPlayer : NSObject
 
@@ -169,7 +172,7 @@ extern NSString *const OOOoyalaPlayerLanguageChangedNotification; /**< Fires whe
  * @returns the initialized OOOoyalaPlayer
  */
 - (id)initWithPcode:(NSString *)pcode
-             domain:(NSString *)domain;
+             domain:(OOPlayerDomain *)domain;
 
 /**
  * Initialize an OOOoyalaPlayer with the given parameters
@@ -179,7 +182,7 @@ extern NSString *const OOOoyalaPlayerLanguageChangedNotification; /**< Fires whe
  * @returns the initialized OOOoyalaPlayer
  */
 - (id)initWithPcode:(NSString *)pcode
-             domain:(NSString *)domain
+             domain:(OOPlayerDomain *)domain
 embedTokenGenerator:(id<OOEmbedTokenGenerator>)embedTokenGenerator;
 
 /**
@@ -337,6 +340,9 @@ embedTokenGenerator:(id<OOEmbedTokenGenerator>)embedTokenGenerator;
  */
 - (void)setClosedCaptionsLanguage:(NSString *)language;
 
+
+- (void)setClosedCaptionsPresentationStyle: (OOClosedCaptionPresentation) presentationStyle;
+
 /**
  * Get the current bitrate
  * @returns a double indicating the current bitrate in bytes
@@ -374,4 +380,20 @@ embedTokenGenerator:(id<OOEmbedTokenGenerator>)embedTokenGenerator;
 - (BOOL)playAd:(OOAdSpot *)ad;
 
 - (void)registerAdPlayer:(Class)adPlayerClass forType:(Class)adClass;
+
+- (void)updateClosedCaptionsViewPosition:(CGRect)bottomControlsRect withControlsHide:(BOOL)hidden;
+
+- (CGRect)videoRect;
+
+/**
+ * set encryptedloopback.
+ * @param[in] true if enabled, false if disabled
+ */
++ (void)setEncryptedLoopback:(BOOL)enabled;
+
+/**
+ * get encryptedloopback.
+ * @returns encryptedLoopback;
+ */
++ (BOOL)encryptedLoopback;
 @end

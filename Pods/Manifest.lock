@@ -19,7 +19,7 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - Appirater (2.0.2)
-  - Bolts (1.1.0)
+  - Bolts (1.1.2)
   - Facebook-iOS-SDK (3.14.1):
     - Bolts
   - GoogleAnalytics-iOS-SDK (3.0.7)
@@ -33,7 +33,7 @@ PODS:
   - Masonry (0.5.0)
   - MKNetworkKit (0.87):
     - Reachability (~> 3.1.0)
-  - Ooyala (1.5.1)
+  - Ooyala (2.7.0)
   - Reachability (3.1.1)
   - SDWebImage (3.6):
     - SDWebImage/Core
@@ -42,16 +42,17 @@ PODS:
   - TestFlightSDK (3.0.0)
 
 DEPENDENCIES:
-  - AFNetworking
-  - Appirater
-  - Facebook-iOS-SDK
-  - GoogleAnalytics-iOS-SDK
+  - AFNetworking (= 2.2.4)
+  - Appirater (= 2.0.2)
+  - Bolts (= 1.1.0)
+  - Facebook-iOS-SDK (= 3.14.1)
+  - GoogleAnalytics-iOS-SDK (= 3.0.7)
   - GoogleConversionTracking
   - ISO8601DateFormatter
   - Kiwi/XCTest
-  - Masonry
+  - Masonry (= 0.5.0)
   - MKNetworkKit (from `https://github.com/rockpack/MKNetworkKit.git`, branch `cocoapods`)
-  - Ooyala
+  - Ooyala (from `Pods/Local Podspecs/Ooyala.podspec.json`)
   - Reachability
   - SDWebImage
   - SSKeychain (~> 0.2.1)
@@ -61,22 +62,24 @@ EXTERNAL SOURCES:
   MKNetworkKit:
     :branch: cocoapods
     :git: https://github.com/rockpack/MKNetworkKit.git
+  Ooyala:
+    :podspec: Pods/Local Podspecs/Ooyala.podspec.json
 
 SPEC CHECKSUMS:
-  AFNetworking: 01aa7c3aa9a200b94943e54072a4373f14b3d219
-  Appirater: 32fb9089615b5e542c7ad7b5749741a8aed55290
-  Bolts: dc620a31cf67c29bce3e3d14a07a12e797a1a154
-  Facebook-iOS-SDK: 97e68fb37468bee2d90201fd0c9e4dccce5683d9
-  GoogleAnalytics-iOS-SDK: 594702aaf93e6ee497140fd31e758c2e2fa44315
-  GoogleConversionTracking: 8e767c5033aa9802d661970e733f31b9d4e0731a
-  ISO8601DateFormatter: 00944e437ea647f4244454ce8809d313861d08de
-  Kiwi: d60d7498b640a16f58b01925fc3c8d7c4d809f66
-  Masonry: bef482b29f00b33a2da916e1011af85f5d371d66
+  AFNetworking: ab63e259fe91eef4519b371ef0a4955af0e73e64
+  Appirater: a5e00fb01d47a9a6acf4b2f22323b4ccf4f23fbb
+  Bolts: 2635e8698a630774689441047f3465d78c48d485
+  Facebook-iOS-SDK: e9b3d5ac54ee3e5e693f4eef470b97911b3d076d
+  GoogleAnalytics-iOS-SDK: bb285d8eef15a682f1b82971becd0d22edd0e53b
+  GoogleConversionTracking: 9397f655f58f115d0494bb4648dbfd68c1ab11a4
+  ISO8601DateFormatter: 59731cd880cf87e71b4fa95f0d6b713dcbc4cbce
+  Kiwi: c73667f2b84cbf36f1a3830267c5a4ae8dcbd8ba
+  Masonry: eb26a0073a2c4b0df533c39fd623fb11d79a1bd9
   MKNetworkKit: e92724a21c0392c2f4181978135f3ae715863f1a
-  Ooyala: 1550fdef31d67149684b481a4f6c80a0c625ebac
-  Reachability: be4883bb93f31e38266ae3365e5600a317aae735
-  SDWebImage: 7eb273e54ca8a2e506ad9bd5e80c35b2a4d7c95e
-  SSKeychain: ff035de8a52ecb729f4ddcc2d09e49e6826d9778
-  TestFlightSDK: fe0567a897456b6f65b180541892ef0154986e01
+  Ooyala: e9d0c56c3eb471060ab8a026908d769543ee2ac2
+  Reachability: 8e9635e3cb4f98e7f825e51147f677ecc694d0e7
+  SDWebImage: c6989652c1cdf27cbdf3f56957e2030f825af5bc
+  SSKeychain: a9428ab9db1edfbb92daf46301bda9eff800a011
+  TestFlightSDK: 36b8a207c5a119a3144aa2e6d24973eb9d5e0d0a
 
-COCOAPODS: 0.32.1
+COCOAPODS: 0.33.1
