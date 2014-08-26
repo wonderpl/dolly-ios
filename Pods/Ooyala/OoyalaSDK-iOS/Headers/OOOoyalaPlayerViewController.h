@@ -15,6 +15,7 @@ extern NSString *const OOOoyalaPlayerViewControllerFullscreenExit;
 
 @class OOOoyalaAPIClient;
 @class OOControlsViewController;
+@class OOPlayerDomain;
 
 /**
  * Main ViewController class for Ooyala player.
@@ -31,7 +32,7 @@ enum
 };
 typedef NSInteger OOOoyalaPlayerControlType;
 
-@property (nonatomic, readonly) OOOoyalaPlayerControlType controlType; // initial state
+@property (nonatomic, readonly) OOOoyalaPlayerControlType initialControlType; // initial state
 @property (nonatomic, strong) OOOoyalaPlayer *player;
 
 @property (nonatomic, strong) UIView *inlineOverlay;
@@ -55,7 +56,7 @@ typedef NSInteger OOOoyalaPlayerControlType;
  * @param[in] domain Web domain to which playback will be assigned
  */
 - (id)initWithPcode:(NSString *)pcode
-             domain:(NSString *)domain;
+             domain:(OOPlayerDomain *)domain;
 /**
  * Initialize the UI and player with pcode, domain and control type
  * @param[in] pcode Ooyala publisher code
@@ -63,7 +64,7 @@ typedef NSInteger OOOoyalaPlayerControlType;
  * @param[in] controlType Selects inline or fullscreen only UI mode
  */
 - (id)initWithPcode:(NSString *)pcode
-             domain:(NSString *)domain
+             domain:(OOPlayerDomain *)domain
         controlType:(OOOoyalaPlayerControlType)controlType;
 
 /**
@@ -73,7 +74,7 @@ typedef NSInteger OOOoyalaPlayerControlType;
  * @param[in] embedTokenGenerator Callback protocol for generating Ooyala Player Tokens
  */
 - (id)initWithPcode:(NSString *)pcode
-             domain:(NSString *)domain
+             domain:(OOPlayerDomain *)domain
 embedTokenGenerator:(id<OOEmbedTokenGenerator>)embedTokenGenerator;
 
 /**
@@ -84,7 +85,7 @@ embedTokenGenerator:(id<OOEmbedTokenGenerator>)embedTokenGenerator;
  * @param[in] controlType Selects inline or fullscreen only UI mode
  */
 - (id)initWithPcode:(NSString *)pcode
-             domain:(NSString *)domain
+             domain:(OOPlayerDomain *)domain
 embedTokenGenerator:(id<OOEmbedTokenGenerator>)embedTokenGenerator
         controlType:(OOOoyalaPlayerControlType)controlType;
 
@@ -156,4 +157,21 @@ embedTokenGenerator:(id<OOEmbedTokenGenerator>)embedTokenGenerator
  * @param[in] showing True to show fullscreen button, false otherwise
  */
 - (void)setFullScreenButtonShowing: (BOOL) showing;
+
+/**
+ * Sets visibility of scrubber while watching live streams
+ * @param[in] showing YES if you want to show the scrubber, NO otherwise (default YES) */
+- (void)setLiveSliderShowing: (BOOL) showing;
+
+/**
+ * Sets the ViewController used to display controls in fullscreen mode
+ * @param[in] the initialized ViewController to use
+ */
+- (void)setFullScreenViewController:(OOControlsViewController *)controller;
+/**
+ * Sets the ViewController used to display controls in inline mode
+ * @param[in] the initialized ViewController to use
+ */
+- (void)setInlineViewController:(OOControlsViewController *)controller;
+
 @end

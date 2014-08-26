@@ -12,7 +12,6 @@
 @protected
   NSString *signature;
   NSInteger expires;
-  NSURL *vastURL;
   NSMutableArray *ads;
 }
 

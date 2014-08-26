@@ -33,6 +33,7 @@ extern NSString *const PlayerErrorNotification;
 @property(readonly, nonatomic, getter = isLiveClosedCaptionsAvailable) BOOL liveClosedCaptionsAvailable;
 @property(nonatomic) BOOL allowsExternalPlayback;
 @property(nonatomic) float rate;
+@property(readonly) double bitrate;
 /**
  * Init the player
  */
@@ -81,12 +82,11 @@ extern NSString *const PlayerErrorNotification;
 
 - (void)setVideoGravity:(OOOoyalaPlayerVideoGravity)gravity;
 
-- (double)bitrate;
-
 - (BOOL)isAudioOnlyStreamPlaying;
 
 - (void) setLiveClosedCaptionsEnabled:(BOOL)enabled;
 
 - (CMTimeRange) seekableTimeRange;
 
+-(CGRect)videoRect;
 @end

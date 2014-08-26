@@ -8,31 +8,25 @@
 
 #import <Foundation/Foundation.h>
 #import "OOTBXML.h"
+#import "OOVASTAdData.h"
 
 @interface OOVASTAd : NSObject {
 @protected
-  NSString *adID;
-  NSString *system;
-  NSString *systemVersion;
-  NSString *title;
-  NSString *description;
-  NSMutableArray *surveyURLs;
-  NSMutableArray *errorURLs;
-  NSMutableArray *impressionURLs;
-  __block NSMutableArray *sequence;
-  NSDictionary *extensions;
+OOVASTAdData *_adData;
 }
 
-@property(readonly, nonatomic, strong) NSString *adID;                   /**< the ID of the Ad */
-@property(readonly, nonatomic, strong) NSString *system;                 /**< the System */
-@property(readonly, nonatomic, strong) NSString *systemVersion;          /**< the System Version */
-@property(readonly, nonatomic, strong) NSString *title;                  /**< the title of the Ad */
-@property(readonly, nonatomic, strong) NSString *description;            /**< the description of the Ad */
-@property(readonly, nonatomic, strong) NSMutableArray *surveyURLs;       /**< the survey URLs of the Ad */
-@property(readonly, nonatomic, strong) NSMutableArray *errorURLs;        /**< the error URLs of the Ad */
-@property(readonly, nonatomic, strong) NSMutableArray *impressionURLs;   /**< the impression URLs of the Ad */
-@property(readonly, nonatomic, strong) __block NSMutableArray *sequence; /**< the ordered sequence of the Ad (NSMutableArray of OOVASTSequenceItem) */
-@property(readonly, nonatomic) NSDictionary *extensions;                 /**< the extensions of the Ad */
+@property(readonly, nonatomic) NSString *adID;                   /**< the ID of the Ad */
+@property(readonly, nonatomic) NSString *system;                 /**< the System */
+@property(readonly, nonatomic) NSString *systemVersion;          /**< the System Version */
+@property(readonly, nonatomic) NSString *title;                  /**< the title of the Ad */
+@property(readonly, nonatomic) NSString *description;            /**< the description of the Ad */
+@property(readonly, nonatomic) NSMutableArray *surveyURLs;       /**< the survey URLs of the Ad */
+@property(readonly, nonatomic) NSMutableArray *errorURLs;        /**< the error URLs of the Ad */
+@property(readonly, nonatomic) NSMutableArray *impressionURLs;   /**< the impression URLs of the Ad */
+@property(readonly, nonatomic) NSMutableArray *sequence;         /**< the ordered sequence of the Ad (NSMutableArray of OOVASTSequenceItem) */
+@property(readonly, nonatomic) NSDictionary *extensions;         /**< the extensions of the Ad */
+
+-(instancetype) init __attribute__((unavailable("init not available")));
 
 /** @internal
  * Initialize a OOVASTAd using the specified xml (subclasses should override this)

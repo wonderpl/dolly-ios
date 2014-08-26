@@ -18,4 +18,12 @@
 
 - (BOOL)setup:(NSArray *)streams;
 - (id<OOPlayerInfo>)playerInfo;
+
+/**
+ * seek to time
+ * @param[in] time to seek
+ * @param[in] onCompletion a callback when seek is completed
+ */
+- (void)seekToTime:(Float64)time completion:(void (^)())onCompletion;
+
 @end
