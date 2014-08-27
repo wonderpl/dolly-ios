@@ -18,17 +18,14 @@
 #import "SYNActivityManager.h"
 #import "SYNAddToChannelViewController.h"
 #import "UINavigationBar+Appearance.h"
-#import "UILabel+Animation.h"
 #import "SYNWebViewController.h"
 #import "SYNGenreManager.h"
-#import "SYNMasterViewController.h"
 #import <SDWebImageManager.h>
 #import <UIButton+WebCache.h>
 #import "UIDevice+Helpers.h"
 #import "SYNPagingModel.h"
 #import "SYNVideoPlayerCell.h"
 #import "VideoAnnotation.h"
-#import "SYNVideoInfoViewController.h"
 #import "SYNShopMotionOverlayViewController.h"
 #import "SYNFeedRootViewController.h"
 #import "SYNVideoPlayerAnimator.h"
@@ -39,7 +36,7 @@
 @import MediaPlayer;
 @import MessageUI;
 
-@interface SYNVideoPlayerViewController () <UIViewControllerTransitioningDelegate, UIPopoverControllerDelegate, UIScrollViewDelegate, SYNVideoPlayerDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, SYNVideoInfoViewControllerDelegate>
+@interface SYNVideoPlayerViewController () <UIViewControllerTransitioningDelegate, UIPopoverControllerDelegate, UIScrollViewDelegate, SYNVideoPlayerDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 
 @property (nonatomic, assign) BOOL hasTrackedAirPlayUse;
@@ -53,8 +50,6 @@
 @property (nonatomic, strong) IBOutlet UIView *videoPlayerContainerView;
 
 @property (nonatomic, strong) IBOutlet UICollectionView *videosCollectionView;
-
-@property (nonatomic, strong) SYNVideoInfoViewController *videoInfoViewController;
 
 @property (nonatomic, strong) VideoInstance *videoInstance;
 
@@ -235,7 +230,6 @@
 	
 	self.videoInstance = [self.model itemAtIndex:selectedIndex];
 	
-	self.videoInfoViewController.selectedIndex = selectedIndex;
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -320,7 +314,10 @@
 
 - (void)videoPlayerFinishedPlaying {
     //If there are annotations do not play the next video
-    if (!self.videoInfoViewController.hasAnnotations) {
+    //TODO: more click to more stuff.
+    BOOL hasAnnotations = NO;
+    
+    if (hasAnnotations) {
         [self playNextVideo];
     }
 }
@@ -382,23 +379,6 @@
 
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
 	[self.annotationImageView removeFromSuperview];
-}
-
-#pragma mark - SYNVideoInfoViewControllerDelegate
-
-- (void)videoInfoViewController:(SYNVideoInfoViewController *)viewController didScrollToContentOffset:(CGPoint)contentOffset {
-}
-
-- (void)videoInfoViewController:(SYNVideoInfoViewController *)viewController didSelectVideoAtIndex:(NSInteger)index {
-	VideoInstance *videoInstance = [self.model itemAtIndex:index];
-	[[SYNTrackingManager sharedManager] trackUpcomingVideoSelectedForTitle:videoInstance.title];
-    
-    //index gets set in scroll view delegates
-    
-	NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
-	[self.videosCollectionView scrollToItemAtIndexPath:indexPath
-									  atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
-											  animated:YES];
 }
 
 #pragma mark - Notifications
@@ -466,13 +446,11 @@
 
 - (void)showInboardingSwipe {
 
+    //TODO: check out feed overlay.
     BOOL showOverlay = ![[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultsVideoPlayerFirstTime];
 
     if (showOverlay) {
-        self.collectionOverLay = [[UIView alloc] initWithFrame:self.videoInfoViewController.view.frame];
-        [self.collectionOverLay setBackgroundColor:[UIColor colorWithWhite:0.0 alpha:0.8]];
         [self.view setBackgroundColor:[UIColor colorWithWhite:0.0 alpha:0.8]];
-        [self.videoInfoViewController.view addSubview:self.collectionOverLay];
         
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
         [label setFont:[UIFont regularCustomFontOfSize: IS_IPAD ? 24 : 22]];
