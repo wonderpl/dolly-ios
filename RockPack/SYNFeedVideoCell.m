@@ -98,7 +98,7 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 	
 	self.clickToMoreButton.tintColor = [UIColor dollyButtonGreenColor];
     [self.clickToMoreButton.titleLabel setFont:[UIFont regularCustomFontOfSize:self.clickToMoreButton.titleLabel.font.pointSize]];
-    
+
     self.videoThumbnailButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentFill;
     self.videoThumbnailButton.contentVerticalAlignment = UIControlContentVerticalAlignmentFill;
     [self.videoThumbnailButton setContentMode:UIViewContentModeScaleToFill];
@@ -157,12 +157,6 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
     
     self.clickToMoreButton.hidden = ([self.videoInstance.video.linkTitle length] == 0);
 	[self.clickToMoreButton setTitle:self.videoInstance.video.linkTitle forState:UIControlStateNormal];
-    if ([self.videoInstance.video.linkTitle length] == 0) {
-        [self.clickToMoreHeight setConstant:0];
-    } else {
-        [self.clickToMoreHeight setConstant:30];
-    }
-    
 
     BOOL hasLabel = ([self.videoInstance.label length]);
 	if (hasLabel) {
@@ -282,6 +276,7 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 - (IBAction)addedByPressed:(UIButton *)button {
 	[self.delegate videoCell:self addedByPressed:button];
 }
+
 - (IBAction)playVideo:(id)sender {
     self.videoPlayerCell.hidden = NO;
     self.playButton.hidden = YES;
@@ -326,6 +321,9 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 - (IBAction)followButtonTapped:(id)sender {
     [self.delegate videoCell:self followButtonPressed:sender];
 
+}
+- (IBAction)descriptionButtonTapped:(id)sender {
+    [self.delegate videoCell:self descriptionButtonTapped:sender];
 }
 
 @end

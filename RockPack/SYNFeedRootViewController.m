@@ -39,6 +39,7 @@
 #import "SYNFullScreenVideoAnimator.h"
 #import "SYNYouTubeWebVideoPlayer.h"
 #import "SYNWebViewController.h"
+#import "SYNDescriptionViewController.h"
 
 static const CGFloat heightLandscape = 703;
 static const CGFloat heightPortrait = 985;
@@ -513,6 +514,13 @@ static const CGFloat heightPortrait = 985;
 	[self followControlPressed:button withChannelOwner:cell.videoInstance.originator withVideoInstace:cell.videoInstance completion:nil];
 }
 
+- (void)videoCell:(SYNFeedVideoCell *)cell descriptionButtonTapped:(UIButton *)button {
+    SYNDescriptionViewController *viewController = [[SYNDescriptionViewController alloc ]init];
+    viewController.contentHTML = cell.videoInstance.video.videoDescription;
+    viewController.modalPresentationStyle = UIModalPresentationCustom;
+	viewController.transitioningDelegate = self;
+	[self presentViewController:viewController animated:YES completion:nil];
+}
 
 - (void)videoCell:(SYNFeedVideoCell *)cell addedByPressed:(UIButton *)button {
 	VideoInstance *videoInstance = cell.videoInstance;

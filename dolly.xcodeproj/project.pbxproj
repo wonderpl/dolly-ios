@@ -656,6 +656,8 @@
 		E9FDCDA0188D92EF00C31CC1 /* ForwardButton.png in Resources */ = {isa = PBXBuildFile; fileRef = E9FDCD9C188D92EF00C31CC1 /* ForwardButton.png */; };
 		E9FDCDA1188D92EF00C31CC1 /* ForwardButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E9FDCD9D188D92EF00C31CC1 /* ForwardButton@2x.png */; };
 		E9FECE6C1856000800BBE7F2 /* SYNStaticModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9FECE6B1856000800BBE7F2 /* SYNStaticModel.m */; };
+		F408DB7419AE1B6B0043111B /* SYNDescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F408DB7219AE1B6B0043111B /* SYNDescriptionViewController.m */; };
+		F408DB7519AE1B6B0043111B /* SYNDescriptionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F408DB7319AE1B6B0043111B /* SYNDescriptionViewController.xib */; };
 		F419A150192A444200DBA621 /* profile-cover-gradient.png in Resources */ = {isa = PBXBuildFile; fileRef = F419A14F192A444200DBA621 /* profile-cover-gradient.png */; };
 		F419A153192A72FF00DBA621 /* register-button.png in Resources */ = {isa = PBXBuildFile; fileRef = F419A151192A72FF00DBA621 /* register-button.png */; };
 		F419A154192A72FF00DBA621 /* register-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F419A152192A72FF00DBA621 /* register-button@2x.png */; };
@@ -1706,6 +1708,9 @@
 		E9FDCD9D188D92EF00C31CC1 /* ForwardButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ForwardButton@2x.png"; path = "Assets/Images/ForwardButton@2x.png"; sourceTree = "<group>"; };
 		E9FECE6A1856000800BBE7F2 /* SYNStaticModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNStaticModel.h; sourceTree = "<group>"; };
 		E9FECE6B1856000800BBE7F2 /* SYNStaticModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNStaticModel.m; sourceTree = "<group>"; };
+		F408DB7119AE1B6B0043111B /* SYNDescriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNDescriptionViewController.h; sourceTree = "<group>"; };
+		F408DB7219AE1B6B0043111B /* SYNDescriptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNDescriptionViewController.m; sourceTree = "<group>"; };
+		F408DB7319AE1B6B0043111B /* SYNDescriptionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNDescriptionViewController.xib; sourceTree = "<group>"; };
 		F419A14F192A444200DBA621 /* profile-cover-gradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile-cover-gradient.png"; sourceTree = "<group>"; };
 		F419A151192A72FF00DBA621 /* register-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "register-button.png"; sourceTree = "<group>"; };
 		F419A152192A72FF00DBA621 /* register-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "register-button@2x.png"; sourceTree = "<group>"; };
@@ -2246,6 +2251,7 @@
 		019824E11629CAB600216900 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				F408DB7019AE1B100043111B /* Description Webview */,
 				4C5E85EC18B6203600D0E937 /* In Boarding */,
 				BE57C01B1843585E00C6444A /* On Boarding */,
 				BE0815C216D5386B00ADB1DC /* Master */,
@@ -3989,6 +3995,16 @@
 			name = Web;
 			sourceTree = "<group>";
 		};
+		F408DB7019AE1B100043111B /* Description Webview */ = {
+			isa = PBXGroup;
+			children = (
+				F408DB7119AE1B6B0043111B /* SYNDescriptionViewController.h */,
+				F408DB7219AE1B6B0043111B /* SYNDescriptionViewController.m */,
+				F408DB7319AE1B6B0043111B /* SYNDescriptionViewController.xib */,
+			);
+			name = "Description Webview";
+			sourceTree = "<group>";
+		};
 		F468C757193768FF00838890 /* ShopMotion */ = {
 			isa = PBXGroup;
 			children = (
@@ -4520,6 +4536,7 @@
 				7D6D4F5B192A275C0084DC84 /* TabProfileSelected@2x~ipad.png in Resources */,
 				E985D34B18FEC80500D5A9E1 /* SYNFeedChannelCell.xib in Resources */,
 				E93122FD18916A52008ADBEB /* SYNTimestampView.xib in Resources */,
+				F408DB7519AE1B6B0043111B /* SYNDescriptionViewController.xib in Resources */,
 				1F458B2417E1CE8E003C14AC /* AppIcon-Dev-40x40.png in Resources */,
 				BEB1577B173C10E900DAFA2F /* Localizable.strings in Resources */,
 				1F1B4BD6174280F0009DEB0C /* PlaceholderVideoWide.png in Resources */,
@@ -4991,6 +5008,7 @@
 				E924DEBC192CC457004A3C9E /* SYNTimestampLabel.m in Sources */,
 				E93E10E9183512D600A62F64 /* SYNOoyalaVideoPlayer.m in Sources */,
 				E92D335B184E239C0025D1DF /* SYNPagingModel.m in Sources */,
+				F408DB7419AE1B6B0043111B /* SYNDescriptionViewController.m in Sources */,
 				4CE0B4C118CE258A009859CB /* SYNProfileHeader.m in Sources */,
 				E94BEFA918C9F18F00762651 /* _Recommendation.m in Sources */,
 				E914BEDA183CF33A001616D3 /* SYNFullScreenVideoAnimator.m in Sources */,

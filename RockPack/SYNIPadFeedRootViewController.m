@@ -25,9 +25,6 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
-//	SYNIPadFeedLayout *layout = (SYNIPadFeedLayout *)self.feedCollectionView.collectionViewLayout;
-//	layout.model = self.model;
-	
 	[self.feedCollectionView registerNib:[SYNFeedVideoLargeCell nib]
 			  forCellWithReuseIdentifier:[SYNFeedVideoLargeCell reuseIdentifier]];
 		
@@ -61,7 +58,7 @@
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
 	
     if (UIDeviceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
-        return CGSizeMake(768, 1024);
+        return CGSizeMake(768, 768);
     } else {
         return CGSizeMake(1024, 768);
     }

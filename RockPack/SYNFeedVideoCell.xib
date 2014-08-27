@@ -89,7 +89,7 @@
                         </constraints>
                     </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z1p-cm-72X" userLabel="Add To Channel Button">
-                        <rect key="frame" x="220" y="450" width="40" height="40"/>
+                        <rect key="frame" x="240" y="450" width="40" height="40"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <accessibility key="accessibilityConfiguration">
                             <accessibilityTraits key="traits" none="YES" notEnabled="YES"/>
@@ -106,7 +106,7 @@
                         </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sde-G5-ls3" userLabel="Share Button">
-                        <rect key="frame" x="260" y="450" width="40" height="40"/>
+                        <rect key="frame" x="280" y="450" width="40" height="40"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="40" id="1sY-n3-vi0"/>
                             <constraint firstAttribute="height" constant="40" id="l81-SW-gnm"/>
@@ -155,7 +155,7 @@
                         </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FpZ-sJ-Jad" userLabel="Favourites Button">
-                        <rect key="frame" x="240" y="485" width="40" height="40"/>
+                        <rect key="frame" x="260" y="485" width="40" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="NNd-P3-MXN"/>
@@ -189,6 +189,16 @@
                             <action selector="clickToMoreTapped:" destination="RZU-6J-M1O" eventType="touchUpInside" id="qOQ-vi-jSQ"/>
                         </connections>
                     </button>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Liy-9H-iJw">
+                        <rect key="frame" x="240" y="394" width="46" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <state key="normal" title="Button">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="descriptionButtonTapped:" destination="RZU-6J-M1O" eventType="touchUpInside" id="WeI-px-rcq"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -200,7 +210,7 @@
                 <constraint firstItem="ehm-8n-Vnv" firstAttribute="height" secondItem="PSP-Md-g5O" secondAttribute="height" id="3LH-RO-Jb0"/>
                 <constraint firstItem="ehm-8n-Vnv" firstAttribute="leading" secondItem="RZU-6J-M1O" secondAttribute="leading" id="68c-3z-uRj"/>
                 <constraint firstAttribute="bottom" secondItem="Z1p-cm-72X" secondAttribute="bottom" constant="78" id="7wQ-ol-aTD"/>
-                <constraint firstAttribute="trailing" secondItem="sde-G5-ls3" secondAttribute="trailing" constant="20" id="9hE-eb-9D6"/>
+                <constraint firstAttribute="trailing" secondItem="sde-G5-ls3" secondAttribute="trailing" id="9hE-eb-9D6"/>
                 <constraint firstAttribute="bottom" secondItem="71k-CY-H0Y" secondAttribute="bottom" constant="83" id="9sB-8I-Uae"/>
                 <constraint firstAttribute="bottom" secondItem="sde-G5-ls3" secondAttribute="bottom" constant="78" id="9zE-Ms-DjG"/>
                 <constraint firstAttribute="centerX" secondItem="U37-hs-lKO" secondAttribute="centerX" constant="-2" id="9zo-Lx-Vin"/>
@@ -227,7 +237,7 @@
                 <constraint firstItem="TYr-xr-Krw" firstAttribute="leading" secondItem="71k-CY-H0Y" secondAttribute="trailing" constant="10" id="ew3-dl-w66"/>
                 <constraint firstItem="FpZ-sJ-Jad" firstAttribute="top" secondItem="Z1p-cm-72X" secondAttribute="bottom" constant="-5" id="fRd-tm-D9g"/>
                 <constraint firstItem="mfC-OQ-T9d" firstAttribute="leading" secondItem="RZU-6J-M1O" secondAttribute="leading" constant="10" id="fcc-hT-vsA"/>
-                <constraint firstAttribute="trailing" secondItem="Z1p-cm-72X" secondAttribute="trailing" constant="60" id="h5S-27-Kdb"/>
+                <constraint firstAttribute="trailing" secondItem="Z1p-cm-72X" secondAttribute="trailing" constant="40" id="h5S-27-Kdb"/>
                 <constraint firstItem="U37-hs-lKO" firstAttribute="top" secondItem="wYn-bf-10j" secondAttribute="bottom" constant="3" id="hVa-QE-MiK"/>
                 <constraint firstItem="PSP-Md-g5O" firstAttribute="leading" secondItem="RZU-6J-M1O" secondAttribute="leading" id="k1x-uv-5jG"/>
                 <constraint firstItem="wYn-bf-10j" firstAttribute="leading" secondItem="RZU-6J-M1O" secondAttribute="leading" constant="4" id="kga-Zf-5q2"/>
@@ -240,12 +250,14 @@
             <connections>
                 <outlet property="avatarThumbnailButton" destination="71k-CY-H0Y" id="Lao-D1-36e"/>
                 <outlet property="clickToMoreButton" destination="U37-hs-lKO" id="zGx-zh-o7r"/>
+                <outlet property="clickToMoreHeight" destination="t8f-tB-VbB" id="rGU-jm-fUw"/>
                 <outlet property="curatedByButton" destination="DMH-Zk-ftY" id="GdM-z1-Yus"/>
                 <outlet property="descriptionLabel" destination="mfC-OQ-T9d" id="l72-xU-SLN"/>
                 <outlet property="durationLabel" destination="8LT-cL-UD0" id="1YV-ZK-3pM"/>
                 <outlet property="favouriteButton" destination="FpZ-sJ-Jad" id="tgS-Qh-lZK"/>
                 <outlet property="followButton" destination="TYr-xr-Krw" id="MZP-9h-uNZ"/>
                 <outlet property="labelLabel" destination="kaB-GM-XxE" id="xnA-8N-uFp"/>
+                <outlet property="loveButton" destination="FpZ-sJ-Jad" id="LXY-XP-jd6"/>
                 <outlet property="originatorDisplayNameLabel" destination="chp-ga-XQ6" id="6SL-nh-E0M"/>
                 <outlet property="playButton" destination="Ng3-nW-QKC" id="RCh-eN-0Db"/>
                 <outlet property="titleLabel" destination="gYj-Gp-52k" id="k9L-4Y-dNV"/>

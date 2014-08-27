@@ -258,6 +258,9 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    
+    NSLog(@"collectionView.frame : %@", NSStringFromCGRect(collectionView.frame));
 	return collectionView.frame.size;
 }
 
