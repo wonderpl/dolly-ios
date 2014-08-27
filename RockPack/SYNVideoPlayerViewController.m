@@ -18,7 +18,6 @@
 #import "SYNActivityManager.h"
 #import "SYNAddToChannelViewController.h"
 #import "UINavigationBar+Appearance.h"
-#import "SYNWebViewController.h"
 #import "SYNGenreManager.h"
 #import <SDWebImageManager.h>
 #import <UIButton+WebCache.h>
@@ -27,7 +26,6 @@
 #import "SYNVideoPlayerCell.h"
 #import "VideoAnnotation.h"
 #import "SYNShopMotionOverlayViewController.h"
-#import "SYNFeedRootViewController.h"
 #import "SYNVideoPlayerAnimator.h"
 #import "UIFont+SYNFont.h"
 #import "SYNYouTubeWebVideoPlayer.h"
@@ -152,8 +150,6 @@
 	BOOL isActuallyBeingDismissed = (![self isBeingPresented] && [self isBeingDismissed]);
 	if (isActuallyBeingDismissed) {
 		[self trackViewingStatisticsForCurrentVideo];
-		
-//		[self.currentVideoPlayer pause];
 	}
 	
 	if (IS_IPHONE) {
@@ -253,7 +249,6 @@
 		VideoInstance *videoInstance = [self.model itemAtIndex:indexPath.row];
 		SYNVideoPlayer *videoPlayer = [SYNVideoPlayer playerForVideoInstance:videoInstance];
 		videoPlayer.delegate = self;
-        
         
 		cell.videoPlayer = videoPlayer;
         cell.videoPlayer.maximised = self.maximised;
@@ -483,7 +478,6 @@
 
 - (void)updateViewWithOrientation:(UIDeviceOrientation)orientation {
     
-    
     if (UIDeviceOrientationIsPortrait(orientation)) {
         self.overlayLabel.center = CGPointMake(self.view.center.x, self.view.center.y+100);
         if (IS_IPAD) {
@@ -570,10 +564,6 @@
 
 - (void)stoppedScrolling:(UIScrollView *)scrollView {
     self.selectedIndex = (NSInteger)ceil(scrollView.contentOffset.x / scrollView.frame.size.width);
-}
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-	
 }
 
 - (void)trackViewingStatisticsForCurrentVideo {
