@@ -123,6 +123,10 @@
     if (IS_IPAD) {
         self.navigationItem.title = @"";
     }
+    
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)] && IS_IPAD) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -790,5 +794,6 @@
 - (BOOL) isOwnerId:(NSString *) unquieId {
 	return [unquieId isEqualToString:appDelegate.currentUser.uniqueId];
 }
+
 
 @end

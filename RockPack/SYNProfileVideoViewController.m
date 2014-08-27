@@ -274,9 +274,9 @@ forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
 - (void) updateLayoutForOrientation: (UIDeviceOrientation) orientation {
     if (IS_IPAD) {
         if (UIDeviceOrientationIsPortrait(orientation)) {
-            self.defaultLayout.sectionInset = UIEdgeInsetsMake(0, 24, 70, 24);
+            self.defaultLayout.sectionInset = UIEdgeInsetsMake(0, 55, 70, 55);
         } else {
-            self.defaultLayout.sectionInset = UIEdgeInsetsMake(0, 8, 70, 8);
+            self.defaultLayout.sectionInset = UIEdgeInsetsMake(0, 30, 70, 30);
         }
         [self.cv.collectionViewLayout invalidateLayout];
     }

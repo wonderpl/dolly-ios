@@ -219,8 +219,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     } else {
         SYNChannelMidCell *channelThumbnailCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelMidCell" forIndexPath: indexPath];
         
-        Channel *channel;
-        channel = (Channel *) self.channelOwner.channelsSet[indexPath.item - (self.isUserProfile ? 1 : 0)];
+        Channel *channel = (Channel *) self.channelOwner.channelsSet[indexPath.item - (self.isUserProfile ? 1 : 0)];
 
         channelThumbnailCell.followButton.hidden = self.isUserProfile;
         channelThumbnailCell.channel = channel;

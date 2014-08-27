@@ -14,7 +14,8 @@
 #import "UIFont+SYNFont.h"
 #import "UINavigationBar+Appearance.h"
 #import "SYNProfileViewController.h"
-
+#import "SYNMasterViewController.h"
+#import "NSObject+Blocks.h"
 
 @interface SYNContainerViewController ()
 
@@ -53,22 +54,27 @@
     SYNFeedRootViewController *feedRootViewController = [SYNFeedRootViewController viewController];
     feedRootViewController.navigationItem.backBarButtonItem = backButton;
     UINavigationController *navFeedViewController = [[UINavigationController alloc] initWithRootViewController:feedRootViewController];
+
+    [navFeedViewController.navigationBar.backItem.backBarButtonItem setImageInsets:UIEdgeInsetsMake(0, 0, 0, 100)];
     
     // == Profile Page == //
 
     UINavigationController *navProfileViewController = [SYNProfileViewController navigationControllerWithChannelOwner:self.appDelegate.currentUser];
+    [navProfileViewController.navigationBar.backItem.backBarButtonItem setImageInsets:UIEdgeInsetsMake(0, 0, 0, 100)];
     
     // == Activity Page == //
     
     SYNActivityViewController *activityViewController = [[SYNActivityViewController alloc] initWithViewId: kActivityViewId];
     activityViewController.navigationItem.backBarButtonItem = backButton;
     UINavigationController *navActivityViewController = [[UINavigationController alloc] initWithRootViewController:activityViewController];
-    
+    [navActivityViewController.navigationBar.backItem.backBarButtonItem setImageInsets:UIEdgeInsetsMake(0, 0, 0, 100)];
+
     // == Discovery (Search) Page == //
     SYNDiscoverViewController *discoveryViewController = [[SYNDiscoverViewController alloc] initWithViewId: kDiscoverViewId];
     discoveryViewController.navigationItem.backBarButtonItem = backButton;
     UINavigationController *navSearchViewController = [[UINavigationController alloc] initWithRootViewController:discoveryViewController];
-    
+    [navSearchViewController.navigationBar.backItem.backBarButtonItem setImageInsets:UIEdgeInsetsMake(0, 0, 0, 100)];
+
     // == Hold the vc locally
     self.viewControllers = @[navFeedViewController, navSearchViewController,
                              navProfileViewController, navActivityViewController];
@@ -145,6 +151,11 @@
     {
         self.currentViewController = nil; // will be caught by the setter
     }
+    
+    [self performBlock: ^{
+        [self.appDelegate.masterViewController hideTabBar];
+    } afterDelay: 0.75f];
+    
     //If the user taps the current tab they are on, pop to root
     if (self.currentViewController == self.viewControllers[index]) {
         [((UINavigationController*)self.viewControllers[index]) popToRootViewControllerAnimated:YES];

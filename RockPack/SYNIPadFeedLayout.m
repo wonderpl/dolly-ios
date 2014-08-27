@@ -9,11 +9,11 @@
 #import "SYNIPadFeedLayout.h"
 #import "SYNPagingModel.h"
 
-static const CGSize PortraitLargeCellSize = { .width = 672.0, .height = 596.0};
-static const CGSize PortraitSmallCellSize = { .width = 336.0, .height = 380.0};
+static const CGSize PortraitLargeCellSize = { .width = 768.0, .height = 596.0};
+static const CGSize PortraitSmallCellSize = { .width = 384.0, .height = 380.0};
 
-static const CGSize LandscapeLargeCellSize = { .width = 578.0, .height = 704.0};
-static const CGSize LandscapeSmallCellSize = { .width = 350.0, .height = 352.0};
+static const CGSize LandscapeLargeCellSize = { .width = 640.0, .height = 704.0};
+static const CGSize LandscapeSmallCellSize = { .width = 384.0, .height = 352.0};
 
 @interface SYNIPadFeedLayout ()
 

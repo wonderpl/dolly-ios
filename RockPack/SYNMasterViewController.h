@@ -58,5 +58,6 @@ typedef void (^VideoOverlayDismissBlock)(void);
 
 // on-boarding
 
+- (void)hideTabBar;
 
 @end

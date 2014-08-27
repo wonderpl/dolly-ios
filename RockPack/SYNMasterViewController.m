@@ -1,4 +1,4 @@
-//
+	//
 //  SYNTopBarViewController.m
 //  rockpack
 //
@@ -20,10 +20,10 @@
 
 #define kBackgroundOverlayAlpha 0.5f
 
-@interface SYNMasterViewController ()
+
+@interface SYNMasterViewController () <UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) IBOutlet UIView* containerView;
-
 @property (nonatomic, strong) SYNContainerViewController* containerViewController;
 @property (nonatomic, strong) SYNNetworkMessageView* networkMessageView;
 
@@ -32,6 +32,11 @@
 
 @property (strong, nonatomic) IBOutlet UIView *tabsViewIPad;
 @property (nonatomic) CGRect overlayControllerFrame;
+
+@property (nonatomic, strong) NSTimer *tabBarTimer;
+
+@property (nonatomic, assign) float firstX;
+@property (nonatomic, assign) float firstY;
 
 @end
 
@@ -105,10 +110,30 @@
     
     if (IS_IPAD) {
         CGRect tmpFrame = self.tabsViewIPad.frame;
-        tmpFrame.origin.x -= self.tabsViewIPad.frame.size.width;
+        tmpFrame.origin.x -= self.tabsView.frame.size.width;
         self.tabsViewIPad.frame = tmpFrame;
         
+//        UIScreenEdgePanGestureRecognizer *leftEdgeGesture = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self action:@selector(showTabBar)];
+//        leftEdgeGesture.edges = UIRectEdgeLeft;
+//        leftEdgeGesture.delegate = self;
+//        [self.view addGestureRecognizer:leftEdgeGesture];
+//        
+//        UIScreenEdgePanGestureRecognizer *bottomEdgeGesture = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self action:@selector(showTabBar)];
+//        bottomEdgeGesture.edges = UIRectEdgeBottom;
+//        bottomEdgeGesture.delegate = self;
+//        [self.view addGestureRecognizer:bottomEdgeGesture];
+
         
+//        UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(hideTabBar)];
+//        [swipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
+//		[self.tabsViewIPad addGestureRecognizer:swipeLeft];
+
+        UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveTabBar:)];
+        [panRecognizer setMinimumNumberOfTouches:1];
+        [panRecognizer setMaximumNumberOfTouches:1];
+        [self.tabsViewIPad addGestureRecognizer:panRecognizer];
+
+    
     }
     
     if (IS_IPHONE) {
@@ -117,13 +142,6 @@
                                                           userInfo: @{kScrollingDirection:@(ScrollingDirectionUp)}];
     }
     
-    if (IS_IPAD) {
-        [UIView animateWithDuration:0.5 animations:^{
-            CGRect tmpFrame = self.tabsViewIPad.frame;
-            tmpFrame.origin.x += self.tabsViewIPad.frame.size.width;
-            self.tabsViewIPad.frame = tmpFrame;
-        }];
-    }
 
 }
 
@@ -491,6 +509,20 @@
 	return self.tabs[3];
 }
 
+- (void)hideTabBar {
+    CGRect frame = self.tabsViewIPad.frame;
+    
+    frame.origin.x = -180-self.tabsView.frame.size.width;
+ 
+    [UIView animateWithDuration:0.5
+                          delay:0
+         usingSpringWithDamping:0.8
+          initialSpringVelocity:0.6
+                        options:UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionBeginFromCurrentState
+                     animations:^{
+                         self.tabsViewIPad.frame = frame;
+                     } completion:nil];
+}
 
 #pragma mark - Display Notifications Number
 
@@ -500,5 +532,60 @@
 - (BOOL)shouldAutomaticallyForwardAppearanceMethods {
     return YES;
 }
+
+
+#pragma mark - Pangesture
+
+//TODO: fix values
+
+- (void)moveTabBar:(UIPanGestureRecognizer *)recognizer {
+
+    [self.view bringSubviewToFront:[(UIPanGestureRecognizer*)recognizer view]];
+    CGPoint translatedPoint = [(UIPanGestureRecognizer*)recognizer translationInView:self.view];
+    
+    if ([(UIPanGestureRecognizer*)recognizer state] == UIGestureRecognizerStateBegan) {
+        self.firstX = [[recognizer view] center].x;
+        self.firstY = [[recognizer view] center].y;
+    }
+    
+    translatedPoint = CGPointMake(self.firstX+translatedPoint.x, self.firstY);
+    
+    if (translatedPoint.x >= -110 && translatedPoint.x <= 100) {
+
+        [[recognizer view] setCenter:translatedPoint];
+    }
+    
+    if ([(UIPanGestureRecognizer*)recognizer state] == UIGestureRecognizerStateEnded) {
+        CGFloat velocityX = (0.2*[(UIPanGestureRecognizer*)recognizer velocityInView:self.view].x);
+        
+        CGFloat finalX = translatedPoint.x + velocityX;
+        CGFloat finalY = self.firstY;
+
+            if (finalX >= -50) {
+                finalX = -12;
+            } else {
+                finalX = -108;
+            }
+        
+        CGFloat animationDuration = (ABS(velocityX)*.0002)+.6;
+        
+        [UIView animateWithDuration:animationDuration delay:0
+             usingSpringWithDamping:0.3f initialSpringVelocity:0.8f
+                            options:0 animations:^{
+                                [[recognizer view] setCenter:CGPointMake(finalX, finalY)];
+                            } completion:^(BOOL finished) {
+                                [self.tabBarTimer invalidate];
+                                self.tabBarTimer = [NSTimer scheduledTimerWithTimeInterval:3.0
+                                                                                    target:self
+                                                                                  selector:@selector(hideTabBar)
+                                                                                  userInfo:nil
+                                                                                   repeats:NO];
+                                
+
+                            }];
+    }
+
+}
+
 
 @end
