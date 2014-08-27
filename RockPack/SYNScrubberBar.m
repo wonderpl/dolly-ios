@@ -113,6 +113,9 @@
 	_playing = playing;
 	
 	NSString *buttonImageName = (playing ? @"ButtonShuttleBarPause.png" : @"ButtonShuttleBarPlay.png");
+    
+    NSLog(@"playing : %d", playing);
+    
 	[self.playPauseButton setImage:[UIImage imageNamed:buttonImageName] forState:UIControlStateNormal];
 }
 

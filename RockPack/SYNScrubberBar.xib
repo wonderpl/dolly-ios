@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -7,7 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="1" customClass="SYNScrubberBar">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="24"/>
+            <rect key="frame" x="0.0" y="0.0" width="363" height="24"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2HY-ng-bdK">
@@ -22,7 +22,7 @@
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1TK-HE-31a" customClass="SYNProgressView">
-                    <rect key="frame" x="69" y="7" width="138" height="10"/>
+                    <rect key="frame" x="71" y="7" width="161" height="10"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     <constraints>
@@ -30,7 +30,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UPL-IY-mRy" customClass="UISlider">
-                    <rect key="frame" x="69" y="-6" width="138" height="34"/>
+                    <rect key="frame" x="71" y="-6" width="161" height="34"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="34" id="oQs-3a-YDo"/>
@@ -44,29 +44,42 @@
                     </connections>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ScrubberBarHD.png" translatesAutoresizingMaskIntoConstraints="NO" id="GtO-iW-TPz">
-                    <rect key="frame" x="242" y="6" width="26" height="12"/>
+                    <rect key="frame" x="267" y="6" width="26" height="12"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="26" id="jlD-jx-yCU"/>
                     </constraints>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kmx-LH-wU8" customClass="MPVolumeView">
-                    <rect key="frame" x="278" y="0.0" width="38" height="24"/>
+                    <rect key="frame" x="323" y="0.0" width="36" height="24"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="24" id="5q7-NK-7ah"/>
-                        <constraint firstAttribute="width" constant="38" id="uWn-bG-pRw"/>
+                        <constraint firstAttribute="width" constant="36" id="uWn-bG-pRw"/>
                     </constraints>
                 </view>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hzL-mR-Ilh">
-                    <rect key="frame" x="213" y="5" width="25" height="15"/>
+                    <rect key="frame" x="238" y="5" width="25" height="15"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e9l-ov-1Zi" customClass="SYNTimestampLabel">
-                    <rect key="frame" x="38" y="5" width="25" height="15"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1aE-ZN-sKt">
+                    <rect key="frame" x="293" y="1" width="30" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="30" id="VsY-ac-H0S"/>
+                    </constraints>
+                    <state key="normal" image="ScrubberBarFullScreen.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="fullscreenButtonPressed:" destination="1" eventType="touchUpInside" id="pFo-72-aXg"/>
+                    </connections>
+                </button>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lyl-id-SIc" customClass="SYNTimestampLabel">
+                    <rect key="frame" x="38" y="4" width="25" height="15"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -76,18 +89,20 @@
             <color key="backgroundColor" red="0.47843137254901957" green="0.50196078431372548" blue="0.52156862745098043" alpha="0.38" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="centerY" secondItem="2HY-ng-bdK" secondAttribute="centerY" id="1uY-Kv-the"/>
-                <constraint firstAttribute="centerY" secondItem="e9l-ov-1Zi" secondAttribute="centerY" id="99E-6U-MCt"/>
                 <constraint firstAttribute="trailing" secondItem="Kmx-LH-wU8" secondAttribute="trailing" constant="4" id="A1f-Ar-Reh"/>
+                <constraint firstItem="Lyl-id-SIc" firstAttribute="leading" secondItem="2HY-ng-bdK" secondAttribute="trailing" id="BaX-HS-VFf"/>
                 <constraint firstAttribute="centerY" secondItem="1TK-HE-31a" secondAttribute="centerY" id="HcR-XS-nMI"/>
-                <constraint firstItem="1TK-HE-31a" firstAttribute="leading" secondItem="e9l-ov-1Zi" secondAttribute="trailing" constant="6" id="JJd-4P-TrL"/>
-                <constraint firstItem="Kmx-LH-wU8" firstAttribute="leading" secondItem="GtO-iW-TPz" secondAttribute="trailing" constant="10" id="MxH-Fa-Rll"/>
+                <constraint firstAttribute="centerY" secondItem="Lyl-id-SIc" secondAttribute="centerY" id="I5Z-tN-4PN"/>
+                <constraint firstItem="1TK-HE-31a" firstAttribute="leading" secondItem="Lyl-id-SIc" secondAttribute="trailing" constant="8" id="Jt3-2X-wbX"/>
+                <constraint firstItem="1aE-ZN-sKt" firstAttribute="leading" secondItem="GtO-iW-TPz" secondAttribute="trailing" id="SUA-x3-1Tz"/>
                 <constraint firstItem="2HY-ng-bdK" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="V9l-Ok-PU8"/>
+                <constraint firstItem="Kmx-LH-wU8" firstAttribute="leading" secondItem="1aE-ZN-sKt" secondAttribute="trailing" id="agd-oa-vG7"/>
                 <constraint firstItem="1TK-HE-31a" firstAttribute="leading" secondItem="UPL-IY-mRy" secondAttribute="leading" id="bFK-vf-WoG"/>
                 <constraint firstAttribute="centerY" secondItem="UPL-IY-mRy" secondAttribute="centerY" constant="1" id="dgA-9y-rvw"/>
                 <constraint firstItem="1TK-HE-31a" firstAttribute="trailing" secondItem="UPL-IY-mRy" secondAttribute="trailing" id="eiy-UR-iBX"/>
                 <constraint firstAttribute="centerY" secondItem="GtO-iW-TPz" secondAttribute="centerY" id="fxQ-TQ-QCH"/>
                 <constraint firstItem="hzL-mR-Ilh" firstAttribute="leading" secondItem="1TK-HE-31a" secondAttribute="trailing" constant="6" id="glw-Cq-MEl"/>
-                <constraint firstItem="e9l-ov-1Zi" firstAttribute="leading" secondItem="2HY-ng-bdK" secondAttribute="trailing" id="j5R-QD-phd"/>
+                <constraint firstAttribute="centerY" secondItem="1aE-ZN-sKt" secondAttribute="centerY" id="hcM-o7-sJJ"/>
                 <constraint firstAttribute="centerY" secondItem="hzL-mR-Ilh" secondAttribute="centerY" id="n5H-PA-szk"/>
                 <constraint firstAttribute="centerY" secondItem="Kmx-LH-wU8" secondAttribute="centerY" id="oAE-WV-mJz"/>
                 <constraint firstItem="GtO-iW-TPz" firstAttribute="leading" secondItem="hzL-mR-Ilh" secondAttribute="trailing" constant="4" id="rLc-XT-wPR"/>
@@ -96,11 +111,12 @@
             <connections>
                 <outlet property="bufferingProgressView" destination="1TK-HE-31a" id="GhL-Fq-4cm"/>
                 <outlet property="durationLabel" destination="hzL-mR-Ilh" id="fEq-m7-dVJ"/>
-                <outlet property="highDefinitionTrailingSpace" destination="MxH-Fa-Rll" id="K4v-m0-9MK"/>
-                <outlet property="highDefinitionWidth" destination="jlD-jx-yCU" id="qui-ec-Kze"/>
+                <outlet property="fullscreenButton" destination="1aE-ZN-sKt" id="at6-hH-Od4"/>
+                <outlet property="highDefinitionTrailingSpace" destination="SUA-x3-1Tz" id="Yty-2O-jNv"/>
+                <outlet property="highDefinitionWidth" destination="jlD-jx-yCU" id="DlG-uf-G3d"/>
                 <outlet property="playPauseButton" destination="2HY-ng-bdK" id="VHc-Dp-nzo"/>
                 <outlet property="progressSlider" destination="UPL-IY-mRy" id="Ap2-P6-ftg"/>
-                <outlet property="timestampLabel" destination="e9l-ov-1Zi" id="TDb-5j-J62"/>
+                <outlet property="timestampLabel" destination="Lyl-id-SIc" id="hSG-0J-ooy"/>
                 <outlet property="volumeView" destination="Kmx-LH-wU8" id="4LJ-vJ-lkM"/>
                 <outlet property="volumeViewTrailingSpace" destination="A1f-Ar-Reh" id="6Ce-gx-a5C"/>
             </connections>
@@ -108,6 +124,7 @@
     </objects>
     <resources>
         <image name="ButtonShuttleBarPlay.png" width="38" height="24"/>
+        <image name="ScrubberBarFullScreen.png" width="11" height="11"/>
         <image name="ScrubberBarHD.png" width="26" height="12"/>
     </resources>
 </document>
