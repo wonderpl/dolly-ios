@@ -88,7 +88,9 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
     self.videoPlayerCell.hidden = YES;
     self.playButton.hidden = NO;
 
-    [self.actionsBar feedBar];
+    if (IS_IPHONE) {
+        [self.actionsBar feedBar];
+    }
     
     self.clickToMoreButton.layer.cornerRadius = (CGRectGetHeight(self.clickToMoreButton.frame) / 2.0);
 	self.clickToMoreButton.layer.borderColor = [[UIColor dollyButtonGreenColor] CGColor];

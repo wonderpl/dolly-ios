@@ -129,12 +129,8 @@ static const CGFloat heightPortrait = 985;
 													 name:UIDeviceOrientationDidChangeNotification
 												   object:nil];
 	}
-
-    
     
 	[self reloadData];
-    
-    NSLog(@"STAKE viewDidLoad end %d", self.currentVideoPlayer.state);
 
 }
 
@@ -146,9 +142,6 @@ static const CGFloat heightPortrait = 985;
 		self.videoOrientation = device.orientation;
 
         if (IS_IPHONE) {
-            
-            NSLog(@"stateee %d", self.currentVideoPlayer.state);
-            
             if ([self isVideoOnScreen]) {
             	[self videoPlayerMaximise];
             }
@@ -161,8 +154,6 @@ static const CGFloat heightPortrait = 985;
     NSArray *arr = [self.feedCollectionView visibleCells];
     for (UICollectionViewCell *cell in arr) {
         if ([self.feedCollectionView indexPathForCell:cell].row == self.selectedIndex) {
-            NSLog(@"Video On Screen");
-            
             return YES;
         }
     }
@@ -170,7 +161,6 @@ static const CGFloat heightPortrait = 985;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    NSLog(@"STAKE viewWillAppear start %d", self.currentVideoPlayer.state);
 
     [super viewWillAppear:animated];
 	
@@ -195,11 +185,7 @@ static const CGFloat heightPortrait = 985;
 	self.shownInboarding = NO;
     [self showInboarding];
     
-    if (IS_IPHONE) {
-        [self.navigationController.navigationBar setHidden:YES];
-    }
-
-
+    [self.navigationController.navigationBar setHidden:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -214,11 +200,7 @@ static const CGFloat heightPortrait = 985;
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     self.lastYOffset = self.feedCollectionView.contentOffset.y;
-
-    if (IS_IPHONE) {
-        [self.navigationController.navigationBar setHidden:NO];
-    }
-
+  	[self.navigationController.navigationBar setHidden:NO];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -237,7 +219,6 @@ static const CGFloat heightPortrait = 985;
 - (void)scrollToTop {
     [self.feedCollectionView setContentOffset:CGPointMake(0, -self.feedCollectionView.contentInset.top) animated:YES];
 }
-
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
@@ -272,7 +253,6 @@ static const CGFloat heightPortrait = 985;
     self.lastYOffset = self.feedCollectionView.contentOffset.y;
     [self.feedCollectionView.collectionViewLayout invalidateLayout];
     [self.feedCollectionView reloadData];
-
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
@@ -282,12 +262,10 @@ static const CGFloat heightPortrait = 985;
     [self calculateRotationOffSet];
 }
 
-
 - (void)clearedLocationBoundData {
 	[self reloadData];
 	[self.feedCollectionView reloadData];
 }
-
 
 #pragma mark - UICollectionViewDataSource
 
@@ -310,7 +288,6 @@ static const CGFloat heightPortrait = 985;
     }
     
     if (!isCurrentVideoPlayerOffScreen) {
-        
         if (self.currentVideoPlayer.state == SYNVideoPlayerStatePrePlaying) {
             if ([self.currentVideoPlayer isKindOfClass:[SYNYouTubeWebVideoPlayer class]]) {
                 [((SYNYouTubeWebVideoPlayer*)self.currentVideoPlayer).reloadVideoTimer invalidate];
@@ -325,9 +302,7 @@ static const CGFloat heightPortrait = 985;
 	FeedItem *feedItem = [self.model feedItemAtindex:indexPath.row];
 	
 	if (feedItem.resourceTypeValue == FeedItemResourceTypeChannel) {
-		
 		SYNFeedChannelCell *cell = [self channelCellForIndexPath:indexPath collectionView:collectionView];
-		
 		Channel *channel = [self.model resourceForFeedItem:feedItem];
         if (channel) {
             cell.channel = channel;
@@ -338,7 +313,6 @@ static const CGFloat heightPortrait = 985;
 		SYNFeedVideoCell *cell = [self videoCellForIndexPath:indexPath collectionView:collectionView];
 		
         VideoInstance *videoInstance = [self.model itemAtIndex:indexPath.row];
-        
         if (videoInstance) {
             cell.videoInstance = videoInstance;
             cell.delegate = self;
@@ -658,7 +632,6 @@ static const CGFloat heightPortrait = 985;
 }
 
 - (void)videoPlayerMaximise {
-    NSLog(@"Maximiseee");
 	// We need to convert it to the index in the array of videos since the player doesn't know about channels
 		NSInteger itemIndex = [self.model itemIndexForFeedIndex:self.selectedIndex];
     
@@ -666,8 +639,6 @@ static const CGFloat heightPortrait = 985;
                                                                                            selectedIndex:itemIndex];
     
     viewController.currentVideoPlayer = self.currentVideoPlayer;
-    
-    //    [viewController.videosCollectionView reloadData];
     
 	SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
 	animator.delegate = self;
