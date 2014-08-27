@@ -9,9 +9,6 @@
 #import "SYNVideoPlayerViewController.h"
 #import "VideoInstance.h"
 #import "Video.h"
-#import "SYNButton.h"
-#import "SYNFullScreenVideoViewController.h"
-#import "SYNFullScreenVideoAnimator.h"
 #import "SYNVideoPlayer.h"
 #import "SYNOAuthNetworkEngine.h"
 #import "UIFont+SYNFont.h"
@@ -56,8 +53,6 @@
 @property (nonatomic, strong) IBOutlet UIView *videoPlayerContainerView;
 
 @property (nonatomic, strong) IBOutlet UICollectionView *videosCollectionView;
-
-@property (nonatomic, strong) SYNFullScreenVideoViewController *fullscreenViewController;
 
 @property (nonatomic, strong) SYNVideoInfoViewController *videoInfoViewController;
 
@@ -126,6 +121,7 @@
 										  atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
 												  animated:NO];
 	}
+    
 	[self updateVideoInstanceDetails:self.videoInstance];
 	
 	AVAudioSession *audioSession = [AVAudioSession sharedInstance];
@@ -342,45 +338,46 @@
 }
 
 - (void)videoPlayerAnnotationSelected:(VideoAnnotation *)annotation button:(UIButton *)button {
+// TODO: Figure out what's happening to click to more.
     
-    BOOL didAdd = [self.videoInfoViewController addVideoAnnotation:annotation];
-	if (!didAdd) {
-		return;
-	}
-	
-    [[SYNTrackingManager sharedManager] trackShopMotionAnnotationPressForTitle:self.videoInstance.title];
-	
-    
-	UIView *containerView = self.currentVideoPlayer.maximised ? self.fullscreenViewController.view : self.view;
-    
-	CGPoint buttonCenter = [containerView convertPoint:button.center fromView:button.superview];
-	
-	UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ShopMotionBagItem"]];
-    
-	imageView.center = buttonCenter;
-	self.annotationImageView = imageView;
-
-    if (self.currentVideoPlayer.maximised) {
-        [self.fullscreenViewController.view addSubview:imageView];
-    } else {
-        [self.view addSubview:imageView];
-    }
-    
-    CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
-	UIBezierPath *path = [UIBezierPath bezierPath];
-	[path moveToPoint:imageView.center];
-	
-	CGRect videoPlayerFrame = [containerView convertRect:self.currentVideoPlayer.bounds fromView:self.currentVideoPlayer];
-	
-	CGPoint destinationPoint = CGPointMake(CGRectGetMaxX(videoPlayerFrame) - 100.0, CGRectGetMaxY(videoPlayerFrame));
-	[path addQuadCurveToPoint:destinationPoint controlPoint:CGPointMake(destinationPoint.x, imageView.center.y)];
-	
-	animation.path = [path CGPath];
-	animation.duration = 0.6;
-	animation.delegate = self;
-	animation.removedOnCompletion = YES;
-	
-	[imageView.layer addAnimation:animation forKey:nil];
+//    BOOL didAdd = [self.videoInfoViewController addVideoAnnotation:annotation];
+//	if (!didAdd) {
+//		return;
+//	}
+//	
+//    [[SYNTrackingManager sharedManager] trackShopMotionAnnotationPressForTitle:self.videoInstance.title];
+//	
+//    
+//	UIView *containerView = self.currentVideoPlayer.maximised ? self.fullscreenViewController.view : self.view;
+//    
+//	CGPoint buttonCenter = [containerView convertPoint:button.center fromView:button.superview];
+//	
+//	UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ShopMotionBagItem"]];
+//    
+//	imageView.center = buttonCenter;
+//	self.annotationImageView = imageView;
+//
+//    if (self.currentVideoPlayer.maximised) {
+//        [self.fullscreenViewController.view addSubview:imageView];
+//    } else {
+//        [self.view addSubview:imageView];
+//    }
+//    
+//    CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+//	UIBezierPath *path = [UIBezierPath bezierPath];
+//	[path moveToPoint:imageView.center];
+//	
+//	CGRect videoPlayerFrame = [containerView convertRect:self.currentVideoPlayer.bounds fromView:self.currentVideoPlayer];
+//	
+//	CGPoint destinationPoint = CGPointMake(CGRectGetMaxX(videoPlayerFrame) - 100.0, CGRectGetMaxY(videoPlayerFrame));
+//	[path addQuadCurveToPoint:destinationPoint controlPoint:CGPointMake(destinationPoint.x, imageView.center.y)];
+//	
+//	animation.path = [path CGPath];
+//	animation.duration = 0.6;
+//	animation.delegate = self;
+//	animation.removedOnCompletion = YES;
+//	
+//	[imageView.layer addAnimation:animation forKey:nil];
 }
 
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
@@ -402,18 +399,6 @@
 	[self.videosCollectionView scrollToItemAtIndexPath:indexPath
 									  atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
 											  animated:YES];
-}
-
-#pragma mark - IBActions
-
-- (IBAction)closeButtonPressed:(UIButton *)barButton {
-	[self dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (IBAction)followButtonPressed:(UIButton *)button {
-	[self followControlPressed:button withChannelOwner:self.videoInstance.originator withVideoInstace:self.videoInstance completion:^{
-		
-	}];
 }
 
 #pragma mark - Notifications
@@ -438,15 +423,6 @@
 	[videoPlayer play];
 	
 	self.currentVideoPlayer = videoPlayer;
-}
-
-- (void)maximiseVideoPlayer {
-	self.fullscreenViewController = [[SYNFullScreenVideoViewController alloc] init];
-	self.fullscreenViewController.videoPlayerViewController = self;
-	self.fullscreenViewController.transitioningDelegate = self;
-    self.maximised = YES;
-	self.currentVideoPlayer.delegate = self;
-	[self presentViewController:self.fullscreenViewController animated:YES completion:nil];
 }
 
 - (void)minimiseVideoPlayer {
@@ -641,8 +617,7 @@
 
 - (Class)animationClassForViewController:(UIViewController *)viewController {
 	NSDictionary *mapping = @{
-							  NSStringFromClass([SYNFullScreenVideoViewController class]) : [SYNFullScreenVideoAnimator class],
-							  NSStringFromClass([SYNOneToOneSharingController class])     : [SYNPopoverAnimator class],
+                              NSStringFromClass([SYNOneToOneSharingController class])     : [SYNPopoverAnimator class],
 							  NSStringFromClass([SYNAddToChannelViewController class])    : [SYNPopoverAnimator class]
 							  };
 	return mapping[NSStringFromClass([viewController class])];
