@@ -20,7 +20,8 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 	SYNYouTubeVideoPlayerStateInitialised,
 	SYNYouTubeVideoPlayerStateReady,
 	SYNYouTubeVideoPlayerStateLoaded,
-	SYNYouTubeVideoPlayerStatePlayStarted
+	SYNYouTubeVideoPlayerStatePlayStarted,
+    SYNYouTubeVideoPlayerStatePlayEnded
 };
 
 static const CGFloat bufferingTime = 12;
@@ -123,7 +124,10 @@ static const CGFloat bufferingTime = 12;
 - (void)playVideo {
 	if (self.youTubePlayerState == SYNYouTubeVideoPlayerStateLoaded || self.youTubePlayerState == SYNYouTubeVideoPlayerStatePlayStarted) {
 		[self.youTubeWebView stringByEvaluatingJavaScriptFromString:@"player.playVideo();"];
-	} else {
+	} else if (self.youTubePlayerState == SYNYouTubeVideoPlayerStatePlayEnded) {
+	//TODO: replay the video when if has ended. 
+    
+    } else {
 		[self loadPlayer];
 	}
 }
@@ -182,6 +186,7 @@ static const CGFloat bufferingTime = 12;
 			[self handleVideoPlayerPaused];
 		}
 		if ([actionData isEqualToString:@"ended"]) {
+            self.youTubePlayerState = SYNYouTubeVideoPlayerStatePlayEnded;
 			[self handleVideoPlayerFinishedPlaying];
 		}
         if ([actionData isEqualToString:@"buffering"]) {

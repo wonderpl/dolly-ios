@@ -138,12 +138,6 @@
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	
-	if ([self isBeingPresented]) {
-		if (self.currentVideoPlayer.state != SYNVideoPlayerStatePlaying) {
-            [self.currentVideoPlayer play];
-        }
-    }
-	
 	Genre *genre = [[SYNGenreManager sharedManager] genreWithId:self.videoInstance.channel.categoryId];
 	[[SYNTrackingManager sharedManager] setCategoryDimension:genre.name];
 	[[SYNTrackingManager sharedManager] trackVideoPlayerScreenView];

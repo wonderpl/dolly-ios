@@ -214,8 +214,7 @@ static const CGFloat heightPortrait = 985;
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     self.lastYOffset = self.feedCollectionView.contentOffset.y;
-    [self.currentVideoPlayer pause];
-    
+
     if (IS_IPHONE) {
         [self.navigationController.navigationBar setHidden:NO];
     }
@@ -631,20 +630,20 @@ static const CGFloat heightPortrait = 985;
 
 - (void)videoPlayerFinishedPlaying {
  
-    for (int i = self.selectedIndex+1; i<[self.model itemCount]; i++) {
-        FeedItem *feedItem = [self.model feedItemAtindex:i];
-
-        if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo) {
-            
-                [self.feedCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredVertically animated:YES];
-                
-                SYNFeedVideoCell *cell = (SYNFeedVideoCell*)[self.feedCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
-            
-	            self.selectedIndex = i;
-                [self playVideoInCell:cell];
-                break;
-        }
-    }
+//    for (int i = self.selectedIndex+1; i<[self.model itemCount]; i++) {
+//        FeedItem *feedItem = [self.model feedItemAtindex:i];
+//
+//        if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo) {
+//            
+//                [self.feedCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredVertically animated:YES];
+//                
+//                SYNFeedVideoCell *cell = (SYNFeedVideoCell*)[self.feedCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
+//            
+//	            self.selectedIndex = i;
+//                [self playVideoInCell:cell];
+//                break;
+//        }
+//    }
 }
 
 - (void)videoPlayerErrorOccurred:(NSString *)reason {
