@@ -30,21 +30,21 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <view contentMode="scaleToFill" id="tNm-DH-njZ" userLabel="Tabs" customClass="SYNTabBarTouchesView">
-                    <rect key="frame" x="-180" y="47" width="297" height="721"/>
+                    <rect key="frame" x="-180" y="52" width="313" height="716"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                     <subviews>
                         <view contentMode="scaleToFill" id="O9h-K9-ff2">
-                            <rect key="frame" x="180" y="-47" width="97" height="768"/>
+                            <rect key="frame" x="180" y="-52" width="97" height="768"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         </view>
                         <view contentMode="scaleToFill" id="vkd-Jn-XkQ" userLabel="View - Right Border">
-                            <rect key="frame" x="276" y="-47" width="1" height="768"/>
+                            <rect key="frame" x="276" y="-52" width="1" height="768"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.83921568627450982" green="0.83921568627450982" blue="0.83921568627450982" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
                         <view contentMode="scaleToFill" id="950-BM-Kmd">
-                            <rect key="frame" x="180" y="143" width="97" height="388"/>
+                            <rect key="frame" x="180" y="138" width="97" height="388"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" id="hEO-NN-qb5" userLabel="Tab 2 - Search">
@@ -89,7 +89,7 @@
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
                         <view contentMode="scaleToFill" id="ZAq-yZ-nDp">
-                            <rect key="frame" x="0.0" y="-47" width="180" height="768"/>
+                            <rect key="frame" x="0.0" y="-52" width="180" height="768"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         </view>

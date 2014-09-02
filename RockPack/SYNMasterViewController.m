@@ -550,6 +550,8 @@
     
     translatedPoint = CGPointMake(self.firstX+translatedPoint.x, self.firstY);
     
+    NSLog(@"%f", translatedPoint.x);
+    
     if (translatedPoint.x >= -130 && translatedPoint.x <= 100) {
         [[recognizer view] setCenter:translatedPoint];
     }
@@ -561,7 +563,7 @@
         CGFloat finalY = self.firstY;
 
             if (finalX >= -50) {
-                finalX = -32;
+                finalX = -22;
             } else {
                 finalX = -130;
             }
