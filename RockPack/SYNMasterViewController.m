@@ -561,7 +561,7 @@
         CGFloat finalY = self.firstY;
 
             if (finalX >= -50) {
-                finalX = -33;
+                finalX = -32;
             } else {
                 finalX = -130;
             }
