@@ -181,14 +181,15 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
                                                      blue: 123.0f / 255.0f
                                                      alpha: 1.0f]];
 
-    if (![self.videoInstance.video.videoDescription length] && ![self.videoInstance.video.linkTitle length]) {
-        [self.videoTopSpace setConstant:20];
-        self.titleLabel.numberOfLines = 3;
-    } else {
-        [self.videoTopSpace setConstant:5];
-        self.titleLabel.numberOfLines = 2;
-    }
-
+    if (IS_IPHONE) {
+        if (![self.videoInstance.video.videoDescription length] && ![self.videoInstance.video.linkTitle length]) {
+            [self.videoTopSpace setConstant:20];
+            self.titleLabel.numberOfLines = 3;
+        } else {
+            [self.videoTopSpace setConstant:5];
+            self.titleLabel.numberOfLines = 2;
+        }
+	}
 }
 
 
