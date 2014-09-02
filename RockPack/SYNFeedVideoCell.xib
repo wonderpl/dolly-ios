@@ -82,7 +82,7 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wYn-bf-10j" userLabel="Actions Bar">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wYn-bf-10j" userLabel="Actions Bar" customClass="SYNVideoActionsBar">
                         <rect key="frame" x="4" y="279" width="317" height="36"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="36" id="RLr-qT-URE"/>
@@ -261,7 +261,6 @@
                 <outlet property="originatorDisplayNameLabel" destination="chp-ga-XQ6" id="6SL-nh-E0M"/>
                 <outlet property="playButton" destination="Ng3-nW-QKC" id="RCh-eN-0Db"/>
                 <outlet property="titleLabel" destination="gYj-Gp-52k" id="k9L-4Y-dNV"/>
-                <outlet property="videoActionsContainer" destination="wYn-bf-10j" id="S1X-yg-8rz"/>
                 <outlet property="videoPlayerCell" destination="ehm-8n-Vnv" id="maC-fR-ss2"/>
                 <outlet property="videoThumbnailButton" destination="PSP-Md-g5O" id="EIy-kz-kcQ"/>
                 <outlet property="videoTopSpace" destination="AeT-Yd-ZPJ" id="mj4-So-EsR"/>

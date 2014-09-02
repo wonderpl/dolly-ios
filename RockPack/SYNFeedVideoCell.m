@@ -62,8 +62,8 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
     [self.curatedByButton.titleLabel setFont:[UIFont regularCustomFontOfSize: self.curatedByButton.titleLabel.font.pointSize]];
     
     if (IS_IPAD) {
-        [self.labelLabel setFont:[UIFont regularCustomFontOfSize: self.labelLabel.font.pointSize]];
-        self.durationLabel.font = [UIFont regularCustomFontOfSize:self.durationLabel.font.pointSize];
+        [self.labelLabel setFont:[UIFont semiboldCustomFontOfSize: self.labelLabel.font.pointSize]];
+        self.durationLabel.font = [UIFont semiboldCustomFontOfSize:self.durationLabel.font.pointSize];
         [self.descriptionLabel setFont:[UIFont lightCustomFontOfSize:self.descriptionLabel.font.pointSize]];
 
     } else {
@@ -72,12 +72,7 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
         [self.descriptionLabel setFont:[UIFont lightCustomFontOfSize:self.descriptionLabel.font.pointSize]];
     }
 
-    if (IS_IPHONE) {
-        [self.titleLabel setFont:[UIFont lightCustomFontOfSize:self.titleLabel.font.pointSize]];
-    } else {
-        [self.titleLabel setFont:[UIFont lightCustomFontOfSize:self.titleLabel.font.pointSize]];
-
-    }
+    [self.titleLabel setFont:[UIFont lightCustomFontOfSize:self.titleLabel.font.pointSize]];
 	
 	self.actionsBar.frame = self.videoActionsContainer.bounds;
 	[self.videoActionsContainer addSubview:self.actionsBar];
@@ -306,7 +301,6 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 }
 
 - (IBAction)favouriteButtonTapped:(id)sender {
-    
     [self.delegate videoCell:self favouritePressed:sender];
 }
 

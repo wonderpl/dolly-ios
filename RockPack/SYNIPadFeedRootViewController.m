@@ -30,7 +30,6 @@
 		
 	[self.feedCollectionView registerNib:[SYNFeedChannelLargeCell nib]
 			  forCellWithReuseIdentifier:[SYNFeedChannelLargeCell reuseIdentifier]];
-	
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -58,7 +57,7 @@
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
 	
     if (UIDeviceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
-        return CGSizeMake(768, 768);
+        return CGSizeMake(768, 638);
     } else {
         return CGSizeMake(1024, 768);
     }
