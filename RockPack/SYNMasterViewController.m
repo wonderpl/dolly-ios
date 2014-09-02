@@ -550,8 +550,7 @@
     
     translatedPoint = CGPointMake(self.firstX+translatedPoint.x, self.firstY);
     
-    if (translatedPoint.x >= -110 && translatedPoint.x <= 100) {
-
+    if (translatedPoint.x >= -130 && translatedPoint.x <= 100) {
         [[recognizer view] setCenter:translatedPoint];
     }
     
@@ -562,9 +561,9 @@
         CGFloat finalY = self.firstY;
 
             if (finalX >= -50) {
-                finalX = -12;
+                finalX = -33;
             } else {
-                finalX = -108;
+                finalX = -130;
             }
         
         CGFloat animationDuration = (ABS(velocityX)*.0002)+.6;
