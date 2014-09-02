@@ -28,7 +28,7 @@
                             <action selector="videoThumbnailPressed:" destination="b82-Mn-j5C" eventType="touchUpInside" id="sAQ-sM-QL0"/>
                         </connections>
                     </button>
-                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uOx-Cy-REo" customClass="SYNVideoPlayerCell">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uOx-Cy-REo" customClass="SYNVideoPlayerCell">
                         <rect key="frame" x="46" y="90" width="676" height="380"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -40,7 +40,7 @@
                         <color key="textColor" red="0.46666666670000001" green="0.46666666670000001" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OHt-JI-i3d" userLabel="ActionBar View">
+                    <view autoresizesSubviews="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OHt-JI-i3d" userLabel="ActionBar View">
                         <rect key="frame" x="44" y="473" width="678" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.29019609089999998" green="0.68627452850000004" blue="0.36078432199999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -49,7 +49,7 @@
                         </constraints>
                     </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ujv-HH-Fku" userLabel="Added by Button">
-                        <rect key="frame" x="44" y="580" width="52" height="40"/>
+                        <rect key="frame" x="46" y="580" width="52" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="4SJ-Lq-O4u"/>
@@ -157,12 +157,12 @@
                 <constraint firstItem="HdK-AT-wCD" firstAttribute="top" secondItem="iNz-XJ-FqX" secondAttribute="bottom" constant="10" id="c3L-ew-pa1"/>
                 <constraint firstItem="dVi-I7-bEK" firstAttribute="centerX" secondItem="yNU-gd-v1v" secondAttribute="centerX" id="dNB-M8-TKM"/>
                 <constraint firstItem="2uC-p9-xU8" firstAttribute="top" secondItem="HdK-AT-wCD" secondAttribute="bottom" constant="23" id="e76-k3-0X7"/>
-                <constraint firstItem="2uC-p9-xU8" firstAttribute="leading" secondItem="Ujv-HH-Fku" secondAttribute="trailing" constant="10" id="ggR-vF-yNh"/>
+                <constraint firstItem="2uC-p9-xU8" firstAttribute="leading" secondItem="Ujv-HH-Fku" secondAttribute="trailing" constant="8" id="ggR-vF-yNh"/>
                 <constraint firstItem="uOx-Cy-REo" firstAttribute="centerY" secondItem="dVi-I7-bEK" secondAttribute="centerY" id="ipS-8f-Joa"/>
                 <constraint firstAttribute="trailing" secondItem="jKl-DL-gRy" secondAttribute="trailing" id="kQf-jv-prY"/>
                 <constraint firstItem="iNz-XJ-FqX" firstAttribute="leading" secondItem="b82-Mn-j5C" secondAttribute="leading" constant="44" id="leQ-2q-eTa"/>
                 <constraint firstAttribute="trailing" secondItem="iNz-XJ-FqX" secondAttribute="trailing" constant="46" id="mJA-WZ-16y"/>
-                <constraint firstItem="Ujv-HH-Fku" firstAttribute="leading" secondItem="b82-Mn-j5C" secondAttribute="leading" constant="44" id="ox4-hU-Hw8"/>
+                <constraint firstItem="Ujv-HH-Fku" firstAttribute="leading" secondItem="b82-Mn-j5C" secondAttribute="leading" constant="46" id="ox4-hU-Hw8"/>
                 <constraint firstItem="dVi-I7-bEK" firstAttribute="height" secondItem="yNU-gd-v1v" secondAttribute="height" id="qYc-Gs-SRq"/>
                 <constraint firstItem="uOx-Cy-REo" firstAttribute="height" secondItem="dVi-I7-bEK" secondAttribute="height" id="qmr-oE-Kli"/>
                 <constraint firstItem="OHt-JI-i3d" firstAttribute="top" secondItem="dVi-I7-bEK" secondAttribute="bottom" constant="3" id="rkJ-bU-U2L"/>

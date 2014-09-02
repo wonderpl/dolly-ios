@@ -50,6 +50,7 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 @property (strong, nonatomic) IBOutlet UILabel *originatorDisplayNameLabel;
 @property (strong, nonatomic) IBOutlet UIButton *favouriteButton;
 
+@property (strong, nonatomic) IBOutlet UIButton *descriptionButton;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *clickToMoreHeight;
 @property (strong, nonatomic) IBOutlet UIButton *loveButton;
 @end
@@ -100,7 +101,6 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
     
     [self.originatorDisplayNameLabel setFont:[UIFont regularCustomFontOfSize:self.originatorDisplayNameLabel.font.pointSize]];
 
-
 }
 
 - (void)prepareForReuse {
@@ -108,6 +108,7 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
     self.playButton.hidden = NO;
     self.videoPlayerCell.hidden = YES;
     self.descriptionLabel.text = @"";
+    self.descriptionButton.hidden = YES;
 }
 
 - (UIImageView *)imageView {
@@ -148,7 +149,7 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
     
     [self.originatorDisplayNameLabel setText:self.videoInstance.originator.displayName];
  
-   self.followButton.selected = [[SYNActivityManager sharedInstance] isSubscribedToUserId:self.videoInstance.originator.uniqueId];
+    self.followButton.selected = [[SYNActivityManager sharedInstance] isSubscribedToUserId:self.videoInstance.originator.uniqueId];
     
     self.clickToMoreButton.hidden = ([self.videoInstance.video.linkTitle length] == 0);
 	[self.clickToMoreButton setTitle:self.videoInstance.video.linkTitle forState:UIControlStateNormal];
@@ -182,14 +183,26 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
                                                      alpha: 1.0f]];
 
     if (IS_IPHONE) {
-        if (![self.videoInstance.video.videoDescription length] && ![self.videoInstance.video.linkTitle length]) {
+        
+        BOOL hasDescription = [self.videoInstance.video.videoDescription length];
+        BOOL hasClickToMore = [self.videoInstance.video.linkTitle length];
+        if (!hasDescription && !hasClickToMore) {
             [self.videoTopSpace setConstant:20];
             self.titleLabel.numberOfLines = 3;
         } else {
             [self.videoTopSpace setConstant:5];
             self.titleLabel.numberOfLines = 2;
+            
         }
+        
+        NSLog(@"== %@", self.videoInstance.video.videoDescription);
+        if ([self.videoInstance.video.videoDescription length] > 40) {
+            self.descriptionButton.hidden = NO;
+        }
+
 	}
+
+    
 }
 
 
