@@ -62,6 +62,8 @@ static const CGFloat heightPortrait = 985;
 @property (nonatomic, strong) SYNFullScreenVideoViewController *fullscreenViewController;
 
 @property (nonatomic, assign) UIDeviceOrientation videoOrientation;
+@property (nonatomic, retain) IBOutlet UIPopoverController *descriptionPopOver;
+
 
 @end
 
@@ -515,11 +517,26 @@ static const CGFloat heightPortrait = 985;
 }
 
 - (void)videoCell:(SYNFeedVideoCell *)cell descriptionButtonTapped:(UIButton *)button {
-    SYNDescriptionViewController *viewController = [[SYNDescriptionViewController alloc ]init];
-    viewController.contentHTML = cell.videoInstance.video.videoDescription;
-    viewController.modalPresentationStyle = UIModalPresentationCustom;
-	viewController.transitioningDelegate = self;
-	[self presentViewController:viewController animated:YES completion:nil];
+    if (IS_IPAD) {
+        SYNDescriptionViewController *viewController = [[SYNDescriptionViewController alloc ]init];
+        viewController.contentHTML = cell.videoInstance.video.videoDescription;
+
+       self.descriptionPopOver = [[UIPopoverController alloc] initWithContentViewController:viewController];
+
+		self.descriptionPopOver.popoverContentSize = CGSizeMake(320.0, 400.0);
+        
+        [self.descriptionPopOver presentPopoverFromRect:[(UIButton *)button frame]
+                                          		 inView:self.view
+                               permittedArrowDirections:UIPopoverArrowDirectionAny
+                                               animated:YES];
+        
+    } else {
+        SYNDescriptionViewController *viewController = [[SYNDescriptionViewController alloc ]init];
+        viewController.contentHTML = cell.videoInstance.video.videoDescription;
+        viewController.modalPresentationStyle = UIModalPresentationCustom;
+        viewController.transitioningDelegate = self;
+        [self presentViewController:viewController animated:YES completion:nil];
+    }
 }
 
 - (void)videoCell:(SYNFeedVideoCell *)cell addedByPressed:(UIButton *)button {
