@@ -57,7 +57,7 @@
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
 	
     if (UIDeviceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
-        return CGSizeMake(768, 638);
+        return CGSizeMake(768, 738);
     } else {
         return CGSizeMake(1024, 768);
     }
