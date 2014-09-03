@@ -90,7 +90,7 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
     self.playButton.hidden = NO;
 
     if (IS_IPHONE) {
-        [self.actionsBar feedBar];
+//        [self.actionsBar feedBar];
     }
     
     self.clickToMoreButton.layer.cornerRadius = (CGRectGetHeight(self.clickToMoreButton.frame) / 2.0);
@@ -105,20 +105,13 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
     [self.videoThumbnailButton setContentMode:UIViewContentModeScaleToFill];
     
     [self.originatorDisplayNameLabel setFont:[UIFont regularCustomFontOfSize:self.originatorDisplayNameLabel.font.pointSize]];
-
+    [self setVideoSizeConstant];
 }
 
 
 - (void)layoutIfNeeded {
     [super layoutIfNeeded];
-    if (UIDeviceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
-        [self.videoConstantLeft setConstant:46];
-        [self.videoConstantRight setConstant:46];
-    } else {
-        [self.videoConstantLeft setConstant:190];
-        [self.videoConstantRight setConstant:190];
-
-    }
+    [self setVideoSizeConstant];
     
 }
 - (void)prepareForReuse {
@@ -128,15 +121,23 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
     self.descriptionLabel.text = @"";
     self.descriptionButton.hidden = YES;
     
+    [self setVideoSizeConstant];
+
+}
+
+
+- (void) setVideoSizeConstant {
     if (UIDeviceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
         [self.videoConstantLeft setConstant:46];
         [self.videoConstantRight setConstant:46];
-    } else {
-        [self.videoConstantLeft setConstant:120];
-        [self.videoConstantRight setConstant:120];
-    }
-    
+        self.actionsBar.frame = CGRectMake(0, 0, 694, 36);
 
+    } else {
+        [self.videoConstantLeft setConstant:130];
+        [self.videoConstantRight setConstant:130];
+        self.actionsBar.frame = CGRectMake(0, 0, 782, 36);
+
+    }
 }
 
 - (UIImageView *)imageView {
@@ -173,7 +174,6 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 
     self.actionsBar.favouritedBy = [videoInstance.starrers array];
 	self.actionsBar.favouriteButton.selected = videoInstance.starredByUserValue;
-    self.actionsBar.frame = self.videoActionsContainer.bounds;
     
     [self.originatorDisplayNameLabel setText:self.videoInstance.originator.displayName];
  
@@ -211,7 +211,6 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
                                                      alpha: 1.0f]];
 
     if (IS_IPHONE) {
-        
         BOOL hasDescription = [self.videoInstance.video.videoDescription length];
         BOOL hasClickToMore = [self.videoInstance.video.linkTitle length];
         if (!hasDescription && !hasClickToMore) {
@@ -222,14 +221,11 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
             self.titleLabel.numberOfLines = 2;
             
         }
-        
-        NSLog(@"== %@", self.videoInstance.video.videoDescription);
-        if ([self.videoInstance.video.videoDescription length] > 40) {
-            self.descriptionButton.hidden = NO;
-        }
-
 	}
     
+    if ([self.videoInstance.video.videoDescription length] > 40) {
+        self.descriptionButton.hidden = NO;
+    }
     
 }
 

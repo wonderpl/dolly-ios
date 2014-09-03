@@ -189,10 +189,10 @@
                             <action selector="clickToMoreTapped:" destination="RZU-6J-M1O" eventType="touchUpInside" id="qOQ-vi-jSQ"/>
                         </connections>
                     </button>
-                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Liy-9H-iJw">
-                        <rect key="frame" x="240" y="394" width="46" height="30"/>
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Liy-9H-iJw">
+                        <rect key="frame" x="274" y="417" width="23" height="23"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <state key="normal" title="Button">
+                        <state key="normal" image="MoreButton.png">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                         <connections>
@@ -272,6 +272,7 @@
         <image name="AddButton.png" width="19" height="19"/>
         <image name="FavouriteButton.png" width="24" height="22"/>
         <image name="FavouriteButtonSelected.png" width="24" height="22"/>
+        <image name="MoreButton.png" width="23" height="23"/>
         <image name="ShareButton.png" width="19" height="27"/>
     </resources>
 </document>
