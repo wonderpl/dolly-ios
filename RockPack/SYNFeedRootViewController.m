@@ -41,8 +41,8 @@
 #import "SYNWebViewController.h"
 #import "SYNDescriptionViewController.h"
 
-static const CGFloat heightLandscape = 703;
-static const CGFloat heightPortrait = 985;
+static const CGFloat heightLandscape = 733;
+static const CGFloat heightPortrait = 768;
 
 @interface SYNFeedRootViewController () <UIViewControllerTransitioningDelegate, SYNPagingModelDelegate, SYNVideoPlayerAnimatorDelegate, SYNFeedVideoCellDelegate, SYNFeedChannelCellDelegate, SYNVideoPlayerDismissIndex, SYNVideoPlayerDelegate>
 
@@ -592,7 +592,7 @@ static const CGFloat heightPortrait = 985;
         height = heightLandscape;
     }
     
-    int point = ([self.model videoIndexForFeedIndex:index] / 3) * height;
+    int point = ([self.model videoIndexForFeedIndex:index] ) * height;
     [self.feedCollectionView setContentOffset:CGPointMake(0, point) animated:NO];
 }
 

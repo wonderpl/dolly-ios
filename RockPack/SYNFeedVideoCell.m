@@ -20,7 +20,7 @@
 #import <UIImageView+WebCache.h>
 #import "UIImage+Blur.h"
 #import "SYNActivityManager.h"
-#import "SYNFollowUserButton.h"
+#import "SYNFollowChannelButton.h"
 #import "UIColor+SYNColor.h"
 
 
@@ -31,7 +31,7 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 @property (nonatomic, strong) IBOutlet UIButton *avatarThumbnailButton;
 
 @property (nonatomic, strong) IBOutlet UILabel *titleLabel;
-@property (strong, nonatomic) IBOutlet SYNFollowUserButton *followButton;
+@property (strong, nonatomic) IBOutlet SYNFollowChannelButton *followButton;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *videoTopSpace;
 
 @property (nonatomic, strong) IBOutlet UILabel *labelLabel;
@@ -49,10 +49,15 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 
 @property (strong, nonatomic) IBOutlet UILabel *originatorDisplayNameLabel;
 @property (strong, nonatomic) IBOutlet UIButton *favouriteButton;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *videoHeight;
 
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *videoWidth;
 @property (strong, nonatomic) IBOutlet UIButton *descriptionButton;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *clickToMoreHeight;
 @property (strong, nonatomic) IBOutlet UIButton *loveButton;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *videoConstantLeft;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *videoConstantRight;
+
 @end
 
 @implementation SYNFeedVideoCell
@@ -103,12 +108,35 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 
 }
 
+
+- (void)layoutIfNeeded {
+    [super layoutIfNeeded];
+    if (UIDeviceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
+        [self.videoConstantLeft setConstant:46];
+        [self.videoConstantRight setConstant:46];
+    } else {
+        [self.videoConstantLeft setConstant:190];
+        [self.videoConstantRight setConstant:190];
+
+    }
+    
+}
 - (void)prepareForReuse {
     [super prepareForReuse];
     self.playButton.hidden = NO;
     self.videoPlayerCell.hidden = YES;
     self.descriptionLabel.text = @"";
     self.descriptionButton.hidden = YES;
+    
+    if (UIDeviceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
+        [self.videoConstantLeft setConstant:46];
+        [self.videoConstantRight setConstant:46];
+    } else {
+        [self.videoConstantLeft setConstant:120];
+        [self.videoConstantRight setConstant:120];
+    }
+    
+
 }
 
 - (UIImageView *)imageView {
@@ -201,7 +229,7 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
         }
 
 	}
-
+    
     
 }
 
