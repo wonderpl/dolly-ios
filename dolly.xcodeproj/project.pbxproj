@@ -670,6 +670,8 @@
 		F45061B719A7AB3000DED3BB /* FavouriteButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F45061B319A7AB3000DED3BB /* FavouriteButton@2x.png */; };
 		F45061B819A7AB3000DED3BB /* FavouriteButtonSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = F45061B419A7AB3000DED3BB /* FavouriteButtonSelected.png */; };
 		F45061B919A7AB3000DED3BB /* FavouriteButtonSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F45061B519A7AB3000DED3BB /* FavouriteButtonSelected@2x.png */; };
+		F453722F19B71F160010273F /* MoreButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F453722D19B71F160010273F /* MoreButton.png */; };
+		F453723019B71F160010273F /* MoreButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F453722E19B71F160010273F /* MoreButton@2x.png */; };
 		F4623FEF197D1AD000DEE044 /* buildAndTestiPhone.sh in Resources */ = {isa = PBXBuildFile; fileRef = F4623FEE197D1AD000DEE044 /* buildAndTestiPhone.sh */; };
 		F4623FF1197D1B5500DEE044 /* SimulatorReset.txt in Resources */ = {isa = PBXBuildFile; fileRef = F4623FF0197D1B5500DEE044 /* SimulatorReset.txt */; };
 		F4623FF3197D25AB00DEE044 /* choose_sim_device in Resources */ = {isa = PBXBuildFile; fileRef = F4623FF2197D25AB00DEE044 /* choose_sim_device */; };
@@ -1728,6 +1730,8 @@
 		F45061B319A7AB3000DED3BB /* FavouriteButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FavouriteButton@2x.png"; sourceTree = "<group>"; };
 		F45061B419A7AB3000DED3BB /* FavouriteButtonSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FavouriteButtonSelected.png; sourceTree = "<group>"; };
 		F45061B519A7AB3000DED3BB /* FavouriteButtonSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FavouriteButtonSelected@2x.png"; sourceTree = "<group>"; };
+		F453722D19B71F160010273F /* MoreButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MoreButton.png; sourceTree = "<group>"; };
+		F453722E19B71F160010273F /* MoreButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MoreButton@2x.png"; sourceTree = "<group>"; };
 		F4623FEE197D1AD000DEE044 /* buildAndTestiPhone.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = buildAndTestiPhone.sh; sourceTree = "<group>"; };
 		F4623FF0197D1B5500DEE044 /* SimulatorReset.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SimulatorReset.txt; sourceTree = "<group>"; };
 		F4623FF2197D25AB00DEE044 /* choose_sim_device */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = choose_sim_device; sourceTree = "<group>"; };
@@ -2178,6 +2182,8 @@
 		019824DE1629CA5900216900 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				F453722D19B71F160010273F /* MoreButton.png */,
+				F453722E19B71F160010273F /* MoreButton@2x.png */,
 				F45061B219A7AB3000DED3BB /* FavouriteButton.png */,
 				F45061B319A7AB3000DED3BB /* FavouriteButton@2x.png */,
 				F45061B419A7AB3000DED3BB /* FavouriteButtonSelected.png */,
@@ -4479,6 +4485,7 @@
 				993B1B45191AA4B5008532D4 /* TabFeed~ipad.png in Resources */,
 				F4A443FE19363A0F009287FA /* ShopMotion7.png in Resources */,
 				993B1B4C191AA4D3008532D4 /* TabProfile~ipad.png in Resources */,
+				F453723019B71F160010273F /* MoreButton@2x.png in Resources */,
 				F419A154192A72FF00DBA621 /* register-button@2x.png in Resources */,
 				BED027D01834D4CC00636659 /* ButtonMoreLogout.png in Resources */,
 				BEB31367181AB81600FAF98A /* IconVideoAddHighlighted.png in Resources */,
@@ -4609,6 +4616,7 @@
 				E9EF289518FD901E003B2D0F /* FreightTextPro-Book.otf in Resources */,
 				F462400E197D82AE00DEE044 /* TwitterSignInButton@2x~iphone.png in Resources */,
 				F4A443F719363A0F009287FA /* ShopMotion0.png in Resources */,
+				F453722F19B71F160010273F /* MoreButton.png in Resources */,
 				BED027C61834D4CC00636659 /* ButtonMoreAbout.png in Resources */,
 				1F458B2217E1CE8E003C14AC /* AppIcon-Dev-29x29.png in Resources */,
 				0EF0786C181EAE9100667417 /* ButtonMore~iphone.png in Resources */,
