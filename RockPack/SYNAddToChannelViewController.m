@@ -121,8 +121,9 @@
     // Copy Channels
     self.channels = [appDelegate.currentUser.channels array];
 
+    //TODO: need paging here, quick hack to get all channels.
     [appDelegate.oAuthNetworkEngine userDataForUser: ((User *) appDelegate.currentUser)
-                                            inRange: NSMakeRange(0, STANDARD_REQUEST_LENGTH)
+                                            inRange: NSMakeRange(0, 1000)
                                        onCompletion: ^(id dictionary) {
                                            if (appDelegate.currentUser) {
                                                [appDelegate.currentUser setAttributesFromDictionary: dictionary
