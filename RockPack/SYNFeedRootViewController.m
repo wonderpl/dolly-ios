@@ -310,7 +310,7 @@ static const CGFloat heightPortrait = 740;
 	} else {
 		SYNFeedVideoCell *cell = [self videoCellForIndexPath:indexPath collectionView:collectionView];
 		
-        VideoInstance *videoInstance = [self.model itemAtIndex:indexPath.row];
+        VideoInstance *videoInstance = [self.model resourceForFeedItem:feedItem];
         if (videoInstance) {
             cell.videoInstance = videoInstance;
             cell.delegate = self;
