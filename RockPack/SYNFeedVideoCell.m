@@ -121,7 +121,7 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
     [super prepareForReuse];
     self.playButton.hidden = NO;
     self.videoPlayerCell.hidden = YES;
-//    self.descriptionLabel.text = @"";
+    self.descriptionTextView.text = @"";
     self.descriptionButton.hidden = YES;
     
     [self setVideoSizeConstant];
@@ -155,8 +155,6 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
     self.durationLabel.text = [NSString friendlyLengthFromTimeInterval:videoInstance.video.durationValue];
 
     if (self.videoInstance.video.videoDescription.length > 0) {
-	    
-        
         
         //TODO: Counting characters is not goog enough, need to check for new lines aswell. eg. lists.
         NSString *descriptionText = [self.videoInstance.video.videoDescription stringByStrippingHTML];
@@ -167,20 +165,23 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
         NSString *trimmedString = [shortDescription stringByTrimmingCharactersInSet:
                                    [NSCharacterSet whitespaceCharacterSet]];
 
+        NSString *endString = @"See More";
         
-        
-        
-        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@... See More", trimmedString]];
+        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@... %@", trimmedString, endString]];
         [attributedString addAttribute:NSLinkAttributeName
                                  value:@"continue//:"
-                                 range:[[attributedString string] rangeOfString:@"See More"]];
-        
-        
+                                 range:[[attributedString string] rangeOfString:endString]];
         
         [attributedString addAttribute:NSFontAttributeName
                       value:[UIFont lightCustomFontOfSize:self.descriptionTextView.font.pointSize]
                       range:NSMakeRange(0, stringLength)];
 
+        
+        if ([descriptionText length] > 140) {
+            [attributedString addAttribute:NSFontAttributeName
+                                     value:[UIFont regularCustomFontOfSize:self.descriptionTextView.font.pointSize+2]
+                                     range:[[attributedString string] rangeOfString:endString]];
+        }
         
         NSDictionary *linkAttributes = @{NSForegroundColorAttributeName: [UIColor dollyGreen],
                                          NSUnderlineColorAttributeName: [UIColor lightGrayColor],
@@ -200,8 +201,6 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 //            [self.descriptionLabel setAttributedText:[self attributedStringFromString:[self.videoInstance.video.videoDescription stringByStrippingHTML] withLineHeight:2]];
         }
     }
-    
-    
 
 	NSURL *avatarURL = [NSURL URLWithString:self.videoInstance.originator.thumbnailURL];
 	[self.avatarThumbnailButton setImageWithURL:avatarURL
