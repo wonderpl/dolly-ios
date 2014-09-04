@@ -118,7 +118,7 @@
                             <constraint firstAttribute="width" constant="768" id="MSg-8g-RIb"/>
                         </constraints>
                     </view>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YBO-V8-5pH" userLabel="Descrption Button">
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YBO-V8-5pH" userLabel="Descrption Button">
                         <rect key="frame" x="680" y="639" width="42" height="36"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <constraints>
@@ -128,9 +128,6 @@
                         <state key="normal" image="MoreButton.png">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
-                        <connections>
-                            <action selector="descriptionButtonTapped:" destination="b82-Mn-j5C" eventType="touchUpInside" id="FDs-3m-Mp4"/>
-                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rrA-eC-9UF" userLabel="Click to more button">
                         <rect key="frame" x="341" y="558" width="86" height="34"/>
@@ -176,6 +173,12 @@
                             <constraint firstAttribute="width" constant="650" id="uKX-cC-JJG"/>
                         </constraints>
                     </view>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l0k-gP-iCf" userLabel="Video Description">
+                        <rect key="frame" x="216" y="629" width="506" height="34"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
@@ -194,6 +197,7 @@
                 <constraint firstItem="dVi-I7-bEK" firstAttribute="leading" secondItem="b82-Mn-j5C" secondAttribute="leading" constant="46" id="E2K-ah-wqf"/>
                 <constraint firstItem="dVi-I7-bEK" firstAttribute="width" secondItem="yNU-gd-v1v" secondAttribute="width" id="Ekt-hN-Byi"/>
                 <constraint firstAttribute="trailing" secondItem="iNz-XJ-FqX" secondAttribute="trailing" constant="46" id="Fan-Vi-L3f"/>
+                <constraint firstAttribute="trailing" secondItem="l0k-gP-iCf" secondAttribute="trailing" constant="46" id="G4d-vR-4Pg"/>
                 <constraint firstItem="dVi-I7-bEK" firstAttribute="top" secondItem="Ujv-HH-Fku" secondAttribute="bottom" constant="19" id="G63-mG-pp5"/>
                 <constraint firstItem="HdK-AT-wCD" firstAttribute="leading" secondItem="KIA-TZ-hGw" secondAttribute="trailing" constant="41" id="GgA-4E-Fya"/>
                 <constraint firstAttribute="trailing" secondItem="dVi-I7-bEK" secondAttribute="trailing" constant="46" id="Nh8-gR-IoR"/>
@@ -201,6 +205,7 @@
                 <constraint firstItem="Ujv-HH-Fku" firstAttribute="top" secondItem="iNz-XJ-FqX" secondAttribute="bottom" constant="5" id="Pse-qe-8nQ"/>
                 <constraint firstItem="ZNC-b6-sja" firstAttribute="top" secondItem="ypB-ke-5qG" secondAttribute="bottom" constant="17" id="SGq-Vd-85U"/>
                 <constraint firstItem="rrA-eC-9UF" firstAttribute="top" secondItem="dVi-I7-bEK" secondAttribute="bottom" constant="23" id="Suc-Ov-iUK"/>
+                <constraint firstItem="l0k-gP-iCf" firstAttribute="top" secondItem="OHt-JI-i3d" secondAttribute="bottom" constant="37" id="TwC-Nn-ne2"/>
                 <constraint firstAttribute="trailing" secondItem="2uC-p9-xU8" secondAttribute="trailing" constant="46" id="UJ5-Gt-xg3"/>
                 <constraint firstItem="Ujv-HH-Fku" firstAttribute="top" secondItem="b82-Mn-j5C" secondAttribute="top" constant="104" id="Y38-mK-lzg"/>
                 <constraint firstItem="iNz-XJ-FqX" firstAttribute="leading" secondItem="b82-Mn-j5C" secondAttribute="leading" constant="44" id="YRW-nr-2au"/>
@@ -216,6 +221,7 @@
                 <constraint firstItem="uOx-Cy-REo" firstAttribute="centerY" secondItem="dVi-I7-bEK" secondAttribute="centerY" id="ipS-8f-Joa"/>
                 <constraint firstAttribute="trailing" secondItem="jKl-DL-gRy" secondAttribute="trailing" id="kQf-jv-prY"/>
                 <constraint firstItem="OHt-JI-i3d" firstAttribute="width" secondItem="dVi-I7-bEK" secondAttribute="width" constant="16" id="luc-v8-pLb"/>
+                <constraint firstItem="l0k-gP-iCf" firstAttribute="leading" secondItem="b82-Mn-j5C" secondAttribute="leading" constant="216" id="n42-DR-J0F"/>
                 <constraint firstItem="YBO-V8-5pH" firstAttribute="top" secondItem="HdK-AT-wCD" secondAttribute="bottom" constant="10" id="oEy-fz-THY"/>
                 <constraint firstItem="HdK-AT-wCD" firstAttribute="top" secondItem="OHt-JI-i3d" secondAttribute="bottom" constant="37" id="qHA-rU-qFt"/>
                 <constraint firstItem="dVi-I7-bEK" firstAttribute="height" secondItem="yNU-gd-v1v" secondAttribute="height" id="qYc-Gs-SRq"/>
@@ -229,7 +235,7 @@
                 <outlet property="avatarThumbnailButton" destination="ypB-ke-5qG" id="z0k-ug-QOM"/>
                 <outlet property="clickToMoreButton" destination="rrA-eC-9UF" id="0sC-Gn-yOQ"/>
                 <outlet property="curatedByButton" destination="Ujv-HH-Fku" id="dMd-r3-sb4"/>
-                <outlet property="descriptionButton" destination="YBO-V8-5pH" id="ZL9-DH-ShJ"/>
+                <outlet property="descriptionTextView" destination="l0k-gP-iCf" id="sGQ-f1-xUY"/>
                 <outlet property="durationLabel" destination="2uC-p9-xU8" id="ZmF-9S-xm4"/>
                 <outlet property="followButton" destination="KIA-TZ-hGw" id="PWD-wU-dNk"/>
                 <outlet property="labelLabel" destination="eA5-pA-pfI" id="Lc1-8T-vpO"/>
