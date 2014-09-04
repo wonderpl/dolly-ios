@@ -17,11 +17,11 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NWm-in-24r">
-                                <rect key="frame" x="0.0" y="0.0" width="1024" height="1024"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="0R6-e8-kts" customClass="SYNVideoCollectionView">
-                                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                                        <rect key="frame" x="0.0" y="96" width="1024" height="576"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="JkG-hQ-ebs">
                                             <size key="itemSize" width="1024" height="768"/>
@@ -31,7 +31,7 @@
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="VideoPlayerCell" id="Imu-ex-8VO" customClass="SYNVideoPlayerCell">
-                                                <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                                                <rect key="frame" x="0.0" y="-96" width="1024" height="768"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                     <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
@@ -49,10 +49,10 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="0R6-e8-kts" firstAttribute="top" secondItem="NWm-in-24r" secondAttribute="top" id="7wl-qc-7Xr"/>
+                                    <constraint firstItem="0R6-e8-kts" firstAttribute="top" secondItem="NWm-in-24r" secondAttribute="top" constant="96" id="7wl-qc-7Xr"/>
                                     <constraint firstAttribute="width" constant="1024" id="Jf0-NC-S4f"/>
-                                    <constraint firstAttribute="bottom" secondItem="0R6-e8-kts" secondAttribute="bottom" constant="256" id="UNT-pk-Ixp"/>
-                                    <constraint firstAttribute="height" constant="1024" id="fV7-Y7-NXo"/>
+                                    <constraint firstAttribute="bottom" secondItem="0R6-e8-kts" secondAttribute="bottom" constant="96" id="UNT-pk-Ixp"/>
+                                    <constraint firstAttribute="height" constant="768" id="fV7-Y7-NXo"/>
                                     <constraint firstAttribute="trailing" secondItem="0R6-e8-kts" secondAttribute="trailing" id="sbE-QP-sIo"/>
                                     <constraint firstItem="0R6-e8-kts" firstAttribute="leading" secondItem="NWm-in-24r" secondAttribute="leading" id="xKR-g7-DUi"/>
                                 </constraints>

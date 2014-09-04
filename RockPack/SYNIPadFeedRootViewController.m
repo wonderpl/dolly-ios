@@ -43,7 +43,7 @@
 - (SYNFeedChannelCell *)channelCellForIndexPath:(NSIndexPath *)indexPath
 								 collectionView:(UICollectionView *)collectionView {
 	return [collectionView dequeueReusableCellWithReuseIdentifier:[SYNFeedChannelLargeCell reuseIdentifier]
-																forIndexPath:indexPath];
+													 forIndexPath:indexPath];
 }
 
 - (SYNFeedVideoCell *)videoCellForIndexPath:(NSIndexPath *)indexPath

@@ -1,6 +1,6 @@
 //
-//  SYNHomeTopTabViewController.m
-//  rockpack
+//  SYNFeedRootViewController.m
+//  dolly
 //
 //  Created by Nick Banks on 07/12/2012.
 //  Copyright (c) 2012 Nick Banks. All rights reserved.
@@ -41,8 +41,8 @@
 #import "SYNWebViewController.h"
 #import "SYNDescriptionViewController.h"
 
-static const CGFloat heightLandscape = 733;
-static const CGFloat heightPortrait = 768;
+static const CGFloat heightLandscape = 770;
+static const CGFloat heightPortrait = 740;
 
 @interface SYNFeedRootViewController () <UIViewControllerTransitioningDelegate, SYNPagingModelDelegate, SYNVideoPlayerAnimatorDelegate, SYNFeedVideoCellDelegate, SYNFeedChannelCellDelegate, SYNVideoPlayerDismissIndex, SYNVideoPlayerDelegate>
 
@@ -87,10 +87,7 @@ static const CGFloat heightPortrait = 768;
 
 #pragma mark - View lifecycle
 
-- (void) viewDidLoad
-{
-    NSLog(@"STAKE viewDidLoad start %d", self.currentVideoPlayer.state);
-
+- (void) viewDidLoad {
     [super viewDidLoad];
 	
     self.selectedIndex = -1;
@@ -134,7 +131,6 @@ static const CGFloat heightPortrait = 768;
 	}
     
 	[self reloadData];
-
 }
 
 - (void)deviceOrientationChanged:(NSNotification *)notification {
@@ -259,7 +255,6 @@ static const CGFloat heightPortrait = 768;
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
-    
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
     self.feedCollectionView.alpha = 1.0;
     [self calculateRotationOffSet];

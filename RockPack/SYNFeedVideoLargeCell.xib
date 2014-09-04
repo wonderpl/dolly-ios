@@ -176,6 +176,11 @@
                             <constraint firstAttribute="width" constant="650" id="uKX-cC-JJG"/>
                         </constraints>
                     </view>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Gq-1Y-VWI">
+                        <rect key="frame" x="8" y="0.0" width="753" height="3"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
