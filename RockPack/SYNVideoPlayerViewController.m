@@ -158,7 +158,8 @@
 													  object:nil];
 	}
 
-    if ([self.dismissDelegate respondsToSelector:@selector(dismissPosition:)]) {
+    if ([self.dismissDelegate respondsToSelector:@selector(dismissPosition::)]) {
+        
         [self.dismissDelegate dismissPosition:self.selectedIndex :self.currentVideoPlayer];
     }
 

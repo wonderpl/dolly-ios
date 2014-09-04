@@ -311,9 +311,13 @@ static const CGFloat heightPortrait = 740;
 		SYNFeedVideoCell *cell = [self videoCellForIndexPath:indexPath collectionView:collectionView];
 		
         VideoInstance *videoInstance = [self.model resourceForFeedItem:feedItem];
+        [self.model videoIndexForFeedIndex:0];
+        
         if (videoInstance) {
             cell.videoInstance = videoInstance;
             cell.delegate = self;
+            
+            
             if (indexPath.item == self.selectedIndex && self.currentVideoPlayer) {
                 cell.videoPlayerCell.videoPlayer = self.currentVideoPlayer;
                 cell.videoPlayerCell.hidden = NO;
@@ -475,7 +479,7 @@ static const CGFloat heightPortrait = 740;
 	[videoPlayer play];
 	self.currentVideoPlayer = videoPlayer;
     self.currentVideoPlayer.delegate = self;
-    self.selectedIndex = [[self.feedCollectionView indexPathForCell:cell] row] ;
+    self.selectedIndex = [[self.feedCollectionView indexPathForCell:cell] row];
 }
 - (void)videoCell:(SYNFeedVideoCell *)cell favouritePressed:(UIButton *)button {
     
@@ -565,29 +569,32 @@ static const CGFloat heightPortrait = 740;
 - (void) dismissPosition:(NSInteger)index :(SYNVideoPlayer *)videoPlayer {
     self.currentVideoPlayer = videoPlayer;
     self.currentVideoPlayer.delegate = self;
+    self.selectedIndex = [self.model videoIndexForFeedIndex:index];
     [self dismissPosition:index];
 }
 
 - (void)dismissPosition:(NSInteger)index {
-    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:[self.model videoIndexForFeedIndex:index] inSection:0];
+    
+    int videoCellIndex = [self.model videoIndexForFeedIndex:index];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:videoCellIndex inSection:0];
     self.videoPlayerAnimator.cellIndexPath = indexPath;
     
     if (IS_IPHONE) {
         [self.feedCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollDirectionVertical animated:NO];
     } else {
-        [self scrollToItemAtIndex:index];
+        [self scrollToItemAtIndex:videoCellIndex];
     }
 }
 
 - (void)scrollToItemAtIndex:(NSInteger)index {
     int height = 0;
     if (UIDeviceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
-        height = heightPortrait;
+        height = 738;
     } else {
-        height = heightLandscape;
+        height = 768;
     }
     
-    int point = ([self.model videoIndexForFeedIndex:index] ) * height;
+    int point = index * height;
     [self.feedCollectionView setContentOffset:CGPointMake(0, point) animated:NO];
 }
 
