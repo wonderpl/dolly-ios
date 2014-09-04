@@ -26,8 +26,9 @@
 
 static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 
-@interface SYNFeedVideoCell () <SYNVideoActionsBarDelegate>
+@interface SYNFeedVideoCell () <SYNVideoActionsBarDelegate, UITextViewDelegate>
 
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *descriptionTopConstraint;
 @property (nonatomic, strong) IBOutlet UIButton *avatarThumbnailButton;
 
 @property (nonatomic, strong) IBOutlet UILabel *titleLabel;
@@ -38,13 +39,13 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 @property (nonatomic, strong) IBOutlet UIButton *curatedByButton;
 @property (nonatomic, strong) IBOutlet UIButton *clickToMoreButton;
 
+@property (strong, nonatomic) IBOutlet UITextView *descriptionTextView;
 @property (nonatomic, strong) IBOutlet UILabel *durationLabel;
 
 @property (nonatomic, strong) IBOutlet UIButton *videoThumbnailButton;
 
 @property (nonatomic, strong) IBOutlet UIView *videoActionsContainer;
 
-@property (strong, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (nonatomic, strong) SYNVideoActionsBar *actionsBar;
 
 @property (strong, nonatomic) IBOutlet UILabel *originatorDisplayNameLabel;
@@ -70,12 +71,12 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
     if (IS_IPAD) {
         [self.labelLabel setFont:[UIFont semiboldCustomFontOfSize: self.labelLabel.font.pointSize]];
         self.durationLabel.font = [UIFont semiboldCustomFontOfSize:self.durationLabel.font.pointSize];
-        [self.descriptionLabel setFont:[UIFont lightCustomFontOfSize:self.descriptionLabel.font.pointSize]];
+        [self.descriptionTextView setFont:[UIFont lightCustomFontOfSize:self.descriptionTextView.font.pointSize]];
 
     } else {
         [self.labelLabel setFont:[UIFont semiboldCustomFontOfSize: self.labelLabel.font.pointSize]];
         self.durationLabel.font = [UIFont semiboldCustomFontOfSize:self.durationLabel.font.pointSize];
-        [self.descriptionLabel setFont:[UIFont lightCustomFontOfSize:self.descriptionLabel.font.pointSize]];
+        [self.descriptionTextView setFont:[UIFont lightCustomFontOfSize:self.descriptionTextView.font.pointSize]];
     }
 
     [self.titleLabel setFont:[UIFont lightCustomFontOfSize:self.titleLabel.font.pointSize]];
@@ -90,8 +91,10 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
     self.playButton.hidden = NO;
 
     if (IS_IPHONE) {
-//        [self.actionsBar feedBar];
+        [self.actionsBar feedBar];
     }
+    
+    [self.descriptionTopConstraint setConstant:0];
     
     self.clickToMoreButton.layer.cornerRadius = (CGRectGetHeight(self.clickToMoreButton.frame) / 2.0);
 	self.clickToMoreButton.layer.borderColor = [[UIColor dollyButtonGreenColor] CGColor];
@@ -118,7 +121,7 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
     [super prepareForReuse];
     self.playButton.hidden = NO;
     self.videoPlayerCell.hidden = YES;
-    self.descriptionLabel.text = @"";
+//    self.descriptionLabel.text = @"";
     self.descriptionButton.hidden = YES;
     
     [self setVideoSizeConstant];
@@ -152,16 +155,54 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
     self.durationLabel.text = [NSString friendlyLengthFromTimeInterval:videoInstance.video.durationValue];
 
     if (self.videoInstance.video.videoDescription.length > 0) {
-        [self.descriptionLabel setAttributedText:[self attributedStringFromString:[self.videoInstance.video.videoDescription stringByStrippingHTML] withLineHeight:12]];
+	    
+        
+        
+        //TODO: Counting characters is not goog enough, need to check for new lines aswell. eg. lists.
+        NSString *descriptionText = [self.videoInstance.video.videoDescription stringByStrippingHTML];
+        
+        int stringLength = [descriptionText length] > 140 ? 140 : [descriptionText length];
+        NSString *shortDescription = [descriptionText substringToIndex:  stringLength];
+        
+        NSString *trimmedString = [shortDescription stringByTrimmingCharactersInSet:
+                                   [NSCharacterSet whitespaceCharacterSet]];
+
+        
+        
+        
+        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@... See More", trimmedString]];
+        [attributedString addAttribute:NSLinkAttributeName
+                                 value:@"continue//:"
+                                 range:[[attributedString string] rangeOfString:@"See More"]];
+        
+        
+        
+        [attributedString addAttribute:NSFontAttributeName
+                      value:[UIFont lightCustomFontOfSize:self.descriptionTextView.font.pointSize]
+                      range:NSMakeRange(0, stringLength)];
+
+        
+        NSDictionary *linkAttributes = @{NSForegroundColorAttributeName: [UIColor dollyGreen],
+                                         NSUnderlineColorAttributeName: [UIColor lightGrayColor],
+                                         NSUnderlineStyleAttributeName: @(NSUnderlinePatternSolid)};
+        
+        self.descriptionTextView.linkTextAttributes = linkAttributes;
+        self.descriptionTextView.attributedText = attributedString;
+        self.descriptionTextView.delegate = self;
+        
+        [self.descriptionTextView setScrollEnabled:NO];
+
     }
     
     if (IS_IPHONE) {
         if (self.videoInstance.video.videoDescription.length > 0) {
             self.titleLabel.numberOfLines = 2;
-            [self.descriptionLabel setAttributedText:[self attributedStringFromString:[self.videoInstance.video.videoDescription stringByStrippingHTML] withLineHeight:2]];
+//            [self.descriptionLabel setAttributedText:[self attributedStringFromString:[self.videoInstance.video.videoDescription stringByStrippingHTML] withLineHeight:2]];
         }
     }
     
+    
+
 	NSURL *avatarURL = [NSURL URLWithString:self.videoInstance.originator.thumbnailURL];
 	[self.avatarThumbnailButton setImageWithURL:avatarURL
 									   forState:UIControlStateNormal
@@ -179,8 +220,25 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
  
     self.followButton.selected = [[SYNActivityManager sharedInstance] isSubscribedToUserId:self.videoInstance.originator.uniqueId];
     
-    self.clickToMoreButton.hidden = ([self.videoInstance.video.linkTitle length] == 0);
+    BOOL isClickToMoreHidden = ([self.videoInstance.video.linkTitle length] == 0);
+    BOOL hasDescription = [self.videoInstance.video.videoDescription length];
+    BOOL hasClickToMore = [self.videoInstance.video.linkTitle length];
+
+    self.clickToMoreButton.hidden = isClickToMoreHidden;
 	[self.clickToMoreButton setTitle:self.videoInstance.video.linkTitle forState:UIControlStateNormal];
+    
+    if (isClickToMoreHidden == YES) {
+
+        BOOL isFavouritedByFriends = [[videoInstance.starrers array] count] > 0;
+        if (isFavouritedByFriends == YES) {
+            [self.descriptionTopConstraint setConstant:-10];
+        } else {
+                [self.descriptionTopConstraint setConstant:-30];
+        }
+        
+    } else {
+        [self.descriptionTopConstraint setConstant:30];
+    }
 
     BOOL hasLabel = ([self.videoInstance.label length]);
 	if (hasLabel) {
@@ -211,8 +269,6 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
                                                      alpha: 1.0f]];
 
     if (IS_IPHONE) {
-        BOOL hasDescription = [self.videoInstance.video.videoDescription length];
-        BOOL hasClickToMore = [self.videoInstance.video.linkTitle length];
         if (!hasDescription && !hasClickToMore) {
             [self.videoTopSpace setConstant:20];
             self.titleLabel.numberOfLines = 3;
@@ -226,34 +282,6 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
     if ([self.videoInstance.video.videoDescription length] > 40) {
         self.descriptionButton.hidden = NO;
     }
-    
-}
-
-
-- (void) setVideoLabelWithColor:(UIColor*) textColor{
-    
-	self.durationLabel.text = [NSString friendlyLengthFromTimeInterval:self.videoInstance.video.durationValue];
-	
-	self.titleLabel.attributedText = [self attributedStringFromString: self.videoInstance.title];
-	
-	NSURL *avatarURL = [NSURL URLWithString:self.videoInstance.originator.thumbnailURL];
-	[self.avatarThumbnailButton setImageWithURL:avatarURL
-									   forState:UIControlStateNormal
-							   placeholderImage:[UIImage imageNamed:@"PlaceholderAvatarProfile"]
-										options:SDWebImageRetryFailed];
-	
-	NSURL *thumbnailURL = [NSURL URLWithString:self.videoInstance.thumbnailURL];
-	[self.videoThumbnailButton setImageWithURL:thumbnailURL forState:UIControlStateNormal];
-	
-	self.actionsBar.favouritedBy = [self.videoInstance.starrers array];
-	self.actionsBar.favouriteButton.selected = self.videoInstance.starredByUserValue;
-
-    [self.curatedByButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.labelLabel setTextColor:[UIColor whiteColor]];
-    [self.durationLabel setTextColor:[UIColor whiteColor]];
-    [self.titleLabel setTextColor:[UIColor whiteColor]];
-    [self.descriptionLabel setTextColor:[UIColor whiteColor]];
-    [self setVideoLabelWithColor: [UIColor whiteColor]];
     
 }
 
@@ -356,6 +384,11 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 }
 - (IBAction)descriptionButtonTapped:(id)sender {
     [self.delegate videoCell:self descriptionButtonTapped:sender];
+}
+
+- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange {
+	[self.delegate videoCell:self descriptionButtonTapped:nil];
+    return NO;
 }
 
 @end

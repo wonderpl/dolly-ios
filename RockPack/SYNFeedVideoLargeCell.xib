@@ -230,7 +230,6 @@
                 <outlet property="clickToMoreButton" destination="rrA-eC-9UF" id="0sC-Gn-yOQ"/>
                 <outlet property="curatedByButton" destination="Ujv-HH-Fku" id="dMd-r3-sb4"/>
                 <outlet property="descriptionButton" destination="YBO-V8-5pH" id="ZL9-DH-ShJ"/>
-                <outlet property="descriptionLabel" destination="HdK-AT-wCD" id="Pvr-ja-yQ2"/>
                 <outlet property="durationLabel" destination="2uC-p9-xU8" id="ZmF-9S-xm4"/>
                 <outlet property="followButton" destination="KIA-TZ-hGw" id="PWD-wU-dNk"/>
                 <outlet property="labelLabel" destination="eA5-pA-pfI" id="Lc1-8T-vpO"/>
