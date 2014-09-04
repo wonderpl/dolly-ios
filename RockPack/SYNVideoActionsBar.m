@@ -53,11 +53,9 @@
 	
 
 	NSMutableArray *buttons = [NSMutableArray array];
-
-    
-    for (int i = 0; i < 3; i++) {
-        CGRect frame = CGRectMake(i * (buttonSize + 6.0), 0.0, buttonSize, buttonSize);
-		NSURL *thumbnailURL = [NSURL URLWithString:@"http://media.us.wonderpl.com/images/avatar/thumbnail_medium/sXL9Ld9OtFcBODfJV5YoAw.jpg"];
+	[favouritedBy enumerateObjectsUsingBlock:^(ChannelOwner *channelOwner, NSUInteger idx, BOOL *stop) {
+		CGRect frame = CGRectMake(idx * (buttonSize + 6.0), 0.0, buttonSize, buttonSize);
+		NSURL *thumbnailURL = [NSURL URLWithString:channelOwner.thumbnailURL];
 		
 		SYNAvatarButton *button = [[SYNAvatarButton alloc] initWithFrame:frame];
 		[button setImageWithURL:thumbnailURL
@@ -68,8 +66,7 @@
 		
 		[buttons addObject:button];
 		[self.favouritedByContainer addSubview:button];
-        
-    }
+	}];
 	
 	self.favouritedByButtons = buttons;
 }
