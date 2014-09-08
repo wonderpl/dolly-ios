@@ -18,7 +18,6 @@
 #import "SYNMasterViewController.h"
 #import "SYNNetworkEngine.h"
 #import "SYNOAuthNetworkEngine.h"
-#import "SYNCollectionVideoCell.h"
 #import "UIFont+SYNFont.h"
 #import <UIImageView+WebCache.h>
 #import "User.h"
@@ -41,6 +40,10 @@
 #import "SYNVideoActionsBar.h"
 #import "SYNCollectionVideoCell.h"
 #import <TestFlight.h>
+#import "SYNFeedVideoLargeCell.h"
+#import "SYNFeedVideoCell.h"
+#import "SYNDescriptionViewController.h"
+#import "SYNWebViewController.h"
 
 #define kHeightChange 30.0f
 #define FULL_NAME_LABEL_IPHONE 147.0f
@@ -50,7 +53,7 @@
 static const CGFloat HeaderHeightIPad = 530;
 
 
-@interface SYNChannelDetailsViewController () <UITextViewDelegate, UIViewControllerTransitioningDelegate, LXReorderableCollectionViewDelegateFlowLayout, SYNImagePickerControllerDelegate, SYNPagingModelDelegate, SYNVideoPlayerAnimatorDelegate,SYNCollectionVideoCellDelegate,SYNVideoPlayerDismissIndex>
+@interface SYNChannelDetailsViewController () <UITextViewDelegate, UIViewControllerTransitioningDelegate, LXReorderableCollectionViewDelegateFlowLayout, SYNImagePickerControllerDelegate, SYNPagingModelDelegate, SYNVideoPlayerAnimatorDelegate,SYNCollectionVideoCellDelegate,SYNVideoPlayerDismissIndex, SYNVideoPlayerDelegate, SYNFeedVideoCellDelegate>
 
 @property (nonatomic, strong) UIActivityIndicatorView *subscribingIndicator;
 @property (nonatomic, weak) Channel *originalChannel;
@@ -93,6 +96,9 @@ static const CGFloat HeaderHeightIPad = 530;
 @property (nonatomic, strong) SYNChannelVideosModel *model;
 
 @property (nonatomic, strong) SYNVideoPlayerAnimator *videoPlayerAnimator;
+@property (nonatomic, assign) NSInteger selectedIndex;
+@property (nonatomic, strong) SYNVideoPlayer *currentVideoPlayer;
+
 
 @end
 
@@ -129,7 +135,7 @@ static const CGFloat HeaderHeightIPad = 530;
 	if (IS_IPHONE) {
         self.videoCollectionViewLayoutIPhone.sectionInset = UIEdgeInsetsMake(2, 0, 60, 0);
         self.videoCollectionViewLayoutIPhoneEdit = [[LXReorderableCollectionViewFlowLayout alloc]init];
-        self.videoCollectionViewLayoutIPhoneEdit.itemSize = CGSizeMake(300,284-kHeightChange);
+        self.videoCollectionViewLayoutIPhoneEdit.itemSize = CGSizeMake(300,568);
         self.videoCollectionViewLayoutIPhoneEdit.sectionInset = self.videoCollectionViewLayoutIPhone.sectionInset;
     }
     
@@ -137,8 +143,9 @@ static const CGFloat HeaderHeightIPad = 530;
         self.videoCollectionViewLayoutIPadEdit = [[LXReorderableCollectionViewFlowLayout alloc]init];
         self.videoCollectionViewLayoutIPadEdit.itemSize = CGSizeMake(300, 284-kHeightChange);
         self.videoCollectionViewLayoutIPadEdit.sectionInset = UIEdgeInsetsMake(2, 0, 60, 0);
-
     }
+    self.selectedIndex = -1;
+
     self.barBtnCancel = [[UIBarButtonItem alloc]initWithTitle:@"cancel"
                                                         style:UIBarButtonItemStyleBordered
                                                        target:self
@@ -261,6 +268,13 @@ static const CGFloat HeaderHeightIPad = 530;
     [self.videoThumbnailCollectionView registerNib:[SYNChannelFooterMoreView nib]
                         forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
                                withReuseIdentifier:[SYNChannelFooterMoreView reuseIdentifier]];
+
+    [self.videoThumbnailCollectionView registerNib:[SYNFeedVideoLargeCell nib]
+			  forCellWithReuseIdentifier:[SYNFeedVideoLargeCell reuseIdentifier]];
+    
+    [self.videoThumbnailCollectionView registerNib:[SYNFeedVideoCell nib]
+			  forCellWithReuseIdentifier:[SYNFeedVideoCell reuseIdentifier]];
+
 
     self.btnShowFollowers.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     [self.txtFieldChannelName setFont:[UIFont boldCustomFontOfSize:self.txtFieldChannelName.font.pointSize]];
@@ -695,23 +709,39 @@ static const CGFloat HeaderHeightIPad = 530;
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *) collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    SYNCollectionVideoCell *videoThumbnailCell = [collectionView dequeueReusableCellWithReuseIdentifier:[SYNCollectionVideoCell reuseIdentifier]
-                                                                                           forIndexPath:indexPath];
     
-	VideoInstance *videoInstance = [self.model itemAtIndex:indexPath.item];
+    SYNFeedVideoCell *cell;
+    if (IS_IPAD) {
+        cell =  [collectionView dequeueReusableCellWithReuseIdentifier:[SYNFeedVideoLargeCell reuseIdentifier]
+                                                          forIndexPath:indexPath];
+
+    } else {
+        cell =  [collectionView dequeueReusableCellWithReuseIdentifier:[SYNFeedVideoCell reuseIdentifier]
+                                                                            forIndexPath:indexPath];
+        
+    }
+    
+	
+    VideoInstance *videoInstance = [self.model itemAtIndex:indexPath.item];
     
     
     BOOL editable = (self.mode == kChannelDetailsModeEdit);
-    
-    [videoThumbnailCell setEditable:editable];
-    [videoThumbnailCell setVideoInstance:videoInstance];
-    [videoThumbnailCell setDelegate:self];
-    
-    if (self.mode != kChannelDetailsModeEdit) {
-        [videoThumbnailCell setUpVideoTap];
+
+    [cell setEditMode:editable];
+
+    if (videoInstance) {
+        
+        cell.videoInstance = videoInstance;
+        cell.delegate = self;
+        if (indexPath.item == self.selectedIndex && self.currentVideoPlayer) {
+            cell.videoPlayerCell.videoPlayer = self.currentVideoPlayer;
+            cell.videoPlayerCell.hidden = NO;
+        } else {
+            cell.videoPlayerCell.hidden = YES;
+        }
     }
-    
-    return videoThumbnailCell;
+
+    return cell;
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
@@ -745,6 +775,19 @@ static const CGFloat HeaderHeightIPad = 530;
                                           duration: (NSTimeInterval) duration
 {
     [self updateLayoutForOrientation: toInterfaceOrientation];
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView
+				  layout:(UICollectionViewLayout *)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (IS_IPAD) {
+        if (UIDeviceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
+            return CGSizeMake(768, 738);
+        } else {
+            return CGSizeMake(1024, 768);
+        }
+    }
+    return ((UICollectionViewFlowLayout*)self.videoThumbnailCollectionView.collectionViewLayout).itemSize;
 }
 
 
@@ -1051,6 +1094,8 @@ static const CGFloat HeaderHeightIPad = 530;
 
 - (IBAction)editTapped:(id)sender
 {
+    
+    
 	
 	[[SYNTrackingManager sharedManager] trackEditCollectionScreenView];
     
@@ -1058,18 +1103,18 @@ static const CGFloat HeaderHeightIPad = 530;
 
     [self editMode];
     
-    for (SYNCollectionVideoCell* cell in self.videoThumbnailCollectionView.visibleCells)
+    for (SYNFeedVideoCell* cell in self.videoThumbnailCollectionView.visibleCells)
     {
         
         void (^animateEditMode)(void) = ^{
-            [cell setEditable:YES];
+//            [cell setEditable:YES];
 
             CGRect frame = cell.frame;
             
             cell.frame = frame;
             
-            cell.deleteButton.alpha = 1.0f;
-            cell.videoActionsContainer.alpha = 0.0f;
+//            cell.deleteButton.alpha = 1.0f;
+//            cell.videoActionsContainer.alpha = 0.0f;
             
         };
         
@@ -1081,7 +1126,7 @@ static const CGFloat HeaderHeightIPad = 530;
                             
                         }];
         
-        [cell removeGestureRecognizer:cell.tap];
+//        [cell removeGestureRecognizer:cell.tap];
     }
     self.mode = kChannelDetailsModeEdit;
     // not clear why its 0.5f delay
@@ -1119,7 +1164,7 @@ static const CGFloat HeaderHeightIPad = 530;
         
         void (^animateProfileMode)(void) = ^{
             
-            [cell setEditable:NO];
+//            [cell setEditable:NO];
             cell.deleteButton.alpha = 0.0f;
 			cell.videoActionsContainer.alpha = 1.0f;
 
@@ -1654,6 +1699,163 @@ static const CGFloat HeaderHeightIPad = 530;
         //TODO: Displaying something when the video is not found
         
     }];
+}
+
+#pragma mark - feed cell warnings
+
+
+#pragma mark - SYNFeedVideoCellDelegate
+
+- (void)videoCellAvatarPressed:(SYNFeedVideoCell *)cell {
+	VideoInstance *videoInstance = cell.videoInstance;
+	[[SYNTrackingManager sharedManager] trackVideoOriginatorPressed:videoInstance.originator.displayName];
+    
+    [self.currentVideoPlayer pause];
+	[self viewProfileDetails:videoInstance.originator];
+}
+
+
+
+- (void)videoCell:(SYNFeedVideoCell *)cell maximiseVideoPlayer:(UIButton *)button {
+	NSIndexPath *indexPath = [self.videoThumbnailCollectionView indexPathForCell:cell];
+    
+	// We need to convert it to the index in the array of videos since the player doesn't know about channels
+	//	NSInteger itemIndex = [self.model itemIndexForFeedIndex:indexPath.row];
+    
+	SYNVideoPlayerViewController *viewController = [SYNVideoPlayerViewController viewControllerWithModel:self.model
+                                                                                           selectedIndex:[self.videoThumbnailCollectionView indexPathForCell:cell].row];
+    
+    viewController.currentVideoPlayer = self.currentVideoPlayer;
+    
+    //    [viewController.videosCollectionView reloadData];
+    
+	SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
+	animator.delegate = self;
+	animator.cellIndexPath = indexPath;
+	self.videoPlayerAnimator = animator;
+	viewController.transitioningDelegate = animator;
+	viewController.dismissDelegate = self;
+	[self presentViewController:viewController animated:YES completion:nil];
+}
+
+
+- (void)videoCellThumbnailPressed:(SYNFeedVideoCell *)cell {
+    if (self.mode == kChannelDetailsModeEdit) {
+        return;
+    }
+
+    if (self.selectedIndex == [[self.videoThumbnailCollectionView indexPathForCell:cell] row]) {
+        return;
+    }
+    
+    [self playVideoInCell:cell];
+}
+
+- (void)playVideoInCell:(SYNFeedVideoCell*) cell{
+    
+    
+    cell.videoPlayerCell.hidden = NO;
+    cell.playButton.hidden = YES;
+    
+    [self.currentVideoPlayer stop];
+    SYNVideoPlayer *videoPlayer = [SYNVideoPlayer playerForVideoInstance:cell.videoInstance];
+    cell.videoPlayerCell.videoPlayer = videoPlayer;
+	[videoPlayer play];
+	self.currentVideoPlayer = videoPlayer;
+    self.currentVideoPlayer.delegate = self;
+    self.selectedIndex = [[self.videoThumbnailCollectionView indexPathForCell:cell] row] ;
+}
+
+- (void)videoCell:(SYNFeedVideoCell *)cell descriptionButtonTapped:(UIButton *)button {
+    SYNDescriptionViewController *viewController = [[SYNDescriptionViewController alloc ]init];
+    viewController.contentHTML = cell.videoInstance.video.videoDescription;
+    viewController.modalPresentationStyle = UIModalPresentationCustom;
+    viewController.transitioningDelegate = self;
+    [self presentViewController:viewController animated:YES completion:nil];
+}
+
+
+- (void)videoCell:(SYNFeedVideoCell *)cell followButtonPressed:(UIButton *)button {
+	[self followControlPressed:button withChannelOwner:cell.videoInstance.originator withVideoInstace:cell.videoInstance completion:nil];
+}
+
+
+- (void)videoCell:(SYNFeedVideoCell *)cell addedByPressed:(UIButton *)button {
+	VideoInstance *videoInstance = cell.videoInstance;
+	
+	[[SYNTrackingManager sharedManager] trackVideoAddedByPressed:videoInstance.channel.channelOwner.displayName];
+    [self.currentVideoPlayer pause];
+	[self viewProfileDetails:videoInstance.channel.channelOwner];
+}
+
+
+- (void)videoPlayerStartedPlaying {
+    
+}
+
+- (void)videoPlayerVideoViewed {
+    
+}
+
+- (void)videoPlayerFinishedPlaying {
+    
+    //    for (int i = self.selectedIndex+1; i<[self.model itemCount]; i++) {
+    //        FeedItem *feedItem = [self.model feedItemAtindex:i];
+    //
+    //        if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo) {
+    //
+    //                [self.feedCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredVertically animated:YES];
+    //
+    //                SYNFeedVideoCell *cell = (SYNFeedVideoCell*)[self.feedCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
+    //
+    //	            self.selectedIndex = i;
+    //                [self playVideoInCell:cell];
+    //                break;
+    //        }
+    //    }
+}
+
+- (void)videoCell:(SYNFeedVideoCell *)cell clickToMorePressed:(UIButton *)button {
+    Video *video = cell.videoInstance.video;
+	NSURL *linkURL = [NSURL URLWithString:video.linkURL];
+	
+	UIViewController *viewController = [SYNWebViewController webViewControllerForURL:linkURL withTrackingName:@"Click to more"];
+    
+	[self presentViewController:viewController animated:YES completion:nil];
+    
+    [[SYNTrackingManager sharedManager] trackClickToMoreWithTitle:cell.videoInstance.title
+                                                              URL:video.linkURL];
+    
+}
+
+
+- (void)videoPlayerErrorOccurred:(NSString *)reason {
+    
+}
+
+- (void)videoPlayerAnnotationSelected:(VideoAnnotation *)annotation button:(UIButton *)button {
+    
+}
+
+- (void)videoPlayerMinimise {
+}
+
+- (void)videoPlayerMaximise {
+	// We need to convert it to the index in the array of videos since the player doesn't know about channels
+    
+	SYNVideoPlayerViewController *viewController = [SYNVideoPlayerViewController viewControllerWithModel:self.model
+                                                                                           selectedIndex:self.selectedIndex];
+    
+    viewController.currentVideoPlayer = self.currentVideoPlayer;
+    
+	SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
+	animator.delegate = self;
+	animator.cellIndexPath = [NSIndexPath indexPathForItem:self.selectedIndex inSection:0];
+	self.videoPlayerAnimator = animator;
+	viewController.transitioningDelegate = animator;
+	viewController.dismissDelegate = self;
+	[self presentViewController:viewController animated:NO completion:nil];
+    
 }
 
 

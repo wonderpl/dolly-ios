@@ -42,4 +42,6 @@
 
 @property (nonatomic, weak) id<SYNFeedVideoCellDelegate> delegate;
 
+- (void)setEditMode:(BOOL)edit;
+
 @end

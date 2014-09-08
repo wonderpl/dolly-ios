@@ -47,7 +47,9 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 @property (nonatomic, strong) IBOutlet UIView *videoActionsContainer;
 
 @property (nonatomic, strong) SYNVideoActionsBar *actionsBar;
+@property (strong, nonatomic) IBOutlet UIImageView *deleteImage;
 
+@property (strong, nonatomic) IBOutlet UIButton *deleteButton;
 @property (strong, nonatomic) IBOutlet UILabel *originatorDisplayNameLabel;
 @property (strong, nonatomic) IBOutlet UIButton *favouriteButton;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *videoHeight;
@@ -58,6 +60,7 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *videoConstantLeft;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *videoConstantRight;
 
+@property (assign, nonatomic) BOOL editing;
 @end
 
 @implementation SYNFeedVideoCell
@@ -108,6 +111,13 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
     
     [self.originatorDisplayNameLabel setFont:[UIFont regularCustomFontOfSize:self.originatorDisplayNameLabel.font.pointSize]];
     [self setVideoSizeConstant];
+    
+    [self.layer setBorderColor:[[UIColor clearColor] CGColor]];
+    [self.layer setBorderWidth:0.0];
+    self.layer.cornerRadius = 0;
+    self.deleteButton.hidden = YES;
+    self.deleteImage.hidden = YES;
+
 }
 
 
@@ -147,6 +157,7 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 - (void)setVideoInstance:(VideoInstance *)videoInstance {
 	_videoInstance = videoInstance;
     
+
     [self.titleLabel setText:videoInstance.title];
     self.labelLabel.text = videoInstance.label;
     self.durationLabel.text = [NSString friendlyLengthFromTimeInterval:videoInstance.video.durationValue];
@@ -156,9 +167,9 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
         //TODO: Counting characters is not goog enough, need to check for new lines aswell. eg. lists.
         NSString *descriptionText = [self.videoInstance.video.videoDescription stringByStrippingHTML];
         
-        int maxStringLength = IS_IPHONE ? 90 : 170;
+        NSUInteger maxStringLength = IS_IPHONE ? 90 : 170;
         
-        int stringLength = [descriptionText length] > maxStringLength ? maxStringLength : [descriptionText length];
+        NSUInteger stringLength = [descriptionText length] > maxStringLength ? maxStringLength : [descriptionText length];
         NSString *shortDescription = [descriptionText substringToIndex:  stringLength];
         
         NSString *trimmedString = [shortDescription stringByTrimmingCharactersInSet:
@@ -227,18 +238,6 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
     self.clickToMoreButton.hidden = isClickToMoreHidden;
 	[self.clickToMoreButton setTitle:self.videoInstance.video.linkTitle forState:UIControlStateNormal];
     
-    if (isClickToMoreHidden == YES) {
-
-        BOOL isFavouritedByFriends = [[videoInstance.starrers array] count] > 0;
-        if (isFavouritedByFriends == YES) {
-            [self.descriptionTopConstraint setConstant:-10];
-        } else {
-                [self.descriptionTopConstraint setConstant:-30];
-        }
-        
-    } else {
-        [self.descriptionTopConstraint setConstant:30];
-    }
 
     BOOL hasLabel = ([self.videoInstance.label length]);
 	if (hasLabel) {
@@ -335,8 +334,10 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 }
 
 - (IBAction)playVideo:(id)sender {
-    self.videoPlayerCell.hidden = NO;
-    self.playButton.hidden = YES;
+    if (!self.editing) {
+        self.videoPlayerCell.hidden = NO;
+        self.playButton.hidden = YES;
+    }
     [self.delegate videoCellThumbnailPressed:self];
 }
 
@@ -386,4 +387,24 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
     return NO;
 }
 
+- (void)setEditMode:(BOOL)edit {
+    
+    _editing = edit;
+    if (edit) {
+        [self.layer setBorderColor:[[UIColor redColor] CGColor]];
+        [self.layer setBorderWidth:1.0];
+        self.layer.cornerRadius = 10;
+		self.deleteButton.hidden = NO;
+        self.deleteImage.hidden = NO;
+    } else {
+        [self.layer setBorderColor:[[UIColor clearColor] CGColor]];
+        [self.layer setBorderWidth:0.0];
+        self.layer.cornerRadius = 0;
+		self.deleteButton.hidden = YES;
+        self.deleteImage.hidden = YES;
+        
+    }
+}
+
 @end
+

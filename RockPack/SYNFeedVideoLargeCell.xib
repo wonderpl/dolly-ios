@@ -179,10 +179,30 @@
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RemoveVideo.png" translatesAutoresizingMaskIntoConstraints="NO" id="TvW-EV-OXH" userLabel="imageview remove video">
+                        <rect key="frame" x="690" y="0.0" width="78" height="77"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="78" id="QhL-ay-KRJ"/>
+                            <constraint firstAttribute="height" constant="77" id="fMp-io-fPM"/>
+                        </constraints>
+                    </imageView>
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U7b-pW-lfA" userLabel="Button - Delete">
+                        <rect key="frame" x="721" y="0.0" width="44" height="44"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="44" id="MdC-9N-BGR"/>
+                            <constraint firstAttribute="height" constant="44" id="OAz-Ra-b8G"/>
+                        </constraints>
+                        <state key="normal">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="U7b-pW-lfA" secondAttribute="trailing" constant="3" id="1pR-lK-vnP"/>
                 <constraint firstItem="eA5-pA-pfI" firstAttribute="top" secondItem="iNz-XJ-FqX" secondAttribute="bottom" constant="11" id="3QA-Cc-axl"/>
                 <constraint firstItem="hdn-o2-AAd" firstAttribute="top" secondItem="ZNC-b6-sja" secondAttribute="bottom" constant="20" id="4Ev-Uk-Bm9"/>
                 <constraint firstItem="eA5-pA-pfI" firstAttribute="leading" secondItem="b82-Mn-j5C" secondAttribute="leading" constant="46" id="4LB-Uz-5dl"/>
@@ -194,6 +214,7 @@
                 <constraint firstItem="hdn-o2-AAd" firstAttribute="leading" secondItem="b82-Mn-j5C" secondAttribute="leading" constant="59" id="C3q-T9-5s1"/>
                 <constraint firstAttribute="trailing" secondItem="HdK-AT-wCD" secondAttribute="trailing" constant="46" id="CG5-96-cqQ"/>
                 <constraint firstAttribute="trailing" secondItem="hdn-o2-AAd" secondAttribute="trailing" constant="59" id="CsH-83-nQa"/>
+                <constraint firstItem="TvW-EV-OXH" firstAttribute="top" secondItem="b82-Mn-j5C" secondAttribute="top" id="DfH-cs-oEj"/>
                 <constraint firstItem="dVi-I7-bEK" firstAttribute="leading" secondItem="b82-Mn-j5C" secondAttribute="leading" constant="46" id="E2K-ah-wqf"/>
                 <constraint firstItem="dVi-I7-bEK" firstAttribute="width" secondItem="yNU-gd-v1v" secondAttribute="width" id="Ekt-hN-Byi"/>
                 <constraint firstAttribute="trailing" secondItem="iNz-XJ-FqX" secondAttribute="trailing" constant="46" id="Fan-Vi-L3f"/>
@@ -201,6 +222,7 @@
                 <constraint firstItem="dVi-I7-bEK" firstAttribute="top" secondItem="Ujv-HH-Fku" secondAttribute="bottom" constant="19" id="G63-mG-pp5"/>
                 <constraint firstItem="HdK-AT-wCD" firstAttribute="leading" secondItem="KIA-TZ-hGw" secondAttribute="trailing" constant="41" id="GgA-4E-Fya"/>
                 <constraint firstAttribute="trailing" secondItem="dVi-I7-bEK" secondAttribute="trailing" constant="46" id="Nh8-gR-IoR"/>
+                <constraint firstItem="U7b-pW-lfA" firstAttribute="top" secondItem="b82-Mn-j5C" secondAttribute="top" id="NtT-D4-tef"/>
                 <constraint firstItem="jKl-DL-gRy" firstAttribute="leading" secondItem="b82-Mn-j5C" secondAttribute="leading" id="PPR-Fo-lAN"/>
                 <constraint firstItem="Ujv-HH-Fku" firstAttribute="top" secondItem="iNz-XJ-FqX" secondAttribute="bottom" constant="5" id="Pse-qe-8nQ"/>
                 <constraint firstItem="ZNC-b6-sja" firstAttribute="top" secondItem="ypB-ke-5qG" secondAttribute="bottom" constant="17" id="SGq-Vd-85U"/>
@@ -223,6 +245,7 @@
                 <constraint firstItem="OHt-JI-i3d" firstAttribute="width" secondItem="dVi-I7-bEK" secondAttribute="width" constant="16" id="luc-v8-pLb"/>
                 <constraint firstItem="l0k-gP-iCf" firstAttribute="leading" secondItem="b82-Mn-j5C" secondAttribute="leading" constant="216" id="n42-DR-J0F"/>
                 <constraint firstItem="YBO-V8-5pH" firstAttribute="top" secondItem="HdK-AT-wCD" secondAttribute="bottom" constant="10" id="oEy-fz-THY"/>
+                <constraint firstAttribute="trailing" secondItem="TvW-EV-OXH" secondAttribute="trailing" id="pIK-yj-Icz"/>
                 <constraint firstItem="HdK-AT-wCD" firstAttribute="top" secondItem="OHt-JI-i3d" secondAttribute="bottom" constant="37" id="qHA-rU-qFt"/>
                 <constraint firstItem="dVi-I7-bEK" firstAttribute="height" secondItem="yNU-gd-v1v" secondAttribute="height" id="qYc-Gs-SRq"/>
                 <constraint firstItem="uOx-Cy-REo" firstAttribute="height" secondItem="dVi-I7-bEK" secondAttribute="height" id="qmr-oE-Kli"/>
@@ -235,6 +258,8 @@
                 <outlet property="avatarThumbnailButton" destination="ypB-ke-5qG" id="z0k-ug-QOM"/>
                 <outlet property="clickToMoreButton" destination="rrA-eC-9UF" id="0sC-Gn-yOQ"/>
                 <outlet property="curatedByButton" destination="Ujv-HH-Fku" id="dMd-r3-sb4"/>
+                <outlet property="deleteButton" destination="U7b-pW-lfA" id="f2S-Vk-Tex"/>
+                <outlet property="deleteImage" destination="TvW-EV-OXH" id="yJB-sX-WN8"/>
                 <outlet property="descriptionTextView" destination="l0k-gP-iCf" id="sGQ-f1-xUY"/>
                 <outlet property="durationLabel" destination="2uC-p9-xU8" id="ZmF-9S-xm4"/>
                 <outlet property="followButton" destination="KIA-TZ-hGw" id="PWD-wU-dNk"/>
@@ -252,5 +277,6 @@
     </objects>
     <resources>
         <image name="MoreButton.png" width="23" height="23"/>
+        <image name="RemoveVideo.png" width="85" height="85"/>
     </resources>
 </document>
