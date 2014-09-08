@@ -53,7 +53,6 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *videoHeight;
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *videoWidth;
-@property (strong, nonatomic) IBOutlet UIButton *descriptionButton;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *clickToMoreHeight;
 @property (strong, nonatomic) IBOutlet UIButton *loveButton;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *videoConstantLeft;
@@ -122,8 +121,6 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
     self.playButton.hidden = NO;
     self.videoPlayerCell.hidden = YES;
     self.descriptionTextView.text = @"";
-    self.descriptionButton.hidden = YES;
-    
     [self setVideoSizeConstant];
 
 }
@@ -159,7 +156,7 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
         //TODO: Counting characters is not goog enough, need to check for new lines aswell. eg. lists.
         NSString *descriptionText = [self.videoInstance.video.videoDescription stringByStrippingHTML];
         
-        int stringLength = [descriptionText length] > 140 ? 140 : [descriptionText length];
+        int stringLength = [descriptionText length] > 90 ? 90 : [descriptionText length];
         NSString *shortDescription = [descriptionText substringToIndex:  stringLength];
         
         NSString *trimmedString = [shortDescription stringByTrimmingCharactersInSet:
@@ -177,11 +174,13 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
                       range:NSMakeRange(0, stringLength)];
 
         
-        if ([descriptionText length] > 140) {
+        if ([descriptionText length] > 90) {
             [attributedString addAttribute:NSFontAttributeName
-                                     value:[UIFont regularCustomFontOfSize:self.descriptionTextView.font.pointSize+2]
+                                     value:[UIFont regularCustomFontOfSize:self.descriptionTextView.font.pointSize]
                                      range:[[attributedString string] rangeOfString:endString]];
         }
+        
+        [self attributedString:attributedString withLineHeight:2];
         
         NSDictionary *linkAttributes = @{NSForegroundColorAttributeName: [UIColor dollyGreen],
                                          NSUnderlineColorAttributeName: [UIColor lightGrayColor],
@@ -269,18 +268,14 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 
     if (IS_IPHONE) {
         if (!hasDescription && !hasClickToMore) {
-            [self.videoTopSpace setConstant:20];
+//            [self.videoTopSpace setConstant:20];
             self.titleLabel.numberOfLines = 3;
         } else {
-            [self.videoTopSpace setConstant:5];
+//            [self.videoTopSpace setConstant:5];
             self.titleLabel.numberOfLines = 2;
             
         }
 	}
-    
-    if ([self.videoInstance.video.videoDescription length] > 40) {
-        self.descriptionButton.hidden = NO;
-    }
     
 }
 
@@ -343,23 +338,22 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
     [self.delegate videoCellThumbnailPressed:self];
 }
 
--(NSMutableAttributedString*) attributedStringFromString:(NSString *) string withLineHeight:(int) lineHeight{
+-(NSMutableAttributedString*) attributedString:(NSMutableAttributedString *)string withLineHeight:(int) lineHeight{
 	
     if (!string) {
 		return [[NSMutableAttributedString alloc] initWithString: @""];
 	}
-	NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString: string];
-	
-	NSInteger strLength = [attributedString length];
+    
+	NSInteger strLength = [string length];
 	NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
 	style.lineBreakMode = NSLineBreakByWordWrapping;
 	[style setLineSpacing:lineHeight];
 	[style setAlignment:NSTextAlignmentLeft];
 	
-	[attributedString addAttribute:NSParagraphStyleAttributeName
+	[string addAttribute:NSParagraphStyleAttributeName
                              value:style
                              range:NSMakeRange(0, strLength)];
-	return attributedString;
+	return string;
 }
 - (IBAction)addButtonTapped:(id)sender {
     [self.delegate videoCell:self addToChannelPressed:sender];

@@ -29,7 +29,7 @@
                         </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PSP-Md-g5O" userLabel="Video Thumbnail">
-                        <rect key="frame" x="0.0" y="100" width="320" height="180"/>
+                        <rect key="frame" x="0.0" y="104" width="320" height="180"/>
                         <color key="backgroundColor" red="0.83921568629999999" green="0.83921568629999999" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="320" id="Rq8-my-dHU"/>
@@ -77,7 +77,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wYn-bf-10j" userLabel="Actions Bar" customClass="SYNVideoActionsBar">
-                        <rect key="frame" x="4" y="279" width="317" height="36"/>
+                        <rect key="frame" x="4" y="283" width="317" height="36"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="36" id="RLr-qT-URE"/>
                         </constraints>
@@ -134,12 +134,12 @@
                         </connections>
                     </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ehm-8n-Vnv" customClass="SYNVideoPlayerCell">
-                        <rect key="frame" x="0.0" y="100" width="320" height="180"/>
+                        <rect key="frame" x="0.0" y="104" width="320" height="180"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ng3-nW-QKC" userLabel="Play Video">
-                        <rect key="frame" x="0.0" y="100" width="320" height="180"/>
+                        <rect key="frame" x="0.0" y="104" width="320" height="180"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <state key="normal">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -169,13 +169,13 @@
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vxx-65-fq7" userLabel="Video Description">
-                        <rect key="frame" x="10" y="348" width="300" height="34"/>
+                        <rect key="frame" x="10" y="352" width="300" height="34"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U37-hs-lKO">
-                        <rect key="frame" x="119" y="318" width="86" height="30"/>
+                        <rect key="frame" x="119" y="322" width="86" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <constraints>
                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="280" id="Xt2-ix-UPQ"/>
@@ -211,7 +211,7 @@
                 <constraint firstAttribute="bottom" secondItem="71k-CY-H0Y" secondAttribute="bottom" constant="83" id="9sB-8I-Uae"/>
                 <constraint firstAttribute="bottom" secondItem="sde-G5-ls3" secondAttribute="bottom" constant="42" id="9zE-Ms-DjG"/>
                 <constraint firstAttribute="centerX" secondItem="U37-hs-lKO" secondAttribute="centerX" constant="-2" id="9zo-Lx-Vin"/>
-                <constraint firstItem="PSP-Md-g5O" firstAttribute="top" secondItem="DMH-Zk-ftY" secondAttribute="bottom" constant="11" id="AeT-Yd-ZPJ"/>
+                <constraint firstItem="PSP-Md-g5O" firstAttribute="top" secondItem="DMH-Zk-ftY" secondAttribute="bottom" constant="15" id="AeT-Yd-ZPJ"/>
                 <constraint firstItem="ehm-8n-Vnv" firstAttribute="width" secondItem="Ng3-nW-QKC" secondAttribute="width" id="CAc-i7-pD4"/>
                 <constraint firstItem="ehm-8n-Vnv" firstAttribute="width" secondItem="PSP-Md-g5O" secondAttribute="width" id="Dym-Wr-P7A"/>
                 <constraint firstItem="Ng3-nW-QKC" firstAttribute="top" secondItem="PSP-Md-g5O" secondAttribute="top" id="EX1-Ba-Ob7"/>
