@@ -87,6 +87,19 @@ forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
 
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    if (self.currentVideoPlayer) {
+        self.currentVideoPlayer.delegate = self;
+    }
+    
+    if (self.currentVideoPlayer.state == SYNVideoPlayerStatePlaying) {
+		[self.currentVideoPlayer play];
+    }
+
+
+}
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self.cv reloadData];
@@ -242,52 +255,6 @@ forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
 	return ((collectionView == self.cv && [self.model hasMoreItems]) ? [self footerSize] : CGSizeZero);
 }
 
-#pragma mark - SYNCollectionVideoCellDelegate
-//
-//- (void)videoCell:(SYNCollectionVideoCell *)cell favouritePressed:(UIButton *)button {
-//	[self favouriteButtonPressed:button videoInstance:cell.videoInstance];
-//}
-//
-//
-//// TODO: abstract this call, Copy paste from Feed Root.
-//- (void)videoCell:(SYNCollectionVideoCell *)cell addToChannelPressed:(UIButton *)button {
-//    NSIndexPath *indexPath = [self.cv indexPathForCell:cell];
-//    TFLog(@"Feed: Video Instance from model :%@", [self.model itemAtIndex:indexPath.row]);
-//
-//    [self addToChannelButtonPressed:button videoInstance:cell.videoInstance];
-//}
-//
-//- (void)videoCell:(SYNCollectionVideoCell *)cell sharePressed:(UIButton *)button {
-//    [self shareVideoInstance:cell.videoInstance];
-//}
-//
-//- (void)showVideoForCell:(SYNCollectionVideoCell *)cell {
-//    UIView *candidateCell = cell;
-//    
-//    while (![candidateCell isKindOfClass: [SYNCollectionVideoCell class]])
-//    {
-//        candidateCell = candidateCell.superview;
-//    }
-//    
-//    
-//    SYNCollectionVideoCell *selectedCell = (SYNCollectionVideoCell *) candidateCell;
-//    NSIndexPath *indexPath = [self.cv indexPathForItemAtPoint: selectedCell.center];
-//	
-//	SYNVideoPlayerViewController *viewController = [SYNVideoPlayerViewController viewControllerWithModel:self.model
-//																			   selectedIndex:indexPath.item];
-//	
-//	SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
-//	animator.delegate = self;
-//	animator.cellIndexPath = indexPath;
-//	
-//	self.videoPlayerAnimator = animator;
-//    viewController.dismissDelegate = self;
-//    
-//	viewController.transitioningDelegate = animator;
-//	[self presentViewController:viewController animated:YES completion:nil];
-//    
-//}
-//
 #pragma mark animation delegate
 
 - (id<SYNVideoInfoCell>)videoCellForIndexPath:(NSIndexPath *)indexPath {
@@ -359,6 +326,7 @@ forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
 - (void) dismissPosition:(NSInteger)index :(SYNVideoPlayer *)videoPlayer {
     self.currentVideoPlayer = videoPlayer;
     self.currentVideoPlayer.delegate = self;
+    self.selectedIndex = index;
     [self dismissPosition:index];
 }
 
@@ -521,21 +489,6 @@ forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
 }
 
 - (void)videoPlayerFinishedPlaying {
-    
-    //    for (int i = self.selectedIndex+1; i<[self.model itemCount]; i++) {
-    //        FeedItem *feedItem = [self.model feedItemAtindex:i];
-    //
-    //        if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo) {
-    //
-    //                [self.feedCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredVertically animated:YES];
-    //
-    //                SYNFeedVideoCell *cell = (SYNFeedVideoCell*)[self.feedCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
-    //
-    //	            self.selectedIndex = i;
-    //                [self playVideoInCell:cell];
-    //                break;
-    //        }
-    //    }
 }
 
 - (void)videoPlayerErrorOccurred:(NSString *)reason {
@@ -556,7 +509,7 @@ forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
                                                                                            selectedIndex:self.selectedIndex];
     
     viewController.currentVideoPlayer = self.currentVideoPlayer;
-    
+    viewController.currentVideoPlayer.delegate = viewController;
 	SYNVideoPlayerAnimator *animator = [[SYNVideoPlayerAnimator alloc] init];
 	animator.delegate = self;
 	animator.cellIndexPath = [NSIndexPath indexPathForItem:self.selectedIndex inSection:0];

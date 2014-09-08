@@ -198,6 +198,15 @@ static const CGFloat HeaderHeightIPad = 530;
     }
 	self.model.delegate = self;
 
+    
+    if (self.currentVideoPlayer) {
+        self.currentVideoPlayer.delegate = self;
+    }
+    
+    if (self.currentVideoPlayer.state == SYNVideoPlayerStatePlaying) {
+		[self.currentVideoPlayer play];
+    }
+
 }
 
 

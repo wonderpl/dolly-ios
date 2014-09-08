@@ -516,26 +516,26 @@ static const CGFloat heightPortrait = 740;
 }
 
 - (void)videoCell:(SYNFeedVideoCell *)cell descriptionButtonTapped:(UIButton *)button {
-    if (IS_IPAD) {
-        SYNDescriptionViewController *viewController = [[SYNDescriptionViewController alloc ]init];
-        viewController.contentHTML = cell.videoInstance.video.videoDescription;
-
-       self.descriptionPopOver = [[UIPopoverController alloc] initWithContentViewController:viewController];
-
-		self.descriptionPopOver.popoverContentSize = CGSizeMake(320.0, 400.0);
-        
-        [self.descriptionPopOver presentPopoverFromRect:[(UIButton *)button frame]
-                                          		 inView:self.view
-                               permittedArrowDirections:UIPopoverArrowDirectionAny
-                                               animated:YES];
-        
-    } else {
+//    if (IS_IPAD) {
+//        SYNDescriptionViewController *viewController = [[SYNDescriptionViewController alloc ]init];
+//        viewController.contentHTML = cell.videoInstance.video.videoDescription;
+//
+//       self.descriptionPopOver = [[UIPopoverController alloc] initWithContentViewController:viewController];
+//
+//		self.descriptionPopOver.popoverContentSize = CGSizeMake(320.0, 400.0);
+//        
+//        [self.descriptionPopOver presentPopoverFromRect:[(UIButton *)button frame]
+//                                          		 inView:self.view
+//                               permittedArrowDirections:UIPopoverArrowDirectionAny
+//                                               animated:YES];
+//        
+//    } else {
         SYNDescriptionViewController *viewController = [[SYNDescriptionViewController alloc ]init];
         viewController.contentHTML = cell.videoInstance.video.videoDescription;
         viewController.modalPresentationStyle = UIModalPresentationCustom;
         viewController.transitioningDelegate = self;
         [self presentViewController:viewController animated:YES completion:nil];
-    }
+//    }
 }
 
 - (void)videoCell:(SYNFeedVideoCell *)cell addedByPressed:(UIButton *)button {
@@ -563,9 +563,7 @@ static const CGFloat heightPortrait = 740;
 	[self shareChannel:cell.channel];
 }
 
-
 #pragma mark - SYNVideoPlayerDismissIndex
-
 - (void) dismissPosition:(NSInteger)index :(SYNVideoPlayer *)videoPlayer {
     self.currentVideoPlayer = videoPlayer;
     self.currentVideoPlayer.delegate = self;
