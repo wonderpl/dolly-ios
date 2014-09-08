@@ -156,11 +156,13 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
         //TODO: Counting characters is not goog enough, need to check for new lines aswell. eg. lists.
         NSString *descriptionText = [self.videoInstance.video.videoDescription stringByStrippingHTML];
         
-        int stringLength = [descriptionText length] > 90 ? 90 : [descriptionText length];
+        int maxStringLength = IS_IPHONE ? 90 : 170;
+        
+        int stringLength = [descriptionText length] > maxStringLength ? maxStringLength : [descriptionText length];
         NSString *shortDescription = [descriptionText substringToIndex:  stringLength];
         
         NSString *trimmedString = [shortDescription stringByTrimmingCharactersInSet:
-                                   [NSCharacterSet whitespaceCharacterSet]];
+                                   [NSCharacterSet whitespaceAndNewlineCharacterSet]];
 
         NSString *endString = @"See More";
         
@@ -174,7 +176,7 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
                       range:NSMakeRange(0, stringLength)];
 
         
-        if ([descriptionText length] > 90) {
+        if ([descriptionText length] > maxStringLength) {
             [attributedString addAttribute:NSFontAttributeName
                                      value:[UIFont regularCustomFontOfSize:self.descriptionTextView.font.pointSize]
                                      range:[[attributedString string] rangeOfString:endString]];
