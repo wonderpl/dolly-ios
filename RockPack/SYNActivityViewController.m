@@ -274,10 +274,10 @@
         case kNotificationObjectTypeUserLikedYourVideo:
         {
             
-            Channel* channel = [Channel instanceFromDictionary: @{@"id" : notification.channelId, @"resource_url" : notification.channelResourceUrl}
-                                     usingManagedObjectContext: [appDelegate mainManagedObjectContext]];
-            
-            [self viewVideoInstanceInChannel:channel withVideoId:notification.videoId];
+//            Channel* channel = [Channel instanceFromDictionary: @{@"id" : notification.channelId, @"resource_url" : notification.channelResourceUrl}
+//                                     usingManagedObjectContext: [appDelegate mainManagedObjectContext]];
+//            
+//            [self viewVideoInstanceInChannel:channel withVideoId:notification.videoId];
             
             break;
         }
@@ -313,10 +313,10 @@
             
         case kNotificationObjectTypeCommentMention:
         {
-            Channel* channel = [Channel instanceFromDictionary: @{@"id" : notification.channelId, @"resource_url" : notification.channelResourceUrl}
-                                     usingManagedObjectContext: [appDelegate mainManagedObjectContext]];
-            
-            [self viewVideoInstanceInChannel:channel withVideoId:notification.videoId];
+//            Channel* channel = [Channel instanceFromDictionary: @{@"id" : notification.channelId, @"resource_url" : notification.channelResourceUrl}
+//                                     usingManagedObjectContext: [appDelegate mainManagedObjectContext]];
+//            
+//            [self viewVideoInstanceInChannel:channel withVideoId:notification.videoId];
             break;
         }
 
