@@ -59,13 +59,9 @@ static const CGFloat ProfileHeaderHeightIPadLand = 664;
     [self.cv registerNib:[SYNFeedVideoCell nib] forCellWithReuseIdentifier:[SYNFeedVideoCell reuseIdentifier]];
     [self.cv registerNib:[SYNFeedVideoLargeCell nib] forCellWithReuseIdentifier:[SYNFeedVideoLargeCell reuseIdentifier]];
 
-    [self.cv registerNib:[SYNChannelFooterMoreView nib]
-forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
-     withReuseIdentifier:[SYNChannelFooterMoreView reuseIdentifier]];
+    [self.cv registerNib:[SYNChannelFooterMoreView nib] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:[SYNChannelFooterMoreView reuseIdentifier]];
 
-    [self.cv registerNib: [SYNProfileHeader nib]
-forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
-     withReuseIdentifier:[SYNProfileHeader reuseIdentifier]];
+    [self.cv registerNib: [SYNProfileHeader nib] forSupplementaryViewOfKind: UICollectionElementKindSectionHeader withReuseIdentifier:[SYNProfileHeader reuseIdentifier]];
 
     if (IS_IPAD) {
 	//[self updateLayoutForOrientation: [SYNDeviceManager.sharedInstance orientation]];
@@ -517,10 +513,10 @@ forSupplementaryViewOfKind: UICollectionElementKindSectionHeader
 	viewController.transitioningDelegate = animator;
 	viewController.dismissDelegate = self;
 	[self presentViewController:viewController animated:NO completion:nil];
-    
 }
 
-
-
+- (void)pauseCurrentVideo {
+    [self.currentVideoPlayer pause];
+}
 
 @end

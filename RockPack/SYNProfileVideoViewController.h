@@ -21,7 +21,7 @@
 @property (nonatomic, strong, readonly) SYNProfileHeader* headerView;
 @property (nonatomic, weak) id<SYNProfileNavigationBarDelegate> delegate;
 
-- (void) coverPhotoAnimation;
-
+- (void)coverPhotoAnimation;
+- (void)pauseCurrentVideo;
 
 @end

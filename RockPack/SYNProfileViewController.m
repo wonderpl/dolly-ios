@@ -247,7 +247,7 @@ static const CGFloat TransitionDuration = 0.5f;
 }
 
 
-# pragma mark SYNProfileDelegate
+#pragma mark - SYNProfileDelegate
 
 - (void)collectionsTabTapped {
 
@@ -255,6 +255,8 @@ static const CGFloat TransitionDuration = 0.5f;
         self.channelCollectionViewController.headerView.secondTab.selected = NO;
         self.channelCollectionViewController.headerView.firstTab.selected = YES;
     } else {
+        //Pause any video currently playing, Edge case when the video is on screen and use tabbs away.
+        [self.videoCollectionViewController pauseCurrentVideo];
         self.channelCollectionViewController.headerView.secondTab.selected = YES;
         self.channelCollectionViewController.headerView.firstTab.selected = NO;
     }
