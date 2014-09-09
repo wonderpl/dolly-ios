@@ -162,50 +162,7 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
     self.labelLabel.text = videoInstance.label;
     self.durationLabel.text = [NSString friendlyLengthFromTimeInterval:videoInstance.video.durationValue];
 
-    if (self.videoInstance.video.videoDescription.length > 0) {
-        
-        //TODO: Counting characters is not goog enough, need to check for new lines aswell. eg. lists.
-        NSString *descriptionText = [self.videoInstance.video.videoDescription stringByStrippingHTML];
-        
-        NSUInteger maxStringLength = IS_IPHONE ? 90 : 170;
-        
-        NSUInteger stringLength = [descriptionText length] > maxStringLength ? maxStringLength : [descriptionText length];
-        NSString *shortDescription = [descriptionText substringToIndex:  stringLength];
-        
-        NSString *trimmedString = [shortDescription stringByTrimmingCharactersInSet:
-                                   [NSCharacterSet whitespaceAndNewlineCharacterSet]];
-
-        NSString *endString = @"See More";
-        
-        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@... %@", trimmedString, endString]];
-        [attributedString addAttribute:NSLinkAttributeName
-                                 value:@"continue//:"
-                                 range:[[attributedString string] rangeOfString:endString]];
-        
-        [attributedString addAttribute:NSFontAttributeName
-                      value:[UIFont lightCustomFontOfSize:self.descriptionTextView.font.pointSize]
-                      range:NSMakeRange(0, stringLength)];
-
-        
-        if ([descriptionText length] > maxStringLength) {
-            [attributedString addAttribute:NSFontAttributeName
-                                     value:[UIFont regularCustomFontOfSize:self.descriptionTextView.font.pointSize]
-                                     range:[[attributedString string] rangeOfString:endString]];
-        }
-        
-        [self attributedString:attributedString withLineHeight:2];
-        
-        NSDictionary *linkAttributes = @{NSForegroundColorAttributeName: [UIColor dollyGreen],
-                                         NSUnderlineColorAttributeName: [UIColor lightGrayColor],
-                                         NSUnderlineStyleAttributeName: @(NSUnderlinePatternSolid)};
-        
-        self.descriptionTextView.linkTextAttributes = linkAttributes;
-        self.descriptionTextView.attributedText = attributedString;
-        self.descriptionTextView.delegate = self;
-        
-        [self.descriptionTextView setScrollEnabled:NO];
-
-    }
+	[self setDescriptionText];
     
     if (IS_IPHONE) {
         if (self.videoInstance.video.videoDescription.length > 0) {
@@ -278,6 +235,61 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
         }
 	}
     
+}
+
+- (void)setDescriptionText {
+    if (self.videoInstance.video.videoDescription.length > 0) {
+        
+        NSString *descriptionText = [self.videoInstance.video.videoDescription stringByStrippingHTML];
+        NSUInteger maxStringLength = IS_IPHONE ? 90 : 170;
+        BOOL hasSeeMore = [descriptionText length] > maxStringLength;
+
+        NSUInteger stringLength = [descriptionText length] > maxStringLength ? maxStringLength : [descriptionText length];
+        NSString *shortDescription = [descriptionText substringToIndex:  stringLength];
+
+        NSArray *strArr = [shortDescription componentsSeparatedByString:@"\n"];
+        NSString *finalString = @"";
+        
+        for (int i = 0;  i < 3 && i < [strArr count]; i++) {
+            finalString = [NSString stringWithFormat:@"%@\n%@", finalString, strArr[i]];
+        }
+        
+        NSString *trimmedString = [finalString stringByTrimmingCharactersInSet:
+                                   [NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        
+        NSString *endString = @"See More";
+        
+        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString: trimmedString];
+        
+        if (hasSeeMore) {
+        	attributedString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@... %@", trimmedString, endString]];
+            
+            [attributedString addAttribute:NSFontAttributeName
+                                     value:[UIFont regularCustomFontOfSize:self.descriptionTextView.font.pointSize]
+                                     range:[[attributedString string] rangeOfString:endString]];
+            [attributedString addAttribute:NSLinkAttributeName
+                                     value:@"continue//:"
+                                     range:[[attributedString string] rangeOfString:endString]];
+        }
+        
+        [attributedString addAttribute:NSFontAttributeName
+                                 value:[UIFont lightCustomFontOfSize:self.descriptionTextView.font.pointSize]
+                                 range:NSMakeRange(0, [trimmedString length])];
+
+        [self attributedString:attributedString withLineHeight:2];
+        
+        NSDictionary *linkAttributes = @{NSForegroundColorAttributeName: [UIColor dollyGreen],
+                                         NSUnderlineColorAttributeName: [UIColor lightGrayColor],
+                                         NSUnderlineStyleAttributeName: @(NSUnderlinePatternSolid)};
+        
+        self.descriptionTextView.linkTextAttributes = linkAttributes;
+        self.descriptionTextView.attributedText = attributedString;
+        self.descriptionTextView.delegate = self;
+        
+        [self.descriptionTextView setScrollEnabled:NO];
+        
+    }
+
 }
 
 -(NSMutableAttributedString*) attributedStringFromString:(NSString *) string {
