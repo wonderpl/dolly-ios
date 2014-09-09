@@ -22,6 +22,7 @@
 #import "VideoInstance.h"
 #import "SYNWebViewController.h"
 #import "SYNDescriptionViewController.h"
+#import "SYNYouTubeWebVideoPlayer.h"
 
 static const CGFloat PARALLAX_SCROLL_VALUE = 2.0f;
 static const CGFloat ProfileHeaderHeightIPhone = 523;
@@ -101,6 +102,11 @@ static const CGFloat ProfileHeaderHeightIPadLand = 664;
     [self.cv reloadData];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.currentVideoPlayer pause];
+}
+
 #pragma mark - Scrollview delegates
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
@@ -111,6 +117,25 @@ static const CGFloat ProfileHeaderHeightIPadLand = 664;
     [super scrollViewDidScroll:scrollView];
     NSLog(@"%f", scrollView.contentOffset.y);
     [self coverPhotoAnimation];
+    
+    [super scrollViewDidScroll:scrollView];
+    
+    BOOL isCurrentVideoPlayerOffScreen = NO;
+    for (UICollectionViewCell *cell in [self.cv visibleCells]) {
+        if ([self.cv indexPathForCell:cell].row == self.selectedIndex) {
+            isCurrentVideoPlayerOffScreen = YES;
+        }
+    }
+    
+    if (!isCurrentVideoPlayerOffScreen) {
+        if (self.currentVideoPlayer.state == SYNVideoPlayerStatePrePlaying) {
+            if ([self.currentVideoPlayer isKindOfClass:[SYNYouTubeWebVideoPlayer class]]) {
+                [((SYNYouTubeWebVideoPlayer*)self.currentVideoPlayer).reloadVideoTimer invalidate];
+            }
+        }
+        [self.currentVideoPlayer pause];
+    }
+
 }
 
 
@@ -401,7 +426,8 @@ static const CGFloat ProfileHeaderHeightIPadLand = 664;
 	[videoPlayer play];
 	self.currentVideoPlayer = videoPlayer;
     self.currentVideoPlayer.delegate = self;
-    self.selectedIndex = [[self.cv indexPathForCell:cell] row] ;
+    self.selectedIndex = [[self.cv indexPathForCell:cell] row];
+    [self.cv reloadData];
 }
 
 - (void)videoCell:(SYNFeedVideoCell *)cell favouritePressed:(UIButton *)button {

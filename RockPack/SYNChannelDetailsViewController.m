@@ -44,6 +44,7 @@
 #import "SYNFeedVideoCell.h"
 #import "SYNDescriptionViewController.h"
 #import "SYNWebViewController.h"
+#import "SYNYouTubeWebVideoPlayer.h"
 
 #define kHeightChange 30.0f
 #define FULL_NAME_LABEL_IPHONE 147.0f
@@ -174,6 +175,7 @@ static const CGFloat HeaderHeightIPad = 530;
 - (void)viewWillAppear: (BOOL) animated {
     [super viewWillAppear: animated];
 	[self.txtViewDescription setPlaceHolderLabelFont:[UIFont regularCustomFontOfSize:self.txtViewDescription.font.pointSize]];
+    
     if (IS_IPAD) {
         self.txtViewDescription.placeholder = @"           Change collection details";
         self.txtViewTitle.placeholder = @"Change collection title";
@@ -196,8 +198,8 @@ static const CGFloat HeaderHeightIPad = 530;
     } else {
         self.navigationItem.title = @"COLLECTION";
     }
-	self.model.delegate = self;
 
+	self.model.delegate = self;
     
     if (self.currentVideoPlayer) {
         self.currentVideoPlayer.delegate = self;
@@ -248,7 +250,7 @@ static const CGFloat HeaderHeightIPad = 530;
     }
     
     self.navigationItem.title = @"";
-
+	[self.currentVideoPlayer pause];
 }
 
 - (NSString *)trackingScreenName {
@@ -428,6 +430,27 @@ static const CGFloat HeaderHeightIPad = 530;
 - (void)scrollViewDidScroll: (UIScrollView *) scrollView {
     [super scrollViewDidScroll:scrollView];
     [self moveHeader:scrollView.contentOffset.y];
+    
+    
+    [super scrollViewDidScroll:scrollView];
+    
+    BOOL isCurrentVideoPlayerOffScreen = NO;
+    for (UICollectionViewCell *cell in [self.videoThumbnailCollectionView visibleCells]) {
+        if ([self.videoThumbnailCollectionView indexPathForCell:cell].row == self.selectedIndex) {
+            isCurrentVideoPlayerOffScreen = YES;
+        }
+    }
+    
+    if (!isCurrentVideoPlayerOffScreen) {
+        if (self.currentVideoPlayer.state == SYNVideoPlayerStatePrePlaying) {
+            if ([self.currentVideoPlayer isKindOfClass:[SYNYouTubeWebVideoPlayer class]]) {
+                [((SYNYouTubeWebVideoPlayer*)self.currentVideoPlayer).reloadVideoTimer invalidate];
+            }
+        }
+        [self.currentVideoPlayer pause];
+    }
+    
+
 }
 
 - (void)killScroll {
@@ -730,7 +753,7 @@ static const CGFloat HeaderHeightIPad = 530;
         
     }
     
-	
+	 
     VideoInstance *videoInstance = [self.model itemAtIndex:indexPath.item];
     
     
@@ -1103,8 +1126,8 @@ static const CGFloat HeaderHeightIPad = 530;
 
 - (IBAction)editTapped:(id)sender
 {
-    
-    
+    [self.currentVideoPlayer pause];
+    self.currentVideoPlayer = nil;
 	
 	[[SYNTrackingManager sharedManager] trackEditCollectionScreenView];
     

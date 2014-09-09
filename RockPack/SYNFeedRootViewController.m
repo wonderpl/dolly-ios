@@ -200,6 +200,7 @@ static const CGFloat heightPortrait = 740;
     [super viewWillDisappear:animated];
     self.lastYOffset = self.feedCollectionView.contentOffset.y;
   	[self.navigationController.navigationBar setHidden:NO];
+    [self.currentVideoPlayer pause];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {

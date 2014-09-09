@@ -140,6 +140,8 @@
 	}
     
     self.currentVideoPlayer.delegate = self;
+    [self.currentVideoPlayer play];
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
