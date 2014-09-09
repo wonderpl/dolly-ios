@@ -1784,8 +1784,6 @@ static const CGFloat HeaderHeightIPad = 530;
 }
 
 - (void)playVideoInCell:(SYNFeedVideoCell*) cell{
-    
-    
     cell.videoPlayerCell.hidden = NO;
     cell.playButton.hidden = YES;
     
@@ -1795,7 +1793,17 @@ static const CGFloat HeaderHeightIPad = 530;
 	[videoPlayer play];
 	self.currentVideoPlayer = videoPlayer;
     self.currentVideoPlayer.delegate = self;
-    self.selectedIndex = [[self.videoThumbnailCollectionView indexPathForCell:cell] row] ;
+
+    NSMutableArray *arr = [[NSMutableArray alloc] init];
+    
+    if (self.selectedIndex > 0) {
+        [arr addObject: [NSIndexPath indexPathForItem:self.selectedIndex inSection:0]];
+    }
+    
+    [arr addObject:[NSIndexPath indexPathForItem:[[self.videoThumbnailCollectionView indexPathForCell:cell] row] inSection:0]];
+    
+    self.selectedIndex = [[self.videoThumbnailCollectionView indexPathForCell:cell] row];
+    [self.videoThumbnailCollectionView reloadItemsAtIndexPaths:arr];
 }
 
 - (void)videoCell:(SYNFeedVideoCell *)cell descriptionButtonTapped:(UIButton *)button {

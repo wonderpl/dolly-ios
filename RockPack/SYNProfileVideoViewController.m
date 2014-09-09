@@ -426,8 +426,14 @@ static const CGFloat ProfileHeaderHeightIPadLand = 664;
 	[videoPlayer play];
 	self.currentVideoPlayer = videoPlayer;
     self.currentVideoPlayer.delegate = self;
+    
+    NSMutableArray *arr = [[NSMutableArray alloc] init];
+    if (self.selectedIndex > 0) {
+        [arr addObject: [NSIndexPath indexPathForItem:self.selectedIndex inSection:0]];
+    }
+    [arr addObject:[NSIndexPath indexPathForItem:[[self.cv indexPathForCell:cell] row] inSection:0]];
     self.selectedIndex = [[self.cv indexPathForCell:cell] row];
-    [self.cv reloadData];
+    [self.cv reloadItemsAtIndexPaths:arr];
 }
 
 - (void)videoCell:(SYNFeedVideoCell *)cell favouritePressed:(UIButton *)button {

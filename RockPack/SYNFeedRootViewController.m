@@ -480,8 +480,18 @@ static const CGFloat heightPortrait = 740;
 	[videoPlayer play];
 	self.currentVideoPlayer = videoPlayer;
     self.currentVideoPlayer.delegate = self;
+    NSMutableArray *arr = [[NSMutableArray alloc] init];
+    
+    if (self.selectedIndex > 0) {
+        [arr addObject: [NSIndexPath indexPathForItem:self.selectedIndex inSection:0]];
+    }
+    
+    [arr addObject:[NSIndexPath indexPathForItem:[[self.feedCollectionView indexPathForCell:cell] row] inSection:0]];
+    
     self.selectedIndex = [[self.feedCollectionView indexPathForCell:cell] row];
+    [self.feedCollectionView reloadItemsAtIndexPaths:arr];
 }
+
 - (void)videoCell:(SYNFeedVideoCell *)cell favouritePressed:(UIButton *)button {
     
 	[self favouriteButtonPressed:button videoInstance:cell.videoInstance];
