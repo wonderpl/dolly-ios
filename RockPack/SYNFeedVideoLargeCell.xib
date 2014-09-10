@@ -174,7 +174,7 @@
                         </constraints>
                     </view>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l0k-gP-iCf" userLabel="Video Description">
-                        <rect key="frame" x="216" y="629" width="506" height="34"/>
+                        <rect key="frame" x="216" y="620" width="506" height="34"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -227,7 +227,7 @@
                 <constraint firstItem="Ujv-HH-Fku" firstAttribute="top" secondItem="iNz-XJ-FqX" secondAttribute="bottom" constant="5" id="Pse-qe-8nQ"/>
                 <constraint firstItem="ZNC-b6-sja" firstAttribute="top" secondItem="ypB-ke-5qG" secondAttribute="bottom" constant="17" id="SGq-Vd-85U"/>
                 <constraint firstItem="rrA-eC-9UF" firstAttribute="top" secondItem="dVi-I7-bEK" secondAttribute="bottom" constant="23" id="Suc-Ov-iUK"/>
-                <constraint firstItem="l0k-gP-iCf" firstAttribute="top" secondItem="OHt-JI-i3d" secondAttribute="bottom" constant="37" id="TwC-Nn-ne2"/>
+                <constraint firstItem="l0k-gP-iCf" firstAttribute="top" secondItem="OHt-JI-i3d" secondAttribute="bottom" constant="28" id="TwC-Nn-ne2"/>
                 <constraint firstAttribute="trailing" secondItem="2uC-p9-xU8" secondAttribute="trailing" constant="46" id="UJ5-Gt-xg3"/>
                 <constraint firstItem="Ujv-HH-Fku" firstAttribute="top" secondItem="b82-Mn-j5C" secondAttribute="top" constant="104" id="Y38-mK-lzg"/>
                 <constraint firstItem="iNz-XJ-FqX" firstAttribute="leading" secondItem="b82-Mn-j5C" secondAttribute="leading" constant="44" id="YRW-nr-2au"/>
@@ -246,6 +246,7 @@
                 <constraint firstItem="l0k-gP-iCf" firstAttribute="leading" secondItem="b82-Mn-j5C" secondAttribute="leading" constant="216" id="n42-DR-J0F"/>
                 <constraint firstItem="YBO-V8-5pH" firstAttribute="top" secondItem="HdK-AT-wCD" secondAttribute="bottom" constant="10" id="oEy-fz-THY"/>
                 <constraint firstAttribute="trailing" secondItem="TvW-EV-OXH" secondAttribute="trailing" id="pIK-yj-Icz"/>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="l0k-gP-iCf" secondAttribute="bottom" constant="30" id="pbE-G9-naw"/>
                 <constraint firstItem="HdK-AT-wCD" firstAttribute="top" secondItem="OHt-JI-i3d" secondAttribute="bottom" constant="37" id="qHA-rU-qFt"/>
                 <constraint firstItem="dVi-I7-bEK" firstAttribute="height" secondItem="yNU-gd-v1v" secondAttribute="height" id="qYc-Gs-SRq"/>
                 <constraint firstItem="uOx-Cy-REo" firstAttribute="height" secondItem="dVi-I7-bEK" secondAttribute="height" id="qmr-oE-Kli"/>
