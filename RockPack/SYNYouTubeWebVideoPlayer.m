@@ -87,6 +87,7 @@ static const CGFloat bufferingTime = 12;
     return webView;
 
 }
+
 #pragma mark - UIWebViewDelegate
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
@@ -125,8 +126,7 @@ static const CGFloat bufferingTime = 12;
 	if (self.youTubePlayerState == SYNYouTubeVideoPlayerStateLoaded || self.youTubePlayerState == SYNYouTubeVideoPlayerStatePlayStarted) {
 		[self.youTubeWebView stringByEvaluatingJavaScriptFromString:@"player.playVideo();"];
 	} else if (self.youTubePlayerState == SYNYouTubeVideoPlayerStatePlayEnded) {
-	//TODO: replay the video when if has ended. 
-    
+        [self reloadVideoPlayer];
     } else {
 		[self loadPlayer];
 	}
@@ -219,14 +219,14 @@ static const CGFloat bufferingTime = 12;
 }
 
 - (void)reloadVideoPlayer:(NSTimer *)timer  {
-    
     DebugLog(@"Reloading Video Player with VideoInstance%@", self.videoInstance);
-    
     UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Connection problem" message:@"We are attempting to reload your video" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alertView show];
-    
+	[self reloadVideoPlayer];
+}
+
+- (void) reloadVideoPlayer {
     _youTubeWebView = [self newWebView];
-    
     [super playFirstTime];
 	[self playVideo];
 }
