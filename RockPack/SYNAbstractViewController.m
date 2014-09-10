@@ -28,6 +28,8 @@
 #import "SYNProfileChannelViewController.h"
 #import <TestFlight.h>
 #import "SYNAddToChannelViewController.h"
+#import "SYNDescriptionViewController.h"
+#import "SYNiPhonePopoverAnimator.h"
 
 @import QuartzCore;
 
@@ -775,10 +777,20 @@
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
 																  presentingController:(UIViewController *)presenting
 																	  sourceController:(UIViewController *)source {
+    
+    if ([presented isKindOfClass:[SYNDescriptionViewController class]]) {
+        return [[SYNiPhonePopoverAnimator alloc] initForPresentation:YES];
+    }
+                
 	return [SYNPopoverAnimator animatorForPresentation:YES];
 }
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
+    
+    if ([dismissed isKindOfClass:[SYNDescriptionViewController class]]) {
+        return [[SYNiPhonePopoverAnimator alloc] initForPresentation:NO];
+    }
+
 	return [SYNPopoverAnimator animatorForPresentation:NO];
 }
 

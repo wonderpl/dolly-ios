@@ -13,5 +13,6 @@
 @property (nonatomic, assign, readonly) BOOL presenting;
 
 + (instancetype)animatorForPresentation:(BOOL)presenting;
+- (instancetype)initForPresentation:(BOOL)presenting;
 
 @end
