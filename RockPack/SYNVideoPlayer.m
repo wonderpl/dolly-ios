@@ -254,6 +254,7 @@ static CGFloat const ControlsFadeTimer = 5.0;
 	if (self.state != SYNVideoPlayerStateEnded) {
 		self.state = SYNVideoPlayerStateEnded;
         NSLog(@"FINISHED PLAYERING");
+        [self stopUpdatingProgress];
 		[self.delegate videoPlayerFinishedPlaying];
 	}
 }
