@@ -68,6 +68,8 @@ static const CGFloat VideoAspectRatio = 16.0 / 9.0;
     [self.collectionView scrollToItemAtIndexPath:indexPath
                                 atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
                                         animated:NO];
+    
+    [self.collectionView reloadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
