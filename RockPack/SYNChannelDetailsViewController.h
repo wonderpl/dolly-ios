@@ -17,6 +17,7 @@ SYNSocialActionsDelegate, UITextFieldDelegate, UITextViewDelegate>
 
 @property (nonatomic, assign) kChannelDetailsMode mode;
 @property (nonatomic, strong) NSString* autoplayId;
+@property (nonatomic, assign) BOOL clickToMore;
 @property (nonatomic, strong) Channel *channel;
 @property (nonatomic, weak) id<SYNSocialActionsDelegate> delegate;
 

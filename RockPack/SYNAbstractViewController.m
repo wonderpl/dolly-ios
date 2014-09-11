@@ -609,12 +609,16 @@
 	}
 }
 
-- (void) viewVideoInstanceInChannel:(Channel*) channel withVideoId:videoId
+- (void) viewVideoInstanceInChannel:(Channel*) channel withVideoId:videoId {
+    [self viewVideoInstanceInChannel:channel withVideoId:videoId withClickToMore:NO];
+}
+
+- (void) viewVideoInstanceInChannel:(Channel*) channel withVideoId:videoId withClickToMore:(BOOL)clickToMore
 {
-//    [self viewChannelDetails:channel withAnimation:NO];
     SYNChannelDetailsViewController *channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel
                                                                usingMode:kChannelDetailsModeDisplay];
     channelVC.autoplayId = videoId;
+    channelVC.clickToMore = clickToMore;
     [self.navigationController pushViewController:channelVC animated:YES];
 }
 

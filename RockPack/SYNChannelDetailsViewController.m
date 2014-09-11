@@ -41,6 +41,7 @@
 #import "SYNVideoActionsBar.h"
 #import "SYNCollectionVideoCell.h"
 #import <TestFlight.h>
+#import "SYNWebViewController.h"
 
 #define kHeightChange 30.0f
 #define FULL_NAME_LABEL_IPHONE 147.0f
@@ -1635,24 +1636,27 @@ static const CGFloat HeaderHeightIPad = 530;
         //If the Video was not found, add the video instance to th end.
         
         if (position == NSNotFound) {
-            
             [self.channel addVideoInstancesObject:vidToPlay];
-            
             viewController = [SYNVideoPlayerViewController viewControllerWithModel:self.model
                                                                      selectedIndex:[self.model itemCount] - 1];
         } else {
-            
             viewController = [SYNVideoPlayerViewController viewControllerWithModel:self.model
                                                                      selectedIndex:position];
         }
         
-        [self.navigationController presentViewController:viewController animated:YES completion:nil];
-        
-        self.autoplayId = nil;
-        
+        [self.navigationController presentViewController:viewController animated:YES completion:^{
+            if (self.clickToMore == YES) {
+                Video *video = vidToPlay.video;
+                NSURL *linkURL = [NSURL URLWithString:video.linkURL];
+                UIViewController *webViewController = [SYNWebViewController webViewControllerForURL:linkURL];
+                [viewController presentViewController:webViewController animated:YES completion:^{
+                    self.clickToMore = NO;
+                    self.autoplayId = nil;
+                }];
+            }
+        }];
     } errorHandler:^(id  error) {
         //TODO: Displaying something when the video is not found
-        
     }];
 }
 

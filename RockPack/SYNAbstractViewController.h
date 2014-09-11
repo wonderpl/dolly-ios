@@ -61,6 +61,7 @@
 
 - (void)viewProfileDetails:(ChannelOwner *)channelOwner;
 - (void)viewChannelDetails:(Channel *)channel withAnimation:(BOOL)animated;
+- (void) viewVideoInstanceInChannel:(Channel*) channel withVideoId:videoId withClickToMore:(BOOL)clickToMore;
 - (void)viewVideoInstanceInChannel:(Channel*) channel withVideoId:videoId;
 
 - (NSString *)trackingScreenName;
