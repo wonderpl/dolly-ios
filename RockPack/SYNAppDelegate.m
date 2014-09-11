@@ -1500,7 +1500,20 @@
                 }
                 break;
             }
-                
+               
+            case 2:
+            {
+                NSString *channelOwnerId = pathComponents[1];
+
+                    ChannelOwner *channelOwner = [ChannelOwner instanceFromDictionary: @{@"id" : channelOwnerId}
+                                                            usingManagedObjectContext: self.mainManagedObjectContext
+                                                                  ignoringObjectTypes: kIgnoreChannelObjects];
+                    
+                    [currentViewController viewProfileDetails:channelOwner];
+                    success = TRUE;
+                break;
+            }
+
                 // Channel
             case 3:
             {
@@ -1535,6 +1548,23 @@
                 break;
             }
                 
+            case 6:
+            {
+                
+                NSString *channelId = pathComponents[2];
+                NSString *videoId = pathComponents[4];
+                NSString *resourceURL = [NSString stringWithFormat: @"%@//%@/ws/%@/channels/%@/", httpScheme, hostName, userId, channelId];
+                Channel* channel = [Channel instanceFromDictionary: @{@"id" : channelId, @"resource_url" : resourceURL}
+                                         usingManagedObjectContext: self.mainManagedObjectContext];
+                
+                if (channel)
+                {
+                    [currentViewController viewVideoInstanceInChannel:channel withVideoId:videoId withClickToMore:YES];
+                    success = TRUE;
+                }
+                
+                break;
+            }
             default:
                 // Not sure what this is so indicate failure
                 break;
