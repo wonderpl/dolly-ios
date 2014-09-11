@@ -35,6 +35,10 @@ static const CGFloat VideoAspectRatio = 16.0 / 9.0;
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
+    if (IS_IPHONE) {
+        self.view.frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.height, [[UIScreen mainScreen] bounds].size.width);        
+    }
+
 	[self.view addSubview:self.backgroundView];
 	[self.view addSubview:self.videoContainerView];
 }
@@ -69,7 +73,8 @@ static const CGFloat VideoAspectRatio = 16.0 / 9.0;
                                 atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
                                         animated:NO];
     
-    [self.collectionView reloadData];
+    
+    NSLog(@"full frame : %@", NSStringFromCGRect(self.view.frame));
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -85,10 +90,10 @@ static const CGFloat VideoAspectRatio = 16.0 / 9.0;
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    self.videoContainerView.frame = [self videoContainerFrame];
-    [self.videoContainerView layoutIfNeeded];
-    [self.collectionView.collectionViewLayout invalidateLayout];
-    [self.collectionView setContentOffset:CGPointMake(self.videoPlayerViewController.selectedIndex * CGRectGetWidth(self.view.bounds), 0.0f)];
+//    self.videoContainerView.frame = [self videoContainerFrame];
+//    [self.videoContainerView layoutIfNeeded];
+//    [self.collectionView.collectionViewLayout invalidateLayout];
+//    [self.collectionView setContentOffset:CGPointMake(self.videoPlayerViewController.selectedIndex * CGRectGetWidth(self.view.bounds), 0.0f)];
     
 }
 
@@ -160,11 +165,36 @@ static const CGFloat VideoAspectRatio = 16.0 / 9.0;
 - (CGRect)videoContainerFrame {
 	CGFloat width = CGRectGetWidth(self.view.bounds);
 	CGFloat height = width / VideoAspectRatio;
+    self.view.frame=CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame
+                               .size.height);
+
+    if (IS_IPAD) {
+        if (UIDeviceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation])) {
+            width = CGRectGetHeight(self.view.bounds);
+            CGRect rect =  CGRectMake(0,
+                                      (CGRectGetHeight(self.view.bounds) - height) / 2.0,
+                                      CGRectGetWidth(self.view.bounds),
+                                      height);
+            return rect;
+        }
+        
+        if (UIDeviceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
+            return CGRectMake(0,
+                              (CGRectGetHeight(self.view.bounds) - height) / 2.0,
+                              width,
+                              height);
+        }
+    }
     
-	return CGRectMake(0,
-					  (CGRectGetHeight(self.view.bounds) - height) / 2.0,
-					  width,
-					  height);
+    if (IS_IPHONE) {
+        return CGRectMake(0,
+                          (CGRectGetHeight(self.view.bounds) - height) / 2.0,
+                          width,
+                          height+1);
+
+    }
+    
+    return CGRectZero;
 }
 
 @end
