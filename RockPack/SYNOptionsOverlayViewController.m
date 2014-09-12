@@ -319,7 +319,7 @@ typedef enum {
 {
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
     
-    self.view.frame = [[SYNDeviceManager sharedInstance] currentScreenRect];
+    self.view.frame = [[UIScreen mainScreen] bounds];
 }
 
 -(void)finishingPresentation
