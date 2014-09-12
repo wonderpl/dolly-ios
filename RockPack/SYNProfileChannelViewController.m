@@ -405,7 +405,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
                 self.cv.contentOffset =  CGPointMake(0, 429);
             }
         } else {
-                self.cv.contentOffset =  CGPointMake(0, 444);
+                self.cv.contentOffset =  CGPointMake(0, 484);
         }
     }
 }
