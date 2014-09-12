@@ -49,7 +49,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.preferredContentSize = CGSizeMake(0, 220);
+    self.preferredContentSize = CGSizeMake(0, 380);
     [self setUpVideo];
 }
 
@@ -64,20 +64,8 @@
     self.videoDictionary = [[mySharedDefaults dictionaryForKey:@"videoData"] mutableCopy];
     
     if ([mySharedDefaults boolForKey:@"isVideo"]) {
-        self.clickToMoreButton.layer.cornerRadius = (CGRectGetHeight(self.clickToMoreButton.frame) / 2.0);
-        self.clickToMoreButton.layer.borderColor = [[self dollyGreen] CGColor];
-        self.clickToMoreButton.layer.borderWidth = 2.0;
-        self.clickToMoreButton.tintColor = [self dollyGreen];
-        
-        NSString *linkTitle = self.videoDictionary[@"linkTitle"];
-        NSString *videoDescription = [mySharedDefaults objectForKey:@"videoDescription"];
-
-        self.clickToMoreButton.hidden = ([linkTitle length] == 0);
-        [self.clickToMoreButton setTitle:linkTitle forState:UIControlStateNormal];
-        
-        self.descriptionLabel.hidden = ([videoDescription length] == 0);
-        self.descriptionLabel.hidden = NO;
-        [self.descriptionLabel setText:[self stringByStrippingHTMLFromString:videoDescription]];
+        [self setUpClickToMore];
+        [self setUpVideoDescription];
         
         [self.titleLabel setText:self.videoDictionary[@"title"]];
         
@@ -86,10 +74,18 @@
                              [NSURL URLWithString: [mySharedDefaults objectForKey:@"thumbnailURL"]]]];
         
         [self.videoButton setImage:myImage forState:UIControlStateNormal];
-    
+        
+        [self.addedByLabel setText:self.videoDictionary[@"label"]];
+        [self.curatedByButton setTitle:self.videoDictionary[@"channelOwnerName"] forState:UIControlStateNormal];
+        [self.watchLabel setText:self.videoDictionary[@"duration"]];
+        
         self.titleLabel.hidden = NO;
         self.thumbnail.hidden = NO;
         self.videoButton.hidden = NO;
+        self.addedByLabel.hidden = NO;
+        self.curatedByButton.hidden = NO;
+        self.watchLabel.hidden = NO;
+        
         
         self.followButton.hidden = YES;
         self.avatarButton.hidden = YES;
@@ -107,34 +103,40 @@
 
         self.channelLabel.text = channelOwnerString;
         self.channelTitle.text = [mySharedDefaults objectForKey:@"channelTitle"];
-        self.titleLabel.hidden = YES;
-        self.videoButton.hidden = YES;
-        self.clickToMoreButton.hidden = YES;
-        
-//        self.followButton.selected = NO;
-//        self.followButton.layer.cornerRadius = (CGRectGetHeight(self.followButton.frame) / 2.0);
-//        self.followButton.layer.borderWidth = 2.0;
-//
-//        if (self.followButton.selected) {
-//            self.followButton.layer.borderColor = [[self dollyGreen] CGColor];
-//            self.followButton.backgroundColor = [self dollyGreen];
-//            [self setTitle:NSLocalizedString(@"unfollow", nil)];
-//            [self.followButton setTitleColor: [UIColor whiteColor]
-//                       forState: UIControlStateNormal];
-//            [self.followButton setTitleColor: [UIColor whiteColor]
-//                       forState: UIControlStateSelected];
-//        } else {
-//            self.followButton.layer.borderColor = [[self dollyGreen] CGColor];
-//            self.followButton.backgroundColor = [UIColor clearColor];
-//            [self.followButton setTitle:NSLocalizedString(@"follow", nil) forState:UIControlStateNormal];
-//            [self.followButton setTitleColor: [self dollyGreen]
-//                       forState: UIControlStateNormal];
-//            [self.followButton setTitleColor: [self dollyGreen]
-//                       forState: UIControlStateSelected];
-//        }
+        [self setUpViews:NO];
     }
+}
 
+- (void)setUpViews :(BOOL) isVideo {
+    self.titleLabel.hidden = isVideo;
+    self.videoButton.hidden = isVideo;
+    self.clickToMoreButton.hidden = isVideo;
+    self.addedByLabel.hidden = isVideo;
+    self.curatedByButton.hidden = isVideo;
+    self.watchLabel.hidden = isVideo;
+    self.followButton.hidden = !isVideo;
+    self.avatarButton.hidden = !isVideo;
+    self.channelLabel.hidden = !isVideo;
+    self.channelTitle.hidden = !isVideo;
+}
 
+- (void)setUpVideoDescription {
+    NSUserDefaults *mySharedDefaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.wonderapps"];
+
+    NSString *videoDescription = [mySharedDefaults objectForKey:@"videoDescription"];
+    self.descriptionLabel.hidden = ([videoDescription length] == 0);
+    self.descriptionLabel.hidden = NO;
+    [self.descriptionLabel setText:[self stringByStrippingHTMLFromString:videoDescription]];
+}
+
+- (void)setUpClickToMore {
+    self.clickToMoreButton.layer.cornerRadius = (CGRectGetHeight(self.clickToMoreButton.frame) / 2.0);
+    self.clickToMoreButton.layer.borderColor = [[self dollyGreen] CGColor];
+    self.clickToMoreButton.layer.borderWidth = 2.0;
+    self.clickToMoreButton.tintColor = [self dollyGreen];
+    NSString *linkTitle = self.videoDictionary[@"linkTitle"];
+    self.clickToMoreButton.hidden = ([linkTitle length] == 0);
+    [self.clickToMoreButton setTitle:linkTitle forState:UIControlStateNormal];
 }
 
 - (IBAction)avatarButtonTapped:(id)sender {
@@ -179,6 +181,7 @@ completionHandler:(void (^)(BOOL success))completionHandler {
         [self.extensionContext openURL:url completionHandler:nil];
 
 }
+
 - (IBAction)followButton:(id)sender {
 }
 
