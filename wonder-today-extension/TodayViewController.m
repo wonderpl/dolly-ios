@@ -13,22 +13,11 @@
 #import "UIFont+SYNFont.h"
 
 @interface TodayViewController () <NCWidgetProviding>
-@property (strong, nonatomic) IBOutlet UILabel *label;
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *descriptionLabel;
-@property (strong, nonatomic) IBOutlet UIWebView *webView;
-@property (strong, nonatomic) IBOutlet UIImageView *thumbnail;
 @property (strong, nonatomic) IBOutlet UIButton *clickToMoreButton;
-@property (strong, nonatomic) IBOutlet UIView *videoThumbnail;
 @property (strong, nonatomic) IBOutlet UIButton *videoButton;
-
 @property (strong, nonatomic) NSDictionary *videoDictionary;
-@property (strong, nonatomic) NSDictionary *channelDictionary;
-@property (strong, nonatomic) IBOutlet UIButton *avatarButton;
-@property (strong, nonatomic) IBOutlet UILabel *channelLabel;
-@property (strong, nonatomic) IBOutlet UILabel *channelTitle;
-@property (strong, nonatomic) IBOutlet UIButton *followButton;
-@property (strong, nonatomic) IBOutlet UILabel *testLabel;
 @property (strong, nonatomic) IBOutlet UILabel *addedByLabel;
 @property (strong, nonatomic) IBOutlet UIButton *curatedByButton;
 @property (strong, nonatomic) IBOutlet UILabel *watchLabel;
@@ -49,7 +38,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.preferredContentSize = CGSizeMake(0, 380);
+    self.preferredContentSize = CGSizeMake(0, 180);
     [self setUpVideo];
 }
 
@@ -80,30 +69,10 @@
         [self.watchLabel setText:self.videoDictionary[@"duration"]];
         
         self.titleLabel.hidden = NO;
-        self.thumbnail.hidden = NO;
         self.videoButton.hidden = NO;
         self.addedByLabel.hidden = NO;
         self.curatedByButton.hidden = NO;
         self.watchLabel.hidden = NO;
-        
-        
-        self.followButton.hidden = YES;
-        self.avatarButton.hidden = YES;
-        self.channelLabel.hidden = YES;
-        self.channelTitle.hidden = YES;
-
-    } else {
-        self.channelDictionary = [mySharedDefaults dictionaryForKey:@"channelData"] ;
-        UIImage* myImage2 = [UIImage imageWithData:
-                            [NSData dataWithContentsOfURL:
-                             [NSURL URLWithString: [mySharedDefaults objectForKey:@"avatarURL"]]]];
-
-        [self.avatarButton setImage:myImage2 forState:UIControlStateNormal];
-        NSString *channelOwnerString = [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"A collection of great new videos from ", nil), [mySharedDefaults objectForKey:@"channelOwnerDisplayName"]];
-
-        self.channelLabel.text = channelOwnerString;
-        self.channelTitle.text = [mySharedDefaults objectForKey:@"channelTitle"];
-        [self setUpViews:NO];
     }
 }
 
@@ -114,10 +83,6 @@
     self.addedByLabel.hidden = isVideo;
     self.curatedByButton.hidden = isVideo;
     self.watchLabel.hidden = isVideo;
-    self.followButton.hidden = !isVideo;
-    self.avatarButton.hidden = !isVideo;
-    self.channelLabel.hidden = !isVideo;
-    self.channelTitle.hidden = !isVideo;
 }
 
 - (void)setUpVideoDescription {
@@ -130,10 +95,7 @@
 }
 
 - (void)setUpClickToMore {
-    self.clickToMoreButton.layer.cornerRadius = (CGRectGetHeight(self.clickToMoreButton.frame) / 2.0);
-    self.clickToMoreButton.layer.borderColor = [[self dollyGreen] CGColor];
-    self.clickToMoreButton.layer.borderWidth = 2.0;
-    self.clickToMoreButton.tintColor = [self dollyGreen];
+    self.clickToMoreButton.layer.cornerRadius = 5.0;
     NSString *linkTitle = self.videoDictionary[@"linkTitle"];
     self.clickToMoreButton.hidden = ([linkTitle length] == 0);
     [self.clickToMoreButton setTitle:linkTitle forState:UIControlStateNormal];

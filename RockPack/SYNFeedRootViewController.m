@@ -474,71 +474,79 @@ static const CGFloat heightPortrait = 985;
 }
 
 - (void)setFeedWidgetItem {
-        FeedItem *feedItem = [self.model feedItemAtindex:0];
-        
-        if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo) {
-            VideoInstance *videoInstance = [self.model resourceForFeedItem:feedItem];
-            NSUserDefaults *mySharedDefaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.wonderapps"];
-            
-            NSDictionary *videoData = @{
-                                        @"title":videoInstance.title,
-                                        @"channelId":videoInstance.channel.uniqueId,
-                                        @"videoId":videoInstance.uniqueId,
-                                        @"userId":appDelegate.currentUser.uniqueId,
-                                        @"thumbnailURL":videoInstance.thumbnailURL,
-                                        @"videoDescription":videoInstance.video.videoDescription,
-                                        @"linkURL":videoInstance.video.linkURL,
-                                        @"linkTitle":videoInstance.video.linkTitle,
-                                        @"label":videoInstance.label,
-                                        @"channelOwnerName":videoInstance.channel.channelOwner.displayName,
-                                        @"duration": [NSString friendlyLengthFromTimeInterval:videoInstance.video.durationValue]
-                                        };
-            
-            [mySharedDefaults setBool:YES forKey:@"isVideo"];
-
-            [mySharedDefaults setObject:videoInstance.title forKey:@"title"];
-            [mySharedDefaults setObject:videoInstance.channel.uniqueId forKey:@"channelId"];
-            [mySharedDefaults setObject:videoInstance.uniqueId forKey:@"videoId"];
-            [mySharedDefaults setObject:videoInstance.channel.channelOwner.uniqueId forKey:@"channelOwnerId"];
-
-            [mySharedDefaults setObject:appDelegate.currentUser.uniqueId forKey:@"userId"];
-            [mySharedDefaults setObject:videoInstance.thumbnailURL forKey:@"thumbnailURL"];
-            [mySharedDefaults setObject:videoInstance.video.videoDescription forKey:@"videoDescription"];
-            [mySharedDefaults setObject:videoInstance.video.linkURL forKey:@"linkURL"];
-            [mySharedDefaults setObject:videoInstance.video.linkTitle forKey:@"linkTitle"];
-            
-            [mySharedDefaults setObject:videoData forKey:@"videoData"];
-            [mySharedDefaults synchronize];
-            
-        } else if (feedItem.resourceTypeValue == FeedItemResourceTypeChannel) {
-            
-
-            Channel *channel = [self.model resourceForFeedItem:feedItem];
-            NSUserDefaults *mySharedDefaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.wonderapps"];
-            [mySharedDefaults setBool:NO forKey:@"isVideo"];
-
-            BOOL followingChannel = [[SYNActivityManager sharedInstance] isSubscribedToChannelId:channel.uniqueId];
-            NSDictionary *channelData = @{
-                                        @"channelTitle":channel.title,
-                                        @"channelId":channel.uniqueId,
-                                        @"userId":appDelegate.currentUser.uniqueId,
-                                        @"channelOwnerDisplayName":channel.channelOwner.displayName,
-										@"channelOwnerId":channel.channelOwner.uniqueId,
-                                        @"avatarURL":channel.channelOwner.thumbnailURL,
-                                        @"followingChannel": [NSNumber numberWithBool:followingChannel]
-                                        };
-
-            [mySharedDefaults setObject:channel.title forKey:@"channelTitle"];
-            [mySharedDefaults setObject:channel.channelOwner.thumbnailURL forKey:@"avatarURL"];
-            [mySharedDefaults setObject:channel.uniqueId forKey:@"channelId"];
-            [mySharedDefaults setObject:appDelegate.currentUser.uniqueId forKey:@"userId"];
-            [mySharedDefaults setObject:channel.channelOwner.displayName forKey:@"channelOwnerDisplayName"];
-            [mySharedDefaults setObject:channel.channelOwner.uniqueId forKey:@"channelOwnerId"];
-            [mySharedDefaults setBool:followingChannel forKey:@"followingChannel"];
-            [mySharedDefaults setObject:channelData forKey:@"channelData"];
-
-        }
+    FeedItem *feedItem = [self.model feedItemAtindex:0];
     
+    if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo) {
+        VideoInstance *videoInstance = [self.model resourceForFeedItem:feedItem];
+        NSUserDefaults *mySharedDefaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.wonderapps"];
+        
+        NSDictionary *videoData = @{
+                                    @"title":videoInstance.title,
+                                    @"channelId":videoInstance.channel.uniqueId,
+                                    @"videoId":videoInstance.uniqueId,
+                                    @"userId":appDelegate.currentUser.uniqueId,
+                                    @"thumbnailURL":videoInstance.thumbnailURL,
+                                    @"videoDescription":videoInstance.video.videoDescription,
+                                    @"linkURL":videoInstance.video.linkURL,
+                                    @"linkTitle":videoInstance.video.linkTitle,
+                                    @"label":videoInstance.label,
+                                    @"channelOwnerName":videoInstance.channel.channelOwner.displayName,
+                                    @"duration": [NSString friendlyLengthFromTimeInterval:videoInstance.video.durationValue]
+                                    };
+        
+        [mySharedDefaults setBool:YES forKey:@"isVideo"];
+        
+        [mySharedDefaults setObject:videoInstance.title forKey:@"title"];
+        [mySharedDefaults setObject:videoInstance.channel.uniqueId forKey:@"channelId"];
+        [mySharedDefaults setObject:videoInstance.uniqueId forKey:@"videoId"];
+        [mySharedDefaults setObject:videoInstance.channel.channelOwner.uniqueId forKey:@"channelOwnerId"];
+        
+        [mySharedDefaults setObject:appDelegate.currentUser.uniqueId forKey:@"userId"];
+        [mySharedDefaults setObject:videoInstance.thumbnailURL forKey:@"thumbnailURL"];
+        [mySharedDefaults setObject:videoInstance.video.videoDescription forKey:@"videoDescription"];
+        [mySharedDefaults setObject:videoInstance.video.linkURL forKey:@"linkURL"];
+        [mySharedDefaults setObject:videoInstance.video.linkTitle forKey:@"linkTitle"];
+        
+        [mySharedDefaults setObject:videoData forKey:@"videoData"];
+        [mySharedDefaults synchronize];
+    }
+    
+}
+
+- (void)setChannelValuesForWidget:(Channel*)channel {
+    NSUserDefaults *mySharedDefaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.wonderapps"];
+    [mySharedDefaults setBool:NO forKey:@"isVideo"];
+    
+    BOOL followingChannel = [[SYNActivityManager sharedInstance] isSubscribedToChannelId:channel.uniqueId];
+    NSDictionary *channelData = @{
+                                  @"channelTitle":channel.title,
+                                  @"channelId":channel.uniqueId,
+                                  @"userId":appDelegate.currentUser.uniqueId,
+                                  @"channelOwnerDisplayName":channel.channelOwner.displayName,
+                                  @"channelOwnerId":channel.channelOwner.uniqueId,
+                                  @"avatarURL":channel.channelOwner.thumbnailURL,
+                                  @"followingChannel": [NSNumber numberWithBool:followingChannel]
+                                  };
+    
+    [mySharedDefaults setObject:channel.title forKey:@"channelTitle"];
+    [mySharedDefaults setObject:channel.channelOwner.thumbnailURL forKey:@"avatarURL"];
+    [mySharedDefaults setObject:channel.uniqueId forKey:@"channelId"];
+    [mySharedDefaults setObject:appDelegate.currentUser.uniqueId forKey:@"userId"];
+    [mySharedDefaults setObject:channel.channelOwner.displayName forKey:@"channelOwnerDisplayName"];
+    [mySharedDefaults setObject:channel.channelOwner.uniqueId forKey:@"channelOwnerId"];
+    [mySharedDefaults setBool:followingChannel forKey:@"followingChannel"];
+    [mySharedDefaults setObject:channelData forKey:@"channelData"];
+}
+
+- (FeedItem*) firstVideoFeedItem {
+    for (int i = 0; i < self.model.itemCount; i++) {
+        FeedItem* feedItem = [self.model itemAtIndex:i];
+        if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo) {
+            return feedItem;
+        }
+    }
+    
+    return nil;
 }
 
 @end
