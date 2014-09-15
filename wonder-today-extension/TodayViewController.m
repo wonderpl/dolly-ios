@@ -21,6 +21,10 @@
 @property (strong, nonatomic) IBOutlet UILabel *addedByLabel;
 @property (strong, nonatomic) IBOutlet UIButton *curatedByButton;
 @property (strong, nonatomic) IBOutlet UILabel *watchLabel;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *videoWidth;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *videoHeight;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *labelTop;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *labelRight;
 
 @end
 
@@ -38,8 +42,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.preferredContentSize = CGSizeMake(0, 180);
+    self.preferredContentSize = CGSizeMake(0, 360);
     [self setUpVideo];
+    
+    if ([[UIScreen mainScreen] bounds].size.width > 320) {
+        [self.videoWidth setConstant:320];
+        [self.videoHeight setConstant:190];
+        
+        [self.labelRight setConstant:223];
+        [self.labelTop setConstant:12];
+        
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
