@@ -51,12 +51,15 @@ static const CGFloat VideoAspectRatio = 16.0 / 9.0;
 		self.videoOrientation = orientation;
 	}
 	
-	self.videoContainerView.frame = [self videoContainerFrame];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	
+    self.videoContainerView.frame = [self videoContainerFrame];
+    [self.videoContainerView layoutIfNeeded];
+    [self.collectionView layoutSubviews];
+
 	if (IS_IPHONE) {
 		self.videoOrientation = [[UIDevice currentDevice] orientation];
 		
@@ -74,7 +77,7 @@ static const CGFloat VideoAspectRatio = 16.0 / 9.0;
                                         animated:NO];
     
     
-    NSLog(@"full frame : %@", NSStringFromCGRect(self.view.frame));
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
