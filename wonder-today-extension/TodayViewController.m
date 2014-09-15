@@ -138,13 +138,10 @@ completionHandler:(void (^)(BOOL success))completionHandler {
         NSString *channelId = [mySharedDefaults objectForKey:@"channelId"];
         NSString *videoId = [mySharedDefaults objectForKey:@"videoId"];
         
-        NSString *urlString = [NSString stringWithFormat:@"wonderpldev://-/channels/%@/videos/%@/-/", channelId,videoId];
+        NSString *urlString = [NSString stringWithFormat:@"wonderpl://-/channels/%@/videos/%@/-/", channelId,videoId];
         NSURL *url = [NSURL URLWithString:urlString];
         [self.extensionContext openURL:url completionHandler:nil];
 
-}
-
-- (IBAction)followButton:(id)sender {
 }
 
 - (IBAction)openApp:(id)sender {
@@ -155,7 +152,7 @@ completionHandler:(void (^)(BOOL success))completionHandler {
         NSString *channelId = [mySharedDefaults objectForKey:@"channelId"];
         NSString *videoId = [mySharedDefaults objectForKey:@"videoId"];
 
-        NSString *urlString = [NSString stringWithFormat:@"wonderpldev://-/channels/%@/videos/%@/", channelId,videoId];
+        NSString *urlString = [NSString stringWithFormat:@"wonderpl://-/channels/%@/videos/%@/", channelId,videoId];
         NSURL *url = [NSURL URLWithString:urlString];
         [self.extensionContext openURL:url completionHandler:nil];
     }
