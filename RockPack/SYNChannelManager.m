@@ -211,7 +211,7 @@
     NSManagedObjectContext *channelOwnerObjectMOC = channelOwner.managedObjectContext;
     
     MKNKUserErrorBlock errorBlock = ^(id error) {
-        
+        DebugLog (@"Erorr : %@", error);
     };
     
     if ([channelOwner isMemberOfClass: [User class]]) // the user uses the oAuthEngine to avoid caching
