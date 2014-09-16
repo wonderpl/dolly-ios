@@ -465,7 +465,7 @@ static const CGFloat heightPortrait = 985;
         height = heightLandscape;
     }
     
-    int point = ([self.model videoIndexForFeedIndex:index] / 3) * height;
+    NSInteger point = ([self.model videoIndexForFeedIndex:index] / 3) * height;
     [self.feedCollectionView setContentOffset:CGPointMake(0, point) animated:NO];
 }
 

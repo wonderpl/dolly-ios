@@ -256,7 +256,7 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 
 - (void)selectCategoryForCollection:(UICollectionView *)collectionView atIndexPath:(NSIndexPath *)indexPath {
 	
-	int index = indexPath.section;
+	NSInteger index = indexPath.section;
 	
 	if (index>0) {
 		index--;
@@ -272,7 +272,7 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 	}
 	
 	BOOL inRecentlyViewed = [self.recentlyViewed containsObject:subGenre];
-	int indexOfRecent = [self.recentlyViewed indexOfObject:subGenre];
+	NSInteger indexOfRecent = [self.recentlyViewed indexOfObject:subGenre];
 	BOOL editiorsPicks = index ==0;
 	
 	
@@ -502,7 +502,7 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 			
 		} else {
 			
-			int index = indexPath.section;
+			NSInteger index = indexPath.section;
 			if (index>0) {
 				index--;
 			}

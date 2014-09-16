@@ -458,9 +458,9 @@
 
 - (SYNAbstractViewController*) rootViewController
 {
-    int count = [self.containerViewController.currentViewController.viewControllers count]-1;
+    NSInteger count = [self.containerViewController.currentViewController.viewControllers count]-1;
     
-    for (int i = count; i>=0; i--) {
+    for (NSInteger i = count; i>=0; i--) {
         
         SYNAbstractViewController *viewController = [self.containerViewController.currentViewController.viewControllers objectAtIndex:i];
         NSString *className = NSStringFromClass([viewController class]);
