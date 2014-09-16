@@ -51,11 +51,14 @@ static const CGFloat VideoAspectRatio = 16.0 / 9.0;
 		self.videoOrientation = orientation;
 	}
 	
+    if (IS_IPHONE) {
+        self.videoContainerView.frame = [self videoContainerFrame];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	
+    
     self.videoContainerView.frame = [self videoContainerFrame];
     [self.videoContainerView layoutIfNeeded];
     [self.collectionView layoutSubviews];
@@ -90,14 +93,12 @@ static const CGFloat VideoAspectRatio = 16.0 / 9.0;
 	}
 }
 
-- (void)viewDidLayoutSubviews
-{
+- (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-//    self.videoContainerView.frame = [self videoContainerFrame];
-//    [self.videoContainerView layoutIfNeeded];
-//    [self.collectionView.collectionViewLayout invalidateLayout];
-//    [self.collectionView setContentOffset:CGPointMake(self.videoPlayerViewController.selectedIndex * CGRectGetWidth(self.view.bounds), 0.0f)];
-    
+    self.videoContainerView.frame = [self videoContainerFrame];
+    [self.videoContainerView layoutIfNeeded];
+    [self.collectionView layoutSubviews];
+    [self.collectionView setContentOffset:CGPointMake(self.videoPlayerViewController.selectedIndex * CGRectGetWidth(self.view.bounds), 0.0f)];
 }
 
 
@@ -140,7 +141,6 @@ static const CGFloat VideoAspectRatio = 16.0 / 9.0;
 		UIView *view = [[UIView alloc] initWithFrame:self.view.bounds];
 		view.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
 		view.backgroundColor = [UIColor blackColor];
-		
 		self.backgroundView = view;
 	}
 	return _backgroundView;
@@ -190,11 +190,19 @@ static const CGFloat VideoAspectRatio = 16.0 / 9.0;
     }
     
     if (IS_IPHONE) {
-        return CGRectMake(0,
-                          (CGRectGetHeight(self.view.bounds) - height) / 2.0,
-                          width,
-                          height+1);
-
+        
+        if (UIDeviceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation])) {
+            return CGRectMake(0,
+                              0,
+                              width,
+                              height);
+            
+        } else {
+            return CGRectMake(0,
+                              (CGRectGetHeight(self.view.bounds) - height) / 2.0,
+                              width,
+                              height);
+        }
     }
     
     return CGRectZero;
