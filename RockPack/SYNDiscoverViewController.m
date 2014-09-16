@@ -403,7 +403,7 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 		return self.recentlyViewed.count;
 	}
 	
-	int index = section;
+	NSInteger index = section;
 	
 	if (index>0) {
 		index--;
@@ -419,7 +419,7 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
                                                                             forIndexPath: indexPath];
 	SubGenre *subGenre;
 		
-	int index = indexPath.section;
+	NSInteger index = indexPath.section;
 	
 	if (index>0) {
 		index--;
