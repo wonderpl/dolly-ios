@@ -86,4 +86,8 @@ __PRAGMA_POP_NO_EXTRA_ARG_WARNINGS\
 /** BOOL: Detect if device is the Simulator **/
 #define IS_SIMULATOR ( TARGET_IPHONE_SIMULATOR )
 
-#define IS_IOS_7_OR_GREATER ([[UIApplication sharedApplication] respondsToSelector: @selector(setMinimumBackgroundFetchInterval:)])
+#define IS_IOS_7    ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0 && [[[UIDevice currentDevice] systemVersion] floatValue] < 8.0)
+
+#define IS_IOS_7_OR_GREATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
+
+#define IS_IOS_8_OR_GREATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
