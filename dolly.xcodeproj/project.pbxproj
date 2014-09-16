@@ -715,10 +715,6 @@
 		F4952B9D19406D2E00DB5E39 /* SYNDiscoverSearchOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4952B9B19406D2E00DB5E39 /* SYNDiscoverSearchOverlayViewController.m */; };
 		F4952B9E19406D2E00DB5E39 /* SYNDiscoverSearchOverlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4952B9C19406D2E00DB5E39 /* SYNDiscoverSearchOverlayViewController.xib */; };
 		F4952BBE1940B06D00DB5E39 /* UICollectionViewFlowLayoutCenterItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F4952BBD1940B06D00DB5E39 /* UICollectionViewFlowLayoutCenterItem.m */; };
-		F49D267A197981ED00BF72C1 /* login_tests.js in Sources */ = {isa = PBXBuildFile; fileRef = F49D2679197981ED00BF72C1 /* login_tests.js */; };
-		F49D267C1979821000BF72C1 /* hidden_navigation_bar_from_profile.js in Sources */ = {isa = PBXBuildFile; fileRef = F49D267B1979821000BF72C1 /* hidden_navigation_bar_from_profile.js */; };
-		F49D267F1979823700BF72C1 /* search_tests.js in Sources */ = {isa = PBXBuildFile; fileRef = F49D267D1979823700BF72C1 /* search_tests.js */; };
-		F49D26801979823700BF72C1 /* profile_tests.js in Sources */ = {isa = PBXBuildFile; fileRef = F49D267E1979823700BF72C1 /* profile_tests.js */; };
 		F4A443F719363A0F009287FA /* ShopMotion0.png in Resources */ = {isa = PBXBuildFile; fileRef = F4A443D919363A0F009287FA /* ShopMotion0.png */; };
 		F4A443F819363A0F009287FA /* ShopMotion1.png in Resources */ = {isa = PBXBuildFile; fileRef = F4A443DA19363A0F009287FA /* ShopMotion1.png */; };
 		F4A443F919363A0F009287FA /* ShopMotion2.png in Resources */ = {isa = PBXBuildFile; fileRef = F4A443DB19363A0F009287FA /* ShopMotion2.png */; };
@@ -751,7 +747,6 @@
 		F4A4441419363A0F009287FA /* ShopMotion14@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4A443F619363A0F009287FA /* ShopMotion14@2x.png */; };
 		F4A444161936602D009287FA /* ShopMotionBagItem.png in Resources */ = {isa = PBXBuildFile; fileRef = F4A444151936602D009287FA /* ShopMotionBagItem.png */; };
 		F4A4441819366089009287FA /* ShopMotionBagItem@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4A4441719366089009287FA /* ShopMotionBagItem@2x.png */; };
-		F4AAA90319797F7200DC6E08 /* test_suite.js in Sources */ = {isa = PBXBuildFile; fileRef = F4AAA90219797F7200DC6E08 /* test_suite.js */; };
 		F4C692E9196AA41C00F57DD9 /* SYNTwitterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C692E8196AA41C00F57DD9 /* SYNTwitterManager.m */; };
 		F4C692EC196ACB5E00F57DD9 /* TWSignedRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C692EB196ACB5E00F57DD9 /* TWSignedRequest.m */; };
 		F4C7E588192E3419006053DA /* CoverUpload@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4C7E584192E3419006053DA /* CoverUpload@2x.png */; };
@@ -4901,7 +4896,6 @@
 				BE1B3DD6180EA2EF00DA2BD6 /* SYNDiscoverCategoriesCell.m in Sources */,
 				F468C75A1937692C00838890 /* SYNShopMotionOverlayViewController.m in Sources */,
 				E915A1AC191A6A6F001DC76A /* _VideoAnnotation.m in Sources */,
-				F49D26801979823700BF72C1 /* profile_tests.js in Sources */,
 				01E427E21664DF21009B941F /* Video.m in Sources */,
 				4CCAD0B518D7530600EC0F03 /* SYNProfileSubscriptionModel.m in Sources */,
 				01E427E51664DF21009B941F /* Channel.m in Sources */,
@@ -4911,7 +4905,6 @@
 				01E427F01664EE52009B941F /* _Channel.m in Sources */,
 				E905A945189BCD1500FED785 /* SYNSignupViewController.m in Sources */,
 				E98F609818B24901008AAAA8 /* SYNWonderMailActivity.m in Sources */,
-				F49D267C1979821000BF72C1 /* hidden_navigation_bar_from_profile.js in Sources */,
 				E9F6255318845EF9000EF6A2 /* SYNiPhonePasswordForgotViewController.m in Sources */,
 				BEE01B5A184F5868000CF681 /* SYNSocialFollowButton.m in Sources */,
 				01E427F11664EE52009B941F /* _Video.m in Sources */,
@@ -4950,7 +4943,6 @@
 				E947097318D70F21000174A7 /* SYNYouTubeWebView.m in Sources */,
 				E9577EA118EAF62300E95127 /* SYNVideoPlayerCell.m in Sources */,
 				E9A4E5321864623E00972F09 /* UINavigationBar+Appearance.m in Sources */,
-				F49D267F1979823700BF72C1 /* search_tests.js in Sources */,
 				012502BD16CA8FE30029C7C8 /* SYNFacebookManager.m in Sources */,
 				0E3AE6901875DE8C008A8D00 /* SYNGenreManager.m in Sources */,
 				E915A1AF191A6ACC001DC76A /* VideoAnnotation.m in Sources */,
@@ -4972,7 +4964,6 @@
 				4C0B956F1912838F008D8036 /* SYNSearchVideoLargeCell.m in Sources */,
 				4C72DD4A18FD96E6004AC132 /* SYNFollowChannelButton.m in Sources */,
 				4C5E861B18B6580300D0E937 /* SYNDiscoverOverlayHighlightsViewController.m in Sources */,
-				F49D267A197981ED00BF72C1 /* login_tests.js in Sources */,
 				E98A851C19096B30001ADE09 /* SYNFeedChannelLargeCell.m in Sources */,
 				0125FB6C182BB41300EC822E /* SYNButton.m in Sources */,
 				0EFE39B0186458DE0006FA78 /* UIImageView+RoundImage.m in Sources */,
@@ -5118,7 +5109,6 @@
 				1F356185175F6F7400829457 /* SYNAccountSettingOtherTableViewCell.m in Sources */,
 				E9EE08D018F6FC49000DC06A /* SYNWebViewCell.m in Sources */,
 				BEA216B217E8A611007C6DF7 /* SYNOneToOneSharingFriendCell.m in Sources */,
-				F4AAA90319797F7200DC6E08 /* test_suite.js in Sources */,
 				E9AD5B6C187D767200298D95 /* SYNiPhoneLoginViewController.m in Sources */,
 				BE7D02F7178C4354008053DC /* SYNSubscribersViewController.m in Sources */,
 				BE7D0301179D5624008053DC /* SYNFriendsViewController.m in Sources */,
