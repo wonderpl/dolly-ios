@@ -55,7 +55,7 @@ static NSString *const URLPrefix = @"http://dev.rockpack.com/log?message=%@";
     }
     else
     {
-        DebugLog(fullMessage);
+        DebugLog(@"%@",fullMessage);
     }
 }
 

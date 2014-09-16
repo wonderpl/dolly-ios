@@ -55,7 +55,7 @@ static const NSInteger DefaultBatchSize = 40;
 - (id)itemAtIndex:(NSInteger)index {
     
     if(self.loadedItems.count <= index) {
-    	TFLog(@"Index out of bounds in array %@, at index %d", self.loadedItems, index);
+    	TFLog(@"Index out of bounds in array %@, at index %ld", self.loadedItems, index);
         DebugLog(@"Attemted to load a index out of bounds");
         return nil;
     }

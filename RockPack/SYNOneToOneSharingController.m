@@ -394,6 +394,8 @@ SYNFriendShareCellDelegate>
         }
         break;
             
+        default:
+		break;
     }
 	return point;
 }
