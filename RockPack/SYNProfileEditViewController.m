@@ -110,13 +110,11 @@ static const CGFloat OFFSET_DESCRIPTION_EDIT = 130.0f;
     self.imagePickerControllerCoverphoto = [[SYNImagePickerController alloc] initWithHostViewController:self withCropSize:CGSizeMake(302,167)];
     self.imagePickerControllerCoverphoto.delegate = self;
     
-    if (UIDeviceOrientationIsLandscape([[SYNDeviceManager sharedInstance] isLandscape])) {
+    if (UIDeviceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation])) {
         [self.imagePickerControllerCoverphoto presentImagePickerAsPopupFromView:sender arrowDirection:UIPopoverArrowDirectionAny];
-    }
-    else {
+    } else {
         [self.imagePickerControllerCoverphoto presentImagePickerAsPopupFromView:sender arrowDirection:UIPopoverArrowDirectionRight];
     }
-    
 }
 
 
