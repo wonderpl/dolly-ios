@@ -20,7 +20,8 @@ typedef NS_ENUM(NSInteger, SYNYouTubeVideoPlayerState) {
 	SYNYouTubeVideoPlayerStateInitialised,
 	SYNYouTubeVideoPlayerStateReady,
 	SYNYouTubeVideoPlayerStateLoaded,
-	SYNYouTubeVideoPlayerStatePlayStarted
+	SYNYouTubeVideoPlayerStatePlayStarted,
+    SYNYouTubeVideoPlayerStateEnded
 };
 
 static const CGFloat bufferingTime = 12;
@@ -123,7 +124,14 @@ static const CGFloat bufferingTime = 12;
 - (void)playVideo {
 	if (self.youTubePlayerState == SYNYouTubeVideoPlayerStateLoaded || self.youTubePlayerState == SYNYouTubeVideoPlayerStatePlayStarted) {
 		[self.youTubeWebView stringByEvaluatingJavaScriptFromString:@"player.playVideo();"];
-	} else {
+    } else if (self.youTubePlayerState == SYNYouTubeVideoPlayerStateEnded) {
+        if (IS_IOS_7) {
+            [self reloadVideoPlayer];
+        } else {
+            [self.youTubeWebView stringByEvaluatingJavaScriptFromString:@"player.playVideo();"];
+        }
+
+    }else {
 		[self loadPlayer];
 	}
 }
@@ -179,6 +187,7 @@ static const CGFloat bufferingTime = 12;
 			[self handleVideoPlayerPaused];
 		}
 		if ([actionData isEqualToString:@"ended"]) {
+            self.youTubePlayerState = SYNYouTubeVideoPlayerStateEnded;
 			[self handleVideoPlayerFinishedPlaying];
 		}
         if ([actionData isEqualToString:@"buffering"]) {
@@ -216,11 +225,15 @@ static const CGFloat bufferingTime = 12;
     
     UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Connection problem" message:@"We are attempting to reload your video" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alertView show];
-    
+    [self reloadVideoPlayer];
+}
+
+- (void)reloadVideoPlayer {
     _youTubeWebView = [self newWebView];
     
     [super playFirstTime];
-	[self playVideo];
+    [self playVideo];
+    
 }
 
 - (NSTimeInterval) bufferTIme {
