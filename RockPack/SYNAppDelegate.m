@@ -581,7 +581,7 @@
     
     [[SYNAddEmailAlertView sharedInstance] appBecameActive];
 	
-	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"applicationDidBecomeActive: Starting app in state: %d",
+	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"applicationDidBecomeActive: Starting app in state: %ld",
                                          application.applicationState]];
 	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"applicationDidBecomeActive: Protected data available: %d",
                                          application.protectedDataAvailable]];
@@ -1208,7 +1208,7 @@
 - (void) resetCurrentOAuth2Credentials
 {
 	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"resetCurrentOAuth2Credentials: %@", [NSThread callStackSymbols]]];
-	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"resetCurrentOAuth2Credentials: App state: %d",
+	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"resetCurrentOAuth2Credentials: App state: %ld",
                                          [UIApplication sharedApplication].applicationState]];
 	[[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"resetCurrentOAuth2Credentials: Protected data available: %d",
                                          [UIApplication sharedApplication].protectedDataAvailable]];
@@ -1602,7 +1602,7 @@
 
         // Wait a second to give the images a chance to download
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"updateFeedWithCompletionHandler: callback: %u",
+            [[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"updateFeedWithCompletionHandler: callback: %lu",
                                                  result]];
             completionHandler(result);
         });

@@ -82,7 +82,7 @@ static const NSInteger DefaultBatchSize = 40;
 }
 
 - (void)loadNextPageWithCompletionHandler:(SYNPagingModelCompletionBlock)completion {
-    [[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"loadNextPageWithCompletionHandler: %hhd",
+    [[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"loadNextPageWithCompletionHandler: %d",
                                          self.loading]];
 
 	if (self.loading) {
@@ -101,7 +101,7 @@ static const NSInteger DefaultBatchSize = 40;
 	[self loadItemsForRange:range successBlock:^(NSArray *results, NSInteger totalItemCount) {
 		BOOL hasChanged = ![results isEqualToArray:self.loadedItems];
 
-        [[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"loadNextPageWithCompletionHandler: success: %hhd",
+        [[SYNRemoteLogger sharedLogger] log:[NSString stringWithFormat:@"loadNextPageWithCompletionHandler: success: %d",
                                              hasChanged]];
 
 		self.loadedItems = results;
