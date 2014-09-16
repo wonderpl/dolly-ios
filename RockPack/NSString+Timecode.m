@@ -18,10 +18,10 @@
 	NSInteger seconds = (totalSeconds % 60);
 	
 	if (hours) {
-		return [NSString stringWithFormat:@"%ld:%02ld:%02ld", (long)hours, (long)minutes, (long)seconds];
+        return [NSString stringWithFormat:@"%ld:%02ld:%02ld", (long)hours, (long)minutes, (long)seconds];
 	}
 	
-	return [NSString stringWithFormat:@"%ld:%02ld", (long)minutes, (long)seconds];
+    return [NSString stringWithFormat:@"%ld:%02ld", (long)minutes, (long)seconds];
 }
 
 + (NSString *)friendlyLengthFromTimeInterval:(NSTimeInterval)timeInterval {
@@ -42,13 +42,13 @@
 			roundedMinutes = 0;
 		}
 		if (roundedMinutes) {
-			return [NSString stringWithFormat:@"%ld HR %ld MIN WATCH", hours, roundedMinutes];
+			return [NSString stringWithFormat:@"%@ HR %@ MIN WATCH", @(hours), @(roundedMinutes)];
 		} else {
-			return [NSString stringWithFormat:@"%ld HR WATCH", hours];
+			return [NSString stringWithFormat:@"%@ HR WATCH", @(hours)];
 		}
 	}
 
-	return [NSString stringWithFormat:@"%ld MIN WATCH", minutes];
+	return [NSString stringWithFormat:@"%@ MIN WATCH", @(minutes)];
 }
 
 @end
