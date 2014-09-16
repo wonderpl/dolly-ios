@@ -169,6 +169,11 @@
 														 name:UIDeviceOrientationDidChangeNotification
 													   object:nil];
 		}
+        
+        if (IS_IOS_7 && IS_IPHONE) {
+            [self.videosCollectionView.collectionViewLayout invalidateLayout];
+            [self.videosCollectionView reloadData];
+        }
 	}
 }
 
@@ -301,7 +306,9 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-	return collectionView.frame.size;
+
+    NSLog(@"sizeeee %@", NSStringFromCGSize(collectionView.frame.size));
+    return collectionView.frame.size;
 }
 
 #pragma mark - UIViewControllerTransitioningDelegate

@@ -59,9 +59,11 @@ static const CGFloat VideoAspectRatio = 16.0 / 9.0;
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
     
-    self.videoContainerView.frame = [self videoContainerFrame];
-    [self.videoContainerView layoutIfNeeded];
-    [self.collectionView layoutSubviews];
+    if (IS_IOS_8_OR_GREATER) {
+        self.videoContainerView.frame = [self videoContainerFrame];
+        [self.videoContainerView layoutIfNeeded];
+        [self.collectionView layoutSubviews];
+    }
 
 	if (IS_IPHONE) {
 		self.videoOrientation = [[UIDevice currentDevice] orientation];
@@ -96,8 +98,14 @@ static const CGFloat VideoAspectRatio = 16.0 / 9.0;
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     self.videoContainerView.frame = [self videoContainerFrame];
+
     [self.videoContainerView layoutIfNeeded];
-    [self.collectionView layoutSubviews];
+
+    if (IS_IOS_7) {
+        [self.collectionView.collectionViewLayout invalidateLayout];
+        [self.collectionView reloadData];
+    }
+    
     [self.collectionView setContentOffset:CGPointMake(self.videoPlayerViewController.selectedIndex * CGRectGetWidth(self.view.bounds), 0.0f)];
 }
 
@@ -190,19 +198,10 @@ static const CGFloat VideoAspectRatio = 16.0 / 9.0;
     }
     
     if (IS_IPHONE) {
-        
-        if (UIDeviceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation])) {
-            return CGRectMake(0,
-                              0,
-                              width,
-                              height);
-            
-        } else {
-            return CGRectMake(0,
-                              (CGRectGetHeight(self.view.bounds) - height) / 2.0,
-                              width,
-                              height);
-        }
+                return CGRectMake(0,
+                                  (CGRectGetHeight(self.view.bounds) - height) / 2.0,
+                                  width,
+                                  height);
     }
     
     return CGRectZero;
