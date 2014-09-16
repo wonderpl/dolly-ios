@@ -97,7 +97,7 @@
     
     id<FBOpenGraphAction> action = (id<FBOpenGraphAction>)[FBGraphObject graphObject];
     
-    FBOpenGraphActionShareDialogParams *params = [[FBOpenGraphActionShareDialogParams alloc] init];
+    FBOpenGraphActionParams *params = [[FBOpenGraphActionParams alloc] init];
     params.actionType = [NSString stringWithFormat: @"%@:share", facebookNamespace];
     
     if (isVideo.boolValue)
