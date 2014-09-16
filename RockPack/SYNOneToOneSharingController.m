@@ -375,7 +375,11 @@ SYNFriendShareCellDelegate>
             
         case UIInterfaceOrientationPortraitUpsideDown:
         {
-            point = CGPointMake(0, -160);
+            if (IS_IOS_8_OR_GREATER) {
+                point = CGPointMake(0, -160);
+            } else {
+                point = CGPointMake(0, 160);
+            }
             if(!IS_IPHONE_5)
                 point.y -= 60.0f;
             
@@ -384,13 +388,21 @@ SYNFriendShareCellDelegate>
             
         case UIInterfaceOrientationLandscapeLeft:
         {
-           point = CGPointMake(0, -160);
+            if (IS_IOS_8_OR_GREATER) {
+                point = CGPointMake(0, -160);
+            } else {
+                point = CGPointMake(-160, 0);
+            }
         }
         break;
             
         case UIInterfaceOrientationLandscapeRight:
         {
-            point = CGPointMake(0, -160);
+            if (IS_IOS_8_OR_GREATER) {
+                point = CGPointMake(0, -160);
+            } else {
+                point = CGPointMake(160, 0);
+            }
         }
         break;
             
