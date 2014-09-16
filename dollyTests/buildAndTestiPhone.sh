@@ -5,7 +5,7 @@ ARCHS=i386 \
 ONLY_ACTIVE_ARCH=YES \
 -workspace "../dolly.xcworkspace" \
 -scheme "Dolly" \
--sdk iphonesimulator7.1 \
+-sdk iphonesimulator8.0 \
 -configuration Debug \
 SYMROOT="/Users/$USER/Documents/UIAutomationBuild/build" \
 DSTROOT="/Users/$USER/Documents/UIAutomationBuild/build" \
