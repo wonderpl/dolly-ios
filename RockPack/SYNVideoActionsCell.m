@@ -22,6 +22,8 @@
 	
 	self.actionsBar.frame = self.contentView.bounds;
 	[self.contentView addSubview:self.actionsBar];
+    self.contentView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin |UIViewAutoresizingFlexibleTopMargin |UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin;
+
 }
 
 - (SYNVideoActionsBar *)actionsBar {

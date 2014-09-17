@@ -25,6 +25,8 @@
 	self.button.layer.borderWidth = 2.0;
 	
 	self.button.tintColor = [UIColor dollyButtonGreenColor];
+    self.contentView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin |UIViewAutoresizingFlexibleTopMargin |UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin;
+
 }
 
 - (void)setTitle:(NSString *)title {

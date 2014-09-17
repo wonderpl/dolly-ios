@@ -20,7 +20,8 @@ static NSString *const HTMLTemplateFilename = @"VideoDescriptionTemplate";
 
 - (void)awakeFromNib {
 	[super awakeFromNib];
-	
+    self.contentView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin |UIViewAutoresizingFlexibleTopMargin |UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin;
+
 	self.webView.scrollView.scrollEnabled = NO;
 }
 

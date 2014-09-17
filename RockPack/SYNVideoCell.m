@@ -30,6 +30,8 @@
 	
 	self.thumbnailImageView.layer.borderColor = [[UIColor colorWithWhite:0 alpha:0.05] CGColor];
 	self.thumbnailImageView.layer.borderWidth = 1.0;
+    
+    self.contentView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin |UIViewAutoresizingFlexibleTopMargin |UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin;
 	
 }
 
