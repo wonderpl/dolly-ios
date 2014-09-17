@@ -415,7 +415,7 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
 	
-	SYNDiscoverCategoriesCell *categoryCell = [cv dequeueReusableCellWithReuseIdentifier:[SYNDiscoverCategoriesCell reuseIdentifier]
+	SYNDiscoverCategoriesCell *cell = [cv dequeueReusableCellWithReuseIdentifier:[SYNDiscoverCategoriesCell reuseIdentifier]
                                                                             forIndexPath: indexPath];
 	SubGenre *subGenre;
 		
@@ -432,10 +432,9 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 		subGenre = genre.subgenres[indexPath.row];
 	}
 	
-    categoryCell.label.text = subGenre.name;
-	
-	
-    return categoryCell;
+    cell.label.text = subGenre.name;
+ 
+    return cell;
 }
 
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
