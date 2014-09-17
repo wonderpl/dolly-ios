@@ -103,9 +103,9 @@ static const CGFloat VideoAspectRatio = 16.0 / 9.0;
 
     if (IS_IOS_7) {
         [self.collectionView.collectionViewLayout invalidateLayout];
-        [self.collectionView reloadData];
     }
     
+    [self.collectionView reloadData];
     [self.collectionView setContentOffset:CGPointMake(self.videoPlayerViewController.selectedIndex * CGRectGetWidth(self.view.bounds), 0.0f)];
 }
 
