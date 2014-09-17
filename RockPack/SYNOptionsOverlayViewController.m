@@ -319,7 +319,12 @@ typedef enum {
 {
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
     
-    self.view.frame = [[UIScreen mainScreen] bounds];
+    if (IS_IOS_8_OR_GREATER) {
+        self.view.frame = [[UIScreen mainScreen] bounds];
+    } else {
+        self.view.frame = [[SYNDeviceManager sharedInstance] currentScreenRect];
+
+    }
 }
 
 -(void)finishingPresentation

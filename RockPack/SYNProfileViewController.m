@@ -416,12 +416,14 @@ static const CGFloat TransitionDuration = 0.5f;
     
     SYNOptionsOverlayViewController* optionsVC = [[SYNOptionsOverlayViewController alloc] init];
     CGRect vFrame = optionsVC.view.frame;
-    vFrame.size = [[UIScreen mainScreen] bounds].size;
+    if (IS_IOS_8_OR_GREATER) {
+        vFrame.size = [[UIScreen mainScreen] bounds].size;
+    } else {
+        vFrame.size = [[SYNDeviceManager sharedInstance] currentScreenSize];
+    }
     optionsVC.view.frame = vFrame;
     optionsVC.view.alpha = 0.0f;
 	optionsVC.delegate = self;
-    
-    
     
     [appDelegate.masterViewController addChildViewController:optionsVC];
     [appDelegate.masterViewController.view addSubview:optionsVC.view];
