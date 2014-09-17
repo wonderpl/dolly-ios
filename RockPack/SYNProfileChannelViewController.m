@@ -217,7 +217,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
         cell = createCell;
         
     } else {
-        SYNChannelMidCell *channelThumbnailCell = [collectionView dequeueReusableCellWithReuseIdentifier: @"SYNChannelMidCell" forIndexPath: indexPath];
+        SYNChannelMidCell *channelThumbnailCell = [collectionView dequeueReusableCellWithReuseIdentifier: [SYNChannelMidCell reuseIdentifier] forIndexPath: indexPath];
         
         Channel *channel;
         channel = (Channel *) self.channelOwner.channelsSet[indexPath.item - (self.isUserProfile ? 1 : 0)];
@@ -253,8 +253,6 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
 		[self hideDescriptionCurrentlyShowing];
 	}
 	
-	
-	
     SYNChannelMidCell* cell = (SYNChannelMidCell*)[collectionView cellForItemAtIndexPath:indexPath];
     
     SYNChannelMidCell *selectedCell = cell;
@@ -287,6 +285,7 @@ forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
     } else {
         channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel usingMode:kChannelDetailsModeDisplay];
     }
+    
     [self.navigationController pushViewController:channelVC animated:YES];
 }
 
