@@ -85,6 +85,9 @@
     self.selected = NO;
 
     self.isFromProfile = NO;
+
+    self.contentView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin |UIViewAutoresizingFlexibleTopMargin |UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin;
+
 }
 
 - (void)setViewControllerDelegate: (id<SYNChannelMidCellDelegate>)  viewControllerDelegate {
