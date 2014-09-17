@@ -37,6 +37,9 @@
 	self.channelTitleButton.titleLabel.numberOfLines = 2;
 	self.channelTitleButton.titleLabel.textAlignment = NSTextAlignmentCenter;
 	self.channelTitleButton.titleLabel.font = [UIFont boldCustomFontOfSize:self.channelTitleButton.titleLabel.font.pointSize];
+    
+    self.contentView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin |UIViewAutoresizingFlexibleTopMargin |UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin;
+
 }
 
 - (void)setChannel:(Channel *)channel {

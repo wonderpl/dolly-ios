@@ -189,6 +189,8 @@ static const CGFloat heightPortrait = 985;
 	[super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
     self.feedCollectionView.alpha = 0.0;
     self.lastYOffset = self.feedCollectionView.contentOffset.y;
+    [self.feedCollectionView.collectionViewLayout invalidateLayout];
+    [self.feedCollectionView reloadData];
 
 }
 

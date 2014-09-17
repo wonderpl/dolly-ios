@@ -21,6 +21,8 @@
 - (void)awakeFromNib {
 	[super awakeFromNib];
     self.label.font = [UIFont semiboldCustomFontOfSize: self.label.font.pointSize];
+    self.contentView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin |UIViewAutoresizingFlexibleTopMargin |UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin;
+
 }
 
 -(void)prepareForReuse {

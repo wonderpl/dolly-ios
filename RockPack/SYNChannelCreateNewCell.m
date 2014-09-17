@@ -31,6 +31,7 @@
 		self.createCellButton.titleLabel.textAlignment = NSTextAlignmentCenter;		
 	}
 
+    self.contentView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin |UIViewAutoresizingFlexibleTopMargin |UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin;
 }
 
 - (void) setBorder {

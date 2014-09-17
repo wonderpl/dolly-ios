@@ -16,6 +16,7 @@
 
 @implementation SYNVideoPlayerCell
 
+
 - (void)prepareForReuse {
 	[self.videoPlayer removeFromSuperview];
 }
@@ -23,10 +24,10 @@
 - (void)setVideoPlayer:(SYNVideoPlayer *)videoPlayer {
 	_videoPlayer = videoPlayer;
 	
-	videoPlayer.frame = self.bounds;
-	videoPlayer.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
-	
-	[self.contentView addSubview:videoPlayer];
+    videoPlayer.frame = self.bounds;
+    videoPlayer.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
+    
+    [self.contentView addSubview:videoPlayer];
 }
 
 @end
