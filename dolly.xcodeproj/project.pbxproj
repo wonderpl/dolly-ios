@@ -707,7 +707,7 @@
 		F47C26101993CA2E0070BD31 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F47C260F1993CA2E0070BD31 /* NotificationCenter.framework */; };
 		F47C26161993CA2E0070BD31 /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F47C26151993CA2E0070BD31 /* TodayViewController.m */; };
 		F47C26181993CA2E0070BD31 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F47C26171993CA2E0070BD31 /* MainInterface.storyboard */; };
-		F47C261B1993CA2E0070BD31 /* com.wonderpl.dev.dolly.wonder-today-extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F47C260E1993CA2E0070BD31 /* com.wonderpl.dev.dolly.wonder-today-extension.appex */; };
+		F47C261B1993CA2E0070BD31 /* com.wonderpl.dolly.wonder-today-extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F47C260E1993CA2E0070BD31 /* com.wonderpl.dolly.wonder-today-extension.appex */; };
 		F48C1619192B663B00107B32 /* TabActivityNotification@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = F48C1617192B663B00107B32 /* TabActivityNotification@2x~iphone.png */; };
 		F48C161A192B663B00107B32 /* TabActivityNotification~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = F48C1618192B663B00107B32 /* TabActivityNotification~iphone.png */; };
 		F48C161D192B665000107B32 /* TabActivityNotification~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F48C161B192B665000107B32 /* TabActivityNotification~ipad.png */; };
@@ -795,7 +795,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				F47C261B1993CA2E0070BD31 /* com.wonderpl.dev.dolly.wonder-today-extension.appex in Embed App Extensions */,
+				F47C261B1993CA2E0070BD31 /* com.wonderpl.dolly.wonder-today-extension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1792,7 +1792,7 @@
 		F478E826193897160015BF38 /* SYNProfileVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNProfileVideoViewController.m; sourceTree = "<group>"; };
 		F478E8281938BD020015BF38 /* SYNProfileVideoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNProfileVideoModel.h; sourceTree = "<group>"; };
 		F478E8291938BD020015BF38 /* SYNProfileVideoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNProfileVideoModel.m; sourceTree = "<group>"; };
-		F47C260E1993CA2E0070BD31 /* com.wonderpl.dev.dolly.wonder-today-extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "com.wonderpl.dev.dolly.wonder-today-extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F47C260E1993CA2E0070BD31 /* com.wonderpl.dolly.wonder-today-extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "com.wonderpl.dolly.wonder-today-extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F47C260F1993CA2E0070BD31 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		F47C26131993CA2E0070BD31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F47C26141993CA2E0070BD31 /* TodayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TodayViewController.h; sourceTree = "<group>"; };
@@ -1845,6 +1845,7 @@
 		F4A4441719366089009287FA /* ShopMotionBagItem@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ShopMotionBagItem@2x.png"; sourceTree = "<group>"; };
 		F4A8F0911961B75900404F12 /* SYNVideoPlayerDismissIndex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYNVideoPlayerDismissIndex.h; sourceTree = "<group>"; };
 		F4AAA90219797F7200DC6E08 /* test_suite.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = test_suite.js; sourceTree = "<group>"; };
+		F4B5A97C19C9FA070097730E /* com.wonderpl.dolly.wonder-today-extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "com.wonderpl.dolly.wonder-today-extension.entitlements"; sourceTree = "<group>"; };
 		F4C692E7196AA41C00F57DD9 /* SYNTwitterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNTwitterManager.h; sourceTree = "<group>"; };
 		F4C692E8196AA41C00F57DD9 /* SYNTwitterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNTwitterManager.m; sourceTree = "<group>"; };
 		F4C692EA196ACB5E00F57DD9 /* TWSignedRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWSignedRequest.h; sourceTree = "<group>"; };
@@ -1931,7 +1932,7 @@
 			children = (
 				010DEFD01629BDC40080F26B /* dolly.app */,
 				01901A951771CCBA007DBEAC /* dollyTests.xctest */,
-				F47C260E1993CA2E0070BD31 /* com.wonderpl.dev.dolly.wonder-today-extension.appex */,
+				F47C260E1993CA2E0070BD31 /* com.wonderpl.dolly.wonder-today-extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -4049,6 +4050,7 @@
 		F47C26111993CA2E0070BD31 /* wonder-today-extension */ = {
 			isa = PBXGroup;
 			children = (
+				F4B5A97C19C9FA070097730E /* com.wonderpl.dolly.wonder-today-extension.entitlements */,
 				F45E2C631994CD2000E9266B /* com.wonderpl.dev.dolly.wonder-today-extension.entitlements */,
 				F47C26141993CA2E0070BD31 /* TodayViewController.h */,
 				F47C26151993CA2E0070BD31 /* TodayViewController.m */,
@@ -4248,7 +4250,7 @@
 			);
 			name = "wonder-today-extension";
 			productName = "wonder-today-extension";
-			productReference = F47C260E1993CA2E0070BD31 /* com.wonderpl.dev.dolly.wonder-today-extension.appex */;
+			productReference = F47C260E1993CA2E0070BD31 /* com.wonderpl.dolly.wonder-today-extension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -4282,6 +4284,9 @@
 						CreatedOnToolsVersion = 6.0;
 						DevelopmentTeam = 55U2NK549A;
 						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
 							com.apple.iOS = {
 								enabled = 1;
 							};
@@ -5530,7 +5535,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_ENTITLEMENTS = "wonder-today-extension/com.wonderpl.dev.dolly.wonder-today-extension.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "wonder-today-extension/com.wonderpl.dolly.wonder-today-extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -5547,7 +5552,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				METAL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = "com.wonderpl.dev.dolly.$(TARGET_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "com.wonderpl.dolly.$(TARGET_NAME:rfc1034identifier)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
@@ -5560,7 +5565,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_ENTITLEMENTS = "wonder-today-extension/com.wonderpl.dev.dolly.wonder-today-extension.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "wonder-today-extension/com.wonderpl.dolly.wonder-today-extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -5587,7 +5592,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_ENTITLEMENTS = "wonder-today-extension/com.wonderpl.dev.dolly.wonder-today-extension.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "wonder-today-extension/com.wonderpl.dolly.wonder-today-extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_NS_ASSERTIONS = NO;
