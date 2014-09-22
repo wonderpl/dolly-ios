@@ -154,8 +154,15 @@
     // == Add Background View == //
     
     CGRect bgFrame = CGRectZero;
-    bgFrame.size = [[SYNDeviceManager sharedInstance] currentScreenSize];
+
+    if (IS_IOS_8_OR_GREATER) {
+        bgFrame.size = [[UIScreen mainScreen] bounds].size;
+    } else {
+        bgFrame.size = [[SYNDeviceManager sharedInstance] currentScreenSize];
+    }
+
     self.backgroundOverlayView.frame = bgFrame;
+    
     
     [self.backgroundOverlayView addGestureRecognizer:tapGesture];
     
@@ -183,8 +190,8 @@
     }
     else
     {
-		endFrame.origin.x = [[SYNDeviceManager sharedInstance] currentScreenMiddlePoint].x - endFrame.size.width * 0.5f;
-		endFrame.origin.y = [[SYNDeviceManager sharedInstance] currentScreenMiddlePoint].y - endFrame.size.height * 0.5f;
+		endFrame.origin.x = bgFrame.size.width/2 - endFrame.size.width * 0.5f;
+		endFrame.origin.y = bgFrame.size.height/2 - endFrame.size.height * 0.5f;
         
         self.overlayController.view.alpha = 0.0;
         
@@ -193,8 +200,6 @@
         
         self.overlayController.view.frame = self.overlayControllerFrame = endFrame;
     }
-    
-    
     
     
     void(^AnimationsBlock)(void) = ^{
@@ -421,28 +426,29 @@
     }
 }
 
-
-
-
 - (void) willAnimateRotationToInterfaceOrientation: (UIInterfaceOrientation) toInterfaceOrientation
                                           duration: (NSTimeInterval)duration
 {
     [super willAnimateRotationToInterfaceOrientation: toInterfaceOrientation
                                             duration: duration];
     
-    
     if(IS_IPAD && self.overlayController)
     {
         CGRect currentOverlayFrame = self.overlayController.view.frame;
+        
+        CGPoint centre;
+        if (IS_IOS_8_OR_GREATER) {
+            centre = CGPointMake([[UIScreen mainScreen] bounds].size.width/2, [[UIScreen mainScreen] bounds].size.height/2);
+        } else {
+            centre = CGPointMake([[SYNDeviceManager sharedInstance] currentScreenSize].width/2, [[SYNDeviceManager sharedInstance] currentScreenSize].height/2);
+        }
+
 		currentOverlayFrame.size = self.overlayControllerFrame.size;
-		currentOverlayFrame.origin.x = [[SYNDeviceManager sharedInstance] currentScreenWidth] * 0.5f - currentOverlayFrame.size.width * 0.5;
-		currentOverlayFrame.origin.y = [[SYNDeviceManager sharedInstance] currentScreenHeight] * 0.5f - currentOverlayFrame.size.height * 0.5;
+		currentOverlayFrame.origin.x = centre.x - currentOverlayFrame.size.width * 0.5;
+		currentOverlayFrame.origin.y = centre.y - currentOverlayFrame.size.height * 0.5;
         
         self.overlayController.view.frame = currentOverlayFrame;
     }
-
-    
-
 }
 
 #pragma mark - Accessors
