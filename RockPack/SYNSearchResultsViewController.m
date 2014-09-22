@@ -173,14 +173,11 @@ typedef void (^SearchResultCompleteBlock)(int);
         }
         // protection from being called twice, one for every tab and making the loader dissapear prematurely
 //        if (wself.searchResultsShowing == SearchResultsShowingUsers)
-            [wself removePopupMessage];
-        
+        [wself removePopupMessage];
         wself.loadingMoreContent = NO;
-        
-        
         wself.dataItemsAvailable2 = (NSInteger)count;
-        
         [wself.usersCollectionView reloadData];
+        
     };
     
     // Set Initial
@@ -209,7 +206,6 @@ typedef void (^SearchResultCompleteBlock)(int);
 		[self.videosCollectionView deselectItemAtIndexPath:selectedIndexPath animated:YES];
 	}
     
-    [self.usersCollectionView.collectionViewLayout invalidateLayout];
     self.shownOverlay = NO;
     if (self.searchResultsShowing == SearchResultsShowingUsers) {
         [self showUserOverLay];
