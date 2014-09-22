@@ -202,7 +202,8 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
             [wself reloadCategories];
         }];
     }
-
+    
+    [self.categoriesCollectionView.collectionViewLayout invalidateLayout];
 	[self.categoriesCollectionView reloadData];
 	
 	//Automatically select editors picks on load.
@@ -834,12 +835,22 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 
 
 - (void)updateContainerWidths {
+    
+    
 	if (IS_IPAD) {
-		CGFloat width = CGRectGetWidth(self.view.bounds);
+	
+        CGFloat width;// = CGRectGetWidth(self.view.bounds);
+        if (IS_IOS_8_OR_GREATER) {
+            width = [[UIScreen mainScreen] bounds].size.width - 97;
+            
+        } else {
+            width = [[SYNDeviceManager sharedInstance] currentScreenSize].width - 97;
+        }
+        
 		CGFloat sideWidth = (int)(width / 3.0);
 		
 		
-		if (UIDeviceOrientationIsPortrait([[SYNDeviceManager sharedInstance] orientation])) {
+		if (UIDeviceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
 			sideWidth = 273;
 		}
 		self.sideContainerWidth.constant = sideWidth;
