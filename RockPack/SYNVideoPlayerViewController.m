@@ -169,12 +169,11 @@
 														 name:UIDeviceOrientationDidChangeNotification
 													   object:nil];
 		}
-        
-        if (IS_IOS_7 && IS_IPHONE) {
-            [self.videosCollectionView.collectionViewLayout invalidateLayout];
-            [self.videosCollectionView reloadData];
-        }
 	}
+
+    [self.videosCollectionView.collectionViewLayout invalidateLayout];
+    [self.videosCollectionView reloadData];
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

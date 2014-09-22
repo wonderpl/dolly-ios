@@ -38,7 +38,9 @@
 
 - (void)awakeFromNib {
 	[super awakeFromNib];
-	self.loadingLabel.font = [UIFont lightCustomFontOfSize:self.loadingLabel.font.pointSize];
+    self.imageView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin |UIViewAutoresizingFlexibleTopMargin |UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin;
+    self.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin |UIViewAutoresizingFlexibleTopMargin |UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin;
+    self.loadingLabel.font = [UIFont lightCustomFontOfSize:self.loadingLabel.font.pointSize];
 	self.activityIndicator.transform = CGAffineTransformMakeScale(0.7, 0.7);
     self.titleLabel.font = [UIFont boldCustomFontOfSize:self.titleLabel.font.pointSize];
 }
