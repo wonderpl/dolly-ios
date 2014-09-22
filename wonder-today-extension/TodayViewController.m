@@ -25,6 +25,8 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *videoHeight;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *labelTop;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *labelRight;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *topPlayImage;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *leftPlayImage;
 
 @end
 
@@ -42,16 +44,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.preferredContentSize = CGSizeMake(0, 360);
     [self setUpVideo];
     
-    if ([[UIScreen mainScreen] bounds].size.width > 320) {
+    if ([[UIScreen mainScreen] bounds].size.width > 600) {
         [self.videoWidth setConstant:320];
         [self.videoHeight setConstant:190];
         
         [self.labelRight setConstant:223];
         [self.labelTop setConstant:12];
-        
+        [self.topPlayImage setConstant:97];
+        [self.leftPlayImage setConstant:122];
     }
 }
 
@@ -105,6 +107,13 @@
     self.descriptionLabel.hidden = ([videoDescription length] == 0);
     self.descriptionLabel.hidden = NO;
     [self.descriptionLabel setText:[self stringByStrippingHTMLFromString:videoDescription]];
+    
+    if (videoDescription.length > 0) {
+        self.preferredContentSize = CGSizeMake(0, 330);
+    } else {
+        self.preferredContentSize = CGSizeMake(0, 260);
+    }
+
 }
 
 - (void)setUpClickToMore {

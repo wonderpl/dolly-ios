@@ -56,8 +56,16 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ButtonShuttleBarPlay.png" translatesAutoresizingMaskIntoConstraints="NO" id="z7Y-DD-F8i">
+                                <rect key="frame" x="55" y="52" width="83" height="54"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="83" id="PBn-XY-TAw"/>
+                                    <constraint firstAttribute="height" constant="54" id="lQ4-4z-c6B"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="z7Y-DD-F8i" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leadingMargin" constant="39" id="3Hr-ZW-L2f"/>
                             <constraint firstItem="PJZ-RI-iJA" firstAttribute="top" secondItem="6QT-hK-XHK" secondAttribute="bottom" constant="29" id="FdR-kY-KOw"/>
                             <constraint firstItem="WTn-LQ-BR9" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leadingMargin" id="GbD-Zr-Qcf"/>
                             <constraint firstItem="c0n-dy-spc" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leadingMargin" id="Ner-Es-cr5"/>
@@ -67,6 +75,7 @@
                             <constraint firstItem="c0n-dy-spc" firstAttribute="trailing" secondItem="S3S-Oj-5AN" secondAttribute="trailingMargin" constant="-10" id="ZmM-TR-y3v"/>
                             <constraint firstItem="Khn-qz-LFI" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leadingMargin" id="acA-5W-HBv"/>
                             <constraint firstAttribute="trailingMargin" secondItem="PJZ-RI-iJA" secondAttribute="trailing" constant="10" id="fia-LW-OjS"/>
+                            <constraint firstItem="z7Y-DD-F8i" firstAttribute="top" secondItem="6QT-hK-XHK" secondAttribute="bottom" constant="52" id="lwg-96-asq"/>
                             <constraint firstAttribute="trailingMargin" secondItem="WTn-LQ-BR9" secondAttribute="trailing" constant="10" id="pVH-Zo-4fm"/>
                             <constraint firstItem="kVv-C0-5aL" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leadingMargin" id="y7I-wX-Ae9"/>
                             <constraint firstItem="c0n-dy-spc" firstAttribute="top" secondItem="Khn-qz-LFI" secondAttribute="bottom" constant="8" id="yIC-WQ-c9S"/>
@@ -83,7 +92,9 @@
                         <outlet property="descriptionLabel" destination="WTn-LQ-BR9" id="VQb-Z2-GiJ"/>
                         <outlet property="labelRight" destination="fia-LW-OjS" id="aWI-SQ-pOf"/>
                         <outlet property="labelTop" destination="FdR-kY-KOw" id="WGT-zQ-zwP"/>
+                        <outlet property="leftPlayImage" destination="3Hr-ZW-L2f" id="5aq-yY-WGB"/>
                         <outlet property="titleLabel" destination="c0n-dy-spc" id="nk4-Bt-5iK"/>
+                        <outlet property="topPlayImage" destination="lwg-96-asq" id="888-H5-ku5"/>
                         <outlet property="videoButton" destination="Khn-qz-LFI" id="Lhg-Td-nzN"/>
                         <outlet property="videoHeight" destination="sst-3K-mbm" id="DQY-tc-1PI"/>
                         <outlet property="videoWidth" destination="lbH-lv-gEo" id="Jyv-xR-p0e"/>
@@ -95,6 +106,9 @@
             <point key="canvasLocation" x="-236.5" y="187"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ButtonShuttleBarPlay.png" width="38" height="24"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

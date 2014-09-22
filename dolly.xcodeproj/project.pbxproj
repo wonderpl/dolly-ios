@@ -708,6 +708,7 @@
 		F47C26161993CA2E0070BD31 /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F47C26151993CA2E0070BD31 /* TodayViewController.m */; };
 		F47C26181993CA2E0070BD31 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F47C26171993CA2E0070BD31 /* MainInterface.storyboard */; };
 		F47C261B1993CA2E0070BD31 /* com.wonderpl.dolly.wonder-today-extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F47C260E1993CA2E0070BD31 /* com.wonderpl.dolly.wonder-today-extension.appex */; };
+		F47EFD4D19D05FC1005C7DC3 /* Images.xcassets in Sources */ = {isa = PBXBuildFile; fileRef = 1F65D48F17EB3C8B004326A9 /* Images.xcassets */; };
 		F48C1619192B663B00107B32 /* TabActivityNotification@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = F48C1617192B663B00107B32 /* TabActivityNotification@2x~iphone.png */; };
 		F48C161A192B663B00107B32 /* TabActivityNotification~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = F48C1618192B663B00107B32 /* TabActivityNotification~iphone.png */; };
 		F48C161D192B665000107B32 /* TabActivityNotification~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F48C161B192B665000107B32 /* TabActivityNotification~ipad.png */; };
@@ -5164,6 +5165,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F47EFD4D19D05FC1005C7DC3 /* Images.xcassets in Sources */,
 				F47C26161993CA2E0070BD31 /* TodayViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
