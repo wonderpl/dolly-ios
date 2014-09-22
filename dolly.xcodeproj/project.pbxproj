@@ -503,8 +503,6 @@
 		BEF0AE0716E751280094BFDA /* SYNNetworkOperationJsonObjectParse.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF0AE0616E751280094BFDA /* SYNNetworkOperationJsonObjectParse.m */; };
 		BEF3E588183682FF006DECD0 /* IconFriendsEmpty.png in Resources */ = {isa = PBXBuildFile; fileRef = BEF3E586183682FF006DECD0 /* IconFriendsEmpty.png */; };
 		BEF3E589183682FF006DECD0 /* IconFriendsEmpty@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEF3E587183682FF006DECD0 /* IconFriendsEmpty@2x.png */; };
-		BEF5ED8F17DE061E006EF5A1 /* ShareAddEntry.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BEF5ED8B17DE061E006EF5A1 /* ShareAddEntry.jpg */; };
-		BEF5ED9017DE061E006EF5A1 /* ShareAddEntry@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BEF5ED8C17DE061E006EF5A1 /* ShareAddEntry@2x.jpg */; };
 		BEF5ED9117DE061E006EF5A1 /* ShareAddEntrySmall.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BEF5ED8D17DE061E006EF5A1 /* ShareAddEntrySmall.jpg */; };
 		BEF5ED9217DE061E006EF5A1 /* ShareAddEntrySmall@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BEF5ED8E17DE061E006EF5A1 /* ShareAddEntrySmall@2x.jpg */; };
 		BEFAE89C1725485B009B2F66 /* SYNVideoQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFAE89B1725485B009B2F66 /* SYNVideoQueue.m */; };
@@ -709,6 +707,10 @@
 		F47C26181993CA2E0070BD31 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F47C26171993CA2E0070BD31 /* MainInterface.storyboard */; };
 		F47C261B1993CA2E0070BD31 /* com.wonderpl.dolly.wonder-today-extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F47C260E1993CA2E0070BD31 /* com.wonderpl.dolly.wonder-today-extension.appex */; };
 		F47EFD4D19D05FC1005C7DC3 /* Images.xcassets in Sources */ = {isa = PBXBuildFile; fileRef = 1F65D48F17EB3C8B004326A9 /* Images.xcassets */; };
+		F47EFD5019D074EB005C7DC3 /* ShareAddEntry.png in Resources */ = {isa = PBXBuildFile; fileRef = F47EFD4E19D074EB005C7DC3 /* ShareAddEntry.png */; };
+		F47EFD5119D074EB005C7DC3 /* ShareAddEntry.png in Resources */ = {isa = PBXBuildFile; fileRef = F47EFD4E19D074EB005C7DC3 /* ShareAddEntry.png */; };
+		F47EFD5219D074EB005C7DC3 /* ShareAddEntry@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F47EFD4F19D074EB005C7DC3 /* ShareAddEntry@2x.png */; };
+		F47EFD5319D074EB005C7DC3 /* ShareAddEntry@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F47EFD4F19D074EB005C7DC3 /* ShareAddEntry@2x.png */; };
 		F48C1619192B663B00107B32 /* TabActivityNotification@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = F48C1617192B663B00107B32 /* TabActivityNotification@2x~iphone.png */; };
 		F48C161A192B663B00107B32 /* TabActivityNotification~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = F48C1618192B663B00107B32 /* TabActivityNotification~iphone.png */; };
 		F48C161D192B665000107B32 /* TabActivityNotification~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = F48C161B192B665000107B32 /* TabActivityNotification~ipad.png */; };
@@ -1488,8 +1490,6 @@
 		BEF0AE0616E751280094BFDA /* SYNNetworkOperationJsonObjectParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNNetworkOperationJsonObjectParse.m; sourceTree = "<group>"; };
 		BEF3E586183682FF006DECD0 /* IconFriendsEmpty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = IconFriendsEmpty.png; path = Assets/Images/IconFriendsEmpty.png; sourceTree = "<group>"; };
 		BEF3E587183682FF006DECD0 /* IconFriendsEmpty@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "IconFriendsEmpty@2x.png"; path = "Assets/Images/IconFriendsEmpty@2x.png"; sourceTree = "<group>"; };
-		BEF5ED8B17DE061E006EF5A1 /* ShareAddEntry.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = ShareAddEntry.jpg; path = Assets/Images/ShareAddEntry.jpg; sourceTree = "<group>"; };
-		BEF5ED8C17DE061E006EF5A1 /* ShareAddEntry@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "ShareAddEntry@2x.jpg"; path = "Assets/Images/ShareAddEntry@2x.jpg"; sourceTree = "<group>"; };
 		BEF5ED8D17DE061E006EF5A1 /* ShareAddEntrySmall.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = ShareAddEntrySmall.jpg; path = Assets/Images/ShareAddEntrySmall.jpg; sourceTree = "<group>"; };
 		BEF5ED8E17DE061E006EF5A1 /* ShareAddEntrySmall@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "ShareAddEntrySmall@2x.jpg"; path = "Assets/Images/ShareAddEntrySmall@2x.jpg"; sourceTree = "<group>"; };
 		BEFAE89A1725485B009B2F66 /* SYNVideoQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNVideoQueue.h; sourceTree = "<group>"; };
@@ -1799,6 +1799,8 @@
 		F47C26141993CA2E0070BD31 /* TodayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TodayViewController.h; sourceTree = "<group>"; };
 		F47C26151993CA2E0070BD31 /* TodayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TodayViewController.m; sourceTree = "<group>"; };
 		F47C26171993CA2E0070BD31 /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
+		F47EFD4E19D074EB005C7DC3 /* ShareAddEntry.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ShareAddEntry.png; sourceTree = "<group>"; };
+		F47EFD4F19D074EB005C7DC3 /* ShareAddEntry@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ShareAddEntry@2x.png"; sourceTree = "<group>"; };
 		F48C1617192B663B00107B32 /* TabActivityNotification@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabActivityNotification@2x~iphone.png"; sourceTree = "<group>"; };
 		F48C1618192B663B00107B32 /* TabActivityNotification~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabActivityNotification~iphone.png"; sourceTree = "<group>"; };
 		F48C161B192B665000107B32 /* TabActivityNotification~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabActivityNotification~ipad.png"; sourceTree = "<group>"; };
@@ -3646,12 +3648,12 @@
 		BE8F938F17B3CF9700E7035F /* Sharing */ = {
 			isa = PBXGroup;
 			children = (
+				F47EFD4E19D074EB005C7DC3 /* ShareAddEntry.png */,
+				F47EFD4F19D074EB005C7DC3 /* ShareAddEntry@2x.png */,
 				99F300DB191BEBBE002C1D25 /* share-message-background@2x~ipad.png */,
 				99F300DC191BEBBE002C1D25 /* share-message-background~ipad.png */,
 				99F300D7191BD80F002C1D25 /* share-message-background@2x.png */,
 				99F300D8191BD80F002C1D25 /* share-message-background.png */,
-				BEF5ED8B17DE061E006EF5A1 /* ShareAddEntry.jpg */,
-				BEF5ED8C17DE061E006EF5A1 /* ShareAddEntry@2x.jpg */,
 				BEF5ED8D17DE061E006EF5A1 /* ShareAddEntrySmall.jpg */,
 				BEF5ED8E17DE061E006EF5A1 /* ShareAddEntrySmall@2x.jpg */,
 			);
@@ -4438,6 +4440,7 @@
 				BED027D91834F4EA00636659 /* SYNAccountSettingsViewController.xib in Resources */,
 				F4A443FF19363A0F009287FA /* ShopMotion8.png in Resources */,
 				1F458B0717E1C4E6003C14AC /* AppIcon76x76@2x.png in Resources */,
+				F47EFD5019D074EB005C7DC3 /* ShareAddEntry.png in Resources */,
 				99BEAEC2191D1F6500A27FC7 /* facebook-login-button@2x.png in Resources */,
 				9937CA2C19228EFC002D3C23 /* intro-church~ipad.jpg in Resources */,
 				BEC39C0E184CA4F700DA8089 /* SYNFeedbackViewController.xib in Resources */,
@@ -4711,6 +4714,7 @@
 				F4F5062F192CAAFA00993D0B /* SYNAddToChannelOverlayViewController~iphone.xib in Resources */,
 				F4A4440A19363A0F009287FA /* ShopMotion4@2x.png in Resources */,
 				993B1B5D191AA526008532D4 /* TabActivity~ipad.png in Resources */,
+				F47EFD5219D074EB005C7DC3 /* ShareAddEntry@2x.png in Resources */,
 				F4A4440919363A0F009287FA /* ShopMotion3@2x.png in Resources */,
 				F4C7E58A192E3419006053DA /* AvatarUpload@2x.png in Resources */,
 				BE53DD801832850400D65793 /* SYNAddToChannelCell~iphone.xib in Resources */,
@@ -4757,11 +4761,9 @@
 				BED027CD1834D4CC00636659 /* ButtonMoreFriends@2x.png in Resources */,
 				E91E3B2118C7292400F79020 /* ButtonVideoDeleteDefault.png in Resources */,
 				993B1B44191AA4B5008532D4 /* TabFeed@2x~ipad.png in Resources */,
-				BEF5ED8F17DE061E006EF5A1 /* ShareAddEntry.jpg in Resources */,
 				7D6A477119362E9800B998EA /* ShopMotionButtonActive.png in Resources */,
 				993B1ACB191A95FC008532D4 /* TabProfile~iphone.png in Resources */,
 				4C0B956C19128262008D8036 /* SYNSearchVideoSmallCell.xib in Resources */,
-				BEF5ED9017DE061E006EF5A1 /* ShareAddEntry@2x.jpg in Resources */,
 				BEF5ED9117DE061E006EF5A1 /* ShareAddEntrySmall.jpg in Resources */,
 				BEF5ED9217DE061E006EF5A1 /* ShareAddEntrySmall@2x.jpg in Resources */,
 				F4A4441219363A0F009287FA /* ShopMotion12@2x.png in Resources */,
@@ -4782,6 +4784,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F47EFD5119D074EB005C7DC3 /* ShareAddEntry.png in Resources */,
+				F47EFD5319D074EB005C7DC3 /* ShareAddEntry@2x.png in Resources */,
 				F47C26181993CA2E0070BD31 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

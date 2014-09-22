@@ -23,12 +23,10 @@
 
 @implementation SYNOneToOneSharingFriendCell
 
--(void)awakeFromNib
-{
-    
+-(void)awakeFromNib {
     self.nameLabel.font = [UIFont lightCustomFontOfSize:self.nameLabel.font.pointSize];
     self.imageView.layer.cornerRadius = self.imageView.frame.size.width * 0.5;
-    
+    [self.imageView setImage:[UIImage new]];
 }
 
 
@@ -60,7 +58,6 @@
 - (void)setFriend:(Friend *)friendItem {
     
     _friend = friendItem;
-
     
     if ([friendItem.thumbnailURL rangeOfString: @"localhost"].location == NSNotFound) // is not a fake URL
     {
@@ -88,6 +85,7 @@
 - (void)setAvatarAlpha:(double)alpha {
 	self.avatarButton.alpha = alpha;
 }
+
 - (IBAction)avatarButtonTapped:(id)sender {
         [self.delegate cell:self tappedWithFriend:self.friend];
 }

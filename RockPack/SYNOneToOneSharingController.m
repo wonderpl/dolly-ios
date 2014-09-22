@@ -681,7 +681,7 @@ SYNFriendShareCellDelegate>
     
     if (realIndex == 0)
     {
-        [userThumbnailCell setAvatarImage:[UIImage imageNamed: @"ShareAddEntry.jpg"]];
+        [userThumbnailCell setAvatarImage:[UIImage imageNamed: @"ShareAddEntry.png"]];
         [userThumbnailCell setDisplayName: @"Add New"];
         [userThumbnailCell setAvatarAlpha:1.0];
         userThumbnailCell.delegate = self;
@@ -782,7 +782,7 @@ shouldSelectItemAtIndexPath: (NSIndexPath *) indexPath
     
     if (indexPath.row == self.searchedFriends.count) // last 'special' cell
     {
-        cell.imageView.image = [UIImage imageNamed: @"ShareAddEntrySmall.jpg"];
+        cell.imageView.image = [UIImage imageNamed: @"ShareAddEntry.png"];
         cell.textLabel.text = @"Add a new email address";
         cell.detailTextLabel.text = @"";
         cell.special = YES;
