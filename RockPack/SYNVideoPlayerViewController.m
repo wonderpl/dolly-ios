@@ -174,8 +174,13 @@
 	}
 
     [self.videosCollectionView.collectionViewLayout invalidateLayout];
+    
+    if (IS_IPHONE) {
+        [self.videosCollectionView layoutIfNeeded];
+        [self.videosCollectionView layoutSubviews];
+    }
+    
     [self.videosCollectionView reloadData];
-
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -298,8 +303,6 @@
         cell.videoPlayer.maximised = self.maximised;
 	}
     
-    NSLog(@"frame size : %@", NSStringFromCGRect(cell.frame));
-	
 	return cell;
 }
 
