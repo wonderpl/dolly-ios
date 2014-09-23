@@ -207,8 +207,10 @@ typedef enum : NSInteger {
 
 // Notifications
 
+// kScrollMovement is used in iPhone for the hiding and showing of the tab bar.
 #define kScrollMovement @"kScrollMovement"
-#define kHideAllDesciptions @"kHideAllDesciptions"
+
+// kReloadFeed is used as a post notificatio to refresh the feed and the widget.
 #define kReloadFeed @"kReloadFeed"
 
 #define kLoginOnBoardingMessagesNum 5
@@ -217,7 +219,6 @@ typedef enum : NSInteger {
 #define kTextViewContentSizeKey @"contentSize"
 
 // OAuth Username and Password
-
 #define kOAuth2ClientId @"c8fe5f6rock873dpack19Q"
 
 

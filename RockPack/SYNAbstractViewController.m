@@ -36,17 +36,19 @@
 
 @interface SYNAbstractViewController () <UIViewControllerTransitioningDelegate>
 
-@property (strong, nonatomic) NSMutableDictionary *mutableShareDictionary;
+@property (nonatomic, strong) NSMutableDictionary *mutableShareDictionary;
+
 @property (nonatomic, assign) NSInteger lastContentOffset;
 @property (nonatomic, assign) CGPoint startDraggingPoint;
 @property (nonatomic, assign) CGPoint endDraggingPoint;
-@property (strong, nonatomic) NSDate *startDate;
-@property (strong, nonatomic) NSDate *endDate;
-@property (nonatomic, strong) SYNPopupMessageView* popupMessageView;
-@property (nonatomic, assign) ScrollingDirection scrollDirection;
 @property (nonatomic, assign) BOOL scrollerIsNearTop;
-
+@property (nonatomic, assign) ScrollingDirection scrollDirection;
 @property (nonatomic, strong) UITapGestureRecognizer *scrollToTopGestureRecognizer;
+
+@property (nonatomic, strong) NSDate *startDate;
+@property (nonatomic, strong) NSDate *endDate;
+
+@property (nonatomic, strong) SYNPopupMessageView* popupMessageView;
 
 @end
 
@@ -57,28 +59,22 @@
 
 #pragma mark - Object lifecycle
 
-- (id) init
-{
+- (id)init {
     return [self initWithViewId: @"Unknown"];
 }
 
-
-- (id) initWithViewId: (NSString*) vid
-{
+- (id) initWithViewId: (NSString*) vid {
     // Check to see if there is a XIB file in the system and initialise accordingly
     
     NSString* classNameString = NSStringFromClass([self class]);
     
-    if([[NSBundle mainBundle] pathForResource:classNameString ofType:@"nib"] != nil)
-    {
+    if([[NSBundle mainBundle] pathForResource:classNameString ofType:@"nib"] != nil) {
         self = [super initWithNibName:classNameString bundle:nil];
-    }
-    else
-    {
+    } else {
         self = [super init];
     }
-    if (self)
-    {
+    
+    if (self) {
         viewId = vid;
         
         [[NSNotificationCenter defaultCenter] addObserver: self
@@ -91,16 +87,13 @@
 }
 
 
-- (void) dealloc
-{
-    // Stop observing everything
+- (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver: self];
 }
 
 #pragma mark - View lifecycle
 
-- (void) viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     self.automaticallyAdjustsScrollViewInsets = NO; 
@@ -113,11 +106,9 @@
     appDelegate = (SYNAppDelegate *)[[UIApplication sharedApplication] delegate];
     
     // for loading data
-    
     [self resetDataRequestRange];
     
     self.view.multipleTouchEnabled = NO;
-    
     
     //IPad has no navigation titles
     if (IS_IPAD) {
@@ -125,7 +116,7 @@
     }
 }
 
--(void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     [self setNeedsStatusBarAppearanceUpdate];
@@ -162,18 +153,15 @@
 
 #pragma mark - Data Request Range
 
-- (void) resetDataRequestRange
-{
+- (void)resetDataRequestRange {
     self.dataRequestRange = NSMakeRange(0, STANDARD_REQUEST_LENGTH);
 }
 
-- (BOOL) moreItemsToLoad
-{
+- (BOOL)moreItemsToLoad {
     return (self.dataRequestRange.location + self.dataRequestRange.length < self.dataItemsAvailable);
 }
 
-- (void) incrementRangeForNextRequest
-{
+- (void)incrementRangeForNextRequest {
     if(!self.moreItemsToLoad)
         return;
     
@@ -184,19 +172,16 @@
     self.dataRequestRange = NSMakeRange(nextStart, nextSize);
 }
 
--(void)clearedLocationBoundData
-{
+- (void)clearedLocationBoundData {
     // to be implemented by child
 }
 
 
--(void)setTitle:(NSString *)title
-{
+- (void)setTitle:(NSString *)title {
     abstractTitle = title;
 }
 
--(NSString*)title
-{
+- (NSString*)title {
     if(abstractTitle && ![abstractTitle isEqualToString:@""])
         return abstractTitle;
     else
@@ -252,7 +237,7 @@
     videoInstance.starredByUserValue = didStar;
 }
 
-- (void)shareChannel:(Channel *)channel {
+- (void)shareChannel:(Channel *) channel {
 	VideoInstance *firstVideoInstance = [channel.videoInstances firstObject];
 	UIImage *image = [[SDImageCache sharedImageCache] imageFromMemoryCacheForKey:firstVideoInstance.thumbnailURL];
 
@@ -262,31 +247,26 @@
     [self shareObject:channel usingImage:image];
 }
 
-- (void) shareVideoInstance: (VideoInstance *) videoInstance
-{
+- (void)shareVideoInstance:(VideoInstance *)videoInstance {
     
-    NSLog(@"SHARE videoInstance.uniqueId %@",videoInstance);
-
 	[self requestShareLinkWithObjectType: @"video_instance"
 								objectId: videoInstance.uniqueId
      	trackingCode:[[SYNActivityManager sharedInstance] trackingCodeForVideoInstance:videoInstance]];
     
     // At this point it is safe to assume that the video thumbnail image is in the cache
     UIImage *thumbnailImage = [SDWebImageManager.sharedManager.imageCache imageFromMemoryCacheForKey: videoInstance.video.thumbnailURL];
-    
-
     [self shareObject:videoInstance usingImage:thumbnailImage];
 }
 
 
-- (void)shareObject: (id) object usingImage: (UIImage *) usingImage {
+- (void)shareObject:(id)object usingImage:(UIImage *) usingImage {
     SYNOneToOneSharingController *viewController = [self createSharingViewControllerForShareObject:object image:usingImage];
     viewController.modalPresentationStyle = UIModalPresentationCustom;
 	viewController.transitioningDelegate = self;
 	[self presentViewController:viewController animated:YES completion:nil];
 }
 
-- (NSString*) userName {
+- (NSString*)userName {
 	NSString *userName = nil;
 	User *user = appDelegate.currentUser;
 	
@@ -302,7 +282,7 @@
 }
 
 - (SYNOneToOneSharingController *)createSharingViewControllerForShareObject:(id) shareObject
-                                                                     	image:(UIImage *)image {
+                                                                      image:(UIImage *)image {
     NSString *subject = @"";
 	NSString *userName = [self userName];
 	NSString *type = @"";
@@ -337,8 +317,7 @@
 
 - (void) requestShareLinkWithObjectType: (NSString *) objectType
                                objectId: (NSString *) objectId
-                           trackingCode: (NSString *) trackingCode
-{
+                           trackingCode: (NSString *) trackingCode {
     // Get share link
     self.mutableShareDictionary = @{@"type" : objectType,
                                     @"object_id" : objectId,
@@ -352,8 +331,7 @@
     [appDelegate.oAuthNetworkEngine shareLinkWithObjectType: objectType
                                                    objectId: objectId
                                                trackingCode: trackingCode
-                                          completionHandler: ^(NSDictionary *responseDictionary)
-     {
+                                          completionHandler: ^(NSDictionary *responseDictionary) {
          NSString *resourceURLString = [responseDictionary objectForKey: @"resource_url"
                                                             withDefault: @"http://rockpack.com"];
          
@@ -390,14 +368,12 @@
 
 // Load more footer
 
-- (CGSize) footerSize
-{
+- (CGSize) footerSize {
     return IS_IPHONE ? CGSizeMake(320.0f, 64.0f) : CGSizeMake(1024.0, 64.0);
 }
 
 
-- (void) setLoadingMoreContent: (BOOL) loadingMoreContent
-{
+- (void) setLoadingMoreContent: (BOOL) loadingMoreContent {
     // First set the state of our footer spinner
     self.footerView.showsLoading = loadingMoreContent;
     
@@ -419,60 +395,41 @@
 
 #pragma mark UIApplication Callback Notifications
 
-- (void) applicationWillEnterForeground: (UIApplication *) application
-{
+- (void) applicationWillEnterForeground: (UIApplication *) application {
     [self resetDataRequestRange];
-    
     // and then make a class appropriate data call
-
 }
 
-
-
-- (UIStatusBarStyle) preferredStatusBarStyle
-{
+- (UIStatusBarStyle) preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
 }
 
 
 #pragma mark - UIScrollView delegates
 
-
-- (void) scrollViewWillBeginDragging: (UIScrollView *) scrollView
-{
-
+- (void) scrollViewWillBeginDragging: (UIScrollView *) scrollView {
     self.startDraggingPoint = scrollView.contentOffset;
     self.startDate = [NSDate date];
 }
 
-
-- (void) scrollViewDidEndDragging: (UIScrollView *) scrollView willDecelerate: (BOOL) decelerate
-{
-
+- (void) scrollViewDidEndDragging: (UIScrollView *) scrollView willDecelerate: (BOOL) decelerate {
     self.endDraggingPoint = scrollView.contentOffset;
     self.endDate = [NSDate dateWithTimeIntervalSinceNow: self.startDate.timeIntervalSinceNow];
     [self shouldHideTabBar];
 }
 
-
-- (void) scrollViewDidScroll: (UIScrollView *) scrollView
-{
-    
+- (void) scrollViewDidScroll: (UIScrollView *) scrollView {
     int offset = scrollView.contentOffset.y + self.offsetValue;
     
-    if (self.lastContentOffset > offset)
-    {
+    if (self.lastContentOffset > offset) {
         self.scrollDirection = ScrollingDirectionUp;
-    }
-    else
-    {
+    } else {
         self.scrollDirection = ScrollingDirectionDown;
     }
     
     self.lastContentOffset = offset;
     
-    if (scrollView.contentOffset.y < kScrollContentOff && !self.scrollerIsNearTop)
-    {
+    if (scrollView.contentOffset.y < kScrollContentOff && !self.scrollerIsNearTop) {
         self.scrollerIsNearTop = YES;
         //Notification that tells the navigation manager to show the navigation bar
         [[NSNotificationCenter defaultCenter] postNotificationName: kScrollMovement
@@ -480,8 +437,7 @@
                                                           userInfo: @{kScrollingDirection:@(ScrollingDirectionUp)}];
     }
     
-    if (scrollView.contentOffset.y > kScrollContentOff && self.scrollerIsNearTop)
-    {
+    if (scrollView.contentOffset.y > kScrollContentOff && self.scrollerIsNearTop) {
         self.scrollerIsNearTop = NO;
     }
 }
@@ -490,8 +446,7 @@
 	return nil;
 }
 
-- (void) shouldHideTabBar
-{
+- (void) shouldHideTabBar {
     CGPoint difference = CGPointMake(self.startDraggingPoint.x - self.endDraggingPoint.x, self.startDraggingPoint.y - self.endDraggingPoint.y);
     
     int check = fabsf(difference.y) / fabsf(self.startDate.timeIntervalSinceNow);
@@ -505,11 +460,9 @@
 }
 
 
-- (SYNPopupMessageView*) displayPopupMessage: (NSString*) messageKey
-                                  withLoader: (BOOL) isLoader
-{
-    if (self.popupMessageView)
-    {
+- (SYNPopupMessageView*)displayPopupMessage: (NSString*) messageKey
+                                 withLoader: (BOOL) isLoader {
+    if (self.popupMessageView) {
         [self.popupMessageView removeFromSuperview];
         self.popupMessageView = nil;
     }
@@ -530,8 +483,7 @@
     return self.popupMessageView;
 }
 
-- (void) removePopupMessage
-{
+- (void)removePopupMessage {
     if (!self.popupMessageView)
         return;
     
@@ -562,22 +514,19 @@
 }
 
 - (void)viewChannelDetails:(Channel *)channel withAnimation:(BOOL)animated {
+  
     if (!channel)
 		return;
-	
     
 	SYNChannelDetailsViewController *channelVC =
 	(SYNChannelDetailsViewController *) [self viewControllerOfClass:[SYNChannelDetailsViewController class]];
 	
-	if (channelVC) // we found a channelVC
-    {
+	if (channelVC) {
 		channelVC.channel = channel;
         channelVC.mode = kChannelDetailsModeDisplay;
         
 		[self.navigationController popToViewController:channelVC animated:animated];
-	}
-    else
-    {
+	} else {
 		channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel
                                                                    usingMode:kChannelDetailsModeDisplay];
 		[self.navigationController pushViewController:channelVC animated:animated];
@@ -588,8 +537,7 @@
     [self viewVideoInstanceInChannel:channel withVideoId:videoId withClickToMore:NO];
 }
 
-- (void) viewVideoInstanceInChannel:(Channel*) channel withVideoId:videoId withClickToMore:(BOOL)clickToMore
-{
+- (void) viewVideoInstanceInChannel:(Channel*) channel withVideoId:videoId withClickToMore:(BOOL)clickToMore {
     SYNChannelDetailsViewController *channelVC = [[SYNChannelDetailsViewController alloc] initWithChannel:channel
                                                                usingMode:kChannelDetailsModeDisplay];
     channelVC.autoplayId = videoId;
@@ -608,7 +556,6 @@
 	}
 	return nil;
 }
-
 
 - (void)followControlPressed:(UIButton *)button withChannelOwner:(ChannelOwner *)channelOwner withVideoInstace:(VideoInstance*)videoInstance completion :(void (^)(void))callbackBlock {
     
@@ -706,7 +653,6 @@
 }
 
 
-
 - (void) followButtonAnimation :(UIButton *) button {
     
     float totalAnimationTime = 0.35;
@@ -742,7 +688,6 @@
     [group setAnimations:[NSArray arrayWithObjects:first, second, third,  nil]];
     
     [button.layer addAnimation:group forKey:nil];
-    
 }
 
 #pragma mark - UIViewControllerTransitioningDelegate
@@ -758,13 +703,6 @@
 }
 
 #pragma mark - rotation
-
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
-    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    
-    TFLog(@"rotation in class %@", [self class]);
-    TFLog(@"to orientation %d", toInterfaceOrientation);
-}
 
 - (BOOL) isOwnerId:(NSString *) unquieId {
 	return [unquieId isEqualToString:appDelegate.currentUser.uniqueId];

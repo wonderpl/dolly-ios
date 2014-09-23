@@ -144,6 +144,8 @@
 	[audioSession setActive:YES withOptions:0 error:nil];
     
     [self showInboardingSwipe];
+    
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -222,25 +224,20 @@
 	return UIStatusBarStyleDefault;
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-	if ([segue.identifier isEqualToString:@"VideoInfo"])
-    {
-        
+	if ([segue.identifier isEqualToString:@"VideoInfo"]) {
 		SYNVideoInfoViewController *viewController = segue.destinationViewController;
 		viewController.model = self.model;
 		viewController.selectedIndex = self.selectedIndex;
 		viewController.delegate = self;
 		self.videoInfoViewController = viewController;
-        
 	}
 }
 
 #pragma mark - Getters / Setters
 
-- (void)setVideoInstance:(VideoInstance *)videoInstance
-{
+- (void)setVideoInstance:(VideoInstance *)videoInstance {
     if (!videoInstance) {
         return;
     }
@@ -300,6 +297,8 @@
 		cell.videoPlayer = videoPlayer;
         cell.videoPlayer.maximised = self.maximised;
 	}
+    
+    NSLog(@"frame size : %@", NSStringFromCGRect(cell.frame));
 	
 	return cell;
 }
@@ -578,8 +577,6 @@
 }
 
 - (void)updateViewWithOrientation:(UIDeviceOrientation)orientation {
-    
-    
     if (UIDeviceOrientationIsPortrait(orientation)) {
         self.overlayLabel.center = CGPointMake(self.view.center.x, self.view.center.y+100);
         if (IS_IPAD) {
@@ -624,7 +621,7 @@
     }];
 }
 
-- (void) showInboardingShopMotion :(VideoInstance*) videoInstance {
+- (void)showInboardingShopMotion:(VideoInstance*) videoInstance {
     
     BOOL hasAnnotations = [videoInstance.video.videoAnnotations count] > 0;
     

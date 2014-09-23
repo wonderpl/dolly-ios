@@ -25,7 +25,6 @@
 @property (nonatomic, strong) UIView *separatorView;
 
 @property (nonatomic, strong) IBOutlet SYNSocialButton *followButton;
-@property (nonatomic, strong) IBOutlet SYNAvatarButton *userThumbnailButton;
 @property (strong, nonatomic) UIAlertView *followAllAlertView;
 @property (strong, nonatomic) IBOutlet UIImageView *coverImage;
 @property (strong, nonatomic) IBOutlet UIView *gradientMask;
@@ -43,8 +42,6 @@
 		[self addSubview:self.separatorView];
 	}
 	
-	
-	[self.userThumbnailButton addTarget:self action:@selector(profileButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
 	[self.followButton addTarget:self action:@selector(followButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
  
     self.followButton.layer.cornerRadius = self.followButton.frame.size.width/2;
@@ -62,7 +59,6 @@
 	_channelOwner = channelOwner; // can be friend
 	
 	if (!_channelOwner) {
-		self.userThumbnailButton.imageView.image = [UIImage imageNamed: @"PlaceholderChannelSmall.png"];
 		return;
 	}
 
@@ -186,10 +182,6 @@
 	if (IS_IPHONE) {
 		self.separatorView.frame = CGRectMake(0, 0, CGRectGetWidth(self.bounds), 0.5);
 	}
-}
-
-- (void)profileButtonPressed:(UIButton *)button {
-	[self.delegate profileButtonTapped:button];
 }
 
 - (void)followButtonPressed:(UIButton *)button {
