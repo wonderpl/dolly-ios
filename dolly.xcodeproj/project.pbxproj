@@ -5537,6 +5537,7 @@
 		F47C261E1993CA2E0070BD31 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUNDLE_ID = "com.wonderpl.dev.dolly.wonder-today-extension";
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
@@ -5567,6 +5568,7 @@
 		F47C261F1993CA2E0070BD31 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUNDLE_ID = "com.wonderpl.dolly.wonder-today-extension";
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
@@ -5594,6 +5596,7 @@
 		F47C26201993CA2E0070BD31 /* AdHoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUNDLE_ID = "com.wonderpl.dolly.wonder-today-extension";
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
