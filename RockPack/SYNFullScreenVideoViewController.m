@@ -59,11 +59,9 @@ static const CGFloat VideoAspectRatio = 16.0 / 9.0;
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
     
-    if (IS_IOS_8_OR_GREATER) {
         self.videoContainerView.frame = [self videoContainerFrame];
         [self.videoContainerView layoutIfNeeded];
         [self.collectionView layoutSubviews];
-    }
 
 	if (IS_IPHONE) {
 		self.videoOrientation = [[UIDevice currentDevice] orientation];
@@ -126,7 +124,6 @@ static const CGFloat VideoAspectRatio = 16.0 / 9.0;
     self.videoContainerView.frame = [self videoContainerFrame];
     [self.collectionView.collectionViewLayout invalidateLayout];
     [self.collectionView setContentOffset:CGPointMake(self.videoPlayerViewController.selectedIndex * CGRectGetWidth(self.videoContainerView.frame), 0.0f) animated:NO];
-
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
