@@ -59,10 +59,11 @@ static const CGFloat VideoAspectRatio = 16.0 / 9.0;
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
     
-        self.videoContainerView.frame = [self videoContainerFrame];
-        [self.videoContainerView layoutIfNeeded];
-        [self.collectionView layoutSubviews];
-
+    self.videoContainerView.frame = [self videoContainerFrame];
+    [self.videoContainerView layoutIfNeeded];
+    [self.collectionView.collectionViewLayout invalidateLayout];
+    [self.collectionView layoutSubviews];
+    
 	if (IS_IPHONE) {
 		self.videoOrientation = [[UIDevice currentDevice] orientation];
 		
