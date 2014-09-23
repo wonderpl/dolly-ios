@@ -131,8 +131,8 @@ static CGFloat const ControlsFadeTimer = 5.0;
 									   CGRectGetHeight(self.frame) - CGRectGetHeight(scrubberBar.frame),
 									   CGRectGetWidth(self.frame),
 									   CGRectGetHeight(scrubberBar.frame));
-		scrubberBar.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin);
-		scrubberBar.delegate = self;
+        scrubberBar.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin |UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
+        scrubberBar.delegate = self;
 		
 		self.scrubberBar = scrubberBar;
 	}
