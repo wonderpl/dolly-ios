@@ -205,14 +205,10 @@
 
 #pragma mark - Social Actions Delegate
 
-- (void)favouriteButtonPressed:(UIButton *)button videoInstance:(VideoInstance *)videoInstance
-{
+- (void)favouriteButtonPressed:(UIButton *)button videoInstance:(VideoInstance *)videoInstance {
     
-	[[SYNTrackingManager sharedManager] trackVideoLikeFromScreenName:[self trackingScreenName]];
-	
-    BOOL didStar = (button.selected == NO);
-    
-    button.enabled = NO;
+    [[SYNTrackingManager sharedManager] trackVideoLikeFromScreenName:[self trackingScreenName]];
+	BOOL didStar = (button.selected == NO);
     [self starVideoInstance:videoInstance withButton:button didStar:didStar];
     
     [appDelegate.oAuthNetworkEngine recordActivityForUserId: appDelegate.currentUser.uniqueId
@@ -227,19 +223,12 @@
                                                   videoInstance.starredByUserValue = previousStarringState;
                                               }
                                               
-                                              button.enabled = YES;
                                           } errorHandler: ^(id error) {
                                               DebugLog(@"Could not star video");
-											  
-                                              button.enabled = YES;
                                           }];
 }
 
 - (void)addToChannelButtonPressed:(UIButton *)button videoInstance:(VideoInstance *)videoInstance {
-    
-    NSLog(@"ADD videoInstance.uniqueId %@",videoInstance);
-    
-    NSLog(@"ADD videoInstance ID %@",videoInstance.uniqueId);
 
     [[SYNTrackingManager sharedManager] trackVideoAddFromScreenName:[self trackingScreenName]];
     [appDelegate.oAuthNetworkEngine recordActivityForUserId:appDelegate.currentUser.uniqueId
@@ -256,25 +245,11 @@
     TFLog(@"Channel details: Video instance :%@", videoInstance);
     
 	[self presentViewController:viewController animated:YES completion:nil];
-
-    
-    
 }
 
 - (void)starVideoInstance:(VideoInstance*)videoInstance withButton:(UIButton*)button didStar:(BOOL)didStar {
-
-    if (didStar) {
-        // Currently highlighted, so increment
-        videoInstance.starredByUserValue = YES;
-        
-        button.selected = YES;
-    } else {
-        // Currently highlighted, so decrement
-        videoInstance.starredByUserValue = NO;
-        
-        button.selected = NO;
-    }
-
+	button.selected = didStar;
+    videoInstance.starredByUserValue = didStar;
 }
 
 - (void)shareChannel:(Channel *)channel {
