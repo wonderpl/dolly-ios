@@ -72,15 +72,12 @@ static const CGFloat AnimationDuration = 0.3;
 		
 		[containerView insertSubview:toViewController.view belowSubview:fromViewController.view];
 		
+        toViewController.containerView.center = CGPointMake(toViewController.containerView.center.x - toViewController.view.frame.size.width, toViewController.containerView.center.y);
 		[UIView animateWithDuration:AnimationDuration animations:^{
-			fromViewController.navigationBar.alpha = 0.0;
-			fromViewController.backgroundView.alpha = 0.0;
-			
-			fromViewController.containerView.center = CGPointMake(fromViewController.containerView.center.x + CGRectGetWidth(containerView.frame),
-																  fromViewController.containerView.center.y);
-			
-			toViewController.containerView.center = CGPointZero;
-		} completion:^(BOOL finished) {
+			fromViewController.view.alpha = 0.0;
+            toViewController.containerView.center = CGPointMake(toViewController.containerView.center.x + toViewController.view.frame.size.width, toViewController.containerView.center.y);
+        
+        } completion:^(BOOL finished) {
 			[transitionContext completeTransition:YES];
 		}];
 	}
