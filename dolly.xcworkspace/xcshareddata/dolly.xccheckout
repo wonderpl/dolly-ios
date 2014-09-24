@@ -10,6 +10,10 @@
 	<string>dolly</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>062291CF2AB04ACFFB0274AB9F3FA7A530793FD3</key>
+		<string>https://github.com/rockpack/dolly-ios.git</string>
+		<key>2FF848319764E0EFB4BD54544F7E2E2A0760261A</key>
+		<string>https://github.com/rockpack/MKNetworkKit.git</string>
 		<key>B8C45797-6EF1-45A8-88A0-6CB6C35E4218</key>
 		<string>ssh://github.com/rockpack/dolly-ios.git</string>
 		<key>E8987E8A-0B0F-47FD-AE24-B446F3E7A36A</key>
@@ -19,17 +23,21 @@
 	<string>dolly.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>B8C45797-6EF1-45A8-88A0-6CB6C35E4218</key>
+		<key>062291CF2AB04ACFFB0274AB9F3FA7A530793FD3</key>
 		<string>..</string>
+		<key>2FF848319764E0EFB4BD54544F7E2E2A0760261A</key>
+		<string>..Pods/MKNetworkKit/</string>
+		<key>B8C45797-6EF1-45A8-88A0-6CB6C35E4218</key>
+		<string>../../dolly-ios</string>
 		<key>E8987E8A-0B0F-47FD-AE24-B446F3E7A36A</key>
 		<string>../../ios-app</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://github.com/rockpack/dolly-ios.git</string>
+	<string>https://github.com/rockpack/dolly-ios.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>B8C45797-6EF1-45A8-88A0-6CB6C35E4218</string>
+	<string>062291CF2AB04ACFFB0274AB9F3FA7A530793FD3</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
@@ -44,9 +52,25 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>062291CF2AB04ACFFB0274AB9F3FA7A530793FD3</string>
+			<key>IDESourceControlWCCName</key>
+			<string>dollydevelop</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>E8987E8A-0B0F-47FD-AE24-B446F3E7A36A</string>
 			<key>IDESourceControlWCCName</key>
 			<string>ios-app</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>2FF848319764E0EFB4BD54544F7E2E2A0760261A</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MKNetworkKit</string>
 		</dict>
 	</array>
 </dict>
