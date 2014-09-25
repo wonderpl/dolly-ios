@@ -223,7 +223,7 @@ static NSString* errorText = @"Please provide your feedback here...";
     SYNAppDelegate* appDelegate = (SYNAppDelegate*)[[UIApplication sharedApplication] delegate];
     
     NSString* message = self.textView.text;
-    NSNumber* score = [NSNumber numberWithFloat:self.slider.value];
+    NSNumber* score = [NSNumber numberWithInt:self.slider.value];
     
     __weak SYNFeedbackViewController* wself = self;
     
