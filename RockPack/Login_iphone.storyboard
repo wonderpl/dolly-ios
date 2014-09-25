@@ -51,7 +51,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="302"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="260" translatesAutoresizingMaskIntoConstraints="NO" id="wrO-ZI-aYX" userLabel="Message Label 1">
-                                        <rect key="frame" x="12" y="144" width="260" height="150"/>
+                                        <rect key="frame" x="30" y="144" width="260" height="150"/>
                                         <string key="text">Welcome to Wonder
 
 Watch, collect and share only the very best videos</string>
