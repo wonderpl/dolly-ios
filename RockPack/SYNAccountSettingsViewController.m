@@ -361,10 +361,14 @@
                                            self.dobTableViewCell.textLabel.text = [self getDOBPlainString: user.dateOfBirth];
                                            [dobLoader stopAnimating];
                                            [dobLoader removeFromSuperview];
-										   
 										   [[SYNTrackingManager sharedManager] setAgeDimensionFromBirthDate:datePicker.date];
                                        }
-                                            errorHandler: ^(id errorInfo) {
+                                            errorHandler: ^(NSDictionary* errorInfo) {
+                                                NSString *errorMessage = [errorInfo[@"message"][0] stringByReplacingOccurrencesOfString:@"Rockpack" withString:@"Wonder PL"];
+                                                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Opps" message:errorMessage delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                                                [alert show];
+                                                [dobLoader stopAnimating];
+                                                [dobLoader removeFromSuperview];
                                             }];
 	
 }
