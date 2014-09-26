@@ -211,8 +211,6 @@
 - (void)viewDidDisappear:(BOOL)animated {
 	[super viewDidDisappear:animated];
 	
-	AVAudioSession *audioSession = [AVAudioSession sharedInstance];
-	[audioSession setActive:NO withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation error:nil];
 	
 	BOOL isShowingMail = [self.presentedViewController isKindOfClass:[MFMailComposeViewController class]];
 	BOOL isShowingFullScreen = [self.presentedViewController isKindOfClass:[SYNFullScreenVideoViewController class]];
@@ -221,7 +219,11 @@
 	if (!isShowingFullScreen && !isShowingMail) {
 		[self.currentVideoPlayer pause];
 	}
-    
+
+    if (!isShowingFullScreen) {
+        AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+        [audioSession setActive:NO withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation error:nil];
+    }
     
 }
 
