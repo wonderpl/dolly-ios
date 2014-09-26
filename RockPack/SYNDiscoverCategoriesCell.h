@@ -14,5 +14,6 @@
 @property (nonatomic, strong) UIColor *selectedColor;
 @property (nonatomic, strong) UIColor *deSelectedColor;
 @property (nonatomic, strong, readonly)  UIImageView *arrowImage;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *arrowRightConstant;
 
 @end

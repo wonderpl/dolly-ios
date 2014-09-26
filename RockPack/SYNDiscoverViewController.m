@@ -434,6 +434,17 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 	}
 	
     cell.label.text = subGenre.name;
+    
+    // the arrow would not form to the autolayout
+    
+    if (IS_IPAD && IS_IOS_7) {
+        if (UIDeviceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation])) {
+            [cell.arrowRightConstant setConstant: -26];
+        } else {
+            [cell.arrowRightConstant setConstant: 12];
+        }
+    }
+
  
     return cell;
 }
@@ -856,6 +867,11 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 		self.sideContainerWidth.constant = sideWidth;
 		
 		[self.categoriesCollectionView.collectionViewLayout invalidateLayout];
+        [self.categoriesCollectionView layoutIfNeeded];
+        [self.categoriesCollectionView reloadData];
+        if (self.selectedCellIndex) {
+            [self.categoriesCollectionView selectItemAtIndexPath:self.selectedCellIndex animated:NO scrollPosition:UICollectionViewScrollPositionCenteredVertically];
+        }
 	}
 }
 

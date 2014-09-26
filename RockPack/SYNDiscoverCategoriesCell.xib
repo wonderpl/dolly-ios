@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -14,15 +13,14 @@
                 <rect key="frame" x="0.0" y="0.0" width="256" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="CREATE NEW PACK" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="VDA-cz-Gkg" userLabel="Title Label">
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="501" verticalHuggingPriority="501" horizontalCompressionResistancePriority="499" verticalCompressionResistancePriority="499" text="CREATE NEW PACK" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="VDA-cz-Gkg" userLabel="Title Label">
                         <rect key="frame" x="12" y="0.0" width="244" height="44"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="0.25217363910000001" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView hidden="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rightarrow.png" translatesAutoresizingMaskIntoConstraints="NO" id="7ma-il-ldL">
                         <rect key="frame" x="235" y="14" width="9" height="17"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="17" id="n06-tM-big"/>
                             <constraint firstAttribute="width" constant="9" id="qIM-XS-Fhw"/>
@@ -31,10 +29,10 @@
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="7ma-il-ldL" secondAttribute="trailing" constant="12" id="4dX-0Z-PeS"/>
                 <constraint firstItem="VDA-cz-Gkg" firstAttribute="top" secondItem="DiE-ts-EYH" secondAttribute="top" id="FOG-nv-hqd"/>
-                <constraint firstAttribute="trailing" secondItem="7ma-il-ldL" secondAttribute="trailing" constant="12" id="QHe-pw-XaA"/>
                 <constraint firstAttribute="bottom" secondItem="VDA-cz-Gkg" secondAttribute="bottom" id="RFq-eY-xVk"/>
                 <constraint firstAttribute="centerY" secondItem="7ma-il-ldL" secondAttribute="centerY" id="bq8-Di-eid"/>
                 <constraint firstItem="VDA-cz-Gkg" firstAttribute="leading" secondItem="DiE-ts-EYH" secondAttribute="leading" constant="12" id="lkf-Ob-NaB"/>
@@ -43,6 +41,7 @@
             <size key="customSize" width="332" height="67"/>
             <connections>
                 <outlet property="arrowImage" destination="7ma-il-ldL" id="ygV-Cp-g3l"/>
+                <outlet property="arrowRightConstant" destination="4dX-0Z-PeS" id="p9e-C4-vLL"/>
                 <outlet property="label" destination="VDA-cz-Gkg" id="Unb-AB-PbO"/>
             </connections>
         </collectionViewCell>
@@ -50,4 +49,9 @@
     <resources>
         <image name="rightarrow.png" width="9" height="17"/>
     </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
 </document>
