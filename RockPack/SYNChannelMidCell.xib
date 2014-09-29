@@ -30,8 +30,8 @@
                                     <action selector="deleteChannel:" destination="3" eventType="touchUpInside" id="sxk-oZ-4ax"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="DESCRIPTION" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="12" preferredMaxLayoutWidth="250" translatesAutoresizingMaskIntoConstraints="NO" id="96x-Ly-DNm">
-                                <rect key="frame" x="0.0" y="0.0" width="143" height="27"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DESCRIPTION" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="12" preferredMaxLayoutWidth="250" translatesAutoresizingMaskIntoConstraints="NO" id="96x-Ly-DNm">
+                                <rect key="frame" x="0.0" y="0.0" width="280" height="90"/>
                                 <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -47,7 +47,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GARDENING TIPS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="qfg-Af-VXr" userLabel="Label - Pack name">
-                                        <rect key="frame" x="18" y="15" width="243" height="27"/>
+                                        <rect key="frame" x="18" y="15" width="243" height="26.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <color key="textColor" red="0.0039215686274509803" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -82,11 +82,15 @@
                         </subviews>
                         <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="96x-Ly-DNm" firstAttribute="top" secondItem="YqO-ZS-QBX" secondAttribute="top" id="0DO-DI-gZv"/>
+                            <constraint firstAttribute="bottom" secondItem="96x-Ly-DNm" secondAttribute="bottom" id="1JS-LF-24V"/>
                             <constraint firstItem="IsZ-bf-jJ2" firstAttribute="leading" secondItem="YqO-ZS-QBX" secondAttribute="leading" id="Fyu-gb-0VV"/>
                             <constraint firstAttribute="trailing" secondItem="HUn-aA-WSg" secondAttribute="trailing" id="Gyo-L1-j36"/>
                             <constraint firstAttribute="bottom" secondItem="IsZ-bf-jJ2" secondAttribute="bottom" id="Q3r-S0-EMZ"/>
                             <constraint firstAttribute="trailing" secondItem="IsZ-bf-jJ2" secondAttribute="trailing" constant="-1" id="SSY-En-eqw"/>
+                            <constraint firstAttribute="trailing" secondItem="96x-Ly-DNm" secondAttribute="trailing" id="Vpx-Ol-3BX"/>
                             <constraint firstAttribute="bottom" secondItem="HUn-aA-WSg" secondAttribute="bottom" id="ceL-VG-8UW"/>
+                            <constraint firstItem="96x-Ly-DNm" firstAttribute="leading" secondItem="YqO-ZS-QBX" secondAttribute="leading" id="f3N-KN-PHz"/>
                             <constraint firstItem="IsZ-bf-jJ2" firstAttribute="top" secondItem="YqO-ZS-QBX" secondAttribute="top" id="g2u-MK-dWz"/>
                             <constraint firstItem="HUn-aA-WSg" firstAttribute="top" secondItem="YqO-ZS-QBX" secondAttribute="top" id="tRa-rd-Qpg"/>
                         </constraints>
