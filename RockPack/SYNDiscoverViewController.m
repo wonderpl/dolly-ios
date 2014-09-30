@@ -208,9 +208,6 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 	
 	//Automatically select editors picks on load.
 	[self.categoriesCollectionView selectItemAtIndexPath:self.selectedCellIndex animated:NO scrollPosition:UICollectionViewScrollPositionNone];
-    if (self.selectedCellIndex.row == 0) {
-        [self.categoriesCollectionView setContentOffset:CGPointZero];
-    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {

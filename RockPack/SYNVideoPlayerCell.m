@@ -16,6 +16,9 @@
 
 @implementation SYNVideoPlayerCell
 
+- (void)awakeFromNib {
+    self.contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+}
 
 - (void)prepareForReuse {
 	[self.videoPlayer removeFromSuperview];
