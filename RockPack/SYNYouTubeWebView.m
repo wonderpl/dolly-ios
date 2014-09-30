@@ -10,7 +10,7 @@
 
 static const CGFloat VideoAspectRatio = 16.0 / 9.0;
 
-static const NSInteger InitialWebViewCount = 3;
+static const NSInteger InitialWebViewCount = 4;
 
 @interface SYNYouTubeWebView ()
 
