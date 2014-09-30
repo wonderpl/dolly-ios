@@ -12,6 +12,9 @@
 #import "AbstractCommon.h"
 #import "UIFont+SYNFont.h"
 
+#define IS_IPHONE ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone )
+#define IS_IPAD ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+
 @interface TodayViewController () <NCWidgetProviding>
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *descriptionLabel;
@@ -47,13 +50,13 @@
     [self setUpVideo];
     
     if ([[UIScreen mainScreen] bounds].size.width > 600) {
-        [self.videoWidth setConstant:320];
-        [self.videoHeight setConstant:190];
         
         [self.labelRight setConstant:223];
         [self.labelTop setConstant:12];
         [self.topPlayImage setConstant:97];
         [self.leftPlayImage setConstant:122];
+        [self.videoWidth setConstant:320];
+        [self.videoHeight setConstant:190];
     }
 }
 
@@ -107,11 +110,20 @@
     self.descriptionLabel.hidden = ([videoDescription length] == 0);
     self.descriptionLabel.hidden = NO;
     [self.descriptionLabel setText:[self stringByStrippingHTMLFromString:videoDescription]];
+
     
     if (videoDescription.length > 0) {
-        self.preferredContentSize = CGSizeMake(0, 330);
+        if (IS_IPAD) {
+            self.preferredContentSize = CGSizeMake(0, 330);
+        } else {
+            self.preferredContentSize = CGSizeMake(0, 210);
+        }
     } else {
-        self.preferredContentSize = CGSizeMake(0, 260);
+        if (IS_IPAD) {
+            self.preferredContentSize = CGSizeMake(0, 260);
+        } else {
+            self.preferredContentSize = CGSizeMake(0, 170);
+        }
     }
 
 }
