@@ -18,4 +18,6 @@
 
 + (instancetype)viewController;
 
+- (void)updateWidgetFeedItem;
+
 @end

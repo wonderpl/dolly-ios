@@ -37,6 +37,8 @@
 #import "SYNVideoPlayerViewController.h"
 #import "SYNRemoteLogger.h"
 #import "SYNAddEmailAlertView.h"
+#import "SYNFeedRootViewController.h"
+
 
 @import AVFoundation;
 
@@ -1589,6 +1591,9 @@
         if (success) {
             if (hasChanged) {
                 [self.navigationManager switchToFeed];
+				//Update widget in background fetch. 
+                SYNFeedRootViewController *viewController = (SYNFeedRootViewController *)self.masterViewController.showingViewController;
+                [viewController updateWidgetFeedItem];
                 result = UIBackgroundFetchResultNewData;
             } else {
                 result = UIBackgroundFetchResultNoData;

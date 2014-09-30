@@ -125,7 +125,6 @@
             self.preferredContentSize = CGSizeMake(0, 170);
         }
     }
-
 }
 
 - (void)setUpClickToMore {
@@ -151,17 +150,8 @@
 }
 
 - (void)widgetPerformUpdateWithCompletionHandler:(void (^)(NCUpdateResult))completionHandler {
-    // Perform any setup necessary in order to update the view.
-    // If an error is encoutered, use NCUpdateResultFailed
-    // If there's no update required, use NCUpdateResultNoData
-    // If there's an update, use NCUpdateResultNewData
-
+    [self setUpVideo];
     completionHandler(NCUpdateResultNewData);
-}
-
-- (void)openURL:(NSURL *)URL
-completionHandler:(void (^)(BOOL success))completionHandler {
-    
 }
 
 - (IBAction)clickToMoreButton:(id)sender {
