@@ -538,7 +538,6 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 	return nil;
 }
 
-
 #pragma mark - UITableView Delegate/Data Source
 
 - (NSInteger) tableView: (UITableView *) tableView numberOfRowsInSection: (NSInteger) section
@@ -879,7 +878,7 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
         [self.categoriesCollectionView layoutIfNeeded];
         [self.categoriesCollectionView reloadData];
         if (self.selectedCellIndex) {
-            [self.categoriesCollectionView selectItemAtIndexPath:self.selectedCellIndex animated:NO scrollPosition:UICollectionViewScrollPositionCenteredVertically];
+            [self.categoriesCollectionView selectItemAtIndexPath:self.selectedCellIndex animated:NO scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
         }
 	}
 }
