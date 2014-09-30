@@ -156,6 +156,7 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
     
 	self.recentlyViewed = [[NSMutableArray alloc] init];
     self.selectedCellIndex = [NSIndexPath indexPathForItem:0 inSection:0];
+    
 
 }
 
@@ -208,7 +209,11 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 	
 	//Automatically select editors picks on load.
 	[self.categoriesCollectionView selectItemAtIndexPath:self.selectedCellIndex animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+
+
 }
+
+
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
@@ -437,11 +442,15 @@ UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
     
     // the arrow would not form to the autolayout
     
-    if (IS_IPAD && IS_IOS_7) {
-        if (UIDeviceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation])) {
-            [cell.arrowRightConstant setConstant: -26];
+    if (IS_IOS_7) {
+        if (IS_IPAD) {
+            if (UIDeviceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation])) {
+                [cell.arrowRightConstant setConstant: -26];
+            } else {
+                [cell.arrowRightConstant setConstant: 12];
+            }
         } else {
-            [cell.arrowRightConstant setConstant: 12];
+            [cell.arrowRightConstant setConstant: -48];
         }
     }
 
