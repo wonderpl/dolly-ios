@@ -32,13 +32,8 @@
 
 
 - (void) addToViewController :(UIViewController*) vc {
-    
 
-    
-    // Set frame to full screen
-    CGRect vFrame = self.view.frame;
-    vFrame.size = [[SYNDeviceManager sharedInstance] currentScreenSize];
-    self.view.frame = vFrame;
+    [self setCorrectFrameSize];
     self.view.alpha = 0.0f;
     
     [vc addChildViewController:self];
@@ -58,5 +53,29 @@
 
 }
 
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    
+    [self setCorrectFrameSize];
+}
+
+- (void)setCorrectFrameSize {
+    CGRect vFrame = self.view.frame;
+    if (IS_IOS_7) {
+        NSInteger width = [[UIScreen mainScreen] bounds].size.width;
+        NSInteger height = [[UIScreen mainScreen] bounds].size.height;
+        
+        if (UIDeviceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
+            vFrame.size = CGSizeMake(MAX(width, height), MAX(height, width));
+        } else {
+            vFrame.size = CGSizeMake(MAX(width, height), MIN(height, width));
+        }
+        
+    } else {
+        vFrame.size = [[UIScreen mainScreen] bounds].size;
+    }
+    self.view.frame = vFrame;
+}
 
 @end
