@@ -101,7 +101,7 @@ static const CGFloat UpcomingVideosDividerHeight = 40.0;
         
         
         float totalAnimationTime = 0.65;
-        UIImageView *animationImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 21, 25)];
+        UIImageView *animationImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 21, 28)];
         animationImageView.animationImages = images;
         animationImageView.animationDuration = totalAnimationTime;
         
