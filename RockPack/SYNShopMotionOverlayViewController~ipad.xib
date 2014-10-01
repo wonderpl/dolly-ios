@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SYNShopMotionOverlayViewController">
@@ -23,7 +23,6 @@
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="InboardingShopMotionActionButton.png" translatesAutoresizingMaskIntoConstraints="NO" id="mQA-TY-V2m">
                     <rect key="frame" x="575" y="298" width="60" height="61"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="60" id="6Ut-nu-IGN"/>
                         <constraint firstAttribute="height" constant="61" id="MPA-OT-bjr"/>
@@ -31,11 +30,9 @@
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="InboardingShopMotion.png" translatesAutoresizingMaskIntoConstraints="NO" id="ktM-eK-CbR">
                     <rect key="frame" x="656" y="584" width="21" height="25"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This video is Shop Motion enabled" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="295" translatesAutoresizingMaskIntoConstraints="NO" id="jAO-xH-sgN">
                     <rect key="frame" x="82" y="235" width="295" height="41"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="295" id="PCD-Mb-CqK"/>
                         <constraint firstAttribute="height" constant="41" id="wk8-iE-adc"/>
@@ -46,7 +43,6 @@
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tapping the shopping bag will take you to the website to complete your purchase" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="626" translatesAutoresizingMaskIntoConstraints="NO" id="LLt-OM-8Fs">
                     <rect key="frame" x="82" y="494" width="626" height="61"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="626" id="Cjo-yt-bhO"/>
                         <constraint firstAttribute="height" constant="61" id="Sl6-8I-gsb"/>
@@ -57,7 +53,6 @@
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap the Shop Motion icon to put the item in your shopping bag" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="485" translatesAutoresizingMaskIntoConstraints="NO" id="fYh-RZ-MtN">
                     <rect key="frame" x="82" y="298" width="485" height="61"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="61" id="Drj-8V-J4r"/>
                         <constraint firstAttribute="width" constant="485" id="mta-pe-oQU"/>
@@ -80,11 +75,15 @@
                 <constraint firstItem="ktM-eK-CbR" firstAttribute="leading" secondItem="mQA-TY-V2m" secondAttribute="trailing" constant="21" id="r8F-0u-jIi"/>
                 <constraint firstItem="ktM-eK-CbR" firstAttribute="leading" secondItem="jAO-xH-sgN" secondAttribute="trailing" constant="279" id="tZj-TZ-8O3"/>
             </constraints>
-            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
         </view>
     </objects>
     <resources>
         <image name="InboardingShopMotion.png" width="21" height="25"/>
         <image name="InboardingShopMotionActionButton.png" width="52" height="52"/>
     </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
 </document>
