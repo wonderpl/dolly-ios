@@ -179,8 +179,6 @@ static const CGFloat bufferingTime = 12;
 			[self loadPlayer];
 		}
 	}
-	
-    NSLog(@"name : %@ data : %@", actionName, actionData);
     
 	if ([actionName isEqualToString:@"stateChange"]) {
 		if ([actionData isEqualToString:@"playing"] && self.youTubePlayerState == SYNYouTubeVideoPlayerStateLoaded) {
