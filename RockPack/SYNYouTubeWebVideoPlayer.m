@@ -69,6 +69,11 @@ static const CGFloat bufferingTime = 12;
 	if (!_youTubeWebView) {
 		_youTubeWebView = [self newWebView];
 	}
+    
+    if (!_youTubeWebView.delegate) {
+        _youTubeWebView.delegate = self;
+    }
+    
 	return _youTubeWebView;
 }
 
@@ -82,10 +87,7 @@ static const CGFloat bufferingTime = 12;
         self.youTubePlayerState = SYNYouTubeVideoPlayerStateReady;
     }
     
-    webView.delegate = self;
-    
     return webView;
-
 }
 #pragma mark - UIWebViewDelegate
 
@@ -178,6 +180,8 @@ static const CGFloat bufferingTime = 12;
 		}
 	}
 	
+    NSLog(@"name : %@ data : %@", actionName, actionData);
+    
 	if ([actionName isEqualToString:@"stateChange"]) {
 		if ([actionData isEqualToString:@"playing"] && self.youTubePlayerState == SYNYouTubeVideoPlayerStateLoaded) {
 			self.youTubePlayerState = SYNYouTubeVideoPlayerStatePlayStarted;
