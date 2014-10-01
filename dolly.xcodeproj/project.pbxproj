@@ -454,6 +454,8 @@
 		F47C26181993CA2E0070BD31 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F47C26171993CA2E0070BD31 /* MainInterface.storyboard */; };
 		F47C261B1993CA2E0070BD31 /* com.wonderpl.dolly.wonder-today-extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F47C260E1993CA2E0070BD31 /* com.wonderpl.dolly.wonder-today-extension.appex */; };
 		F47EFD4D19D05FC1005C7DC3 /* Images.xcassets in Sources */ = {isa = PBXBuildFile; fileRef = 1F65D48F17EB3C8B004326A9 /* Images.xcassets */; };
+		F493C1DC19DC08A200BCE843 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F493C1DB19DC08A200BCE843 /* libPods.a */; };
+		F493C1DE19DC08AA00BCE843 /* MediaAccessibility.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F493C1DD19DC08AA00BCE843 /* MediaAccessibility.framework */; };
 		F4952B9D19406D2E00DB5E39 /* SYNDiscoverSearchOverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4952B9B19406D2E00DB5E39 /* SYNDiscoverSearchOverlayViewController.m */; };
 		F4952B9E19406D2E00DB5E39 /* SYNDiscoverSearchOverlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4952B9C19406D2E00DB5E39 /* SYNDiscoverSearchOverlayViewController.xib */; };
 		F4952BBE1940B06D00DB5E39 /* UICollectionViewFlowLayoutCenterItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F4952BBD1940B06D00DB5E39 /* UICollectionViewFlowLayoutCenterItem.m */; };
@@ -1243,6 +1245,13 @@
 		F47C26141993CA2E0070BD31 /* TodayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TodayViewController.h; sourceTree = "<group>"; };
 		F47C26151993CA2E0070BD31 /* TodayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TodayViewController.m; sourceTree = "<group>"; };
 		F47C26171993CA2E0070BD31 /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
+		F493C1D119DC05AC00BCE843 /* libPods-GoogleAnalytics-iOS-SDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-GoogleAnalytics-iOS-SDK.a"; path = "Pods/build/Debug-iphoneos/libPods-GoogleAnalytics-iOS-SDK.a"; sourceTree = "<group>"; };
+		F493C1D319DC05FF00BCE843 /* libPods-GoogleAnalytics-iOS-SDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-GoogleAnalytics-iOS-SDK.a"; path = "Pods/build/Debug-iphoneos/libPods-GoogleAnalytics-iOS-SDK.a"; sourceTree = "<group>"; };
+		F493C1D519DC067300BCE843 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		F493C1D719DC087700BCE843 /* libPods-GoogleAnalytics-iOS-SDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-GoogleAnalytics-iOS-SDK.a"; path = "Pods/build/Debug-iphoneos/libPods-GoogleAnalytics-iOS-SDK.a"; sourceTree = "<group>"; };
+		F493C1D819DC087700BCE843 /* libPods-GoogleConversionTracking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-GoogleConversionTracking.a"; path = "Pods/build/Debug-iphoneos/libPods-GoogleConversionTracking.a"; sourceTree = "<group>"; };
+		F493C1DB19DC08A200BCE843 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		F493C1DD19DC08AA00BCE843 /* MediaAccessibility.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaAccessibility.framework; path = System/Library/Frameworks/MediaAccessibility.framework; sourceTree = SDKROOT; };
 		F4952B9A19406D2E00DB5E39 /* SYNDiscoverSearchOverlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNDiscoverSearchOverlayViewController.h; sourceTree = "<group>"; };
 		F4952B9B19406D2E00DB5E39 /* SYNDiscoverSearchOverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNDiscoverSearchOverlayViewController.m; sourceTree = "<group>"; };
 		F4952B9C19406D2E00DB5E39 /* SYNDiscoverSearchOverlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNDiscoverSearchOverlayViewController.xib; sourceTree = "<group>"; };
@@ -1306,6 +1315,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F493C1DE19DC08AA00BCE843 /* MediaAccessibility.framework in Frameworks */,
+				F493C1DC19DC08A200BCE843 /* libPods.a in Frameworks */,
 				F47C26101993CA2E0070BD31 /* NotificationCenter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1341,6 +1352,13 @@
 		010DEFD31629BDC40080F26B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F493C1DD19DC08AA00BCE843 /* MediaAccessibility.framework */,
+				F493C1DB19DC08A200BCE843 /* libPods.a */,
+				F493C1D719DC087700BCE843 /* libPods-GoogleAnalytics-iOS-SDK.a */,
+				F493C1D819DC087700BCE843 /* libPods-GoogleConversionTracking.a */,
+				F493C1D519DC067300BCE843 /* libPods.a */,
+				F493C1D319DC05FF00BCE843 /* libPods-GoogleAnalytics-iOS-SDK.a */,
+				F493C1D119DC05AC00BCE843 /* libPods-GoogleAnalytics-iOS-SDK.a */,
 				E91F04531844C4410009D610 /* XCTest.framework */,
 				E9058168183CC87C00257E7F /* libicucore.dylib */,
 				E9058166183CC77F00257E7F /* libPods-Ooyala.a */,
@@ -4011,6 +4029,7 @@
 		};
 		F47C261E1993CA2E0070BD31 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 276F95C3CF7F47FE9BF50F40 /* Pods.xcconfig */;
 			buildSettings = {
 				BUNDLE_ID = "com.wonderpl.dev.dolly.wonder-today-extension";
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -4033,6 +4052,10 @@
 				INFOPLIST_FILE = "wonder-today-extension/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
 				METAL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = "com.wonderpl.dolly.$(TARGET_NAME:rfc1034identifier)";
 				PROVISIONING_PROFILE = "";
@@ -4042,6 +4065,7 @@
 		};
 		F47C261F1993CA2E0070BD31 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 276F95C3CF7F47FE9BF50F40 /* Pods.xcconfig */;
 			buildSettings = {
 				BUNDLE_ID = "com.wonderpl.dolly.wonder-today-extension";
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -4061,6 +4085,10 @@
 				INFOPLIST_FILE = "wonder-today-extension/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
 				METAL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "com.wonderpl.dolly.$(TARGET_NAME:rfc1034identifier)";
 				PROVISIONING_PROFILE = "";
@@ -4070,6 +4098,7 @@
 		};
 		F47C26201993CA2E0070BD31 /* AdHoc */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 276F95C3CF7F47FE9BF50F40 /* Pods.xcconfig */;
 			buildSettings = {
 				BUNDLE_ID = "com.wonderpl.dolly.wonder-today-extension";
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -4089,6 +4118,10 @@
 				INFOPLIST_FILE = "wonder-today-extension/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
 				METAL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "com.wonderpl.dolly.$(TARGET_NAME:rfc1034identifier)";
 				PROVISIONING_PROFILE = "";
