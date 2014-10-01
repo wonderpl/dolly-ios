@@ -368,7 +368,7 @@
 	[appDelegate.oAuthNetworkEngine reportPlayerErrorForVideoInstanceId:self.videoInstance.uniqueId
 													   errorDescription:reason
 													  completionHandler:^(NSDictionary *dictionary) {
-														  DebugLog(@"Reported video error");
+														  DebugLog(@"Reported video error: %@", reason);
 													  }
 														   errorHandler:^(NSError* error) {
 															   DebugLog(@"Report concern failed");

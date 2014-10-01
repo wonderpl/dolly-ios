@@ -140,6 +140,7 @@ typedef NS_ENUM(NSInteger, kNotificationObjectType);
 
 - (void)trackExternalLinkOpened:(NSString *)url;
 
+- (void)setUserId:(NSString *)userId;
 - (void)setAgeDimensionFromBirthDate:(NSDate *)birthDate;
 - (void)setCategoryDimension:(NSString *)name;
 - (void)setGenderDimension:(Gender)gender;

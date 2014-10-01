@@ -471,6 +471,10 @@ static const NSInteger TrackingDimensionConnection = 6;
 	[self trackEventWithCategory:GoalCategory action:@"videoShared" label:service value:nil];
 }
 
+- (void)setUserId:(NSString *)userId {
+    [[self defaultTracker] set:@"&uid" value:userId];
+}
+
 - (void)setAgeDimensionFromBirthDate:(NSDate *)birthDate {
 	NSString *ageString = @"unknown";
 	if (birthDate) {

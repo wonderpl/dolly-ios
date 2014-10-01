@@ -161,7 +161,8 @@
 	
     if (self.currentUser && self.currentOAuth2Credentials)
     {
-		[[SYNTrackingManager sharedManager] setAgeDimensionFromBirthDate:self.currentUser.dateOfBirth];
+        [[SYNTrackingManager sharedManager] setUserId:self.currentUser.uniqueId];
+        [[SYNTrackingManager sharedManager] setAgeDimensionFromBirthDate:self.currentUser.dateOfBirth];
 		[[SYNTrackingManager sharedManager] setGenderDimension:self.currentUser.genderValue];
 		
         // If we have a user and a refresh token... //
@@ -471,7 +472,8 @@
 - (void)loginCompleted:(NSNotification *)notification {
 	[[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
     
-	[[SYNTrackingManager sharedManager] setAgeDimensionFromBirthDate:self.currentUser.dateOfBirth];
+    [[SYNTrackingManager sharedManager] setUserId:self.currentUser.uniqueId];
+    [[SYNTrackingManager sharedManager] setAgeDimensionFromBirthDate:self.currentUser.dateOfBirth];
 	[[SYNTrackingManager sharedManager] setGenderDimension:self.currentUser.genderValue];
 	[SYNActivityManager.sharedInstance updateActivityForCurrentUserWithReset:YES];
 	
