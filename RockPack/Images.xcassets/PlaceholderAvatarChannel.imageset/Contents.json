@@ -12,17 +12,18 @@
     },
     {
       "idiom" : "iphone",
-      "scale" : "3x"
+      "scale" : "3x",
+      "filename" : "PlaceholderAvatarChannel@3x~iphone.png"
     },
     {
       "idiom" : "ipad",
       "scale" : "1x",
-      "filename" : "PlaceholderAvatarChannel.png"
+      "filename" : "PlaceholderAvatarChannel~ipad.png"
     },
     {
       "idiom" : "ipad",
       "scale" : "2x",
-      "filename" : "PlaceholderAvatarChannel@2x.png"
+      "filename" : "PlaceholderAvatarChannel@2x~ipad.png"
     }
   ],
   "info" : {

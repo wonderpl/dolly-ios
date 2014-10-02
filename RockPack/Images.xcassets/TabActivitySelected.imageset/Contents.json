@@ -12,7 +12,8 @@
     },
     {
       "idiom" : "iphone",
-      "scale" : "3x"
+      "scale" : "3x",
+      "filename" : "TabActivitySelected@3x~iphone.png"
     },
     {
       "idiom" : "ipad",

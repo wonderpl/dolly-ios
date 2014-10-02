@@ -8,11 +8,12 @@
     {
       "idiom" : "iphone",
       "scale" : "2x",
-      "filename" : "TabSearch@2x~iphone.png"
+      "filename" : "TabSearch~iphone@2x.png"
     },
     {
       "idiom" : "iphone",
-      "scale" : "3x"
+      "scale" : "3x",
+      "filename" : "TabSearch~iphone@3x.png"
     },
     {
       "idiom" : "ipad",
@@ -22,7 +23,7 @@
     {
       "idiom" : "ipad",
       "scale" : "2x",
-      "filename" : "TabSearch@2x~ipad.png"
+      "filename" : "TabSearch~ipad@2x.png"
     }
   ],
   "info" : {

@@ -12,7 +12,8 @@
     },
     {
       "idiom" : "iphone",
-      "scale" : "3x"
+      "scale" : "3x",
+      "filename" : "wonder-logo@3x~iphone.png"
     },
     {
       "idiom" : "ipad",
@@ -22,7 +23,7 @@
     {
       "idiom" : "ipad",
       "scale" : "2x",
-      "filename" : "wonder-logo@2x~ipad.png"
+      "filename" : "wonder-logo~ipad@2x.png"
     }
   ],
   "info" : {

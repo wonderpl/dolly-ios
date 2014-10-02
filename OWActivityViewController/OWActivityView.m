@@ -79,7 +79,7 @@
         button.alpha = 0.1;
     }
     
-    button.frame = CGRectMake(x, y , 61.0f, 61.0f);
+    button.frame = CGRectMake(x, y , 60.0f, 60.0f);
     button.tag = index;
     
     [button	addTarget: self
