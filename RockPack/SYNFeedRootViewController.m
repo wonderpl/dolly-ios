@@ -316,6 +316,7 @@ static const CGFloat heightPortrait = 985;
 }
 
 - (void)reloadDataAndSwitchToFeed:(BOOL)shouldSwitch {
+    
 	[self.model reloadInitialPageWithCompletionHandler:^(BOOL success, BOOL hasChanged) {
 		if (shouldSwitch && hasChanged) {
 			[appDelegate.navigationManager switchToFeed];
@@ -470,7 +471,12 @@ static const CGFloat heightPortrait = 985;
 }
 
 - (void)updateWidgetFeedItem {
-    FeedItem *feedItem = [self.model feedItemAtindex:0];
+    
+    if (![self firstVideoFeedItem]) {
+        return;
+    }
+    
+	FeedItem *feedItem = [self firstVideoFeedItem];
     
     if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo) {
         VideoInstance *videoInstance = [self.model resourceForFeedItem:feedItem];
@@ -511,7 +517,7 @@ static const CGFloat heightPortrait = 985;
 
 - (FeedItem*) firstVideoFeedItem {
     for (int i = 0; i < self.model.itemCount; i++) {
-        FeedItem* feedItem = [self.model itemAtIndex:i];
+        FeedItem *feedItem = [self.model feedItemAtindex:i];
         if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo) {
             return feedItem;
         }
