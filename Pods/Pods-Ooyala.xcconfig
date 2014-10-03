@@ -1,2 +1,0 @@
-PODS_OOYALA_LIBRARY_SEARCH_PATHS = "$(PODS_ROOT)/Ooyala/OoyalaSDK-iOS"
-PODS_OOYALA_OTHER_LDFLAGS = -lOoyalaSDK -lc++ -lxml2 -lz -framework AVFoundation -framework CFNetwork -framework CoreMedia -framework CoreText -framework MediaPlayer -framework Security -framework SystemConfiguration

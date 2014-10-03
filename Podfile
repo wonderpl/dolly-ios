@@ -1,10 +1,12 @@
-platform :ios, '7.0'
+source 'https://github.com/CocoaPods/Specs.git'
+
+platform :ios, '7.1'
 
 pod 'Reachability'
 pod 'MKNetworkKit',	:git => 'https://github.com/rockpack/MKNetworkKit.git', :branch => 'cocoapods' # Temporarily point to our fork pending https://github.com/MugunthKumar/MKNetworkKit/pull/393
 pod 'AFNetworking',	'2.2.4'
 pod 'SSKeychain', 	'~> 0.2.1'
-pod 'Appirater',	'2.0.2'
+pod 'Appirater',	'2.0.4'
 pod 'Ooyala',		:podspec => 'Pods/Local Podspecs/Ooyala.podspec.json'
 pod 'SDWebImage'
 pod 'GoogleConversionTracking'

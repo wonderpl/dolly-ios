@@ -670,7 +670,7 @@
 		01E427EE1664EE52009B941F /* _Video.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Video.h; sourceTree = "<group>"; };
 		01E427EF1664EE52009B941F /* _Video.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Video.m; sourceTree = "<group>"; };
 		01F7C9671748ED0B00E36994 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
-		0D1292A190C148B79DB3A513 /* Pods-dollyTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dollyTests.xcconfig"; path = "Pods/Pods-dollyTests.xcconfig"; sourceTree = "<group>"; };
+		0C20B357C31F2DEF8F9962E0 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		0E0062DF188EBBCB00429C79 /* SYNOnBoardingSectionHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNOnBoardingSectionHeader.h; sourceTree = "<group>"; };
 		0E0062E0188EBBCB00429C79 /* SYNOnBoardingSectionHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNOnBoardingSectionHeader.m; sourceTree = "<group>"; };
 		0E0062E4188EBCCC00429C79 /* SYNOnBoardingSectionHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNOnBoardingSectionHeader.xib; sourceTree = "<group>"; };
@@ -712,7 +712,6 @@
 		1F458B2017E1CE8E003C14AC /* AppIcon-Dev-76x76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "AppIcon-Dev-76x76.png"; path = "Assets/Images/AppIcon-Dev-76x76.png"; sourceTree = "<group>"; };
 		1F458B2117E1CE8E003C14AC /* AppIcon-Dev-76x76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "AppIcon-Dev-76x76@2x.png"; path = "Assets/Images/AppIcon-Dev-76x76@2x.png"; sourceTree = "<group>"; };
 		1F65D48F17EB3C8B004326A9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = rockpack/Images.xcassets; sourceTree = SOURCE_ROOT; };
-		276F95C3CF7F47FE9BF50F40 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		3685246F69AA4C9B93DDEDAC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3854788017940F75006EB38B /* Rockpack 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Rockpack 5.xcdatamodel"; sourceTree = "<group>"; };
 		3862E8AF172979410066E8E7 /* SYNChannelMidCell~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNChannelMidCell~iphone.xib"; sourceTree = "<group>"; };
@@ -725,6 +724,7 @@
 		38A2FF1A17314B3E00FB9F57 /* SYNDiscoverAutocompleteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNDiscoverAutocompleteCell.m; sourceTree = "<group>"; };
 		38A73D8517A0086400AD9E90 /* SYNFriendsViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SYNFriendsViewController~iphone.xib"; sourceTree = "<group>"; };
 		38DC34B1175E42DF0048286C /* Rockpack 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Rockpack 3.xcdatamodel"; sourceTree = "<group>"; };
+		3A317CC084F32E069D557FED /* Pods-dollyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dollyTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-dollyTests/Pods-dollyTests.debug.xcconfig"; sourceTree = "<group>"; };
 		4C03237318AE3F4D00E168EF /* SYNDiscoverSectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNDiscoverSectionView.h; sourceTree = "<group>"; };
 		4C03237418AE3F4D00E168EF /* SYNDiscoverSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNDiscoverSectionView.m; sourceTree = "<group>"; };
 		4C03237618AE3F8700E168EF /* SYNDiscoverSectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SYNDiscoverSectionView.xib; sourceTree = "<group>"; };
@@ -800,6 +800,7 @@
 		4CF39EF018CDD5FA0077CDF0 /* SYNProfileChannelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNProfileChannelViewController.m; sourceTree = "<group>"; };
 		4CF39EF218CDF4420077CDF0 /* SYNProfileSubscriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNProfileSubscriptionViewController.h; sourceTree = "<group>"; };
 		4CF39EF318CDF4420077CDF0 /* SYNProfileSubscriptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNProfileSubscriptionViewController.m; sourceTree = "<group>"; };
+		97867F99045633EC2A8FBB04 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		99F300C4191BAF57002C1D25 /* UIViewController+PresentNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+PresentNotification.h"; sourceTree = "<group>"; };
 		99F300C5191BAF57002C1D25 /* UIViewController+PresentNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+PresentNotification.m"; sourceTree = "<group>"; };
 		99F300C8191BCBFF002C1D25 /* SYNActivityTabButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNActivityTabButton.h; sourceTree = "<group>"; };
@@ -989,9 +990,12 @@
 		BEF0AE0616E751280094BFDA /* SYNNetworkOperationJsonObjectParse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNNetworkOperationJsonObjectParse.m; sourceTree = "<group>"; };
 		BEFAE89A1725485B009B2F66 /* SYNVideoQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNVideoQueue.h; sourceTree = "<group>"; };
 		BEFAE89B1725485B009B2F66 /* SYNVideoQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNVideoQueue.m; sourceTree = "<group>"; };
+		D782778D7FF2D54A71E5432B /* Pods-dollyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dollyTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-dollyTests/Pods-dollyTests.release.xcconfig"; sourceTree = "<group>"; };
 		D9D50C4D95B04D83AF3B374D /* libPods-rockpackTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-rockpackTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA8E2410194104480041B95B /* Rockpack 12.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Rockpack 12.xcdatamodel"; sourceTree = "<group>"; };
 		DAB6042C193C84630012A7A8 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		E2ED6BBC26DE42D068C108D9 /* Pods-dollyTests.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dollyTests.adhoc.xcconfig"; path = "Pods/Target Support Files/Pods-dollyTests/Pods-dollyTests.adhoc.xcconfig"; sourceTree = "<group>"; };
+		E31ACBF4B3C39A07B60A54CD /* Pods.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.adhoc.xcconfig; path = "Pods/Target Support Files/Pods/Pods.adhoc.xcconfig"; sourceTree = "<group>"; };
 		E90506A418E05FD800E0910E /* UIDevice+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Helpers.h"; sourceTree = "<group>"; };
 		E90506A518E05FD800E0910E /* UIDevice+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Helpers.m"; sourceTree = "<group>"; };
 		E9058166183CC77F00257E7F /* libPods-Ooyala.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-Ooyala.a"; path = "Pods/build/Debug-iphoneos/libPods-Ooyala.a"; sourceTree = "<group>"; };
@@ -1334,8 +1338,7 @@
 				F47C26111993CA2E0070BD31 /* wonder-today-extension */,
 				010DEFD31629BDC40080F26B /* Frameworks */,
 				010DEFD11629BDC40080F26B /* Products */,
-				276F95C3CF7F47FE9BF50F40 /* Pods.xcconfig */,
-				0D1292A190C148B79DB3A513 /* Pods-dollyTests.xcconfig */,
+				DBB24B94B0E2BEF790DCC2E2 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -2776,6 +2779,19 @@
 			name = "Video Queue";
 			sourceTree = "<group>";
 		};
+		DBB24B94B0E2BEF790DCC2E2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0C20B357C31F2DEF8F9962E0 /* Pods.debug.xcconfig */,
+				97867F99045633EC2A8FBB04 /* Pods.release.xcconfig */,
+				E31ACBF4B3C39A07B60A54CD /* Pods.adhoc.xcconfig */,
+				3A317CC084F32E069D557FED /* Pods-dollyTests.debug.xcconfig */,
+				D782778D7FF2D54A71E5432B /* Pods-dollyTests.release.xcconfig */,
+				E2ED6BBC26DE42D068C108D9 /* Pods-dollyTests.adhoc.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		E947097A18D76236000174A7 /* Serializers */ = {
 			isa = PBXGroup;
 			children = (
@@ -3337,7 +3353,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-dollyTests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-dollyTests/Pods-dollyTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		39A52BE75A62433CAD032D95 /* Check Pods Manifest.lock */ = {
@@ -3366,7 +3382,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -3793,7 +3809,7 @@
 		};
 		010DEFF51629BDC40080F26B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 276F95C3CF7F47FE9BF50F40 /* Pods.xcconfig */;
+			baseConfigurationReference = 0C20B357C31F2DEF8F9962E0 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
@@ -3833,7 +3849,7 @@
 		};
 		010DEFF61629BDC40080F26B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 276F95C3CF7F47FE9BF50F40 /* Pods.xcconfig */;
+			baseConfigurationReference = 97867F99045633EC2A8FBB04 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
@@ -3868,7 +3884,7 @@
 		};
 		01901AA41771CCBA007DBEAC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0D1292A190C148B79DB3A513 /* Pods-dollyTests.xcconfig */;
+			baseConfigurationReference = 3A317CC084F32E069D557FED /* Pods-dollyTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/dolly.app/dolly";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -3891,7 +3907,7 @@
 		};
 		01901AA51771CCBA007DBEAC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0D1292A190C148B79DB3A513 /* Pods-dollyTests.xcconfig */;
+			baseConfigurationReference = D782778D7FF2D54A71E5432B /* Pods-dollyTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/dolly.app/dolly";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -3914,7 +3930,7 @@
 		};
 		01901AA61771CCBA007DBEAC /* AdHoc */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0D1292A190C148B79DB3A513 /* Pods-dollyTests.xcconfig */;
+			baseConfigurationReference = E2ED6BBC26DE42D068C108D9 /* Pods-dollyTests.adhoc.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/dolly.app/dolly";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -3968,7 +3984,7 @@
 		};
 		01B37243162EBAE900A9F8F5 /* AdHoc */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 276F95C3CF7F47FE9BF50F40 /* Pods.xcconfig */;
+			baseConfigurationReference = E31ACBF4B3C39A07B60A54CD /* Pods.adhoc.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
@@ -4029,7 +4045,7 @@
 		};
 		F47C261E1993CA2E0070BD31 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 276F95C3CF7F47FE9BF50F40 /* Pods.xcconfig */;
+			baseConfigurationReference = 0C20B357C31F2DEF8F9962E0 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_ID = "com.wonderpl.dev.dolly.wonder-today-extension";
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -4065,7 +4081,7 @@
 		};
 		F47C261F1993CA2E0070BD31 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 276F95C3CF7F47FE9BF50F40 /* Pods.xcconfig */;
+			baseConfigurationReference = 97867F99045633EC2A8FBB04 /* Pods.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_ID = "com.wonderpl.dolly.wonder-today-extension";
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -4098,7 +4114,7 @@
 		};
 		F47C26201993CA2E0070BD31 /* AdHoc */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 276F95C3CF7F47FE9BF50F40 /* Pods.xcconfig */;
+			baseConfigurationReference = E31ACBF4B3C39A07B60A54CD /* Pods.adhoc.xcconfig */;
 			buildSettings = {
 				BUNDLE_ID = "com.wonderpl.dolly.wonder-today-extension";
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;

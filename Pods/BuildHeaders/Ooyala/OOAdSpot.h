@@ -1,1 +1,0 @@
-../../Ooyala/OoyalaSDK-iOS/Headers/OOAdSpot.h

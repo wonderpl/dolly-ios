@@ -18,7 +18,7 @@ PODS:
   - AFNetworking/UIKit (2.2.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - Appirater (2.0.2)
+  - Appirater (2.0.4)
   - Bolts (1.1.2)
   - Facebook-iOS-SDK (3.14.1):
     - Bolts
@@ -43,7 +43,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (= 2.2.4)
-  - Appirater (= 2.0.2)
+  - Appirater (= 2.0.4)
   - Bolts (= 1.1.0)
   - Facebook-iOS-SDK (= 3.14.1)
   - GoogleAnalytics-iOS-SDK (= 3.0.7)
@@ -67,7 +67,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AFNetworking: ab63e259fe91eef4519b371ef0a4955af0e73e64
-  Appirater: a5e00fb01d47a9a6acf4b2f22323b4ccf4f23fbb
+  Appirater: cbdb7f305562cfde585300bfff86da01ae559deb
   Bolts: 2635e8698a630774689441047f3465d78c48d485
   Facebook-iOS-SDK: e9b3d5ac54ee3e5e693f4eef470b97911b3d076d
   GoogleAnalytics-iOS-SDK: bb285d8eef15a682f1b82971becd0d22edd0e53b
@@ -82,4 +82,4 @@ SPEC CHECKSUMS:
   SSKeychain: a9428ab9db1edfbb92daf46301bda9eff800a011
   TestFlightSDK: 36b8a207c5a119a3144aa2e6d24973eb9d5e0d0a
 
-COCOAPODS: 0.33.1
+COCOAPODS: 0.34.1
