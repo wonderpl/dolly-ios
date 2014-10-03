@@ -6,6 +6,17 @@
 //  Copyright (c) Rockpack Ltd. All rights reserved.
 //
 
+/*
+ 
+ SYNMasterViewController
+ 
+ Master view controller is container for the app's navigation.
+ This VC contains "SYNContainerViewController" which handles the navigation.
+ The reasoning behind having the MasterVC is for the TAB bar.
+ Using apples default navigation works for tab bars that are displayed at the bottom but
+ does not work with them to the left. In this current IPhone design it is possible to use apples default tab bar.
+ 
+*/
 
 #import "SYNAppDelegate.h"
 #import "SYNNetworkMessageView.h"
@@ -56,7 +67,6 @@ typedef void (^VideoOverlayDismissBlock)(void);
 
 -(void) removeOverlayControllerAnimated:(BOOL)animated;
 
-// on-boarding
 
 
 @end

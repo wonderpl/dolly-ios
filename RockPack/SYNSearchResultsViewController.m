@@ -53,6 +53,8 @@ typedef void (^SearchResultCompleteBlock)(int);
 @property (nonatomic, strong) MKNetworkOperation *videoSearchOperation;
 @property (nonatomic, strong) MKNetworkOperation *userSearchOperation;
 
+//TODO: Instead of using dataRequestRange and dataRequestRange2 create 2 SYNPagingModel classes and implement them.
+
 // @property (nonatomic) NSRange dataRequestRange; is from SYNAbstract, here we need a second for users
 @property (nonatomic) NSRange dataRequestRange2;
 @property (nonatomic) NSInteger dataItemsAvailable2;

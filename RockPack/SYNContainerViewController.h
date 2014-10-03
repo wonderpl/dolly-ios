@@ -6,6 +6,11 @@
 //  Copyright (c) 2012 Nick Banks. All rights reserved.
 //
 
+/* 
+ SYNContainerViewController
+ Container initilises all the navigation controllers i.e feed, profile, activity etc..
+ */
+ 
 @import UIKit;
 
 @interface SYNContainerViewController : UIViewController

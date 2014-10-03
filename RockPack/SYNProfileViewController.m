@@ -566,6 +566,8 @@ static const CGFloat TransitionDuration = 0.5f;
 	return @"Profile";
 }
 
+
+//TODO : remove SYNProfileNavigationBarDelegate, was used to for apperance and disapperance of Navigation bar.
 #pragma mark - SYNProfileNavigationBarDelegate
 
 - (void)hideNavigationBar {
@@ -594,6 +596,7 @@ static const CGFloat TransitionDuration = 0.5f;
     if (self.isUserProfile) {
         if (self.isChannelsCollectionViewShowing) {
             
+            //TODO: To make apart of a model.
             [appDelegate.oAuthNetworkEngine userDataForUser: ((User *) self.channelOwner)
                                                     inRange: NSMakeRange(0, STANDARD_REQUEST_LENGTH)
              

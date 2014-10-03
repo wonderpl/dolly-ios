@@ -151,6 +151,8 @@
 	}
 }
 
+// TODO: UPDate SYNSearchResultsViewController to use SYNPaging model and remove this from the abstract class.
+
 #pragma mark - Data Request Range
 
 - (void)resetDataRequestRange {

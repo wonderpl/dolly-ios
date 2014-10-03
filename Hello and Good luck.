@@ -1,0 +1,81 @@
+Hello and Good luck. 
+
+View Controllers.
+
+The app has 6 main views. All files can be found in the "View Controllers" Directory.
+
+Discover 
+- SYNDiscoverViewController
+
+The IPad has a container view called SYNSearchResultsViewController that contains 
+the serach results.
+
+Feed 
+- SYNFeedRootViewController
+	- SYNIPadFeedRootViewController
+	- SYNIPhoneFeedRootViewController
+
+The 2 sub classes are for the layout logic and for the naming of the reuse cells 
+
+Profile 
+- SYNProfileViewController
+
+SYNProfileViewController is the main VC. It is the container for 3 other VC's
+
+- SYNProfileSubscriptionViewController
+- SYNProfileVideoViewController
+- SYNProfileChannelViewController
+
+Each of these VC's have a seperate collectionview.
+
+Activity
+- SYNActivityViewController
+
+Video Player Overlay
+ - SYNVideoPlayerViewController
+ 	SYNVideoPlayerViewController has a container underneath the videoplayer called
+ 	SYNVideoInfoViewController. 
+
+The videoplayer is currently in a UICollectionView. There have been issues with this with Reuse. To solve this problem there is always 
+a stored SYNVideoPlayer for the current video. The videoplayer is set in setSelectedIndex. 
+
+Network calls.
+
+- SYNAbstractNetworkEngine
+	- SYNNetworkEngine - Http
+	- SYNOAuthNetworkEngine - Https
+
+
+Overall view controller archetecture of the app.
+
+The app is contained in SYNMasterViewController. 
+SYNMasterViewController handles the top level navigation. (Tab bars).
+Navigation is all handled in SYNNavigationManager.
+Within the MasterViewController it has a container called SYNContainerViewController.
+SYNContainerViewController initilises all the VC's. 
+
+Data model 
+
+The core data stack is initilised in the appDelegate method -(void) initializeCoreDataStack.
+
+There are 3 registerys to save to core data.
+ -SYNSearchRegistery
+	Search registry never clears its entries upon registry because the data is always considered fresh. It is the controllers responsibility to clear it when needed
+	The search PersistentStoreCoordinator is NSInMemoryStoreType, It is for search so its not somthing that is required to be stored persistently. 
+
+
+SYNPagingModel
+All list data should be using this class. An example can be seen in 
+SYNProfileVideoViewController - SYNProfileVideoModel
+
+
+
+
+
+
+
+
+
+
+
+

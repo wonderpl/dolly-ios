@@ -7,6 +7,17 @@
 //
 //  Abstract view controller to provide functionality common to all Rockpack view controllers
 
+/* SYNAbstractViewController
+ 
+ The hiding / showing of the tab bar. All view controllers are a subclass of the abstract. To implement the hiding / showing of the tab bar, the delegate methods
+ 
+ scrollViewWillBeginDragging
+ scrollViewDidEndDragging
+ scrollViewDidScroll
+ 
+ have been modified. To not use the hiding / showing logic for the tab bar. Override these methods in the subclass without calling super.
+ 
+*/
 
 #import "MKNetworkOperation.h"
 #import "SYNAppDelegate.h"
@@ -47,8 +58,7 @@
 // Share
 
 - (void) shareVideoInstance: (VideoInstance *) videoInstance;
-
-- (void)shareChannel:(Channel *)channel;
+- (void) shareChannel:(Channel *)channel;
 
 
 - (SYNOneToOneSharingController *)createSharingViewControllerForShareObject:(id) shareObject
@@ -59,9 +69,10 @@
 
 - (void) removePopupMessage;
 
-- (void)viewProfileDetails:(ChannelOwner *)channelOwner;
+// Navigation
+- (void)viewProfileDetails:(ChannelOwner *) channelOwner;
 - (void)viewChannelDetails:(Channel *)channel withAnimation:(BOOL)animated;
-- (void) viewVideoInstanceInChannel:(Channel*) channel withVideoId:videoId withClickToMore:(BOOL)clickToMore;
+- (void)viewVideoInstanceInChannel:(Channel*) channel withVideoId:videoId withClickToMore:(BOOL)clickToMore;
 - (void)viewVideoInstanceInChannel:(Channel*) channel withVideoId:videoId;
 
 - (NSString *)trackingScreenName;

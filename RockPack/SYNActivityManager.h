@@ -6,6 +6,16 @@
 //  Copyright (c) Rockpack Ltd. All rights reserved.
 //
 
+/* SYNAcitivtyManager
+ The activity manager stores all user activity, this includes the Loving of videos, The 
+ channels/users they follow and recently viewed videos.
+ 
+ At the moment when an "action" has been posted to the server a return of all the user activity 
+ gets returned. It would make more sense if less is returned, no point getting extra 
+ information about loved videos when a user follows/unfollows a channel.
+ 
+*/
+
 #import "SYNOAuthNetworkEngine.h"
 
 @import Foundation;
