@@ -559,12 +559,8 @@
         
         completeBlock(dictionary);
     } errorHandler: ^(NSError *error) {
-        if (error.code >= 500 && error.code < 600)
-        {
-            [self showErrorPopUpForError: error];
-        }
         
-        errorBlock(error);
+		[self showErrorPopUpForError: error];
     }];
     
     [self enqueueOperation: networkOperation];
