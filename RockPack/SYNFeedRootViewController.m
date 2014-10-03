@@ -471,12 +471,12 @@ static const CGFloat heightPortrait = 985;
 }
 
 - (void)updateWidgetFeedItem {
-    
-    if (![self firstVideoFeedItem]) {
+
+    FeedItem *feedItem = [self firstVideoFeedItem];
+
+    if (!feedItem) {
         return;
     }
-    
-	FeedItem *feedItem = [self firstVideoFeedItem];
     
     if (feedItem.resourceTypeValue == FeedItemResourceTypeVideo) {
         VideoInstance *videoInstance = [self.model resourceForFeedItem:feedItem];
